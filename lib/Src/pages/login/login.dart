@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/route/application.dart';
+import 'package:upgradegame/Src/route/upgradegame_route.dart';
 
-class WelcomePage extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   @override
-  _WelcomePageState createState() => new _WelcomePageState();
+  _LoginPageState createState() => new _LoginPageState();
 }
 
-class _WelcomePageState extends State<WelcomePage> {
-  bool hadInit = false;
+class _LoginPageState extends State<LoginPage> {
 
-  ///创建时候在initState 之后被调用
-  ///在依赖的InheritedWidget发生变化的时候会被调用
+
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (hadInit) {
-      return;
-    }
 
-    ///防止多次进入
-    hadInit = true;
   }
 
   @override
@@ -32,7 +28,7 @@ class _WelcomePageState extends State<WelcomePage> {
         children: <Widget>[
           new Center(
             child:
-            new Image(image: new AssetImage('static/images/welcome.png')),
+            new Image(image: new AssetImage('resource/images/welcome.png')),
           ),
         ],
       ),

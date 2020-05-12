@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'route_handler.dart';
 import 'package:fluro/fluro.dart';
 
-class NovaRouters {
-  static String testPage = "/testPage";
+class UpgradeGameRoute {
+  static String welcomePage = "/welcomePage";
+  static String loginPage = "/loginPage";
 
 
   static void configureRoutes(Router router) {
@@ -12,7 +13,8 @@ class NovaRouters {
           print('ERROR====>ROUTE WAS NOT FONUND!!!');
         });
 
-    router.define(testPage, handler: testPageHandler);
+    router.define(welcomePage, handler: welcomePageHandler);
+    router.define(loginPage, handler: loginPageHandler);
 
   }
 }
