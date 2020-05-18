@@ -33,12 +33,14 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context,width: 750, height: 1334);
+    ScreenUtil.init(context,width: 1080, height: 1920);
     return new Container(
       color: SystemColor.primaryWhite,
       child: Stack(
+
         children: <Widget>[
           new Center(
+
             child:
             new Image(image: new AssetImage('resource/images/welcome.png')),
           ),

@@ -21,14 +21,19 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context,width: 750, height: 1334);
+    ScreenUtil.init(context,width: 1080, height: 1920);
     return new Container(
-      color: SystemColor.primaryWhite,
+      color: Colors.black,
       child: Stack(
         children: <Widget>[
-          new Center(
-            child:
-            new Image(image: new AssetImage('resource/images/welcome.png')),
+          new Container(
+            child:Center(
+              child:
+              new RaisedButton(onPressed: (){
+                Application.router
+                    .navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+              }),
+            ),
           ),
         ],
       ),
