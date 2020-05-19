@@ -36,6 +36,7 @@ class _MainPageState extends State<MainPage> {
             Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
               'height': ScreenUtil().setHeight(1660),
               'width': ScreenUtil().setWidth(1020),
+              'childName':'farmDetail'
             });
           }),
         ],
