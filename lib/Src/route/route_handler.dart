@@ -27,5 +27,7 @@ Handler mainPageHandler = Handler(
 
 Handler detailDialogHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return DetailDialog();
+      double height = double.parse(params['height']?.first);
+      double width = double.parse(params['width']?.first);
+      return DetailDialog(height: height,width: width);
     });

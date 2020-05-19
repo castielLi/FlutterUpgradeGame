@@ -22,7 +22,6 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context,width: 1080, height: 1920);
     return new Container(
       color: Colors.white,
       child: Stack(
@@ -34,7 +33,10 @@ class _MainPageState extends State<MainPage> {
             fit: BoxFit.fill,
           ),
           new RaisedButton(onPressed: (){
-            Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage);
+            Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+              'height': ScreenUtil().setHeight(1660),
+              'width': ScreenUtil().setWidth(1020),
+            });
           }),
         ],
       ),

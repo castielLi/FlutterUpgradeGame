@@ -5,6 +5,12 @@ import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
 
 class DetailDialog extends StatefulWidget {
+
+  double height;
+  double width;
+  DetailDialog({Key key,this.height,this.width}):super(key:key);
+
+
   @override
   _DetailDialogState createState() => new _DetailDialogState();
 }
@@ -21,18 +27,19 @@ class _DetailDialogState extends State<DetailDialog> {
 
   @override
   Widget build(BuildContext context) {
+
     return new Container(
       child: new Container(
-          width: 100,
-          height: 100,
-          color: Colors.red,
-          margin: EdgeInsets.fromLTRB(0,200,0,200),
+          margin: EdgeInsets.fromLTRB((ScreenUtil().setWidth(1080) - this.widget.width)/2,
+              (ScreenUtil().setHeight(1920) - this.widget.height)/2,
+              (ScreenUtil().setWidth(1080) - this.widget.width)/2,
+              (ScreenUtil().setHeight(1920) - this.widget.height)/2),
               child:Center(
                 child:
-                new Image(image: new AssetImage('resource/images/welcome.png'),
-                 fit: BoxFit.fill,
-                  height: 100,
-                  width: 100,
+                new Image(image: new AssetImage('resource/images/detailDialogbackgroundImage.png'),
+                  fit: BoxFit.fill,
+                  height: widget.height ,
+                  width: widget.width,
                 ),
               ),
         ),

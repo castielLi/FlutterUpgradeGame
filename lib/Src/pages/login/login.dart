@@ -21,7 +21,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context,width: 1080, height: 1920);
     return new Container(
       color: Colors.black,
       child: Stack(
