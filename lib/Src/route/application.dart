@@ -23,11 +23,7 @@ class Application{
     path = path + query;
     return router.navigateTo(context,path);
   }
-
-  static Future showDetailDialogTest(){
-    return null;
-  }
-
+  
   static Future showDetailDialog(BuildContext context, String path ,{Map<String, dynamic> params}){
     String query =  "";
     if (params != null) {
