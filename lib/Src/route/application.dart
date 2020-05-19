@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class Application{
   static Router router;
 
-  static showDetailDialog(BuildContext context, String path ,{Map<String, dynamic> params}){
+  static Future showDetailDialog(BuildContext context, String path ,{Map<String, dynamic> params}){
     String query =  "";
     if (params != null) {
       int index = 0;
@@ -21,6 +21,6 @@ class Application{
     }
     print('我是navigateTo传递的参数：$query');
     path = path + query;
-    router.navigateTo(context,path,transitionDuration:const Duration(milliseconds:500),transition: TransitionType.native);
+    return router.navigateTo(context,path,transitionDuration:const Duration(milliseconds:500),transition: TransitionType.native);
   }
 }
