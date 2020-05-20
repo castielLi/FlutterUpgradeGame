@@ -41,8 +41,11 @@ class _MainPageState extends State<MainPage> {
             child: new Stack(
               children: <Widget>[
                 ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/mainBuilding.png",callback: (){
-//            name = "";
-                  print(this.widget.name);
+                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                    'height': ScreenUtil().setHeight(1660),
+                    'width': ScreenUtil().setWidth(1020),
+                    'childName':'farmDetail'
+                  });
                 },),
                 Container(
                     padding: EdgeInsets.only(top:ScreenUtil().setHeight(420)),
