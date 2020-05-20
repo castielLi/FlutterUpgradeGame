@@ -34,17 +34,15 @@ class _MainPageState extends State<MainPage> {
             height: 1080,
             fit: BoxFit.fill,
           ),
-//          new RaisedButton(onPressed: (){
-//            Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
-//              'height': ScreenUtil().setHeight(1660),
-//              'width': ScreenUtil().setWidth(1020),
-//              'childName':'farmDetail'
-//            });
-//          }),
           new ImageButton(height:ScreenUtil().setHeight(200),width: ScreenUtil().setWidth(400),buttonName: "hello",imageUrl: "resource/images/upgradeButton.png",callback: (){
 //            name = "";
+            Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+              'height': ScreenUtil().setHeight(1660),
+              'width': ScreenUtil().setWidth(1020),
+              'childName':'farmDetail'
+            });
             print(this.widget.name);
-          },)
+          },),
         ],
       ),
     );
