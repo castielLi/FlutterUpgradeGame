@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Src/pages/farm/farm.dart';
+import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Src/route/application.dart';
 
 class DetailDialog extends StatefulWidget {
 
   double height;
   double width;
   String childWidgetName;
-  DetailDialog({Key key,this.height,this.width,this.childWidgetName}):super(key:key);
+  String title;
+  DetailDialog({Key key,this.height,this.width,this.childWidgetName,this.title=""}):super(key:key);
 
 
   @override
@@ -48,6 +52,21 @@ class _DetailDialogState extends State<DetailDialog> {
                       width: widget.width,
                     ),
                   ),
+                  Container(
+                    height: ScreenUtil().setHeight(380),
+                      child:Center(
+                        child: Text(this.widget.title,textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.detailDialogTitleTextFontSize),),
+                      )
+                  ),
+                   Container(
+                     height: ScreenUtil().setHeight(200),
+                     width: this.widget.height,
+                     padding: EdgeInsets.only(left: ScreenUtil().setWidth(820)),
+                     child: ImageButton(height:ScreenUtil().setHeight(140),width: ScreenUtil().setWidth(140),imageUrl: "resource/images/cancelDialog.png",callback: () {
+                          Application.router.pop(context);
+                     }),
+                   ),
                    currentWidget
                 ],
               )
