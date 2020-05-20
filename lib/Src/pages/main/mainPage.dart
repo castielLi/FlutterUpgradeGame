@@ -63,9 +63,17 @@ class _MainPageState extends State<MainPage> {
             margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(590), ScreenUtil().setHeight(1250), ScreenUtil().setWidth(170), ScreenUtil().setHeight(360)),
             child: new Stack(
               children: <Widget>[
-                ImageButton(height:ScreenUtil().setHeight(290),width: ScreenUtil().setWidth(240),imageUrl: "resource/images/herosBuilding.png",callback: (){
-//            name = "";
-                  print(this.widget.name);
+//                ImageButton(height:ScreenUtil().setHeight(290),width: ScreenUtil().setWidth(240),imageUrl: "resource/images/herosBuilding.png",callback: (){
+////            name = "";
+//                  print(this.widget.name);
+//                },),
+                // 排行榜。暂时放到英雄祭坛
+                ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/mainBuilding.png",callback: (){
+                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                    'height': ScreenUtil().setHeight(1660),
+                    'width': ScreenUtil().setWidth(1020),
+                    'childName':'rankDetail',
+                  });
                 },),
                 Container(
                     padding: EdgeInsets.only(top:ScreenUtil().setHeight(190)),

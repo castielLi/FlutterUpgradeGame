@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Src/model/MainPalace.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 
 
@@ -57,7 +56,7 @@ class _FarmDetailState extends State<FarmDetail> {
               ],
             ),
             Text('升级后产出:'+'$coinPerHour'+'T币一小时',style:textStyleC),
-            new ImageButton(height:ScreenUtil().setHeight(200),width: ScreenUtil().setWidth(400),buttonName: "升级",imageUrl: "resource/images/upgradeButton.png",callback: (){
+            new ImageButton(height:ScreenUtil().setHeight(200),width: ScreenUtil().setWidth(400),buttonName: "升 级",imageUrl: "resource/images/upgradeButton.png",callback: (){
               print('点击升级');
             },),
           ],
