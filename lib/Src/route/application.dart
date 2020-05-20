@@ -23,7 +23,7 @@ class Application{
     path = path + query;
     return router.navigateTo(context,path);
   }
-  
+
   static Future showDetailDialog(BuildContext context, String path ,{Map<String, dynamic> params}){
     String query =  "";
     if (params != null) {
@@ -41,6 +41,6 @@ class Application{
     }
     print('我是navigateTo传递的参数：$query');
     path = path + query;
-    return router.navigateTo(context,path,transitionDuration:const Duration(milliseconds:500),transition: TransitionType.material);
+    return router.navigateTo(context,path,transitionDuration:const Duration(milliseconds:500),transition: TransitionType.native);
   }
 }
