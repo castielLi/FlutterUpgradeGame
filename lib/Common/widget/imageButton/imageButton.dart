@@ -25,6 +25,8 @@ class _ImageButtonState extends State<ImageButton> {
     }
     return new FlatButton(
       textColor: Colors.white,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       child: Container(
         height: this.widget.height,
         width: this.widget.width,
