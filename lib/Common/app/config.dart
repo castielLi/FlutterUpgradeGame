@@ -51,6 +51,7 @@ class SystemIconSize {
 
 ///系统字体大小
 class SystemFontSize {
+  static const buttonTextFontSize = 29.0;
   static const veryLagerTextSize = 80.0;
   static const moreMoreLargerTextSize = 45.0;
   static const moreLargerTextSize = 35.0;

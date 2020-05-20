@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
+import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 
 class MainPage extends StatefulWidget {
+  String name = "hello";
   @override
   _MainPageState createState() => new _MainPageState();
 }
@@ -32,13 +34,17 @@ class _MainPageState extends State<MainPage> {
             height: 1080,
             fit: BoxFit.fill,
           ),
-          new RaisedButton(onPressed: (){
-            Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
-              'height': ScreenUtil().setHeight(1660),
-              'width': ScreenUtil().setWidth(1020),
-              'childName':'farmDetail'
-            });
-          }),
+//          new RaisedButton(onPressed: (){
+//            Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+//              'height': ScreenUtil().setHeight(1660),
+//              'width': ScreenUtil().setWidth(1020),
+//              'childName':'farmDetail'
+//            });
+//          }),
+          new ImageButton(height:ScreenUtil().setHeight(200),width: ScreenUtil().setWidth(400),buttonName: "hello",imageUrl: "resource/images/upgradeButton.png",callback: (){
+//            name = "";
+            print(this.widget.name);
+          },)
         ],
       ),
     );
