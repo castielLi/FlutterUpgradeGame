@@ -1,5 +1,6 @@
 // 主建筑
 class MainPalace {
+  MainPalace();
   // 等级
   static int _level;
   // 升到本等级需要的木头
@@ -9,7 +10,11 @@ class MainPalace {
   // 本等级每小时产生的币
   static int _coinPerHour;
 
-//  MainPalace({this.level, this.neededWood, this.neededStone, this.coinPerHour});
+
+
+
+//  factory MainPalace.fromJson(Map<String,dynamic> json) => _$MainPalaceFromJson(json);
+//  Map<String, dynamic> toJson() => _$MainPalaceToJson(this);
 
 
 
