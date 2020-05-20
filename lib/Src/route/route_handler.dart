@@ -30,5 +30,6 @@ Handler detailDialogHandler = Handler(
       double height = double.parse(params['height']?.first);
       double width = double.parse(params['width']?.first);
       String childName = params['childName']?.first;
-      return DetailDialog(height: height,width: width,childWidgetName: childName,);
+      String title = params['title']?.first;
+      return DetailDialog(height: height,width: width,childWidgetName: childName,title: title,);
     });
