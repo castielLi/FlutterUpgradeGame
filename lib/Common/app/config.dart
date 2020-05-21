@@ -54,6 +54,8 @@ class SystemFontSize {
   static const buttonTextFontSize = 29.0;
   static const mainBuildingTextFontSize = 34.0;
   static const otherBuildingTextFontSize = 24.0;
+  static const resourceTextFontSize = 13.0;
+  static const levelTextFontSize = 15.0;
 
 
   static const detailDialogTitleTextFontSize = 36.0;
