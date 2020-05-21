@@ -4,13 +4,13 @@ import 'package:upgradegame/Common/widget/adIconRow/adIconRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 
 
-class SawmillDetail extends StatefulWidget {
+class StoneDetail extends StatefulWidget {
 
   @override
-  _SawmillDetailState createState() => new _SawmillDetailState();
+  _StoneDetailState createState() => new _StoneDetailState();
 }
 
-class _SawmillDetailState extends State<SawmillDetail> {
+class _StoneDetailState extends State<StoneDetail> {
   // 获取数据
   static int level = 13;
   static int levelFrom = level-1;
@@ -87,7 +87,7 @@ class _SawmillDetailState extends State<SawmillDetail> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Text('每次获取 ',style: textStyleC,),
-                      new Image(image: new AssetImage('resource/images/wood.png'),height: 30,),
+                      new Image(image: new AssetImage('resource/images/stone.png'),height: 30,),
                       Text('$woodPerAd',style: textStyleC,),
                     ],
                   ),

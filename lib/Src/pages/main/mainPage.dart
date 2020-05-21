@@ -95,7 +95,7 @@ class _MainPageState extends State<MainPage> {
                     'height': ScreenUtil().setHeight(1660),
                     'width': ScreenUtil().setWidth(1020),
                     'childName':'farmDetail',
-                    "title":"升 级"
+                    "title":"主 城"
                   });
                 },),
                 Container(
@@ -138,9 +138,13 @@ class _MainPageState extends State<MainPage> {
             child: new Stack(
               children: <Widget>[
                 ImageButton(height:ScreenUtil().setHeight(300),width: ScreenUtil().setWidth(250),imageUrl: "resource/images/stoneBuilding.png",callback: (){
-//            name = "";
-                  print(this.widget.name);
-                },),
+                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                    'height': ScreenUtil().setHeight(1660),
+                    'width': ScreenUtil().setWidth(1020),
+                    'childName':'stoneDetail',
+                    "title":"采石场",
+                  });
+                  },),
                 Container(
                     padding: EdgeInsets.only(top:ScreenUtil().setHeight(200)),
                     child:Center(
