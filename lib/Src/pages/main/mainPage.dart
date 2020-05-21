@@ -5,7 +5,7 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
-import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 
 class MainPage extends StatefulWidget {
   String name = "hello";
@@ -34,6 +34,56 @@ class _MainPageState extends State<MainPage> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             fit: BoxFit.fill,
+          ),
+          new Container(
+            height: ScreenUtil().setHeight(250),
+            child: new Row(
+              children: <Widget>[
+                new Expanded(child:new Container(
+                  margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(20), ScreenUtil().setHeight(80), ScreenUtil().setWidth(20), ScreenUtil().setHeight(20)),
+                  decoration: new BoxDecoration(
+                    color: Color.fromRGBO(0, 0, 0, 0.7),
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  ),
+                  child: new Row(
+                    children: <Widget>[
+                      new Expanded(child: new ResourceWidget(
+                        amount: "100000100",
+                        size: ScreenUtil().setHeight(130),
+                        imageUrl: "resource/images/gold.png",
+                      ),flex: 1,),
+                      new Expanded(child: new ResourceWidget(
+                        amount: "100000",
+                        size: ScreenUtil().setHeight(130),
+                        imageUrl: "resource/images/wood.png",
+                      ),flex: 1,),
+                      new Expanded(child: new ResourceWidget(
+                        amount: "100000",
+                        size: ScreenUtil().setHeight(130),
+                        imageUrl: "resource/images/stone.png",
+                      ),flex: 1,)
+                    ],
+                  ),
+                ),
+                flex: 7,),
+                new Expanded(child: new Container(
+                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(60)),
+                  height: ScreenUtil().setHeight(150),
+                  child: new Stack(
+                    children: <Widget>[
+                      new Image(image: new AssetImage('resource/images/userInfo.png'),
+                        fit: BoxFit.fill,
+                      ),
+                      new Center(
+                        child: new Text("Lv 100",textAlign: TextAlign.right,
+                            style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.levelTextFontSize)),
+                      )
+                    ],
+                  ),
+                )
+                ,flex: 2,)
+              ],
+            ),
           ),
           ///主城
           new Container(
