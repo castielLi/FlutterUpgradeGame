@@ -6,6 +6,7 @@ import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
+import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 
 class MainPage extends StatefulWidget {
   String name = "hello";
@@ -35,6 +36,7 @@ class _MainPageState extends State<MainPage> {
             height: MediaQuery.of(context).size.height,
             fit: BoxFit.fill,
           ),
+          ///资源栏
           new Container(
             height: ScreenUtil().setHeight(250),
             child: new Row(
@@ -82,6 +84,45 @@ class _MainPageState extends State<MainPage> {
                   ),
                 )
                 ,flex: 2,)
+              ],
+            ),
+          ),
+          ///功能栏
+          new Container(
+            color: Colors.red,
+            margin: EdgeInsets.only(top: ScreenUtil().setHeight(230)),
+            height: ScreenUtil().setHeight(180),
+            child: new Row(
+              children: <Widget>[
+                new Expanded(child: new Container(
+                  color: Colors.green,
+                  child: new Row(
+                    children: <Widget>[
+                      new Expanded(
+                        child: new UserImageButton(size:ScreenUtil().setHeight(140),imageUrl: "resource/images/rank.png",callback: (){
+
+                        },),
+                        flex: 1,
+                      ),
+                      new Expanded(
+                        child: new UserImageButton(size:ScreenUtil().setHeight(140),imageUrl: "resource/images/mission.png",callback: (){
+                        },),
+                        flex: 1,
+                      ),
+                      new Expanded(
+                        child: new UserImageButton(size:ScreenUtil().setHeight(140),imageUrl: "resource/images/team.png",callback: (){
+                        },),
+                        flex: 1,
+                      ),
+                    ],
+                  ),),
+                flex: 2,
+                ),
+                new Expanded(child: new Container(),
+                flex: 1,),
+                new Expanded(child: new Container(),
+                  flex: 1,),
+
               ],
             ),
           ),
