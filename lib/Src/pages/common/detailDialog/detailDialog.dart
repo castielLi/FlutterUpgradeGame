@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Src/pages/farm/farm.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Src/pages/rank/rank.dart';
+import 'package:upgradegame/Src/pages/sawmill/sawmill.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
 class DetailDialog extends StatefulWidget {
@@ -32,8 +34,23 @@ class _DetailDialogState extends State<DetailDialog> {
   Widget build(BuildContext context) {
 
     Widget currentWidget;
-    if(this.widget.childWidgetName == 'farmDetail'){
+
+    switch(this.widget.childWidgetName){
+      // 主城
+      case 'farmDetail':{
         currentWidget = new FarmDetail();
+        break;
+      }
+      // 伐木场
+      case 'sawmillDetail':{
+        currentWidget = new SawmillDetail();
+        break;
+      }
+      // 排行榜
+      case 'rankDetail':{
+        currentWidget = new RankDetail();
+        break;
+      }
     }
 
     return new Container(
