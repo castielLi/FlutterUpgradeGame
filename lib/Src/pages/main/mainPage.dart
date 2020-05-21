@@ -95,7 +95,7 @@ class _MainPageState extends State<MainPage> {
                     'height': ScreenUtil().setHeight(1660),
                     'width': ScreenUtil().setWidth(1020),
                     'childName':'farmDetail',
-                    "title":"升 级"
+                    "title":"主 城"
                   });
                 },),
                 Container(
@@ -113,16 +113,13 @@ class _MainPageState extends State<MainPage> {
             margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(590), ScreenUtil().setHeight(1250), ScreenUtil().setWidth(170), ScreenUtil().setHeight(360)),
             child: new Stack(
               children: <Widget>[
-//                ImageButton(height:ScreenUtil().setHeight(290),width: ScreenUtil().setWidth(240),imageUrl: "resource/images/herosBuilding.png",callback: (){
-////            name = "";
-//                  print(this.widget.name);
-//                },),
                 // 排行榜。暂时放到英雄祭坛
                 ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/herosBuilding.png",callback: (){
                   Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
                     'height': ScreenUtil().setHeight(1660),
                     'width': ScreenUtil().setWidth(1020),
                     'childName':'rankDetail',
+                    "title":"排行榜",
                   });
                 },),
                 Container(
@@ -141,9 +138,13 @@ class _MainPageState extends State<MainPage> {
             child: new Stack(
               children: <Widget>[
                 ImageButton(height:ScreenUtil().setHeight(300),width: ScreenUtil().setWidth(250),imageUrl: "resource/images/stoneBuilding.png",callback: (){
-//            name = "";
-                  print(this.widget.name);
-                },),
+                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                    'height': ScreenUtil().setHeight(1660),
+                    'width': ScreenUtil().setWidth(1020),
+                    'childName':'stoneDetail',
+                    "title":"采石场",
+                  });
+                  },),
                 Container(
                     padding: EdgeInsets.only(top:ScreenUtil().setHeight(200)),
                     child:Center(
@@ -160,10 +161,18 @@ class _MainPageState extends State<MainPage> {
             margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(20), ScreenUtil().setHeight(1330), ScreenUtil().setWidth(700), ScreenUtil().setHeight(300)),
             child: new Stack(
               children: <Widget>[
-                ImageButton(height:ScreenUtil().setHeight(340),width: ScreenUtil().setWidth(380),imageUrl: "resource/images/fellingBuilding.png",callback: (){
-//            name = "";
-                  print(this.widget.name);
+                ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/fellingBuilding.png",callback: (){
+                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                    'height': ScreenUtil().setHeight(1660),
+                    'width': ScreenUtil().setWidth(1020),
+                    'childName':'sawmillDetail',
+                    "title":"伐木场",
+                  });
                 },),
+//                ImageButton(height:ScreenUtil().setHeight(340),width: ScreenUtil().setWidth(380),imageUrl: "resource/images/fellingBuilding.png",callback: (){
+////            name = "";
+//                  print(this.widget.name);
+//                },),
                 Container(
                     padding: EdgeInsets.only(top:ScreenUtil().setHeight(190)),
                     child:Center(
