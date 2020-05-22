@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Common/widget/adIconRow/adIconRow.dart';
-import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Common/widget/rankItem.dart';
+import 'package:upgradegame/Common/app/config.dart';
 
 
 class RankDetail extends StatefulWidget {
@@ -21,8 +21,6 @@ class _RankDetailState extends State<RankDetail> {
 
   @override
   Widget build(BuildContext context) {
-    var textStyle = TextStyle(fontSize: 30.0, color: Colors.white,
-        decoration: TextDecoration.none);
 
     return new Container(
       child: new Container(
@@ -31,12 +29,10 @@ class _RankDetailState extends State<RankDetail> {
             ScreenUtil().setHeight(400),  // 上
             ScreenUtil().setWidth(120),   // 右
             ScreenUtil().setHeight(220)), // 下
-//        color: Colors.blue,
         child:Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Container(
-              color: Colors.red,
               child:Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
@@ -45,12 +41,12 @@ class _RankDetailState extends State<RankDetail> {
                     Stack(
                       alignment: AlignmentDirectional.center,
                       children: <Widget>[
-                        Image(image: new AssetImage('resource/images/yellowButton.png'),height: 60,),
+                        Image(image: new AssetImage('resource/images/yellowButton.png'),height: ScreenUtil().setHeight(160),),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Image(image: new AssetImage('resource/images/gold.png'),height: 45,),
-                            Text('T币',style: textStyle,),
+                            Image(image: new AssetImage('resource/images/gold.png'),height: ScreenUtil().setHeight(150),),
+                            Text('T币',style: CustomFontSize.textStyle30,),
                           ],
                         ),
                       ],
@@ -62,12 +58,12 @@ class _RankDetailState extends State<RankDetail> {
                     child: Stack(
                       alignment: AlignmentDirectional.center,
                       children: <Widget>[
-                        Image(image: new AssetImage('resource/images/yellowButton.png'),height: 60,),
+                        Image(image: new AssetImage('resource/images/yellowButton.png'),height: ScreenUtil().setHeight(160),),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Image(image: new AssetImage('resource/images/withdraw.png'),height: 40,),
-                            Text('提现',style: textStyle,),
+                            Image(image: new AssetImage('resource/images/withdraw.png'),height: ScreenUtil().setHeight(110),),
+                            Text('提现',style: CustomFontSize.textStyle30,),
                           ],
                         ),
                       ],
@@ -78,17 +74,22 @@ class _RankDetailState extends State<RankDetail> {
               ),
             ),
             Container(
-              color: Colors.blue,
+              width: ScreenUtil().setWidth(800),
+              height: ScreenUtil().setHeight(840),
               child:
-              Text('提现',style: textStyle,),
-
-//              ListView.builder(
-//                  itemCount: 1,
-//                  itemExtent: 30,
-//                  itemBuilder: (BuildContext context, int index){
-//                    return ListTile(title: Text("$index",style: textStyle,));
-//                  },
-//              ),
+                ListView.builder(
+                  itemCount: 10,
+                  itemExtent: 55,
+                  itemBuilder: (BuildContext context, int index){
+                    // 获取排名数据
+                    int count = index+1;
+                    if (count>5){count = 5;};
+                    String imageUrl = 'resource/images/rank$count.png';
+                    int value = 5919-index;
+                    return RankItem(imageUrl: imageUrl,avatarUrl: 'resource/images/avatar.png',
+                    rankName: '黄小龙',value: value,);
+                  },
+              ),
             ),
 
           ],

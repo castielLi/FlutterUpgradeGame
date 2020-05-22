@@ -100,7 +100,12 @@ class _MainPageState extends State<MainPage> {
                     children: <Widget>[
                       new UserImageButton(size:ScreenUtil().setHeight(150),buttonName: "排行榜"
                         ,imageUrl: "resource/images/rank.png",textSize: SystemFontSize.operationTextFontSize,callback: (){
-
+                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                            'height': ScreenUtil().setHeight(1660),
+                            'width': ScreenUtil().setWidth(1020),
+                            'childName':'rankDetail',
+                            "title":"排行榜",
+                          });
                         },),
                       new UserImageButton(size:ScreenUtil().setHeight(150),buttonName: "任务"
                         ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/mission.png",callback: (){
@@ -169,14 +174,8 @@ class _MainPageState extends State<MainPage> {
             margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(590), ScreenUtil().setHeight(1250), ScreenUtil().setWidth(170), ScreenUtil().setHeight(360)),
             child: new Stack(
               children: <Widget>[
-                // 排行榜。暂时放到英雄祭坛
                 ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/herosBuilding.png",callback: (){
-                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
-                    'height': ScreenUtil().setHeight(1660),
-                    'width': ScreenUtil().setWidth(1020),
-                    'childName':'rankDetail',
-                    "title":"排行榜",
-                  });
+                  print('英雄祭坛');
                 },),
                 Container(
                     padding: EdgeInsets.only(top:ScreenUtil().setHeight(190)),

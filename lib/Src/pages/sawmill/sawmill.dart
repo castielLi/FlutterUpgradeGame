@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/widget/adIconRow/adIconRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Common/app/config.dart';
 
 
 class SawmillDetail extends StatefulWidget {
@@ -28,12 +29,6 @@ class _SawmillDetailState extends State<SawmillDetail> {
 
   @override
   Widget build(BuildContext context) {
-    var textStyleA = TextStyle(fontSize: 32.0, color: Colors.white,
-        decoration: TextDecoration.none);
-    var textStyleB = TextStyle(fontSize: 30.0, color: Colors.white,
-        decoration: TextDecoration.none);
-    var textStyleC = TextStyle(fontSize: 23.0, color: Colors.white,
-        decoration: TextDecoration.none);
 
     return new Container(
       child: new Container(
@@ -42,7 +37,6 @@ class _SawmillDetailState extends State<SawmillDetail> {
             ScreenUtil().setHeight(350),  // 上
             ScreenUtil().setWidth(80),   // 右
             ScreenUtil().setHeight(100)), // 下
-//        color: Colors.blue,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -56,18 +50,18 @@ class _SawmillDetailState extends State<SawmillDetail> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('LV $levelFrom > LV $level',textAlign:TextAlign.left,style: textStyleA),
-                  Text('升级所需资料',style: textStyleA),
+                  Text('LV $levelFrom > LV $level',textAlign:TextAlign.left,style: CustomFontSize.textStyle30),
+                  Text('升级所需资料',style: CustomFontSize.textStyle30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       new Image(image: new AssetImage('resource/images/wood.png'), height:30),
-                      Text('$neededWood ',style: textStyleB,),
+                      Text('$neededWood ',style: CustomFontSize.textStyle30,),
                       new Image(image: new AssetImage('resource/images/stone.png'), height:30),
-                      Text('$neededStone',style: textStyleB),
+                      Text('$neededStone',style: CustomFontSize.textStyle30),
                     ],
                   ),
-                  Text('观看广告获取升级资源',style:textStyleC),
+                  Text('观看广告获取升级资源',style:CustomFontSize.textStyle22),
                 ],
               ),
             ),
@@ -86,12 +80,12 @@ class _SawmillDetailState extends State<SawmillDetail> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Text('每次获取 ',style: textStyleC,),
+                      Text('每次获取 ',style: CustomFontSize.textStyle22,),
                       new Image(image: new AssetImage('resource/images/wood.png'),height: 30,),
-                      Text('$woodPerAd',style: textStyleC,),
+                      Text('$woodPerAd',style: CustomFontSize.textStyle22,),
                     ],
                   ),
-                  Text('今日观看次数 $watchedAd/$maxWatchableAd',style:textStyleC),
+                  Text('今日观看次数 $watchedAd/$maxWatchableAd',style:CustomFontSize.textStyle22),
                 ],
               ),
             ),
