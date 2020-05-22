@@ -63,6 +63,8 @@ class SystemFontSize {
 
   static const detailDialogTitleTextFontSize = 36.0;
 
+  static const settingTextFontSize = 21.0;
+
 
 
   static const veryLagerTextSize = 80.0;

@@ -123,6 +123,12 @@ class _MainPageState extends State<MainPage> {
                     children: <Widget>[
                       new UserImageButton(size:ScreenUtil().setHeight(130),buttonName: "设置"
                         ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/setting.png",callback: (){
+                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                            'height': ScreenUtil().setHeight(1660),
+                            'width': ScreenUtil().setWidth(1020),
+                            'childName':'settingDetail',
+                            "title":"设 置"
+                          });
                         },
                       ),
                       new UserImageButton(size:ScreenUtil().setHeight(130),buttonName: "公告"
