@@ -20,7 +20,8 @@ class _RankDetailState extends State<RankDetail> {
 
   @override
   Widget build(BuildContext context) {
-
+    var textStyle = TextStyle(fontSize: 32.0, color: Colors.white,
+        decoration: TextDecoration.none);
 
     return new Container(
       child: new Container(
@@ -30,13 +31,15 @@ class _RankDetailState extends State<RankDetail> {
             ScreenUtil().setWidth(120),   // 右
             ScreenUtil().setHeight(220)), // 下
         color: Colors.blue,
-        child:ListView.builder(
-            itemCount: 10,
-//                itemExtent: 30,
-            itemBuilder: (BuildContext context, int index){
-              return ListTile(title: Text("$index"));
-            }
-        ),
+//        child:Text('T币 提现',style: textStyle,),
+
+//        ListView.builder(
+//            itemCount: 10,
+////                itemExtent: 30,
+//            itemBuilder: (BuildContext context, int index){
+//              return ListTile(title: Text("$index"));
+//            }
+//        ),
 
 
 //        new Column(
