@@ -80,16 +80,15 @@ class _RankDetailState extends State<RankDetail> {
             Container(
               color: Colors.blue,
               child:
-//              Text('提现',style: textStyle,),
+              Text('提现',style: textStyle,),
 
-              ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 1,
-                  itemExtent: 30,
-                  itemBuilder: (BuildContext context, int index){
-                    return ListTile(title: Text("$index",style: textStyle,));
-                  },
-              ),
+//              ListView.builder(
+//                  itemCount: 1,
+//                  itemExtent: 30,
+//                  itemBuilder: (BuildContext context, int index){
+//                    return ListTile(title: Text("$index",style: textStyle,));
+//                  },
+//              ),
             ),
 
           ],
