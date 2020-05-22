@@ -21,7 +21,7 @@ class _RankDetailState extends State<RankDetail> {
 
   @override
   Widget build(BuildContext context) {
-    var textStyle = TextStyle(fontSize: 32.0, color: Colors.white,
+    var textStyle = TextStyle(fontSize: 30.0, color: Colors.white,
         decoration: TextDecoration.none);
 
     return new Container(
@@ -36,41 +36,61 @@ class _RankDetailState extends State<RankDetail> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Container(
+              color: Colors.red,
               child:Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   GestureDetector(
                     child:
-//                      Stack(
-//                        children: <Widget>[
-//                          Image(image: new AssetImage('resource/images/rank/yellowButton.png'),
-////                            width: MediaQuery.of(context).size.width,
-////                            height: MediaQuery.of(context).size.height,
-////                            fit: BoxFit.fill,
-//                          ),
-////                          Row(
-////                            children: <Widget>[
-////                              Image(image: new AssetImage('resource/images/rank/coin.png'),height: 40,),
-//////                              Text('T币'),
-////                            ],
-////                          ),
-//                        ],
-//                      ),
-                    new Image(image: new AssetImage('resource/images/rank/yellowButton.png'),height: 50,),
+                    Stack(
+                      alignment: AlignmentDirectional.center,
+                      children: <Widget>[
+                        Image(image: new AssetImage('resource/images/yellowButton.png'),height: 60,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Image(image: new AssetImage('resource/images/gold.png'),height: 45,),
+                            Text('T币',style: textStyle,),
+                          ],
+                        ),
+                      ],
+                    ),
+
                     onTap: (){print('点击T币');},
                   ),
-//                  GestureDetector(
-//                    child: new Image(image: new AssetImage('resource/images/stone.png'),height: 50,),
-//                    onTap: (){print('点击提现');},
-//                  ),
+                  GestureDetector(
+                    child: Stack(
+                      alignment: AlignmentDirectional.center,
+                      children: <Widget>[
+                        Image(image: new AssetImage('resource/images/yellowButton.png'),height: 60,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Image(image: new AssetImage('resource/images/withdraw.png'),height: 40,),
+                            Text('提现',style: textStyle,),
+                          ],
+                        ),
+                      ],
+                    ),
+                    onTap: (){print('点击提现');},
+                  ),
                 ],
               ),
             ),
-//            Container(
-//              child:ListView.builder(
-//                  itemBuilder: null
-//              ),
-//            ),
+            Container(
+              color: Colors.blue,
+              child:
+//              Text('提现',style: textStyle,),
+
+              ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: 1,
+                  itemExtent: 30,
+                  itemBuilder: (BuildContext context, int index){
+                    return ListTile(title: Text("$index",style: textStyle,));
+                  },
+              ),
+            ),
 
           ],
         ),
