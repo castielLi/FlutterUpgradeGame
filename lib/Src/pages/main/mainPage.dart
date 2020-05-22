@@ -107,6 +107,12 @@ class _MainPageState extends State<MainPage> {
                         },),
                       new UserImageButton(size:ScreenUtil().setHeight(150),buttonName: "团队"
                         ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/team.png",callback: (){
+                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                            'height': ScreenUtil().setHeight(1660),
+                            'width': ScreenUtil().setWidth(1020),
+                            'childName':'teamDetail',
+                            "title":"团 队"
+                          });
                         },),
                     ],
                   ),
