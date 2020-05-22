@@ -6,6 +6,8 @@ import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
+import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
+import 'package:upgradegame/Src/pages/main/common/dividendPart.dart';
 
 class MainPage extends StatefulWidget {
   String name = "hello";
@@ -35,6 +37,7 @@ class _MainPageState extends State<MainPage> {
             height: MediaQuery.of(context).size.height,
             fit: BoxFit.fill,
           ),
+          ///资源栏
           new Container(
             height: ScreenUtil().setHeight(250),
             child: new Row(
@@ -82,6 +85,53 @@ class _MainPageState extends State<MainPage> {
                   ),
                 )
                 ,flex: 2,)
+              ],
+            ),
+          ),
+          ///功能栏
+          new Container(
+            margin: EdgeInsets.only(top: ScreenUtil().setHeight(230)),
+            height: ScreenUtil().setHeight(180),
+            child: new Row(
+              children: <Widget>[
+                new Container(
+                  margin: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
+                  child: new Row(
+                    children: <Widget>[
+                      new UserImageButton(size:ScreenUtil().setHeight(150),buttonName: "排行榜"
+                        ,imageUrl: "resource/images/rank.png",textSize: SystemFontSize.operationTextFontSize,callback: (){
+
+                        },),
+                      new UserImageButton(size:ScreenUtil().setHeight(150),buttonName: "任务"
+                        ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/mission.png",callback: (){
+                        },),
+                      new UserImageButton(size:ScreenUtil().setHeight(150),buttonName: "团队"
+                        ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/team.png",callback: (){
+                        },),
+                    ],
+                  ),
+                ),
+                new Container(
+                  margin: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
+                  width: ScreenUtil().setWidth(380),
+                  child: new DividendPart(imageTitle: "分红",imageUrl:"resource/images/dividend.png",
+                  imageHeight: ScreenUtil().setHeight(140),imageWidth: ScreenUtil().setWidth(150),
+                  title: "今日分红",amount: "¥100000",),
+                ),
+                new Container(
+                  child: new Row(
+                    children: <Widget>[
+                      new UserImageButton(size:ScreenUtil().setHeight(130),buttonName: "设置"
+                        ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/setting.png",callback: (){
+                        },
+                      ),
+                      new UserImageButton(size:ScreenUtil().setHeight(130),buttonName: "公告"
+                        ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/announcement.png",callback: (){
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
