@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Common/widget/rankItem.dart';
+import 'package:upgradegame/Common/app/config.dart';
 
 
 class RankDetail extends StatefulWidget {
@@ -20,8 +21,6 @@ class _RankDetailState extends State<RankDetail> {
 
   @override
   Widget build(BuildContext context) {
-    var textStyle = TextStyle(fontSize: 32.0, color: Colors.white,
-        decoration: TextDecoration.none);
 
     return new Container(
       child: new Container(
@@ -30,31 +29,73 @@ class _RankDetailState extends State<RankDetail> {
             ScreenUtil().setHeight(400),  // 上
             ScreenUtil().setWidth(120),   // 右
             ScreenUtil().setHeight(220)), // 下
-        color: Colors.blue,
-//        child:Text('T币 提现',style: textStyle,),
+        child:Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              child:Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  GestureDetector(
+                    child:
+                    Stack(
+                      alignment: AlignmentDirectional.center,
+                      children: <Widget>[
+                        Image(image: new AssetImage('resource/images/yellowButton.png'),height: ScreenUtil().setHeight(160),),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Image(image: new AssetImage('resource/images/gold.png'),height: ScreenUtil().setHeight(150),),
+                            Text('T币',style: CustomFontSize.textStyle30,),
+                          ],
+                        ),
+                      ],
+                    ),
 
-//        ListView.builder(
-//            itemCount: 10,
-////                itemExtent: 30,
-//            itemBuilder: (BuildContext context, int index){
-//              return ListTile(title: Text("$index"));
-//            }
-//        ),
+                    onTap: (){print('点击T币');},
+                  ),
+                  GestureDetector(
+                    child: Stack(
+                      alignment: AlignmentDirectional.center,
+                      children: <Widget>[
+                        Image(image: new AssetImage('resource/images/yellowButton.png'),height: ScreenUtil().setHeight(160),),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Image(image: new AssetImage('resource/images/withdraw.png'),height: ScreenUtil().setHeight(110),),
+                            Text('提现',style: CustomFontSize.textStyle30,),
+                          ],
+                        ),
+                      ],
+                    ),
+                    onTap: (){print('点击提现');},
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              width: ScreenUtil().setWidth(800),
+              height: ScreenUtil().setHeight(840),
+              child:
+                ListView.builder(
+                  itemCount: 10,
+                  itemExtent: 55,
+                  itemBuilder: (BuildContext context, int index){
+                    // 获取排名数据
+                    int count = index+1;
+                    if (count>5){count = 5;};
+                    String imageUrl = 'resource/images/rank$count.png';
+                    int value = 5919-index;
+                    return RankItem(imageUrl: imageUrl,avatarUrl: 'resource/images/avatar.png',
+                    rankName: '黄小龙',value: value,);
+                  },
+              ),
+            ),
+
+          ],
+        ),
 
 
-//        new Column(
-//          mainAxisAlignment: MainAxisAlignment.center,
-//          children: <Widget>[
-//            Text('T币 提现'),
-//            ListView.builder(
-//                itemCount: 10,
-////                itemExtent: 30,
-//                itemBuilder: (BuildContext context, int index){
-//                  return ListTile(title: Text("$index"));
-//                }
-//            ),
-//          ],
-//        ),
       ),
     );
   }
