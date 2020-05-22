@@ -95,33 +95,28 @@ class _MainPageState extends State<MainPage> {
             child: new Row(
               children: <Widget>[
                 new Expanded(child: new Container(
-                  color: Colors.green,
                   child: new Row(
                     children: <Widget>[
-                      new Expanded(
-                        child: new UserImageButton(size:ScreenUtil().setHeight(140),imageUrl: "resource/images/rank.png",callback: (){
+                      new UserImageButton(size:ScreenUtil().setHeight(150),buttonName: "排行榜"
+                        ,imageUrl: "resource/images/rank.png",textSize: SystemFontSize.operationTextFontSize,callback: (){
 
-                        },),
-                        flex: 1,
-                      ),
-                      new Expanded(
-                        child: new UserImageButton(size:ScreenUtil().setHeight(140),imageUrl: "resource/images/mission.png",callback: (){
-                        },),
-                        flex: 1,
-                      ),
-                      new Expanded(
-                        child: new UserImageButton(size:ScreenUtil().setHeight(140),imageUrl: "resource/images/team.png",callback: (){
-                        },),
-                        flex: 1,
-                      ),
+                      },),
+                      new UserImageButton(size:ScreenUtil().setHeight(150),buttonName: "任务"
+                        ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/mission.png",callback: (){
+                      },),
+                      new UserImageButton(size:ScreenUtil().setHeight(150),buttonName: "团队"
+                        ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/team.png",callback: (){
+                      },),
                     ],
                   ),),
-                flex: 2,
+                flex: 3,
                 ),
+                new Expanded(child: new Container(
+                  color: Colors.blue,
+                ),
+                flex: 2,),
                 new Expanded(child: new Container(),
-                flex: 1,),
-                new Expanded(child: new Container(),
-                  flex: 1,),
+                  flex: 2,),
 
               ],
             ),

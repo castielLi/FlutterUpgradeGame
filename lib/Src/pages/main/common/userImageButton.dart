@@ -27,14 +27,20 @@ class _UserImageButtonState extends State<UserImageButton> {
         width: this.widget.size,
         child: new  GestureDetector(
           child: Container(
-            padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
+            margin: EdgeInsets.all(ScreenUtil().setWidth(10)),
             decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(this.widget.imageUrl),
                   fit: BoxFit.fill),
             ),
             child: Center(
-              child: Text(this.widget.buttonName,style: TextStyle(fontSize: this.widget.textSize),),
+              child: new Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  new Text(this.widget.buttonName,textAlign: TextAlign.center
+                    ,style:  TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: this.widget.textSize),),
+                ],
+              )
             ),
           ),
           onTap: (){
