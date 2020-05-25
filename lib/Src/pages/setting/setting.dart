@@ -27,7 +27,7 @@ class _SettingDetailState extends State<SettingDetail> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
-              buttonName: "账号及安全",textSize: SystemFontSize.settingTextFontSize,callback: (){
+              buttonName: "攻 略",textSize: SystemFontSize.settingTextFontSize,callback: (){
 
               },),
             new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
