@@ -16,10 +16,10 @@ class _StoneDetailState extends State<StoneDetail> {
   static int level = 13;
   static int levelFrom = level-1;
   static int neededWood  = 2910;
-  static int neededStone = 2910;
+//  static int neededStone = 2910;
   static int woodPerAd = 100;
   static int watchedAd = 1;
-  static int maxWatchableAd = 10;
+  static int maxWatchableAd = 5;
 
   @override
   void didChangeDependencies() {
@@ -56,18 +56,18 @@ class _StoneDetailState extends State<StoneDetail> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      new Image(image: new AssetImage('resource/images/wood.png'), height:30),
+                      new Image(image: new AssetImage('resource/images/gold.png'), height:30),
                       Text('$neededWood ',style: CustomFontSize.textStyle30,),
-                      new Image(image: new AssetImage('resource/images/stone.png'), height:30),
-                      Text('$neededStone',style: CustomFontSize.textStyle30),
+//                      new Image(image: new AssetImage('resource/images/stone.png'), height:30),
+//                      Text('$neededStone',style: CustomFontSize.textStyle30),
                     ],
                   ),
                   Text('观看广告获取升级资源',style:CustomFontSize.textStyle22),
                 ],
               ),
             ),
-            AdIconRow(countInOneRow: 5,adIconHeight: 50.0,imageUrl: 'resource/images/adIcon.png',),
-            AdIconRow(countInOneRow: 5,adIconHeight: 50.0,imageUrl: 'resource/images/adIcon.png',),
+            AdIconRow(countInOneRow: maxWatchableAd,adIconHeight: 50.0,imageUrl: 'resource/images/adIcon.png',),
+//            AdIconRow(countInOneRow: 5,adIconHeight: 50.0,imageUrl: 'resource/images/adIcon.png',),
             new Container(
               margin: EdgeInsets.fromLTRB(
                   ScreenUtil().setWidth(20),   // 左

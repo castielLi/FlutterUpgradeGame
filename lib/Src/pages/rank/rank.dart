@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/rankItem.dart';
 import 'package:upgradegame/Common/app/config.dart';
 
@@ -30,7 +31,7 @@ class _RankDetailState extends State<RankDetail> {
             ScreenUtil().setWidth(120),   // 右
             ScreenUtil().setHeight(220)), // 下
         child:Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
               child:Row(
@@ -79,7 +80,8 @@ class _RankDetailState extends State<RankDetail> {
               child:
                 ListView.builder(
                   itemCount: 10,
-                  itemExtent: 55,
+                  itemExtent: 60,
+                  padding: EdgeInsets.all(1.0),
                   itemBuilder: (BuildContext context, int index){
                     // 获取排名数据
                     int count = index+1;
