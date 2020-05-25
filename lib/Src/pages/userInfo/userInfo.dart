@@ -6,13 +6,14 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
+import 'package:upgradegame/Src/pages/userInfo/userResourceDetail.dart';
 
-class SettingDetail extends StatefulWidget {
+class UserInfoDetail extends StatefulWidget {
   @override
-  _SettingDetailState createState() => new _SettingDetailState();
+  _UserInfoDetailState createState() => new _UserInfoDetailState();
 }
 
-class _SettingDetailState extends State<SettingDetail> {
+class _UserInfoDetailState extends State<UserInfoDetail> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
@@ -26,20 +27,28 @@ class _SettingDetailState extends State<SettingDetail> {
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            new UserResourceDetail(
+              imageUrl: "resource/images/avatar.png",
+              amountCash: "100000",
+            ),
             new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
-              buttonName: "攻 略",textSize: SystemFontSize.settingTextFontSize,callback: (){
+              buttonName: "账号及安全",textSize: SystemFontSize.settingTextFontSize,callback: (){
 
               },),
             new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
-              buttonName: "用户协议",textSize: SystemFontSize.settingTextFontSize,callback: (){
+              buttonName: "交易明细",textSize: SystemFontSize.settingTextFontSize,callback: (){
 
               },),
             new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
-              buttonName: "隐私条款",textSize: SystemFontSize.settingTextFontSize,callback: (){
+              buttonName: "提现记录",textSize: SystemFontSize.settingTextFontSize,callback: (){
 
               },),
             new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
-              buttonName: "关于我们",textSize: SystemFontSize.settingTextFontSize,callback: (){
+              buttonName: "实名认证",textSize: SystemFontSize.settingTextFontSize,callback: (){
+
+              },),
+            new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
+              buttonName: "客服中心",textSize: SystemFontSize.settingTextFontSize,callback: (){
 
               },),
           ],
