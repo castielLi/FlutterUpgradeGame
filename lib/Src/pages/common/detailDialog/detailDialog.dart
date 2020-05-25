@@ -10,6 +10,8 @@ import 'package:upgradegame/Src/pages/stone/stone.dart';
 import 'package:upgradegame/Src/pages/setting/setting.dart';
 import 'package:upgradegame/Src/pages/team/team.dart';
 import 'package:upgradegame/Src/route/application.dart';
+import 'package:upgradegame/Src/pages/team/team.dart';
+import 'package:upgradegame/Src/pages/userInfo/userInfo.dart';
 
 class DetailDialog extends StatefulWidget {
 
@@ -71,6 +73,14 @@ class _DetailDialogState extends State<DetailDialog> {
       }
       case 'settingDetail':{
         currentWidget = new SettingDetail();
+        break;
+      }
+      case 'teamDetail':{
+        currentWidget = new TeamDetail();
+        break;
+      }
+      case 'userInfoDetail':{
+        currentWidget = new UserInfoDetail();
         break;
       }
     }

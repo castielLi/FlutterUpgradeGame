@@ -60,6 +60,9 @@ class SystemFontSize {
   static const dividendTitleTextFontSize = 15.0;
   static const dividendContentTextFontSize = 17.5;
 
+  static const userInfoResourceTextFontSize = 11.5;
+  static const userInfoResourceWithdrawTextFontSize = 15.0;
+
 
   static const detailDialogTitleTextFontSize = 36.0;
 

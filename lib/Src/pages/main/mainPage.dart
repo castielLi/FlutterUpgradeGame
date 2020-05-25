@@ -78,8 +78,17 @@ class _MainPageState extends State<MainPage> {
                         fit: BoxFit.fill,
                       ),
                       new Center(
-                        child: new Text("Lv 100",textAlign: TextAlign.right,
-                            style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.levelTextFontSize)),
+                        child:
+                        new UserImageButton(size:ScreenUtil().setHeight(150),buttonName: ""
+                          ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/avatar.png",callback: (){
+                            Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                              'height': ScreenUtil().setHeight(1660),
+                              'width': ScreenUtil().setWidth(1020),
+                              'childName':'userInfoDetail',
+                              "title":"个人信息"
+                            });
+                          },
+                        ),
                       )
                     ],
                   ),
@@ -107,9 +116,6 @@ class _MainPageState extends State<MainPage> {
                             "title":"排行榜",
                           });
                         },),
-                      new UserImageButton(size:ScreenUtil().setHeight(150),buttonName: "任务"
-                        ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/mission.png",callback: (){
-                        },),
                       new UserImageButton(size:ScreenUtil().setHeight(150),buttonName: "团队"
                         ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/team.png",callback: (){
                           Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
@@ -118,7 +124,13 @@ class _MainPageState extends State<MainPage> {
                             'childName':'teamDetail',
                             "title":"团 队",
                           });
+                            "title":"团 队"
+                          });
                         },),
+                      new UserImageButton(size:ScreenUtil().setHeight(150),buttonName: "商城"
+                        ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/marketStores.png",callback: (){
+                        },),
+
                     ],
                   ),
                 ),
