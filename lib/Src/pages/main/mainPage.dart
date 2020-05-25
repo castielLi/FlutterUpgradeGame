@@ -68,7 +68,7 @@ class _MainPageState extends State<MainPage> {
                     ],
                   ),
                 ),
-                flex: 7,),
+                  flex: 7,),
                 new Expanded(child: new Container(
                   margin: EdgeInsets.only(top: ScreenUtil().setHeight(60)),
                   height: ScreenUtil().setHeight(150),
@@ -93,7 +93,7 @@ class _MainPageState extends State<MainPage> {
                     ],
                   ),
                 )
-                ,flex: 2,)
+                  ,flex: 2,)
               ],
             ),
           ),
@@ -122,8 +122,6 @@ class _MainPageState extends State<MainPage> {
                             'height': ScreenUtil().setHeight(1660),
                             'width': ScreenUtil().setWidth(1020),
                             'childName':'teamDetail',
-                            "title":"团 队",
-                          });
                             "title":"团 队"
                           });
                         },),
@@ -138,8 +136,8 @@ class _MainPageState extends State<MainPage> {
                   margin: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
                   width: ScreenUtil().setWidth(380),
                   child: new DividendPart(imageTitle: "分红",imageUrl:"resource/images/dividend.png",
-                  imageHeight: ScreenUtil().setHeight(140),imageWidth: ScreenUtil().setWidth(150),
-                  title: "今日分红",amount: "¥100000",),
+                    imageHeight: ScreenUtil().setHeight(140),imageWidth: ScreenUtil().setWidth(150),
+                    title: "今日分红",amount: "¥100000",),
                 ),
                 new Container(
                   child: new Row(
@@ -166,138 +164,138 @@ class _MainPageState extends State<MainPage> {
           ),
           ///主城
           new Container(
-            margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(330), ScreenUtil().setHeight(660), ScreenUtil().setWidth(170), ScreenUtil().setHeight(670)),
-            child: new Stack(
-              children: <Widget>[
-                ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/mainBuilding.png",callback: (){
-                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
-                    'height': ScreenUtil().setHeight(1660),
-                    'width': ScreenUtil().setWidth(1020),
-                    'childName':'mainBuildingDetail',
-                    "title":"主 城"
-                  });
-                },),
-                Container(
-                    padding: EdgeInsets.only(top:ScreenUtil().setHeight(420)),
-                    child:Center(
-                      child: Text("主 城",textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.mainBuildingTextFontSize),),
-                    )
-                )
-              ],
-            )
+              margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(330), ScreenUtil().setHeight(660), ScreenUtil().setWidth(170), ScreenUtil().setHeight(670)),
+              child: new Stack(
+                children: <Widget>[
+                  ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/mainBuilding.png",callback: (){
+                    Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                      'height': ScreenUtil().setHeight(1660),
+                      'width': ScreenUtil().setWidth(1020),
+                      'childName':'mainBuildingDetail',
+                      "title":"主 城"
+                    });
+                  },),
+                  Container(
+                      padding: EdgeInsets.only(top:ScreenUtil().setHeight(420)),
+                      child:Center(
+                        child: Text("主 城",textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.mainBuildingTextFontSize),),
+                      )
+                  )
+                ],
+              )
           ),
           ///英雄祭坛
           new Container(
-            margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(590), ScreenUtil().setHeight(1250), ScreenUtil().setWidth(170), ScreenUtil().setHeight(360)),
-            child: new Stack(
-              children: <Widget>[
-                ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/herosBuilding.png",callback: (){
-                  print('英雄祭坛');
-                },),
-                Container(
-                    padding: EdgeInsets.only(top:ScreenUtil().setHeight(190)),
-                    child:Center(
-                      child: Text("英雄祭坛",textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.otherBuildingTextFontSize),),
-                    )
-                )
-              ],
-            )
+              margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(590), ScreenUtil().setHeight(1250), ScreenUtil().setWidth(170), ScreenUtil().setHeight(360)),
+              child: new Stack(
+                children: <Widget>[
+                  ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/herosBuilding.png",callback: (){
+                    print('英雄祭坛');
+                  },),
+                  Container(
+                      padding: EdgeInsets.only(top:ScreenUtil().setHeight(190)),
+                      child:Center(
+                        child: Text("英雄祭坛",textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.otherBuildingTextFontSize),),
+                      )
+                  )
+                ],
+              )
           ),
           ///采石场
           new Container(
-            margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(590), ScreenUtil().setHeight(1550), ScreenUtil().setWidth(170), ScreenUtil().setHeight(80)),
-            child: new Stack(
-              children: <Widget>[
-                ImageButton(height:ScreenUtil().setHeight(300),width: ScreenUtil().setWidth(250),imageUrl: "resource/images/stoneBuilding.png",callback: (){
-                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
-                    'height': ScreenUtil().setHeight(1660),
-                    'width': ScreenUtil().setWidth(1020),
-                    'childName':'stoneDetail',
-                    "title":"采石场",
-                  });
+              margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(590), ScreenUtil().setHeight(1550), ScreenUtil().setWidth(170), ScreenUtil().setHeight(80)),
+              child: new Stack(
+                children: <Widget>[
+                  ImageButton(height:ScreenUtil().setHeight(300),width: ScreenUtil().setWidth(250),imageUrl: "resource/images/stoneBuilding.png",callback: (){
+                    Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                      'height': ScreenUtil().setHeight(1660),
+                      'width': ScreenUtil().setWidth(1020),
+                      'childName':'stoneDetail',
+                      "title":"采石场",
+                    });
                   },),
-                Container(
-                    padding: EdgeInsets.only(top:ScreenUtil().setHeight(200)),
-                    child:Center(
-                      child: Text("采石场",textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.otherBuildingTextFontSize),),
-                    )
-                )
+                  Container(
+                      padding: EdgeInsets.only(top:ScreenUtil().setHeight(200)),
+                      child:Center(
+                        child: Text("采石场",textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.otherBuildingTextFontSize),),
+                      )
+                  )
 
-              ],
-            )
+                ],
+              )
           ),
           ///伐木场
           new Container(
-            margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(20), ScreenUtil().setHeight(1330), ScreenUtil().setWidth(700), ScreenUtil().setHeight(300)),
-            child: new Stack(
-              children: <Widget>[
-                ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/fellingBuilding.png",callback: (){
-                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
-                    'height': ScreenUtil().setHeight(1660),
-                    'width': ScreenUtil().setWidth(1020),
-                    'childName':'sawmillDetail',
-                    "title":"伐木场",
-                  });
-                },),
+              margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(20), ScreenUtil().setHeight(1330), ScreenUtil().setWidth(700), ScreenUtil().setHeight(300)),
+              child: new Stack(
+                children: <Widget>[
+                  ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/fellingBuilding.png",callback: (){
+                    Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                      'height': ScreenUtil().setHeight(1660),
+                      'width': ScreenUtil().setWidth(1020),
+                      'childName':'sawmillDetail',
+                      "title":"伐木场",
+                    });
+                  },),
 //                ImageButton(height:ScreenUtil().setHeight(340),width: ScreenUtil().setWidth(380),imageUrl: "resource/images/fellingBuilding.png",callback: (){
 ////            name = "";
 //                  print(this.widget.name);
 //                },),
-                Container(
-                    padding: EdgeInsets.only(top:ScreenUtil().setHeight(190)),
-                    child:Center(
-                      child: Text("伐木场",textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.otherBuildingTextFontSize),),
-                    )
-                )
-              ],
-            )
+                  Container(
+                      padding: EdgeInsets.only(top:ScreenUtil().setHeight(190)),
+                      child:Center(
+                        child: Text("伐木场",textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.otherBuildingTextFontSize),),
+                      )
+                  )
+                ],
+              )
           ),
           ///农场
           new Container(
-            margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(0), ScreenUtil().setHeight(980), ScreenUtil().setWidth(680), ScreenUtil().setHeight(630)),
-            child: new Stack(
-              children: <Widget>[
-                ImageButton(height:ScreenUtil().setHeight(290),width: ScreenUtil().setWidth(340),imageUrl: "resource/images/farmBuilding.png",callback: (){
-                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
-                    'height': ScreenUtil().setHeight(1660),
-                    'width': ScreenUtil().setWidth(1020),
-                    'childName':'farmDetail',
-                    "title":"农 场"
-                  });
-                  print(this.widget.name);
-                },),
-                Container(
-                    padding: EdgeInsets.only(top:ScreenUtil().setHeight(190)),
-                    child:Center(
-                      child: Text("农 场",textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.otherBuildingTextFontSize),),
-                    )
-                )
-              ],
-            )
+              margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(0), ScreenUtil().setHeight(980), ScreenUtil().setWidth(680), ScreenUtil().setHeight(630)),
+              child: new Stack(
+                children: <Widget>[
+                  ImageButton(height:ScreenUtil().setHeight(290),width: ScreenUtil().setWidth(340),imageUrl: "resource/images/farmBuilding.png",callback: (){
+                    Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                      'height': ScreenUtil().setHeight(1660),
+                      'width': ScreenUtil().setWidth(1020),
+                      'childName':'farmDetail',
+                      "title":"农 场"
+                    });
+                    print(this.widget.name);
+                  },),
+                  Container(
+                      padding: EdgeInsets.only(top:ScreenUtil().setHeight(190)),
+                      child:Center(
+                        child: Text("农 场",textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.otherBuildingTextFontSize),),
+                      )
+                  )
+                ],
+              )
           ),
           ///市场
           new Container(
-            margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(0), ScreenUtil().setHeight(620), ScreenUtil().setWidth(680), ScreenUtil().setHeight(990)),
-            child: new Stack(
-              children: <Widget>[
-                ImageButton(height:ScreenUtil().setHeight(290),width: ScreenUtil().setWidth(310),imageUrl: "resource/images/marketBuilding.png",callback: (){
+              margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(0), ScreenUtil().setHeight(620), ScreenUtil().setWidth(680), ScreenUtil().setHeight(990)),
+              child: new Stack(
+                children: <Widget>[
+                  ImageButton(height:ScreenUtil().setHeight(290),width: ScreenUtil().setWidth(310),imageUrl: "resource/images/marketBuilding.png",callback: (){
 //            name = "";
-                  print(this.widget.name);
-                },),
-                Container(
-                    padding: EdgeInsets.only(top:ScreenUtil().setHeight(170)),
-                    child:Center(
-                      child: Text("市 场",textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.otherBuildingTextFontSize),),
-                    )
-                )
-              ],
-            )
+                    print(this.widget.name);
+                  },),
+                  Container(
+                      padding: EdgeInsets.only(top:ScreenUtil().setHeight(170)),
+                      child:Center(
+                        child: Text("市 场",textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.otherBuildingTextFontSize),),
+                      )
+                  )
+                ],
+              )
           ),
         ],
       ),
