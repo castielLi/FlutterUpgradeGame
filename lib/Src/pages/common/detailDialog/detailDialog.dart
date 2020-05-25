@@ -10,10 +10,10 @@ import 'package:upgradegame/Src/pages/stone/stone.dart';
 import 'package:upgradegame/Src/pages/setting/setting.dart';
 import 'package:upgradegame/Src/pages/team/team.dart';
 import 'package:upgradegame/Src/route/application.dart';
-import 'package:upgradegame/Src/pages/team/team.dart';
 import 'package:upgradegame/Src/pages/userInfo/userInfo.dart';
 import 'package:upgradegame/Src/pages/store/store.dart';
 import 'package:upgradegame/Src/pages/adDividend/adDividend.dart';
+import 'package:upgradegame/Src/pages/market/market.dart';
 
 class DetailDialog extends StatefulWidget {
 
@@ -91,6 +91,10 @@ class _DetailDialogState extends State<DetailDialog> {
       }
       case 'adDividendDetail':{
         currentWidget = new adDividendDetail();
+        break;
+      }
+      case 'marketDetail':{
+        currentWidget = new MarketDetail();
         break;
       }
     }

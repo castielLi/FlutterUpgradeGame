@@ -10,7 +10,6 @@ import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/main/common/dividendPart.dart';
 
 class MainPage extends StatefulWidget {
-  String name = "hello";
   @override
   _MainPageState createState() => new _MainPageState();
 }
@@ -281,7 +280,6 @@ class _MainPageState extends State<MainPage> {
                       'childName':'farmDetail',
                       "title":"农 场"
                     });
-                    print(this.widget.name);
                   },),
                   Container(
                       padding: EdgeInsets.only(top:ScreenUtil().setHeight(190)),
@@ -299,8 +297,12 @@ class _MainPageState extends State<MainPage> {
               child: new Stack(
                 children: <Widget>[
                   ImageButton(height:ScreenUtil().setHeight(290),width: ScreenUtil().setWidth(310),imageUrl: "resource/images/marketBuilding.png",callback: (){
-//            name = "";
-                    print(this.widget.name);
+                    Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                      'height': ScreenUtil().setHeight(1660),
+                      'width': ScreenUtil().setWidth(1020),
+                      'childName':'marketDetail',
+                      "title":"市 场"
+                    });
                   },),
                   Container(
                       padding: EdgeInsets.only(top:ScreenUtil().setHeight(170)),
