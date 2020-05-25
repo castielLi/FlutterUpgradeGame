@@ -8,6 +8,7 @@ import 'package:upgradegame/Src/pages/rank/rank.dart';
 import 'package:upgradegame/Src/pages/sawmill/sawmill.dart';
 import 'package:upgradegame/Src/pages/stone/stone.dart';
 import 'package:upgradegame/Src/pages/setting/setting.dart';
+import 'package:upgradegame/Src/pages/team/team.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
 class DetailDialog extends StatefulWidget {
@@ -61,6 +62,11 @@ class _DetailDialogState extends State<DetailDialog> {
       // 排行榜
       case 'rankDetail':{
         currentWidget = new RankDetail();
+        break;
+      }
+      // 团队
+      case 'teamDetail':{
+        currentWidget = new TeamDetail();
         break;
       }
       case 'settingDetail':{

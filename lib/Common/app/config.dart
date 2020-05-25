@@ -83,4 +83,5 @@ class CustomFontSize{
   static const TextStyle textStyle30 = TextStyle(fontSize: 30.0, color: Colors.white, decoration: TextDecoration.none);
   static const TextStyle textStyle26 = TextStyle(fontSize: 26.0, color: Colors.white, decoration: TextDecoration.none);
   static const TextStyle textStyle22 = TextStyle(fontSize: 22.0, color: Colors.white, decoration: TextDecoration.none);
+  static const TextStyle textStyle16 = TextStyle(fontSize: 16.0, color: Colors.white, decoration: TextDecoration.none);
 }
