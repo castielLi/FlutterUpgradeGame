@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Common/widget/teamItem.dart';
+import 'package:upgradegame/Src/pages/team/teamItem.dart';
 
 
 class TeamDetail extends StatefulWidget {
@@ -71,11 +71,11 @@ class _TeamDetailState extends State<TeamDetail> {
             Container(
 //              color: Colors.red,
               width: ScreenUtil().setWidth(800),
-              height: ScreenUtil().setHeight(750),
+              height: ScreenUtil().setHeight(730),
               child:
               ListView.builder(
                 itemCount: 10,
-                itemExtent: 52,
+//                itemExtent: 52,
                 padding: EdgeInsets.all(1.0),
                 itemBuilder: (BuildContext context, int index){
                   // 获取数据
