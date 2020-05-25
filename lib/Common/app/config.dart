@@ -62,6 +62,7 @@ class SystemFontSize {
 
   static const userInfoResourceTextFontSize = 11.5;
   static const userInfoResourceWithdrawTextFontSize = 15.0;
+  static const storeCashGoldTextFontSize = 27.0;
 
 
   static const detailDialogTitleTextFontSize = 36.0;

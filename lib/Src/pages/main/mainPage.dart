@@ -127,8 +127,13 @@ class _MainPageState extends State<MainPage> {
                         },),
                       new UserImageButton(size:ScreenUtil().setHeight(150),buttonName: "商城"
                         ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/marketStores.png",callback: (){
+                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                            'height': ScreenUtil().setHeight(1660),
+                            'width': ScreenUtil().setWidth(1020),
+                            'childName':'storeDetail',
+                            "title":"商 城"
+                          });
                         },),
-
                     ],
                   ),
                 ),
