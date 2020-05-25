@@ -137,12 +137,22 @@ class _MainPageState extends State<MainPage> {
                     ],
                   ),
                 ),
-                new Container(
-                  margin: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
-                  width: ScreenUtil().setWidth(380),
-                  child: new DividendPart(imageTitle: "分红",imageUrl:"resource/images/dividend.png",
-                    imageHeight: ScreenUtil().setHeight(140),imageWidth: ScreenUtil().setWidth(150),
-                    title: "今日分红",amount: "¥100000",),
+                new GestureDetector(
+                  child: Container(
+                    margin: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
+                    width: ScreenUtil().setWidth(380),
+                    child: new DividendPart(imageTitle: "分红",imageUrl:"resource/images/dividend.png",
+                      imageHeight: ScreenUtil().setHeight(140),imageWidth: ScreenUtil().setWidth(150),
+                      title: "今日分红",amount: "¥100000",),
+                  ),
+                  onTap:(){
+                    Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                      'height': ScreenUtil().setHeight(1660),
+                      'width': ScreenUtil().setWidth(1020),
+                      'childName':'adDividendDetail',
+                      "title":"广告分红"
+                    });
+                  },
                 ),
                 new Container(
                   child: new Row(
