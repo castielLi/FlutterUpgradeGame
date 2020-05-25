@@ -155,7 +155,7 @@ class _MainPageState extends State<MainPage> {
                   Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
                     'height': ScreenUtil().setHeight(1660),
                     'width': ScreenUtil().setWidth(1020),
-                    'childName':'farmDetail',
+                    'childName':'mainBuildingDetail',
                     "title":"主 城"
                   });
                 },),
@@ -244,7 +244,12 @@ class _MainPageState extends State<MainPage> {
             child: new Stack(
               children: <Widget>[
                 ImageButton(height:ScreenUtil().setHeight(290),width: ScreenUtil().setWidth(340),imageUrl: "resource/images/farmBuilding.png",callback: (){
-//            name = "";
+                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                    'height': ScreenUtil().setHeight(1660),
+                    'width': ScreenUtil().setWidth(1020),
+                    'childName':'farmDetail',
+                    "title":"农 场"
+                  });
                   print(this.widget.name);
                 },),
                 Container(
