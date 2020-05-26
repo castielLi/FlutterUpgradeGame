@@ -43,11 +43,7 @@ class _SawmillDetailState extends State<SawmillDetail> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Container(
-              margin: EdgeInsets.fromLTRB(
-                  ScreenUtil().setWidth(20),   // 左
-                  ScreenUtil().setHeight(0),  // 上
-                  ScreenUtil().setWidth(0),   // 右
-                  ScreenUtil().setHeight(0)), // 下
+              margin: EdgeInsets.only(left: ScreenUtil().setWidth(20),),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,11 +66,7 @@ class _SawmillDetailState extends State<SawmillDetail> {
             AdIconRow(countInOneRow: maxWatchableAd,adIconHeight: 50.0,imageUrl: 'resource/images/adIcon.png',),
 //            AdIconRow(countInOneRow: 5,adIconHeight: 50.0,imageUrl: 'resource/images/adIcon.png',),
             new Container(
-              margin: EdgeInsets.fromLTRB(
-                  ScreenUtil().setWidth(20),   // 左
-                  ScreenUtil().setHeight(0),  // 上
-                  ScreenUtil().setWidth(0),   // 右
-                  ScreenUtil().setHeight(0)),
+              margin: EdgeInsets.only(left: ScreenUtil().setWidth(20),),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +75,7 @@ class _SawmillDetailState extends State<SawmillDetail> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Text('每次获取 ',style: CustomFontSize.textStyle22,),
-                      new Image(image: new AssetImage('resource/images/wood.png'),height: 30,),
+                      Image(image: new AssetImage('resource/images/wood.png'),height: 30,),
                       Text('$woodPerAd',style: CustomFontSize.textStyle22,),
                     ],
                   ),

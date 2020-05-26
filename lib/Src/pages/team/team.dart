@@ -57,11 +57,7 @@ class _TeamDetailState extends State<TeamDetail> {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(
-                  ScreenUtil().setWidth(120),   // 左
-                  ScreenUtil().setHeight(0),  // 上
-                  ScreenUtil().setWidth(0),   // 右
-                  ScreenUtil().setHeight(0)),
+              margin: EdgeInsets.only(left: ScreenUtil().setWidth(120)),
               child:Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -82,7 +78,8 @@ class _TeamDetailState extends State<TeamDetail> {
                 itemBuilder: (BuildContext context, int index){
                   // 获取数据
                   int value = 5919-index;
-                  return TeamItem(avatarUrl: 'resource/images/avatar.png', name: '黄小龙',money: value.toDouble(),date: '20200508',level: 1,tCoin: 5,);
+                  int tCoin = 5+index;
+                  return TeamItem(avatarUrl: 'resource/images/avatar.png', name: '黄小龙',money: value.toDouble(),date: '20200508',level: 1,tCoin: tCoin.toDouble(),);
                 },
               ),
             ),
