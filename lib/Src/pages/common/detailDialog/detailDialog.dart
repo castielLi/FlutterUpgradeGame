@@ -113,11 +113,6 @@ class _DetailDialogState extends State<DetailDialog> {
         currentWidget = new TeamDetail(HUD: showOrDismissProgressHUD,);
         break;
       }
-      //广告分红
-      case 'AdDividendDetail':{
-        currentWidget = new AdDividendDetail(HUD: showOrDismissProgressHUD,);
-        break;
-      }
       case 'userInfoDetail':{
         currentWidget = new UserInfoDetail(HUD: showOrDismissProgressHUD,);
         break;
