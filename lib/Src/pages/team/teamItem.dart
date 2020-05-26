@@ -41,19 +41,15 @@ class _TeamItem extends State <TeamItem>{
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(this.widget.name,style: CustomFontSize.textStyle22,),
-                Text(this.widget.date,style: CustomFontSize.textStyle16,)
+                Text(this.widget.date,style: CustomFontSize.textStyle16,),
               ],
             ),
           ],
 
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(
-              ScreenUtil().setWidth(0),   // 左
-              ScreenUtil().setHeight(0),  // 上
-              ScreenUtil().setWidth(20),   // 右
-              ScreenUtil().setHeight(0)),
-          child:Text('¥'+this.widget.money.toInt().toString()+"("+this.widget.tCoin.toInt().toString()+')',style: CustomFontSize.textStyle16,),
+          margin: EdgeInsets.only(right:ScreenUtil().setWidth(20)),
+          child:Text('¥'+this.widget.money.toInt().toString()+"("+(this.widget.tCoin.toInt()).toString()+')',style: CustomFontSize.textStyle16,),
         ),
 
       ],
