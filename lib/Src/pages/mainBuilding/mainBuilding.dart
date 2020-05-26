@@ -7,6 +7,8 @@ import 'package:upgradegame/Common/app/config.dart';
 class MainBuildingDetail extends StatefulWidget {
 
   @override
+  VoidCallback HUD;
+  MainBuildingDetail({Key key,this.HUD}):super(key:key);
   _MainBuildingDetailState createState() => new _MainBuildingDetailState();
 }
 
@@ -53,6 +55,7 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
             Text('升级后产出:'+'$coinPerHour'+'T币一小时',style:CustomFontSize.textStyle22),
             new ImageButton(height:ScreenUtil().setHeight(200),width: ScreenUtil().setWidth(400),buttonName: "升 级",imageUrl: "resource/images/upgradeButton.png",callback: (){
               print('点击升级');
+              this.widget.HUD();
             },),
           ],
         ),

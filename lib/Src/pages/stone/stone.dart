@@ -8,6 +8,8 @@ import 'package:upgradegame/Common/app/config.dart';
 class StoneDetail extends StatefulWidget {
 
   @override
+  VoidCallback HUD;
+  StoneDetail({Key key,this.HUD}):super(key:key);
   _StoneDetailState createState() => new _StoneDetailState();
 }
 

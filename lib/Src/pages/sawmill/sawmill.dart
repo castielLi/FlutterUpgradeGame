@@ -8,6 +8,8 @@ import 'package:upgradegame/Common/app/config.dart';
 class SawmillDetail extends StatefulWidget {
 
   @override
+  VoidCallback HUD;
+  SawmillDetail({Key key,this.HUD}):super(key:key);
   _SawmillDetailState createState() => new _SawmillDetailState();
 }
 

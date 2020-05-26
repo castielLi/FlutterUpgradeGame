@@ -268,6 +268,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.2"
+  progress_hud:
+    dependency: "direct main"
+    description:
+      name: progress_hud
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.0"
   provide:
     dependency: "direct main"
     description:
