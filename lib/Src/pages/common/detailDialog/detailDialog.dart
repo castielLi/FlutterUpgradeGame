@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:upgradegame/Src/pages/AdDividend/adDividendDetail.dart';
 import 'package:upgradegame/Src/pages/farm/farm.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
@@ -77,8 +78,14 @@ class _DetailDialogState extends State<DetailDialog> {
         currentWidget = new SettingDetail();
         break;
       }
+      // 团队
       case 'teamDetail':{
         currentWidget = new TeamDetail();
+        break;
+      }
+      //广告分红
+      case 'AdDividendDetail':{
+        currentWidget = new AdDividendDetail();
         break;
       }
       case 'userInfoDetail':{
