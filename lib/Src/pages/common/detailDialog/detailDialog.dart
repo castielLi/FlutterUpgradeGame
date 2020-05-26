@@ -4,6 +4,7 @@ import 'package:upgradegame/Src/pages/adDividend/adDividendDetail.dart';
 import 'package:upgradegame/Src/pages/farm/farm.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Src/pages/heroAltar/heroAltar.dart';
 import 'package:upgradegame/Src/pages/mainBuilding/mainBuilding.dart';
 import 'package:upgradegame/Src/pages/rank/rank.dart';
 import 'package:upgradegame/Src/pages/sawmill/sawmill.dart';
@@ -85,6 +86,11 @@ class _DetailDialogState extends State<DetailDialog> {
       // 采石场
       case 'stoneDetail':{
         currentWidget = new StoneDetail(HUD: showOrDismissProgressHUD,);
+        break;
+      }
+      // 英雄祭坛
+      case 'heroAltal':{
+        currentWidget = new HeroAltal(HUD: showOrDismissProgressHUD,);
         break;
       }
       // 农场

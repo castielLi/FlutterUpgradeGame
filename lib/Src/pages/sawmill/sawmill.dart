@@ -84,8 +84,9 @@ class _SawmillDetailState extends State<SawmillDetail> {
               ),
             ),
             new ImageButton(height:ScreenUtil().setHeight(200),width: ScreenUtil().setWidth(400),buttonName: "升 级",imageUrl: "resource/images/upgradeButton.png",callback: (){
-              print('点击升级');
-            },),
+                print('点击升级');
+              },),
+
           ],
         ),
       ),
