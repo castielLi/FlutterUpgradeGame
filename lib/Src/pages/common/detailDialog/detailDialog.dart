@@ -115,7 +115,7 @@ class _DetailDialogState extends State<DetailDialog> {
       }
       //广告分红
       case 'AdDividendDetail':{
-        currentWidget = new AdDividendDetail();
+        currentWidget = new AdDividendDetail(HUD: showOrDismissProgressHUD,);
         break;
       }
       case 'userInfoDetail':{
