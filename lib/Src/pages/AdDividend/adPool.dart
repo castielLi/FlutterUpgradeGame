@@ -42,7 +42,7 @@ class _AdPool extends State <AdPool>{
         children: <Widget>[
           Image(image: new AssetImage(this.widget.heroImageUrl),height: ScreenUtil().setHeight(250),width: ScreenUtil().setWidth(250),),
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
                 padding: EdgeInsets.only(left:100),

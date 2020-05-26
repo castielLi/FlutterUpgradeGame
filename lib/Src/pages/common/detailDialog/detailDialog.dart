@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Src/pages/AdDividend/adDividendDetail.dart';
+import 'package:upgradegame/Src/pages/adDividend/adDividendDetail.dart';
 import 'package:upgradegame/Src/pages/farm/farm.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
@@ -13,7 +13,6 @@ import 'package:upgradegame/Src/pages/team/team.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/pages/userInfo/userInfo.dart';
 import 'package:upgradegame/Src/pages/store/store.dart';
-import 'package:upgradegame/Src/pages/adDividend/adDividend.dart';
 import 'package:upgradegame/Src/pages/market/market.dart';
 
 class DetailDialog extends StatefulWidget {
@@ -94,10 +93,6 @@ class _DetailDialogState extends State<DetailDialog> {
       }
       case 'storeDetail':{
         currentWidget = new StoreDetail();
-        break;
-      }
-      case 'adDividendDetail':{
-        currentWidget = new adDividendDetail();
         break;
       }
       case 'marketDetail':{
