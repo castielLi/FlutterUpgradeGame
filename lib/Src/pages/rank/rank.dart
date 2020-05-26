@@ -7,6 +7,8 @@ import 'package:upgradegame/Common/app/config.dart';
 class RankDetail extends StatefulWidget {
 
   @override
+  VoidCallback HUD;
+  RankDetail({Key key,this.HUD}):super(key:key);
   _RankDetailState createState() => new _RankDetailState();
 }
 

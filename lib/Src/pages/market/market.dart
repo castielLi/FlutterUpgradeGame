@@ -10,6 +10,8 @@ import 'package:upgradegame/Src/pages/store/productItem.dart';
 
 class MarketDetail extends StatefulWidget {
   @override
+  VoidCallback HUD;
+  MarketDetail({Key key,this.HUD}):super(key:key);
   _MarketDetailState createState() => new _MarketDetailState();
 }
 

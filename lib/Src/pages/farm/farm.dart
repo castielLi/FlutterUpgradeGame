@@ -8,6 +8,8 @@ import 'package:upgradegame/Common/app/config.dart';
 class FarmDetail extends StatefulWidget {
 
   @override
+  VoidCallback HUD;
+  FarmDetail({Key key,this.HUD}):super(key:key);
   _FarmDetailState createState() => new _FarmDetailState();
 }
 

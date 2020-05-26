@@ -10,6 +10,8 @@ import 'package:upgradegame/Src/pages/store/productItem.dart';
 
 class StoreDetail extends StatefulWidget {
   @override
+  VoidCallback HUD;
+  StoreDetail({Key key,this.HUD}):super(key:key);
   _StoreDetailState createState() => new _StoreDetailState();
 }
 

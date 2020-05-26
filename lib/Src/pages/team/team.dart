@@ -9,6 +9,8 @@ import 'package:upgradegame/Src/pages/team/teamItem.dart';
 class TeamDetail extends StatefulWidget {
 
   @override
+  VoidCallback HUD;
+  TeamDetail({Key key,this.HUD}):super(key:key);
   _TeamDetailState createState() => new _TeamDetailState();
 }
 
