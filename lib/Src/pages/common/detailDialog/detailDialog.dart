@@ -127,7 +127,7 @@ class _DetailDialogState extends State<DetailDialog> {
         break;
       }
       case 'adDividendDetail':{
-        currentWidget = new adDividendDetail();
+        currentWidget = new adDividendDetail(HUD: showOrDismissProgressHUD,);
         break;
       }
       case 'marketDetail':{

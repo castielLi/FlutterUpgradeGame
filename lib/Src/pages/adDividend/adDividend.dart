@@ -10,6 +10,8 @@ import 'package:upgradegame/Src/pages/store/productItem.dart';
 
 class adDividendDetail extends StatefulWidget {
   @override
+  VoidCallback HUD;
+  adDividendDetail({Key key,this.HUD}):super(key:key);
   _adDividendDetailState createState() => new _adDividendDetailState();
 }
 
