@@ -10,6 +10,8 @@ import 'package:upgradegame/Src/pages/userInfo/userResourceDetail.dart';
 
 class UserInfoDetail extends StatefulWidget {
   @override
+  VoidCallback HUD;
+  UserInfoDetail({Key key,this.HUD}):super(key:key);
   _UserInfoDetailState createState() => new _UserInfoDetailState();
 }
 
@@ -44,7 +46,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
 
               },),
             new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
-              buttonName: "实名认证",textSize: SystemFontSize.settingTextFontSize,callback: (){
+              buttonName: "t币明细",textSize: SystemFontSize.settingTextFontSize,callback: (){
 
               },),
             new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),

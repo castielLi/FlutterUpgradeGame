@@ -8,14 +8,14 @@ import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Src/pages/store/productItem.dart';
 
-class MarketDetail extends StatefulWidget {
+class adDividendDetail extends StatefulWidget {
   @override
   VoidCallback HUD;
-  MarketDetail({Key key,this.HUD}):super(key:key);
-  _MarketDetailState createState() => new _MarketDetailState();
+  adDividendDetail({Key key,this.HUD}):super(key:key);
+  _adDividendDetailState createState() => new _adDividendDetailState();
 }
 
-class _MarketDetailState extends State<MarketDetail> {
+class _adDividendDetailState extends State<adDividendDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(

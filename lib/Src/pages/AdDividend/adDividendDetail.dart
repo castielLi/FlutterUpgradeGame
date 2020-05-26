@@ -5,6 +5,8 @@ import 'package:upgradegame/Src/pages/AdDividend/adPool.dart';
 class AdDividendDetail extends StatefulWidget {
 
   @override
+  VoidCallback HUD;
+  AdDividendDetail({Key key,this.HUD}):super(key:key);
   _AdDividendDetailState createState() => new _AdDividendDetailState();
 }
 
