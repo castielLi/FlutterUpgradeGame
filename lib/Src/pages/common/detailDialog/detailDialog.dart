@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Src/pages/adDividend/adDividend.dart';
 import 'package:upgradegame/Src/pages/adDividend/adDividendDetail.dart';
 import 'package:upgradegame/Src/pages/farm/farm.dart';
 import 'package:upgradegame/Common/app/config.dart';
@@ -121,10 +119,11 @@ class _DetailDialogState extends State<DetailDialog> {
         currentWidget = new StoreDetail(HUD: showOrDismissProgressHUD,);
         break;
       }
-//      case 'adDividendDetail':{
-//        currentWidget = new adDividendDetail(HUD: showOrDismissProgressHUD,);
-//        break;
-//      }
+      // 分红
+      case 'adDividendDetail':{
+        currentWidget = new AdDividendDetail(HUD: showOrDismissProgressHUD,);
+        break;
+      }
       case 'marketDetail':{
         currentWidget = new MarketDetail(HUD: showOrDismissProgressHUD,);
         break;
