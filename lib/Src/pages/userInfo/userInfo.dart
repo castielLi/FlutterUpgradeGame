@@ -13,7 +13,7 @@ class UserInfoDetail extends StatefulWidget {
   @override
   VoidCallback HUD;
   final changeTitleCallback;
-  final displayOriginalTitleCallback;
+  VoidCallback displayOriginalTitleCallback;
 
   UserInfoDetail({Key key,this.HUD,this.changeTitleCallback,this.displayOriginalTitleCallback}):super(key:key);
   _UserInfoDetailState createState() => new _UserInfoDetailState();
