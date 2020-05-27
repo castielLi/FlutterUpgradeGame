@@ -122,7 +122,9 @@ class _DetailDialogState extends State<DetailDialog> {
         break;
       }
       case 'settingDetail':{
-        currentWidget = new SettingDetail(HUD: showOrDismissProgressHUD,);
+        currentWidget = new SettingDetail(HUD: showOrDismissProgressHUD
+          ,changeTitleCallback:changeCurrentDialogTitle
+          ,displayOriginalTitleCallback: displayOriginalTitle,);
         break;
       }
       // 团队
