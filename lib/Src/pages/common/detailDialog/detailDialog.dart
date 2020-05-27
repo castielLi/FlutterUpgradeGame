@@ -58,8 +58,6 @@ class _DetailDialogState extends State<DetailDialog> {
   @override
   Widget build(BuildContext context) {
 
-    this.currentDisplayTitle = this.widget.title;
-
     void showOrDismissProgressHUD() {
       setState(() {
         if (_loading) {
@@ -75,6 +73,7 @@ class _DetailDialogState extends State<DetailDialog> {
     void changeCurrentDialogTitle(String title){
       setState(() {
         currentDisplayTitle = title;
+        print(currentDisplayTitle);
       });
     }
 
@@ -132,7 +131,9 @@ class _DetailDialogState extends State<DetailDialog> {
         break;
       }
       case 'userInfoDetail':{
-        currentWidget = new UserInfoDetail(HUD: showOrDismissProgressHUD,);
+        currentWidget = new UserInfoDetail(HUD: showOrDismissProgressHUD
+          ,changeTitleCallback:changeCurrentDialogTitle
+          ,displayOriginalTitleCallback: displayOriginalTitle,);
         break;
       }
       case 'storeDetail':{
@@ -170,7 +171,7 @@ class _DetailDialogState extends State<DetailDialog> {
                     Container(
                         height: ScreenUtil().setHeight(380),
                         child:Center(
-                          child: Text(this.currentDisplayTitle,textAlign: TextAlign.center,
+                          child: Text(this.currentDisplayTitle == ""?this.widget.title:this.currentDisplayTitle,textAlign: TextAlign.center,
                             style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.detailDialogTitleTextFontSize),),
                         )
                     ),
