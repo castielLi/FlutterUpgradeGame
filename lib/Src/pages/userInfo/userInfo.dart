@@ -8,6 +8,8 @@ import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Src/pages/userInfo/userResourceDetail.dart';
 import 'package:upgradegame/Src/pages/userInfo/tradeDetail/tradeDetail.dart';
+import 'package:upgradegame/Src/pages/userInfo/account/account.dart';
+import 'package:upgradegame/Src/pages/userInfo/withdraw/withdrawDetail.dart';
 
 class UserInfoDetail extends StatefulWidget {
   @override
@@ -76,6 +78,18 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
               ),
             ),
           ),
+          ///账号及安全
+          new Offstage(
+            offstage: this.tradeDetailHide,
+            child: new AccountDetail(HUD: this.widget.HUD,viewCallback: (){
+              setState(() {
+                tradeDetailHide = true;
+                userInfoHide = false;
+              });
+              this.widget.displayOriginalTitleCallback();
+            },),
+          ),
+          ///交易明细
           new Offstage(
             offstage: this.tradeDetailHide,
             child: new TradeDetail(HUD: this.widget.HUD,viewCallback: (){
@@ -85,7 +99,18 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
               });
               this.widget.displayOriginalTitleCallback();
             },),
-          )
+          ),
+          ///提现明细
+          new Offstage(
+            offstage: this.tradeDetailHide,
+            child: new WithDrawDetail(HUD: this.widget.HUD,viewCallback: (){
+              setState(() {
+                tradeDetailHide = true;
+                userInfoHide = false;
+              });
+              this.widget.displayOriginalTitleCallback();
+            },),
+          ),
         ],
       )
     );

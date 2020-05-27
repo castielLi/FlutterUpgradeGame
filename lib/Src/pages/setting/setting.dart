@@ -10,7 +10,9 @@ import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 class SettingDetail extends StatefulWidget {
   @override
   VoidCallback HUD;
-  SettingDetail({Key key,this.HUD}):super(key:key);
+  final changeTitleCallback;
+  VoidCallback displayOriginalTitleCallback;
+  SettingDetail({Key key,this.HUD,this.changeTitleCallback,this.displayOriginalTitleCallback}):super(key:key);
   _SettingDetailState createState() => new _SettingDetailState();
 }
 
