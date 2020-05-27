@@ -34,8 +34,8 @@ class DetailDialog extends StatefulWidget {
 class _DetailDialogState extends State<DetailDialog> {
 
   ProgressHUD _progressHUD;
-
   bool _loading = false;
+  String currentDisplayTitle = "";
 
   void initState() {
     super.initState();
@@ -58,6 +58,8 @@ class _DetailDialogState extends State<DetailDialog> {
   @override
   Widget build(BuildContext context) {
 
+    this.currentDisplayTitle = this.widget.title;
+
     void showOrDismissProgressHUD() {
       setState(() {
         if (_loading) {
@@ -67,6 +69,18 @@ class _DetailDialogState extends State<DetailDialog> {
         }
 
         _loading = !_loading;
+      });
+    }
+
+    void changeCurrentDialogTitle(String title){
+      setState(() {
+        currentDisplayTitle = title;
+      });
+    }
+
+    void displayOriginalTitle(){
+      setState(() {
+        currentDisplayTitle = this.widget.title;
       });
     }
 
@@ -156,7 +170,7 @@ class _DetailDialogState extends State<DetailDialog> {
                     Container(
                         height: ScreenUtil().setHeight(380),
                         child:Center(
-                          child: Text(this.widget.title,textAlign: TextAlign.center,
+                          child: Text(this.currentDisplayTitle,textAlign: TextAlign.center,
                             style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.detailDialogTitleTextFontSize),),
                         )
                     ),
