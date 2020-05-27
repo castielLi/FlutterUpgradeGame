@@ -24,7 +24,6 @@ class _HeroAltarClockState extends State<HeroAltarClock>{
       );
     }
     content = new Row(
-//      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: clockIconList,
     );
     return content;

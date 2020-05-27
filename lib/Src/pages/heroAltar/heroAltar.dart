@@ -13,10 +13,6 @@ class HeroAltal extends StatefulWidget {
 
 class _HeroAltalState extends State<HeroAltal> {
   // 获取数据
-  static int yesterdayRevenue = 1928;
-  static int totalRevenue = 2928;
-  static int heroInNetwork  = 99910;
-  static int productionToday = 9100;
 
   @override
   void didChangeDependencies() {

@@ -57,6 +57,15 @@ class _RankDetailState extends State<RankDetail> {
                     onTap: (){print('点击T币');},
                   ),
                   GestureDetector(
+//                    child:
+//                    Container(
+//                      decoration: BoxDecoration(
+//                        image: DecorationImage(
+//                          image: new AssetImage('resource/images/yellowButton.png'),
+//                          fit:BoxFit.fill,
+//                        ),
+//                      ),
+//                    ),
                     child: Stack(
                       alignment: AlignmentDirectional.center,
                       children: <Widget>[
@@ -81,12 +90,12 @@ class _RankDetailState extends State<RankDetail> {
               child:
                 ListView.builder(
                   itemCount: 10,
-                  itemExtent: 60,
-                  padding: EdgeInsets.all(1.0),
+                  itemExtent: ScreenUtil().setHeight(170),
+                  padding: EdgeInsets.only(top:0),
                   itemBuilder: (BuildContext context, int index){
                     // 获取排名数据
                     int count = index+1;
-                    if (count>5){count = 5;};
+                    if (count>5){count = 5;}
                     String imageUrl = 'resource/images/rank$count.png';
                     int value = 5919-index;
                     return RankItem(imageUrl: imageUrl,avatarUrl: 'resource/images/avatar.png',

@@ -50,8 +50,8 @@ class _HeroAltalItem extends State <HeroAltalItem>{
                crossAxisAlignment: CrossAxisAlignment.start,
                children: <Widget>[
                  Text(this.widget.description,style: CustomFontSize.textStyle22,),
-                 Text('效率：收益提高'+this.widget.revenueUp.toInt().toString()+'%',style: CustomFontSize.textStyle22,),
-                 Text('期限：30天（可叠加）',style: CustomFontSize.textStyle22,),
+                 Text('效率:收益提高'+this.widget.revenueUp.toInt().toString()+'%',style: CustomFontSize.textStyle22,),
+                 Text('期限:30天（可叠加）',style: CustomFontSize.textStyle22,),
                ],
              ),
            ],
@@ -62,7 +62,7 @@ class _HeroAltalItem extends State <HeroAltalItem>{
            child:Row(
              mainAxisAlignment: MainAxisAlignment.spaceAround,
              children: <Widget>[
-               HeroAltarClock(imageUrl: 'resource/images/gold.png',clockCount: 4,adIconHeight: 100,),
+               HeroAltarClock(imageUrl: 'resource/images/clock.png',clockCount: 4,adIconHeight: 70,),
                Text('战士*'+this.widget.heroCount.toString(),style: CustomFontSize.textStyle16,),
                Text('剩余'+this.widget.remainDays.toString()+'天',style: CustomFontSize.textStyle16,),
 
