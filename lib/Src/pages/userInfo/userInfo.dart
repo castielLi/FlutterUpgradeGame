@@ -60,7 +60,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                       tradeDetailHide = false;
                       userInfoHide = true;
                     });
-                    this.widget.changeTitleCallback("交易明细");
+//                    this.widget.changeTitleCallback("交易明细");
                     },),
                   new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
                     buttonName: "提现记录",textSize: SystemFontSize.settingTextFontSize,callback: (){

@@ -11,13 +11,13 @@ class HeroAltalItem extends StatefulWidget{
   // 收益提高
   double revenueUp;
   // 英雄数量
-  int heroCount;
+//  int heroCount;
   // 剩余天数
-  int remainDays;
+  List <int> remainDays;
 
   String heroImageUrl;
 
-  HeroAltalItem({Key key,this.description,this.revenueUp,this.heroCount,this.remainDays,this.heroImageUrl}):super(key:key);
+  HeroAltalItem({Key key,this.description,this.revenueUp,this.remainDays,this.heroImageUrl}):super(key:key);
 
   @override
   _HeroAltalItem createState() => _HeroAltalItem();
@@ -30,7 +30,6 @@ class _HeroAltalItem extends State <HeroAltalItem>{
   @override
   Widget build(BuildContext context) {
     return Column(
-
      children: <Widget>[
        Container(
          width: ScreenUtil().setWidth(900),
@@ -62,10 +61,7 @@ class _HeroAltalItem extends State <HeroAltalItem>{
            child:Row(
              mainAxisAlignment: MainAxisAlignment.spaceAround,
              children: <Widget>[
-               HeroAltarClock(imageUrl: 'resource/images/clock.png',clockCount: 4,adIconHeight: 70,),
-               Text('战士*'+this.widget.heroCount.toString(),style: CustomFontSize.textStyle16,),
-               Text('剩余'+this.widget.remainDays.toString()+'天',style: CustomFontSize.textStyle16,),
-
+               HeroAltarClock(imageUrl: 'resource/images/clock.png',adIconHeight: 60,remainDays: this.widget.remainDays,),
                Container(
                  width: ScreenUtil().setWidth(200),
                  height: ScreenUtil().setHeight(100),

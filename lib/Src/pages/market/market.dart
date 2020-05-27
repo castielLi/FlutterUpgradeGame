@@ -1,12 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Src/route/application.dart';
-import 'package:upgradegame/Src/route/upgradegame_route.dart';
-import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
-import 'package:upgradegame/Src/pages/store/productItem.dart';
 
 class MarketDetail extends StatefulWidget {
   @override
@@ -19,11 +12,12 @@ class _MarketDetailState extends State<MarketDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
+      color: Colors.yellow,
       margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(80),   // 左
-          ScreenUtil().setHeight(280),  // 上
-          ScreenUtil().setWidth(80),   // 右
-          ScreenUtil().setHeight(100)), // 下
+          ScreenUtil().setWidth(120),   // 左
+          ScreenUtil().setHeight(400),  // 上
+          ScreenUtil().setWidth(120),   // 右
+          ScreenUtil().setHeight(220)), // 下
       child: new Container(
 
       ),
