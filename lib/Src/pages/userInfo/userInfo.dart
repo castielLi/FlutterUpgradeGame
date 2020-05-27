@@ -10,6 +10,8 @@ import 'package:upgradegame/Src/pages/userInfo/userResourceDetail.dart';
 import 'package:upgradegame/Src/pages/userInfo/tradeDetail/tradeDetail.dart';
 import 'package:upgradegame/Src/pages/userInfo/account/account.dart';
 import 'package:upgradegame/Src/pages/userInfo/withdraw/withdrawDetail.dart';
+import 'package:upgradegame/Src/pages/userInfo/tcoinDetail/tcoinDetail.dart';
+import 'package:upgradegame/Src/pages/userInfo/serverCenter/serverCenterDetail.dart';
 
 class UserInfoDetail extends StatefulWidget {
   @override
@@ -25,6 +27,22 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
 
   bool userInfoHide = false;
   bool tradeDetailHide = true;
+  bool accountDetailHide = true;
+  bool tCoinDetailHide = true;
+  bool withdrawHide = true;
+  bool serverCenter = true;
+
+  void showUserInfoDetail(){
+    setState(() {
+      userInfoHide = false;
+      tradeDetailHide = true;
+      accountDetailHide = true;
+      tCoinDetailHide = true;
+      withdrawHide = true;
+      serverCenter = true;
+    });
+  }
+
   void initState() {
     super.initState();
   }
@@ -53,6 +71,11 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                   new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
                     buttonName: "账号及安全",textSize: SystemFontSize.settingTextFontSize,callback: (){
 
+                      setState(() {
+                        userInfoHide = true;
+                        accountDetailHide = false;
+                      });
+                      this.widget.changeTitleCallback("账号及安全");
                     },),
                   new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
                     buttonName: "交易明细",textSize: SystemFontSize.settingTextFontSize,callback: (){
@@ -65,14 +88,28 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                   new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
                     buttonName: "提现记录",textSize: SystemFontSize.settingTextFontSize,callback: (){
 
+                      setState(() {
+                        userInfoHide = true;
+                        withdrawHide = false;
+                      });
+                      this.widget.changeTitleCallback("提现记录");
                     },),
                   new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
                     buttonName: "t币明细",textSize: SystemFontSize.settingTextFontSize,callback: (){
 
+                      setState(() {
+                        userInfoHide = true;
+                        tCoinDetailHide = false;
+                      });
+                      this.widget.changeTitleCallback("t币明细");
                     },),
                   new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
                     buttonName: "客服中心",textSize: SystemFontSize.settingTextFontSize,callback: (){
-
+                      setState(() {
+                        userInfoHide = true;
+                        serverCenter = false;
+                      });
+                      this.widget.changeTitleCallback("客服中心");
                     },),
                 ],
               ),
@@ -80,12 +117,9 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
           ),
           ///账号及安全
           new Offstage(
-            offstage: this.tradeDetailHide,
+            offstage: this.accountDetailHide,
             child: new AccountDetail(HUD: this.widget.HUD,viewCallback: (){
-              setState(() {
-                tradeDetailHide = true;
-                userInfoHide = false;
-              });
+              showUserInfoDetail();
               this.widget.displayOriginalTitleCallback();
             },),
           ),
@@ -93,21 +127,31 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
           new Offstage(
             offstage: this.tradeDetailHide,
             child: new TradeDetail(HUD: this.widget.HUD,viewCallback: (){
-              setState(() {
-                tradeDetailHide = true;
-                userInfoHide = false;
-              });
+              showUserInfoDetail();
               this.widget.displayOriginalTitleCallback();
             },),
           ),
           ///提现明细
           new Offstage(
-            offstage: this.tradeDetailHide,
+            offstage: this.withdrawHide,
             child: new WithDrawDetail(HUD: this.widget.HUD,viewCallback: (){
-              setState(() {
-                tradeDetailHide = true;
-                userInfoHide = false;
-              });
+              showUserInfoDetail();
+              this.widget.displayOriginalTitleCallback();
+            },),
+          ),
+          ///t币明细
+          new Offstage(
+            offstage: this.tCoinDetailHide,
+            child: new TCoinDetail(HUD: this.widget.HUD,viewCallback: (){
+              showUserInfoDetail();
+              this.widget.displayOriginalTitleCallback();
+            },),
+          ),
+          ///客服中心
+          new Offstage(
+            offstage: this.serverCenter,
+            child: new ServerCenter(HUD: this.widget.HUD,viewCallback: (){
+              showUserInfoDetail();
               this.widget.displayOriginalTitleCallback();
             },),
           ),
