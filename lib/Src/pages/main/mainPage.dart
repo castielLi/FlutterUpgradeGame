@@ -203,7 +203,13 @@ class _MainPageState extends State<MainPage> {
               child: new Stack(
                 children: <Widget>[
                   ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/herosBuilding.png",callback: (){
-                    print('英雄祭坛');
+                    Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                      'height': ScreenUtil().setHeight(1660),
+                      'width': ScreenUtil().setWidth(1020),
+                      'childName':'heroAltal',
+                      "title":"英雄祭坛"
+                    });
+
                   },),
                   Container(
                       padding: EdgeInsets.only(top:ScreenUtil().setHeight(190)),
