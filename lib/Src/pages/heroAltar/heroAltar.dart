@@ -7,6 +7,7 @@ class HeroAltal extends StatefulWidget {
 
   @override
   VoidCallback HUD;
+  // 获取数据
   List <int> remaindays = [35,36,37,38];
   HeroAltal({Key key,this.HUD}):super(key:key);
   _HeroAltalState createState() => new _HeroAltalState();
