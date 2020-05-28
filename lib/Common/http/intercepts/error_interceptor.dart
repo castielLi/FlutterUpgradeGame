@@ -17,9 +17,8 @@ class ErrorInterceptors extends InterceptorsWrapper {
     //没有网络
     var connectivityResult = await (new Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
-      return _dio.resolve(new ResultData(
+      return _dio.resolve(new ResultData(null,
           ConfigSetting.errorHandleFunction(ConfigSetting.NETWORK_ERROR, "", false),
-          false,
           ConfigSetting.NETWORK_ERROR));
     }
     return options;

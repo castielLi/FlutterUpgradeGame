@@ -1,9 +1,14 @@
-///网络结果数据
-class ResultData {
-  var data;
-  bool result;
-  int code;
-  var headers;
 
-  ResultData(this.data, this.result, this.code, {this.headers});
+class ResultData {
+  int code;
+  String message;
+  dynamic data;
+
+  ResultData(this.data, this.message,this.code);
+
+  ResultData.fromJson(Map<String, dynamic> json) {
+    code = json['code'];
+    message = json['message'];
+    data = json['data'];
+  }
 }
