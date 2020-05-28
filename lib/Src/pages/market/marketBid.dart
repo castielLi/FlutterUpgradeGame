@@ -37,21 +37,18 @@ class _MarketBidItem extends State <MarketBidItem>{
         ),
       ),
       child:Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Image(image: new AssetImage(this.widget.avatarUrl),height:ScreenUtil().setHeight(90),),
                   Text(this.widget.name,style: CustomFontSize.textStyle16,),
                 ],
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text('出售:',style: CustomFontSize.textStyle16),
                   Image(image: new AssetImage('resource/images/'+this.widget.bidType+'.png'),height:ScreenUtil().setHeight(90),),
@@ -63,14 +60,12 @@ class _MarketBidItem extends State <MarketBidItem>{
           Container(
             padding: EdgeInsets.only(left:172),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Image(image: new AssetImage('resource/images/gold.png'),height:ScreenUtil().setHeight(100),),
                 Text('数量:'+this.widget.needCoin.toString(),style: CustomFontSize.textStyle16,),
               ],
             ),
           ),
-
           ImageTextButton(
             imageUrl: "resource/images/upgradeButton.png",
             imageWidth: ScreenUtil().setWidth(270),
