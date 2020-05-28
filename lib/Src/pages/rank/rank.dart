@@ -63,8 +63,7 @@ class _RankDetailState extends State<RankDetail> {
                   if (count>5){count = 5;}
                   String imageUrl = 'resource/images/rank$count.png';
                   int value = 5919-index;
-                  return RankItem(imageUrl: imageUrl,avatarUrl: 'resource/images/avatar.png',
-                    rankName: '黄小龙',value: value,);
+                  return RankItem(imageUrl: imageUrl,avatarUrl: 'resource/images/avatar.png', rankName: '黄小龙',value: value,);
                 },
               ),
             ),
