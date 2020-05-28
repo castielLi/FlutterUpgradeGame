@@ -8,6 +8,7 @@ import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/main/common/dividendPart.dart';
+import 'package:upgradegame/Src/pages/main/service/mainService.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
 
-
+  var model = MainService.getBaseInfo();
 
   @override
   void didChangeDependencies() {

@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/http/intercepts/header_interceptor.dart';
 import 'package:upgradegame/Common/http/intercepts/log_interceptor.dart';
-import 'package:upgradegame/Common/http/intercepts/response_interceptor.dart';
 import 'package:upgradegame/Common/http/intercepts/token_interceptor.dart';
 import 'package:upgradegame/Common/http/intercepts/error_interceptor.dart';
 import 'package:upgradegame/Common/http/resultData.dart';
@@ -27,7 +26,6 @@ class HttpManager {
     //对网络错误进行拦截
     _dio.interceptors.add(new ErrorInterceptors(_dio));
 
-    _dio.interceptors.add(new ResponseInterceptors());
   }
 
   ///网络请求
@@ -64,12 +62,11 @@ class HttpManager {
           e.type == DioErrorType.RECEIVE_TIMEOUT) {
         errorResponse.statusCode = ConfigSetting.NETWORK_TIMEOUT;
       }
-      return new ResultData(
+      return new ResultData(null,
           ConfigSetting.errorHandleFunction(errorResponse.statusCode, e.message, noTip),
-          false,
           errorResponse.statusCode);
     }
-    return response.data;
+    return ResultData.fromJson(response.data);
   }
 
   ///清除授权
