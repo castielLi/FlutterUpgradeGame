@@ -56,7 +56,7 @@ class _MainPageState extends State<MainPage> {
                       child: new Row(
                         children: <Widget>[
                           new Expanded(child: new ResourceWidget(
-                            amount: "100000100",
+                            amount: baseUserInfo.TCoinAmount.toString(),
                             size: ScreenUtil().setHeight(130),
                             imageUrl: "resource/images/gold.png",
                           ),flex: 1,),
