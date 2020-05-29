@@ -34,7 +34,7 @@ class HttpManager {
   ///[ header] 请求头额外参数
   ///[ option] 配置 post get
   ///返回结果，错误，不管，数据返回即可
-  Future request(url, params, Map<String, dynamic> header, Options option,
+  Future<ResultData> request(url, params, Map<String, dynamic> header, Options option,
       {noTip = false}) async {
     Map<String, dynamic> headers = new HashMap();
     if (header != null) {
