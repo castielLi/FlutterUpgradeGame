@@ -2,7 +2,7 @@ import 'package:upgradegame/Src/common/model/hero.dart';
 
 class BaseUserInfoModel {
   String displayname;
-  double tcionamount;
+  int tcionamount;
   int stoneamount;
   int woodamount;
   String avatar;
