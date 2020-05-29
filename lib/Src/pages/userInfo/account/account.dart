@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Src/route/application.dart';
-import 'package:upgradegame/Src/route/upgradegame_route.dart';
-import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 
 class AccountDetail extends StatefulWidget {
   @override
@@ -26,20 +22,35 @@ class _AccountDetailState extends State<AccountDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      child: Stack(
+      margin: EdgeInsets.fromLTRB(
+          ScreenUtil().setWidth(0),   // 左
+          ScreenUtil().setHeight(120),  // 上
+          ScreenUtil().setWidth(0),   // 右
+          ScreenUtil().setHeight(150),
+      ),
+      color:Colors.lightBlue,
+      child:
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          new Container(
-            child:Center(
-              child:
-              new ImageButton(height:ScreenUtil().setHeight(200),width: ScreenUtil().setWidth(400),buttonName: "升 级",imageUrl: "resource/images/upgradeButton.png",callback: (){
-                print('点击升级');
-//                this.widget.HUD();
-                this.widget.viewCallback();
-              },),
-            ),
-          ),
+          TextField(),
+//          TextField(),
         ],
       ),
+//      Stack(
+//        children: <Widget>[
+//          new Container(
+//            child:Center(
+//              child:
+//              new ImageButton(height:ScreenUtil().setHeight(200),width: ScreenUtil().setWidth(400),buttonName: "返回",imageUrl: "resource/images/upgradeButton.png",callback: (){
+//                print('点击升级');
+////                this.widget.HUD();
+//                this.widget.viewCallback();
+//              },),
+//            ),
+//          ),
+//        ],
+//      ),
     );
   }
 }
