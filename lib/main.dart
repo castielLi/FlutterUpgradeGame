@@ -6,11 +6,12 @@ import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Src/pages/welcome/welcomePage.dart';
 import 'package:upgradegame/Common/app/initAppBaseSetting.dart';
 import 'dart:async';
+import 'package:upgradegame/Src/provider/provider.dart';
 
 
 
 void main() {
-  var providers = Providers();
+  var providers = AppProvider.initAppProvider();
 //
   runZoned(() {
     runApp(ProviderNode(child: UpgradeGameApp(), providers: providers));
