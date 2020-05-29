@@ -1,3 +1,5 @@
+import 'package:upgradegame/Src/common/model/hero.dart';
+
 class BaseUserInfoModel {
   String displayname;
   double tcionamount;
@@ -8,7 +10,7 @@ class BaseUserInfoModel {
   int farmlevel;
   int stonelevel;
   int woodlevel;
-  List<Hero> hero;
+  List<Heroes> hero;
   double todayprofitsharing;
   int voucher;
 
@@ -37,9 +39,9 @@ class BaseUserInfoModel {
     stonelevel = json['stonelevel'];
     woodlevel = json['woodlevel'];
     if (json['hero'] != null) {
-      hero = new List<Hero>();
+      hero = new List<Heroes>();
       json['hero'].forEach((v) {
-        hero.add(new Hero.fromJson(v));
+        hero.add(new Heroes.fromJson(v));
       });
     }
     todayprofitsharing = json['todayprofitsharing'];
@@ -62,25 +64,6 @@ class BaseUserInfoModel {
     }
     data['todayprofitsharing'] = this.todayprofitsharing;
     data['voucher'] = this.voucher;
-    return data;
-  }
-}
-
-class Hero {
-  int type;
-  int days;
-
-  Hero({this.type, this.days});
-
-  Hero.fromJson(Map<String, dynamic> json) {
-    type = json['type'];
-    days = json['days'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['type'] = this.type;
-    data['days'] = this.days;
     return data;
   }
 }

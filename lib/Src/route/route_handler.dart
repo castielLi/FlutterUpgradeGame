@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:upgradegame/Src/pages/welcome/welcomePage.dart';
 import 'package:upgradegame/Src/pages/login/login.dart';
 import 'package:upgradegame/Src/pages/main/mainPage.dart';
-import 'package:upgradegame/Src/pages/common/detailDialog/detailDialog.dart';
+import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
 
 //import '../pages/detail_page.dart';
 //config

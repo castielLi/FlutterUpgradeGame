@@ -11,19 +11,10 @@ import 'dart:async';
 
 void main() {
   var providers = Providers();
-//  var couponProvide = CouponProvide();
-//  var protocolProvide = ProtocolProvide();
-//  var currentIndexProvide = CurrentIndexProvide();
-//  var carProvide = CartProvide();
-//  providers
-//    ..provide(Provider<CartProvide>.value(carProvide))
-//    ..provide(Provider<CouponProvide>.value(couponProvide))
-//    ..provide(Provider<ProtocolProvide>.value(protocolProvide))
-//    ..provide(Provider<CurrentIndexProvide>.value(currentIndexProvide));
 //
   runZoned(() {
     runApp(ProviderNode(child: UpgradeGameApp(), providers: providers));
-//    PaintingBinding.instance.imageCache.maximumSize = 100; //对app内图片缓存大小处理
+
   }, onError: (Object obj, StackTrace stack) {
     print(obj);
     print(stack);
