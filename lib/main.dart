@@ -6,24 +6,16 @@ import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Src/pages/welcome/welcomePage.dart';
 import 'package:upgradegame/Common/app/initAppBaseSetting.dart';
 import 'dart:async';
+import 'package:upgradegame/Src/provider/provider.dart';
 
 
 
 void main() {
-  var providers = Providers();
-//  var couponProvide = CouponProvide();
-//  var protocolProvide = ProtocolProvide();
-//  var currentIndexProvide = CurrentIndexProvide();
-//  var carProvide = CartProvide();
-//  providers
-//    ..provide(Provider<CartProvide>.value(carProvide))
-//    ..provide(Provider<CouponProvide>.value(couponProvide))
-//    ..provide(Provider<ProtocolProvide>.value(protocolProvide))
-//    ..provide(Provider<CurrentIndexProvide>.value(currentIndexProvide));
+  var providers = AppProvider.initAppProvider();
 //
   runZoned(() {
     runApp(ProviderNode(child: UpgradeGameApp(), providers: providers));
-//    PaintingBinding.instance.imageCache.maximumSize = 100; //对app内图片缓存大小处理
+
   }, onError: (Object obj, StackTrace stack) {
     print(obj);
     print(stack);
