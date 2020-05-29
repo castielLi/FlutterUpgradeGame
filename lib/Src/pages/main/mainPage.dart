@@ -19,6 +19,9 @@ class _MainPageState extends State<MainPage> {
 
   var model = MainService.getBaseInfo();
 
+  bool mainBuilding = true;
+  bool mainBuildingCoin = false;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -176,27 +179,54 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
           ///主城
-          new Container(
-              margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(330), ScreenUtil().setHeight(660), ScreenUtil().setWidth(170), ScreenUtil().setHeight(670)),
-              child: new Stack(
-                children: <Widget>[
-                  ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/mainBuilding.png",callback: (){
-                    Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
-                      'height': ScreenUtil().setHeight(1660),
-                      'width': ScreenUtil().setWidth(1020),
-                      'childName':'mainBuildingDetail',
-                      "title":"主 城"
-                    });
-                  },),
-                  Container(
-                      padding: EdgeInsets.only(top:ScreenUtil().setHeight(420)),
-                      child:Center(
-                        child: Text("主 城",textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.mainBuildingTextFontSize),),
-                      )
-                  )
-                ],
-              )
+          new Offstage(
+            offstage: this.mainBuilding,
+            child: Container(
+                margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(330), ScreenUtil().setHeight(660), ScreenUtil().setWidth(170), ScreenUtil().setHeight(670)),
+                child: new Stack(
+                  children: <Widget>[
+                    ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/mainBuilding.png",callback: (){
+                      Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
+                        'height': ScreenUtil().setHeight(1660),
+                        'width': ScreenUtil().setWidth(1020),
+                        'childName':'mainBuildingDetail',
+                        "title":"主 城"
+                      });
+                    },),
+                    Container(
+                        padding: EdgeInsets.only(top:ScreenUtil().setHeight(420)),
+                        child:Center(
+                          child: Text("主 城",textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.mainBuildingTextFontSize),),
+                        )
+                    )
+                  ],
+                )
+            ),
+          ),
+          ///主城金币点击
+          new Offstage(
+            offstage: this.mainBuildingCoin,
+            child: new Container(
+                margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(330), ScreenUtil().setHeight(660), ScreenUtil().setWidth(170), ScreenUtil().setHeight(670)),
+                child: new Stack(
+                  children: <Widget>[
+                    ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/mainBuildingCoin.png",callback: (){
+                      setState(() {
+                        this.mainBuilding = false;
+                        this.mainBuildingCoin = true;
+                      });
+                    },),
+                    Container(
+                        padding: EdgeInsets.only(top:ScreenUtil().setHeight(420)),
+                        child:Center(
+                          child: Text("主 城",textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.mainBuildingTextFontSize),),
+                        )
+                    )
+                  ],
+                )
+            ),
           ),
           ///英雄祭坛
           new Container(
