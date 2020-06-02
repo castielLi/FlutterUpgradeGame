@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 
 class AccountDetail extends StatefulWidget {
   @override
@@ -26,69 +27,42 @@ class _AccountDetailState extends State<AccountDetail> {
         ScreenUtil().setWidth(0), // 右
         ScreenUtil().setHeight(150),
       ),
-      color: Colors.lightBlue,
       child: Scaffold(
-//        body: Flex(
-//          direction: Axis.vertical,
-//          children: <Widget>[
-//            TextField(
-//              autofocus: true,
-//              decoration: InputDecoration(
-//                  labelText: "原密码", prefixIcon: Icon(Icons.lock)),
-//            ),
-//            TextField(
-//              decoration: InputDecoration(
-//                  labelText: "新密码", prefixIcon: Icon(Icons.lock)),
-//              obscureText: true,
-//            ),
-//            TextField(
-//              decoration: InputDecoration(
-//                  labelText: "重复密码", prefixIcon: Icon(Icons.lock)),
-////              obscureText: true,
-//            ),
-//          ],
-//        ),
-//              Column(
-//                mainAxisAlignment: MainAxisAlignment.start,
-//                children: <Widget>[
-//                  TextField(
-//                    autofocus: true,
-//                    decoration: InputDecoration(
-//                        labelText: "原密码",
-//                        prefixIcon: Icon(Icons.lock)
-//                    ),
-//                  ),
-//                  TextField(
-//                    decoration: InputDecoration(
-//                        labelText: "新密码",
-//                        prefixIcon: Icon(Icons.lock)
-//                    ),
-//                    obscureText: true,
-//                  ),
-//                  TextField(
-//                    decoration: InputDecoration(
-//                        labelText: "重复密码",
-//                        prefixIcon: Icon(Icons.lock)
-//                    ),
-//                    obscureText: true,
-//                  ),
-//                ],
-//              )
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.transparent,
+        body: Container(
+          child: ListView(
+            children: <Widget>[
+              TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                    labelText: "原密码", prefixIcon: Icon(Icons.lock)),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                    labelText: "新密码", prefixIcon: Icon(Icons.lock)),
+                obscureText: true,
+              ),
+              TextField(
+                decoration: InputDecoration(
+                    labelText: "重复密码", prefixIcon: Icon(Icons.lock)),
+              obscureText: true,
+              ),
+              new ImageButton(
+                height: ScreenUtil().setHeight(200),
+                width: ScreenUtil().setWidth(400),
+                buttonName: "返回",
+                imageUrl: "resource/images/upgradeButton.png",
+                callback: () {
+                  print('点击升级');
+//                this.widget.HUD();
+                  this.widget.viewCallback();
+                },
+              ),
+            ],
+          ),
+        ),
       ),
-//      Stack(
-//        children: <Widget>[
-//          new Container(
-//            child:Center(
-//              child:
-//              new ImageButton(height:ScreenUtil().setHeight(200),width: ScreenUtil().setWidth(400),buttonName: "返回",imageUrl: "resource/images/upgradeButton.png",callback: (){
-//                print('点击升级');
-////                this.widget.HUD();
-//                this.widget.viewCallback();
-//              },),
-//            ),
-//          ),
-//        ],
-//      ),
     );
   }
 }
