@@ -2,7 +2,7 @@ import 'package:upgradegame/Src/common/model/hero.dart';
 
 class BaseUserInfoModel {
   String displayname;
-  int tcionamount;
+  int tcoinamount;
   int stoneamount;
   int woodamount;
   String avatar;
@@ -16,7 +16,7 @@ class BaseUserInfoModel {
 
   BaseUserInfoModel(
       {this.displayname,
-        this.tcionamount,
+        this.tcoinamount,
         this.stoneamount,
         this.woodamount,
         this.avatar,
@@ -30,7 +30,7 @@ class BaseUserInfoModel {
 
   BaseUserInfoModel.fromJson(Map<String, dynamic> json) {
     displayname = json['displayname'];
-    tcionamount = json['tcionamount'];
+    tcoinamount = json['tcionamount'];
     stoneamount = json['stoneamount'];
     woodamount = json['woodamount'];
     avatar = json['avatar'];
@@ -51,7 +51,7 @@ class BaseUserInfoModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['displayname'] = this.displayname;
-    data['tcionamount'] = this.tcionamount;
+    data['tcoinamount'] = this.tcoinamount;
     data['stoneamount'] = this.stoneamount;
     data['woodamount'] = this.woodamount;
     data['avatar'] = this.avatar;
