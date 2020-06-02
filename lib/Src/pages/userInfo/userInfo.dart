@@ -94,15 +94,15 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                       });
                       this.widget.changeTitleCallback("提现记录");
                     },),
-                  new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
-                    buttonName: "t币明细",textSize: SystemFontSize.settingTextFontSize,callback: (){
-
-                      setState(() {
-                        userInfoHide = true;
-                        tCoinDetailHide = false;
-                      });
-                      this.widget.changeTitleCallback("t币明细");
-                    },),
+//                  new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
+//                    buttonName: "t币明细",textSize: SystemFontSize.settingTextFontSize,callback: (){
+//
+//                      setState(() {
+//                        userInfoHide = true;
+//                        tCoinDetailHide = false;
+//                      });
+//                      this.widget.changeTitleCallback("t币明细");
+//                    },),
                   new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
                     buttonName: "客服中心",textSize: SystemFontSize.settingTextFontSize,callback: (){
                       setState(() {

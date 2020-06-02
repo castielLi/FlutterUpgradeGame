@@ -61,12 +61,12 @@ class _MainPageState extends State<MainPage> {
                             imageUrl: "resource/images/gold.png",
                           ),flex: 1,),
                           new Expanded(child: new ResourceWidget(
-                            amount: "100000",
+                            amount: baseUserInfo.WoodAmount.toString(),
                             size: ScreenUtil().setHeight(130),
                             imageUrl: "resource/images/wood.png",
                           ),flex: 1,),
                           new Expanded(child: new ResourceWidget(
-                            amount: "100000",
+                            amount: baseUserInfo.StoneAmount.toString(),
                             size: ScreenUtil().setHeight(130),
                             imageUrl: "resource/images/stone.png",
                           ),flex: 1,)
@@ -79,13 +79,15 @@ class _MainPageState extends State<MainPage> {
                       height: ScreenUtil().setHeight(150),
                       child: new Stack(
                         children: <Widget>[
-                          new Image(image: new AssetImage('resource/images/userInfo.png'),
+                          new
+                          Image(image: new AssetImage('resource/images/userInfo.png'),
                             fit: BoxFit.fill,
                           ),
                           new Center(
                             child:
                             new UserImageButton(size:ScreenUtil().setHeight(150),buttonName: ""
-                              ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/avatar.png",callback: (){
+                              ,textSize: SystemFontSize.operationTextFontSize,imageUrl: "resource/images/avatar.png",netWorkImageUrl: baseUserInfo.Avatar,netWorkImage: true,
+                              callback: (){
                                 Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
                                   'height': ScreenUtil().setHeight(1660),
                                   'width': ScreenUtil().setWidth(1020),
@@ -147,7 +149,7 @@ class _MainPageState extends State<MainPage> {
                       width: ScreenUtil().setWidth(380),
                       child: new DividendPart(imageTitle: "分红",imageUrl:"resource/images/dividend.png",
                         imageHeight: ScreenUtil().setHeight(140),imageWidth: ScreenUtil().setWidth(150),
-                        title: "今日分红",amount: "¥100000",callback: (){
+                        title: "今日分红",amount: "¥"+ baseUserInfo.Todayprofitsharing.toInt().toString(),callback: (){
                           Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,params:{
                             'height': ScreenUtil().setHeight(1660),
                             'width': ScreenUtil().setWidth(1020),

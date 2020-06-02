@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Src/pages/sawmill/adIconRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
+import 'package:provide/provide.dart';
 
 
 class FarmDetail extends StatefulWidget {
@@ -15,8 +17,6 @@ class FarmDetail extends StatefulWidget {
 
 class _FarmDetailState extends State<FarmDetail> {
   // 获取数据
-  static int level = 13;
-  static int levelFrom = level-1;
   static int neededWood  = 2910;
 //  static int neededFarm = 2910;
 //  static int woodPerAd = 100;
@@ -34,7 +34,11 @@ class _FarmDetailState extends State<FarmDetail> {
   Widget build(BuildContext context) {
 
     return new Container(
-      child: new Container(
+      child: Provide<BaseUserInfoProvider>(
+        builder: (context, child, baseUserInfo) {
+      int levelFrom = baseUserInfo.Farmlevel;
+      int level = baseUserInfo.Farmlevel + 1;
+      return new Container(
         margin: EdgeInsets.fromLTRB(
             ScreenUtil().setWidth(80),   // 左
             ScreenUtil().setHeight(350),  // 上
@@ -98,7 +102,8 @@ class _FarmDetailState extends State<FarmDetail> {
             },),
           ],
         ),
-      ),
+      );
+        })
     );
   }
 }

@@ -6,7 +6,7 @@ class ServiceUrl{
 
   /// login
   static login() {
-    return "${host}api/user";
+    return "${host}api/v1/user";
   }
 
 
