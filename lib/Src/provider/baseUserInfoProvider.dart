@@ -19,11 +19,19 @@ class BaseUserInfoProvider with ChangeNotifier{
   int voucher;
 
   int get TCoinAmount =>tcionamount;
+  int get WoodAmount =>woodamount;
+  int get StoneAmount => stoneamount;
+  String get Avatar => avatar;
+  double get Todayprofitsharing => todayprofitsharing;
+  int get Mainbuildlevel => mainbuildlevel;
+  int get Farmlevel =>farmlevel;
+  int get Stonelevel =>stonelevel;
+  int get Woodlevel =>woodlevel;
 
   ///网络数据初始化
   initBaseUserInfo(BaseUserInfoModel model){
     displayname = model.displayname;
-    tcionamount = model.tcionamount;
+    tcionamount = model.tcoinamount;
     stoneamount = model.stoneamount;
     woodamount = model.woodamount;
     avatar = model.avatar;
