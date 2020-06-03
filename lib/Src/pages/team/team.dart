@@ -28,7 +28,6 @@ class _TeamDetailState extends State<TeamDetail> {
 
     return new Container(
       child: new Container(
-//        color: Colors.blue,
         margin: EdgeInsets.fromLTRB(
             ScreenUtil().setWidth(120),   // 左
             ScreenUtil().setHeight(400),  // 上
@@ -67,13 +66,11 @@ class _TeamDetailState extends State<TeamDetail> {
               ),
             ),
             Container(
-//              color: Colors.red,
               width: ScreenUtil().setWidth(800),
               height: ScreenUtil().setHeight(730),
               child:
               ListView.builder(
                 itemCount: 10,
-//                itemExtent: 52,
                 padding: EdgeInsets.all(1.0),
                 itemBuilder: (BuildContext context, int index){
                   // 获取数据

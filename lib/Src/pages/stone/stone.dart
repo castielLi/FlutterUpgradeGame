@@ -19,7 +19,6 @@ class _StoneDetailState extends State<StoneDetail> {
 
 
   static int neededWood  = 2910;
-//  static int neededStone = 2910;
   static int woodPerAd = 100;
   static int watchedAd = 1;
   static int maxWatchableAd = 5;
@@ -45,18 +44,12 @@ class _StoneDetailState extends State<StoneDetail> {
                 ScreenUtil().setHeight(350),  // 上
                 ScreenUtil().setWidth(80),   // 右
                 ScreenUtil().setHeight(100)), // 下
-//        color: Colors.blue,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new Container(
-                  margin: EdgeInsets.fromLTRB(
-                      ScreenUtil().setWidth(20),   // 左
-                      ScreenUtil().setHeight(0),  // 上
-                      ScreenUtil().setWidth(0),   // 右
-                      ScreenUtil().setHeight(0)), // 下
+                  margin: EdgeInsets.only(left:ScreenUtil().setWidth(20)),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text('LV $levelFrom > LV $level',textAlign:TextAlign.left,style: CustomFontSize.textStyle30),
@@ -64,24 +57,17 @@ class _StoneDetailState extends State<StoneDetail> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          new Image(image: new AssetImage('resource/images/gold.png'), height:30),
+                          new Image(image: new AssetImage('resource/images/gold.png'), height:ScreenUtil().setHeight(100)),
                           Text('$neededWood ',style: CustomFontSize.textStyle30,),
-//                      new Image(image: new AssetImage('resource/images/stone.png'), height:30),
-//                      Text('$neededStone',style: CustomFontSize.textStyle30),
                         ],
                       ),
                       Text('观看广告获取升级资源',style:CustomFontSize.textStyle22),
                     ],
                   ),
                 ),
-                AdIconRow(countInOneRow: maxWatchableAd,adIconHeight: 50.0,imageUrl: 'resource/images/adIcon.png',),
-//            AdIconRow(countInOneRow: 5,adIconHeight: 50.0,imageUrl: 'resource/images/adIcon.png',),
+                AdIconRow(countInOneRow: maxWatchableAd,adIconHeight: ScreenUtil().setHeight(150),imageUrl: 'resource/images/adIcon.png',),
                 new Container(
-                  margin: EdgeInsets.fromLTRB(
-                      ScreenUtil().setWidth(20),   // 左
-                      ScreenUtil().setHeight(0),  // 上
-                      ScreenUtil().setWidth(0),   // 右
-                      ScreenUtil().setHeight(0)),
+                  margin: EdgeInsets.only(left: ScreenUtil().setWidth(20),),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +76,7 @@ class _StoneDetailState extends State<StoneDetail> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Text('每次获取 ',style: CustomFontSize.textStyle22,),
-                          new Image(image: new AssetImage('resource/images/stone.png'),height: 30,),
+                          new Image(image: new AssetImage('resource/images/stone.png'),height: ScreenUtil().setHeight(100),),
                           Text('$woodPerAd',style: CustomFontSize.textStyle22,),
                         ],
                       ),
