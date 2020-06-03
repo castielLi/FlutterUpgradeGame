@@ -31,8 +31,8 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
           new Container(
             child:Center(
               child:
-              new ImageButton(height:ScreenUtil().setHeight(200),width: ScreenUtil().setWidth(400),buttonName: "升 级",imageUrl: "resource/images/upgradeButton.png",callback: (){
-                print('点击升级');
+              new ImageButton(height:ScreenUtil().setHeight(200),width: ScreenUtil().setWidth(400),buttonName: "返回",imageUrl: "resource/images/upgradeButton.png",callback: (){
+                print('点击返回');
 //                this.widget.HUD();
                 this.widget.viewCallback();
               },),

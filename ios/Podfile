@@ -88,3 +88,4 @@ post_install do |installer|
     end
   end
 end
+source 'https://github.com/CocoaPods/Specs.git'
