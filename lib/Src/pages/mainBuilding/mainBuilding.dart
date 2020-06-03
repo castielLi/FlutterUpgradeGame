@@ -4,6 +4,8 @@ import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:provide/provide.dart';
+import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 
 
 class MainBuildingDetail extends StatefulWidget {
@@ -65,7 +67,8 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
                     buttonName: "升 级",
                     imageUrl: "resource/images/upgradeButton.png",
                     callback: () {
-                      print('点击升级');
+                      List<Mainbuild> rule =  Global.getMainBuildingRule();
+                      print(rule[0].stoneamount);
                       this.widget.HUD();
                     },),
                 ],

@@ -27,24 +27,20 @@ class FileStorage {
     String appDocPath = appDocDir.path;
 
     File file = new File('$appDocPath/$fileName');
-//    if(!file.existsSync()) {
-//      file.createSync();
+    if(!file.existsSync()) {
+      file.createSync();
       try {
         writeToFile(file, content);
-      } catch(e) {
+      } catch (e) {
         print(e);
       }
-//    }else{
-//      print("ok");
-//    }
+    }
   }
 
-  static Future<bool> writeToFile(File file, String notes) async {
+  static writeToFile(File file, String notes) async {
     File fileRule = await file.writeAsString(notes);
     if(fileRule.existsSync()) {
-      return true;
-    }else{
-      return false;
+      print("文件存储成功");
     }
   }
 }
