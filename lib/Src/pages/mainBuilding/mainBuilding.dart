@@ -50,29 +50,17 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  new Image(
+                  Image(
                       image: new AssetImage('resource/images/wood.png'),
                       height: ScreenUtil().setHeight(100)),
                   Text(
                     '$neededWood ',
                     style: CustomFontSize.textStyle30,
                   ),
-                  // new Image(
-                  //     image: new AssetImage('resource/images/stone.png'),
-                  //     height: ScreenUtil().setHeight(100)),
-                  // Text('$neededStone', style: CustomFontSize.textStyle30),
-
-                  Text('升级后产出:' + '$coinPerHour' + 'T币一小时',
-                      style: CustomFontSize.textStyle22),
-                  new ImageButton(height: ScreenUtil().setHeight(200),
-                    width: ScreenUtil().setWidth(400),
-                    buttonName: "升 级",
-                    imageUrl: "resource/images/upgradeButton.png",
-                    callback: () {
-                      List<Mainbuild> rule =  Global.getMainBuildingRule();
-                      print(rule[0].stoneamount);
-                      this.widget.HUD();
-                    },),
+                  Image(
+                       image: new AssetImage('resource/images/stone.png'),
+                       height: ScreenUtil().setHeight(100)),
+                  Text('$neededStone', style: CustomFontSize.textStyle30),
                 ],
               ),
               Text('升级后产出:' + '$coinPerHour' + 'T币一小时',
@@ -83,7 +71,8 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
                 buttonName: "升 级",
                 imageUrl: "resource/images/upgradeButton.png",
                 callback: () {
-                  print('点击升级');
+                  List<Mainbuild> rule =  Global.getMainBuildingRule();
+                  print(rule[0].stoneamount);
                   this.widget.HUD();
                 },
               ),

@@ -12,7 +12,6 @@ class FileStorage {
     String appDocPath = appDocDir.path;
 
     File file = new File('$appDocPath/$fileName');
-
     if(file.existsSync()) {
       String content = await file.readAsString();
       return content;
