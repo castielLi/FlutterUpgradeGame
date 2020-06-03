@@ -4,6 +4,8 @@ import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:provide/provide.dart';
+import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 
 class MainBuildingDetail extends StatefulWidget {
   @override
@@ -55,10 +57,22 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
                     '$neededWood ',
                     style: CustomFontSize.textStyle30,
                   ),
-                  new Image(
-                      image: new AssetImage('resource/images/stone.png'),
-                      height: ScreenUtil().setHeight(100)),
-                  Text('$neededStone', style: CustomFontSize.textStyle30),
+                  // new Image(
+                  //     image: new AssetImage('resource/images/stone.png'),
+                  //     height: ScreenUtil().setHeight(100)),
+                  // Text('$neededStone', style: CustomFontSize.textStyle30),
+
+                  Text('升级后产出:' + '$coinPerHour' + 'T币一小时',
+                      style: CustomFontSize.textStyle22),
+                  new ImageButton(height: ScreenUtil().setHeight(200),
+                    width: ScreenUtil().setWidth(400),
+                    buttonName: "升 级",
+                    imageUrl: "resource/images/upgradeButton.png",
+                    callback: () {
+                      List<Mainbuild> rule =  Global.getMainBuildingRule();
+                      print(rule[0].stoneamount);
+                      this.widget.HUD();
+                    },),
                 ],
               ),
               Text('升级后产出:' + '$coinPerHour' + 'T币一小时',

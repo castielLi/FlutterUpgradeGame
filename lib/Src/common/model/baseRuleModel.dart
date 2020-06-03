@@ -5,7 +5,12 @@ class BaseRuleModel {
   List<Wood> wood;
   List<Stone> stone;
 
-  BaseRuleModel({this.mainbuild, this.farm, this.wood, this.stone});
+  BaseRuleModel(BaseRuleModel model) {
+    this.mainbuild = model.mainbuild;
+    this.farm = model.farm;
+    this.wood = model.wood;
+    this.stone = model.stone;
+  }
 
   BaseRuleModel.fromJson(Map<String, dynamic> json) {
     if (json['mainbuild'] != null) {
@@ -57,24 +62,18 @@ class Mainbuild {
   int woodamount;
   int stoneamount;
   int product;
-  int condition1;
-  int condition2;
 
   Mainbuild(
       {this.level,
         this.woodamount,
         this.stoneamount,
-        this.product,
-        this.condition1,
-        this.condition2});
+        this.product,});
 
   Mainbuild.fromJson(Map<String, dynamic> json) {
     level = json['level'];
     woodamount = json['woodamount'];
     stoneamount = json['stoneamount'];
     product = json['product'];
-    condition1 = json['condition1'];
-    condition2 = json['condition2'];
   }
 
   Map<String, dynamic> toJson() {
@@ -83,8 +82,6 @@ class Mainbuild {
     data['woodamount'] = this.woodamount;
     data['stoneamount'] = this.stoneamount;
     data['product'] = this.product;
-    data['condition1'] = this.condition1;
-    data['condition2'] = this.condition2;
     return data;
   }
 }

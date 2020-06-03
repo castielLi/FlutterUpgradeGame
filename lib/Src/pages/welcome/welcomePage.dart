@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Src/common/service/baseService.dart';
@@ -21,11 +22,13 @@ class _WelcomePageState extends State<WelcomePage> {
     dynamic content = await FileStorage.getRule("rule");
     if(content == ""){
       BaseService.getRule((model){
-
+        Global();
+        Global.setBaseRule(model);
       });
     }else{
       BaseRuleModel model = BaseRuleModel.fromJson(convert.jsonDecode(content));
-      print(model);
+      Global();
+      Global.setBaseRule(model);
     }
   }
 
