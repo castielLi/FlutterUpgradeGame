@@ -38,7 +38,11 @@ DEPENDENCIES:
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
 
 SPEC REPOS:
+<<<<<<< HEAD
+  trunk:
+=======
   https://github.com/CocoaPods/Specs.git:
+>>>>>>> master
     - FMDB
     - Reachability
 
@@ -78,6 +82,10 @@ SPEC CHECKSUMS:
   shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
 
+<<<<<<< HEAD
+PODFILE CHECKSUM: e45c292f618eeca3034958d33b444b6e1249b55f
+=======
 PODFILE CHECKSUM: 43f49193400bb5f6531eb4d76a61884c42d6465c
+>>>>>>> master
 
 COCOAPODS: 1.9.1
