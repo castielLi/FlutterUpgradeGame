@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/event/errorEvent.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:fluwx/fluwx.dart' as fluwx;
 
 ///配置app基础组件 例如:错误信息弹窗
 class InitAppSetting extends StatefulWidget {
@@ -26,20 +27,20 @@ class _InitAppSetting extends State<InitAppSetting> {
     stream = ConfigSetting.eventBus.on<HttpErrorEvent>().listen((event) {
       errorHandleFunction(event.code, event.message);
     });
-//    fluwx.register(
+//    fluwx.registerWxApi(
 //        appId: "wxea0b8491b5101053",
 //        doOnAndroid: true,
 //        doOnIOS: true,
-//        enableMTA: false);
+//        universalLink: ""
+//    );
   }
 
   @override
   void dispose() {
-//    fluwx.dispose();
-//    if (stream != null) {
-//      stream.cancel();
-//      stream = null;
-//    }
+    if (stream != null) {
+      stream.cancel();
+      stream = null;
+    }
     super.dispose();
   }
 

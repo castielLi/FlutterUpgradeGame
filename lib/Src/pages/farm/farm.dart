@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Src/pages/sawmill/adIconRow.dart';
+import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
+import 'package:upgradegame/Src/common/widget/adIcon/adIconRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:provide/provide.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 
 
 class FarmDetail extends StatefulWidget {
@@ -17,10 +20,7 @@ class FarmDetail extends StatefulWidget {
 
 class _FarmDetailState extends State<FarmDetail> {
   // 获取数据
-  static int neededWood  = 2910;
-  static int watchedAd = 1;
-  static int maxWatchableAd = 5;
-  static int speedUpPercent = 5;
+
 
   @override
   void didChangeDependencies() {
@@ -36,6 +36,15 @@ class _FarmDetailState extends State<FarmDetail> {
         builder: (context, child, baseUserInfo) {
       int levelFrom = baseUserInfo.Farmlevel;
       int level = baseUserInfo.Farmlevel + 1;
+
+      Farm farmBuildingRule =  Global.getFarmBuildingRule()[level - 1];
+
+      int neededWood  = 2910;
+      int watchedAd = baseUserInfo.ad.farm;
+      int maxWatchableAd = 5;
+      int speedUpPercent = 5;
+
+
       return new Container(
         margin: EdgeInsets.fromLTRB(
             ScreenUtil().setWidth(80),   // 左
@@ -68,7 +77,8 @@ class _FarmDetailState extends State<FarmDetail> {
                 ],
               ),
             ),
-            AdIconRow(countInOneRow: maxWatchableAd,adIconHeight: ScreenUtil().setHeight(150),imageUrl: 'resource/images/adIcon.png',),
+            AdIconRow(countInOneRow: maxWatchableAd,adIconHeight: ScreenUtil().setHeight(150),imageUrlWatched: 'resource/images/adWatched.png',
+                imageUrlUnwatch: "resource/images/adUnwatch.png",alreadyWatched: watchedAd,),
             new Container(
               margin: EdgeInsets.only(top:ScreenUtil().setHeight(20)),
               child: Column(
