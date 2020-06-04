@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/pages/login/service/loginService.dart';
@@ -10,18 +11,20 @@ import 'package:progress_hud/progress_hud.dart';
 
 
 class LoginPage extends StatefulWidget {
+
   @override
   _LoginPageState createState() => new _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-
+  static const platform = const MethodChannel('samples.flutter.ad');
+  static const EventChannel _eventChannel = const EventChannel('samples.flutter.ad.event');
   ProgressHUD _progressHUD;
   bool _loading = false;
 
   void initState() {
     super.initState();
-
+    _eventChannel.receiveBroadcastStream().listen(_onEvent, onError: _onError);
     _progressHUD = new ProgressHUD(
       backgroundColor: Colors.transparent,
       color: Colors.white,
@@ -63,6 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                 child:Center(
                   child:
                   new RaisedButton(onPressed: (){
+                    toast();
                     this.showOrDismissProgressHUD();
                     LoginService.login((model){
                       this.showOrDismissProgressHUD();
@@ -79,5 +83,19 @@ class _LoginPageState extends State<LoginPage> {
         },
       ),
     );
+  }
+  void toast() async {
+    try {
+      await platform.invokeMethod('toast');
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+  void _onEvent(Object event) {
+    print("event 回来了成功");
+  }
+
+  void _onError(Object error) {
+    print("event 回来了失败");
   }
 }
