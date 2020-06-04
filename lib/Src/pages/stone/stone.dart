@@ -38,11 +38,11 @@ class _StoneDetailState extends State<StoneDetail> {
           int level = baseUserInfo.Stonelevel + 1;
           ///当前建筑规则
           Stone stoneBuildingRule =  Global.getStoneBuildingRule()[level - 1];
-
+          AdSetting adSetting = Global.getAdSettingRule();
           int needTCoin  = stoneBuildingRule.tcoinamount;
           int woodPerAd = stoneBuildingRule.product;
           int watchedAd = baseUserInfo.ad.stone;
-          int maxWatchableAd = 5;
+          int maxWatchableAd = adSetting.stone;
 
           return new Container(
             margin: EdgeInsets.fromLTRB(

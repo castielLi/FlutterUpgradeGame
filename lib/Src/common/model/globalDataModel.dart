@@ -35,6 +35,11 @@ class Global {
     return rule.farm;
   }
 
+  ///获取广告次数规则
+  static getAdSettingRule(){
+    return rule.adSetting;
+  }
+
   static Global _getInstance() {
     if (_instance == null) {
       _instance = new Global._internal();

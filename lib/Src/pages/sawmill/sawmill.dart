@@ -38,11 +38,11 @@ class _SawmillDetailState extends State<SawmillDetail> {
           int levelFrom = baseUserInfo.Woodlevel;
           int level = baseUserInfo.Woodlevel + 1;
           Wood woodBuildingRule =  Global.getWoodBuildingRule()[level - 1];
-
+          AdSetting adSetting = Global.getAdSettingRule();
           int needTCoin = woodBuildingRule.tcoinamount;
           int woodPerAd = woodBuildingRule.product;
           int watchedAd = baseUserInfo.ad.wood;
-          int maxWatchableAd = 5;
+          int maxWatchableAd = adSetting.farm;
 
           return new Container(
             margin: EdgeInsets.fromLTRB(
