@@ -20,9 +20,6 @@ class MainBuildingDetail extends StatefulWidget {
 class _MainBuildingDetailState extends State<MainBuildingDetail> {
   // 获取数据
 
-
-
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -33,27 +30,32 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
     return new Container(
       child: Provide<BaseUserInfoProvider>(
           builder: (context, child, baseUserInfo) {
-            ///当前建筑等级
+        ///当前建筑等级
         int levelFrom = baseUserInfo.Mainbuildlevel;
         int level = baseUserInfo.Mainbuildlevel + 1;
+
         ///当前建筑规则
-        Mainbuild mainBuildRule =  Global.getMainBuildingRule()[level - 1];
+        Mainbuild mainBuildRule = Global.getMainBuildingRule()[level - 1];
+
         ///当前建筑规则需要多少木材
         int neededWood = mainBuildRule.woodamount;
+
         ///当前建筑规则需要多少石材
         int neededStone = mainBuildRule.stoneamount;
+
         ///当前建筑规则可以产出多少t币
         int coinPerHour = mainBuildRule.product;
 
         return new Container(
           margin: EdgeInsets.fromLTRB(
               ScreenUtil().setWidth(150), // 左
-              ScreenUtil().setHeight(400), // 上
+              ScreenUtil().setHeight(500), // 上
               ScreenUtil().setWidth(150), // 右
-              ScreenUtil().setHeight(180)), // 下
+              ScreenUtil().setHeight(250)), // 下
           color: Colors.transparent,
-          child: ListView(
-            itemExtent: 60, // list高度
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text('LV $levelFrom > LV $level',
                   textAlign: TextAlign.left, style: CustomFontSize.textStyle30),
@@ -69,25 +71,30 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
                     style: CustomFontSize.textStyle30,
                   ),
                   Image(
-                       image: new AssetImage('resource/images/stone.png'),
-                       height: ScreenUtil().setHeight(100)),
+                      image: new AssetImage('resource/images/stone.png'),
+                      height: ScreenUtil().setHeight(100)),
                   Text('$neededStone', style: CustomFontSize.textStyle30),
                 ],
               ),
               Text('升级后产出:' + '$coinPerHour' + 'T币一小时',
                   style: CustomFontSize.textStyle22),
-              new ImageButton(
-                height: ScreenUtil().setHeight(200),
-                width: ScreenUtil().setWidth(400),
-                buttonName: "升 级",
-                imageUrl: "resource/images/upgradeButton.png",
-                callback: () {
-                  if(baseUserInfo.stoneamount < neededStone || baseUserInfo.woodamount < neededWood){
-                    CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
-                  }else{
-                    this.widget.HUD();
-                  }
-                },
+              Text('每产生1T币需要消耗10木头和10石头', style: CustomFontSize.textStyle16),
+              Container(
+                padding: EdgeInsets.only(left: ScreenUtil().setWidth(100)),
+                child: ImageButton(
+                  height: ScreenUtil().setHeight(200),
+                  width: ScreenUtil().setWidth(400),
+                  buttonName: "升 级",
+                  imageUrl: "resource/images/upgradeButton.png",
+                  callback: () {
+                    if (baseUserInfo.stoneamount < neededStone ||
+                        baseUserInfo.woodamount < neededWood) {
+                      CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
+                    } else {
+                      this.widget.HUD();
+                    }
+                  },
+                ),
               ),
             ],
           ),
