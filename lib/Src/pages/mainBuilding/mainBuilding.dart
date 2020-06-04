@@ -6,6 +6,7 @@ import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 
 class MainBuildingDetail extends StatefulWidget {
   @override
@@ -18,9 +19,9 @@ class MainBuildingDetail extends StatefulWidget {
 
 class _MainBuildingDetailState extends State<MainBuildingDetail> {
   // 获取数据
-  static int neededWood = 2910;
-  static int neededStone = 2910;
-  static int coinPerHour = 291;
+
+
+
 
   @override
   void didChangeDependencies() {
@@ -32,8 +33,18 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
     return new Container(
       child: Provide<BaseUserInfoProvider>(
           builder: (context, child, baseUserInfo) {
+            ///当前建筑等级
         int levelFrom = baseUserInfo.Mainbuildlevel;
         int level = baseUserInfo.Mainbuildlevel + 1;
+        ///当前建筑规则
+        Mainbuild mainBuildRule =  Global.getMainBuildingRule()[level - 1];
+        ///当前建筑规则需要多少木材
+        int neededWood = mainBuildRule.woodamount;
+        ///当前建筑规则需要多少石材
+        int neededStone = mainBuildRule.stoneamount;
+        ///当前建筑规则可以产出多少t币
+        int coinPerHour = mainBuildRule.product;
+
         return new Container(
           margin: EdgeInsets.fromLTRB(
               ScreenUtil().setWidth(150), // 左
@@ -71,9 +82,11 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
                 buttonName: "升 级",
                 imageUrl: "resource/images/upgradeButton.png",
                 callback: () {
-                  List<Mainbuild> rule =  Global.getMainBuildingRule();
-                  print(rule[0].stoneamount);
-                  this.widget.HUD();
+                  if(baseUserInfo.stoneamount < neededStone || baseUserInfo.woodamount < neededWood){
+                    CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
+                  }else{
+                    this.widget.HUD();
+                  }
                 },
               ),
             ],

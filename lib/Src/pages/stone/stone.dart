@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Src/pages/sawmill/adIconRow.dart';
+import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
+import 'package:upgradegame/Src/common/widget/adIcon/adIconRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:provide/provide.dart';
+import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 
 
 class StoneDetail extends StatefulWidget {
@@ -16,12 +20,6 @@ class StoneDetail extends StatefulWidget {
 }
 
 class _StoneDetailState extends State<StoneDetail> {
-
-
-  static int neededWood  = 2910;
-  static int woodPerAd = 100;
-  static int watchedAd = 1;
-  static int maxWatchableAd = 5;
 
   @override
   void didChangeDependencies() {
@@ -38,6 +36,14 @@ class _StoneDetailState extends State<StoneDetail> {
         builder: (context, child, baseUserInfo) {
           int levelFrom = baseUserInfo.Stonelevel;
           int level = baseUserInfo.Stonelevel + 1;
+          ///当前建筑规则
+          Stone stoneBuildingRule =  Global.getStoneBuildingRule()[level - 1];
+
+          int needTCoin  = stoneBuildingRule.tcoinamount;
+          int woodPerAd = stoneBuildingRule.product;
+          int watchedAd = baseUserInfo.ad.stone;
+          int maxWatchableAd = 5;
+
           return new Container(
             margin: EdgeInsets.fromLTRB(
                 ScreenUtil().setWidth(80),   // 左
@@ -58,14 +64,15 @@ class _StoneDetailState extends State<StoneDetail> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           new Image(image: new AssetImage('resource/images/gold.png'), height:ScreenUtil().setHeight(100)),
-                          Text('$neededWood ',style: CustomFontSize.textStyle30,),
+                          Text('$needTCoin ',style: CustomFontSize.textStyle30,),
                         ],
                       ),
                       Text('观看广告获取升级资源',style:CustomFontSize.textStyle22),
                     ],
                   ),
                 ),
-                AdIconRow(countInOneRow: maxWatchableAd,adIconHeight: ScreenUtil().setHeight(150),imageUrl: 'resource/images/adIcon.png',),
+                AdIconRow(countInOneRow: maxWatchableAd,adIconHeight: ScreenUtil().setHeight(150),imageUrlWatched: 'resource/images/adWatched.png',
+                imageUrlUnwatch: "resource/images/adUnwatch.png",alreadyWatched: watchedAd,),
                 new Container(
                   margin: EdgeInsets.only(left: ScreenUtil().setWidth(20),),
                   child: Column(
@@ -77,7 +84,7 @@ class _StoneDetailState extends State<StoneDetail> {
                         children: <Widget>[
                           Text('每次获取 ',style: CustomFontSize.textStyle22,),
                           new Image(image: new AssetImage('resource/images/stone.png'),height: ScreenUtil().setHeight(100),),
-                          Text('$woodPerAd',style: CustomFontSize.textStyle22,),
+                          Text(' $woodPerAd',style: CustomFontSize.textStyle22,),
                         ],
                       ),
                       Text('今日观看次数 $watchedAd/$maxWatchableAd',style:CustomFontSize.textStyle22),
@@ -85,7 +92,11 @@ class _StoneDetailState extends State<StoneDetail> {
                   ),
                 ),
                 new ImageButton(height:ScreenUtil().setHeight(200),width: ScreenUtil().setWidth(400),buttonName: "升 级",imageUrl: "resource/images/upgradeButton.png",callback: (){
-                  print('点击升级');
+                  if(baseUserInfo.tcionamount < stoneBuildingRule.tcoinamount){
+                    CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
+                  }else{
+                    this.widget.HUD();
+                  }
                 },),
               ],
             ),

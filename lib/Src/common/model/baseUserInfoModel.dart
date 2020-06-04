@@ -1,4 +1,5 @@
 import 'package:upgradegame/Src/common/model/hero.dart';
+import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 
 class BaseUserInfoModel {
   String displayname;
@@ -10,6 +11,7 @@ class BaseUserInfoModel {
   int farmlevel;
   int stonelevel;
   int woodlevel;
+  Ad ad;
   List<Heroes> hero;
   double todayprofitsharing;
   int voucher;
@@ -24,6 +26,7 @@ class BaseUserInfoModel {
         this.farmlevel,
         this.stonelevel,
         this.woodlevel,
+        this.ad,
         this.hero,
         this.todayprofitsharing,
         this.voucher});
@@ -38,6 +41,7 @@ class BaseUserInfoModel {
     farmlevel = json['farmlevel'];
     stonelevel = json['stonelevel'];
     woodlevel = json['woodlevel'];
+    ad = json['ad'] != null ? new Ad.fromJson(json['ad']) : null;
     if (json['hero'] != null) {
       hero = new List<Heroes>();
       json['hero'].forEach((v) {
@@ -51,7 +55,7 @@ class BaseUserInfoModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['displayname'] = this.displayname;
-    data['tcoinamount'] = this.tcoinamount;
+    data['tcionamount'] = this.tcoinamount;
     data['stoneamount'] = this.stoneamount;
     data['woodamount'] = this.woodamount;
     data['avatar'] = this.avatar;
@@ -59,6 +63,9 @@ class BaseUserInfoModel {
     data['farmlevel'] = this.farmlevel;
     data['stonelevel'] = this.stonelevel;
     data['woodlevel'] = this.woodlevel;
+    if (this.ad != null) {
+      data['ad'] = this.ad.toJson();
+    }
     if (this.hero != null) {
       data['hero'] = this.hero.map((v) => v.toJson()).toList();
     }
@@ -67,3 +74,4 @@ class BaseUserInfoModel {
     return data;
   }
 }
+

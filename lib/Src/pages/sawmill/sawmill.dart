@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Src/pages/sawmill/adIconRow.dart';
+import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
+import 'package:upgradegame/Src/common/widget/adIcon/adIconRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:provide/provide.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 
 class SawmillDetail extends StatefulWidget {
 
@@ -16,13 +19,8 @@ class SawmillDetail extends StatefulWidget {
 
 class _SawmillDetailState extends State<SawmillDetail> {
   // 获取数据
-  static int level = 13;
-  static int levelFrom = level-1;
-  static int neededWood  = 2910;
-//  static int neededStone = 2910;
-  static int woodPerAd = 100;
-  static int watchedAd = 1;
-  static int maxWatchableAd = 5;
+
+
 
   @override
   void didChangeDependencies() {
@@ -39,6 +37,13 @@ class _SawmillDetailState extends State<SawmillDetail> {
         builder: (context, child, baseUserInfo) {
           int levelFrom = baseUserInfo.Woodlevel;
           int level = baseUserInfo.Woodlevel + 1;
+          Wood woodBuildingRule =  Global.getWoodBuildingRule()[level - 1];
+
+          int needTCoin = woodBuildingRule.tcoinamount;
+          int woodPerAd = woodBuildingRule.product;
+          int watchedAd = baseUserInfo.ad.wood;
+          int maxWatchableAd = 5;
+
           return new Container(
             margin: EdgeInsets.fromLTRB(
                 ScreenUtil().setWidth(80),   // 左
@@ -60,14 +65,15 @@ class _SawmillDetailState extends State<SawmillDetail> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           new Image(image: new AssetImage('resource/images/gold.png'), height:ScreenUtil().setHeight(100)),
-                          Text('$neededWood ',style: CustomFontSize.textStyle30,),
+                          Text('$needTCoin ',style: CustomFontSize.textStyle30,),
                         ],
                       ),
                       Text('观看广告获取升级资源',style:CustomFontSize.textStyle22),
                     ],
                   ),
                 ),
-                AdIconRow(countInOneRow: maxWatchableAd,adIconHeight: ScreenUtil().setHeight(150),imageUrl: 'resource/images/adIcon.png',),
+                AdIconRow(countInOneRow: maxWatchableAd,adIconHeight: ScreenUtil().setHeight(150),imageUrlWatched: 'resource/images/adWatched.png',
+                imageUrlUnwatch: "resource/images/adUnwatch.png",alreadyWatched: watchedAd,),
                 new Container(
                   margin: EdgeInsets.only(left: ScreenUtil().setWidth(20),),
                   child: Column(

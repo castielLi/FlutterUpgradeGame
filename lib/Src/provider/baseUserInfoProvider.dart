@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/common/model/baseUserInfoModel.dart';
+import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 
 //混入
 class BaseUserInfoProvider with ChangeNotifier{
@@ -17,6 +18,7 @@ class BaseUserInfoProvider with ChangeNotifier{
   List<Heroes> hero;
   double todayprofitsharing;
   int voucher;
+  Ad ad;
 
   int get TCoinAmount =>tcionamount;
   int get WoodAmount =>woodamount;
@@ -31,6 +33,7 @@ class BaseUserInfoProvider with ChangeNotifier{
   ///网络数据初始化
   initBaseUserInfo(BaseUserInfoModel model){
     displayname = model.displayname;
+    ad = model.ad;
     tcionamount = model.tcoinamount;
     stoneamount = model.stoneamount;
     woodamount = model.woodamount;
