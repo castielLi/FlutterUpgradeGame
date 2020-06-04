@@ -38,11 +38,11 @@ class _FarmDetailState extends State<FarmDetail> {
       int level = baseUserInfo.Farmlevel + 1;
 
       Farm farmBuildingRule =  Global.getFarmBuildingRule()[level - 1];
-
-      int neededWood  = 2910;
+      AdSetting adSetting = Global.getAdSettingRule();
+      int neededCoin  = farmBuildingRule.tcoinamount;
       int watchedAd = baseUserInfo.ad.farm;
-      int maxWatchableAd = 5;
-      int speedUpPercent = 5;
+      int maxWatchableAd = adSetting.farm;
+      int speedUpPercent = farmBuildingRule.product;
 
 
       return new Container(
@@ -70,7 +70,7 @@ class _FarmDetailState extends State<FarmDetail> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       new Image(image: new AssetImage('resource/images/gold.png'), height:ScreenUtil().setHeight(100)),
-                      Text('$neededWood ',style: CustomFontSize.textStyle30,),
+                      Text('$neededCoin ',style: CustomFontSize.textStyle30,),
                     ],
                   ),
                   Text('观看广告获取升级资源',style:CustomFontSize.textStyle22),
