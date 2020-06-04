@@ -29,7 +29,6 @@ class _AdPool extends State <AdPool>{
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenUtil().setWidth(900),
       height: ScreenUtil().setHeight(360),
       decoration: BoxDecoration(
         image: DecorationImage(

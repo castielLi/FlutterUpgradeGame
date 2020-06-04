@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Src/route/application.dart';
-import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 
 class ProtocolDetail extends StatefulWidget {
@@ -15,7 +12,7 @@ class ProtocolDetail extends StatefulWidget {
 
 class _ProtocolDetailState extends State<ProtocolDetail> {
 
-
+  String protocal = "用户协议";
 
   @override
   void didChangeDependencies() {
@@ -26,17 +23,32 @@ class _ProtocolDetailState extends State<ProtocolDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      child: Stack(
+      margin: EdgeInsets.fromLTRB(
+          ScreenUtil().setWidth(0), // 左
+          ScreenUtil().setHeight(120), // 上
+          ScreenUtil().setWidth(0), // 右
+          ScreenUtil().setHeight(120)),
+      child: new Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          new Container(
-            child:Center(
-              child:
-              new ImageButton(height:ScreenUtil().setHeight(200),width: ScreenUtil().setWidth(400),buttonName: "升 级",imageUrl: "resource/images/upgradeButton.png",callback: (){
-                print('点击升级');
-//                this.widget.HUD();
-                this.widget.viewCallback();
-              },),
+          Container(
+            height: ScreenUtil().setHeight(820),
+            child: ListView(
+              children: <Widget>[
+                Text(this.protocal),
+              ],
             ),
+          ),
+          new ImageButton(
+            height: ScreenUtil().setHeight(200),
+            width: ScreenUtil().setWidth(400),
+            buttonName: "返回",
+            imageUrl: "resource/images/upgradeButton.png",
+            callback: () {
+              print('点击升级');
+//                this.widget.HUD();
+              this.widget.viewCallback();
+            },
           ),
         ],
       ),

@@ -92,10 +92,10 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
   void _onEvent(Object event) {
-    print("event å›æ¥äº†æˆåŠŸ");
+    print("event »ØÀ´ÁË³É¹¦");
   }
 
   void _onError(Object error) {
-    print("event å›æ¥äº†å¤±è´¥");
+    print("event »ØÀ´ÁËÊ§°Ü");
   }
 }
