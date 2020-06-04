@@ -33,6 +33,7 @@ dependencies:
   event_bus: ^1.1.1 #全局事件总线，用于处理网络错误
   progress_hud: ^1.1.0 #hud
   path_provider: ^1.6.9 #本地文件储存
+  fluwx: ^2.1.0
 
 
   flutter:
