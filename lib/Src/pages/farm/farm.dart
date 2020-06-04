@@ -7,7 +7,6 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
-import 'package:upgradegame/Common/widget/toast/toast.dart';
 
 
 class FarmDetail extends StatefulWidget {
