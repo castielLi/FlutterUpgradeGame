@@ -64,18 +64,40 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               new Container(
                 child:Center(
-                  child:
-                  new RaisedButton(onPressed: (){
-                    toast();
-                    this.showOrDismissProgressHUD();
-                    LoginService.login((model){
-                      this.showOrDismissProgressHUD();
-                      Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
-                      Application.router
-                          .navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
-                    });
-                  }),
+                  child:Column(
+                    children: <Widget>[
+                      new RaisedButton(child:Text("adview kaipin"),onPressed: (){
+                        toast(1, 1);
+                      }),
+                      new RaisedButton(child:Text("adview video"),onPressed: (){
+                        toast(1, 2);
+                      }),
+                      new RaisedButton(child:Text("baidu kaipin"),onPressed: (){
+                        toast(2, 1);
+                      }),
+                      new RaisedButton(child:Text("baidu video"),onPressed: (){
+                        toast(2, 2);
+                      }),
+                      new RaisedButton(child:Text("Tencent kaipin"),onPressed: (){
+                        toast(3, 1);
+                      }),
+                      new RaisedButton(child:Text("Tencent video"),onPressed: (){
+                        toast(3, 2);
+                      }),
+                      new RaisedButton(child:Text("login"),onPressed: (){
+                        this.showOrDismissProgressHUD();
+                        LoginService.login((model){
+                          this.showOrDismissProgressHUD();
+                          Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
+                          Application.router
+                              .navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                        });
+                      }),
+                    ],
+                  )
+
                 ),
+                margin: EdgeInsets.only(top: 200),
               ),
               _progressHUD
             ],
@@ -84,9 +106,9 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-  void toast() async {
+  void toast(int type,int showType) async {
     try {
-      await platform.invokeMethod('toast');
+      await platform.invokeMethod('showAd', <String, int>{'type': type,"showType":showType});
     } on PlatformException catch (e) {
       print(e);
     }
