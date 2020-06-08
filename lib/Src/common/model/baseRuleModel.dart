@@ -10,8 +10,8 @@ class BaseRuleModel {
       {this.adSetting, this.mainbuild, this.farm, this.wood, this.stone});
 
   BaseRuleModel.fromJson(Map<String, dynamic> json) {
-    adSetting = json['adSetting'] != null
-        ? new AdSetting.fromJson(json['adSetting'])
+    adSetting = json['adsetting'] != null
+        ? new AdSetting.fromJson(json['adsetting'])
         : null;
     if (json['mainbuild'] != null) {
       mainbuild = new List<Mainbuild>();
@@ -42,7 +42,7 @@ class BaseRuleModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.adSetting != null) {
-      data['adSetting'] = this.adSetting.toJson();
+      data['adsetting'] = this.adSetting.toJson();
     }
     if (this.mainbuild != null) {
       data['mainbuild'] = this.mainbuild.map((v) => v.toJson()).toList();
