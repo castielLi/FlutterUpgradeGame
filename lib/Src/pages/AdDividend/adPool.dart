@@ -15,8 +15,10 @@ class AdPool extends StatefulWidget {
   // 今日产出
   int productionToday;
 
+  // 英雄图片
   String heroImageUrl;
 
+  // 奖池名称
   String poolName;
 
   AdPool(
