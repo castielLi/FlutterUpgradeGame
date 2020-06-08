@@ -46,7 +46,7 @@ class _AccountDetailState extends State<AccountDetail> {
               TextField(
                 decoration: InputDecoration(
                     labelText: "重复密码", prefixIcon: Icon(Icons.lock)),
-              obscureText: true,
+                obscureText: true,
               ),
               new ImageButton(
                 height: ScreenUtil().setHeight(200),
@@ -55,7 +55,6 @@ class _AccountDetailState extends State<AccountDetail> {
                 imageUrl: "resource/images/upgradeButton.png",
                 callback: () {
                   print('点击升级');
-//                this.widget.HUD();
                   this.widget.viewCallback();
                 },
               ),

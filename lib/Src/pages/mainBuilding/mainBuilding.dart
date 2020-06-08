@@ -52,9 +52,8 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
               ScreenUtil().setHeight(500), // 上
               ScreenUtil().setWidth(150), // 右
               ScreenUtil().setHeight(250)), // 下
-          color: Colors.transparent,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text('LV $levelFrom > LV $level',

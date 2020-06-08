@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 
 import 'heroAltarClock.dart';
 
@@ -12,11 +11,10 @@ class HeroAltalItem extends StatefulWidget {
   // 收益提高
   double revenueUp;
 
-  // 英雄数量
-//  int heroCount;
   // 剩余天数
   List<int> remainDays;
 
+  //英雄图片
   String heroImageUrl;
 
   HeroAltalItem(

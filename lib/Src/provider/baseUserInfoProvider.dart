@@ -7,7 +7,7 @@ import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 //混入
 class BaseUserInfoProvider with ChangeNotifier{
   String displayname;
-  int tcoinamount;
+  int tcionamount;
   int stoneamount;
   int woodamount;
   String avatar;
@@ -20,7 +20,7 @@ class BaseUserInfoProvider with ChangeNotifier{
   int voucher;
   Ad ad;
 
-  int get TCoinAmount =>tcoinamount;
+  int get TCoinAmount =>tcionamount;
   int get WoodAmount =>woodamount;
   int get StoneAmount => stoneamount;
   String get Avatar => avatar;
@@ -34,7 +34,7 @@ class BaseUserInfoProvider with ChangeNotifier{
   initBaseUserInfo(BaseUserInfoModel model){
     displayname = model.displayname;
     ad = model.ad;
-    tcoinamount = model.tcoinamount;
+    tcionamount = model.tcoinamount;
     stoneamount = model.stoneamount;
     woodamount = model.woodamount;
     avatar = model.avatar;

@@ -33,7 +33,7 @@ class BaseUserInfoModel {
 
   BaseUserInfoModel.fromJson(Map<String, dynamic> json) {
     displayname = json['displayname'];
-    tcoinamount = json['tcoinamount'];
+    tcoinamount = json['tcionamount'];
     stoneamount = json['stoneamount'];
     woodamount = json['woodamount'];
     avatar = json['avatar'];
