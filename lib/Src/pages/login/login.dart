@@ -78,4 +78,18 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+  void toast(int type,int showType) async {
+    try {
+      await platform.invokeMethod('showAd', <String, dynamic>{'type': type,"showType":showType,"posId":""});
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+  void _onEvent(Object event) {
+    print("event »ØÀ´ÁË³É¹¦");
+  }
+
+  void _onError(Object error) {
+    print("event »ØÀ´ÁËÊ§°Ü");
+  }
 }

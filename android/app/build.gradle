@@ -39,6 +39,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.upgradegame"
+        multiDexEnabled true
         minSdkVersion 16
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
@@ -64,4 +65,16 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api fileTree(include: '*.aar', dir: 'libs')
+    implementation 'androidx.core:core:1.1.0'
+    implementation 'androidx.fragment:fragment:1.2.0'
+//    implementation group: 'javax.annotation', name: 'javax.annotation-api', version: '1.3.2'
+    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:5.5.8'
+    api 'pl.droidsonroids.gif:android-gif-drawable:1.2.6'
+    api 'com.squareup.okhttp3:okhttp:3.10.0'
+    api 'com.squareup.okio:okio:1.14.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+//    compileOnly(name:'Baidu_MobAds_SDK',ext:'aar')
 }
