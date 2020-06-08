@@ -106,11 +106,11 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-  // 显示广告
-  // action = showAd 始终不变
-  // type 显示的广告厂商 1 adview 2-百度广告 3-广点通
-  //  showType 示的广告类型 1 开屏 2 视频
-  // posId 广告位Id
+  // 脧脭脢戮鹿茫赂忙
+  // action = showAd 脢录脰脮虏禄卤盲
+  // type 脧脭脢戮碌脛鹿茫赂忙鲁搂脡脤 1 adview 2-掳脵露脠鹿茫赂忙 3-鹿茫碌茫脥篓
+  //  showType 脢戮碌脛鹿茫赂忙脌脿脨脥 1 驴陋脝脕 2 脢脫脝碌
+  // posId 鹿茫赂忙脦禄Id
   void toast(int type,int showType) async {
     try {
       await platform.invokeMethod('showAd', <String, dynamic>{'type': type,"showType":showType,"posId":""});
@@ -119,10 +119,10 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
   void _onEvent(Object event) {
-    print("event 回来了成功");
+    print("event 禄脴脌麓脕脣鲁脡鹿娄");
   }
 
   void _onError(Object error) {
-    print("event 回来了失败");
+    print("event 禄脴脌麓脕脣脢搂掳脺");
   }
 }
