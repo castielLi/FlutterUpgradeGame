@@ -92,7 +92,7 @@ class _StoneDetailState extends State<StoneDetail> {
                   ),
                 ),
                 new ImageButton(height:ScreenUtil().setHeight(200),width: ScreenUtil().setWidth(400),buttonName: "升 级",imageUrl: "resource/images/upgradeButton.png",callback: (){
-                  if(baseUserInfo.tcionamount < stoneBuildingRule.tcoinamount){
+                  if(baseUserInfo.tcoinamount < stoneBuildingRule.tcoinamount){
                     CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
                   }else{
                     this.widget.HUD();
