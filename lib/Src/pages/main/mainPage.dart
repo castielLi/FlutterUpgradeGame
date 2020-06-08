@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/provider/basePageLogicProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
@@ -21,6 +22,7 @@ class _MainPageState extends State<MainPage> {
 
   bool mainBuilding = true;
   bool mainBuildingCoin = false;
+  bool mainBuildingCoinWaiting = false;
 
   @override
   void didChangeDependencies() {
@@ -32,8 +34,11 @@ class _MainPageState extends State<MainPage> {
 
     return new Container(
       color: Colors.white,
-      child: Provide<BaseUserInfoProvider>(
-        builder: (context,child,baseUserInfo){
+      child: ProvideMulti(
+        builder: (context,child,model){
+          BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
+          BasePageLogicProvider basePageLogic = model.get<BasePageLogicProvider>();
+
           return Stack(
             children: <Widget>[
               new Image(image: new AssetImage('resource/images/mainBackgroud.png'),
@@ -231,6 +236,28 @@ class _MainPageState extends State<MainPage> {
                     )
                 ),
               ),
+              ///主城金币正在生产
+              new Offstage(
+                offstage: this.mainBuildingCoinWaiting,
+                child: new Container(
+                    margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(330), ScreenUtil().setHeight(660), ScreenUtil().setWidth(170), ScreenUtil().setHeight(670)),
+                    child: new Stack(
+                      children: <Widget>[
+                        ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/mainBuildingCoinWaiting.png",callback: (){
+
+                        },),
+                        Container(
+                            padding: EdgeInsets.only(top:ScreenUtil().setHeight(420)),
+                            child:Center(
+                              child: Text("主 城",textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.mainBuildingTextFontSize),),
+                            )
+                        )
+                      ],
+                    )
+                ),
+              ),
+
               ///英雄祭坛
               new Container(
                   margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(590), ScreenUtil().setHeight(1250), ScreenUtil().setWidth(170), ScreenUtil().setHeight(360)),
@@ -355,7 +382,8 @@ class _MainPageState extends State<MainPage> {
             ],
           );
 
-        }
+        },
+        requestedValues: [BaseUserInfoProvider,BasePageLogicProvider],
       ),
     );
   }
