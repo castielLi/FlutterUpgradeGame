@@ -3,6 +3,7 @@ package com.example.upgradegame.adview;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ViewGroup;
 
@@ -44,9 +45,12 @@ public class AdViewManager {
         instlManager.setInstlListener(adViewInstlListener);
     }
     // 视频广告
-    public void adView(){
+    public void adView(String postId){
+        if(TextUtils.isEmpty(postId)){
+            postId = Constant.VIDEOPOSID;
+        }
         videoManager = AdManager.createVideoAd();
-        videoManager.loadVideoAd(activity, Constant.APPID, Constant.VIDEOPOSID);
+        videoManager.loadVideoAd(activity, Constant.APPID, postId);
         videoManager.setVideoListener(adViewVideoListener);
         // 设置屏幕方向，取值可参照ActivityInfo.SCREEN_XXXXXX 定义的常量
         videoManager.setVideoOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);

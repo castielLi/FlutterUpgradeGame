@@ -60,23 +60,30 @@ public class MyActivity extends FlutterActivity {
                                 int type = call.argument("type");
                                 // showType 1 开屏 2 视频
                                 int showType = call.argument("showType");
+                                String posId = call.argument("posId");
                                 if(type == 1){
                                     if(showType == 1){
-                                        startActivity(new Intent(MyActivity.this, AdSpreadActivity.class));
+                                        Intent intent = new Intent(MyActivity.this, AdSpreadActivity.class);
+                                        intent.putExtra("posId",posId);
+                                        startActivity(intent);
                                     } else  if(showType == 2){
-                                        AdViewManager.getInstance(MyActivity.this,sink).adView();
+                                        AdViewManager.getInstance(MyActivity.this,sink).adView(posId);
                                     }
                                 } else if(type == 2){
                                     if(showType == 1){
-                                        startActivity(new Intent(MyActivity.this, SplashActivity.class));
+                                        Intent intent = new Intent(MyActivity.this, SplashActivity.class);
+                                        intent.putExtra("posId",posId);
+                                        startActivity(intent);
                                     } else  if(showType == 2){
-                                        BaiduManager.getInstance(MyActivity.this).showVideo();
+                                        BaiduManager.getInstance(MyActivity.this).showVideo(posId);
                                     }
                                 } else if(type == 3){
                                     if(showType == 1){
-                                        startActivity(new Intent(MyActivity.this, TentcentSplashActivity.class));
+                                        Intent intent = new Intent(MyActivity.this, TentcentSplashActivity.class);
+                                        intent.putExtra("posId",posId);
+                                        startActivity(intent);
                                     } else  if(showType == 2){
-                                        TencentManager.getInstance(MyActivity.this).showVideo();
+                                        TencentManager.getInstance(MyActivity.this).showVideo(posId);
                                     }
                                 }
 

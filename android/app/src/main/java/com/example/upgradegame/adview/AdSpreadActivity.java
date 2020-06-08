@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
@@ -34,12 +35,15 @@ public class AdSpreadActivity extends Activity implements AdViewSpreadListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.spread_layout);
-        requestSpreadAd();
+        requestSpreadAd(getIntent().getStringExtra("posId"));
     }
 
-    private void requestSpreadAd() {
+    private void requestSpreadAd(String posId) {
+        if(TextUtils.isEmpty(posId)){
+            posId = Constant.SPREADPOSID;
+        }
         spreadManager = AdManager.createSpreadAd();
-        spreadManager.loadSpreadAd(this, Constant.APPID, Constant.SPREADPOSID,
+        spreadManager.loadSpreadAd(this, Constant.APPID, posId,
                 (RelativeLayout) findViewById(R.id.spreadlayout));
         spreadManager.setBackgroundColor(Color.WHITE);
         spreadManager.setSpreadNotifyType(AdManager.NOTIFY_COUNTER_NUM);

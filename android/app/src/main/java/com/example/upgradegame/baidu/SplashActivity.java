@@ -3,6 +3,7 @@ package com.example.upgradegame.baidu;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -23,9 +24,12 @@ public class SplashActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.spread_layout);
-        fetchSplashAD();
+        fetchSplashAD(getIntent().getStringExtra("posId"));
     }
-    private void fetchSplashAD() {
+    private void fetchSplashAD(String posId) {
+        if(TextUtils.isEmpty(posId)){
+            posId = "2058622";
+        }
         // 默认请求https广告，若需要请求http广告，请设置AdSettings.setSupportHttps为false
         // AdSettings.setSupportHttps(false);
         // 设置视频广告最大缓存占用空间(15MB~100MB),默认30MB,单位MB
@@ -35,12 +39,11 @@ public class SplashActivity extends Activity {
 
 
 //        AdSettings.setSupportHttps(false);
-        String adPlaceId = "2058622"; // 重要：请填上您的广告位ID，代码位错误会导致无法请求到广告
         // 如果开屏需要支持vr,needRequestVRAd(true)
 //        SplashAd.needRequestVRAd(true);
         // 等比缩小放大，裁剪边缘部分
 //        SplashAd.setBitmapDisplayMode(BitmapDisplayMode.DISPLAY_MODE_CENTER_CROP);
-        new SplashAd(this, adsParent, listener, adPlaceId, true);
+        new SplashAd(this, adsParent, listener, posId, true);
     }
     // 增加lp页面关闭回调，不需要该回调的继续使用原来接口就可以
     SplashLpCloseListener listener = new SplashLpCloseListener() {

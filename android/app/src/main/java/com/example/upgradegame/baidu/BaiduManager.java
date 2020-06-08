@@ -1,9 +1,11 @@
 package com.example.upgradegame.baidu;
 
 import android.app.Activity;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.baidu.mobads.rewardvideo.RewardVideoAd;
+import com.example.upgradegame.Constant;
 
 public class BaiduManager {
     private static final String TAG = "zhoux";
@@ -24,10 +26,13 @@ public class BaiduManager {
     private BaiduManager(Activity activity){
         this.activity = activity;
     }
-    public void showVideo(){
+    public void showVideo(String posId){
+        if(TextUtils.isEmpty(posId)){
+            posId = AD_PLACE_ID;
+        }
         // 激励视屏产品可以选择是否使用SurfaceView进行渲染视频
         mRewardVideoAd = new RewardVideoAd(activity,
-                AD_PLACE_ID, rewardVideoAdListener, true);
+                posId, rewardVideoAdListener, true);
         mRewardVideoAd.load();
         mRewardVideoAd.show();
     }

@@ -72,7 +72,11 @@ public class TentcentSplashActivity extends Activity implements SplashADListener
   }
 
   private String getPosId() {
-    return "4090599490374470";
+    String posId = getIntent().getStringExtra("posId");
+    if(TextUtils.isEmpty(posId)){
+      posId = "4090599490374470";
+    }
+    return posId;
   }
 
   /**

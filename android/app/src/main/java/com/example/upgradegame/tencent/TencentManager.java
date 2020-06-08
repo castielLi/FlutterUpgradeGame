@@ -2,6 +2,7 @@ package com.example.upgradegame.tencent;
 
 import android.app.Activity;
 import android.os.SystemClock;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -33,8 +34,11 @@ public class TencentManager {
     private TencentManager(Activity activity){
         this.activity = activity;
     }
-    public void showVideo(){
-        rewardVideoAD = new RewardVideoAD(activity, TConstant.APPID,"6040295592058680", rewardVideoADListener,true);
+    public void showVideo(String posId){
+        if(TextUtils.isEmpty(posId)){
+            posId = "6040295592058680";
+        }
+        rewardVideoAD = new RewardVideoAD(activity, TConstant.APPID,posId, rewardVideoADListener,true);
         // 2. 加载激励视频广告
         rewardVideoAD.loadAD();
         rewardVideoAD.showAD();

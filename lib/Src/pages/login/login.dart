@@ -106,9 +106,14 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+  // 显示广告
+  // action = showAd 始终不变
+  // type 显示的广告厂商 1 adview 2-百度广告 3-广点通
+  //  showType 示的广告类型 1 开屏 2 视频
+  // posId 广告位Id
   void toast(int type,int showType) async {
     try {
-      await platform.invokeMethod('showAd', <String, int>{'type': type,"showType":showType});
+      await platform.invokeMethod('showAd', <String, dynamic>{'type': type,"showType":showType,"posId":""});
     } on PlatformException catch (e) {
       print(e);
     }
