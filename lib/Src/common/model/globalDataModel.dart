@@ -11,13 +11,33 @@ class Global {
 
   static BaseRuleModel rule;
 
-
   static setBaseRule(BaseRuleModel ruleModel){
     Global.rule = ruleModel;
   }
 
+  ///获取主建筑规则
   static getMainBuildingRule(){
     return rule.mainbuild;
+  }
+
+  ///获取采石场建筑规则
+  static getStoneBuildingRule(){
+    return rule.stone;
+  }
+
+  ///获取伐木场建筑规则
+  static getWoodBuildingRule(){
+    return rule.wood;
+  }
+
+  ///获取农场建筑规则
+  static getFarmBuildingRule(){
+    return rule.farm;
+  }
+
+  ///获取广告次数规则
+  static getAdSettingRule(){
+    return rule.adSetting;
   }
 
   static Global _getInstance() {

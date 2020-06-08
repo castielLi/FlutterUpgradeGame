@@ -3,32 +3,38 @@ import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 
-class MarketBidItem extends StatefulWidget{
-
+class MarketBidItem extends StatefulWidget {
   // 头像
   String avatarUrl;
+
   // 名称
   String name;
+
   // 商品类型
   String bidType;
+
   // 商品数量
   int amount;
+
   // T币数量
   int needCoin;
 
-  MarketBidItem({Key key,this.avatarUrl,this.name,this.bidType,this.amount,this.needCoin}):super(key:key);
+  MarketBidItem(
+      {Key key,
+      this.avatarUrl,
+      this.name,
+      this.bidType,
+      this.amount,
+      this.needCoin})
+      : super(key: key);
 
   @override
   _MarketBidItem createState() => _MarketBidItem();
-
 }
 
-class _MarketBidItem extends State <MarketBidItem>{
-
-
+class _MarketBidItem extends State<MarketBidItem> {
   @override
   Widget build(BuildContext context) {
-
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -36,7 +42,7 @@ class _MarketBidItem extends State <MarketBidItem>{
           fit: BoxFit.fill,
         ),
       ),
-      child:Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           Row(
@@ -44,25 +50,44 @@ class _MarketBidItem extends State <MarketBidItem>{
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  Image(image: new AssetImage(this.widget.avatarUrl),height:ScreenUtil().setHeight(90),),
-                  Text(this.widget.name,style: CustomFontSize.textStyle16,),
+                  Image(
+                    image: new AssetImage(this.widget.avatarUrl),
+                    height: ScreenUtil().setHeight(90),
+                  ),
+                  Text(
+                    this.widget.name,
+                    style: CustomFontSize.textStyle16,
+                  ),
                 ],
               ),
               Row(
                 children: <Widget>[
-                  Text('出售:',style: CustomFontSize.textStyle16),
-                  Image(image: new AssetImage('resource/images/'+this.widget.bidType+'.png'),height:ScreenUtil().setHeight(90),),
-                  Text('数量:'+this.widget.amount.toString(),style: CustomFontSize.textStyle16,),
+                  Text('出售:', style: CustomFontSize.textStyle16),
+                  Image(
+                    image: new AssetImage(
+                        'resource/images/' + this.widget.bidType + '.png'),
+                    height: ScreenUtil().setHeight(90),
+                  ),
+                  Text(
+                    '数量:' + this.widget.amount.toString(),
+                    style: CustomFontSize.textStyle16,
+                  ),
                 ],
               ),
             ],
           ),
           Container(
-            padding: EdgeInsets.only(left:172),
+            padding: EdgeInsets.only(left: 172),
             child: Row(
               children: <Widget>[
-                Image(image: new AssetImage('resource/images/gold.png'),height:ScreenUtil().setHeight(100),),
-                Text('数量:'+this.widget.needCoin.toString(),style: CustomFontSize.textStyle16,),
+                Image(
+                  image: new AssetImage('resource/images/gold.png'),
+                  height: ScreenUtil().setHeight(100),
+                ),
+                Text(
+                  '数量:' + this.widget.needCoin.toString(),
+                  style: CustomFontSize.textStyle16,
+                ),
               ],
             ),
           ),
@@ -71,14 +96,13 @@ class _MarketBidItem extends State <MarketBidItem>{
             imageWidth: ScreenUtil().setWidth(270),
             imageHeight: ScreenUtil().setHeight(120),
             buttonName: "购 买",
-            callback: (){
+            callback: () {
               print(this.widget.bidType);
             },
-            textSize: SystemFontSize.minTextSize,)
+            textSize: SystemFontSize.minTextSize,
+          )
         ],
       ),
     );
   }
-
-
 }

@@ -26,9 +26,13 @@ class _WelcomePageState extends State<WelcomePage> {
         Global.setBaseRule(model);
       });
     }else{
-      BaseRuleModel model = BaseRuleModel.fromJson(convert.jsonDecode(content));
-      Global();
-      Global.setBaseRule(model);
+//      BaseRuleModel model = BaseRuleModel.fromJson(convert.jsonDecode(content));
+//      Global();
+//      Global.setBaseRule(model);
+      BaseService.getRule((model){
+        Global();
+        Global.setBaseRule(model);
+      });
     }
   }
 

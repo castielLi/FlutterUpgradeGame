@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Src/pages/sawmill/adIconRow.dart';
+import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
+import 'package:upgradegame/Src/common/widget/adIcon/adIconRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:provide/provide.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 
 
 class FarmDetail extends StatefulWidget {
@@ -17,10 +19,7 @@ class FarmDetail extends StatefulWidget {
 
 class _FarmDetailState extends State<FarmDetail> {
   // 获取数据
-  static int neededWood  = 2910;
-  static int watchedAd = 1;
-  static int maxWatchableAd = 5;
-  static int speedUpPercent = 5;
+
 
   @override
   void didChangeDependencies() {
@@ -36,6 +35,15 @@ class _FarmDetailState extends State<FarmDetail> {
         builder: (context, child, baseUserInfo) {
       int levelFrom = baseUserInfo.Farmlevel;
       int level = baseUserInfo.Farmlevel + 1;
+
+      Farm farmBuildingRule =  Global.getFarmBuildingRule()[level - 1];
+      AdSetting adSetting = Global.getAdSettingRule();
+      int neededCoin  = farmBuildingRule.tcoinamount;
+      int watchedAd = baseUserInfo.ad.farm;
+      int maxWatchableAd = adSetting.farm;
+      int speedUpPercent = farmBuildingRule.product;
+
+
       return new Container(
         margin: EdgeInsets.fromLTRB(
             ScreenUtil().setWidth(80),   // 左
@@ -61,14 +69,15 @@ class _FarmDetailState extends State<FarmDetail> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       new Image(image: new AssetImage('resource/images/gold.png'), height:ScreenUtil().setHeight(100)),
-                      Text('$neededWood ',style: CustomFontSize.textStyle30,),
+                      Text('$neededCoin ',style: CustomFontSize.textStyle30,),
                     ],
                   ),
                   Text('观看广告获取升级资源',style:CustomFontSize.textStyle22),
                 ],
               ),
             ),
-            AdIconRow(countInOneRow: maxWatchableAd,adIconHeight: ScreenUtil().setHeight(150),imageUrl: 'resource/images/adIcon.png',),
+            AdIconRow(countInOneRow: maxWatchableAd,adIconHeight: ScreenUtil().setHeight(150),imageUrlWatched: 'resource/images/adWatched.png',
+                imageUrlUnwatch: "resource/images/adUnwatch.png",alreadyWatched: watchedAd,),
             new Container(
               margin: EdgeInsets.only(top:ScreenUtil().setHeight(20)),
               child: Column(
