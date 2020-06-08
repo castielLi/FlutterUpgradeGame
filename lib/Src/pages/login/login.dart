@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
   // posId ¹ã¸æÎ»Id
   void toast(int type,int showType) async {
     try {
-//      await platform.invokeMethod('showAd', <String, dynamic>{'type': type,"showType":showType,"posId":""});
+      await platform.invokeMethod('showAd', <String, dynamic>{'type': type,"showType":showType,"posId":""});
     } on PlatformException catch (e) {
       print(e);
     }

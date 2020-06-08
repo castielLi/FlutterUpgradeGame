@@ -47,7 +47,7 @@ public class MyActivity extends FlutterActivity {
     public void configureFlutterEngine(FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
         Log.e(TAG, "configureFlutterEngine");
-        GeneratedPluginRegistrant.registerWith(flutterEngine);
+//        GeneratedPluginRegistrant.registerWith(flutterEngine);
         // 直接 new MethodChannel，然后设置一个Callback来处理Flutter端调用
         new MethodChannel(flutterEngine.getDartExecutor(), METHODCHANNEL_NAME).setMethodCallHandler(
                 new MethodChannel.MethodCallHandler() {
