@@ -22,11 +22,15 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     compileSdkVersion 28
 
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
 
     lintOptions {
         disable 'InvalidPackage'
@@ -41,9 +45,6 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        ndk {
-            abiFilters 'armeabi-v7a', 'x86', 'arm64-v8a', 'x86_64', 'armeabi'
-        }
     }
 
     buildTypes {
@@ -53,24 +54,14 @@ android {
             signingConfig signingConfigs.debug
         }
     }
-    packagingOptions {
-        doNotStrip "*/armeabi-v7a/*.so"
-        doNotStrip "*/x86/*.so"
-        doNotStrip "*/arm64-v8a/*.so"
-        doNotStrip "*/x86_64/*.so"
-        doNotStrip "armeabi.so"
-    }
 }
 
 flutter {
     source '../..'
 }
-repositories{
-    flatDir{
-        dirs 'libs'
-    }
-}
+
 dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
