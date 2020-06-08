@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:upgradegame/Src/pages/login/service/loginService.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
@@ -80,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
   }
   void toast(int type,int showType) async {
     try {
-      await platform.invokeMethod('showAd', <String, dynamic>{'type': type,"showType":showType,"posId":""});
+//      await platform.invokeMethod('showAd', <String, dynamic>{'type': type,"showType":showType,"posId":""});
     } on PlatformException catch (e) {
       print(e);
     }
