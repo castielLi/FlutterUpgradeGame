@@ -19,12 +19,17 @@ class UserInfoDetail extends StatefulWidget {
   final changeTitleCallback;
   VoidCallback displayOriginalTitleCallback;
 
-  UserInfoDetail({Key key,this.HUD,this.changeTitleCallback,this.displayOriginalTitleCallback}):super(key:key);
+  UserInfoDetail(
+      {Key key,
+      this.HUD,
+      this.changeTitleCallback,
+      this.displayOriginalTitleCallback})
+      : super(key: key);
+
   _UserInfoDetailState createState() => new _UserInfoDetailState();
 }
 
 class _UserInfoDetailState extends State<UserInfoDetail> {
-
   bool userInfoHide = false;
   bool tradeDetailHide = true;
   bool accountDetailHide = true;
@@ -32,7 +37,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
   bool withdrawHide = true;
   bool serverCenter = true;
 
-  void showUserInfoDetail(){
+  void showUserInfoDetail() {
     setState(() {
       userInfoHide = false;
       tradeDetailHide = true;
@@ -47,116 +52,147 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return new Container(
-      margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(80),   // 左
-          ScreenUtil().setHeight(280),  // 上
-          ScreenUtil().setWidth(80),   // 右
-          ScreenUtil().setHeight(100)), // 下
-      child: new Stack(
-        children: <Widget>[
-          new Offstage(
-            offstage: this.userInfoHide,
-            child: new Center(
-              child: new Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new UserResourceDetail(
-                    imageUrl: "resource/images/avatar.png",
-                    amountCash: "100000",
-                  ),
-                  new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
-                    buttonName: "账号及安全",textSize: SystemFontSize.settingTextFontSize,callback: (){
-
-                      setState(() {
-                        userInfoHide = true;
-                        accountDetailHide = false;
-                      });
-                      this.widget.changeTitleCallback("账号及安全");
-                    },),
-                  new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
-                    buttonName: "交易明细",textSize: SystemFontSize.settingTextFontSize,callback: (){
-                    setState(() {
-                      tradeDetailHide = false;
-                      userInfoHide = true;
-                    });
-                    this.widget.changeTitleCallback("交易明细");
-                    },),
-                  new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
-                    buttonName: "提现记录",textSize: SystemFontSize.settingTextFontSize,callback: (){
-
-                      setState(() {
-                        userInfoHide = true;
-                        withdrawHide = false;
-                      });
-                      this.widget.changeTitleCallback("提现记录");
-                    },),
-//                  new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
-//                    buttonName: "t币明细",textSize: SystemFontSize.settingTextFontSize,callback: (){
-//
-//                      setState(() {
-//                        userInfoHide = true;
-//                        tCoinDetailHide = false;
-//                      });
-//                      this.widget.changeTitleCallback("t币明细");
-//                    },),
-                  new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
-                    buttonName: "客服中心",textSize: SystemFontSize.settingTextFontSize,callback: (){
-                      setState(() {
-                        userInfoHide = true;
-                        serverCenter = false;
-                      });
-                      this.widget.changeTitleCallback("客服中心");
-                    },),
-                ],
+        margin: EdgeInsets.fromLTRB(
+            ScreenUtil().setWidth(80), // 左
+            ScreenUtil().setHeight(280), // 上
+            ScreenUtil().setWidth(80), // 右
+            ScreenUtil().setHeight(100)), // 下
+        child: new Stack(
+          children: <Widget>[
+            new Offstage(
+              offstage: this.userInfoHide,
+              child: new Center(
+                child: new Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new UserResourceDetail(
+                      imageUrl: "resource/images/avatar.png",
+                      amountCash: "100000",
+                    ),
+                    new ImageTextButton(
+                      imageUrl: "resource/images/settingButtonBackground.png",
+                      imageWidth: ScreenUtil().setWidth(900),
+                      imageHeight: ScreenUtil().setHeight(190),
+                      buttonName: "账号及安全",
+                      textSize: SystemFontSize.settingTextFontSize,
+                      callback: () {
+                        setState(() {
+                          userInfoHide = true;
+                          accountDetailHide = false;
+                        });
+                        this.widget.changeTitleCallback("账号及安全");
+                      },
+                    ),
+                    new ImageTextButton(
+                      imageUrl: "resource/images/settingButtonBackground.png",
+                      imageWidth: ScreenUtil().setWidth(900),
+                      imageHeight: ScreenUtil().setHeight(190),
+                      buttonName: "交易明细",
+                      textSize: SystemFontSize.settingTextFontSize,
+                      callback: () {
+                        setState(() {
+                          tradeDetailHide = false;
+                          userInfoHide = true;
+                        });
+                        this.widget.changeTitleCallback("交易明细");
+                      },
+                    ),
+                    new ImageTextButton(
+                      imageUrl: "resource/images/settingButtonBackground.png",
+                      imageWidth: ScreenUtil().setWidth(900),
+                      imageHeight: ScreenUtil().setHeight(190),
+                      buttonName: "提现记录",
+                      textSize: SystemFontSize.settingTextFontSize,
+                      callback: () {
+                        setState(() {
+                          userInfoHide = true;
+                          withdrawHide = false;
+                        });
+                        this.widget.changeTitleCallback("提现记录");
+                      },
+                    ),
+                    new ImageTextButton(
+                      imageUrl: "resource/images/settingButtonBackground.png",
+                      imageWidth: ScreenUtil().setWidth(900),
+                      imageHeight: ScreenUtil().setHeight(190),
+                      buttonName: "客服中心",
+                      textSize: SystemFontSize.settingTextFontSize,
+                      callback: () {
+                        setState(() {
+                          userInfoHide = true;
+                          serverCenter = false;
+                        });
+                        this.widget.changeTitleCallback("客服中心");
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          ///账号及安全
-          new Offstage(
-            offstage: this.accountDetailHide,
-            child: new AccountDetail(HUD: this.widget.HUD,viewCallback: (){
-              showUserInfoDetail();
-              this.widget.displayOriginalTitleCallback();
-            },),
-          ),
-          ///交易明细
-          new Offstage(
-            offstage: this.tradeDetailHide,
-            child: new TradeDetail(HUD: this.widget.HUD,viewCallback: (){
-              showUserInfoDetail();
-              this.widget.displayOriginalTitleCallback();
-            },),
-          ),
-          ///提现明细
-          new Offstage(
-            offstage: this.withdrawHide,
-            child: new WithDrawDetail(HUD: this.widget.HUD,viewCallback: (){
-              showUserInfoDetail();
-              this.widget.displayOriginalTitleCallback();
-            },),
-          ),
-          ///t币明细
-          new Offstage(
-            offstage: this.tCoinDetailHide,
-            child: new TCoinDetail(HUD: this.widget.HUD,viewCallback: (){
-              showUserInfoDetail();
-              this.widget.displayOriginalTitleCallback();
-            },),
-          ),
-          ///客服中心
-          new Offstage(
-            offstage: this.serverCenter,
-            child: new ServerCenter(HUD: this.widget.HUD,viewCallback: (){
-              showUserInfoDetail();
-              this.widget.displayOriginalTitleCallback();
-            },),
-          ),
-        ],
-      )
-    );
+
+            ///账号及安全
+            new Offstage(
+              offstage: this.accountDetailHide,
+              child: new AccountDetail(
+                HUD: this.widget.HUD,
+                viewCallback: () {
+                  showUserInfoDetail();
+                  this.widget.displayOriginalTitleCallback();
+                },
+              ),
+            ),
+
+            ///交易明细
+            new Offstage(
+              offstage: this.tradeDetailHide,
+              child: new TradeDetail(
+                HUD: this.widget.HUD,
+                viewCallback: () {
+                  showUserInfoDetail();
+                  this.widget.displayOriginalTitleCallback();
+                },
+              ),
+            ),
+
+            ///提现明细
+            new Offstage(
+              offstage: this.withdrawHide,
+              child: new WithDrawDetail(
+                HUD: this.widget.HUD,
+                viewCallback: () {
+                  showUserInfoDetail();
+                  this.widget.displayOriginalTitleCallback();
+                },
+              ),
+            ),
+
+            ///t币明细
+            new Offstage(
+              offstage: this.tCoinDetailHide,
+              child: new TCoinDetail(
+                HUD: this.widget.HUD,
+                viewCallback: () {
+                  showUserInfoDetail();
+                  this.widget.displayOriginalTitleCallback();
+                },
+              ),
+            ),
+
+            ///客服中心
+            new Offstage(
+              offstage: this.serverCenter,
+              child: new ServerCenter(
+                HUD: this.widget.HUD,
+                viewCallback: () {
+                  showUserInfoDetail();
+                  this.widget.displayOriginalTitleCallback();
+                },
+              ),
+            ),
+          ],
+        ));
   }
 }
