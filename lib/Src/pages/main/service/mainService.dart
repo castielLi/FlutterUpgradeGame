@@ -10,12 +10,5 @@ import 'package:upgradegame/Common/widget/toast/toast.dart';
 class MainService{
   static Future<ResultData> getBaseInfo() async{
 
-    ResultData response = await httpManager.request(
-        ServiceUrl.getBaseInfo(), {}, null,null);
-
-    print(response.data);
-
-    return null;
-
   }
 }
