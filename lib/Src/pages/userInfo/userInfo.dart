@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/pages/userInfo/withDraw.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
@@ -29,8 +30,9 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
   bool tradeDetailHide = true;
   bool accountDetailHide = true;
   bool tCoinDetailHide = true;
-  bool withdrawHide = true;
+  bool withdrawHide = true;//提现记录
   bool serverCenter = true;
+  bool withdraw = true;   //提现
 
   void showUserInfoDetail(){
     setState(() {
@@ -40,6 +42,8 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
       tCoinDetailHide = true;
       withdrawHide = true;
       serverCenter = true;
+      withdraw = true;
+
     });
   }
 
@@ -67,6 +71,14 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                   new UserResourceDetail(
                     imageUrl: "resource/images/avatar.png",
                     amountCash: "100000",
+                    withdrawCallback: (){
+                      print('点击提现');
+                      setState(() {
+                        userInfoHide = true;
+                        withdraw = false;
+                      });
+                      this.widget.changeTitleCallback("提 现");
+                    },
                   ),
                   new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
                     buttonName: "账号及安全",textSize: SystemFontSize.settingTextFontSize,callback: (){
@@ -94,15 +106,6 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                       });
                       this.widget.changeTitleCallback("提现记录");
                     },),
-//                  new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
-//                    buttonName: "t币明细",textSize: SystemFontSize.settingTextFontSize,callback: (){
-//
-//                      setState(() {
-//                        userInfoHide = true;
-//                        tCoinDetailHide = false;
-//                      });
-//                      this.widget.changeTitleCallback("t币明细");
-//                    },),
                   new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),
                     buttonName: "客服中心",textSize: SystemFontSize.settingTextFontSize,callback: (){
                       setState(() {
@@ -151,6 +154,14 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
           new Offstage(
             offstage: this.serverCenter,
             child: new ServerCenter(HUD: this.widget.HUD,viewCallback: (){
+              showUserInfoDetail();
+              this.widget.displayOriginalTitleCallback();
+            },),
+          ),
+          ///提现
+          new Offstage(
+            offstage: this.withdraw,
+            child: new Withdraw(HUD: this.widget.HUD,viewCallback: (){
               showUserInfoDetail();
               this.widget.displayOriginalTitleCallback();
             },),
