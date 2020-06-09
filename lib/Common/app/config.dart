@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 
 ///系统配置
 class Config {
@@ -84,8 +85,8 @@ class SystemFontSize {
 }
 /// 自定义字体大小格式
 class CustomFontSize{
-  static const TextStyle textStyle30 = TextStyle(fontSize: 30.0, color: Colors.white, decoration: TextDecoration.none);
-  static const TextStyle textStyle26 = TextStyle(fontSize: 26.0, color: Colors.white, decoration: TextDecoration.none);
-  static const TextStyle textStyle22 = TextStyle(fontSize: 22.0, color: Colors.white, decoration: TextDecoration.none);
-  static const TextStyle textStyle16 = TextStyle(fontSize: 16.0, color: Colors.white, decoration: TextDecoration.none);
+  static TextStyle textStyle30 = TextStyle(fontSize: ScreenUtil().setSp(75), color: Colors.white, decoration: TextDecoration.none);
+  static TextStyle textStyle26 = TextStyle(fontSize: ScreenUtil().setSp(65), color: Colors.white, decoration: TextDecoration.none);
+  static TextStyle textStyle22 = TextStyle(fontSize: ScreenUtil().setSp(55), color: Colors.white, decoration: TextDecoration.none);
+  static TextStyle textStyle16 = TextStyle(fontSize: ScreenUtil().setSp(45), color: Colors.white, decoration: TextDecoration.none);
 }

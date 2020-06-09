@@ -37,7 +37,7 @@ class AdPool extends StatefulWidget {
 
 class _AdPool extends State<AdPool> {
   var minTextStyle = TextStyle(
-      fontSize: SystemFontSize.minMinTextSize,
+      fontSize: ScreenUtil().setSp(SystemFontSize.minMinTextSize),
       color: Colors.white,
       decoration: TextDecoration.none);
 
