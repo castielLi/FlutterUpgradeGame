@@ -19,6 +19,7 @@ class BaseUserInfoProvider with ChangeNotifier{
   double todayprofitsharing;
   int voucher;
   Ad ad;
+  int tobecollectedcoin;
 
   int get TCoinAmount =>tcoinamount;
   int get WoodAmount =>woodamount;
@@ -45,5 +46,11 @@ class BaseUserInfoProvider with ChangeNotifier{
     hero = model.hero;
     todayprofitsharing = model.todayprofitsharing;
     voucher = model.voucher;
+    tobecollectedcoin = model.tobecollectedcoin;
+  }
+
+  void takeCoin(){
+    this.tcoinamount += tobecollectedcoin;
+    tobecollectedcoin = 0;
   }
 }

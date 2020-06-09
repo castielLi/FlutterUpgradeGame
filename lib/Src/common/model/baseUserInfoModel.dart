@@ -4,6 +4,7 @@ import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 class BaseUserInfoModel {
   String displayname;
   int tcoinamount;
+  int tobecollectedcoin;
   int stoneamount;
   int woodamount;
   String avatar;
@@ -19,6 +20,7 @@ class BaseUserInfoModel {
   BaseUserInfoModel(
       {this.displayname,
         this.tcoinamount,
+        this.tobecollectedcoin,
         this.stoneamount,
         this.woodamount,
         this.avatar,
@@ -34,6 +36,7 @@ class BaseUserInfoModel {
   BaseUserInfoModel.fromJson(Map<String, dynamic> json) {
     displayname = json['displayname'];
     tcoinamount = json['tcoinamount'];
+    tobecollectedcoin = json['tobecollectedcoin'];
     stoneamount = json['stoneamount'];
     woodamount = json['woodamount'];
     avatar = json['avatar'];
@@ -56,6 +59,7 @@ class BaseUserInfoModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['displayname'] = this.displayname;
     data['tcoinamount'] = this.tcoinamount;
+    data['tobecollectedcoin'] = this.tobecollectedcoin;
     data['stoneamount'] = this.stoneamount;
     data['woodamount'] = this.woodamount;
     data['avatar'] = this.avatar;

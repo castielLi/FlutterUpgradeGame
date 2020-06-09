@@ -1,3 +1,6 @@
+
+//import 'dart:html';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
@@ -19,11 +22,36 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   bool mainBuilding = true;
   bool mainBuildingCoin = false;
-  bool mainBuildingCoinWaiting = false;
+  bool mainBuildingCoinWaiting = true;
+
+  void setMainBuildingNormal(){
+    setState(() {
+      this.mainBuilding = false;
+      this.mainBuildingCoin = true;
+      this.mainBuildingCoinWaiting = true;
+    });
+  }
+
+  void setMainBuildingCoin(){
+    setState(() {
+      this.mainBuildingCoin = false;
+      this.mainBuilding = true;
+      this.mainBuildingCoinWaiting = true;
+    });
+  }
+
+  void setMainBuildingWaiting(){
+    setState(() {
+      this.mainBuilding = true;
+      this.mainBuildingCoin = true;
+      this.mainBuildingCoinWaiting = false;
+    });
+  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
   }
 
   @override
@@ -33,9 +61,25 @@ class _MainPageState extends State<MainPage> {
       child: ProvideMulti(
         builder: (context, child, model) {
           BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
-          BasePageLogicProvider basePageLogic =
-              model.get<BasePageLogicProvider>();
-
+          BasePageLogicProvider basePageLogic = model.get<BasePageLogicProvider>();
+          if(baseUserInfo.tobecollectedcoin>0){
+            Provide.value<BasePageLogicProvider>(context).changeStatusToCoin();
+            this.mainBuildingCoin = false;
+            this.mainBuilding = true;
+            this.mainBuildingCoinWaiting = true;
+          }else{
+            if(basePageLogic.judgeIfDisplayMainBuildingWaiting()){
+              basePageLogic.changeStatusToWaiting();
+              this.mainBuilding = true;
+              this.mainBuildingCoin = true;
+              this.mainBuildingCoinWaiting = false;
+            }else{
+              basePageLogic.changeStatusToNormal();
+              this.mainBuilding = false;
+              this.mainBuildingCoin = true;
+              this.mainBuildingCoinWaiting = true;
+            }
+          }
           return Stack(
             children: <Widget>[
               new Image(
@@ -314,17 +358,17 @@ class _MainPageState extends State<MainPage> {
                         ScreenUtil().setHeight(670)),
                     child: new Stack(
                       children: <Widget>[
-                        ImageButton(
-                          height: ScreenUtil().setHeight(630),
-                          width: ScreenUtil().setWidth(600),
-                          imageUrl: "resource/images/mainBuildingCoin.png",
-                          callback: () {
-                            setState(() {
-                              this.mainBuilding = false;
-                              this.mainBuildingCoin = true;
-                            });
-                          },
-                        ),
+                        ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/mainBuildingCoin.png",callback: (){
+
+                          if(basePageLogic.judgeIfDisplayMainBuildingWaiting()){
+                            baseUserInfo.takeCoin();
+                            this.setMainBuildingWaiting();
+                          }else{
+                            baseUserInfo.takeCoin();
+                            this.setMainBuildingNormal();
+                          }
+
+                        },),
                         Container(
                             padding: EdgeInsets.only(
                                 top: ScreenUtil().setHeight(420)),
@@ -354,13 +398,15 @@ class _MainPageState extends State<MainPage> {
                         ScreenUtil().setHeight(670)),
                     child: new Stack(
                       children: <Widget>[
-                        ImageButton(
-                          height: ScreenUtil().setHeight(630),
-                          width: ScreenUtil().setWidth(600),
-                          imageUrl:
-                              "resource/images/mainBuildingCoinWaiting.png",
-                          callback: () {},
-                        ),
+                        ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/mainBuildingCoinWaiting.png",callback: (){
+
+                          setState(() {
+                            this.mainBuilding = false;
+                            this.mainBuildingCoin = true;
+                            this.mainBuildingCoinWaiting = true;
+                          });
+
+                        },),
                         Container(
                             padding: EdgeInsets.only(
                                 top: ScreenUtil().setHeight(420)),
