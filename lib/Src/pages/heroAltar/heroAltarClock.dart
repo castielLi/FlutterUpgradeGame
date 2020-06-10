@@ -27,7 +27,7 @@ class _HeroAltarClockState extends State<HeroAltarClock> {
                 height: ScreenUtil().setHeight(this.widget.adIconHeight)),
             Text(
               this.widget.remainDays[i].toString() + '天',
-              style: CustomFontSize.textStyle16,
+              style: CustomFontSize.defaultTextStyle(45),
             ),
           ],
         ),

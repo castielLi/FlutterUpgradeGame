@@ -30,10 +30,7 @@ class HeroAltalItem extends StatefulWidget {
 }
 
 class _HeroAltalItem extends State<HeroAltalItem> {
-  var minTextStyle = TextStyle(
-      fontSize: SystemFontSize.minMinTextSize,
-      color: Colors.white,
-      decoration: TextDecoration.none);
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,15 +59,15 @@ class _HeroAltalItem extends State<HeroAltalItem> {
                 children: <Widget>[
                   Text(
                     this.widget.description,
-                    style: CustomFontSize.textStyle22,
+                    style: CustomFontSize.defaultTextStyle(55),
                   ),
                   Text(
                     '效率:收益提高' + this.widget.revenueUp.toInt().toString() + '%',
-                    style: CustomFontSize.textStyle22,
+                    style: CustomFontSize.defaultTextStyle(55),
                   ),
                   Text(
                     '期限:30天（可叠加）',
-                    style: CustomFontSize.textStyle22,
+                    style: CustomFontSize.defaultTextStyle(55),
                   ),
                 ],
               ),
@@ -101,7 +98,7 @@ class _HeroAltalItem extends State<HeroAltalItem> {
                   child: Center(
                     child: Text(
                       '购 买',
-                      style: CustomFontSize.textStyle16,
+                      style: CustomFontSize.defaultTextStyle(45),
                     ),
                   ),
                 ),

@@ -83,10 +83,10 @@ class SystemFontSize {
   static const minTextSize = 24.0;
   static const minMinTextSize = 15.0;
 }
-/// 自定义字体大小格式
+/// 自定义字体格式
 class CustomFontSize{
-  static TextStyle textStyle30 = TextStyle(fontSize: ScreenUtil().setSp(75), color: Colors.white, decoration: TextDecoration.none);
-  static TextStyle textStyle26 = TextStyle(fontSize: ScreenUtil().setSp(65), color: Colors.white, decoration: TextDecoration.none);
-  static TextStyle textStyle22 = TextStyle(fontSize: ScreenUtil().setSp(55), color: Colors.white, decoration: TextDecoration.none);
-  static TextStyle textStyle16 = TextStyle(fontSize: ScreenUtil().setSp(45), color: Colors.white, decoration: TextDecoration.none);
+
+  static TextStyle defaultTextStyle(double fontSize){
+    return TextStyle(fontSize: ScreenUtil().setSp(fontSize), color: Colors.white, decoration: TextDecoration.none);
+  }
 }

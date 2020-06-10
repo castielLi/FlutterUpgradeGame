@@ -35,7 +35,7 @@ class _AboutUsDetailState extends State<AboutUsDetail> {
             height: ScreenUtil().setHeight(820),
             child: ListView(
               children: <Widget>[
-                Text(this.aboutUs),
+                Text(this.aboutUs,textAlign: TextAlign.center,),
               ],
             ),
           ),

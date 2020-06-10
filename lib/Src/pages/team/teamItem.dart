@@ -53,11 +53,11 @@ class _TeamItem extends State<TeamItem> {
               children: <Widget>[
                 Text(
                   this.widget.name,
-                  style: CustomFontSize.textStyle22,
+                  style: CustomFontSize.defaultTextStyle(55),
                 ),
                 Text(
                   this.widget.date,
-                  style: CustomFontSize.textStyle16,
+                  style: CustomFontSize.defaultTextStyle(45),
                 ),
               ],
             ),
@@ -71,7 +71,7 @@ class _TeamItem extends State<TeamItem> {
                 "(" +
                 (this.widget.tCoin.toInt()).toString() +
                 ')',
-            style: CustomFontSize.textStyle16,
+            style: CustomFontSize.defaultTextStyle(45),
           ),
         ),
       ],

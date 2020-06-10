@@ -57,8 +57,8 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text('LV $levelFrom > LV $level',
-                  textAlign: TextAlign.left, style: CustomFontSize.textStyle30),
-              Text('升级所需资料', style: CustomFontSize.textStyle30),
+                  textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(75)),
+              Text('升级所需资料', style: CustomFontSize.defaultTextStyle(75)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -67,17 +67,17 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
                       height: ScreenUtil().setHeight(100)),
                   Text(
                     '$neededWood ',
-                    style: CustomFontSize.textStyle30,
+                    style: CustomFontSize.defaultTextStyle(75),
                   ),
                   Image(
                       image: new AssetImage('resource/images/stone.png'),
                       height: ScreenUtil().setHeight(100)),
-                  Text('$neededStone', style: CustomFontSize.textStyle30),
+                  Text('$neededStone', style: CustomFontSize.defaultTextStyle(75)),
                 ],
               ),
               Text('升级后产出:' + '$coinPerHour' + 'T币一小时',
-                  style: CustomFontSize.textStyle22),
-              Text('每产生1T币需要消耗10木头和10石头', style: CustomFontSize.textStyle16),
+                  style: CustomFontSize.defaultTextStyle(55)),
+              Text('每产生1T币需要消耗10木头和10石头', style: CustomFontSize.defaultTextStyle(45)),
               Container(
                 padding: EdgeInsets.only(left: ScreenUtil().setWidth(100)),
                 child: ImageButton(

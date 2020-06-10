@@ -36,10 +36,6 @@ class AdPool extends StatefulWidget {
 }
 
 class _AdPool extends State<AdPool> {
-  var minTextStyle = TextStyle(
-      fontSize: ScreenUtil().setSp(SystemFontSize.minMinTextSize),
-      color: Colors.white,
-      decoration: TextDecoration.none);
 
   @override
   Widget build(BuildContext context) {
@@ -71,11 +67,11 @@ class _AdPool extends State<AdPool> {
                   children: <Widget>[
                     Text(
                       '昨日收益',
-                      style: minTextStyle,
+                      style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
                       '历史收益',
-                      style: minTextStyle,
+                      style: CustomFontSize.defaultTextStyle(40),
                     ),
                   ],
                 ),
@@ -88,15 +84,15 @@ class _AdPool extends State<AdPool> {
                   children: <Widget>[
                     Text(
                       '我的' + this.widget.poolName + '奖池',
-                      style: minTextStyle,
+                      style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
                       this.widget.yesterdayRevenue.toString(),
-                      style: minTextStyle,
+                      style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
                       this.widget.totalRevenue.toString(),
-                      style: minTextStyle,
+                      style: CustomFontSize.defaultTextStyle(40),
                     ),
                   ],
                 ),
@@ -109,19 +105,19 @@ class _AdPool extends State<AdPool> {
                   children: <Widget>[
                     Text(
                       '全网总数',
-                      style: minTextStyle,
+                      style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
                       this.widget.heroInNetwork.toString(),
-                      style: minTextStyle,
+                      style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
                       '今日产出',
-                      style: minTextStyle,
+                      style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
                       this.widget.productionToday.toString(),
-                      style: minTextStyle,
+                      style: CustomFontSize.defaultTextStyle(40),
                     ),
                   ],
                 ),
