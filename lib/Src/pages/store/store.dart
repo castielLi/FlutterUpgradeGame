@@ -27,13 +27,19 @@ class _StoreDetailState extends State<StoreDetail> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    StoreService.getStoreList().then((data
-        ){
-      setState(() {
-        storeList = data.datalist;
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      this.widget.HUD();
+      StoreService.getStoreList().then((data
+          ){
+        setState(() {
+          storeList = data.datalist;
+        });
+      this.widget.HUD();
       });
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
