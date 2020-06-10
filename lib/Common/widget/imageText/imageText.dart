@@ -35,7 +35,7 @@ class _ImageTextState extends State<ImageText> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Text(this.widget.text,textAlign: TextAlign.center
-                ,style:  TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: this.widget.textSize),),
+                ,style:  TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: ScreenUtil().setSp(this.widget.textSize*3)),),
             ],
           )
       ),

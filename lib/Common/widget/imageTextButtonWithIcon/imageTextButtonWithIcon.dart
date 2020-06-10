@@ -38,7 +38,7 @@ class _ImageTextButtonWithIconState extends State<ImageTextButtonWithIcon> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image(image: new AssetImage(this.widget.iconUrl),height: ScreenUtil().setHeight(this.widget.iconHeight),width: ScreenUtil().setWidth(this.widget.iconWidth),),
-            Text(this.widget.buttonName,style: TextStyle(fontSize: this.widget.textSize, color: Colors.white, decoration: TextDecoration.none)),
+            Text(this.widget.buttonName,style: TextStyle(fontSize: ScreenUtil().setSp(this.widget.textSize*3), color: Colors.white, decoration: TextDecoration.none)),
           ],
         ),
         onTap: (){

@@ -1,4 +1,3 @@
-
 //import 'dart:html';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,7 @@ class _MainPageState extends State<MainPage> {
   bool mainBuildingCoin = false;
   bool mainBuildingCoinWaiting = true;
 
-  void setMainBuildingNormal(){
+  void setMainBuildingNormal() {
     setState(() {
       this.mainBuilding = false;
       this.mainBuildingCoin = true;
@@ -32,7 +31,7 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  void setMainBuildingCoin(){
+  void setMainBuildingCoin() {
     setState(() {
       this.mainBuildingCoin = false;
       this.mainBuilding = true;
@@ -40,7 +39,7 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  void setMainBuildingWaiting(){
+  void setMainBuildingWaiting() {
     setState(() {
       this.mainBuilding = true;
       this.mainBuildingCoin = true;
@@ -51,7 +50,6 @@ class _MainPageState extends State<MainPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
   }
 
   @override
@@ -61,19 +59,20 @@ class _MainPageState extends State<MainPage> {
       child: ProvideMulti(
         builder: (context, child, model) {
           BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
-          BasePageLogicProvider basePageLogic = model.get<BasePageLogicProvider>();
-          if(baseUserInfo.tobecollectedcoin>0){
+          BasePageLogicProvider basePageLogic =
+              model.get<BasePageLogicProvider>();
+          if (baseUserInfo.tobecollectedcoin > 0) {
             Provide.value<BasePageLogicProvider>(context).changeStatusToCoin();
             this.mainBuildingCoin = false;
             this.mainBuilding = true;
             this.mainBuildingCoinWaiting = true;
-          }else{
-            if(basePageLogic.judgeIfDisplayMainBuildingWaiting()){
+          } else {
+            if (basePageLogic.judgeIfDisplayMainBuildingWaiting()) {
               basePageLogic.changeStatusToWaiting();
               this.mainBuilding = true;
               this.mainBuildingCoin = true;
               this.mainBuildingCoinWaiting = false;
-            }else{
+            } else {
               basePageLogic.changeStatusToNormal();
               this.mainBuilding = false;
               this.mainBuildingCoin = true;
@@ -339,8 +338,9 @@ class _MainPageState extends State<MainPage> {
                                 style: TextStyle(
                                     color: Colors.white,
                                     decoration: TextDecoration.none,
-                                    fontSize: SystemFontSize
-                                        .mainBuildingTextFontSize),
+                                    fontSize: ScreenUtil().setSp(SystemFontSize
+                                            .mainBuildingTextFontSize *
+                                        2)),
                               ),
                             ))
                       ],
@@ -358,17 +358,21 @@ class _MainPageState extends State<MainPage> {
                         ScreenUtil().setHeight(670)),
                     child: new Stack(
                       children: <Widget>[
-                        ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/mainBuildingCoin.png",callback: (){
-
-                          if(basePageLogic.judgeIfDisplayMainBuildingWaiting()){
-                            baseUserInfo.takeCoin();
-                            this.setMainBuildingWaiting();
-                          }else{
-                            baseUserInfo.takeCoin();
-                            this.setMainBuildingNormal();
-                          }
-
-                        },),
+                        ImageButton(
+                          height: ScreenUtil().setHeight(630),
+                          width: ScreenUtil().setWidth(600),
+                          imageUrl: "resource/images/mainBuildingCoin.png",
+                          callback: () {
+                            if (basePageLogic
+                                .judgeIfDisplayMainBuildingWaiting()) {
+                              baseUserInfo.takeCoin();
+                              this.setMainBuildingWaiting();
+                            } else {
+                              baseUserInfo.takeCoin();
+                              this.setMainBuildingNormal();
+                            }
+                          },
+                        ),
                         Container(
                             padding: EdgeInsets.only(
                                 top: ScreenUtil().setHeight(420)),
@@ -379,8 +383,9 @@ class _MainPageState extends State<MainPage> {
                                 style: TextStyle(
                                     color: Colors.white,
                                     decoration: TextDecoration.none,
-                                    fontSize: SystemFontSize
-                                        .mainBuildingTextFontSize),
+                                    fontSize: ScreenUtil().setSp(SystemFontSize
+                                            .mainBuildingTextFontSize *
+                                        2)),
                               ),
                             ))
                       ],
@@ -398,15 +403,19 @@ class _MainPageState extends State<MainPage> {
                         ScreenUtil().setHeight(670)),
                     child: new Stack(
                       children: <Widget>[
-                        ImageButton(height:ScreenUtil().setHeight(630),width: ScreenUtil().setWidth(600),imageUrl: "resource/images/mainBuildingCoinWaiting.png",callback: (){
-
-                          setState(() {
-                            this.mainBuilding = false;
-                            this.mainBuildingCoin = true;
-                            this.mainBuildingCoinWaiting = true;
-                          });
-
-                        },),
+                        ImageButton(
+                          height: ScreenUtil().setHeight(630),
+                          width: ScreenUtil().setWidth(600),
+                          imageUrl:
+                              "resource/images/mainBuildingCoinWaiting.png",
+                          callback: () {
+                            setState(() {
+                              this.mainBuilding = false;
+                              this.mainBuildingCoin = true;
+                              this.mainBuildingCoinWaiting = true;
+                            });
+                          },
+                        ),
                         Container(
                             padding: EdgeInsets.only(
                                 top: ScreenUtil().setHeight(420)),
@@ -417,8 +426,9 @@ class _MainPageState extends State<MainPage> {
                                 style: TextStyle(
                                     color: Colors.white,
                                     decoration: TextDecoration.none,
-                                    fontSize: SystemFontSize
-                                        .mainBuildingTextFontSize),
+                                    fontSize: ScreenUtil().setSp(SystemFontSize
+                                            .mainBuildingTextFontSize *
+                                        2)),
                               ),
                             ))
                       ],
@@ -459,8 +469,9 @@ class _MainPageState extends State<MainPage> {
                               style: TextStyle(
                                   color: Colors.white,
                                   decoration: TextDecoration.none,
-                                  fontSize:
-                                      SystemFontSize.otherBuildingTextFontSize),
+                                  fontSize: ScreenUtil().setSp(
+                                      SystemFontSize.otherBuildingTextFontSize *
+                                          2)),
                             ),
                           ))
                     ],
@@ -500,8 +511,9 @@ class _MainPageState extends State<MainPage> {
                               style: TextStyle(
                                   color: Colors.white,
                                   decoration: TextDecoration.none,
-                                  fontSize:
-                                      SystemFontSize.otherBuildingTextFontSize),
+                                  fontSize: ScreenUtil().setSp(
+                                      SystemFontSize.otherBuildingTextFontSize *
+                                          2)),
                             ),
                           ))
                     ],
@@ -545,8 +557,9 @@ class _MainPageState extends State<MainPage> {
                               style: TextStyle(
                                   color: Colors.white,
                                   decoration: TextDecoration.none,
-                                  fontSize:
-                                      SystemFontSize.otherBuildingTextFontSize),
+                                  fontSize: ScreenUtil().setSp(
+                                      SystemFontSize.otherBuildingTextFontSize *
+                                          2)),
                             ),
                           ))
                     ],
@@ -586,8 +599,9 @@ class _MainPageState extends State<MainPage> {
                               style: TextStyle(
                                   color: Colors.white,
                                   decoration: TextDecoration.none,
-                                  fontSize:
-                                      SystemFontSize.otherBuildingTextFontSize),
+                                  fontSize: ScreenUtil().setSp(
+                                      SystemFontSize.otherBuildingTextFontSize *
+                                          2)),
                             ),
                           ))
                     ],
@@ -627,8 +641,9 @@ class _MainPageState extends State<MainPage> {
                               style: TextStyle(
                                   color: Colors.white,
                                   decoration: TextDecoration.none,
-                                  fontSize:
-                                      SystemFontSize.otherBuildingTextFontSize),
+                                  fontSize: ScreenUtil().setSp(
+                                      SystemFontSize.otherBuildingTextFontSize *
+                                          2)),
                             ),
                           ))
                     ],

@@ -175,7 +175,7 @@ class _DetailDialogState extends State<DetailDialog> {
                         height: ScreenUtil().setHeight(380),
                         child:Center(
                           child: Text(this.currentDisplayTitle == ""?this.widget.title:this.currentDisplayTitle,textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.detailDialogTitleTextFontSize),),
+                            style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: ScreenUtil().setSp(SystemFontSize.detailDialogTitleTextFontSize*3)),),
                         )
                     ),
                     Container(
