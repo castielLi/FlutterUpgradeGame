@@ -67,11 +67,11 @@ class _TeamDetailState extends State<TeamDetail> {
               children: <Widget>[
                 Text(
                   '日期',
-                  style: CustomFontSize.textStyle22,
+                  style: CustomFontSize.defaultTextStyle(55),
                 ),
                 Text(
                   '现金 T币',
-                  style: CustomFontSize.textStyle22,
+                  style: CustomFontSize.defaultTextStyle(55),
                 ),
               ],
             ),

@@ -59,16 +59,16 @@ class _SawmillDetailState extends State<SawmillDetail> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('LV $levelFrom > LV $level',textAlign:TextAlign.left,style: CustomFontSize.textStyle30),
-                      Text('升级所需资料',style: CustomFontSize.textStyle30),
+                      Text('LV $levelFrom > LV $level',textAlign:TextAlign.left,style: CustomFontSize.defaultTextStyle(75)),
+                      Text('升级所需资料',style: CustomFontSize.defaultTextStyle(75)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           new Image(image: new AssetImage('resource/images/gold.png'), height:ScreenUtil().setHeight(100)),
-                          Text('$needTCoin ',style: CustomFontSize.textStyle30,),
+                          Text('$needTCoin ',style: CustomFontSize.defaultTextStyle(75),),
                         ],
                       ),
-                      Text('观看广告获取升级资源',style:CustomFontSize.textStyle22),
+                      Text('观看广告获取升级资源',style:CustomFontSize.defaultTextStyle(55)),
                     ],
                   ),
                 ),
@@ -82,12 +82,12 @@ class _SawmillDetailState extends State<SawmillDetail> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Text('每次获取 ',style: CustomFontSize.textStyle22,),
+                          Text('每次获取 ',style: CustomFontSize.defaultTextStyle(55),),
                           Image(image: new AssetImage('resource/images/wood.png'),height: ScreenUtil().setHeight(100),),
-                          Text('$woodPerAd',style: CustomFontSize.textStyle22,),
+                          Text('$woodPerAd',style: CustomFontSize.defaultTextStyle(55),),
                         ],
                       ),
-                      Text('今日观看次数 $watchedAd/$maxWatchableAd',style:CustomFontSize.textStyle22),
+                      Text('今日观看次数 $watchedAd/$maxWatchableAd',style:CustomFontSize.defaultTextStyle(55)),
                     ],
                   ),
                 ),

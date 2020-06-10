@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Src/route/application.dart';
-import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Common/widget/imageText/imageText.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 
@@ -60,7 +58,7 @@ class _UserResourceDetailState extends State<UserResourceDetail> {
                       child: new Center(
                         child:
                         Text("¥" + this.widget.amountCash,textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.userInfoResourceWithdrawTextFontSize)),
+                            style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: ScreenUtil().setSp(SystemFontSize.userInfoResourceWithdrawTextFontSize*2))),
                       )
                     )
                   ],
@@ -72,7 +70,7 @@ class _UserResourceDetailState extends State<UserResourceDetail> {
                   textSize: SystemFontSize.userInfoResourceWithdrawTextFontSize,
                   buttonName: "提 现",
                   callback: (){
-
+                    this.widget.withdrawCallback();
                   },
                 ),
               ],

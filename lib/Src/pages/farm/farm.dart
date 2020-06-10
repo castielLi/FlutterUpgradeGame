@@ -60,8 +60,8 @@ class _FarmDetailState extends State<FarmDetail> {
                 children: <Widget>[
                   Text('LV $levelFrom > LV $level',
                       textAlign: TextAlign.left,
-                      style: CustomFontSize.textStyle30),
-                  Text('升级所需资料', style: CustomFontSize.textStyle30),
+                      style: CustomFontSize.defaultTextStyle(75)),
+                  Text('升级所需资料', style: CustomFontSize.defaultTextStyle(75)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
@@ -70,11 +70,11 @@ class _FarmDetailState extends State<FarmDetail> {
                           height: ScreenUtil().setHeight(100)),
                       Text(
                         '$neededCoin ',
-                        style: CustomFontSize.textStyle30,
+                        style: CustomFontSize.defaultTextStyle(75),
                       ),
                     ],
                   ),
-                  Text('观看广告获取升级资源', style: CustomFontSize.textStyle22),
+                  Text('观看广告获取升级资源', style: CustomFontSize.defaultTextStyle(55)),
                 ],
               ),
             ),
@@ -96,12 +96,12 @@ class _FarmDetailState extends State<FarmDetail> {
                     children: <Widget>[
                       Text(
                         '每次采石场和伐木场提速 $speedUpPercent%',
-                        style: CustomFontSize.textStyle22,
+                        style: CustomFontSize.defaultTextStyle(55),
                       ),
                     ],
                   ),
                   Text('今日观看次数 $watchedAd/$maxWatchableAd',
-                      style: CustomFontSize.textStyle22),
+                      style: CustomFontSize.defaultTextStyle(55)),
                 ],
               ),
             ),

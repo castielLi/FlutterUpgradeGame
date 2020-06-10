@@ -35,7 +35,7 @@ class _RaidersDetailState extends State<RaidersDetail> {
             height: ScreenUtil().setHeight(820),
             child: ListView(
               children: <Widget>[
-                Text(this.raider),
+                Text(this.raider,textAlign: TextAlign.center),
               ],
             ),
           ),

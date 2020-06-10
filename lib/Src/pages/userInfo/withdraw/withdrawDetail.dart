@@ -32,15 +32,15 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
             children: <Widget>[
               Text(
                 '日期',
-                style: CustomFontSize.textStyle22,
+                style: CustomFontSize.defaultTextStyle(55),
               ),
               Text(
                 '种类',
-                style: CustomFontSize.textStyle22,
+                style: CustomFontSize.defaultTextStyle(55),
               ),
               Text(
                 '数量',
-                style: CustomFontSize.textStyle22,
+                style: CustomFontSize.defaultTextStyle(55),
               ),
             ],
           ),

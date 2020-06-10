@@ -35,7 +35,7 @@ class _PrivateDetailState extends State<PrivateDetail> {
             height: ScreenUtil().setHeight(820),
             child: ListView(
               children: <Widget>[
-                Text(this.privacyContext),
+                Text(this.privacyContext,textAlign: TextAlign.center),
               ],
             ),
           ),

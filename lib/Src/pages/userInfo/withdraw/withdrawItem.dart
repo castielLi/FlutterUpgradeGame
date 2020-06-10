@@ -27,7 +27,7 @@ class _WithdrawItem extends State<WithdrawItem> {
       children: <Widget>[
         Text(
           this.widget.tDate,
-          style: CustomFontSize.textStyle22,
+          style: CustomFontSize.defaultTextStyle(55),
         ),
         Image(
           image: new AssetImage(this.widget.tTypeImageUrl),
@@ -35,7 +35,7 @@ class _WithdrawItem extends State<WithdrawItem> {
         ),
         Text(
           this.widget.tAmount.toString(),
-          style: CustomFontSize.textStyle22,
+          style: CustomFontSize.defaultTextStyle(55),
         ),
       ],
     );

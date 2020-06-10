@@ -41,13 +41,13 @@ class _RankItem extends State<RankItem> {
             ),
             Text(
               this.widget.rankName,
-              style: CustomFontSize.textStyle26,
+              style: CustomFontSize.defaultTextStyle(65),
             ),
           ],
         ),
         Text(
           this.widget.value.toString(),
-          style: CustomFontSize.textStyle26,
+          style: CustomFontSize.defaultTextStyle(65),
         ),
       ],
     );

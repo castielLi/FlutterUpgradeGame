@@ -35,7 +35,7 @@ class _ProtocolDetailState extends State<ProtocolDetail> {
             height: ScreenUtil().setHeight(820),
             child: ListView(
               children: <Widget>[
-                Text(this.protocal),
+                Text(this.protocal,textAlign: TextAlign.center),
               ],
             ),
           ),

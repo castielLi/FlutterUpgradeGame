@@ -30,7 +30,7 @@ class _TradeItem extends State<TradeItem> {
       children: <Widget>[
         Text(
           this.widget.tDate,
-          style: CustomFontSize.textStyle22,
+          style: CustomFontSize.defaultTextStyle(55),
         ),
         Image(
           image: new AssetImage(this.widget.tTypeImageUrl),
@@ -38,11 +38,11 @@ class _TradeItem extends State<TradeItem> {
         ),
         Text(
           this.widget.tAmount.toString(),
-          style: CustomFontSize.textStyle22,
+          style: CustomFontSize.defaultTextStyle(55),
         ),
         Text(
           this.widget.tCoin.toString(),
-          style: CustomFontSize.textStyle22,
+          style: CustomFontSize.defaultTextStyle(55),
         ),
       ],
     );

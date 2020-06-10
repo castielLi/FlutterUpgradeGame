@@ -56,13 +56,13 @@ class _MarketBidItem extends State<MarketBidItem> {
                   ),
                   Text(
                     this.widget.name,
-                    style: CustomFontSize.textStyle16,
+                    style: CustomFontSize.defaultTextStyle(45),
                   ),
                 ],
               ),
               Row(
                 children: <Widget>[
-                  Text('出售:', style: CustomFontSize.textStyle16),
+                  Text('出售:', style: CustomFontSize.defaultTextStyle(45)),
                   Image(
                     image: new AssetImage(
                         'resource/images/' + this.widget.bidType + '.png'),
@@ -70,7 +70,7 @@ class _MarketBidItem extends State<MarketBidItem> {
                   ),
                   Text(
                     '数量:' + this.widget.amount.toString(),
-                    style: CustomFontSize.textStyle16,
+                    style: CustomFontSize.defaultTextStyle(45),
                   ),
                 ],
               ),
@@ -86,7 +86,7 @@ class _MarketBidItem extends State<MarketBidItem> {
                 ),
                 Text(
                   '数量:' + this.widget.needCoin.toString(),
-                  style: CustomFontSize.textStyle16,
+                  style: CustomFontSize.defaultTextStyle(45),
                 ),
               ],
             ),
