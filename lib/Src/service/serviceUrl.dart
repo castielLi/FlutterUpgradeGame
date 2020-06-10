@@ -16,6 +16,6 @@ class ServiceUrl{
 
   ///storeList
   static getStoreList(){
-    return "${host}api/voucher/list";
+    return "${host}api/v1/voucher/list";
   }
 }

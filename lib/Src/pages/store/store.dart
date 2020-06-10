@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Src/pages/store/model/storeModel.dart';
 import 'package:upgradegame/Src/pages/store/storeService/storeService.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Src/pages/store/productItem.dart';
+import 'dart:async';
 
 class StoreDetail extends StatefulWidget {
   @override
@@ -20,10 +22,18 @@ class StoreDetail extends StatefulWidget {
 class _StoreDetailState extends State<StoreDetail> {
 
   List<StoreModel> storeList;
-//  StoreService.getStoreList();
+
 
   @override
   Widget build(BuildContext context) {
+
+    StoreService.getStoreList().then((data
+        ){
+      setState(() {
+        storeList = data.datalist;
+      });
+    });
+
     return new Container(
       margin: EdgeInsets.fromLTRB(
           ScreenUtil().setWidth(80),   // 左
@@ -35,11 +45,11 @@ class _StoreDetailState extends State<StoreDetail> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new ProductItem(
-              volumeAmount: "38",
+              volumeAmount: storeList == null?"":storeList[0].amount.toString(),
               callback: (){
 
               },
-              cashAmount: "10",
+              cashAmount: storeList == null?"":storeList[0].price.toString(),
             ),
             new ProductItem(
               volumeAmount: "108",
