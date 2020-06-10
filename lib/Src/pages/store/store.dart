@@ -23,16 +23,20 @@ class _StoreDetailState extends State<StoreDetail> {
 
   List<StoreModel> storeList;
 
-
   @override
-  Widget build(BuildContext context) {
-
+  void initState() {
+    // TODO: implement initState
+    super.initState();
     StoreService.getStoreList().then((data
         ){
       setState(() {
         storeList = data.datalist;
       });
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
 
     return new Container(
       margin: EdgeInsets.fromLTRB(
