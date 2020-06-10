@@ -24,9 +24,9 @@ class _InitAppSetting extends State<InitAppSetting> {
   @override
   void initState() {
     super.initState();
-    stream = ConfigSetting.eventBus.on<HttpErrorEvent>().listen((event) {
-      errorHandleFunction(event.code, event.message);
-    });
+//    stream = ConfigSetting.eventBus.on<HttpErrorEvent>().listen((event) {
+//      errorHandleFunction(event.code, event.message);
+//    });
 //    fluwx.registerWxApi(
 //        appId: "wxea0b8491b5101053",
 //        doOnAndroid: true,

@@ -11,9 +11,6 @@ class ConfigSetting {
   ///网络成功
   static const SUCCESS = 200;
 
-  ///网络成功,但是请求失败
-  static const FAILED = 200;
-
   static final EventBus eventBus = new EventBus();
 
   static errorHandleFunction(code, message, noTip) {

@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/http/resultData.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/store/model/storeModel.dart';
 import 'package:upgradegame/Src/pages/store/storeService/storeService.dart';
 import 'package:upgradegame/Src/route/application.dart';
@@ -31,9 +33,13 @@ class _StoreDetailState extends State<StoreDetail> {
       this.widget.HUD();
       StoreService.getStoreList().then((data
           ){
-        setState(() {
-          storeList = data.datalist;
-        });
+        if(data.code == ConfigSetting.SUCCESS && data.data != null){
+          setState(() {
+            storeList = StoreListModel.fromJson(data.data).datalist;
+          });
+        }else{
+          CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
+        }
       this.widget.HUD();
       });
     });
