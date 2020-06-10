@@ -14,10 +14,8 @@ class ServiceUrl{
     return "${host}api/v1/user";
   }
 
-
-
-  /// main
-  static getBaseInfo(){
-    return "${host}api/user";
+  ///storeList
+  static getStoreList(){
+    return "${host}api/v1/voucher/list";
   }
 }
