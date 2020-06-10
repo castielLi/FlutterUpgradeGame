@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:upgradegame/Common/http/configSetting.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/AdDividend/adPool.dart';
+import 'package:upgradegame/Src/pages/adDividend/model/AdDividendModel.dart';
+import 'package:upgradegame/Src/pages/adDividend/service/adDividendService.dart';
 
 class AdDividendDetail extends StatefulWidget {
   @override
@@ -12,15 +16,25 @@ class AdDividendDetail extends StatefulWidget {
 }
 
 class _AdDividendDetailState extends State<AdDividendDetail> {
-  // 获取数据
-  static int yesterdayRevenue = 1928;
-  static int totalRevenue = 2928;
-  static int heroInNetwork = 99910;
-  static int productionToday = 9100;
+  List<AdDividendModel> adDividendDataList;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      this.widget.HUD();
+      AdDividendService.getAdDividendList().then((data
+          ){
+        if(data.code == ConfigSetting.SUCCESS && data.data != null){
+          setState(() {
+            adDividendDataList = AdDividendListModel.fromJson(data.data).datalist;
+          });
+        }else{
+          CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
+        }
+        this.widget.HUD();
+      });
+    });
   }
 
   @override
@@ -36,26 +50,50 @@ class _AdDividendDetailState extends State<AdDividendDetail> {
           AdPool(
             heroImageUrl: 'resource/images/warrior.png',
             poolName: '勇士',
-            yesterdayRevenue: yesterdayRevenue,
-            totalRevenue: totalRevenue,
-            heroInNetwork: heroInNetwork,
-            productionToday: productionToday,
+            yesterdayincome: adDividendDataList == null
+                ? 0
+                : adDividendDataList[0].yesterdayincome,
+            totalincome: adDividendDataList == null
+                ? 0
+                : adDividendDataList[0].totalincome,
+            totalheroamount: adDividendDataList == null
+                ? 0
+                : adDividendDataList[0].totalheroamount,
+            todayheroamount: adDividendDataList == null
+                ? 0
+                : adDividendDataList[0].todayheroamount,
           ),
           AdPool(
             heroImageUrl: 'resource/images/hunter.png',
             poolName: '猎人',
-            yesterdayRevenue: yesterdayRevenue,
-            totalRevenue: totalRevenue,
-            heroInNetwork: heroInNetwork,
-            productionToday: productionToday,
+            yesterdayincome: adDividendDataList == null
+                ? 0
+                : adDividendDataList[1].yesterdayincome,
+            totalincome: adDividendDataList == null
+                ? 0
+                : adDividendDataList[1].totalincome,
+            totalheroamount: adDividendDataList == null
+                ? 0
+                : adDividendDataList[1].totalheroamount,
+            todayheroamount: adDividendDataList == null
+                ? 0
+                : adDividendDataList[1].todayheroamount,
           ),
           AdPool(
             heroImageUrl: 'resource/images/shaman.png',
             poolName: '萨满',
-            yesterdayRevenue: yesterdayRevenue,
-            totalRevenue: totalRevenue,
-            heroInNetwork: heroInNetwork,
-            productionToday: productionToday,
+            yesterdayincome: adDividendDataList == null
+                ? 0
+                : adDividendDataList[2].yesterdayincome,
+            totalincome: adDividendDataList == null
+                ? 0
+                : adDividendDataList[2].totalincome,
+            totalheroamount: adDividendDataList == null
+                ? 0
+                : adDividendDataList[2].totalheroamount,
+            todayheroamount: adDividendDataList == null
+                ? 0
+                : adDividendDataList[2].todayheroamount,
           ),
         ],
       ),

@@ -59,15 +59,15 @@ class _HeroAltalItem extends State<HeroAltalItem> {
                 children: <Widget>[
                   Text(
                     this.widget.description,
-                    style: CustomFontSize.defaultTextStyle(55),
+                    style: CustomFontSize.defaultTextStyle(50),
                   ),
                   Text(
                     '效率:收益提高' + this.widget.revenueUp.toInt().toString() + '%',
-                    style: CustomFontSize.defaultTextStyle(55),
+                    style: CustomFontSize.defaultTextStyle(50),
                   ),
                   Text(
                     '期限:30天（可叠加）',
-                    style: CustomFontSize.defaultTextStyle(55),
+                    style: CustomFontSize.defaultTextStyle(50),
                   ),
                 ],
               ),

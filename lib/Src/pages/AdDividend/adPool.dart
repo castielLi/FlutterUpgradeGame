@@ -4,16 +4,16 @@ import 'package:upgradegame/Common/app/config.dart';
 
 class AdPool extends StatefulWidget {
   // 昨日收益
-  int yesterdayRevenue;
+  double yesterdayincome;
 
   // 历史收益
-  int totalRevenue;
+  int totalincome;
 
   // 全网总数
-  int heroInNetwork;
+  int totalheroamount;
 
   // 今日产出
-  int productionToday;
+  int todayheroamount;
 
   // 英雄图片
   String heroImageUrl;
@@ -23,10 +23,10 @@ class AdPool extends StatefulWidget {
 
   AdPool(
       {Key key,
-      this.yesterdayRevenue,
-      this.totalRevenue,
-      this.heroInNetwork,
-      this.productionToday,
+      this.yesterdayincome,
+      this.totalincome,
+      this.totalheroamount,
+      this.todayheroamount,
       this.heroImageUrl,
       this.poolName})
       : super(key: key);
@@ -36,7 +36,6 @@ class AdPool extends StatefulWidget {
 }
 
 class _AdPool extends State<AdPool> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,7 +47,6 @@ class _AdPool extends State<AdPool> {
         ),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Image(
             image: new AssetImage(this.widget.heroImageUrl),
@@ -59,7 +57,7 @@ class _AdPool extends State<AdPool> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(left: 100),
+                padding: EdgeInsets.only(left: ScreenUtil().setSp(270)),
                 width: ScreenUtil().setWidth(600),
                 height: ScreenUtil().setHeight(80),
                 child: Row(
@@ -87,11 +85,11 @@ class _AdPool extends State<AdPool> {
                       style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
-                      this.widget.yesterdayRevenue.toString(),
+                      this.widget.yesterdayincome.toString(),
                       style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
-                      this.widget.totalRevenue.toString(),
+                      this.widget.totalincome.toString(),
                       style: CustomFontSize.defaultTextStyle(40),
                     ),
                   ],
@@ -108,7 +106,7 @@ class _AdPool extends State<AdPool> {
                       style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
-                      this.widget.heroInNetwork.toString(),
+                      this.widget.totalheroamount.toString(),
                       style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
@@ -116,7 +114,7 @@ class _AdPool extends State<AdPool> {
                       style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
-                      this.widget.productionToday.toString(),
+                      this.widget.todayheroamount.toString(),
                       style: CustomFontSize.defaultTextStyle(40),
                     ),
                   ],

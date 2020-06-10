@@ -49,11 +49,7 @@ class _FarmDetailState extends State<FarmDetail> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Container(
-              margin: EdgeInsets.fromLTRB(
-                  ScreenUtil().setWidth(20), // 左
-                  ScreenUtil().setHeight(0), // 上
-                  ScreenUtil().setWidth(0), // 右
-                  ScreenUtil().setHeight(0)), // 下
+              margin: EdgeInsets.only(left:ScreenUtil().setWidth(20)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +70,8 @@ class _FarmDetailState extends State<FarmDetail> {
                       ),
                     ],
                   ),
-                  Text('观看广告获取升级资源', style: CustomFontSize.defaultTextStyle(55)),
+                  Text('观看广告获取升级资源',
+                      style: CustomFontSize.defaultTextStyle(55)),
                 ],
               ),
             ),
@@ -86,7 +83,7 @@ class _FarmDetailState extends State<FarmDetail> {
               alreadyWatched: watchedAd,
             ),
             new Container(
-              margin: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
+              margin: EdgeInsets.only(left: ScreenUtil().setHeight(20)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,

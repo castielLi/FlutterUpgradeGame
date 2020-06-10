@@ -18,4 +18,9 @@ class ServiceUrl{
   static getStoreList(){
     return "${host}api/v1/voucher/list";
   }
+
+  /// 广告分红
+  static getAdDividendList(){
+    return "${host}api/v1/adincome";
+  }
 }
