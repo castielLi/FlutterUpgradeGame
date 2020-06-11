@@ -50,7 +50,7 @@ class _UserImageButtonState extends State<UserImageButton> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           new Text(this.widget.buttonName,textAlign: TextAlign.center
-                            ,style:  TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: ScreenUtil().setSp(this.widget.textSize*2)),),
+                            ,style:  TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: ScreenUtil().setSp(this.widget.textSize)),),
                         ],
                       )
                   ),

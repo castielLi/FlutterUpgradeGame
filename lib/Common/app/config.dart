@@ -52,23 +52,24 @@ class SystemIconSize {
 
 ///系统字体大小
 class SystemFontSize {
-  static const buttonTextFontSize = 29.0;
+  static const buttonTextFontSize = 70.0;
   static const mainBuildingTextFontSize = 34.0;
   static const otherBuildingTextFontSize = 24.0;
   static const resourceTextFontSize = 13.0;
   static const levelTextFontSize = 15.0;
-  static const operationTextFontSize = 14.0;
+  static const operationTextFontSize = 35.0;
   static const dividendTitleTextFontSize = 15.0;
   static const dividendContentTextFontSize = 17.5;
+  static const buttonWithIconFontSize = 65.0;
 
-  static const userInfoResourceTextFontSize = 11.5;
-  static const userInfoResourceWithdrawTextFontSize = 15.0;
-  static const storeCashGoldTextFontSize = 27.0;
+  static const userInfoResourceTextFontSize = 30.0;
+  static const userInfoResourceWithdrawTextFontSize = 40.0;
+  static const storeCashGoldTextFontSize = 55.0;
 
 
-  static const detailDialogTitleTextFontSize = 36.0;
+  static const detailDialogTitleTextFontSize = 75.0;
 
-  static const settingTextFontSize = 21.0;
+  static const settingTextFontSize = 55.0;
 
 
 

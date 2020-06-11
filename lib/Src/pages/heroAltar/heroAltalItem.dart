@@ -30,8 +30,6 @@ class HeroAltalItem extends StatefulWidget {
 }
 
 class _HeroAltalItem extends State<HeroAltalItem> {
-
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -76,7 +74,7 @@ class _HeroAltalItem extends State<HeroAltalItem> {
         ),
         Container(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               HeroAltarClock(
                 imageUrl: 'resource/images/clock.png',

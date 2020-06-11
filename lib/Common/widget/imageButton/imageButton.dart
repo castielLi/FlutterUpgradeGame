@@ -37,7 +37,7 @@ class _ImageButtonState extends State<ImageButton> {
               fit: BoxFit.fill),
         ),
         child: Center(
-          child: Text(this.widget.buttonName,style: TextStyle(fontSize: ScreenUtil().setSp(this.widget.textSize*3)),),
+          child: Text(this.widget.buttonName,style: TextStyle(fontSize: ScreenUtil().setSp(this.widget.textSize)),),
         ),
       ),
       // ),

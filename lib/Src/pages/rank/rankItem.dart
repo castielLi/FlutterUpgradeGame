@@ -35,10 +35,10 @@ class _RankItem extends State<RankItem> {
               image: new AssetImage(this.widget.imageUrl),
               height: ScreenUtil().setHeight(120),
             ),
-            Image(
-              image: new AssetImage(this.widget.avatarUrl),
-              height: ScreenUtil().setHeight(120),
-            ),
+//            Image(
+//              image: new AssetImage(this.widget.avatarUrl),
+//              height: ScreenUtil().setHeight(120),
+//            ),
             Text(
               this.widget.rankName,
               style: CustomFontSize.defaultTextStyle(65),

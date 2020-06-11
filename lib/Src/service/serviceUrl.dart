@@ -23,4 +23,8 @@ class ServiceUrl{
   static getAdDividendList(){
     return "${host}api/v1/adincome";
   }
+  /// 排行榜
+  static getRankList(){
+    return "${host}api/v1/rank";
+  }
 }

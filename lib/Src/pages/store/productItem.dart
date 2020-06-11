@@ -29,7 +29,7 @@ class _ProductItemState extends State<ProductItem> {
                 width: ScreenUtil().setWidth(180),
                 child:
                 new Text("¥" + this.widget.cashAmount,textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize*2))),
+                    style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize))),
 
               ),
               new Container(
@@ -44,7 +44,7 @@ class _ProductItemState extends State<ProductItem> {
                 width: ScreenUtil().setWidth(180),
                 margin: EdgeInsets.only(left: ScreenUtil().setWidth(100)),
                 child:new Text(this.widget.volumeAmount+"*",textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize*2))),
+                    style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize))),
               ),
               new Container(
                 margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),

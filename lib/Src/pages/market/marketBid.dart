@@ -99,7 +99,7 @@ class _MarketBidItem extends State<MarketBidItem> {
             callback: () {
               print(this.widget.bidType);
             },
-            textSize: SystemFontSize.minTextSize,
+            textSize: SystemFontSize.settingTextFontSize,
           )
         ],
       ),

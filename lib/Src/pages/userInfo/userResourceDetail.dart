@@ -58,7 +58,7 @@ class _UserResourceDetailState extends State<UserResourceDetail> {
                       child: new Center(
                         child:
                         Text("¥" + this.widget.amountCash,textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: ScreenUtil().setSp(SystemFontSize.userInfoResourceWithdrawTextFontSize*2))),
+                            style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: ScreenUtil().setSp(SystemFontSize.userInfoResourceWithdrawTextFontSize))),
                       )
                     )
                   ],

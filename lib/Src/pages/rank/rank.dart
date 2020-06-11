@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/imageTextButtonWithIcon/imageTextButtonWithIcon.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/pages/rank/model/rankModel.dart';
 import 'package:upgradegame/Src/pages/rank/rankItem.dart';
+import 'package:upgradegame/Src/pages/rank/service/rankService.dart';
 
 class RankDetail extends StatefulWidget {
   @override
@@ -13,11 +18,24 @@ class RankDetail extends StatefulWidget {
 }
 
 class _RankDetailState extends State<RankDetail> {
-  // 获取数据
+  List<RankCoinModel> rankList = [];
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      this.widget.HUD();
+      RankService.getRankList().then((data) {
+        if (data.code == ConfigSetting.SUCCESS && data.data != null) {
+          setState(() {
+            rankList = RankCoinListModel.fromJson(data.data).datalist;
+          });
+        } else {
+          CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
+        }
+        this.widget.HUD();
+      });
+    });
   }
 
   @override
@@ -43,7 +61,7 @@ class _RankDetailState extends State<RankDetail> {
                   iconHeight: 140,
                   iconWidth: 140,
                   buttonName: 'T币',
-                  textSize: 29,
+                  textSize: SystemFontSize.buttonWithIconFontSize,
                   callback: () {
                     print('T币');
                   },
@@ -56,7 +74,7 @@ class _RankDetailState extends State<RankDetail> {
                   iconHeight: 130,
                   iconWidth: 130,
                   buttonName: '提现',
-                  textSize: 29,
+                  textSize: SystemFontSize.buttonWithIconFontSize,
                   callback: () {
                     print('提现');
                   },
@@ -68,22 +86,20 @@ class _RankDetailState extends State<RankDetail> {
             width: ScreenUtil().setWidth(800),
             height: ScreenUtil().setHeight(840),
             child: ListView.builder(
-              itemCount: 10,
+              itemCount: rankList.length,
               itemExtent: ScreenUtil().setHeight(170),
               padding: EdgeInsets.only(top: 0),
               itemBuilder: (BuildContext context, int index) {
-                // 获取排名数据
                 int count = index + 1;
                 if (count > 5) {
                   count = 5;
                 }
                 String imageUrl = 'resource/images/rank$count.png';
-                int value = 5919 - index;
                 return RankItem(
                   imageUrl: imageUrl,
                   avatarUrl: 'resource/images/avatar.png',
-                  rankName: '黄小龙',
-                  value: value,
+                  rankName: rankList[index].displayname,
+                  value: rankList[index].amount,
                 );
               },
             ),

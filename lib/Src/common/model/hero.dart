@@ -1,6 +1,10 @@
 
 
 class Heroes {
+  static const WARRIOR = 1;
+  static const HUNTER = 2;
+  static const SHAMAN = 3;
+
   int type;
   int days;
 

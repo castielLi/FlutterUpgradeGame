@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageTextButtonWithIcon/imageTextButtonWithIcon.dart';
 import 'package:upgradegame/Src/pages/market/marketBid.dart';
 
@@ -63,7 +64,7 @@ class _MarketDetailState extends State<MarketDetail> {
                   iconHeight: 90,
                   iconWidth: 90,
                   buttonName: 'T币',
-                  textSize: 22,
+                  textSize: SystemFontSize.buttonWithIconFontSize,
                   callback: () {
                     print('T币');
                     changeTabs('coin');
@@ -77,7 +78,7 @@ class _MarketDetailState extends State<MarketDetail> {
                   iconHeight: 90,
                   iconWidth: 90,
                   buttonName: '木材',
-                  textSize: 22,
+                  textSize: SystemFontSize.buttonWithIconFontSize,
                   callback: () {
                     print('木材');
                     changeTabs('wood');
@@ -91,7 +92,7 @@ class _MarketDetailState extends State<MarketDetail> {
                   iconHeight: 90,
                   iconWidth: 90,
                   buttonName: '石材',
-                  textSize: 22,
+                  textSize: SystemFontSize.buttonWithIconFontSize,
                   callback: () {
                     print('石材');
                     changeTabs('stone');
