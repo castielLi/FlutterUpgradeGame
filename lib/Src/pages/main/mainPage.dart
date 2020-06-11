@@ -339,8 +339,7 @@ class _MainPageState extends State<MainPage> {
                                     color: Colors.white,
                                     decoration: TextDecoration.none,
                                     fontSize: ScreenUtil().setSp(SystemFontSize
-                                            .mainBuildingTextFontSize *
-                                        2)),
+                                            .mainBuildingTextFontSize)),
                               ),
                             ))
                       ],
@@ -384,8 +383,7 @@ class _MainPageState extends State<MainPage> {
                                     color: Colors.white,
                                     decoration: TextDecoration.none,
                                     fontSize: ScreenUtil().setSp(SystemFontSize
-                                            .mainBuildingTextFontSize *
-                                        2)),
+                                            .mainBuildingTextFontSize)),
                               ),
                             ))
                       ],
@@ -427,8 +425,7 @@ class _MainPageState extends State<MainPage> {
                                     color: Colors.white,
                                     decoration: TextDecoration.none,
                                     fontSize: ScreenUtil().setSp(SystemFontSize
-                                            .mainBuildingTextFontSize *
-                                        2)),
+                                            .mainBuildingTextFontSize)),
                               ),
                             ))
                       ],
@@ -470,8 +467,7 @@ class _MainPageState extends State<MainPage> {
                                   color: Colors.white,
                                   decoration: TextDecoration.none,
                                   fontSize: ScreenUtil().setSp(
-                                      SystemFontSize.otherBuildingTextFontSize *
-                                          2)),
+                                      SystemFontSize.otherBuildingTextFontSize)),
                             ),
                           ))
                     ],
@@ -512,8 +508,7 @@ class _MainPageState extends State<MainPage> {
                                   color: Colors.white,
                                   decoration: TextDecoration.none,
                                   fontSize: ScreenUtil().setSp(
-                                      SystemFontSize.otherBuildingTextFontSize *
-                                          2)),
+                                      SystemFontSize.otherBuildingTextFontSize)),
                             ),
                           ))
                     ],
@@ -558,8 +553,7 @@ class _MainPageState extends State<MainPage> {
                                   color: Colors.white,
                                   decoration: TextDecoration.none,
                                   fontSize: ScreenUtil().setSp(
-                                      SystemFontSize.otherBuildingTextFontSize *
-                                          2)),
+                                      SystemFontSize.otherBuildingTextFontSize)),
                             ),
                           ))
                     ],
@@ -600,8 +594,7 @@ class _MainPageState extends State<MainPage> {
                                   color: Colors.white,
                                   decoration: TextDecoration.none,
                                   fontSize: ScreenUtil().setSp(
-                                      SystemFontSize.otherBuildingTextFontSize *
-                                          2)),
+                                      SystemFontSize.otherBuildingTextFontSize)),
                             ),
                           ))
                     ],
@@ -642,8 +635,7 @@ class _MainPageState extends State<MainPage> {
                                   color: Colors.white,
                                   decoration: TextDecoration.none,
                                   fontSize: ScreenUtil().setSp(
-                                      SystemFontSize.otherBuildingTextFontSize *
-                                          2)),
+                                      SystemFontSize.otherBuildingTextFontSize)),
                             ),
                           ))
                     ],
