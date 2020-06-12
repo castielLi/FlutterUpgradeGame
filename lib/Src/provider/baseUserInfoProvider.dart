@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/common/model/baseUserInfoModel.dart';
 import 'package:upgradegame/Src/common/model/userInfoAd.dart';
+import 'package:upgradegame/Src/provider/basePageLogicProvider.dart';
 
 //混入
 class BaseUserInfoProvider with ChangeNotifier{
@@ -47,10 +48,18 @@ class BaseUserInfoProvider with ChangeNotifier{
     todayprofitsharing = model.todayprofitsharing;
     voucher = model.voucher;
     tobecollectedcoin = model.tobecollectedcoin;
+
   }
 
   void takeCoin(){
     this.tcoinamount += tobecollectedcoin;
     tobecollectedcoin = 0;
   }
+
+  void runProductCoin(int tCoinAmount,int woodAmount, int stoneAmount){
+    this.tobecollectedcoin = tCoinAmount;
+    this.woodamount = woodAmount;
+    this.stoneamount = stoneAmount;
+  }
+
 }

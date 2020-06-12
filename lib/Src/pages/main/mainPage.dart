@@ -1,9 +1,13 @@
 //import 'dart:html';
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/provider/basePageLogicProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
@@ -22,6 +26,7 @@ class _MainPageState extends State<MainPage> {
   bool mainBuilding = true;
   bool mainBuildingCoin = false;
   bool mainBuildingCoinWaiting = true;
+  bool initFromService = true;
 
   void setMainBuildingNormal() {
     setState(() {
@@ -67,18 +72,56 @@ class _MainPageState extends State<MainPage> {
             this.mainBuilding = true;
             this.mainBuildingCoinWaiting = true;
           } else {
-            if (basePageLogic.judgeIfDisplayMainBuildingWaiting()) {
-              basePageLogic.changeStatusToWaiting();
+            if(baseUserInfo.tobecollectedcoin == 0 && this.initFromService){
+              Provide.value<BasePageLogicProvider>(context).changeStatusToNormal();
+              this.mainBuilding = false;
+              this.mainBuildingCoin = true;
+              this.mainBuildingCoinWaiting = true;
+            }else if (basePageLogic.judgeIfDisplayMainBuildingWaiting()) {
+              Provide.value<BasePageLogicProvider>(context).changeStatusToWaiting();
               this.mainBuilding = true;
               this.mainBuildingCoin = true;
               this.mainBuildingCoinWaiting = false;
             } else {
-              basePageLogic.changeStatusToNormal();
+              Provide.value<BasePageLogicProvider>(context).changeStatusToNormal();
               this.mainBuilding = false;
               this.mainBuildingCoin = true;
               this.mainBuildingCoinWaiting = true;
             }
           }
+          ///系统自动判断是否需要产生t币
+          Timer.periodic( Duration( seconds: 60 ), ( timer ) {
+              int timeMinute = DateTime.now().minute;
+              if(timeMinute == 44){
+                Mainbuild mainBuildRule = Global.getMainBuildingRule()[baseUserInfo.Mainbuildlevel];
+
+                int woodAmount = baseUserInfo.woodamount;
+                int stoneAmount = baseUserInfo.stoneamount;
+                if(woodAmount < mainBuildRule.woodamount || stoneAmount < mainBuildRule.stoneamount){
+                  return;
+                }else{
+                  int currentStone = baseUserInfo.stoneamount - mainBuildRule.stoneamount;
+                  int currentWood = baseUserInfo.woodamount - mainBuildRule.woodamount;
+                  Provide.value<BaseUserInfoProvider>(context).runProductCoin(mainBuildRule.product, currentStone, currentWood);
+                  if(basePageLogic.Status == MainBuildingStatus.Normal) {
+                    Provide.value<BasePageLogicProvider>(context).changeStatusToCoin();
+                    setState(() {
+                      this.mainBuildingCoin = false;
+                      this.mainBuilding = true;
+                      this.mainBuildingCoinWaiting = true;
+                      ///第一次初始化后将初始化字断进行赋值
+                      this.initFromService = false;
+                    });
+                  }else{
+                    setState(() {
+                      ///第一次初始化后将初始化字断进行赋值
+                      this.initFromService = false;
+                    });
+                  }
+                }
+              }
+          });
+
           return Stack(
             children: <Widget>[
               new Image(
