@@ -18,7 +18,10 @@ class RankDetail extends StatefulWidget {
 }
 
 class _RankDetailState extends State<RankDetail> {
-  List<RankCoinModel> rankList = [];
+  List<RankModel> coinList = [];
+  List<RankModel> incomeList = [];
+  bool coinTabHide = false;
+  bool incomeTabHide = true;
 
   @override
   void initState() {
@@ -28,7 +31,8 @@ class _RankDetailState extends State<RankDetail> {
       RankService.getRankList().then((data) {
         if (data.code == ConfigSetting.SUCCESS && data.data != null) {
           setState(() {
-            rankList = RankCoinListModel.fromJson(data.data).datalist;
+            coinList = RankListModel.fromJson(data.data).coinList;
+            incomeList = RankListModel.fromJson(data.data).incomeList;
           });
         } else {
           CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
@@ -63,7 +67,10 @@ class _RankDetailState extends State<RankDetail> {
                   buttonName: 'T币',
                   textSize: SystemFontSize.buttonWithIconFontSize,
                   callback: () {
-                    print('T币');
+                    setState(() {
+                      coinTabHide = false;
+                      incomeTabHide = true;
+                    });
                   },
                 ),
                 ImageTextButtonWithIcon(
@@ -76,7 +83,10 @@ class _RankDetailState extends State<RankDetail> {
                   buttonName: '提现',
                   textSize: SystemFontSize.buttonWithIconFontSize,
                   callback: () {
-                    print('提现');
+                    setState(() {
+                      coinTabHide = true;
+                      incomeTabHide = false;
+                    });
                   },
                 ),
               ],
@@ -85,23 +95,51 @@ class _RankDetailState extends State<RankDetail> {
           Container(
             width: ScreenUtil().setWidth(800),
             height: ScreenUtil().setHeight(840),
-            child: ListView.builder(
-              itemCount: rankList.length,
-              itemExtent: ScreenUtil().setHeight(170),
-              padding: EdgeInsets.only(top: 0),
-              itemBuilder: (BuildContext context, int index) {
-                int count = index + 1;
-                if (count > 5) {
-                  count = 5;
-                }
-                String imageUrl = 'resource/images/rank$count.png';
-                return RankItem(
-                  imageUrl: imageUrl,
-                  avatarUrl: 'resource/images/avatar.png',
-                  rankName: rankList[index].displayname,
-                  value: rankList[index].amount,
-                );
-              },
+            child: Stack(
+              children: [
+                Offstage(
+                  offstage: coinTabHide,
+                  child: ListView.builder(
+                    itemCount: coinList.length,
+                    itemExtent: ScreenUtil().setHeight(170),
+                    padding: EdgeInsets.only(top: 0),
+                    itemBuilder: (BuildContext context, int index) {
+                      int count = index + 1;
+                      if (count > 5) {
+                        count = 5;
+                      }
+                      String imageUrl = 'resource/images/rank$count.png';
+                      return RankItem(
+                        imageUrl: imageUrl,
+                        avatarUrl: 'resource/images/avatar.png',
+                        rankName: coinList[index].displayname,
+                        value: coinList[index].amount,
+                      );
+                    },
+                  ),
+                ),
+                Offstage(
+                  offstage: incomeTabHide,
+                  child: ListView.builder(
+                    itemCount: incomeList.length,
+                    itemExtent: ScreenUtil().setHeight(170),
+                    padding: EdgeInsets.only(top: 0),
+                    itemBuilder: (BuildContext context, int index) {
+                      int count = index + 1;
+                      if (count > 5) {
+                        count = 5;
+                      }
+                      String imageUrl = 'resource/images/rank$count.png';
+                      return RankItem(
+                        imageUrl: imageUrl,
+                        avatarUrl: 'resource/images/avatar.png',
+                        rankName: incomeList[index].displayname,
+                        value: incomeList[index].amount,
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
         ],

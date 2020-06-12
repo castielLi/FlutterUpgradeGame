@@ -103,8 +103,8 @@ class _DetailDialogState extends State<DetailDialog> {
         break;
       }
       // 英雄祭坛
-      case 'heroAltal':{
-        currentWidget = new HeroAltal(HUD: showOrDismissProgressHUD,);
+      case 'heroAltar':{
+        currentWidget = new HeroAltar(HUD: showOrDismissProgressHUD,);
         break;
       }
       // 农场

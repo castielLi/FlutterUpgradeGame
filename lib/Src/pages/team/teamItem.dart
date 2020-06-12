@@ -1,35 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/pages/team/model/invitation.dart';
 
 class TeamItem extends StatefulWidget {
-  // 头像
-  String avatarUrl;
-
-  // 名称
-  String name;
-
-  // 日期
-  String date;
-
   // 等级
   int level;
 
-  // 现金收益
-  double money;
+  // 徒弟数据
+  InvitationModel invite;
 
-  // T币收益
-  double tCoin;
-
-  TeamItem(
-      {Key key,
-      this.avatarUrl,
-      this.name,
-      this.money,
-      this.date,
-      this.level,
-      this.tCoin})
-      : super(key: key);
+  TeamItem({
+    Key key,
+    this.invite,
+    this.level,
+  }) : super(key: key);
 
   @override
   _TeamItem createState() => _TeamItem();
@@ -45,19 +30,21 @@ class _TeamItem extends State<TeamItem> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Image(
-              image: new AssetImage(this.widget.avatarUrl),
+              image: new AssetImage(this.widget.invite.avatar == ""
+                  ? 'resource/images/avatar.png'
+                  : this.widget.invite.avatar),
               height: ScreenUtil().setHeight(100),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  this.widget.name,
+                  this.widget.invite.displayname,
                   style: CustomFontSize.defaultTextStyle(55),
                 ),
                 Text(
-                  this.widget.date,
-                  style: CustomFontSize.defaultTextStyle(45),
+                  this.widget.invite.registertime,
+                  style: CustomFontSize.defaultTextStyle(40),
                 ),
               ],
             ),
@@ -67,9 +54,9 @@ class _TeamItem extends State<TeamItem> {
           margin: EdgeInsets.only(right: ScreenUtil().setWidth(20)),
           child: Text(
             '¥' +
-                this.widget.money.toInt().toString() +
+                this.widget.invite.income.toString() +
                 "(" +
-                (this.widget.tCoin.toInt()).toString() +
+                this.widget.invite.voucherincome.toString() +
                 ')',
             style: CustomFontSize.defaultTextStyle(45),
           ),

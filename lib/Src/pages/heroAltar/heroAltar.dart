@@ -3,18 +3,19 @@ import 'package:flutter_screenutil/screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
-import 'heroAltalItem.dart';
 
-class HeroAltal extends StatefulWidget {
+import 'heroAltarItem.dart';
+
+class HeroAltar extends StatefulWidget {
   @override
   VoidCallback HUD;
 
-  HeroAltal({Key key, this.HUD}) : super(key: key);
+  HeroAltar({Key key, this.HUD}) : super(key: key);
 
-  _HeroAltalState createState() => new _HeroAltalState();
+  _HeroAltarState createState() => new _HeroAltarState();
 }
 
-class _HeroAltalState extends State<HeroAltal> {
+class _HeroAltarState extends State<HeroAltar> {
   // 获取数据
 
   @override
@@ -27,24 +28,23 @@ class _HeroAltalState extends State<HeroAltal> {
     return new Container(
       child: Provide<BaseUserInfoProvider>(
           builder: (context, child, baseUserInfo) {
-        List<Heroes> heros = baseUserInfo.hero;
+        List<Heroes> heroes = baseUserInfo.hero;
         List<int> warriors = [];
         List<int> hunters = [];
         List<int> shamans = [];
         if (null != baseUserInfo) {
-          for (int i = 0; i < heros.length; i++) {
-            if (heros[i].type == Heroes.WARRIOR) {
-              warriors.add(heros[i].days);
-              continue;
+          heroes.forEach((hero) {
+            switch (hero.type) {
+              case Heroes.WARRIOR:
+                warriors.add(hero.days);
+                break;
+              case Heroes.HUNTER:
+                hunters.add(hero.days);
+                break;
+              case Heroes.SHAMAN:
+                shamans.add(hero.days);
             }
-            if (heros[i].type == Heroes.HUNTER) {
-              hunters.add(heros[i].days);
-              continue;
-            }
-            if (heros[i].type == Heroes.SHAMAN) {
-              shamans.add(heros[i].days);
-            }
-          }
+          });
         }
 
         return new Container(
@@ -56,19 +56,19 @@ class _HeroAltalState extends State<HeroAltal> {
           child: ListView(
             padding: EdgeInsets.only(top: 0),
             children: <Widget>[
-              HeroAltalItem(
+              HeroAltarItem(
                 heroImageUrl: 'resource/images/warrior.png',
                 description: '战士:守卫家园',
                 revenueUp: 10,
                 remainDays: warriors,
               ),
-              HeroAltalItem(
+              HeroAltarItem(
                 heroImageUrl: 'resource/images/hunter.png',
                 description: '猎人:在野外获取食物',
                 revenueUp: 10,
                 remainDays: hunters,
               ),
-              HeroAltalItem(
+              HeroAltarItem(
                 heroImageUrl: 'resource/images/shaman.png',
                 description: '萨满:保佑你的灵魂',
                 revenueUp: 10,
