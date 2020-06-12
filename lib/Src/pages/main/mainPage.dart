@@ -451,7 +451,7 @@ class _MainPageState extends State<MainPage> {
                               params: {
                                 'height': ScreenUtil().setHeight(1660),
                                 'width': ScreenUtil().setWidth(1020),
-                                'childName': 'heroAltal',
+                                'childName': 'heroAltar',
                                 "title": "英雄祭坛"
                               });
                         },

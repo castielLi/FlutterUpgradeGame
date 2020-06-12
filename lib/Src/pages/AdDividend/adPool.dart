@@ -1,34 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/pages/adDividend/model/AdDividendModel.dart';
 
 class AdPool extends StatefulWidget {
-  // 昨日收益
-  double yesterdayincome;
-
-  // 历史收益
-  int totalincome;
-
-  // 全网总数
-  int totalheroamount;
-
-  // 今日产出
-  int todayheroamount;
-
   // 英雄图片
   String heroImageUrl;
 
   // 奖池名称
   String poolName;
 
-  AdPool(
-      {Key key,
-      this.yesterdayincome,
-      this.totalincome,
-      this.totalheroamount,
-      this.todayheroamount,
-      this.heroImageUrl,
-      this.poolName})
+  AdDividendModel adDividend;
+
+  AdPool({Key key, this.adDividend, this.heroImageUrl, this.poolName})
       : super(key: key);
 
   @override
@@ -85,11 +69,11 @@ class _AdPool extends State<AdPool> {
                       style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
-                      this.widget.yesterdayincome.toString(),
+                      this.widget.adDividend.yesterdayincome.toString(),
                       style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
-                      this.widget.totalincome.toString(),
+                      this.widget.adDividend.totalincome.toString(),
                       style: CustomFontSize.defaultTextStyle(40),
                     ),
                   ],
@@ -106,7 +90,7 @@ class _AdPool extends State<AdPool> {
                       style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
-                      this.widget.totalheroamount.toString(),
+                      this.widget.adDividend.totalheroamount.toString(),
                       style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
@@ -114,7 +98,7 @@ class _AdPool extends State<AdPool> {
                       style: CustomFontSize.defaultTextStyle(40),
                     ),
                     Text(
-                      this.widget.todayheroamount.toString(),
+                      this.widget.adDividend.todayheroamount.toString(),
                       style: CustomFontSize.defaultTextStyle(40),
                     ),
                   ],

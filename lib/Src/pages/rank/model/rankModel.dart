@@ -1,33 +1,43 @@
-class RankCoinListModel {
-  List<RankCoinModel> datalist;
+class RankListModel {
+  List<RankModel> coinList;
+  List<RankModel> incomeList;
 
-  RankCoinListModel({this.datalist});
+  RankListModel({this.coinList, this.incomeList});
 
-  RankCoinListModel.fromJson(Map<String, dynamic> json) {
+  RankListModel.fromJson(Map<String, dynamic> json) {
     if (json['tcoin'] != null) {
-      datalist = new List<RankCoinModel>();
+      coinList = new List<RankModel>();
       json['tcoin'].forEach((v) {
-        datalist.add(new RankCoinModel.fromJson(v));
+        coinList.add(new RankModel.fromJson(v));
+      });
+    }
+    if (json['income'] != null) {
+      incomeList = new List<RankModel>();
+      json['income'].forEach((v) {
+        incomeList.add(new RankModel.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.datalist != null) {
-      data['tcoin'] = this.datalist.map((v) => v.toJson()).toList();
+    if (this.coinList != null) {
+      data['tcoin'] = this.coinList.map((v) => v.toJson()).toList();
+    }
+    if (this.incomeList != null) {
+      data['income'] = this.incomeList.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class RankCoinModel {
+class RankModel {
   String displayname;
   int amount;
 
-  RankCoinModel({this.displayname, this.amount});
+  RankModel({this.displayname, this.amount});
 
-  RankCoinModel.fromJson(Map<String, dynamic> json) {
+  RankModel.fromJson(Map<String, dynamic> json) {
     displayname = json['displayname'];
     amount = json['amount'];
   }

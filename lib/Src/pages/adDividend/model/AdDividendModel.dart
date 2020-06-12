@@ -39,10 +39,10 @@ class AdDividendModel {
 
   AdDividendModel(
       {this.type,
-      this.yesterdayincome,
-      this.totalincome,
-      this.totalheroamount,
-      this.todayheroamount});
+      this.yesterdayincome = 0,
+      this.totalincome = 0,
+      this.totalheroamount = 0,
+      this.todayheroamount = 0});
 
   AdDividendModel.fromJson(Map<String, dynamic> json) {
     type = json['type'];

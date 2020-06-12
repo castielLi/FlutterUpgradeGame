@@ -4,7 +4,7 @@ import 'package:upgradegame/Common/app/config.dart';
 
 import 'heroAltarClock.dart';
 
-class HeroAltalItem extends StatefulWidget {
+class HeroAltarItem extends StatefulWidget {
   // 描述
   String description;
 
@@ -17,7 +17,7 @@ class HeroAltalItem extends StatefulWidget {
   //英雄图片
   String heroImageUrl;
 
-  HeroAltalItem(
+  HeroAltarItem(
       {Key key,
       this.description,
       this.revenueUp,
@@ -26,10 +26,10 @@ class HeroAltalItem extends StatefulWidget {
       : super(key: key);
 
   @override
-  _HeroAltalItem createState() => _HeroAltalItem();
+  _HeroAltarItem createState() => _HeroAltarItem();
 }
 
-class _HeroAltalItem extends State<HeroAltalItem> {
+class _HeroAltarItem extends State<HeroAltarItem> {
   @override
   Widget build(BuildContext context) {
     return Column(

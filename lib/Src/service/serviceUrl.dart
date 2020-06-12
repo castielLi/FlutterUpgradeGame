@@ -27,4 +27,9 @@ class ServiceUrl{
   static getRankList(){
     return "${host}api/v1/rank";
   }
+
+  /// 团队
+  static getTeamList(){
+    return "${host}api/v1/team";
+  }
 }

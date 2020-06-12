@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/pages/team/model/invitation.dart';
+import 'package:upgradegame/Src/pages/team/service/teamService.dart';
 import 'package:upgradegame/Src/pages/team/teamItem.dart';
 
 class TeamDetail extends StatefulWidget {
@@ -15,11 +19,28 @@ class TeamDetail extends StatefulWidget {
 }
 
 class _TeamDetailState extends State<TeamDetail> {
-  // 获取数据
+  List<InvitationModel> first = [];
+  List<InvitationModel> second = [];
+  bool sonTabHide = false;
+  bool grandsonTabHide = true;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      this.widget.HUD();
+      TeamService.getTeamList().then((data) {
+        if (data.code == ConfigSetting.SUCCESS && data.data != null) {
+          setState(() {
+            first = InvitationListModel.fromJson(data.data).first;
+            second = InvitationListModel.fromJson(data.data).second;
+          });
+        } else {
+          CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
+        }
+        this.widget.HUD();
+      });
+    });
   }
 
   @override
@@ -44,7 +65,12 @@ class _TeamDetailState extends State<TeamDetail> {
                     imageHeight: ScreenUtil().setHeight(190),
                     buttonName: "徒 弟",
                     textSize: SystemFontSize.settingTextFontSize,
-                    callback: () {},
+                    callback: () {
+                      setState(() {
+                        sonTabHide = false;
+                        grandsonTabHide = true;
+                      });
+                    },
                   ),
                 ),
                 new Expanded(
@@ -54,7 +80,12 @@ class _TeamDetailState extends State<TeamDetail> {
                     imageHeight: ScreenUtil().setHeight(190),
                     buttonName: "徒 孙",
                     textSize: SystemFontSize.settingTextFontSize,
-                    callback: () {},
+                    callback: () {
+                      setState(() {
+                        sonTabHide = true;
+                        grandsonTabHide = false;
+                      });
+                    },
                   ),
                 )
               ],
@@ -79,22 +110,32 @@ class _TeamDetailState extends State<TeamDetail> {
           Container(
             width: ScreenUtil().setWidth(800),
             height: ScreenUtil().setHeight(730),
-            child: ListView.builder(
-              itemCount: 10,
-              padding: EdgeInsets.all(1.0),
-              itemBuilder: (BuildContext context, int index) {
-                // 获取数据
-                int value = 5919 - index;
-                int tCoin = 5 + index;
-                return TeamItem(
-                  avatarUrl: 'resource/images/avatar.png',
-                  name: '黄小龙',
-                  money: value.toDouble(),
-                  date: '20200508',
-                  level: 1,
-                  tCoin: tCoin.toDouble(),
-                );
-              },
+            child: Stack(
+              children: [
+                Offstage(
+                  offstage: sonTabHide,
+                  child: ListView.builder(
+                    itemCount: first.length,
+                    padding: EdgeInsets.all(1.0),
+                    itemBuilder: (BuildContext context, int index) {
+                      return TeamItem(
+                        invite: first[index],
+                      );
+                    },
+                  ),
+                ),
+                Offstage(
+                  offstage: grandsonTabHide,
+                  child: ListView.builder(
+                    itemCount: second.length,
+                    padding: EdgeInsets.all(1.0),
+                    itemBuilder: (BuildContext context, int index) {
+                      return TeamItem(invite: second[index],
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
           new ImageButton(
