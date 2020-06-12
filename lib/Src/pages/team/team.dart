@@ -130,7 +130,8 @@ class _TeamDetailState extends State<TeamDetail> {
                     itemCount: second.length,
                     padding: EdgeInsets.all(1.0),
                     itemBuilder: (BuildContext context, int index) {
-                      return TeamItem(invite: second[index],
+                      return TeamItem(
+                        invite: second[index],
                       );
                     },
                   ),
