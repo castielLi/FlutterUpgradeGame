@@ -8,6 +8,7 @@ import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:provide/provide.dart';
 import 'package:progress_hud/progress_hud.dart';
+import 'package:upgradegame/Src/provider/basePageLogicProvider.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -58,8 +59,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return new Container(
       color: Colors.black,
-      child: Provide<BaseUserInfoProvider>(
-        builder: (context,child,baseUserInfo){
+      child: ProvideMulti(
+        builder: (context,child,model){
           return Stack(
             children: <Widget>[
               new Container(
@@ -103,6 +104,7 @@ class _LoginPageState extends State<LoginPage> {
             ],
           );
         },
+          requestedValues: [BaseUserInfoProvider, BasePageLogicProvider]
       ),
     );
   }

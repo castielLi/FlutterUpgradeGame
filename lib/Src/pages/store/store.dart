@@ -65,25 +65,25 @@ class _StoreDetailState extends State<StoreDetail> {
               cashAmount: storeList == null?"":storeList[0].price.toString(),
             ),
             new ProductItem(
-              volumeAmount: "108",
+              volumeAmount: storeList == null?"":storeList[1].amount.toString(),
               callback: (){
 
               },
-              cashAmount: "50",
+              cashAmount: storeList == null?"":storeList[1].price.toString(),
             ),
             new ProductItem(
-              volumeAmount: "158",
+              volumeAmount: storeList == null?"":storeList[2].amount.toString(),
               callback: (){
 
               },
-              cashAmount: "70",
+              cashAmount: storeList == null?"":storeList[2].price.toString(),
             ),
             new ProductItem(
-              volumeAmount: "258",
+              volumeAmount: storeList == null?"":storeList[3].amount.toString(),
               callback: (){
 
               },
-              cashAmount: "100",
+              cashAmount: storeList == null?"":storeList[3].price.toString(),
             )
           ],
         ),
