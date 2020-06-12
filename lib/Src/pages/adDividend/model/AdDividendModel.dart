@@ -21,27 +21,28 @@ class AdDividendListModel {
   }
 }
 
-
-
-
 class AdDividendModel {
   // 分红类型
   int type;
+
   // 昨日收益
   double yesterdayincome;
+
   // 历史收益
   int totalincome;
+
   // 全网总数
   int totalheroamount;
+
   // 今日产出
   int todayheroamount;
 
   AdDividendModel(
       {this.type,
-        this.yesterdayincome,
-        this.totalincome,
-        this.totalheroamount,
-        this.todayheroamount});
+      this.yesterdayincome,
+      this.totalincome,
+      this.totalheroamount,
+      this.todayheroamount});
 
   AdDividendModel.fromJson(Map<String, dynamic> json) {
     type = json['type'];
