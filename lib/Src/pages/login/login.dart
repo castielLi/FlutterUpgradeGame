@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                       }),
                       new RaisedButton(child:Text("Tencent video"),onPressed: (){
 //                        toast(3, 2);
-                        toast(3, 2,tencent);
+                        toast(3, 2);
                       }),
                       new RaisedButton(child:Text("login"),onPressed: (){
                         this.showOrDismissProgressHUD();
@@ -115,11 +115,11 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-  // ÏÔÊ¾¹ã¸æ
-  // action = showAd Ê¼ÖÕ²»±ä
-  // type ÏÔÊ¾µÄ¹ã¸æ³§ÉÌ 1 adview 2-°Ù¶È¹ã¸æ 3-¹ãµãÍ¨
-  //  showType Ê¾µÄ¹ã¸æÀàÐÍ 1 ¿ªÆÁ 2 ÊÓÆµ
-  // posId ¹ã¸æÎ»Id
+
+  ///type选择平台  1：adview 2：baidu 3：腾讯
+  ///showType 选择展示 方式 1：开屏广告 2：视频广告
+  ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
+
   void toast(int type,int showType,[String posId]) async {
     try {
       await platform.invokeMethod('showAd', <String, dynamic>{'type': type,"showType":showType,"posId":posId});

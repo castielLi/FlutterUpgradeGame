@@ -5,11 +5,11 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Constant {
-    // 测试
+    // 测试  百度的appid 只能在androidManifest 里面进行配置
     public  static String ADVIEW_APPID = "SDK2013092209043852zff5vckrrteas";
     public static  String TENCENT_APPID = "1101152570";
     public static  String BAIDU_APPID = "";
-    // 正式
+    // 正式 百度的appid 只能在androidManifest 里面进行配置
 //    public  static String ADVIEW_APPID = "SDK20201314010615pu8teelhxamxrgc";
 //    public static  String TENCENT_APPID = "1110528219";
 //    public static  String BAIDU_APPID = "f1fa4f6f";
