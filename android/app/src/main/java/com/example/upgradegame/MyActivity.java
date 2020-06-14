@@ -26,6 +26,7 @@ import com.kuaiyou.open.VideoManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.FlutterEngine;
@@ -219,4 +220,5 @@ public class MyActivity extends FlutterActivity {
                 break;
         }
     }
+
 }

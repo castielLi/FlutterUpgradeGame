@@ -23,6 +23,7 @@
         android:label="upgradegame"
         android:networkSecurityConfig="@xml/network_security_config"
         android:icon="@mipmap/ic_launcher">
+        <!-- f1fa4f6f 正式  e866cfb0 测试-->
         <meta-data
             android:name="BaiduMobAd_APP_ID"
             android:value="e866cfb0" />

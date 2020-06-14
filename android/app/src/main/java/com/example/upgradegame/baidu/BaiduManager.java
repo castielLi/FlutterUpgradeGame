@@ -10,8 +10,6 @@ import com.example.upgradegame.Constant;
 public class BaiduManager {
     private static final String TAG = "zhoux";
 
-    // 线上广告位id
-    private static final String AD_PLACE_ID = "5925490";
     public RewardVideoAd mRewardVideoAd;
     private Activity activity;
 
@@ -28,7 +26,7 @@ public class BaiduManager {
     }
     public void showVideo(String posId){
         if(TextUtils.isEmpty(posId)){
-            posId = AD_PLACE_ID;
+            posId = Constant.BAIDU_VIDEOPOSID;
         }
         // 激励视屏产品可以选择是否使用SurfaceView进行渲染视频
         mRewardVideoAd = new RewardVideoAd(activity,

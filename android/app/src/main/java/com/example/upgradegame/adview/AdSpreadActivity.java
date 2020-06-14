@@ -1,10 +1,7 @@
 package com.example.upgradegame.adview;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,16 +9,12 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.upgradegame.Constant;
 import com.example.upgradegame.R;
 import com.kuaiyou.open.AdManager;
-import com.kuaiyou.open.InitSDKManager;
 import com.kuaiyou.open.SpreadManager;
 import com.kuaiyou.open.interfaces.AdViewSpreadListener;
-
-import java.util.List;
 
 /**
  * 开屏
@@ -40,10 +33,10 @@ public class AdSpreadActivity extends Activity implements AdViewSpreadListener {
 
     private void requestSpreadAd(String posId) {
         if(TextUtils.isEmpty(posId)){
-            posId = Constant.SPREADPOSID;
+            posId = Constant.ADVIEW_SPREADPOSID;
         }
         spreadManager = AdManager.createSpreadAd();
-        spreadManager.loadSpreadAd(this, Constant.APPID, posId,
+        spreadManager.loadSpreadAd(this, Constant.ADVIEW_APPID, posId,
                 (RelativeLayout) findViewById(R.id.spreadlayout));
         spreadManager.setBackgroundColor(Color.WHITE);
         spreadManager.setSpreadNotifyType(AdManager.NOTIFY_COUNTER_NUM);

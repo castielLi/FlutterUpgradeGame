@@ -1,17 +1,14 @@
 package com.example.upgradegame.tencent;
 
 import android.app.Activity;
-import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.baidu.mobads.rewardvideo.RewardVideoAd;
+import com.example.upgradegame.Constant;
 import com.qq.e.ads.rewardvideo.RewardVideoAD;
 import com.qq.e.ads.rewardvideo.RewardVideoADListener;
 import com.qq.e.comm.util.AdError;
 
-import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
@@ -36,9 +33,9 @@ public class TencentManager {
     }
     public void showVideo(String posId){
         if(TextUtils.isEmpty(posId)){
-            posId = "6040295592058680";
+            posId = Constant.TENCENT_VIDEOPOSID;
         }
-        rewardVideoAD = new RewardVideoAD(activity, TConstant.APPID,posId, rewardVideoADListener,true);
+        rewardVideoAD = new RewardVideoAD(activity, Constant.TENCENT_APPID,posId, rewardVideoADListener,true);
         // 2. 加载激励视频广告
         rewardVideoAD.loadAD();
         rewardVideoAD.showAD();

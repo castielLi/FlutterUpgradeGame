@@ -2,15 +2,12 @@ package com.example.upgradegame.adview;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.ViewGroup;
 
 import com.example.upgradegame.Constant;
 import com.kuaiyou.open.AdManager;
 import com.kuaiyou.open.InstlManager;
-import com.kuaiyou.open.SpreadManager;
 import com.kuaiyou.open.VideoManager;
 import com.kuaiyou.open.interfaces.AdViewInstlListener;
 import com.kuaiyou.open.interfaces.AdViewSpreadListener;
@@ -38,19 +35,13 @@ public class AdViewManager {
         videoManager = AdManager.createVideoAd();
         instlManager = AdManager.createInstlAd();
     }
-    // 插屏广告
-    public void instlAd(){
-        instlManager= AdManager.createInstlAd();
-        instlManager.loadInstlAd(activity, Constant.APPID,Constant.INSTLPOSID, true);//有关闭按钮：true，无关闭按钮：false
-        instlManager.setInstlListener(adViewInstlListener);
-    }
     // 视频广告
     public void adView(String postId){
         if(TextUtils.isEmpty(postId)){
-            postId = Constant.VIDEOPOSID;
+            postId = Constant.ADVIEW_VIDEOPOSID;
         }
         videoManager = AdManager.createVideoAd();
-        videoManager.loadVideoAd(activity, Constant.APPID, postId);
+        videoManager.loadVideoAd(activity, Constant.ADVIEW_APPID, postId);
         videoManager.setVideoListener(adViewVideoListener);
         // 设置屏幕方向，取值可参照ActivityInfo.SCREEN_XXXXXX 定义的常量
         videoManager.setVideoOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);

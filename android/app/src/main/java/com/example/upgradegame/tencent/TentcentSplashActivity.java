@@ -10,21 +10,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.SystemClock;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.upgradegame.Constant;
 import com.example.upgradegame.R;
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
@@ -74,7 +69,7 @@ public class TentcentSplashActivity extends Activity implements SplashADListener
   private String getPosId() {
     String posId = getIntent().getStringExtra("posId");
     if(TextUtils.isEmpty(posId)){
-      posId = "4090599490374470";
+      posId = Constant.TENCENT_SPREADPOSID;
     }
     return posId;
   }
@@ -160,7 +155,7 @@ public class TentcentSplashActivity extends Activity implements SplashADListener
   private void fetchSplashAD(Activity activity, ViewGroup adContainer,
                              String posId, SplashADListener adListener, int fetchDelay) {
     fetchSplashADTime = System.currentTimeMillis();
-    splashAD = new SplashAD(activity, TConstant.APPID, posId, adListener, fetchDelay);
+    splashAD = new SplashAD(activity, Constant.TENCENT_APPID, posId, adListener, fetchDelay);
       splashAD.fetchAndShowIn(adContainer);
   }
 
