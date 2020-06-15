@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 
 import com.baidu.mobads.SplashAd;
 import com.baidu.mobads.SplashLpCloseListener;
+import com.example.upgradegame.Constant;
 import com.example.upgradegame.R;
 
 public class SplashActivity extends Activity {
@@ -28,7 +29,7 @@ public class SplashActivity extends Activity {
     }
     private void fetchSplashAD(String posId) {
         if(TextUtils.isEmpty(posId)){
-            posId = "2058622";
+            posId = Constant.BAIDU_SPREADPOSID;
         }
         // 默认请求https广告，若需要请求http广告，请设置AdSettings.setSupportHttps为false
         // AdSettings.setSupportHttps(false);
