@@ -13,6 +13,10 @@ class ServiceUrl {
     return "${host}api/v1/user";
   }
 
+  static getUserInfo(){
+    return "${host}api/v1/user";
+  }
+
   ///storeList
   static getStoreList() {
     return "${host}api/v1/voucher/list";
