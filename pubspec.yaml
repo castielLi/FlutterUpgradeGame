@@ -21,7 +21,7 @@ dependencies:
   shared_preferences: ^0.5.7+3 #本地存储
 
   flutter_screenutil: ^1.1.0 # 屏幕适配支持
-    #  flutter_easyrefresh: ^1.2.7 # 上拉刷新支持
+  flutter_easyrefresh: ^1.2.7 # 上拉刷新支持
   fluro: ^1.6.3 # 路由支持
   provide: ^1.0.2  # 状态管理支持
   dio: ^3.0.9 # http请求支持

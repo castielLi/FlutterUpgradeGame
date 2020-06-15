@@ -37,4 +37,8 @@ class ServiceUrl {
   static getAnnouncementList() {
     return "${host}api/v1/announcement";
   }
+  /// 攻略
+  static getRaidersList(){
+    return "${host}api/v1/strategy";
+  }
 }
