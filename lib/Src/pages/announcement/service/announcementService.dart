@@ -4,11 +4,11 @@ import 'package:upgradegame/Common/http/resultData.dart';
 import 'dart:async';
 import 'package:upgradegame/Src/service/serviceUrl.dart';
 
-class AdDividendService{
-  static Future<ResultData> getAdDividendList() async{
+class AnnouncementService{
+  static Future<ResultData> getAnnouncementList() async{
 
     var response = await httpManager.request(
-        ServiceUrl.getAdDividendList(), {}, null, null);
+        ServiceUrl.getAnnouncementList(), {}, null, null);
     return response;
   }
 }

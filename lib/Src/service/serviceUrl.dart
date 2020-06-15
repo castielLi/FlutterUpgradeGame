@@ -32,4 +32,9 @@ class ServiceUrl{
   static getTeamList(){
     return "${host}api/v1/team";
   }
+
+  /// 公告
+  static getAnnouncementList(){
+    return "${host}api/v1/announcement";
+  }
 }

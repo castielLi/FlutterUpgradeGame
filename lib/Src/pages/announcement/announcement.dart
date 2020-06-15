@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/pages/announcement/model/announcementModel.dart';
+import 'package:upgradegame/Src/pages/announcement/service/announcementService.dart';
+import 'package:upgradegame/Common/http/configSetting.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 
 class AnnouncementDetail extends StatefulWidget {
   @override
@@ -11,11 +16,24 @@ class AnnouncementDetail extends StatefulWidget {
 }
 
 class _AnnouncementDetailState extends State<AnnouncementDetail> {
-  // 获取数据
 
+  String content = '';
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      this.widget.HUD();
+      AnnouncementService.getAnnouncementList().then((data) {
+        if (data.code == ConfigSetting.SUCCESS && data.data != null) {
+          setState(() {
+            content = AnnouncementModel.fromJson(data.data).content;
+          });
+        } else {
+          CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
+        }
+        this.widget.HUD();
+      });
+    });
   }
 
   @override
@@ -28,7 +46,7 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
           ScreenUtil().setHeight(220)),
       child: ListView(
         children: <Widget>[
-          Text("游戏公告",textAlign: TextAlign.center,),
+          Text("$content",textAlign: TextAlign.center,style: CustomFontSize.defaultTextStyle(100),),
         ],
       ),
 
