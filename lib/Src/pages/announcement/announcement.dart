@@ -16,8 +16,8 @@ class AnnouncementDetail extends StatefulWidget {
 }
 
 class _AnnouncementDetailState extends State<AnnouncementDetail> {
-
   String content = '';
+
   @override
   void initState() {
     super.initState();
@@ -46,10 +46,14 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
           ScreenUtil().setHeight(220)),
       child: ListView(
         children: <Widget>[
-          Text("$content",textAlign: TextAlign.center,style: CustomFontSize.defaultTextStyle(100),),
+          Text(
+            "$content",
+            textAlign: TextAlign.center,
+            style: CustomFontSize.defaultTextStyle(
+                SystemFontSize.moreMoreLargerTextSize),
+          ),
         ],
       ),
-
     );
   }
 }
