@@ -8,7 +8,6 @@ import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:provide/provide.dart';
 import 'package:progress_hud/progress_hud.dart';
-import 'package:upgradegame/Src/provider/basePageLogicProvider.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -111,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
             ],
           );
         },
-          requestedValues: [BaseUserInfoProvider, BasePageLogicProvider]
+          requestedValues: [BaseUserInfoProvider]
       ),
     );
   }

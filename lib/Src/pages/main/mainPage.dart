@@ -8,7 +8,7 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
-import 'package:upgradegame/Src/provider/basePageLogicProvider.dart';
+import 'package:upgradegame/Src/pages/main/service/mainService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
@@ -25,14 +25,38 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   bool mainBuilding = true;
   bool mainBuildingCoin = false;
-  bool mainBuildingCoinWaiting = true;
-  bool initFromService = true;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ///系统自动判断是否需要产生t币
+    Timer.periodic( Duration( seconds: 10 ), ( timer ) {
+      int timeMinute = DateTime.now().minute;
+      /// 前九分钟  userinfo请求 获取用户最新的资源动态
+      if(timeMinute >= 0 && timeMinute <= 9){
+        MainService.getBaseInfo((userInfoModel){
+          Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(userInfoModel);
+        });
+      }
+    });
+
+    Timer.periodic( Duration( seconds: 60 ), ( timer ) {
+      int timeMinute = DateTime.now().minute;
+      /// 十分钟进行一次 userinfo请求 获取用户最新的资源动态
+      if(timeMinute >= 10  && (timeMinute % 10 == 0)){
+        MainService.getBaseInfo((userInfoModel){
+          Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(userInfoModel);
+        });
+      }
+    });
+  }
 
   void setMainBuildingNormal() {
     setState(() {
       this.mainBuilding = false;
       this.mainBuildingCoin = true;
-      this.mainBuildingCoinWaiting = true;
     });
   }
 
@@ -40,15 +64,6 @@ class _MainPageState extends State<MainPage> {
     setState(() {
       this.mainBuildingCoin = false;
       this.mainBuilding = true;
-      this.mainBuildingCoinWaiting = true;
-    });
-  }
-
-  void setMainBuildingWaiting() {
-    setState(() {
-      this.mainBuilding = true;
-      this.mainBuildingCoin = true;
-      this.mainBuildingCoinWaiting = false;
     });
   }
 
@@ -64,63 +79,17 @@ class _MainPageState extends State<MainPage> {
       child: ProvideMulti(
         builder: (context, child, model) {
           BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
-          BasePageLogicProvider basePageLogic =
-              model.get<BasePageLogicProvider>();
+
           if (baseUserInfo.tobecollectedcoin > 0) {
-            Provide.value<BasePageLogicProvider>(context).changeStatusToCoin();
             this.mainBuildingCoin = false;
             this.mainBuilding = true;
-            this.mainBuildingCoinWaiting = true;
-          } else {
-            if(baseUserInfo.tobecollectedcoin == 0 && this.initFromService){
-              Provide.value<BasePageLogicProvider>(context).changeStatusToNormal();
-              this.mainBuilding = false;
-              this.mainBuildingCoin = true;
-              this.mainBuildingCoinWaiting = true;
-            }else if (basePageLogic.judgeIfDisplayMainBuildingWaiting()) {
-              Provide.value<BasePageLogicProvider>(context).changeStatusToWaiting();
-              this.mainBuilding = true;
-              this.mainBuildingCoin = true;
-              this.mainBuildingCoinWaiting = false;
-            } else {
-              Provide.value<BasePageLogicProvider>(context).changeStatusToNormal();
-              this.mainBuilding = false;
-              this.mainBuildingCoin = true;
-              this.mainBuildingCoinWaiting = true;
-            }
+          }else{
+            this.mainBuildingCoin = true;
+            this.mainBuilding = false;
           }
-          ///系统自动判断是否需要产生t币
-          Timer.periodic( Duration( seconds: 60 ), ( timer ) {
-              int timeMinute = DateTime.now().minute;
-              if(timeMinute == 44){
-                Mainbuild mainBuildRule = Global.getMainBuildingRule()[baseUserInfo.Mainbuildlevel];
 
-                int woodAmount = baseUserInfo.woodamount;
-                int stoneAmount = baseUserInfo.stoneamount;
-                if(woodAmount < mainBuildRule.woodamount || stoneAmount < mainBuildRule.stoneamount){
-                  return;
-                }else{
-                  int currentStone = baseUserInfo.stoneamount - mainBuildRule.stoneamount;
-                  int currentWood = baseUserInfo.woodamount - mainBuildRule.woodamount;
-                  Provide.value<BaseUserInfoProvider>(context).runProductCoin(mainBuildRule.product, currentStone, currentWood);
-                  if(basePageLogic.Status == MainBuildingStatus.Normal) {
-                    Provide.value<BasePageLogicProvider>(context).changeStatusToCoin();
-                    setState(() {
-                      this.mainBuildingCoin = false;
-                      this.mainBuilding = true;
-                      this.mainBuildingCoinWaiting = true;
-                      ///第一次初始化后将初始化字断进行赋值
-                      this.initFromService = false;
-                    });
-                  }else{
-                    setState(() {
-                      ///第一次初始化后将初始化字断进行赋值
-                      this.initFromService = false;
-                    });
-                  }
-                }
-              }
-          });
+
+
 
           return Stack(
             children: <Widget>[
@@ -405,14 +374,8 @@ class _MainPageState extends State<MainPage> {
                           width: ScreenUtil().setWidth(600),
                           imageUrl: "resource/images/mainBuildingCoin.png",
                           callback: () {
-                            if (basePageLogic
-                                .judgeIfDisplayMainBuildingWaiting()) {
-                              baseUserInfo.takeCoin();
-                              this.setMainBuildingWaiting();
-                            } else {
-                              baseUserInfo.takeCoin();
-                              this.setMainBuildingNormal();
-                            }
+                            baseUserInfo.takeCoin();
+                            this.setMainBuildingNormal();
                           },
                         ),
                         Container(
@@ -432,49 +395,6 @@ class _MainPageState extends State<MainPage> {
                       ],
                     )),
               ),
-
-              ///主城金币正在生产
-              new Offstage(
-                offstage: this.mainBuildingCoinWaiting,
-                child: new Container(
-                    margin: EdgeInsets.fromLTRB(
-                        ScreenUtil().setWidth(330),
-                        ScreenUtil().setHeight(660),
-                        ScreenUtil().setWidth(170),
-                        ScreenUtil().setHeight(670)),
-                    child: new Stack(
-                      children: <Widget>[
-                        ImageButton(
-                          height: ScreenUtil().setHeight(630),
-                          width: ScreenUtil().setWidth(600),
-                          imageUrl:
-                              "resource/images/mainBuildingCoinWaiting.png",
-                          callback: () {
-                            setState(() {
-                              this.mainBuilding = false;
-                              this.mainBuildingCoin = true;
-                              this.mainBuildingCoinWaiting = true;
-                            });
-                          },
-                        ),
-                        Container(
-                            padding: EdgeInsets.only(
-                                top: ScreenUtil().setHeight(420)),
-                            child: Center(
-                              child: Text(
-                                "主 城",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    decoration: TextDecoration.none,
-                                    fontSize: ScreenUtil().setSp(SystemFontSize
-                                            .mainBuildingTextFontSize)),
-                              ),
-                            ))
-                      ],
-                    )),
-              ),
-
               ///英雄祭坛
               new Container(
                   margin: EdgeInsets.fromLTRB(
@@ -686,7 +606,7 @@ class _MainPageState extends State<MainPage> {
             ],
           );
         },
-        requestedValues: [BaseUserInfoProvider, BasePageLogicProvider],
+        requestedValues: [BaseUserInfoProvider],
       ),
     );
   }
