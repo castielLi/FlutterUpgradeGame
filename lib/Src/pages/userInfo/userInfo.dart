@@ -72,7 +72,6 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                     imageUrl: "resource/images/avatar.png",
                     amountCash: "100000",
                     withdrawCallback: (){
-                      print('点击提现');
                       setState(() {
                         userInfoHide = true;
                         withdraw = false;

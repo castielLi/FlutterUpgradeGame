@@ -48,6 +48,7 @@ class SystemColor {
 
 class SystemIconSize {
   static const normalIconSize = 40.0;
+  static const bigIconSize = 133;
 }
 
 ///系统字体大小
