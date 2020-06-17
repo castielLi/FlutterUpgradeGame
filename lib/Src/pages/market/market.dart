@@ -15,6 +15,7 @@ class MarketDetail extends StatefulWidget {
 }
 
 class _MarketDetailState extends State<MarketDetail> {
+  List<UserSearchItem> searchResult = [];
   final controller = TextEditingController();
   bool showCoin = false;
   bool showWood = true;
@@ -134,12 +135,32 @@ class _MarketDetailState extends State<MarketDetail> {
                                       child: TextField(
                                         controller: controller,
                                         decoration: new InputDecoration(
-                                            hintText: 'Search',
+                                            hintText: '输入用户名',
                                             border: InputBorder.none),
                                         onSubmitted: (String input) {
                                           // TODO 获取搜索用户数据
-                                          input= controller.text;
-                                          print(input);
+                                          input = controller.text;
+                                          setState(() {
+                                            searchResult.clear();
+                                            searchResult.add(UserSearchItem(
+                                              avatarUrl:
+                                                  'resource/images/avatar.png',
+                                              name: '黄小龙',
+                                              id: '123441212',
+                                            ));
+                                            searchResult.add(UserSearchItem(
+                                              avatarUrl:
+                                                  'resource/images/avatar.png',
+                                              name: '张三',
+                                              id: '123441212',
+                                            ));
+                                            searchResult.add(UserSearchItem(
+                                              avatarUrl:
+                                                  'resource/images/avatar.png',
+                                              name: '李四',
+                                              id: '123441212',
+                                            ));
+                                          });
                                         },
                                         // onChanged: onSearchTextChanged,
                                       ),
@@ -151,6 +172,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                     iconSize: 18.0,
                                     onPressed: () {
                                       controller.clear();
+                                      searchResult.clear();
                                     },
                                   ),
                                 ],
@@ -162,13 +184,16 @@ class _MarketDetailState extends State<MarketDetail> {
                           width: ScreenUtil().setWidth(800),
                           height: ScreenUtil().setHeight(700),
                           child: ListView.builder(
-                              itemCount: 5,
+                              itemCount: searchResult.length,
                               itemExtent: ScreenUtil().setSp(150),
                               itemBuilder: (BuildContext context, int index) {
                                 return UserSearchItem(
-                                  avatarUrl: 'resource/images/avatar.png',
-                                  name: '黄小龙',
-                                  id: '123343134',
+                                  avatarUrl: searchResult[index].avatarUrl,
+                                  name: searchResult[index].name,
+                                  id: searchResult[index].id,
+                                  callback: (){
+                                    print('Send coin to '+searchResult[index].name);
+                                  },
                                 );
                               }),
                         ),

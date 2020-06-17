@@ -16,11 +16,9 @@ class UserSearchItem extends StatefulWidget {
   // 字体大小
   double textSize;
 
-  UserSearchItem(
-      {Key key,
-        this.avatarUrl,
-        this.name,
-        this.id,})
+  VoidCallback callback;
+
+  UserSearchItem({Key key, this.avatarUrl, this.name, this.id, this.callback})
       : super(key: key);
 
   @override
@@ -30,28 +28,40 @@ class UserSearchItem extends StatefulWidget {
 class _UserSearchItem extends State<UserSearchItem> {
   @override
   Widget build(BuildContext context) {
-    if(null == this.widget.textSize || 0 == this.widget.textSize){
+    if (null == this.widget.textSize || 0 == this.widget.textSize) {
       this.widget.textSize = SystemFontSize.moreLargerTextSize;
     }
-    return Container(
-    margin: EdgeInsets.only(bottom:3),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: new AssetImage('resource/images/userSearchItemBackground.png'),
-          fit: BoxFit.fill,
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Text('用户:',style:CustomFontSize.defaultTextStyle(this.widget.textSize),),
-          Image(
-            image: new AssetImage(this.widget.avatarUrl),
-            height: ScreenUtil().setHeight(90),
+    return GestureDetector(
+      onTap: this.widget.callback,
+      child: Container(
+        margin: EdgeInsets.only(bottom: 3),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: new AssetImage('resource/images/userSearchItemBackground.png'),
+            fit: BoxFit.fill,
           ),
-          Text(this.widget.name,style:CustomFontSize.defaultTextStyle(this.widget.textSize),),
-          Text('ID:'+this.widget.id,style:CustomFontSize.defaultTextStyle(this.widget.textSize),),
-        ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              '用户:',
+              style: CustomFontSize.defaultTextStyle(this.widget.textSize),
+            ),
+            Image(
+              image: new AssetImage(this.widget.avatarUrl),
+              height: ScreenUtil().setHeight(90),
+            ),
+            Text(
+              this.widget.name,
+              style: CustomFontSize.defaultTextStyle(this.widget.textSize),
+            ),
+            Text(
+              'ID:' + this.widget.id,
+              style: CustomFontSize.defaultTextStyle(this.widget.textSize),
+            ),
+          ],
+        ),
       ),
     );
   }
