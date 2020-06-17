@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageTextButtonWithIcon/imageTextButtonWithIcon.dart';
 import 'package:upgradegame/Src/pages/market/marketBid.dart';
+import 'package:upgradegame/Src/pages/market/userSearchItem.dart';
 
 class MarketDetail extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class MarketDetail extends StatefulWidget {
 }
 
 class _MarketDetailState extends State<MarketDetail> {
+  final controller = TextEditingController();
   bool showCoin = false;
   bool showWood = true;
   bool showStone = false;
@@ -66,7 +68,6 @@ class _MarketDetailState extends State<MarketDetail> {
                   buttonName: 'T币',
                   textSize: SystemFontSize.buttonWithIconFontSize,
                   callback: () {
-                    print('T币');
                     changeTabs('coin');
                   },
                 ),
@@ -80,7 +81,6 @@ class _MarketDetailState extends State<MarketDetail> {
                   buttonName: '木材',
                   textSize: SystemFontSize.buttonWithIconFontSize,
                   callback: () {
-                    print('木材');
                     changeTabs('wood');
                   },
                 ),
@@ -94,7 +94,6 @@ class _MarketDetailState extends State<MarketDetail> {
                   buttonName: '石材',
                   textSize: SystemFontSize.buttonWithIconFontSize,
                   callback: () {
-                    print('石材');
                     changeTabs('stone');
                   },
                 ),
@@ -104,23 +103,78 @@ class _MarketDetailState extends State<MarketDetail> {
           Container(
             width: ScreenUtil().setWidth(800),
             height: ScreenUtil().setHeight(900),
-            padding: EdgeInsets.only(top: 10),
             child: Stack(
               children: <Widget>[
                 Offstage(
                   offstage: !this.showCoin,
-                  child: ListView.builder(
-                      padding: EdgeInsets.only(top: 0),
-                      itemCount: 3,
-                      itemBuilder: (BuildContext context, int index) {
-                        return MarketBidItem(
-                          avatarUrl: 'resource/images/avatar.png',
-                          name: '黄小龙',
-                          bidType: 'gold',
-                          amount: 21231,
-                          needCoin: 192,
-                        );
-                      }),
+                  child: Scaffold(
+                    resizeToAvoidBottomInset: false,
+                    backgroundColor: Colors.transparent,
+                    body: Column(
+                      children: [
+                        Container(
+                          child: Container(
+                            height: ScreenUtil().setHeight(150),
+                            padding: EdgeInsets.only(top: 5),
+                            child: new Card(
+                                child: new Container(
+                              child: new Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  SizedBox(
+                                    width: 5.0,
+                                  ),
+                                  Icon(
+                                    Icons.search,
+                                    color: Colors.grey,
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      child: TextField(
+                                        controller: controller,
+                                        decoration: new InputDecoration(
+                                            hintText: 'Search',
+                                            border: InputBorder.none),
+                                        onSubmitted: (String input) {
+                                          // TODO 获取搜索用户数据
+                                          input= controller.text;
+                                          print(input);
+                                        },
+                                        // onChanged: onSearchTextChanged,
+                                      ),
+                                    ),
+                                  ),
+                                  new IconButton(
+                                    icon: new Icon(Icons.cancel),
+                                    color: Colors.grey,
+                                    iconSize: 18.0,
+                                    onPressed: () {
+                                      controller.clear();
+                                    },
+                                  ),
+                                ],
+                              ),
+                            )),
+                          ),
+                        ),
+                        Container(
+                          width: ScreenUtil().setWidth(800),
+                          height: ScreenUtil().setHeight(700),
+                          child: ListView.builder(
+                              itemCount: 5,
+                              itemExtent: ScreenUtil().setSp(150),
+                              itemBuilder: (BuildContext context, int index) {
+                                return UserSearchItem(
+                                  avatarUrl: 'resource/images/avatar.png',
+                                  name: '黄小龙',
+                                  id: '123343134',
+                                );
+                              }),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 Offstage(
                   offstage: !this.showWood,
@@ -158,5 +212,11 @@ class _MarketDetailState extends State<MarketDetail> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }

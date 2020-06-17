@@ -1,7 +1,7 @@
 class ServiceUrl {
   static const String host =
-//      "https://test.buluo888.com/";
-  "http://192.168.31.57:8080/";
+      "https://www.fastmock.site/mock/095e3520b3833640934d29559631cc16/";
+//  "http://192.168.31.57:80/";
   static const String downloadUrl = '';
 
   /// rule

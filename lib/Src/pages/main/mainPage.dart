@@ -191,7 +191,7 @@ class _MainPageState extends State<MainPage> {
               ///功能栏
               new Container(
                 margin: EdgeInsets.only(top: ScreenUtil().setHeight(230)),
-                height: ScreenUtil().setHeight(SystemIconSize.bigIconSize+20),
+                height: ScreenUtil().setHeight(SystemIconSize.bigIconSize+30),
                 child: new Row(
                   mainAxisAlignment:MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -255,8 +255,8 @@ class _MainPageState extends State<MainPage> {
                       child: new DividendPart(
                         imageTitle: "分红",
                         imageUrl: "resource/images/dividend.png",
-                        imageHeight: ScreenUtil().setHeight(140),
-                        imageWidth: ScreenUtil().setWidth(150),
+                        imageHeight: ScreenUtil().setHeight(SystemIconSize.bigIconSize),
+                        imageWidth: ScreenUtil().setWidth(SystemIconSize.bigIconSize),
                         title: "今日分红",
                         amount: "¥" +
                             baseUserInfo.Todayprofitsharing.toInt().toString(),
@@ -405,32 +405,20 @@ class _MainPageState extends State<MainPage> {
                   child: new Stack(
                     children: <Widget>[
                       ImageButton(
-                        height: ScreenUtil().setHeight(630),
-                        width: ScreenUtil().setWidth(600),
+                        height: ScreenUtil().setHeight(SystemIconSize.mainPageIconSize),
+                        width: ScreenUtil().setHeight(SystemIconSize.mainPageIconSize),
                         imageUrl: "resource/images/herosBuilding.png",
                         callback: () {
                           Application.showDetailDialog(
                               context, UpgradeGameRoute.detailDialogPage,
-                              params: {
-                                'height': ScreenUtil().setHeight(1660),
-                                'width': ScreenUtil().setWidth(1020),
-                                'childName': 'heroAltar',
-                                "title": "英雄祭坛"
+                              params: {'height': ScreenUtil().setHeight(1660), 'width': ScreenUtil().setWidth(1020), 'childName': 'heroAltar', "title": "英雄祭坛"
                               });
                         },
                       ),
                       Container(
-                          padding:
-                              EdgeInsets.only(top: ScreenUtil().setHeight(190)),
+                          padding: EdgeInsets.only(top: ScreenUtil().setHeight(190)),
                           child: Center(
-                            child: Text(
-                              "英雄祭坛",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  decoration: TextDecoration.none,
-                                  fontSize: ScreenUtil().setSp(
-                                      SystemFontSize.otherBuildingTextFontSize)),
+                            child: Text("英雄祭坛", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, decoration: TextDecoration.none, fontSize: ScreenUtil().setSp(SystemFontSize.otherBuildingTextFontSize)),
                             ),
                           ))
                     ],
@@ -446,32 +434,20 @@ class _MainPageState extends State<MainPage> {
                   child: new Stack(
                     children: <Widget>[
                       ImageButton(
-                        height: ScreenUtil().setHeight(300),
-                        width: ScreenUtil().setWidth(250),
+                        height: ScreenUtil().setHeight(SystemIconSize.mainPageIconSize),
+                        width: ScreenUtil().setWidth(SystemIconSize.mainPageIconSize),
                         imageUrl: "resource/images/stoneBuilding.png",
                         callback: () {
                           Application.showDetailDialog(
                               context, UpgradeGameRoute.detailDialogPage,
-                              params: {
-                                'height': ScreenUtil().setHeight(1660),
-                                'width': ScreenUtil().setWidth(1020),
-                                'childName': 'stoneDetail',
-                                "title": "采石场",
+                              params: {'height': ScreenUtil().setHeight(1660), 'width': ScreenUtil().setWidth(1020), 'childName': 'stoneDetail', "title": "采石场",
                               });
                         },
                       ),
                       Container(
-                          padding:
-                              EdgeInsets.only(top: ScreenUtil().setHeight(200)),
+                          padding: EdgeInsets.only(top: ScreenUtil().setHeight(200)),
                           child: Center(
-                            child: Text(
-                              "采石场",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  decoration: TextDecoration.none,
-                                  fontSize: ScreenUtil().setSp(
-                                      SystemFontSize.otherBuildingTextFontSize)),
+                            child: Text("采石场", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, decoration: TextDecoration.none, fontSize: ScreenUtil().setSp(SystemFontSize.otherBuildingTextFontSize)),
                             ),
                           ))
                     ],
@@ -487,8 +463,8 @@ class _MainPageState extends State<MainPage> {
                   child: new Stack(
                     children: <Widget>[
                       ImageButton(
-                        height: ScreenUtil().setHeight(630),
-                        width: ScreenUtil().setWidth(600),
+                        height: ScreenUtil().setHeight(SystemIconSize.mainPageIconSize),
+                        width: ScreenUtil().setWidth(SystemIconSize.mainPageIconSize),
                         imageUrl: "resource/images/fellingBuilding.png",
                         callback: () {
                           Application.showDetailDialog(
@@ -532,8 +508,8 @@ class _MainPageState extends State<MainPage> {
                   child: new Stack(
                     children: <Widget>[
                       ImageButton(
-                        height: ScreenUtil().setHeight(307),
-                        width: ScreenUtil().setWidth(384),
+                        height: ScreenUtil().setHeight(SystemIconSize.mainPageIconSize),
+                        width: ScreenUtil().setWidth(SystemIconSize.mainPageIconSize),
                         imageUrl: "resource/images/farmBuilding.png",
                         callback: () {
                           Application.showDetailDialog(
@@ -573,8 +549,8 @@ class _MainPageState extends State<MainPage> {
                   child: new Stack(
                     children: <Widget>[
                       ImageButton(
-                        height: ScreenUtil().setHeight(290),
-                        width: ScreenUtil().setWidth(310),
+                        height: ScreenUtil().setHeight(SystemIconSize.mainPageIconSize),
+                        width: ScreenUtil().setWidth(SystemIconSize.mainPageIconSize),
                         imageUrl: "resource/images/marketBuilding.png",
                         callback: () {
                           Application.showDetailDialog(

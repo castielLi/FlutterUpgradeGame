@@ -119,8 +119,9 @@ class _TeamDetailState extends State<TeamDetail> {
                   offstage: sonTabHide,
                   child: EasyRefresh(
                     refreshFooter: ClassicsFooter(
-                        bgColor: Colors.transparent,
-                        key: new GlobalKey<RefreshFooterState>(),),
+                      bgColor: Colors.transparent,
+                      key: new GlobalKey<RefreshFooterState>(),
+                    ),
                     // ignore: missing_return
                     loadMore: () {
                       setState(() {
@@ -145,7 +146,8 @@ class _TeamDetailState extends State<TeamDetail> {
                     child: EasyRefresh(
                       refreshFooter: ClassicsFooter(
                         bgColor: Colors.transparent,
-                        key: new GlobalKey<RefreshFooterState>(),),
+                        key: new GlobalKey<RefreshFooterState>(),
+                      ),
                       // ignore: missing_return
                       loadMore: () {
                         setState(() {
