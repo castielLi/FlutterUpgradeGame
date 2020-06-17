@@ -19,6 +19,7 @@ class _UserResourceDetailState extends State<UserResourceDetail> {
   Widget build(BuildContext context) {
     return new Container(
       child: new Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           new Column(
             children: <Widget>[
@@ -37,7 +38,7 @@ class _UserResourceDetailState extends State<UserResourceDetail> {
             ],
           ),
           new Container(
-            margin: EdgeInsets.only(left: ScreenUtil().setWidth(250)),
+//            margin: EdgeInsets.only(left: ScreenUtil().setWidth(250)),
             padding: EdgeInsets.only(top:ScreenUtil().setHeight(50)),
             child: new Column(
               children: <Widget>[

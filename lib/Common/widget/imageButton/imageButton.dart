@@ -34,12 +34,15 @@ class _ImageButtonState extends State<ImageButton> {
         decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage(this.widget.imageUrl),
-              fit: BoxFit.fill),
+              fit: BoxFit.fitWidth),
         ),
         child: Center(
           child: Text(this.widget.buttonName,style: TextStyle(fontSize: ScreenUtil().setSp(this.widget.textSize)),),
         ),
       ),
+      /*
+      排行榜，
+       */
       // ),
       onPressed: () {
           this.widget.callback();

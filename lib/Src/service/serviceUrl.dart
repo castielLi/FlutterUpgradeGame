@@ -1,6 +1,7 @@
 class ServiceUrl {
   static const String host =
       "https://www.fastmock.site/mock/095e3520b3833640934d29559631cc16/";
+//  "http://192.168.31.57:80/";
   static const String downloadUrl = '';
 
   /// rule
@@ -40,5 +41,9 @@ class ServiceUrl {
   /// 公告
   static getAnnouncementList() {
     return "${host}api/v1/announcement";
+  }
+  /// 攻略
+  static getRaidersList(){
+    return "${host}api/v1/strategy";
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
@@ -23,6 +24,8 @@ class _TeamDetailState extends State<TeamDetail> {
   List<InvitationModel> second = [];
   bool sonTabHide = false;
   bool grandsonTabHide = true;
+  int initFirstLength = 20;
+  int initSecondLength = 20;
 
   @override
   void initState() {
@@ -114,28 +117,55 @@ class _TeamDetailState extends State<TeamDetail> {
               children: [
                 Offstage(
                   offstage: sonTabHide,
-                  child: ListView.builder(
-                    itemCount: first.length,
-                    padding: EdgeInsets.all(1.0),
-                    itemBuilder: (BuildContext context, int index) {
-                      return TeamItem(
-                        invite: first[index],
-                      );
+                  child: EasyRefresh(
+                    refreshFooter: ClassicsFooter(
+                      bgColor: Colors.transparent,
+                      key: new GlobalKey<RefreshFooterState>(),
+                    ),
+                    // ignore: missing_return
+                    loadMore: () {
+                      setState(() {
+                        initFirstLength += 20;
+                      });
                     },
+                    child: ListView.builder(
+                      itemCount: first.length > initFirstLength
+                          ? initFirstLength
+                          : first.length,
+                      padding: EdgeInsets.all(1.0),
+                      itemBuilder: (BuildContext context, int index) {
+                        return TeamItem(
+                          invite: first[index],
+                        );
+                      },
+                    ),
                   ),
                 ),
                 Offstage(
-                  offstage: grandsonTabHide,
-                  child: ListView.builder(
-                    itemCount: second.length,
-                    padding: EdgeInsets.all(1.0),
-                    itemBuilder: (BuildContext context, int index) {
-                      return TeamItem(
-                        invite: second[index],
-                      );
-                    },
-                  ),
-                ),
+                    offstage: grandsonTabHide,
+                    child: EasyRefresh(
+                      refreshFooter: ClassicsFooter(
+                        bgColor: Colors.transparent,
+                        key: new GlobalKey<RefreshFooterState>(),
+                      ),
+                      // ignore: missing_return
+                      loadMore: () {
+                        setState(() {
+                          initSecondLength += 20;
+                        });
+                      },
+                      child: ListView.builder(
+                        itemCount: second.length > initSecondLength
+                            ? initSecondLength
+                            : second.length,
+                        padding: EdgeInsets.all(1.0),
+                        itemBuilder: (BuildContext context, int index) {
+                          return TeamItem(
+                            invite: second[index],
+                          );
+                        },
+                      ),
+                    )),
               ],
             ),
           ),
