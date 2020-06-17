@@ -191,15 +191,16 @@ class _MainPageState extends State<MainPage> {
               ///功能栏
               new Container(
                 margin: EdgeInsets.only(top: ScreenUtil().setHeight(230)),
-                height: ScreenUtil().setHeight(180),
+                height: ScreenUtil().setHeight(SystemIconSize.bigIconSize+20),
                 child: new Row(
+                  mainAxisAlignment:MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     new Container(
                       margin: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
                       child: new Row(
                         children: <Widget>[
                           new UserImageButton(
-                            size: ScreenUtil().setHeight(150),
+                            size: ScreenUtil().setSp(SystemIconSize.bigIconSize),
                             buttonName: "排行榜",
                             imageUrl: "resource/images/rank.png",
                             textSize: SystemFontSize.operationTextFontSize,
@@ -215,7 +216,7 @@ class _MainPageState extends State<MainPage> {
                             },
                           ),
                           new UserImageButton(
-                            size: ScreenUtil().setHeight(150),
+                            size: ScreenUtil().setSp(SystemIconSize.bigIconSize),
                             buttonName: "团队",
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/team.png",
@@ -231,7 +232,7 @@ class _MainPageState extends State<MainPage> {
                             },
                           ),
                           new UserImageButton(
-                            size: ScreenUtil().setHeight(150),
+                            size: ScreenUtil().setSp(SystemIconSize.bigIconSize),
                             buttonName: "商城",
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/marketStores.png",
@@ -250,8 +251,7 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                     new Container(
-                      margin: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
-                      width: ScreenUtil().setWidth(380),
+                      width: ScreenUtil().setWidth(SystemIconSize.bigIconSize*3),
                       child: new DividendPart(
                         imageTitle: "分红",
                         imageUrl: "resource/images/dividend.png",
@@ -276,7 +276,7 @@ class _MainPageState extends State<MainPage> {
                       child: new Row(
                         children: <Widget>[
                           new UserImageButton(
-                            size: ScreenUtil().setHeight(130),
+                            size: ScreenUtil().setSp(SystemIconSize.bigIconSize),
                             buttonName: "设置",
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/setting.png",
@@ -292,7 +292,7 @@ class _MainPageState extends State<MainPage> {
                             },
                           ),
                           new UserImageButton(
-                            size: ScreenUtil().setHeight(130),
+                            size: ScreenUtil().setSp(SystemIconSize.bigIconSize),
                             buttonName: "公告",
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/announcement.png",
@@ -532,8 +532,8 @@ class _MainPageState extends State<MainPage> {
                   child: new Stack(
                     children: <Widget>[
                       ImageButton(
-                        height: ScreenUtil().setHeight(290),
-                        width: ScreenUtil().setWidth(340),
+                        height: ScreenUtil().setHeight(307),
+                        width: ScreenUtil().setWidth(384),
                         imageUrl: "resource/images/farmBuilding.png",
                         callback: () {
                           Application.showDetailDialog(

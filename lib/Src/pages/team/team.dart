@@ -118,6 +118,9 @@ class _TeamDetailState extends State<TeamDetail> {
                 Offstage(
                   offstage: sonTabHide,
                   child: EasyRefresh(
+                    refreshFooter: ClassicsFooter(
+                        bgColor: Colors.transparent,
+                        key: new GlobalKey<RefreshFooterState>(),),
                     // ignore: missing_return
                     loadMore: () {
                       setState(() {
@@ -140,6 +143,9 @@ class _TeamDetailState extends State<TeamDetail> {
                 Offstage(
                     offstage: grandsonTabHide,
                     child: EasyRefresh(
+                      refreshFooter: ClassicsFooter(
+                        bgColor: Colors.transparent,
+                        key: new GlobalKey<RefreshFooterState>(),),
                       // ignore: missing_return
                       loadMore: () {
                         setState(() {
