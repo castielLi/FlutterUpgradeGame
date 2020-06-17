@@ -18,8 +18,8 @@ class RankDetail extends StatefulWidget {
 }
 
 class _RankDetailState extends State<RankDetail> {
-  List<RankModel> coinList = [];
-  List<RankModel> incomeList = [];
+  List<RankCoinModel> coinList = [];
+  List<RankCashModel> incomeList = [];
   bool coinTabHide = false;
   bool incomeTabHide = true;
 

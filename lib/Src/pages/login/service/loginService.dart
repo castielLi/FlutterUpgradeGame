@@ -15,8 +15,6 @@ class LoginService{
     var response = await httpManager.request(
         ServiceUrl.login(), {}, null, null);
     BaseUserInfoModel model = BaseUserInfoModel.fromJson(response.data);
-    if(model.tobecollectedcoin>0){
-    }
     callback(model);
   }
 

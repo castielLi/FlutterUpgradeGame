@@ -12,8 +12,8 @@ class RankItem extends StatefulWidget {
   // 名称
   String rankName;
 
-  // 排名值
-  int value;
+  // 数值
+  dynamic value;
 
   RankItem({Key key, this.imageUrl, this.avatarUrl, this.rankName, this.value})
       : super(key: key);
