@@ -60,8 +60,8 @@ class _RaidersDetailState extends State<RaidersDetail> {
                 new Expanded(
                   child: new ImageTextButton(
                     imageUrl: "resource/images/teamSwitchBackground.png",
-                    imageWidth: ScreenUtil().setWidth(400),
-                    imageHeight: ScreenUtil().setHeight(190),
+                    imageWidth: ScreenUtil().setWidth(SystemIconSize.mediumButtonWithIconWidth),
+                    imageHeight: ScreenUtil().setHeight(SystemIconSize.mediumButtonWithIconWidth / 2),
                     buttonName: "基 础",
                     textSize: SystemFontSize.settingTextFontSize,
                     callback: () {
@@ -75,8 +75,8 @@ class _RaidersDetailState extends State<RaidersDetail> {
                 new Expanded(
                   child: new ImageTextButton(
                     imageUrl: "resource/images/teamSwitchBackground.png",
-                    imageWidth: ScreenUtil().setWidth(400),
-                    imageHeight: ScreenUtil().setHeight(190),
+                    imageWidth: ScreenUtil().setWidth(SystemIconSize.mediumButtonWithIconWidth),
+                    imageHeight: ScreenUtil().setHeight(SystemIconSize.mediumButtonWithIconWidth / 2),
                     buttonName: "进 阶",
                     textSize: SystemFontSize.settingTextFontSize,
                     callback: () {

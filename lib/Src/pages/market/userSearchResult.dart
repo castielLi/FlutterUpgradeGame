@@ -40,30 +40,42 @@ class _UserSearchResult extends State<UserSearchResult> {
                       fit: BoxFit.fill,
                     ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        '用户:',
-                        style: CustomFontSize.defaultTextStyle(
-                            SystemFontSize.moreLargerTextSize),
-                      ),
-                      Image(
-                        image: new AssetImage(user.avatarUrl),
-                        height: ScreenUtil().setHeight(90),
-                      ),
-                      Text(
-                        user.name,
-                        style: CustomFontSize.defaultTextStyle(
-                            SystemFontSize.moreLargerTextSize),
-                      ),
-                      Text(
-                        'ID:' + user.id,
-                        style: CustomFontSize.defaultTextStyle(
-                            SystemFontSize.moreLargerTextSize),
-                      ),
-                    ],
-                  ),
+                  child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(left: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                '用户:',
+                                style: CustomFontSize.defaultTextStyle(
+                                    SystemFontSize.moreLargerTextSize),
+                              ),
+                              Image(
+                                image: new AssetImage(user.avatarUrl),
+                                height: ScreenUtil().setHeight(90),
+                              ),
+                              Text(
+                                user.name,
+                                style: CustomFontSize.defaultTextStyle(
+                                    SystemFontSize.moreLargerTextSize),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(right: 20),
+                          child: Text(
+                            'ID:' + user.id,
+                            style: CustomFontSize.defaultTextStyle(
+                                SystemFontSize.moreLargerTextSize),
+                          ),
+                        ),
+                      ],
+                    ),
+//                  ),
                 ),
               );
             });

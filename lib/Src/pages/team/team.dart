@@ -28,7 +28,6 @@ class _TeamDetailState extends State<TeamDetail> {
   int initFirstLength = 20;
   int initSecondLength = 20;
 
-
   @override
   void initState() {
     super.initState();
