@@ -191,7 +191,7 @@ class _MainPageState extends State<MainPage> {
               ///功能栏
               new Container(
                 margin: EdgeInsets.only(top: ScreenUtil().setHeight(230)),
-                height: ScreenUtil().setHeight(SystemIconSize.bigIconSize+30),
+                height: ScreenUtil().setHeight(SystemIconSize.mediumIconSize+30),
                 child: new Row(
                   mainAxisAlignment:MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -200,7 +200,7 @@ class _MainPageState extends State<MainPage> {
                       child: new Row(
                         children: <Widget>[
                           new UserImageButton(
-                            size: ScreenUtil().setSp(SystemIconSize.bigIconSize),
+                            size: ScreenUtil().setSp(SystemIconSize.mediumIconSize),
                             buttonName: "排行榜",
                             imageUrl: "resource/images/rank.png",
                             textSize: SystemFontSize.operationTextFontSize,
@@ -216,7 +216,7 @@ class _MainPageState extends State<MainPage> {
                             },
                           ),
                           new UserImageButton(
-                            size: ScreenUtil().setSp(SystemIconSize.bigIconSize),
+                            size: ScreenUtil().setSp(SystemIconSize.mediumIconSize),
                             buttonName: "团队",
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/team.png",
@@ -232,7 +232,7 @@ class _MainPageState extends State<MainPage> {
                             },
                           ),
                           new UserImageButton(
-                            size: ScreenUtil().setSp(SystemIconSize.bigIconSize),
+                            size: ScreenUtil().setSp(SystemIconSize.mediumIconSize),
                             buttonName: "商城",
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/marketStores.png",
@@ -251,12 +251,12 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                     new Container(
-                      width: ScreenUtil().setWidth(SystemIconSize.bigIconSize*3),
+                      width: ScreenUtil().setWidth(SystemIconSize.mediumIconSize*3),
                       child: new DividendPart(
                         imageTitle: "分红",
                         imageUrl: "resource/images/dividend.png",
-                        imageHeight: ScreenUtil().setHeight(SystemIconSize.bigIconSize),
-                        imageWidth: ScreenUtil().setWidth(SystemIconSize.bigIconSize),
+                        imageHeight: ScreenUtil().setHeight(SystemIconSize.mediumIconSize),
+                        imageWidth: ScreenUtil().setWidth(SystemIconSize.mediumIconSize),
                         title: "今日分红",
                         amount: "¥" +
                             baseUserInfo.Todayprofitsharing.toInt().toString(),
@@ -276,7 +276,7 @@ class _MainPageState extends State<MainPage> {
                       child: new Row(
                         children: <Widget>[
                           new UserImageButton(
-                            size: ScreenUtil().setSp(SystemIconSize.bigIconSize),
+                            size: ScreenUtil().setSp(SystemIconSize.mediumIconSize),
                             buttonName: "设置",
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/setting.png",
@@ -292,7 +292,7 @@ class _MainPageState extends State<MainPage> {
                             },
                           ),
                           new UserImageButton(
-                            size: ScreenUtil().setSp(SystemIconSize.bigIconSize),
+                            size: ScreenUtil().setSp(SystemIconSize.mediumIconSize),
                             buttonName: "公告",
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/announcement.png",

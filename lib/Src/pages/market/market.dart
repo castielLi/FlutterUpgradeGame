@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageTextButtonWithIcon/imageTextButtonWithIcon.dart';
+import 'package:upgradegame/Src/common/model/user.dart';
 import 'package:upgradegame/Src/pages/market/marketBid.dart';
-import 'package:upgradegame/Src/pages/market/userSearchItem.dart';
+import 'package:upgradegame/Src/pages/market/userSearchResult.dart';
 
 class MarketDetail extends StatefulWidget {
   @override
@@ -15,11 +16,13 @@ class MarketDetail extends StatefulWidget {
 }
 
 class _MarketDetailState extends State<MarketDetail> {
-  List<UserSearchItem> searchResult = [];
+  List<User> searchResult = [];
   final controller = TextEditingController();
   bool showCoin = false;
   bool showWood = true;
   bool showStone = false;
+  bool hideUserSearchResult = true;
+  int falseId = 0;
 
   void changeTabs(String tab) {
     setState(() {
@@ -49,10 +52,10 @@ class _MarketDetailState extends State<MarketDetail> {
   Widget build(BuildContext context) {
     return new Container(
       margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(120), // 左
+          ScreenUtil().setWidth(100), // 左
           ScreenUtil().setHeight(400), // 上
           ScreenUtil().setWidth(100), // 右
-          ScreenUtil().setHeight(220)), // 下
+          ScreenUtil().setHeight(200)), // 下
       child: Column(
         children: <Widget>[
           Container(
@@ -61,39 +64,39 @@ class _MarketDetailState extends State<MarketDetail> {
               children: <Widget>[
                 ImageTextButtonWithIcon(
                   imageUrl: 'resource/images/yellowButton.png',
-                  imageHeight: 120,
-                  imageWidth: 240,
+                  imageHeight: SystemIconSize.smallButtonWithIconWidth/2,
+                  imageWidth: SystemIconSize.smallButtonWithIconWidth,
                   iconUrl: 'resource/images/gold.png',
-                  iconHeight: 90,
-                  iconWidth: 90,
+                  iconHeight: SystemIconSize.smallIconSize,
+                  iconWidth: SystemIconSize.smallIconSize,
                   buttonName: 'T币',
-                  textSize: SystemFontSize.buttonWithIconFontSize,
+                  textSize: SystemFontSize.smallButtonWithIconFontSize,
                   callback: () {
                     changeTabs('coin');
                   },
                 ),
                 ImageTextButtonWithIcon(
                   imageUrl: 'resource/images/yellowButton.png',
-                  imageHeight: 120,
-                  imageWidth: 240,
+                  imageHeight: SystemIconSize.smallButtonWithIconWidth/2,
+                  imageWidth: SystemIconSize.smallButtonWithIconWidth,
                   iconUrl: 'resource/images/wood.png',
-                  iconHeight: 90,
-                  iconWidth: 90,
+                  iconHeight: SystemIconSize.smallIconSize,
+                  iconWidth: SystemIconSize.smallIconSize,
                   buttonName: '木材',
-                  textSize: SystemFontSize.buttonWithIconFontSize,
+                  textSize: SystemFontSize.smallButtonWithIconFontSize,
                   callback: () {
                     changeTabs('wood');
                   },
                 ),
                 ImageTextButtonWithIcon(
                   imageUrl: 'resource/images/yellowButton.png',
-                  imageHeight: 120,
-                  imageWidth: 240,
+                  imageHeight: SystemIconSize.smallButtonWithIconWidth/2,
+                  imageWidth: SystemIconSize.smallButtonWithIconWidth,
                   iconUrl: 'resource/images/stone.png',
-                  iconHeight: 90,
-                  iconWidth: 90,
+                  iconHeight: SystemIconSize.smallIconSize,
+                  iconWidth: SystemIconSize.smallIconSize,
                   buttonName: '石材',
-                  textSize: SystemFontSize.buttonWithIconFontSize,
+                  textSize: SystemFontSize.smallButtonWithIconFontSize,
                   callback: () {
                     changeTabs('stone');
                   },
@@ -102,7 +105,7 @@ class _MarketDetailState extends State<MarketDetail> {
             ),
           ),
           Container(
-            width: ScreenUtil().setWidth(800),
+            margin: EdgeInsets.only(top:10),
             height: ScreenUtil().setHeight(900),
             child: Stack(
               children: <Widget>[
@@ -122,13 +125,8 @@ class _MarketDetailState extends State<MarketDetail> {
                               child: new Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
-                                  SizedBox(
-                                    width: 5.0,
-                                  ),
-                                  Icon(
-                                    Icons.search,
-                                    color: Colors.grey,
-                                  ),
+                                  SizedBox(width: 5.0,),
+                                  Icon(Icons.search, color: Colors.grey,),
                                   Expanded(
                                     child: Container(
                                       alignment: Alignment.center,
@@ -142,23 +140,27 @@ class _MarketDetailState extends State<MarketDetail> {
                                           input = controller.text;
                                           setState(() {
                                             searchResult.clear();
-                                            searchResult.add(UserSearchItem(
+                                            hideUserSearchResult = false;
+                                            searchResult.add(User(
                                               avatarUrl:
                                                   'resource/images/avatar.png',
                                               name: '黄小龙',
-                                              id: '123441212',
+                                              id: '1000' +
+                                                  (falseId++).toString(),
                                             ));
-                                            searchResult.add(UserSearchItem(
+                                            searchResult.add(User(
                                               avatarUrl:
                                                   'resource/images/avatar.png',
                                               name: '张三',
-                                              id: '123441212',
+                                              id: '1000' +
+                                                  (falseId++).toString(),
                                             ));
-                                            searchResult.add(UserSearchItem(
+                                            searchResult.add(User(
                                               avatarUrl:
                                                   'resource/images/avatar.png',
                                               name: '李四',
-                                              id: '123441212',
+                                              id: '1000' +
+                                                  (falseId++).toString(),
                                             ));
                                           });
                                         },
@@ -172,7 +174,6 @@ class _MarketDetailState extends State<MarketDetail> {
                                     iconSize: 18.0,
                                     onPressed: () {
                                       controller.clear();
-                                      searchResult.clear();
                                     },
                                   ),
                                 ],
@@ -181,21 +182,14 @@ class _MarketDetailState extends State<MarketDetail> {
                           ),
                         ),
                         Container(
-                          width: ScreenUtil().setWidth(800),
+                          width: ScreenUtil().setWidth(750),
                           height: ScreenUtil().setHeight(700),
-                          child: ListView.builder(
-                              itemCount: searchResult.length,
-                              itemExtent: ScreenUtil().setSp(150),
-                              itemBuilder: (BuildContext context, int index) {
-                                return UserSearchItem(
-                                  avatarUrl: searchResult[index].avatarUrl,
-                                  name: searchResult[index].name,
-                                  id: searchResult[index].id,
-                                  callback: (){
-                                    print('Send coin to '+searchResult[index].name);
-                                  },
-                                );
-                              }),
+                          child: Offstage(
+                            offstage: hideUserSearchResult,
+                            child: UserSearchResult(
+                              searchResult: searchResult,
+                            ),
+                          ),
                         ),
                       ],
                     ),

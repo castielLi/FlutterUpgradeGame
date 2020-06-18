@@ -46,10 +46,10 @@ class _RankDetailState extends State<RankDetail> {
   Widget build(BuildContext context) {
     return new Container(
       margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(120), // 左
+          ScreenUtil().setWidth(100), // 左
           ScreenUtil().setHeight(400), // 上
-          ScreenUtil().setWidth(120), // 右
-          ScreenUtil().setHeight(220)), // 下
+          ScreenUtil().setWidth(100), // 右
+          ScreenUtil().setHeight(200)),  // 下
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -59,13 +59,13 @@ class _RankDetailState extends State<RankDetail> {
               children: <Widget>[
                 ImageTextButtonWithIcon(
                   imageUrl: 'resource/images/yellowButton.png',
-                  imageHeight: 160,
-                  imageWidth: 360,
+                  imageHeight: SystemIconSize.mediumButtonWithIconWidth/2,
+                  imageWidth: SystemIconSize.mediumButtonWithIconWidth,
                   iconUrl: 'resource/images/gold.png',
-                  iconHeight: 140,
-                  iconWidth: 140,
+                  iconHeight: SystemIconSize.mediumIconSize,
+                  iconWidth: SystemIconSize.mediumIconSize,
                   buttonName: 'T币',
-                  textSize: SystemFontSize.buttonWithIconFontSize,
+                  textSize: SystemFontSize.mediumButtonWithIconFontSize,
                   callback: () {
                     setState(() {
                       coinTabHide = false;
@@ -75,13 +75,13 @@ class _RankDetailState extends State<RankDetail> {
                 ),
                 ImageTextButtonWithIcon(
                   imageUrl: 'resource/images/yellowButton.png',
-                  imageHeight: 160,
-                  imageWidth: 360,
+                  imageHeight: SystemIconSize.mediumButtonWithIconWidth/2,
+                  imageWidth: SystemIconSize.mediumButtonWithIconWidth,
                   iconUrl: 'resource/images/withdraw.png',
-                  iconHeight: 130,
-                  iconWidth: 130,
+                  iconHeight: SystemIconSize.mediumIconSize,
+                  iconWidth: SystemIconSize.mediumIconSize,
                   buttonName: '提现',
-                  textSize: SystemFontSize.buttonWithIconFontSize,
+                  textSize: SystemFontSize.mediumButtonWithIconFontSize,
                   callback: () {
                     setState(() {
                       coinTabHide = true;
@@ -95,11 +95,8 @@ class _RankDetailState extends State<RankDetail> {
           Container(
             width: ScreenUtil().setWidth(800),
             height: ScreenUtil().setHeight(840),
-            child: Stack(
-              children: [
-                Offstage(
-                  offstage: coinTabHide,
-                  child: ListView.builder(
+            child: incomeTabHide
+                ? ListView.builder(
                     itemCount: coinList.length,
                     itemExtent: ScreenUtil().setHeight(170),
                     padding: EdgeInsets.only(top: 0),
@@ -116,11 +113,8 @@ class _RankDetailState extends State<RankDetail> {
                         value: coinList[index].amount,
                       );
                     },
-                  ),
-                ),
-                Offstage(
-                  offstage: incomeTabHide,
-                  child: ListView.builder(
+                  )
+                : ListView.builder(
                     itemCount: incomeList.length,
                     itemExtent: ScreenUtil().setHeight(170),
                     padding: EdgeInsets.only(top: 0),
@@ -138,9 +132,6 @@ class _RankDetailState extends State<RankDetail> {
                       );
                     },
                   ),
-                ),
-              ],
-            ),
           ),
         ],
       ),
