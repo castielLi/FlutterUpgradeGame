@@ -4,6 +4,7 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButtonWithIcon/imageTextButtonWithIcon.dart';
 import 'package:upgradegame/Src/common/model/user.dart';
+import 'package:upgradegame/Src/pages/market/marketAsk.dart';
 import 'package:upgradegame/Src/pages/market/marketBid.dart';
 import 'package:upgradegame/Src/pages/market/userSearchResult.dart';
 
@@ -26,6 +27,7 @@ class _MarketDetailState extends State<MarketDetail> {
   bool stoneHide = true;
   bool userSearchResultHide = true;
   int falseId = 0;
+  String sellType;
 
   void changeTabs(String tab) {
     setState(() {
@@ -69,17 +71,44 @@ class _MarketDetailState extends State<MarketDetail> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      ImageTextButtonWithIcon(imageUrl: 'resource/images/yellowButton.png', imageHeight: SystemIconSize.smallButtonWithIconWidth / 2, imageWidth: SystemIconSize.smallButtonWithIconWidth, iconUrl: 'resource/images/gold.png', iconHeight: SystemIconSize.smallIconSize, iconWidth: SystemIconSize.smallIconSize, buttonName: 'T币', textSize: SystemFontSize.smallButtonWithIconFontSize,
+                      ImageTextButtonWithIcon(
+                        imageUrl: 'resource/images/yellowButton.png',
+                        imageHeight:
+                            SystemIconSize.smallButtonWithIconWidth / 2,
+                        imageWidth: SystemIconSize.smallButtonWithIconWidth,
+                        iconUrl: 'resource/images/gold.png',
+                        iconHeight: SystemIconSize.smallIconSize,
+                        iconWidth: SystemIconSize.smallIconSize,
+                        buttonName: 'T币',
+                        textSize: SystemFontSize.smallButtonWithIconFontSize,
                         callback: () {
                           changeTabs('coin');
                         },
                       ),
-                      ImageTextButtonWithIcon(imageUrl: 'resource/images/yellowButton.png', imageHeight: SystemIconSize.smallButtonWithIconWidth / 2, imageWidth: SystemIconSize.smallButtonWithIconWidth, iconUrl: 'resource/images/wood.png', iconHeight: SystemIconSize.smallIconSize, iconWidth: SystemIconSize.smallIconSize, buttonName: '木材', textSize: SystemFontSize.smallButtonWithIconFontSize,
+                      ImageTextButtonWithIcon(
+                        imageUrl: 'resource/images/yellowButton.png',
+                        imageHeight:
+                            SystemIconSize.smallButtonWithIconWidth / 2,
+                        imageWidth: SystemIconSize.smallButtonWithIconWidth,
+                        iconUrl: 'resource/images/wood.png',
+                        iconHeight: SystemIconSize.smallIconSize,
+                        iconWidth: SystemIconSize.smallIconSize,
+                        buttonName: '木材',
+                        textSize: SystemFontSize.smallButtonWithIconFontSize,
                         callback: () {
                           changeTabs('wood');
                         },
                       ),
-                      ImageTextButtonWithIcon(imageUrl: 'resource/images/yellowButton.png', imageHeight: SystemIconSize.smallButtonWithIconWidth / 2, imageWidth: SystemIconSize.smallButtonWithIconWidth, iconUrl: 'resource/images/stone.png', iconHeight: SystemIconSize.smallIconSize, iconWidth: SystemIconSize.smallIconSize, buttonName: '石材', textSize: SystemFontSize.smallButtonWithIconFontSize,
+                      ImageTextButtonWithIcon(
+                        imageUrl: 'resource/images/yellowButton.png',
+                        imageHeight:
+                            SystemIconSize.smallButtonWithIconWidth / 2,
+                        imageWidth: SystemIconSize.smallButtonWithIconWidth,
+                        iconUrl: 'resource/images/stone.png',
+                        iconHeight: SystemIconSize.smallIconSize,
+                        iconWidth: SystemIconSize.smallIconSize,
+                        buttonName: '石材',
+                        textSize: SystemFontSize.smallButtonWithIconFontSize,
                         callback: () {
                           changeTabs('stone');
                         },
@@ -105,26 +134,51 @@ class _MarketDetailState extends State<MarketDetail> {
                                   padding: EdgeInsets.only(top: 5),
                                   child: new Card(
                                       child: new Container(
-                                    child: new Row(crossAxisAlignment: CrossAxisAlignment.center,
+                                    child: new Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: <Widget>[
-                                        SizedBox(width: 5.0,),
-                                        Icon(Icons.search, color: Colors.grey,
+                                        SizedBox(
+                                          width: 5.0,
+                                        ),
+                                        Icon(
+                                          Icons.search,
+                                          color: Colors.grey,
                                         ),
                                         Expanded(
                                           child: Container(
                                             alignment: Alignment.center,
                                             child: TextField(
                                               controller: controller,
-                                              decoration: new InputDecoration(hintText: '输入用户名', border: InputBorder.none),
+                                              decoration: new InputDecoration(
+                                                  hintText: '输入用户名',
+                                                  border: InputBorder.none),
                                               onSubmitted: (String input) {
                                                 // TODO 获取搜索用户数据
                                                 input = controller.text;
                                                 setState(() {
                                                   searchResult.clear();
                                                   userSearchResultHide = false;
-                                                  searchResult.add(User(avatarUrl: 'resource/images/avatar.png', name: '黄小龙', id: '1000' + (falseId++).toString(),));
-                                                  searchResult.add(User(avatarUrl: 'resource/images/avatar.png', name: '张三', id: '1000' + (falseId++).toString(),));
-                                                  searchResult.add(User(avatarUrl: 'resource/images/avatar.png', name: '李四', id: '1000' + (falseId++).toString(),
+                                                  searchResult.add(User(
+                                                    avatarUrl:
+                                                        'resource/images/avatar.png',
+                                                    name: '黄小龙',
+                                                    id: '1000' +
+                                                        (falseId++).toString(),
+                                                  ));
+                                                  searchResult.add(User(
+                                                    avatarUrl:
+                                                        'resource/images/avatar.png',
+                                                    name: '张三',
+                                                    id: '1000' +
+                                                        (falseId++).toString(),
+                                                  ));
+                                                  searchResult.add(User(
+                                                    avatarUrl:
+                                                        'resource/images/avatar.png',
+                                                    name: '李四',
+                                                    id: '1000' +
+                                                        (falseId++).toString(),
                                                   ));
                                                 });
                                               },
@@ -132,7 +186,10 @@ class _MarketDetailState extends State<MarketDetail> {
                                             ),
                                           ),
                                         ),
-                                        new IconButton(icon: new Icon(Icons.cancel), color: Colors.grey, iconSize: 18.0,
+                                        new IconButton(
+                                          icon: new Icon(Icons.cancel),
+                                          color: Colors.grey,
+                                          iconSize: 18.0,
                                           onPressed: () {
                                             controller.clear();
                                           },
@@ -166,7 +223,12 @@ class _MarketDetailState extends State<MarketDetail> {
                                   itemCount: 4,
                                   itemBuilder:
                                       (BuildContext context, int index) {
-                                    return MarketBidItem(avatarUrl: 'resource/images/avatar.png', name: '黄小龙', bidType: 'wood', amount: 21231, needCoin: 192,
+                                    return MarketBidItem(
+                                      avatarUrl: 'resource/images/avatar.png',
+                                      name: '黄小龙',
+                                      bidType: 'wood',
+                                      amount: 21231,
+                                      needCoin: 192,
                                     );
                                   }),
                             ),
@@ -177,6 +239,7 @@ class _MarketDetailState extends State<MarketDetail> {
                               imageUrl: "resource/images/upgradeButton.png",
                               callback: () {
                                 setState(() {
+                                  sellType = "木材";
                                   askPageHide = false;
                                   bidPageHide = true;
                                 });
@@ -196,16 +259,26 @@ class _MarketDetailState extends State<MarketDetail> {
                                   itemCount: 2,
                                   itemBuilder:
                                       (BuildContext context, int index) {
-                                    return MarketBidItem(avatarUrl: 'resource/images/avatar.png', name: '黄小龙', bidType: 'stone', amount: 21231, needCoin: 192,
+                                    return MarketBidItem(
+                                      avatarUrl: 'resource/images/avatar.png',
+                                      name: '黄小龙',
+                                      bidType: 'stone',
+                                      amount: 21231,
+                                      needCoin: 192,
                                     );
                                   }),
                             ),
-                            ImageButton(height: ScreenUtil().setHeight(150), width: ScreenUtil().setWidth(400), buttonName: "发布订单", imageUrl: "resource/images/upgradeButton.png",
+                            ImageButton(
+                              height: ScreenUtil().setHeight(150),
+                              width: ScreenUtil().setWidth(400),
+                              buttonName: "发布订单",
+                              imageUrl: "resource/images/upgradeButton.png",
                               callback: () {
                                 setState(() {
                                   askPageHide = false;
                                   bidPageHide = true;
                                 });
+                                sellType = "石头";
                               },
                             ),
                           ],
@@ -219,24 +292,12 @@ class _MarketDetailState extends State<MarketDetail> {
           ),
           Offstage(
             offstage: askPageHide,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ImageButton(height: ScreenUtil().setHeight(150), width: ScreenUtil().setWidth(300), buttonName: "取消", imageUrl: "resource/images/upgradeButton.png",
-                  callback: () {
-                    setState(() {
-                      askPageHide = true;
-                      bidPageHide = false;
-                    });
-                  },
-                ),
-                ImageButton(height: ScreenUtil().setHeight(150), width: ScreenUtil().setWidth(300), buttonName: "确定", imageUrl: "resource/images/upgradeButton.png",
-                  callback: () {
-                    print('sell');
-                  },
-                ),
-              ],
-            ),
+            child: MarketAsk(sellType: sellType,viewCallback: (){
+              setState(() {
+                askPageHide = true;
+                bidPageHide = false;
+              });
+            },),
           ),
         ],
       ),
