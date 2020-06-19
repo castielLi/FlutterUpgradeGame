@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provide/provide.dart';
 
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
@@ -8,8 +9,10 @@ import 'package:upgradegame/Common/widget/toast/toast.dart';
 
 
 import 'package:upgradegame/Src/pages/store/model/storeModel.dart';
+import 'package:upgradegame/Src/pages/store/model/voucherModel.dart';
 import 'package:upgradegame/Src/pages/store/storeService/storeService.dart';
 import 'package:upgradegame/Src/pages/store/productItem.dart';
+import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
 class StoreDetail extends StatefulWidget {
   @override
@@ -42,6 +45,14 @@ class _StoreDetailState extends State<StoreDetail> {
     });
   }
 
+  void buyVoucher(BaseUserInfoProvider baseUserInfo){
+    this.widget.HUD();
+    StoreService.buyVoucher((VoucherModel model){
+      this.widget.HUD();
+      baseUserInfo.buyVoucher(model.voucher);
+    });
+  }
+
 
 
   @override
@@ -53,41 +64,45 @@ class _StoreDetailState extends State<StoreDetail> {
           ScreenUtil().setHeight(280),  // 上
           ScreenUtil().setWidth(80),   // 右
           ScreenUtil().setHeight(100)), // 下
-      child: new Center(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new ProductItem(
-              volumeAmount: storeList == null?"":storeList[0].amount.toString(),
-              callback: (){
-
-              },
-              cashAmount: storeList == null?"":storeList[0].price.toString(),
+      child:
+      Provide<BaseUserInfoProvider>(
+        builder: (context, child, baseUserInfo){
+          return new Center(
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new ProductItem(
+                  volumeAmount: storeList == null?"":storeList[0].amount.toString(),
+                  callback: (){
+                    this.buyVoucher(baseUserInfo);
+                  },
+                  cashAmount: storeList == null?"":storeList[0].price.toString(),
+                ),
+                new ProductItem(
+                  volumeAmount: storeList == null?"":storeList[1].amount.toString(),
+                  callback: (){
+                    this.buyVoucher(baseUserInfo);
+                  },
+                  cashAmount: storeList == null?"":storeList[1].price.toString(),
+                ),
+                new ProductItem(
+                  volumeAmount: storeList == null?"":storeList[2].amount.toString(),
+                  callback: (){
+                    this.buyVoucher(baseUserInfo);
+                  },
+                  cashAmount: storeList == null?"":storeList[2].price.toString(),
+                ),
+                new ProductItem(
+                  volumeAmount: storeList == null?"":storeList[3].amount.toString(),
+                  callback: (){
+                    this.buyVoucher(baseUserInfo);
+                  },
+                  cashAmount: storeList == null?"":storeList[3].price.toString(),
+                )
+              ],
             ),
-            new ProductItem(
-              volumeAmount: storeList == null?"":storeList[1].amount.toString(),
-              callback: (){
-
-              },
-              cashAmount: storeList == null?"":storeList[1].price.toString(),
-            ),
-            new ProductItem(
-              volumeAmount: storeList == null?"":storeList[2].amount.toString(),
-              callback: (){
-
-              },
-              cashAmount: storeList == null?"":storeList[2].price.toString(),
-            ),
-            new ProductItem(
-              volumeAmount: storeList == null?"":storeList[3].amount.toString(),
-              callback: (){
-
-              },
-              cashAmount: storeList == null?"":storeList[3].price.toString(),
-            )
-          ],
-        ),
-      ),
+          );
+        })
     );
   }
 }

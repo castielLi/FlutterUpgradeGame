@@ -58,4 +58,10 @@ class BaseUserInfoProvider with ChangeNotifier{
     this.tobecollectedcoin = 0;
     notifyListeners();
   }
+
+  ///购买赠送券
+  buyVoucher(int amount){
+    this.voucher = amount;
+    notifyListeners();
+  }
 }

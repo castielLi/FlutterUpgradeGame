@@ -23,6 +23,11 @@ class ServiceUrl {
     return "${host}api/v1/voucher/list";
   }
 
+  ///购买赠送券
+  static buyVocher() {
+    return "${host}api/v1/voucher/buy";
+  }
+
   /// 广告分红
   static getAdDividendList() {
     return "${host}api/v1/adincome";
