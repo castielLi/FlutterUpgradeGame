@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
+import 'package:upgradegame/Common/widget/buttonsInOneRow/buttonsInOneRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
-import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/team/model/invitation.dart';
 import 'package:upgradegame/Src/pages/team/service/teamService.dart';
@@ -22,8 +23,8 @@ class TeamDetail extends StatefulWidget {
 class _TeamDetailState extends State<TeamDetail> {
   List<InvitationModel> first = [];
   List<InvitationModel> second = [];
-  bool hideFirstTab = false;
-  bool hideSecondTab = true;
+  bool firstTabHide = false;
+  bool secondTabHide = true;
   bool hideTeamResult = true;
   int initFirstLength = 20;
   int initSecondLength = 20;
@@ -59,58 +60,28 @@ class _TeamDetailState extends State<TeamDetail> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new Expanded(
-                  child: new ImageTextButton(
-                    imageUrl: "resource/images/teamSwitchBackground.png",
-                    imageWidth: ScreenUtil()
-                        .setWidth(SystemIconSize.mediumButtonWithIconWidth),
-                    imageHeight: ScreenUtil().setHeight(
-                        SystemIconSize.mediumButtonWithIconWidth / 2),
-                    buttonName: "徒 弟",
-                    textSize: SystemFontSize.settingTextFontSize,
-                    callback: () {
-                      setState(() {
-                        hideFirstTab = false;
-                        hideSecondTab = true;
-                      });
-                    },
-                  ),
-                ),
-                new Expanded(
-                  child: new ImageTextButton(
-                    imageUrl: "resource/images/teamSwitchBackground.png",
-                    imageWidth: ScreenUtil()
-                        .setWidth(SystemIconSize.mediumButtonWithIconWidth),
-                    imageHeight: ScreenUtil().setHeight(
-                        SystemIconSize.mediumButtonWithIconWidth / 2),
-                    buttonName: "徒 孙",
-                    textSize: SystemFontSize.settingTextFontSize,
-                    callback: () {
-                      setState(() {
-                        hideFirstTab = true;
-                        hideSecondTab = false;
-                      });
-                    },
-                  ),
-                )
-              ],
-            ),
+          ButtonsInOneRow(
+            buttonWidth: ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
+            buttonHeight: ScreenUtil().setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
+            buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
+            textSize: SystemFontSize.settingTextFontSize,
+            buttons: [
+              ImageTextButton(buttonName: '徒 弟', callback: () {
+                  changeTabs('first');
+                },
+              ),
+              ImageTextButton(buttonName: '徒 孙', callback: () {
+                  changeTabs('second');
+                },
+              ),
+            ],
           ),
-          (hideFirstTab && second.length == 0) ||
-                  (hideSecondTab && first.length == 0)
+          (firstTabHide && second.length == 0) || (secondTabHide && first.length == 0)
               ? Container(
                   height: ScreenUtil().setHeight(730),
                   child: Offstage(
                     offstage: hideTeamResult,
-                    child: Text(
-                      '团队成员还为0',
-                      textAlign: TextAlign.center,
-                      style: CustomFontSize.defaultTextStyle(
-                          SystemFontSize.moreMoreLargerTextSize),
+                    child: Text('团队成员还为0', textAlign: TextAlign.center, style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                     ),
                   ),
                 )
@@ -119,18 +90,13 @@ class _TeamDetailState extends State<TeamDetail> {
                   child: Column(
                     children: [
                       Container(
-                        margin:
-                            EdgeInsets.only(left: ScreenUtil().setWidth(120)),
+                        margin: EdgeInsets.only(left: ScreenUtil().setWidth(120)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text(
-                              '日期',
-                              style: CustomFontSize.defaultTextStyle(55),
+                            Text('日期', style: CustomFontSize.defaultTextStyle(55),
                             ),
-                            Text(
-                              '现金 T币',
-                              style: CustomFontSize.defaultTextStyle(55),
+                            Text('现金 T币', style: CustomFontSize.defaultTextStyle(55),
                             ),
                           ],
                         ),
@@ -140,7 +106,7 @@ class _TeamDetailState extends State<TeamDetail> {
                         child: Stack(
                           children: [
                             Offstage(
-                              offstage: hideFirstTab,
+                              offstage: firstTabHide,
                               child: EasyRefresh(
                                 refreshFooter: ClassicsFooter(
                                   bgColor: Colors.transparent,
@@ -176,7 +142,7 @@ class _TeamDetailState extends State<TeamDetail> {
                               ),
                             ),
                             Offstage(
-                                offstage: hideSecondTab,
+                                offstage: secondTabHide,
                                 child: EasyRefresh(
                                   refreshFooter: ClassicsFooter(
                                     bgColor: Colors.transparent,
@@ -219,5 +185,23 @@ class _TeamDetailState extends State<TeamDetail> {
         ],
       ),
     );
+  }
+
+  void changeTabs(String tab) {
+    setState(() {
+      firstTabHide = true;
+      secondTabHide = true;
+      switch (tab) {
+        case 'first':
+          {
+            this.firstTabHide = false;
+            break;
+          }
+        case 'second':
+          {
+            this.secondTabHide = false;
+          }
+      }
+    });
   }
 }

@@ -48,8 +48,8 @@ class _HeroAltarItem extends State<HeroAltarItem> {
             children: <Widget>[
               Image(
                 image: new AssetImage(this.widget.heroImageUrl),
-                height: ScreenUtil().setHeight(250),
-                width: ScreenUtil().setWidth(250),
+                height: ScreenUtil().setHeight(SystemIconSize.mediumIconSize),
+                width: ScreenUtil().setWidth(SystemIconSize.mediumIconSize),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,

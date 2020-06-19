@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/buttonsInOneRow/buttonsInOneRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
-import 'package:upgradegame/Common/widget/imageTextButtonWithIcon/imageTextButtonWithIcon.dart';
+import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Src/common/model/user.dart';
 import 'package:upgradegame/Src/pages/market/marketAsk.dart';
 import 'package:upgradegame/Src/pages/market/marketBid.dart';
@@ -67,54 +68,36 @@ class _MarketDetailState extends State<MarketDetail> {
             offstage: bidPageHide,
             child: Column(
               children: <Widget>[
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      ImageTextButtonWithIcon(
-                        imageUrl: 'resource/images/yellowButton.png',
-                        imageHeight:
-                            SystemIconSize.smallButtonWithIconWidth / 2,
-                        imageWidth: SystemIconSize.smallButtonWithIconWidth,
-                        iconUrl: 'resource/images/gold.png',
-                        iconHeight: SystemIconSize.smallIconSize,
-                        iconWidth: SystemIconSize.smallIconSize,
-                        buttonName: 'T币',
-                        textSize: SystemFontSize.smallButtonWithIconFontSize,
-                        callback: () {
-                          changeTabs('coin');
-                        },
-                      ),
-                      ImageTextButtonWithIcon(
-                        imageUrl: 'resource/images/yellowButton.png',
-                        imageHeight:
-                            SystemIconSize.smallButtonWithIconWidth / 2,
-                        imageWidth: SystemIconSize.smallButtonWithIconWidth,
-                        iconUrl: 'resource/images/wood.png',
-                        iconHeight: SystemIconSize.smallIconSize,
-                        iconWidth: SystemIconSize.smallIconSize,
-                        buttonName: '木材',
-                        textSize: SystemFontSize.smallButtonWithIconFontSize,
-                        callback: () {
-                          changeTabs('wood');
-                        },
-                      ),
-                      ImageTextButtonWithIcon(
-                        imageUrl: 'resource/images/yellowButton.png',
-                        imageHeight:
-                            SystemIconSize.smallButtonWithIconWidth / 2,
-                        imageWidth: SystemIconSize.smallButtonWithIconWidth,
-                        iconUrl: 'resource/images/stone.png',
-                        iconHeight: SystemIconSize.smallIconSize,
-                        iconWidth: SystemIconSize.smallIconSize,
-                        buttonName: '石材',
-                        textSize: SystemFontSize.smallButtonWithIconFontSize,
-                        callback: () {
-                          changeTabs('stone');
-                        },
-                      ),
-                    ],
-                  ),
+                ButtonsInOneRow(
+                  buttonWidth: ScreenUtil().setWidth(SystemIconSize.smallButtonWithIconWidth),
+                  buttonHeight: ScreenUtil().setHeight(SystemIconSize.smallButtonWithIconWidth / 2),
+                  iconWidth: ScreenUtil().setWidth(SystemIconSize.smallIconSize),
+                  iconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
+                  buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
+                  textSize: SystemFontSize.smallButtonWithIconFontSize,
+                  buttons: [
+                    ImageTextButton(
+                      buttonName: 'T币',
+                      iconUrl: 'resource/images/gold.png',
+                      callback: () {
+                        changeTabs('coin');
+                      },
+                    ),
+                    ImageTextButton(
+                      buttonName: '木头',
+                      iconUrl: 'resource/images/wood.png',
+                      callback: () {
+                        changeTabs('wood');
+                      },
+                    ),
+                    ImageTextButton(
+                      buttonName: '石材',
+                      iconUrl: 'resource/images/stone.png',
+                      callback: () {
+                        changeTabs('stone');
+                      },
+                    ),
+                  ],
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 10),
@@ -292,12 +275,15 @@ class _MarketDetailState extends State<MarketDetail> {
           ),
           Offstage(
             offstage: askPageHide,
-            child: MarketAsk(sellType: sellType,viewCallback: (){
-              setState(() {
-                askPageHide = true;
-                bidPageHide = false;
-              });
-            },),
+            child: MarketAsk(
+              sellType: sellType,
+              viewCallback: () {
+                setState(() {
+                  askPageHide = true;
+                  bidPageHide = false;
+                });
+              },
+            ),
           ),
         ],
       ),

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
-import 'package:upgradegame/Common/widget/imageTextButtonWithIcon/imageTextButtonWithIcon.dart';
+import 'package:upgradegame/Common/widget/buttonsInOneRow/buttonsInOneRow.dart';
+import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/rank/model/rankModel.dart';
 import 'package:upgradegame/Src/pages/rank/rankItem.dart';
@@ -49,48 +50,33 @@ class _RankDetailState extends State<RankDetail> {
           ScreenUtil().setWidth(100), // 左
           ScreenUtil().setHeight(400), // 上
           ScreenUtil().setWidth(100), // 右
-          ScreenUtil().setHeight(200)),  // 下
+          ScreenUtil().setHeight(200)), // 下
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                ImageTextButtonWithIcon(
-                  imageUrl: 'resource/images/yellowButton.png',
-                  imageHeight: SystemIconSize.mediumButtonWithIconWidth/2,
-                  imageWidth: SystemIconSize.mediumButtonWithIconWidth,
-                  iconUrl: 'resource/images/gold.png',
-                  iconHeight: SystemIconSize.mediumIconSize,
-                  iconWidth: SystemIconSize.mediumIconSize,
-                  buttonName: 'T币',
-                  textSize: SystemFontSize.mediumButtonWithIconFontSize,
-                  callback: () {
-                    setState(() {
-                      coinTabHide = false;
-                      incomeTabHide = true;
-                    });
-                  },
-                ),
-                ImageTextButtonWithIcon(
-                  imageUrl: 'resource/images/yellowButton.png',
-                  imageHeight: SystemIconSize.mediumButtonWithIconWidth/2,
-                  imageWidth: SystemIconSize.mediumButtonWithIconWidth,
-                  iconUrl: 'resource/images/withdraw.png',
-                  iconHeight: SystemIconSize.mediumIconSize,
-                  iconWidth: SystemIconSize.mediumIconSize,
-                  buttonName: '提现',
-                  textSize: SystemFontSize.mediumButtonWithIconFontSize,
-                  callback: () {
-                    setState(() {
-                      coinTabHide = true;
-                      incomeTabHide = false;
-                    });
-                  },
-                ),
-              ],
-            ),
+          ButtonsInOneRow(
+            buttonWidth: ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
+            buttonHeight: ScreenUtil().setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
+            iconWidth: ScreenUtil().setWidth(SystemIconSize.largeIconSize),
+            iconHeight: ScreenUtil().setHeight(SystemIconSize.largeIconSize),
+            buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
+            textSize: SystemFontSize.mediumButtonWithIconFontSize,
+            buttons: [
+              ImageTextButton(
+                buttonName: 'T币',
+                iconUrl: 'resource/images/gold.png',
+                callback: () {
+                  changeTabs('coin');
+                },
+              ),
+              ImageTextButton(
+                buttonName: '提现',
+                iconUrl: 'resource/images/withdraw.png',
+                callback: () {
+                  changeTabs('income');
+                },
+              ),
+            ],
           ),
           Container(
             width: ScreenUtil().setWidth(800),
@@ -136,5 +122,23 @@ class _RankDetailState extends State<RankDetail> {
         ],
       ),
     );
+  }
+
+  void changeTabs(String tab) {
+    setState(() {
+      coinTabHide = true;
+      incomeTabHide = true;
+      switch (tab) {
+        case 'coin':
+          {
+            this.coinTabHide = false;
+            break;
+          }
+        case 'income':
+          {
+            this.incomeTabHide = false;
+          }
+      }
+    });
   }
 }

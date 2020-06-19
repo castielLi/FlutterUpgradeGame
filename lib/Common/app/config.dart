@@ -47,12 +47,13 @@ class SystemColor {
 }
 
 class SystemIconSize {
-  static const smallIconSize = 90.0;
-  static const mediumIconSize = 133.0;
-  static const largeIconSize = 250.0;
+  static const smallIconSize = 180.0;
+  static const mediumIconSize = 250.0;
+  static const largeIconSize = 333.0;
   static const mainPageIconSize = 350.0;
+  static const mainPageStatusBarIconSize = 133.0;
   static const smallButtonWithIconWidth = 240.0;
-  static const mediumButtonWithIconWidth = 360.0;
+  static const largeButtonWithIconWidth = 360.0;
 }
 
 ///系统字体大小
