@@ -46,4 +46,9 @@ class ServiceUrl {
   static getRaidersList(){
     return "${host}api/v1/strategy";
   }
+
+  /// 获取t币
+  static takeCoin() {
+    return "${host}api/v1/mainbuild/tcoin/fetch";
+  }
 }

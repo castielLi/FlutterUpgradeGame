@@ -50,15 +50,12 @@ class BaseUserInfoProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  void takeCoin(){
-    this.tcoinamount += tobecollectedcoin;
-    tobecollectedcoin = 0;
+  ///获取t币
+  takeCoin(int tconamount, int woodamount , int stoneamount){
+    this.tcoinamount = tconamount;
+    this.woodamount = woodamount;
+    this.stoneamount = stoneamount;
+    this.tobecollectedcoin = 0;
+    notifyListeners();
   }
-
-  void runProductCoin(int tCoinAmount,int woodAmount, int stoneAmount){
-    this.tobecollectedcoin = tCoinAmount;
-    this.woodamount = woodAmount;
-    this.stoneamount = stoneAmount;
-  }
-
 }

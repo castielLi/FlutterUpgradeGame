@@ -8,6 +8,7 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
+import 'package:upgradegame/Src/pages/main/model/takeCoinModel.dart';
 import 'package:upgradegame/Src/pages/main/service/mainService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
@@ -16,6 +17,7 @@ import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/main/common/dividendPart.dart';
+import 'package:progress_hud/progress_hud.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -26,11 +28,24 @@ class _MainPageState extends State<MainPage> {
   bool mainBuilding = true;
   bool mainBuildingCoin = false;
 
+  ProgressHUD _progressHUD;
+  bool _loading = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    _progressHUD = new ProgressHUD(
+      backgroundColor: Colors.transparent,
+      color: Colors.white,
+      containerColor: Colors.black,
+      borderRadius: 5.0,
+      text: '',
+      loading: false,
+    );
+
+
     ///系统自动判断是否需要产生t币
     Timer.periodic( Duration( seconds: 10 ), ( timer ) {
       int timeMinute = DateTime.now().minute;
@@ -72,8 +87,22 @@ class _MainPageState extends State<MainPage> {
     super.didChangeDependencies();
   }
 
+  void showOrDismissProgressHUD() {
+    setState(() {
+      if (_loading) {
+        _progressHUD.state.dismiss();
+      } else {
+        _progressHUD.state.show();
+      }
+
+      _loading = !_loading;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
+
     return new Container(
       color: Colors.white,
       child: ProvideMulti(
@@ -87,10 +116,6 @@ class _MainPageState extends State<MainPage> {
             this.mainBuildingCoin = true;
             this.mainBuilding = false;
           }
-
-
-
-
           return Stack(
             children: <Widget>[
               new Image(
@@ -374,8 +399,11 @@ class _MainPageState extends State<MainPage> {
                           width: ScreenUtil().setWidth(600),
                           imageUrl: "resource/images/mainBuildingCoin.png",
                           callback: () {
-                            baseUserInfo.takeCoin();
-                            this.setMainBuildingNormal();
+                            this.showOrDismissProgressHUD();
+                            MainService.takeCoin((TakeCoinModel model){
+                              this.showOrDismissProgressHUD();
+                              baseUserInfo.takeCoin(model.tcoinamount,model.woodamount,model.stoneamount);
+                            });
                           },
                         ),
                         Container(
@@ -579,6 +607,7 @@ class _MainPageState extends State<MainPage> {
                           ))
                     ],
                   )),
+              _progressHUD
             ],
           );
         },
