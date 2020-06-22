@@ -55,25 +55,19 @@ class _RankDetailState extends State<RankDetail> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           ButtonsInOneRow(
-            buttonWidth:
-                ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
-            buttonHeight: ScreenUtil()
-                .setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
+            buttonWidth: ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
+            buttonHeight: ScreenUtil().setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
             iconWidth: ScreenUtil().setWidth(SystemIconSize.largeIconSize),
             iconHeight: ScreenUtil().setHeight(SystemIconSize.largeIconSize),
             buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
             textSize: SystemFontSize.mediumButtonWithIconFontSize,
             buttons: [
-              ImageTextButton(
-                buttonName: 'T币',
-                iconUrl: 'resource/images/gold.png',
+              ImageTextButton(buttonName: 'T币', iconUrl: 'resource/images/gold.png',
                 callback: () {
                   changeTabs('coin');
                 },
               ),
-              ImageTextButton(
-                buttonName: '提现',
-                iconUrl: 'resource/images/withdraw.png',
+              ImageTextButton(buttonName: '提现', iconUrl: 'resource/images/withdraw.png',
                 callback: () {
                   changeTabs('income');
                 },
@@ -94,11 +88,7 @@ class _RankDetailState extends State<RankDetail> {
                         count = 5;
                       }
                       String imageUrl = 'resource/images/rank$count.png';
-                      return RankItem(
-                        imageUrl: imageUrl,
-                        avatarUrl: 'resource/images/avatar.png',
-                        rankName: coinList[index].displayname,
-                        value: coinList[index].amount,
+                      return RankItem(imageUrl: imageUrl, avatarUrl: 'resource/images/avatar.png', rankName: coinList[index].displayname, value: coinList[index].amount,
                       );
                     },
                   )
@@ -112,11 +102,7 @@ class _RankDetailState extends State<RankDetail> {
                         count = 5;
                       }
                       String imageUrl = 'resource/images/rank$count.png';
-                      return RankItem(
-                        imageUrl: imageUrl,
-                        avatarUrl: 'resource/images/avatar.png',
-                        rankName: incomeList[index].displayname,
-                        value: incomeList[index].amount,
+                      return RankItem(imageUrl: imageUrl, avatarUrl: 'resource/images/avatar.png', rankName: incomeList[index].displayname, value: incomeList[index].amount,
                       );
                     },
                   ),

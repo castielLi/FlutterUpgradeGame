@@ -21,6 +21,7 @@ class MarketDetail extends StatefulWidget {
 class _MarketDetailState extends State<MarketDetail> {
   List<User> searchResult = [];
   final controller = TextEditingController();
+
   bool bidPageHide = false;
   bool askPageHide = true;
   bool coinHide = true;
@@ -69,34 +70,23 @@ class _MarketDetailState extends State<MarketDetail> {
             child: Column(
               children: <Widget>[
                 ButtonsInOneRow(
-                  buttonWidth: ScreenUtil()
-                      .setWidth(SystemIconSize.smallButtonWithIconWidth),
-                  buttonHeight: ScreenUtil()
-                      .setHeight(SystemIconSize.smallButtonWithIconWidth / 2),
-                  iconWidth:
-                      ScreenUtil().setWidth(SystemIconSize.smallIconSize),
-                  iconHeight:
-                      ScreenUtil().setHeight(SystemIconSize.smallIconSize),
+                  buttonWidth: ScreenUtil().setWidth(SystemIconSize.smallButtonWithIconWidth),
+                  buttonHeight: ScreenUtil().setHeight(SystemIconSize.smallButtonWithIconWidth / 2),
+                  iconWidth: ScreenUtil().setWidth(SystemIconSize.smallIconSize),
+                  iconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
                   buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
                   textSize: SystemFontSize.smallButtonWithIconFontSize,
                   buttons: [
-                    ImageTextButton(
-                      buttonName: 'T币',
-                      iconUrl: 'resource/images/gold.png',
-                      callback: () {
+                    ImageTextButton(buttonName: 'T币', iconUrl: 'resource/images/gold.png', callback: () {
                         changeTabs('coin');
                       },
                     ),
-                    ImageTextButton(
-                      buttonName: '木头',
-                      iconUrl: 'resource/images/wood.png',
+                    ImageTextButton(buttonName: '木头', iconUrl: 'resource/images/wood.png',
                       callback: () {
                         changeTabs('wood');
                       },
                     ),
-                    ImageTextButton(
-                      buttonName: '石材',
-                      iconUrl: 'resource/images/stone.png',
+                    ImageTextButton(buttonName: '石材', iconUrl: 'resource/images/stone.png',
                       callback: () {
                         changeTabs('stone');
                       },
@@ -121,51 +111,25 @@ class _MarketDetailState extends State<MarketDetail> {
                                   padding: EdgeInsets.only(top: 5),
                                   child: new Card(
                                       child: new Container(
-                                    child: new Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
+                                    child: new Row(crossAxisAlignment: CrossAxisAlignment.center,
                                       children: <Widget>[
-                                        SizedBox(
-                                          width: 5.0,
-                                        ),
-                                        Icon(
-                                          Icons.search,
-                                          color: Colors.grey,
-                                        ),
+                                        SizedBox(width: 5.0,),
+                                        Icon(Icons.search, color: Colors.grey,),
                                         Expanded(
                                           child: Container(
                                             alignment: Alignment.center,
                                             child: TextField(
                                               controller: controller,
-                                              decoration: new InputDecoration(
-                                                  hintText: '输入用户名',
-                                                  border: InputBorder.none),
+                                              decoration: new InputDecoration(hintText: '输入用户名', border: InputBorder.none),
                                               onSubmitted: (String input) {
                                                 // TODO 获取搜索用户数据
                                                 input = controller.text;
                                                 setState(() {
                                                   searchResult.clear();
                                                   userSearchResultHide = false;
-                                                  searchResult.add(User(
-                                                    avatarUrl:
-                                                        'resource/images/avatar.png',
-                                                    name: '黄小龙',
-                                                    id: '1000' +
-                                                        (falseId++).toString(),
-                                                  ));
-                                                  searchResult.add(User(
-                                                    avatarUrl:
-                                                        'resource/images/avatar.png',
-                                                    name: '张三',
-                                                    id: '1000' +
-                                                        (falseId++).toString(),
-                                                  ));
-                                                  searchResult.add(User(
-                                                    avatarUrl:
-                                                        'resource/images/avatar.png',
-                                                    name: '李四',
-                                                    id: '1000' +
-                                                        (falseId++).toString(),
+                                                  searchResult.add(User(avatarUrl: 'resource/images/avatar.png', name: '黄小龙', id: '1000' + (falseId++).toString(),));
+                                                  searchResult.add(User(avatarUrl: 'resource/images/avatar.png', name: '张三', id: '1000' + (falseId++).toString(),));
+                                                  searchResult.add(User(avatarUrl: 'resource/images/avatar.png', name: '李四', id: '1000' + (falseId++).toString(),
                                                   ));
                                                 });
                                               },
@@ -210,12 +174,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                   itemCount: 4,
                                   itemBuilder:
                                       (BuildContext context, int index) {
-                                    return MarketBidItem(
-                                      avatarUrl: 'resource/images/avatar.png',
-                                      name: '黄小龙',
-                                      bidType: 'wood',
-                                      amount: 21231,
-                                      needCoin: 192,
+                                    return MarketBidItem(avatarUrl: 'resource/images/avatar.png', name: '黄小龙', bidType: 'wood', amount: 21231, needCoin: 192,
                                     );
                                   }),
                             ),
@@ -246,12 +205,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                   itemCount: 2,
                                   itemBuilder:
                                       (BuildContext context, int index) {
-                                    return MarketBidItem(
-                                      avatarUrl: 'resource/images/avatar.png',
-                                      name: '黄小龙',
-                                      bidType: 'stone',
-                                      amount: 21231,
-                                      needCoin: 192,
+                                    return MarketBidItem(avatarUrl: 'resource/images/avatar.png', name: '黄小龙', bidType: 'stone', amount: 21231, needCoin: 192,
                                     );
                                   }),
                             ),
