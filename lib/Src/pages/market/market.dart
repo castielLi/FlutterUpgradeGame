@@ -69,10 +69,14 @@ class _MarketDetailState extends State<MarketDetail> {
             child: Column(
               children: <Widget>[
                 ButtonsInOneRow(
-                  buttonWidth: ScreenUtil().setWidth(SystemIconSize.smallButtonWithIconWidth),
-                  buttonHeight: ScreenUtil().setHeight(SystemIconSize.smallButtonWithIconWidth / 2),
-                  iconWidth: ScreenUtil().setWidth(SystemIconSize.smallIconSize),
-                  iconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
+                  buttonWidth: ScreenUtil()
+                      .setWidth(SystemIconSize.smallButtonWithIconWidth),
+                  buttonHeight: ScreenUtil()
+                      .setHeight(SystemIconSize.smallButtonWithIconWidth / 2),
+                  iconWidth:
+                      ScreenUtil().setWidth(SystemIconSize.smallIconSize),
+                  iconHeight:
+                      ScreenUtil().setHeight(SystemIconSize.smallIconSize),
                   buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
                   textSize: SystemFontSize.smallButtonWithIconFontSize,
                   buttons: [

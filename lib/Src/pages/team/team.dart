@@ -61,27 +61,39 @@ class _TeamDetailState extends State<TeamDetail> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           ButtonsInOneRow(
-            buttonWidth: ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
-            buttonHeight: ScreenUtil().setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
-            buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
+            buttonWidth:
+                ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
+            buttonHeight: ScreenUtil()
+                .setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
+            buttonBackgroundImageUrl:
+                'resource/images/teamSwitchBackground.png',
             textSize: SystemFontSize.settingTextFontSize,
             buttons: [
-              ImageTextButton(buttonName: '徒 弟', callback: () {
+              ImageTextButton(
+                buttonName: '徒 弟',
+                callback: () {
                   changeTabs('first');
                 },
               ),
-              ImageTextButton(buttonName: '徒 孙', callback: () {
+              ImageTextButton(
+                buttonName: '徒 孙',
+                callback: () {
                   changeTabs('second');
                 },
               ),
             ],
           ),
-          (firstTabHide && second.length == 0) || (secondTabHide && first.length == 0)
+          (firstTabHide && second.length == 0) ||
+                  (secondTabHide && first.length == 0)
               ? Container(
                   height: ScreenUtil().setHeight(730),
                   child: Offstage(
                     offstage: hideTeamResult,
-                    child: Text('团队成员还为0', textAlign: TextAlign.center, style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                    child: Text(
+                      '团队成员还为0',
+                      textAlign: TextAlign.center,
+                      style: CustomFontSize.defaultTextStyle(
+                          SystemFontSize.moreMoreLargerTextSize),
                     ),
                   ),
                 )
@@ -90,13 +102,18 @@ class _TeamDetailState extends State<TeamDetail> {
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(left: ScreenUtil().setWidth(120)),
+                        margin:
+                            EdgeInsets.only(left: ScreenUtil().setWidth(120)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text('日期', style: CustomFontSize.defaultTextStyle(55),
+                            Text(
+                              '日期',
+                              style: CustomFontSize.defaultTextStyle(55),
                             ),
-                            Text('现金 T币', style: CustomFontSize.defaultTextStyle(55),
+                            Text(
+                              '现金 T币',
+                              style: CustomFontSize.defaultTextStyle(55),
                             ),
                           ],
                         ),

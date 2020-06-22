@@ -55,8 +55,10 @@ class _RankDetailState extends State<RankDetail> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           ButtonsInOneRow(
-            buttonWidth: ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
-            buttonHeight: ScreenUtil().setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
+            buttonWidth:
+                ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
+            buttonHeight: ScreenUtil()
+                .setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
             iconWidth: ScreenUtil().setWidth(SystemIconSize.largeIconSize),
             iconHeight: ScreenUtil().setHeight(SystemIconSize.largeIconSize),
             buttonBackgroundImageUrl: 'resource/images/yellowButton.png',

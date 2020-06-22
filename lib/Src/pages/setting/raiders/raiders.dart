@@ -56,10 +56,12 @@ class _RaidersDetailState extends State<RaidersDetail> {
       child: new Column(
         children: <Widget>[
           ButtonsInOneRow(
-            buttonWidth: ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
-            buttonHeight: ScreenUtil().setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
+            buttonWidth:
+                ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
+            buttonHeight: ScreenUtil()
+                .setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
             buttonBackgroundImageUrl:
-            'resource/images/teamSwitchBackground.png',
+                'resource/images/teamSwitchBackground.png',
             textSize: SystemFontSize.settingTextFontSize,
             buttons: [
               ImageTextButton(
@@ -125,6 +127,7 @@ class _RaidersDetailState extends State<RaidersDetail> {
       ),
     );
   }
+
   void changeTabs(String tab) {
     setState(() {
       basicHide = true;
