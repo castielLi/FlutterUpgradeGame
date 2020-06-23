@@ -23,8 +23,7 @@ class TeamDetail extends StatefulWidget {
 class _TeamDetailState extends State<TeamDetail> {
   List<InvitationModel> first = [];
   List<InvitationModel> second = [];
-  bool firstTabHide = false;
-  bool secondTabHide = true;
+  String tabName = 'first';
   bool hideTeamResult = true;
   int initFirstLength = 20;
   int initSecondLength = 20;
@@ -52,21 +51,14 @@ class _TeamDetailState extends State<TeamDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(100),
-          ScreenUtil().setHeight(400),
-          ScreenUtil().setWidth(100),
-          ScreenUtil().setHeight(200)),
+      margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(400), ScreenUtil().setWidth(100), ScreenUtil().setHeight(200)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           ButtonsInOneRow(
-            buttonWidth:
-                ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
-            buttonHeight: ScreenUtil()
-                .setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
-            buttonBackgroundImageUrl:
-                'resource/images/teamSwitchBackground.png',
+            buttonWidth: ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
+            buttonHeight: ScreenUtil().setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
+            buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
             textSize: SystemFontSize.settingTextFontSize,
             buttons: [
               ImageTextButton(
@@ -83,8 +75,7 @@ class _TeamDetailState extends State<TeamDetail> {
               ),
             ],
           ),
-          (firstTabHide && second.length == 0) ||
-                  (secondTabHide && first.length == 0)
+          second.length == 0 && first.length == 0
               ? Container(
                   height: ScreenUtil().setHeight(730),
                   child: Offstage(
@@ -92,8 +83,7 @@ class _TeamDetailState extends State<TeamDetail> {
                     child: Text(
                       '团队成员还为0',
                       textAlign: TextAlign.center,
-                      style: CustomFontSize.defaultTextStyle(
-                          SystemFontSize.moreMoreLargerTextSize),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                     ),
                   ),
                 )
@@ -102,18 +92,17 @@ class _TeamDetailState extends State<TeamDetail> {
                   child: Column(
                     children: [
                       Container(
-                        margin:
-                            EdgeInsets.only(left: ScreenUtil().setWidth(120)),
+                        margin: EdgeInsets.only(left: ScreenUtil().setWidth(120)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Text(
                               '日期',
-                              style: CustomFontSize.defaultTextStyle(55),
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                             ),
                             Text(
                               '现金 T币',
-                              style: CustomFontSize.defaultTextStyle(55),
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                             ),
                           ],
                         ),
@@ -123,7 +112,7 @@ class _TeamDetailState extends State<TeamDetail> {
                         child: Stack(
                           children: [
                             Offstage(
-                              offstage: firstTabHide,
+                              offstage: tabName != 'first',
                               child: EasyRefresh(
                                 refreshFooter: ClassicsFooter(
                                   bgColor: Colors.transparent,
@@ -139,18 +128,12 @@ class _TeamDetailState extends State<TeamDetail> {
                                     ? Text(
                                         '团队成员还为0',
                                         textAlign: TextAlign.center,
-                                        style: CustomFontSize.defaultTextStyle(
-                                            SystemFontSize
-                                                .moreMoreLargerTextSize),
+                                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                                       )
                                     : ListView.builder(
-                                        itemCount:
-                                            first.length > initFirstLength
-                                                ? initFirstLength
-                                                : first.length,
+                                        itemCount: first.length > initFirstLength ? initFirstLength : first.length,
                                         padding: EdgeInsets.all(1.0),
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
+                                        itemBuilder: (BuildContext context, int index) {
                                           return TeamItem(
                                             invite: first[index],
                                           );
@@ -159,7 +142,7 @@ class _TeamDetailState extends State<TeamDetail> {
                               ),
                             ),
                             Offstage(
-                                offstage: secondTabHide,
+                                offstage: tabName != 'second',
                                 child: EasyRefresh(
                                   refreshFooter: ClassicsFooter(
                                     bgColor: Colors.transparent,
@@ -172,12 +155,9 @@ class _TeamDetailState extends State<TeamDetail> {
                                     });
                                   },
                                   child: ListView.builder(
-                                    itemCount: second.length > initSecondLength
-                                        ? initSecondLength
-                                        : second.length,
+                                    itemCount: second.length > initSecondLength ? initSecondLength : second.length,
                                     padding: EdgeInsets.all(1.0),
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
+                                    itemBuilder: (BuildContext context, int index) {
                                       return TeamItem(
                                         invite: second[index],
                                       );
@@ -206,19 +186,7 @@ class _TeamDetailState extends State<TeamDetail> {
 
   void changeTabs(String tab) {
     setState(() {
-      firstTabHide = true;
-      secondTabHide = true;
-      switch (tab) {
-        case 'first':
-          {
-            this.firstTabHide = false;
-            break;
-          }
-        case 'second':
-          {
-            this.secondTabHide = false;
-          }
-      }
+      tabName = tab;
     });
   }
 }

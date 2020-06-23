@@ -147,7 +147,7 @@ class _MainPageState extends State<MainPage> {
                               child: new ResourceWidget(
                                 amount: baseUserInfo.TCoinAmount.toString(),
                                 size: ScreenUtil().setHeight(130),
-                                imageUrl: "resource/images/gold.png",
+                                imageUrl: "resource/images/coin.png",
                               ),
                               flex: 1,
                             ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/pages/announcement/model/announcementModel.dart';
@@ -18,7 +17,6 @@ class AnnouncementDetail extends StatefulWidget {
 
 class _AnnouncementDetailState extends State<AnnouncementDetail> {
   String content = '';
-  int count = 10;
 
   @override
   void initState() {
@@ -51,8 +49,7 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
           Text(
             content,
             textAlign: TextAlign.center,
-            style: CustomFontSize.defaultTextStyle(
-                SystemFontSize.moreMoreLargerTextSize),
+            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
           ),
         ],
       ),

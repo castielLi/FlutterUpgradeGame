@@ -52,7 +52,7 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
               itemBuilder: (content, index) {
                 return WithdrawItem(
                   tDate: '2020-06-04',
-                  tTypeImageUrl: 'resource/images/gold.png',
+                  tTypeImageUrl: 'resource/images/coin.png',
                   tAmount: 2314,
                 );
               }),

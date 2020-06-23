@@ -10,8 +10,7 @@ class MarketAsk extends StatefulWidget {
   VoidCallback HUD;
   VoidCallback viewCallback;
 
-  MarketAsk({Key key, this.HUD, this.viewCallback, this.sellType})
-      : super(key: key);
+  MarketAsk({Key key, this.HUD, this.viewCallback, this.sellType}) : super(key: key);
 
   _MarketAskState createState() => new _MarketAskState();
 }
@@ -30,7 +29,7 @@ class _MarketAskState extends State<MarketAsk> {
         children: [
           Text(
             '出售的' + this.widget.sellType + '数量:',
-            style: CustomFontSize.defaultTextStyle(50),
+            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
           ),
           Container(
             height: ScreenUtil().setHeight(150),
@@ -45,8 +44,8 @@ class _MarketAskState extends State<MarketAsk> {
                       alignment: Alignment.center,
                       child: TextField(
                         controller: amountController,
-                        decoration:
-                            new InputDecoration(border: InputBorder.none),
+                        keyboardType: TextInputType.number,
+                        decoration: new InputDecoration(border: InputBorder.none),
                         onSubmitted: (String input) {
                           input = amountController.text;
                         },
@@ -68,7 +67,7 @@ class _MarketAskState extends State<MarketAsk> {
           ),
           Text(
             '需要的T币数量:',
-            style: CustomFontSize.defaultTextStyle(50),
+            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
           ),
           Container(
             height: ScreenUtil().setHeight(150),
@@ -83,8 +82,8 @@ class _MarketAskState extends State<MarketAsk> {
                       alignment: Alignment.center,
                       child: TextField(
                         controller: coinController,
-                        decoration:
-                            new InputDecoration(border: InputBorder.none),
+                        keyboardType: TextInputType.number,
+                        decoration: new InputDecoration(border: InputBorder.none),
                         onSubmitted: (String input) {
                           input = coinController.text;
                         },

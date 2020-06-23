@@ -30,8 +30,7 @@ class _AdDividendDetailState extends State<AdDividendDetail> {
       AdDividendService.getAdDividendList().then((data) {
         if (data.code == ConfigSetting.SUCCESS && data.data != null) {
           setState(() {
-            adDividendDataList =
-                AdDividendListModel.fromJson(data.data).datalist;
+            adDividendDataList = AdDividendListModel.fromJson(data.data).datalist;
             if (null != adDividendDataList) {
               adDividendDataList.forEach((adDividend) {
                 switch (adDividend.type) {
@@ -65,18 +64,9 @@ class _AdDividendDetailState extends State<AdDividendDetail> {
           ScreenUtil().setHeight(200)),
       child: Column(
         children: <Widget>[
-          AdPool(
-              heroImageUrl: 'resource/images/warrior.png',
-              poolName: '勇士',
-              adDividend: warrior),
-          AdPool(
-              heroImageUrl: 'resource/images/hunter.png',
-              poolName: '猎人',
-              adDividend: hunter),
-          AdPool(
-              heroImageUrl: 'resource/images/shaman.png',
-              poolName: '萨满',
-              adDividend: shaman),
+          AdPool(heroImageUrl: 'resource/images/warrior.png', poolName: '勇士', adDividend: warrior),
+          AdPool(heroImageUrl: 'resource/images/hunter.png', poolName: '猎人', adDividend: hunter),
+          AdPool(heroImageUrl: 'resource/images/shaman.png', poolName: '萨满', adDividend: shaman),
         ],
       ),
     );

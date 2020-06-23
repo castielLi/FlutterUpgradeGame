@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/buttonsInOneRow/buttonsInOneRow.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Src/pages/setting/raiders/raiders.dart';
 import 'package:upgradegame/Src/pages/setting/protocol/protocol.dart';
@@ -13,30 +14,21 @@ class SettingDetail extends StatefulWidget {
   final changeTitleCallback;
   VoidCallback displayOriginalTitleCallback;
 
-  SettingDetail(
-      {Key key,
-      this.HUD,
-      this.changeTitleCallback,
-      this.displayOriginalTitleCallback})
-      : super(key: key);
+  SettingDetail({Key key, this.HUD, this.changeTitleCallback, this.displayOriginalTitleCallback}) : super(key: key);
 
   _SettingDetailState createState() => new _SettingDetailState();
 }
 
 class _SettingDetailState extends State<SettingDetail> {
   bool settingHide = false;
-  bool raidersHide = true;
-  bool protocolHide = true;
-  bool privateHide = true;
-  bool aboutUsHide = true;
+  String buttonName = '';
 
-  void showSettingDetail() {
+  switchPageBetweenFatherAndSon({String sonPageName}) {
     setState(() {
-      settingHide = false;
-      raidersHide = true;
-      protocolHide = true;
-      privateHide = true;
-      aboutUsHide = true;
+      // 子界面名称
+      buttonName = sonPageName;
+      // 父界面是否隐藏
+      settingHide = (null != sonPageName && '' != sonPageName);
     });
   }
 
@@ -54,62 +46,38 @@ class _SettingDetailState extends State<SettingDetail> {
           new Offstage(
             offstage: this.settingHide,
             child: new Center(
-              child: new Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new ImageTextButton(
-                    imageUrl: "resource/images/settingButtonBackground.png",
-                    imageWidth: ScreenUtil().setWidth(900),
-                    imageHeight: ScreenUtil().setHeight(190),
-                    buttonName: "攻 略",
-                    textSize: SystemFontSize.settingTextFontSize,
+              child: ButtonsInOneRow(
+                buttonWidth: ScreenUtil().setWidth(900),
+                buttonHeight: ScreenUtil().setHeight(190),
+                buttonBackgroundImageUrl: 'resource/images/settingButtonBackground.png',
+                textSize: SystemFontSize.settingTextFontSize,
+                isColumn: true,
+                buttons: [
+                  ImageTextButton(
+                    buttonName: '攻 略',
                     callback: () {
-                      setState(() {
-                        settingHide = true;
-                        raidersHide = false;
-                      });
+                      switchPageBetweenFatherAndSon(sonPageName: "raiders");
                       this.widget.changeTitleCallback("攻略");
                     },
                   ),
-                  new ImageTextButton(
-                    imageUrl: "resource/images/settingButtonBackground.png",
-                    imageWidth: ScreenUtil().setWidth(900),
-                    imageHeight: ScreenUtil().setHeight(190),
-                    buttonName: "用户协议",
-                    textSize: SystemFontSize.settingTextFontSize,
+                  ImageTextButton(
+                    buttonName: '用户协议',
                     callback: () {
-                      setState(() {
-                        settingHide = true;
-                        protocolHide = false;
-                      });
+                      switchPageBetweenFatherAndSon(sonPageName: "protocol");
                       this.widget.changeTitleCallback("用户协议");
                     },
                   ),
-                  new ImageTextButton(
-                    imageUrl: "resource/images/settingButtonBackground.png",
-                    imageWidth: ScreenUtil().setWidth(900),
-                    imageHeight: ScreenUtil().setHeight(190),
-                    buttonName: "隐私条款",
-                    textSize: SystemFontSize.settingTextFontSize,
+                  ImageTextButton(
+                    buttonName: '隐私条款',
                     callback: () {
-                      setState(() {
-                        settingHide = true;
-                        privateHide = false;
-                      });
+                      switchPageBetweenFatherAndSon(sonPageName: "privacy");
                       this.widget.changeTitleCallback("隐私条款");
                     },
                   ),
-                  new ImageTextButton(
-                    imageUrl: "resource/images/settingButtonBackground.png",
-                    imageWidth: ScreenUtil().setWidth(900),
-                    imageHeight: ScreenUtil().setHeight(190),
-                    buttonName: "关于我们",
-                    textSize: SystemFontSize.settingTextFontSize,
+                  ImageTextButton(
+                    buttonName: '关于我们',
                     callback: () {
-                      setState(() {
-                        settingHide = true;
-                        aboutUsHide = false;
-                      });
+                      switchPageBetweenFatherAndSon(sonPageName: "aboutUs");
                       this.widget.changeTitleCallback("关于我们");
                     },
                   ),
@@ -118,41 +86,42 @@ class _SettingDetailState extends State<SettingDetail> {
             ),
           ),
           new Offstage(
-            offstage: this.raidersHide,
+            offstage: buttonName != "raiders",
             child: new RaidersDetail(
               HUD: this.widget.HUD,
               viewCallback: () {
-                showSettingDetail();
+                // TODO 子界面父界面更改的方法
+                switchPageBetweenFatherAndSon();
                 this.widget.displayOriginalTitleCallback();
               },
             ),
           ),
           new Offstage(
-            offstage: this.protocolHide,
+            offstage: buttonName != "protocol",
             child: new ProtocolDetail(
               HUD: this.widget.HUD,
               viewCallback: () {
-                showSettingDetail();
+                switchPageBetweenFatherAndSon();
                 this.widget.displayOriginalTitleCallback();
               },
             ),
           ),
           new Offstage(
-            offstage: this.privateHide,
+            offstage: buttonName != "privacy",
             child: new PrivateDetail(
               HUD: this.widget.HUD,
               viewCallback: () {
-                showSettingDetail();
+                switchPageBetweenFatherAndSon();
                 this.widget.displayOriginalTitleCallback();
               },
             ),
           ),
           new Offstage(
-            offstage: this.aboutUsHide,
+            offstage: buttonName != "aboutUs",
             child: new AboutUsDetail(
               HUD: this.widget.HUD,
               viewCallback: () {
-                showSettingDetail();
+                switchPageBetweenFatherAndSon();
                 this.widget.displayOriginalTitleCallback();
               },
             ),

@@ -56,4 +56,18 @@ class ServiceUrl {
   static takeCoin() {
     return "${host}api/v1/mainbuild/tcoin/fetch";
   }
+  /// 获取协议
+  static getProtocol(){
+    return "${host}api/api/useragreement";
+  }
+  /// 关于我们
+  static getAboutUs(){
+    return "${host}api/api/aboutus";
+  }
+  /// 隐私条款
+  static getPrivacyPolicy(){
+    return "${host}api/api/privacy";
+  }
+
 }
+

@@ -27,8 +27,7 @@ class _FarmDetailState extends State<FarmDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(child:
-        Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
+    return new Container(child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
       int levelFrom = baseUserInfo.Farmlevel;
       int level = baseUserInfo.Farmlevel + 1;
 
@@ -49,29 +48,24 @@ class _FarmDetailState extends State<FarmDetail> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Container(
-              margin: EdgeInsets.only(left:ScreenUtil().setWidth(20)),
+              margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('LV $levelFrom > LV $level',
-                      textAlign: TextAlign.left,
-                      style: CustomFontSize.defaultTextStyle(75)),
+                  Text('LV $levelFrom > LV $level', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(75)),
                   Text('升级所需资料', style: CustomFontSize.defaultTextStyle(75)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      new Image(
-                          image: new AssetImage('resource/images/gold.png'),
-                          height: ScreenUtil().setHeight(100)),
+                      new Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(100)),
                       Text(
                         '$neededCoin ',
                         style: CustomFontSize.defaultTextStyle(75),
                       ),
                     ],
                   ),
-                  Text('观看广告获取升级资源',
-                      style: CustomFontSize.defaultTextStyle(55)),
+                  Text('观看广告获取升级资源', style: CustomFontSize.defaultTextStyle(55)),
                 ],
               ),
             ),
@@ -97,8 +91,7 @@ class _FarmDetailState extends State<FarmDetail> {
                       ),
                     ],
                   ),
-                  Text('今日观看次数 $watchedAd/$maxWatchableAd',
-                      style: CustomFontSize.defaultTextStyle(55)),
+                  Text('今日观看次数 $watchedAd/$maxWatchableAd', style: CustomFontSize.defaultTextStyle(55)),
                 ],
               ),
             ),

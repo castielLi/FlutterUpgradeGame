@@ -11,6 +11,7 @@ class ButtonsInOneRow extends StatefulWidget {
   String buttonBackgroundImageUrl;
   double textSize;
   List<ImageTextButton> buttons;
+  bool isColumn;
 
   ButtonsInOneRow(
       {Key key,
@@ -22,7 +23,7 @@ class ButtonsInOneRow extends StatefulWidget {
       this.iconHeight,
       this.buttonBackgroundImageUrl,
       this.textSize,
-      this.buttons})
+      this.buttons,this.isColumn = false})
       : super(key: key);
 
   _ButtonsInOneRowState createState() => new _ButtonsInOneRowState();
@@ -52,10 +53,19 @@ class _ButtonsInOneRowState extends State<ButtonsInOneRow> {
         ),
       );
     });
-    content = new Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: adIconList,
-    );
+
+    if(this.widget.isColumn){
+      content = new Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: adIconList,
+      );
+    }else{
+      content = new Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: adIconList,
+      );
+    }
+
     return content;
   }
 }

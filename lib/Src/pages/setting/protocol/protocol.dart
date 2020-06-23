@@ -1,23 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/pages/setting/protocol/service/protocolService.dart';
+
+import 'model/protocol.dart';
 
 class ProtocolDetail extends StatefulWidget {
   @override
   VoidCallback HUD;
   VoidCallback viewCallback;
-  ProtocolDetail({Key key,this.HUD,this.viewCallback}):super(key:key);
+
+  ProtocolDetail({Key key, this.HUD, this.viewCallback}) : super(key: key);
+
   _ProtocolDetailState createState() => new _ProtocolDetailState();
 }
 
 class _ProtocolDetailState extends State<ProtocolDetail> {
-
-  String protocal = "用户协议";
+  String content = "用户协议";
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      this.widget.HUD();
+      ProtocolService.getProtocolList().then((data) {
+        if (data.code == ConfigSetting.SUCCESS && data.data != null) {
+          setState(() {
+            content = ProtocolModel.fromJson(data.data).content;
+          });
+        } else {
+          CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
+        }
+        this.widget.HUD();
+      });
+    });
   }
 
   @override
@@ -35,7 +54,11 @@ class _ProtocolDetailState extends State<ProtocolDetail> {
             height: ScreenUtil().setHeight(820),
             child: ListView(
               children: <Widget>[
-                Text(this.protocal,textAlign: TextAlign.center),
+                Text(
+                  this.content,
+                  textAlign: TextAlign.center,
+                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                ),
               ],
             ),
           ),

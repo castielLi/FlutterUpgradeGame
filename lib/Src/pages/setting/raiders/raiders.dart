@@ -5,7 +5,6 @@ import 'package:upgradegame/Common/widget/buttonsInOneRow/buttonsInOneRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Common/widget/imageTextButtonWithIcon/imageTextButtonWithIcon.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/setting/raiders/model/RaidersModel.dart';
 import 'package:upgradegame/Src/pages/setting/raiders/service/raidersService.dart';
@@ -23,8 +22,7 @@ class RaidersDetail extends StatefulWidget {
 class _RaidersDetailState extends State<RaidersDetail> {
   String basic = '';
   String advanced = '';
-  bool basicHide = false;
-  bool advancedHide = true;
+  String tabName = 'basic';
 
   @override
   void initState() {
@@ -56,12 +54,9 @@ class _RaidersDetailState extends State<RaidersDetail> {
       child: new Column(
         children: <Widget>[
           ButtonsInOneRow(
-            buttonWidth:
-                ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
-            buttonHeight: ScreenUtil()
-                .setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
-            buttonBackgroundImageUrl:
-                'resource/images/teamSwitchBackground.png',
+            buttonWidth: ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
+            buttonHeight: ScreenUtil().setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
+            buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
             textSize: SystemFontSize.settingTextFontSize,
             buttons: [
               ImageTextButton(
@@ -79,31 +74,28 @@ class _RaidersDetailState extends State<RaidersDetail> {
             ],
           ),
           Container(
-            width: ScreenUtil().setWidth(800),
             height: ScreenUtil().setHeight(600),
             child: Stack(
               children: [
                 Offstage(
-                  offstage: basicHide,
+                  offstage: tabName != 'basic',
                   child: ListView(
                     children: [
                       Text(
                         basic,
-                        style: CustomFontSize.defaultTextStyle(
-                            SystemFontSize.moreMoreLargerTextSize),
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                         textAlign: TextAlign.center,
                       ),
                     ],
                   ),
                 ),
                 Offstage(
-                  offstage: advancedHide,
+                  offstage: tabName != 'advanced',
                   child: ListView(
                     children: [
                       Text(
                         advanced,
-                        style: CustomFontSize.defaultTextStyle(
-                            SystemFontSize.moreMoreLargerTextSize),
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -130,19 +122,7 @@ class _RaidersDetailState extends State<RaidersDetail> {
 
   void changeTabs(String tab) {
     setState(() {
-      basicHide = true;
-      advancedHide = true;
-      switch (tab) {
-        case 'basic':
-          {
-            this.basicHide = false;
-            break;
-          }
-        case 'advanced':
-          {
-            this.advancedHide = false;
-          }
-      }
+      tabName = tab;
     });
   }
 }

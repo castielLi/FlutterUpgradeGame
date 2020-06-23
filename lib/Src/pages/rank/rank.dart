@@ -21,8 +21,7 @@ class RankDetail extends StatefulWidget {
 class _RankDetailState extends State<RankDetail> {
   List<RankCoinModel> coinList = [];
   List<RankCashModel> incomeList = [];
-  bool coinTabHide = false;
-  bool incomeTabHide = true;
+  String tabName = 'coin';
 
   @override
   void initState() {
@@ -62,12 +61,16 @@ class _RankDetailState extends State<RankDetail> {
             buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
             textSize: SystemFontSize.mediumButtonWithIconFontSize,
             buttons: [
-              ImageTextButton(buttonName: 'T币', iconUrl: 'resource/images/gold.png',
+              ImageTextButton(
+                buttonName: 'T币',
+                iconUrl: 'resource/images/coin.png',
                 callback: () {
                   changeTabs('coin');
                 },
               ),
-              ImageTextButton(buttonName: '提现', iconUrl: 'resource/images/withdraw.png',
+              ImageTextButton(
+                buttonName: '提现',
+                iconUrl: 'resource/images/withdraw.png',
                 callback: () {
                   changeTabs('income');
                 },
@@ -77,7 +80,7 @@ class _RankDetailState extends State<RankDetail> {
           Container(
             width: ScreenUtil().setWidth(800),
             height: ScreenUtil().setHeight(840),
-            child: incomeTabHide
+            child: tabName == 'coin'
                 ? ListView.builder(
                     itemCount: coinList.length,
                     itemExtent: ScreenUtil().setHeight(170),
@@ -88,7 +91,11 @@ class _RankDetailState extends State<RankDetail> {
                         count = 5;
                       }
                       String imageUrl = 'resource/images/rank$count.png';
-                      return RankItem(imageUrl: imageUrl, avatarUrl: 'resource/images/avatar.png', rankName: coinList[index].displayname, value: coinList[index].amount,
+                      return RankItem(
+                        imageUrl: imageUrl,
+                        avatarUrl: 'resource/images/avatar.png',
+                        rankName: coinList[index].displayname,
+                        value: coinList[index].amount,
                       );
                     },
                   )
@@ -102,7 +109,11 @@ class _RankDetailState extends State<RankDetail> {
                         count = 5;
                       }
                       String imageUrl = 'resource/images/rank$count.png';
-                      return RankItem(imageUrl: imageUrl, avatarUrl: 'resource/images/avatar.png', rankName: incomeList[index].displayname, value: incomeList[index].amount,
+                      return RankItem(
+                        imageUrl: imageUrl,
+                        avatarUrl: 'resource/images/avatar.png',
+                        rankName: incomeList[index].displayname,
+                        value: incomeList[index].amount,
                       );
                     },
                   ),
@@ -114,19 +125,7 @@ class _RankDetailState extends State<RankDetail> {
 
   void changeTabs(String tab) {
     setState(() {
-      coinTabHide = true;
-      incomeTabHide = true;
-      switch (tab) {
-        case 'coin':
-          {
-            this.coinTabHide = false;
-            break;
-          }
-        case 'income':
-          {
-            this.incomeTabHide = false;
-          }
-      }
+      tabName = tab;
     });
   }
 }
