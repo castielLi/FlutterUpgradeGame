@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Common/widget/buttonsInOneRow/buttonsInOneRow.dart';
+import 'package:upgradegame/Common/widget/buttonsInOneRow/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Src/common/model/resource.dart';
@@ -50,7 +50,7 @@ class _MarketDetailState extends State<MarketDetail> {
             offstage: bidPageHide,
             child: Column(
               children: <Widget>[
-                ButtonsInOneRow(
+                ButtonsList(
                   buttonWidth: ScreenUtil().setWidth(SystemIconSize.smallButtonWithIconWidth),
                   buttonHeight: ScreenUtil().setHeight(SystemIconSize.smallButtonWithIconWidth / 2),
                   iconWidth: ScreenUtil().setWidth(SystemIconSize.smallIconSize),

@@ -27,6 +27,16 @@ class UserInfoDetail extends StatefulWidget {
 class _UserInfoDetailState extends State<UserInfoDetail> {
 
   bool userInfoHide = false;
+  String buttonName = '';
+
+  switchPageBetweenFatherAndSon({String sonPageName}) {
+    setState(() {
+      // 子界面名称
+      buttonName = sonPageName;
+      // 父界面是否隐藏
+      userInfoHide = (null != sonPageName && '' != sonPageName);
+    });
+  }
   bool tradeDetailHide = true;
   bool accountDetailHide = true;
   bool tCoinDetailHide = true;
@@ -45,10 +55,6 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
       withdraw = true;
 
     });
-  }
-
-  void initState() {
-    super.initState();
   }
 
 
@@ -86,6 +92,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                         userInfoHide = true;
                         accountDetailHide = false;
                       });
+                      switchPageBetweenFatherAndSon(sonPageName: "账号及安全");
                       this.widget.changeTitleCallback("账号及安全");
                     },),
                   new ImageTextButton(imageUrl: "resource/images/settingButtonBackground.png",imageWidth: ScreenUtil().setWidth(900),imageHeight: ScreenUtil().setHeight(190),

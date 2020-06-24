@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
-import 'package:upgradegame/Common/widget/buttonsInOneRow/buttonsInOneRow.dart';
+import 'package:upgradegame/Common/widget/buttonsInOneRow/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/rank/model/rankModel.dart';
@@ -53,7 +53,7 @@ class _RankDetailState extends State<RankDetail> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          ButtonsInOneRow(
+          ButtonsList(
             buttonWidth: ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
             buttonHeight: ScreenUtil().setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
             iconWidth: ScreenUtil().setWidth(SystemIconSize.largeIconSize),

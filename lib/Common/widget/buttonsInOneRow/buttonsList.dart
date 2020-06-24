@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 
-class ButtonsInOneRow extends StatefulWidget {
+class ButtonsList extends StatefulWidget {
   double width;
   double height;
   double buttonWidth;
@@ -13,7 +13,7 @@ class ButtonsInOneRow extends StatefulWidget {
   List<ImageTextButton> buttons;
   bool isColumn;
 
-  ButtonsInOneRow(
+  ButtonsList(
       {Key key,
       this.height,
       this.width,
@@ -26,10 +26,10 @@ class ButtonsInOneRow extends StatefulWidget {
       this.buttons,this.isColumn = false})
       : super(key: key);
 
-  _ButtonsInOneRowState createState() => new _ButtonsInOneRowState();
+  _ButtonsListState createState() => new _ButtonsListState();
 }
 
-class _ButtonsInOneRowState extends State<ButtonsInOneRow> {
+class _ButtonsListState extends State<ButtonsList> {
   @override
   Widget build(BuildContext context) {
     return buildList();

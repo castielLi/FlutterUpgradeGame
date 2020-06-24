@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
-import 'package:upgradegame/Common/widget/buttonsInOneRow/buttonsInOneRow.dart';
+import 'package:upgradegame/Common/widget/buttonsInOneRow/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
@@ -53,7 +53,7 @@ class _RaidersDetailState extends State<RaidersDetail> {
           ScreenUtil().setHeight(120)),
       child: new Column(
         children: <Widget>[
-          ButtonsInOneRow(
+          ButtonsList(
             buttonWidth: ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
             buttonHeight: ScreenUtil().setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
             buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
