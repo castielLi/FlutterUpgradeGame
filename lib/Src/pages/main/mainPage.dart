@@ -8,6 +8,7 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
+import 'package:upgradegame/Src/pages/main/model/takeCoinModel.dart';
 import 'package:upgradegame/Src/pages/main/service/mainService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
@@ -16,6 +17,7 @@ import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/main/common/dividendPart.dart';
+import 'package:progress_hud/progress_hud.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -26,11 +28,24 @@ class _MainPageState extends State<MainPage> {
   bool mainBuilding = true;
   bool mainBuildingCoin = false;
 
+  ProgressHUD _progressHUD;
+  bool _loading = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    _progressHUD = new ProgressHUD(
+      backgroundColor: Colors.transparent,
+      color: Colors.white,
+      containerColor: Colors.black,
+      borderRadius: 5.0,
+      text: '',
+      loading: false,
+    );
+
+
     ///系统自动判断是否需要产生t币
     Timer.periodic( Duration( seconds: 10 ), ( timer ) {
       int timeMinute = DateTime.now().minute;
@@ -72,8 +87,22 @@ class _MainPageState extends State<MainPage> {
     super.didChangeDependencies();
   }
 
+  void showOrDismissProgressHUD() {
+    setState(() {
+      if (_loading) {
+        _progressHUD.state.dismiss();
+      } else {
+        _progressHUD.state.show();
+      }
+
+      _loading = !_loading;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
+
     return new Container(
       color: Colors.white,
       child: ProvideMulti(
@@ -87,10 +116,6 @@ class _MainPageState extends State<MainPage> {
             this.mainBuildingCoin = true;
             this.mainBuilding = false;
           }
-
-
-
-
           return Stack(
             children: <Widget>[
               new Image(
@@ -122,7 +147,7 @@ class _MainPageState extends State<MainPage> {
                               child: new ResourceWidget(
                                 amount: baseUserInfo.TCoinAmount.toString(),
                                 size: ScreenUtil().setHeight(130),
-                                imageUrl: "resource/images/gold.png",
+                                imageUrl: "resource/images/coin.png",
                               ),
                               flex: 1,
                             ),
@@ -191,7 +216,7 @@ class _MainPageState extends State<MainPage> {
               ///功能栏
               new Container(
                 margin: EdgeInsets.only(top: ScreenUtil().setHeight(230)),
-                height: ScreenUtil().setHeight(SystemIconSize.bigIconSize+30),
+                height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarIconSize+30),
                 child: new Row(
                   mainAxisAlignment:MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -200,7 +225,7 @@ class _MainPageState extends State<MainPage> {
                       child: new Row(
                         children: <Widget>[
                           new UserImageButton(
-                            size: ScreenUtil().setSp(SystemIconSize.bigIconSize),
+                            size: ScreenUtil().setSp(SystemIconSize.mainPageStatusBarIconSize),
                             buttonName: "排行榜",
                             imageUrl: "resource/images/rank.png",
                             textSize: SystemFontSize.operationTextFontSize,
@@ -216,7 +241,7 @@ class _MainPageState extends State<MainPage> {
                             },
                           ),
                           new UserImageButton(
-                            size: ScreenUtil().setSp(SystemIconSize.bigIconSize),
+                            size: ScreenUtil().setSp(SystemIconSize.mainPageStatusBarIconSize),
                             buttonName: "团队",
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/team.png",
@@ -232,7 +257,7 @@ class _MainPageState extends State<MainPage> {
                             },
                           ),
                           new UserImageButton(
-                            size: ScreenUtil().setSp(SystemIconSize.bigIconSize),
+                            size: ScreenUtil().setSp(SystemIconSize.mainPageStatusBarIconSize),
                             buttonName: "商城",
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/marketStores.png",
@@ -251,12 +276,12 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                     new Container(
-                      width: ScreenUtil().setWidth(SystemIconSize.bigIconSize*3),
+                      width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize*3),
                       child: new DividendPart(
                         imageTitle: "分红",
                         imageUrl: "resource/images/dividend.png",
-                        imageHeight: ScreenUtil().setHeight(SystemIconSize.bigIconSize),
-                        imageWidth: ScreenUtil().setWidth(SystemIconSize.bigIconSize),
+                        imageHeight: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarIconSize),
+                        imageWidth: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize),
                         title: "今日分红",
                         amount: "¥" +
                             baseUserInfo.Todayprofitsharing.toInt().toString(),
@@ -276,7 +301,7 @@ class _MainPageState extends State<MainPage> {
                       child: new Row(
                         children: <Widget>[
                           new UserImageButton(
-                            size: ScreenUtil().setSp(SystemIconSize.bigIconSize),
+                            size: ScreenUtil().setSp(SystemIconSize.mainPageStatusBarIconSize),
                             buttonName: "设置",
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/setting.png",
@@ -292,7 +317,7 @@ class _MainPageState extends State<MainPage> {
                             },
                           ),
                           new UserImageButton(
-                            size: ScreenUtil().setSp(SystemIconSize.bigIconSize),
+                            size: ScreenUtil().setSp(SystemIconSize.mainPageStatusBarIconSize),
                             buttonName: "公告",
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/announcement.png",
@@ -374,8 +399,11 @@ class _MainPageState extends State<MainPage> {
                           width: ScreenUtil().setWidth(600),
                           imageUrl: "resource/images/mainBuildingCoin.png",
                           callback: () {
-                            baseUserInfo.takeCoin();
-                            this.setMainBuildingNormal();
+                            this.showOrDismissProgressHUD();
+                            MainService.takeCoin((TakeCoinModel model){
+                              this.showOrDismissProgressHUD();
+                              baseUserInfo.takeCoin(model.tcoinamount,model.woodamount,model.stoneamount);
+                            });
                           },
                         ),
                         Container(
@@ -579,6 +607,7 @@ class _MainPageState extends State<MainPage> {
                           ))
                     ],
                   )),
+              _progressHUD
             ],
           );
         },

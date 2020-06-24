@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/pages/setting/private/service/privacyService.dart';
+
+import 'model/privacyModel.dart';
 
 class PrivateDetail extends StatefulWidget {
   @override
@@ -13,11 +19,24 @@ class PrivateDetail extends StatefulWidget {
 }
 
 class _PrivateDetailState extends State<PrivateDetail> {
-  String privacyContext = '隐私条款';
+  String content = '';
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      this.widget.HUD();
+      PrivacyService.getPrivacy().then((data) {
+        if (data.code == ConfigSetting.SUCCESS && data.data != null) {
+          setState(() {
+            content = PrivacyModel.fromJson(data.data).content;
+          });
+        } else {
+          CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
+        }
+        this.widget.HUD();
+      });
+    });
   }
 
   @override
@@ -35,7 +54,9 @@ class _PrivateDetailState extends State<PrivateDetail> {
             height: ScreenUtil().setHeight(820),
             child: ListView(
               children: <Widget>[
-                Text(this.privacyContext,textAlign: TextAlign.center),
+                Text(this.content,textAlign: TextAlign.center,
+                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                ),
               ],
             ),
           ),

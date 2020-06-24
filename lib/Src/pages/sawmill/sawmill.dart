@@ -64,7 +64,7 @@ class _SawmillDetailState extends State<SawmillDetail> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          new Image(image: new AssetImage('resource/images/gold.png'), height:ScreenUtil().setHeight(100)),
+                          new Image(image: new AssetImage('resource/images/coin.png'), height:ScreenUtil().setHeight(100)),
                           Text('$needTCoin ',style: CustomFontSize.defaultTextStyle(75),),
                         ],
                       ),

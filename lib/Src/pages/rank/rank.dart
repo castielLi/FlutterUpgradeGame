@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
-import 'package:upgradegame/Common/widget/imageTextButtonWithIcon/imageTextButtonWithIcon.dart';
+import 'package:upgradegame/Common/widget/buttonsInOneRow/buttonsInOneRow.dart';
+import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/rank/model/rankModel.dart';
 import 'package:upgradegame/Src/pages/rank/rankItem.dart';
@@ -20,8 +21,7 @@ class RankDetail extends StatefulWidget {
 class _RankDetailState extends State<RankDetail> {
   List<RankCoinModel> coinList = [];
   List<RankCashModel> incomeList = [];
-  bool coinTabHide = false;
-  bool incomeTabHide = true;
+  String tabName = 'coin';
 
   @override
   void initState() {
@@ -46,60 +46,42 @@ class _RankDetailState extends State<RankDetail> {
   Widget build(BuildContext context) {
     return new Container(
       margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(120), // 左
+          ScreenUtil().setWidth(100), // 左
           ScreenUtil().setHeight(400), // 上
-          ScreenUtil().setWidth(120), // 右
-          ScreenUtil().setHeight(220)), // 下
+          ScreenUtil().setWidth(100), // 右
+          ScreenUtil().setHeight(200)), // 下
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                ImageTextButtonWithIcon(
-                  imageUrl: 'resource/images/yellowButton.png',
-                  imageHeight: 160,
-                  imageWidth: 360,
-                  iconUrl: 'resource/images/gold.png',
-                  iconHeight: 140,
-                  iconWidth: 140,
-                  buttonName: 'T币',
-                  textSize: SystemFontSize.buttonWithIconFontSize,
-                  callback: () {
-                    setState(() {
-                      coinTabHide = false;
-                      incomeTabHide = true;
-                    });
-                  },
-                ),
-                ImageTextButtonWithIcon(
-                  imageUrl: 'resource/images/yellowButton.png',
-                  imageHeight: 160,
-                  imageWidth: 360,
-                  iconUrl: 'resource/images/withdraw.png',
-                  iconHeight: 130,
-                  iconWidth: 130,
-                  buttonName: '提现',
-                  textSize: SystemFontSize.buttonWithIconFontSize,
-                  callback: () {
-                    setState(() {
-                      coinTabHide = true;
-                      incomeTabHide = false;
-                    });
-                  },
-                ),
-              ],
-            ),
+          ButtonsInOneRow(
+            buttonWidth: ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
+            buttonHeight: ScreenUtil().setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
+            iconWidth: ScreenUtil().setWidth(SystemIconSize.largeIconSize),
+            iconHeight: ScreenUtil().setHeight(SystemIconSize.largeIconSize),
+            buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
+            textSize: SystemFontSize.mediumButtonWithIconFontSize,
+            buttons: [
+              ImageTextButton(
+                buttonName: 'T币',
+                iconUrl: 'resource/images/coin.png',
+                callback: () {
+                  changeTabs('coin');
+                },
+              ),
+              ImageTextButton(
+                buttonName: '提现',
+                iconUrl: 'resource/images/withdraw.png',
+                callback: () {
+                  changeTabs('income');
+                },
+              ),
+            ],
           ),
           Container(
             width: ScreenUtil().setWidth(800),
             height: ScreenUtil().setHeight(840),
-            child: Stack(
-              children: [
-                Offstage(
-                  offstage: coinTabHide,
-                  child: ListView.builder(
+            child: tabName == 'coin'
+                ? ListView.builder(
                     itemCount: coinList.length,
                     itemExtent: ScreenUtil().setHeight(170),
                     padding: EdgeInsets.only(top: 0),
@@ -116,11 +98,8 @@ class _RankDetailState extends State<RankDetail> {
                         value: coinList[index].amount,
                       );
                     },
-                  ),
-                ),
-                Offstage(
-                  offstage: incomeTabHide,
-                  child: ListView.builder(
+                  )
+                : ListView.builder(
                     itemCount: incomeList.length,
                     itemExtent: ScreenUtil().setHeight(170),
                     padding: EdgeInsets.only(top: 0),
@@ -138,12 +117,15 @@ class _RankDetailState extends State<RankDetail> {
                       );
                     },
                   ),
-                ),
-              ],
-            ),
           ),
         ],
       ),
     );
+  }
+
+  void changeTabs(String tab) {
+    setState(() {
+      tabName = tab;
+    });
   }
 }

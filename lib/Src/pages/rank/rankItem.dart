@@ -15,8 +15,7 @@ class RankItem extends StatefulWidget {
   // 数值
   dynamic value;
 
-  RankItem({Key key, this.imageUrl, this.avatarUrl, this.rankName, this.value})
-      : super(key: key);
+  RankItem({Key key, this.imageUrl, this.avatarUrl, this.rankName, this.value}) : super(key: key);
 
   @override
   _RankItem createState() => _RankItem();
@@ -25,31 +24,38 @@ class RankItem extends StatefulWidget {
 class _RankItem extends State<RankItem> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Image(
-              image: new AssetImage(this.widget.imageUrl),
-              height: ScreenUtil().setHeight(120),
-            ),
+    return Container(
+    margin: EdgeInsets.fromLTRB(
+          ScreenUtil().setWidth(20), // 左
+          ScreenUtil().setHeight(0), // 上
+          ScreenUtil().setWidth(30), // 右
+          ScreenUtil().setHeight(0)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Image(
+                image: new AssetImage(this.widget.imageUrl),
+                height: ScreenUtil().setHeight(120),
+              ),
 //            Image(
 //              image: new AssetImage(this.widget.avatarUrl),
 //              height: ScreenUtil().setHeight(120),
 //            ),
-            Text(
-              this.widget.rankName,
-              style: CustomFontSize.defaultTextStyle(65),
-            ),
-          ],
-        ),
-        Text(
-          this.widget.value.toString(),
-          style: CustomFontSize.defaultTextStyle(65),
-        ),
-      ],
+              Text(
+                this.widget.rankName,
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+              ),
+            ],
+          ),
+          Text(
+            this.widget.value.toString(),
+            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+          ),
+        ],
+      ),
     );
   }
 }

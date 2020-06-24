@@ -47,9 +47,13 @@ class SystemColor {
 }
 
 class SystemIconSize {
-  static const normalIconSize = 40.0;
-  static const bigIconSize = 133;
-  static const mainPageIconSize = 350;
+  static const smallIconSize = 180.0;
+  static const mediumIconSize = 250.0;
+  static const largeIconSize = 333.0;
+  static const mainPageIconSize = 350.0;
+  static const mainPageStatusBarIconSize = 133.0;
+  static const smallButtonWithIconWidth = 240.0;
+  static const largeButtonWithIconWidth = 360.0;
 }
 
 ///系统字体大小
@@ -62,7 +66,8 @@ class SystemFontSize {
   static const operationTextFontSize = 35.0;
   static const dividendTitleTextFontSize = 15.0;
   static const dividendContentTextFontSize = 17.5;
-  static const buttonWithIconFontSize = 65.0;
+  static const smallButtonWithIconFontSize = 60.0;
+  static const mediumButtonWithIconFontSize = 75.0;
 
   static const userInfoResourceTextFontSize = 30.0;
   static const userInfoResourceWithdrawTextFontSize = 40.0;

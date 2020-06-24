@@ -12,8 +12,7 @@ class AdPool extends StatefulWidget {
 
   AdDividendModel adDividend;
 
-  AdPool({Key key, this.adDividend, this.heroImageUrl, this.poolName})
-      : super(key: key);
+  AdPool({Key key, this.adDividend, this.heroImageUrl, this.poolName}) : super(key: key);
 
   @override
   _AdPool createState() => _AdPool();
@@ -34,8 +33,8 @@ class _AdPool extends State<AdPool> {
         children: <Widget>[
           Image(
             image: new AssetImage(this.widget.heroImageUrl),
-            height: ScreenUtil().setHeight(250),
-            width: ScreenUtil().setWidth(250),
+            height: ScreenUtil().setHeight(SystemIconSize.mediumIconSize),
+            width: ScreenUtil().setWidth(SystemIconSize.mediumIconSize),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -49,11 +48,11 @@ class _AdPool extends State<AdPool> {
                   children: <Widget>[
                     Text(
                       '昨日收益',
-                      style: CustomFontSize.defaultTextStyle(40),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                     Text(
                       '历史收益',
-                      style: CustomFontSize.defaultTextStyle(40),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                   ],
                 ),
@@ -66,15 +65,15 @@ class _AdPool extends State<AdPool> {
                   children: <Widget>[
                     Text(
                       '我的' + this.widget.poolName + '奖池',
-                      style: CustomFontSize.defaultTextStyle(40),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                     Text(
                       this.widget.adDividend.yesterdayincome.toString(),
-                      style: CustomFontSize.defaultTextStyle(40),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                     Text(
                       this.widget.adDividend.totalincome.toString(),
-                      style: CustomFontSize.defaultTextStyle(40),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                   ],
                 ),
@@ -87,19 +86,19 @@ class _AdPool extends State<AdPool> {
                   children: <Widget>[
                     Text(
                       '全网总数',
-                      style: CustomFontSize.defaultTextStyle(40),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                     Text(
                       this.widget.adDividend.totalheroamount.toString(),
-                      style: CustomFontSize.defaultTextStyle(40),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                     Text(
                       '今日产出',
-                      style: CustomFontSize.defaultTextStyle(40),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                     Text(
                       this.widget.adDividend.todayheroamount.toString(),
-                      style: CustomFontSize.defaultTextStyle(40),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                   ],
                 ),

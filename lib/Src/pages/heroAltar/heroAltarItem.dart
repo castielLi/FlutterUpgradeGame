@@ -17,13 +17,7 @@ class HeroAltarItem extends StatefulWidget {
   //英雄图片
   String heroImageUrl;
 
-  HeroAltarItem(
-      {Key key,
-      this.description,
-      this.revenueUp,
-      this.remainDays,
-      this.heroImageUrl})
-      : super(key: key);
+  HeroAltarItem({Key key, this.description, this.revenueUp, this.remainDays, this.heroImageUrl}) : super(key: key);
 
   @override
   _HeroAltarItem createState() => _HeroAltarItem();
@@ -48,8 +42,8 @@ class _HeroAltarItem extends State<HeroAltarItem> {
             children: <Widget>[
               Image(
                 image: new AssetImage(this.widget.heroImageUrl),
-                height: ScreenUtil().setHeight(250),
-                width: ScreenUtil().setWidth(250),
+                height: ScreenUtil().setHeight(SystemIconSize.mediumIconSize),
+                width: ScreenUtil().setWidth(SystemIconSize.mediumIconSize),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -57,15 +51,15 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                 children: <Widget>[
                   Text(
                     this.widget.description,
-                    style: CustomFontSize.defaultTextStyle(50),
+                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                   ),
                   Text(
                     '效率:收益提高' + this.widget.revenueUp.toInt().toString() + '%',
-                    style: CustomFontSize.defaultTextStyle(50),
+                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                   ),
                   Text(
                     '期限:30天（可叠加）',
-                    style: CustomFontSize.defaultTextStyle(50),
+                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                   ),
                 ],
               ),
@@ -78,7 +72,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
             children: <Widget>[
               HeroAltarClock(
                 imageUrl: 'resource/images/clock.png',
-                adIconHeight: ScreenUtil().setHeight(150),
+                adIconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
                 remainDays: this.widget.remainDays,
               ),
               GestureDetector(
@@ -88,15 +82,14 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                   padding: EdgeInsets.all(0),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image:
-                          new AssetImage('resource/images/upgradeButton.png'),
+                      image: new AssetImage('resource/images/upgradeButton.png'),
                       fit: BoxFit.fill,
                     ),
                   ),
                   child: Center(
                     child: Text(
                       '购 买',
-                      style: CustomFontSize.defaultTextStyle(45),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                     ),
                   ),
                 ),

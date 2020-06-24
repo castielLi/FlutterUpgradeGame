@@ -28,8 +28,7 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      child: Provide<BaseUserInfoProvider>(
-          builder: (context, child, baseUserInfo) {
+      child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
         ///当前建筑等级
         int levelFrom = baseUserInfo.Mainbuildlevel;
         int level = baseUserInfo.Mainbuildlevel + 1;
@@ -53,31 +52,25 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
               ScreenUtil().setWidth(150), // 右
               ScreenUtil().setHeight(250)), // 下
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('LV $levelFrom > LV $level',
-                  textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(75)),
-              Text('升级所需资料', style: CustomFontSize.defaultTextStyle(75)),
+              Text('LV $levelFrom > LV $level', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
+              Text('升级所需资料', style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Image(
-                      image: new AssetImage('resource/images/wood.png'),
-                      height: ScreenUtil().setHeight(100)),
+                  Image(image: new AssetImage('resource/images/wood.png'), height: ScreenUtil().setHeight(100)),
                   Text(
                     '$neededWood ',
-                    style: CustomFontSize.defaultTextStyle(75),
+                    style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
                   ),
-                  Image(
-                      image: new AssetImage('resource/images/stone.png'),
-                      height: ScreenUtil().setHeight(100)),
-                  Text('$neededStone', style: CustomFontSize.defaultTextStyle(75)),
+                  Image(image: new AssetImage('resource/images/stone.png'), height: ScreenUtil().setHeight(100)),
+                  Text('$neededStone', style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
                 ],
               ),
-              Text('升级后产出:' + '$coinPerHour' + 'T币一小时',
-                  style: CustomFontSize.defaultTextStyle(55)),
-              Text('每产生1T币需要消耗10木头和10石头', style: CustomFontSize.defaultTextStyle(45)),
+              Text('升级后产出:' + '$coinPerHour' + 'T币一小时', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+              Text('每产生1T币需要消耗10木头和10石头', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize)),
               Container(
                 padding: EdgeInsets.only(left: ScreenUtil().setWidth(100)),
                 child: ImageButton(
@@ -86,8 +79,7 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
                   buttonName: "升 级",
                   imageUrl: "resource/images/upgradeButton.png",
                   callback: () {
-                    if (baseUserInfo.stoneamount < neededStone ||
-                        baseUserInfo.woodamount < neededWood) {
+                    if (baseUserInfo.stoneamount < neededStone || baseUserInfo.woodamount < neededWood) {
                       CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
                     } else {
                       this.widget.HUD();

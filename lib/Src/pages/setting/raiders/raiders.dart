@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
+import 'package:upgradegame/Common/widget/buttonsInOneRow/buttonsInOneRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
@@ -21,8 +22,7 @@ class RaidersDetail extends StatefulWidget {
 class _RaidersDetailState extends State<RaidersDetail> {
   String basic = '';
   String advanced = '';
-  bool basicHide = false;
-  bool advancedHide = true;
+  String tabName = 'basic';
 
   @override
   void initState() {
@@ -53,69 +53,49 @@ class _RaidersDetailState extends State<RaidersDetail> {
           ScreenUtil().setHeight(120)),
       child: new Column(
         children: <Widget>[
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new Expanded(
-                  child: new ImageTextButton(
-                    imageUrl: "resource/images/teamSwitchBackground.png",
-                    imageWidth: ScreenUtil().setWidth(400),
-                    imageHeight: ScreenUtil().setHeight(190),
-                    buttonName: "基 础",
-                    textSize: SystemFontSize.settingTextFontSize,
-                    callback: () {
-                      setState(() {
-                        basicHide = false;
-                        advancedHide = true;
-                      });
-                    },
-                  ),
-                ),
-                new Expanded(
-                  child: new ImageTextButton(
-                    imageUrl: "resource/images/teamSwitchBackground.png",
-                    imageWidth: ScreenUtil().setWidth(400),
-                    imageHeight: ScreenUtil().setHeight(190),
-                    buttonName: "进 阶",
-                    textSize: SystemFontSize.settingTextFontSize,
-                    callback: () {
-                      setState(() {
-                        basicHide = true;
-                        advancedHide = false;
-                      });
-                    },
-                  ),
-                )
-              ],
-            ),
+          ButtonsInOneRow(
+            buttonWidth: ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
+            buttonHeight: ScreenUtil().setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
+            buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
+            textSize: SystemFontSize.settingTextFontSize,
+            buttons: [
+              ImageTextButton(
+                buttonName: '基 础',
+                callback: () {
+                  changeTabs('basic');
+                },
+              ),
+              ImageTextButton(
+                buttonName: '进 阶',
+                callback: () {
+                  changeTabs('advanced');
+                },
+              ),
+            ],
           ),
           Container(
-            width: ScreenUtil().setWidth(800),
             height: ScreenUtil().setHeight(600),
             child: Stack(
               children: [
                 Offstage(
-                  offstage: basicHide,
+                  offstage: tabName != 'basic',
                   child: ListView(
                     children: [
                       Text(
                         basic,
-                        style: CustomFontSize.defaultTextStyle(
-                            SystemFontSize.moreMoreLargerTextSize),
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                         textAlign: TextAlign.center,
                       ),
                     ],
                   ),
                 ),
                 Offstage(
-                  offstage: advancedHide,
+                  offstage: tabName != 'advanced',
                   child: ListView(
                     children: [
                       Text(
                         advanced,
-                        style: CustomFontSize.defaultTextStyle(
-                            SystemFontSize.moreMoreLargerTextSize),
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -138,5 +118,11 @@ class _RaidersDetailState extends State<RaidersDetail> {
         ],
       ),
     );
+  }
+
+  void changeTabs(String tab) {
+    setState(() {
+      tabName = tab;
+    });
   }
 }

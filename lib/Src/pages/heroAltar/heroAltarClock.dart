@@ -7,8 +7,7 @@ class HeroAltarClock extends StatefulWidget {
   double adIconHeight;
   List<int> remainDays;
 
-  HeroAltarClock({Key key, this.remainDays, this.adIconHeight, this.imageUrl})
-      : super(key: key);
+  HeroAltarClock({Key key, this.remainDays, this.adIconHeight, this.imageUrl}) : super(key: key);
 
   @override
   _HeroAltarClockState createState() => _HeroAltarClockState();
@@ -22,12 +21,10 @@ class _HeroAltarClockState extends State<HeroAltarClock> {
       clockDayList.add(
         Row(
           children: <Widget>[
-            Image(
-                image: new AssetImage(this.widget.imageUrl),
-                height: ScreenUtil().setHeight(this.widget.adIconHeight)),
+            Image(image: new AssetImage(this.widget.imageUrl), height: ScreenUtil().setHeight(this.widget.adIconHeight)),
             Text(
               this.widget.remainDays[i].toString() + '天',
-              style: CustomFontSize.defaultTextStyle(45),
+              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
             ),
           ],
         ),
