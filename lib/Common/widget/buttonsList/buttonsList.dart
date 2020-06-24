@@ -14,16 +14,7 @@ class ButtonsList extends StatefulWidget {
   bool isColumn;
 
   ButtonsList(
-      {Key key,
-      this.height,
-      this.width,
-      this.buttonWidth,
-      this.buttonHeight,
-      this.iconWidth,
-      this.iconHeight,
-      this.buttonBackgroundImageUrl,
-      this.textSize,
-      this.buttons,this.isColumn = false})
+      {Key key, this.height, this.width, this.buttonWidth, this.buttonHeight, this.iconWidth, this.iconHeight, this.buttonBackgroundImageUrl, this.textSize, this.buttons, this.isColumn = false})
       : super(key: key);
 
   _ButtonsListState createState() => new _ButtonsListState();
@@ -54,12 +45,12 @@ class _ButtonsListState extends State<ButtonsList> {
       );
     });
 
-    if(this.widget.isColumn){
+    if (this.widget.isColumn) {
       content = new Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: adIconList,
       );
-    }else{
+    } else {
       content = new Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: adIconList,

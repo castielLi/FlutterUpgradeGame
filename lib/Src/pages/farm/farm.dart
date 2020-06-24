@@ -53,19 +53,19 @@ class _FarmDetailState extends State<FarmDetail> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('LV $levelFrom > LV $level', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(75)),
-                  Text('升级所需资料', style: CustomFontSize.defaultTextStyle(75)),
+                  Text('LV $levelFrom > LV $level', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
+                  Text('升级所需资料', style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       new Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(100)),
                       Text(
                         '$neededCoin ',
-                        style: CustomFontSize.defaultTextStyle(75),
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
                       ),
                     ],
                   ),
-                  Text('观看广告获取升级资源', style: CustomFontSize.defaultTextStyle(55)),
+                  Text('观看广告获取升级资源', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
                 ],
               ),
             ),
@@ -87,11 +87,11 @@ class _FarmDetailState extends State<FarmDetail> {
                     children: <Widget>[
                       Text(
                         '每次采石场和伐木场提速 $speedUpPercent%',
-                        style: CustomFontSize.defaultTextStyle(55),
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                       ),
                     ],
                   ),
-                  Text('今日观看次数 $watchedAd/$maxWatchableAd', style: CustomFontSize.defaultTextStyle(55)),
+                  Text('今日观看次数 $watchedAd/$maxWatchableAd', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
                 ],
               ),
             ),

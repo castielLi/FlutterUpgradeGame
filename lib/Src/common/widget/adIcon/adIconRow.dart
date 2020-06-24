@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provide/provide.dart';
 
 class AdIconRow extends StatefulWidget{
 
@@ -25,7 +26,7 @@ class _AdIconRow extends State <AdIconRow>{
       adIconList.add(
         GestureDetector(
           child: new Image(image: new AssetImage(this.widget.imageUrlWatched), height:this.widget.adIconHeight),
-          onTap: (){print('点击广告');},
+          onTap: (){print('已经观看过该广告了');},
         ),
 
       );
@@ -34,7 +35,15 @@ class _AdIconRow extends State <AdIconRow>{
       adIconList.add(
         GestureDetector(
           child: new Image(image: new AssetImage(this.widget.imageUrlUnwatch), height:this.widget.adIconHeight),
-          onTap: (){print('点击广告');},
+          onTap: (){
+            print('点击广告');
+            setState(() {
+              if(this.widget.alreadyWatched<this.widget.countInOneRow){
+                this.widget.alreadyWatched++;
+              }
+              
+            });
+            },
         ),
 
       );
