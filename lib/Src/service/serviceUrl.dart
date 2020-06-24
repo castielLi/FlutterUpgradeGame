@@ -16,6 +16,11 @@ class ServiceUrl {
     return "${host}api/v1/user";
   }
 
+  ///观看广告
+  static watchAd(){
+    return "${host}api/v1/ad/watch";
+  }
+
   static getUserInfo(){
     return "${host}api/v1/user";
   }

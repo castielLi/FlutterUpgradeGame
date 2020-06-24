@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
+import 'package:upgradegame/Src/common/service/adService.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Src/common/service/baseService.dart';
@@ -36,13 +37,20 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this.getRules();
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (hadInit) {
       return;
     }
 
-    this.getRules();
+
 
     ///防止多次进入
     hadInit = true;
