@@ -35,6 +35,7 @@ class _AdIconRow extends State<AdIconRow> {
           child: new Image(image: new AssetImage(this.widget.imageUrlUnwatch), height: this.widget.adIconHeight),
           onTap: () {
             AdService as = new AdService();
+            as.showAd(3, 2);
             //TODO
             this.widget.watchSuccessCallBack();
 //            Provide.value<BaseUserInfoProvider>(context).watchedAnAd(AdType.farm);

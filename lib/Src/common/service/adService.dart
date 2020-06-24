@@ -29,5 +29,24 @@ class AdService{
   }
 
 
+  void showAd(int type,int showType,[String posId]) async {
+    const platform = const MethodChannel('samples.flutter.ad');
+    const EventChannel _eventChannel = const EventChannel('samples.flutter.ad.event');
+    _eventChannel.receiveBroadcastStream().listen(this._onEvent, onError: this._onError);
+    try {
+      await platform.invokeMethod('showAd', <String, dynamic>{'type': type,"showType":showType,"posId":posId});
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+  int _onEvent(Object event) {
+    print("event »"+event);
+    return event;
+
+  }
+
+  void _onError(Object error) {
+    print("event »"+error);
+  }
 
 }
