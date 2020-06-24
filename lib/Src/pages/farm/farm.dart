@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
+import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 import 'package:upgradegame/Src/common/widget/adIcon/adIconRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
@@ -75,6 +76,11 @@ class _FarmDetailState extends State<FarmDetail> {
               imageUrlWatched: 'resource/images/adWatched.png',
               imageUrlUnwatch: "resource/images/adUnwatch.png",
               alreadyWatched: watchedAd,
+              watchSuccessCallBack: () {
+                setState(() {
+                  baseUserInfo.watchedAnAd(AdType.farm);
+                });
+              },
             ),
             new Container(
               margin: EdgeInsets.only(left: ScreenUtil().setHeight(20)),
