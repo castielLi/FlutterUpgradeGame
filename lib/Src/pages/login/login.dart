@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                       }),
                       new RaisedButton(child:Text("login"),onPressed: (){
                         this.showOrDismissProgressHUD();
-                        LoginService.login((model){
+                        LoginService.login("asdf",(model){
                           this.showOrDismissProgressHUD();
                           Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
                           Application.router

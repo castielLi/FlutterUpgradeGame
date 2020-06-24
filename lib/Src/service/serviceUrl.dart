@@ -13,6 +13,11 @@ class ServiceUrl {
 
   /// login
   static login() {
+    return "${host}api/v1/login";
+  }
+
+  ///getuser
+  static getuser() {
     return "${host}api/v1/user";
   }
 

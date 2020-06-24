@@ -12,7 +12,7 @@ import 'package:upgradegame/Common/widget/toast/toast.dart';
 class MainService{
   static Future<ResultData> getBaseInfo(callback) async{
     var response = await httpManager.request(
-        ServiceUrl.login(), {}, null, null);
+        ServiceUrl.getuser(), {}, null, null);
     BaseUserInfoModel model = BaseUserInfoModel.fromJson(response.data);
     callback(model);
   }
