@@ -20,8 +20,34 @@ class LoginService{
 
     var response = await httpManager.request(
         ServiceUrl.login(), params, null, Options(method: "post"));
-    LoginReponseModel responseModel = LoginReponseModel.fromJson(response.data);
-    callback(responseModel.userinfo);
+
+    if(response.code == 200){
+      LoginReponseModel responseModel = LoginReponseModel.fromJson(response.data);
+      LocalStorage.save(Config.TOKEN_KEY, responseModel.token);
+      callback(responseModel.userinfo);
+    }else{
+      CommonUtils.showErrorMessage(msg: '登录出错');
+      callback(null);
+    }
+  }
+
+  static Future<ResultData> loginWithToken(callback) async{
+
+    var response = await httpManager.request(
+        ServiceUrl.getuser(), {}, null, null);
+
+    if(response.code != 200){
+      clearAll();
+      callback(null);
+    }else{
+      BaseUserInfoModel model = BaseUserInfoModel.fromJson(response.data);
+      callback(model);
+    }
+  }
+
+  ///清除所有信息
+  static clearAll() async {
+    httpManager.clearAuthorization();
   }
 
   //用于判断用户是否登录

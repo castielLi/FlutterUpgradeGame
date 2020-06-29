@@ -25,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   var adview = "POSID8rbrja0ih10i";
   var baidu = "7111030";
   var tencent = "6031610694170610";
+  var currentToken = "";
 
   void initState() {
     super.initState();
@@ -37,6 +38,22 @@ class _LoginPageState extends State<LoginPage> {
       text: '',
       loading: false,
     );
+    this.initParams();
+  }
+
+  initParams() async {
+    currentToken = await LoginService.getToken();
+    if(currentToken!=null){
+      this.showOrDismissProgressHUD();
+      LoginService.loginWithToken((model){
+        this.showOrDismissProgressHUD();
+        if(model!=null) {
+          Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
+          Application.router
+              .navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+        }
+      });
+    }
   }
 
 
@@ -95,9 +112,13 @@ class _LoginPageState extends State<LoginPage> {
                         this.showOrDismissProgressHUD();
                         LoginService.login("asdf",(model){
                           this.showOrDismissProgressHUD();
-                          Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
-                          Application.router
-                              .navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                          if(model!=null) {
+                            Provide.value<BaseUserInfoProvider>(context)
+                                .initBaseUserInfo(model);
+                            Application.router
+                                .navigateTo(context, UpgradeGameRoute.mainPage,
+                                clearStack: true);
+                          }
                         });
                       }),
                     ],

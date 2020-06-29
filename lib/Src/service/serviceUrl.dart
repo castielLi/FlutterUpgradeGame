@@ -1,9 +1,9 @@
 class ServiceUrl {
   static const String host =
   ///fastock
-      "https://www.fastmock.site/mock/095e3520b3833640934d29559631cc16/";
+//      "https://www.fastmock.site/mock/095e3520b3833640934d29559631cc16/";
   ///server
-//  "https://test.buluo888.com/";
+  "https://test.buluo888.com/";
   static const String downloadUrl = '';
 
   /// rule
@@ -70,15 +70,15 @@ class ServiceUrl {
   }
   /// 获取协议
   static getProtocol(){
-    return "${host}api/api/useragreement";
+    return "${host}api/v1/useragreement";
   }
   /// 关于我们
   static getAboutUs(){
-    return "${host}api/api/aboutus";
+    return "${host}api/v1/aboutus";
   }
   /// 隐私条款
   static getPrivacyPolicy(){
-    return "${host}api/api/privacy";
+    return "${host}api/v1/privacy";
   }
 
 }
