@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
+import 'package:upgradegame/Src/common/model/enum/buildingEnum.dart';
 import 'package:upgradegame/Src/common/model/userInfoAd.dart';
+import 'package:upgradegame/Src/common/service/baseService.dart';
 import 'package:upgradegame/Src/common/widget/adIcon/adIconRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
@@ -107,7 +110,17 @@ class _FarmDetailState extends State<FarmDetail> {
               buttonName: "升 级",
               imageUrl: "resource/images/upgradeButton.png",
               callback: () {
-                print('点击升级');
+                if (baseUserInfo.tcoinamount < farmBuildingRule.tcoinamount) {
+                  CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
+                } else {
+                  this.widget.HUD();
+                  BaseService.upgradeBuilding(BuildingEnum.farm.index, (model){
+                    this.widget.HUD();
+                    if(model != null){
+                      Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
+                    }
+                  });
+                }
               },
             ),
           ],

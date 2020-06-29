@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/common/model/enum/buildingEnum.dart';
+import 'package:upgradegame/Src/common/service/baseService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
@@ -83,6 +85,12 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
                       CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
                     } else {
                       this.widget.HUD();
+                      BaseService.upgradeBuilding(BuildingEnum.mainBuilding.index, (model){
+                        this.widget.HUD();
+                        if(model != null){
+                          Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
+                        }
+                      });
                     }
                   },
                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:upgradegame/Src/common/model/baseResourceModel.dart';
 import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/common/model/baseUserInfoModel.dart';
 import 'package:upgradegame/Src/common/model/userInfoAd.dart';
@@ -70,6 +71,17 @@ class BaseUserInfoProvider with ChangeNotifier {
   ///购买赠送券
   buyVoucher(int amount) {
     this.voucher = amount;
+    notifyListeners();
+  }
+
+  ///升级建筑
+  upgradeBuilding(BaseResourceModel model){
+    this.tcoinamount = model.tcoinamount;
+    this.woodamount = model.woodamount;
+    this.stoneamount = model.stoneamount;
+    this.mainbuildlevel = model.mainbuildlevel;
+    this.stonelevel = model.stonelevel;
+    this.woodamount = model.woodlevel;
     notifyListeners();
   }
 
