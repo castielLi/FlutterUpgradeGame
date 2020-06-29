@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 import 'package:upgradegame/Src/common/service/adService.dart';
+import 'package:upgradegame/Src/pages/login/login.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
 class AdIconRow extends StatefulWidget {
@@ -38,9 +39,9 @@ class _AdIconRow extends State<AdIconRow> {
           child: new Image(image: new AssetImage(this.widget.imageUrlUnwatch), height: this.widget.adIconHeight),
           onTap: () {
             AdService as = new AdService();
+            as.adWatchSuccessCallback = this.widget.watchSuccessCallBack;
             as.showAd(1, 2);
 
-            this.widget.watchSuccessCallBack();
           },
         ),
       );

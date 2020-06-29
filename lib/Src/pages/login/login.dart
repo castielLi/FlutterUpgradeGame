@@ -11,7 +11,6 @@ import 'package:progress_hud/progress_hud.dart';
 
 
 class LoginPage extends StatefulWidget {
-
   @override
   _LoginPageState createState() => new _LoginPageState();
 }
@@ -21,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   static const EventChannel _eventChannel = const EventChannel('samples.flutter.ad.event');
   ProgressHUD _progressHUD;
   bool _loading = false;
+
 
   var adview = "POSID8rbrja0ih10i";
   var baidu = "7111030";
@@ -126,11 +126,15 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
   void _onEvent(Object event) {
-    print(event.toString()+"!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    print(event.toString()+"111111111111111111");
+    if("5"==event.toString()){
+      print("广告观看成功!!!!!!");
+    }
     print("event »ØÀ´ÁË³É¹¦");
   }
 
   void _onError(Object error) {
+    print(error.toString()+"222222222222");
     print("event »ØÀ´ÁËÊ§°Ü");
   }
 }

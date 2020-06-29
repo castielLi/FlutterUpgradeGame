@@ -10,6 +10,14 @@ import 'dart:convert' as convert;
 
 class AdService {
   static AdType adType;
+  static const platform = const MethodChannel('samples.flutter.ad');
+  static const EventChannel _eventChannel = const EventChannel('samples.flutter.ad.event');
+  VoidCallback adWatchSuccessCallback;
+
+  AdService({this.adWatchSuccessCallback}){
+    print('初始化');
+    _eventChannel.receiveBroadcastStream().listen(this._onEvent, onError: this._onError);
+  }
 
   static Future<ResultData> watchAd(int type, callback) async {
     WatchAd ad = new WatchAd(type: type);
@@ -21,25 +29,26 @@ class AdService {
   }
 
   void showAd(int type, int showType, [String posId]) async {
-    const platform = const MethodChannel('samples.flutter.ad');
-    const EventChannel _eventChannel = const EventChannel('samples.flutter.ad.event');
-    _eventChannel.receiveBroadcastStream().listen(this._onEvent, onError: this._onError);
     try {
+      print('show add');
       await platform.invokeMethod('showAd', <String, dynamic>{'type': type, "showType": showType, "posId": posId});
+      print('show add done');
     } on PlatformException catch (e) {
       print(e);
     }
   }
 
   void _onEvent(Object event) {
+    print(event.toString()+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    if("5"==event.toString()){
+      print("广告观看成功!!!!!!");
+      this.adWatchSuccessCallback();
+    }
     print("event »" + event);
   }
 
   void _onError(Object error) {
-    print("event »" + error);
-  }
-
-  void adWatchSuccess(VoidCallback callBack){
-
+    print(error.toString()+"fail");
+    print("error »" + error);
   }
 }
