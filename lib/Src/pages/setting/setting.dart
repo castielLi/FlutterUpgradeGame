@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Common/widget/buttonsInOneRow/buttonsInOneRow.dart';
+import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Src/pages/setting/raiders/raiders.dart';
 import 'package:upgradegame/Src/pages/setting/protocol/protocol.dart';
@@ -46,7 +46,7 @@ class _SettingDetailState extends State<SettingDetail> {
           new Offstage(
             offstage: this.settingHide,
             child: new Center(
-              child: ButtonsInOneRow(
+              child: ButtonsList(
                 buttonWidth: ScreenUtil().setWidth(900),
                 buttonHeight: ScreenUtil().setHeight(190),
                 buttonBackgroundImageUrl: 'resource/images/settingButtonBackground.png',
@@ -90,7 +90,6 @@ class _SettingDetailState extends State<SettingDetail> {
             child: new RaidersDetail(
               HUD: this.widget.HUD,
               viewCallback: () {
-                // TODO 子界面父界面更改的方法
                 switchPageBetweenFatherAndSon();
                 this.widget.displayOriginalTitleCallback();
               },

@@ -5,7 +5,7 @@ import 'package:upgradegame/Src/common/model/baseUserInfoModel.dart';
 import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 
 //混入
-class BaseUserInfoProvider with ChangeNotifier{
+class BaseUserInfoProvider with ChangeNotifier {
   String displayname;
   int tcoinamount;
   int stoneamount;
@@ -21,18 +21,26 @@ class BaseUserInfoProvider with ChangeNotifier{
   Ad ad;
   int tobecollectedcoin;
 
-  int get TCoinAmount =>tcoinamount;
-  int get WoodAmount =>woodamount;
+  int get TCoinAmount => tcoinamount;
+
+  int get WoodAmount => woodamount;
+
   int get StoneAmount => stoneamount;
+
   String get Avatar => avatar;
+
   double get Todayprofitsharing => todayprofitsharing;
+
   int get Mainbuildlevel => mainbuildlevel;
-  int get Farmlevel =>farmlevel;
-  int get Stonelevel =>stonelevel;
-  int get Woodlevel =>woodlevel;
+
+  int get Farmlevel => farmlevel;
+
+  int get Stonelevel => stonelevel;
+
+  int get Woodlevel => woodlevel;
 
   ///网络数据初始化
-  initBaseUserInfo(BaseUserInfoModel model){
+  initBaseUserInfo(BaseUserInfoModel model) {
     displayname = model.displayname;
     ad = model.ad;
     tcoinamount = model.tcoinamount;
@@ -51,7 +59,7 @@ class BaseUserInfoProvider with ChangeNotifier{
   }
 
   ///获取t币
-  takeCoin(int tconamount, int woodamount , int stoneamount){
+  takeCoin(int tconamount, int woodamount, int stoneamount) {
     this.tcoinamount = tconamount;
     this.woodamount = woodamount;
     this.stoneamount = stoneamount;
@@ -60,8 +68,22 @@ class BaseUserInfoProvider with ChangeNotifier{
   }
 
   ///购买赠送券
-  buyVoucher(int amount){
+  buyVoucher(int amount) {
     this.voucher = amount;
     notifyListeners();
+  }
+
+  ///增加观看广告次数
+  watchedAnAd(AdType adType) {
+    switch (adType) {
+      case AdType.wood:
+        this.ad.wood++;
+        break;
+      case AdType.stone:
+        this.ad.stone++;
+        break;
+      case AdType.farm:
+        this.ad.farm++;
+    }
   }
 }

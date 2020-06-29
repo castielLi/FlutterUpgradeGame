@@ -1,4 +1,3 @@
-
 class Ad {
   int wood;
   int stone;
@@ -19,4 +18,10 @@ class Ad {
     data['farm'] = this.farm;
     return data;
   }
+}
+
+enum AdType {
+  wood,
+  stone,
+  farm,
 }

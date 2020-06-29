@@ -35,12 +35,10 @@ class _WithdrawState extends State<Withdraw> {
             children: <Widget>[
               TextField(
                 obscureText: true,
-                decoration: InputDecoration(
-                    labelText: "提现数量", prefixIcon: Icon(Icons.lock)),
+                decoration: InputDecoration(labelText: "提现数量", prefixIcon: Icon(Icons.lock)),
               ),
               TextField(
-                decoration: InputDecoration(
-                    labelText: "密码", prefixIcon: Icon(Icons.lock)),
+                decoration: InputDecoration(labelText: "密码", prefixIcon: Icon(Icons.lock)),
                 obscureText: true,
               ),
               new ImageButton(
