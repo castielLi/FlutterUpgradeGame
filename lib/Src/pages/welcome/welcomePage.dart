@@ -19,19 +19,23 @@ class _WelcomePageState extends State<WelcomePage> {
   bool hadInit = false;
 
   void getRules() async{
-    dynamic content = await FileStorage.getRule("rule");
+    dynamic content = await FileStorage.getContent("rule");
     if(content == ""){
       BaseService.getRule((model){
-        Global();
-        Global.setBaseRule(model);
+        if(model!=null){
+          Global();
+          Global.setBaseRule(model);
+        }
       });
     }else{
 //      BaseRuleModel model = BaseRuleModel.fromJson(convert.jsonDecode(content));
 //      Global();
 //      Global.setBaseRule(model);
       BaseService.getRule((model){
-        Global();
-        Global.setBaseRule(model);
+        if(model!=null){
+          Global();
+          Global.setBaseRule(model);
+        }
       });
     }
   }
