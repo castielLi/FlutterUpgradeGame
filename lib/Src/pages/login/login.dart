@@ -96,8 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                         LoginService.login((model){
                           this.showOrDismissProgressHUD();
                           Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
-                          Application.router
-                              .navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                          Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
                         });
                       }),
                     ],
@@ -127,6 +126,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
   void _onEvent(Object event) {
+    print(event.toString()+"!!!!!!!!!!!!!!!!!!!!!!!!!!");
     print("event »ØÀ´ÁË³É¹¦");
   }
 

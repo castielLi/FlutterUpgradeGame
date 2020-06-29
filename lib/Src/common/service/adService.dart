@@ -31,12 +31,15 @@ class AdService {
     }
   }
 
-  int _onEvent(Object event) {
+  void _onEvent(Object event) {
     print("event »" + event);
-    return event;
   }
 
   void _onError(Object error) {
     print("event »" + error);
+  }
+
+  void adWatchSuccess(VoidCallback callBack){
+
   }
 }
