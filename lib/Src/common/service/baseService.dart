@@ -16,7 +16,7 @@ class BaseService{
     var response = await httpManager.request(
         ServiceUrl.getRule(), {}, null, null);
     BaseRuleModel model = BaseRuleModel.fromJson(response.data);
-    FileStorage.saveRule(convert.jsonEncode(model),"rule");
+    FileStorage.saveContent(convert.jsonEncode(model),"rule");
     callback(model);
   }
 }

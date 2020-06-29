@@ -1,4 +1,5 @@
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/storge/fileStore.dart';
 import 'package:upgradegame/Common/storge/localStore.dart';
 import 'package:upgradegame/Common/http/httpManager.dart';
 import 'package:dio/dio.dart';
@@ -24,6 +25,7 @@ class LoginService{
     if(response.code == 200){
       LoginReponseModel responseModel = LoginReponseModel.fromJson(response.data);
       LocalStorage.save(Config.TOKEN_KEY, responseModel.token);
+      FileStorage.saveContent(responseModel.token, "token");
       callback(responseModel.userinfo);
     }else{
       CommonUtils.showErrorMessage(msg: '登录出错');
@@ -38,6 +40,7 @@ class LoginService{
 
     if(response.code != 200){
       clearAll();
+      FileStorage.saveContent("", "token");
       callback(null);
     }else{
       BaseUserInfoModel model = BaseUserInfoModel.fromJson(response.data);
@@ -52,8 +55,8 @@ class LoginService{
 
   //用于判断用户是否登录
   static Future<String> getToken() async {
-    var token = await LocalStorage.get(Config.TOKEN_KEY);
-    if (token != null) {
+    var token = await FileStorage.getContent("token");
+    if (token != null && token != "") {
       return token;
     }
     return null;
