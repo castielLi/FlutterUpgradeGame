@@ -6,7 +6,7 @@ import 'dart:io';
 class FileStorage {
 
   /// 按照文件路径名称读取文件
-  static Future<dynamic> getRule(String fileName) async{
+  static Future<dynamic> getContent(String fileName) async{
 
     Directory appDocDir = await getApplicationDocumentsDirectory();
     String appDocPath = appDocDir.path;
@@ -21,7 +21,7 @@ class FileStorage {
   }
 
   /// 按照文件路径名称储存文件
-  static saveRule(String content,String fileName) async {
+  static saveContent(String content,String fileName) async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     String appDocPath = appDocDir.path;
 

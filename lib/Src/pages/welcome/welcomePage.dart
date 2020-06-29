@@ -19,7 +19,7 @@ class _WelcomePageState extends State<WelcomePage> {
   bool hadInit = false;
 
   void getRules() async{
-    dynamic content = await FileStorage.getRule("rule");
+    dynamic content = await FileStorage.getContent("rule");
     if(content == ""){
       BaseService.getRule((model){
         Global();
