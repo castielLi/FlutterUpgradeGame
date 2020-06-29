@@ -81,5 +81,9 @@ class ServiceUrl {
     return "${host}api/v1/privacy";
   }
 
+  /// 升级建筑
+  static upgradeBuilding(){
+    return "${host}api/v1/upgradebuilding";
+  }
 }
 
