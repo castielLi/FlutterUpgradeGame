@@ -61,46 +61,47 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                       },
                     ),
                     ButtonsList(
-                        buttonWidth: ScreenUtil().setWidth(900),
-                        buttonHeight: ScreenUtil().setHeight(190),
-                        buttonBackgroundImageUrl: 'resource/images/settingButtonBackground.png',
-                        textSize: SystemFontSize.settingTextFontSize,
-                        isColumn: true,
-                        buttons: [
-                          ImageTextButton(
-                            buttonName: '账号及安全',
-                            callback: () {
-                              switchPageBetweenFatherAndSon(sonPageName: "账号及安全");
-                              this.widget.changeTitleCallback("账号及安全");
-                            },
-                          ),
-                          ImageTextButton(
-                            buttonName: '交易明细',
-                            callback: () {
-                              switchPageBetweenFatherAndSon(sonPageName: "交易明细");
-                              this.widget.changeTitleCallback("交易明细");
-                            },
-                          ),
-                          ImageTextButton(
-                            buttonName: '提现记录',
-                            callback: () {
-                              switchPageBetweenFatherAndSon(sonPageName: "提现记录");
-                              this.widget.changeTitleCallback("提现记录");
-                            },
-                          ),
-                          ImageTextButton(
-                            buttonName: '客服中心',
-                            callback: () {
-                              switchPageBetweenFatherAndSon(sonPageName: "客服中心");
-                              this.widget.changeTitleCallback("客服中心");
-                            },
-                          ),
-                        ],
-                      ),
+                      buttonWidth: ScreenUtil().setWidth(900),
+                      buttonHeight: ScreenUtil().setHeight(190),
+                      buttonBackgroundImageUrl: 'resource/images/settingButtonBackground.png',
+                      textSize: SystemFontSize.settingTextFontSize,
+                      isColumn: true,
+                      buttons: [
+                        ImageTextButton(
+                          buttonName: '账号及安全',
+                          callback: () {
+                            switchPageBetweenFatherAndSon(sonPageName: "账号及安全");
+                            this.widget.changeTitleCallback("账号及安全");
+                          },
+                        ),
+                        ImageTextButton(
+                          buttonName: '交易明细',
+                          callback: () {
+                            switchPageBetweenFatherAndSon(sonPageName: "交易明细");
+                            this.widget.changeTitleCallback("交易明细");
+                          },
+                        ),
+                        ImageTextButton(
+                          buttonName: '提现记录',
+                          callback: () {
+                            switchPageBetweenFatherAndSon(sonPageName: "提现记录");
+                            this.widget.changeTitleCallback("提现记录");
+                          },
+                        ),
+                        ImageTextButton(
+                          buttonName: '客服中心',
+                          callback: () {
+                            switchPageBetweenFatherAndSon(sonPageName: "客服中心");
+                            this.widget.changeTitleCallback("客服中心");
+                          },
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
             ),
+
             ///账号及安全
             new Offstage(
               offstage: "账号及安全" != buttonName,
@@ -112,6 +113,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                 },
               ),
             ),
+
             ///交易明细
             new Offstage(
               offstage: "交易明细" != buttonName,
@@ -123,6 +125,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                 },
               ),
             ),
+
             ///提现明细
             new Offstage(
               offstage: "提现记录" != buttonName,

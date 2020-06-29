@@ -9,7 +9,7 @@ class AdIconRow extends StatefulWidget {
   String imageUrlWatched;
   VoidCallback watchSuccessCallBack;
 
-  AdIconRow({Key key, this.adIconHeight, this.countInOneRow, this.imageUrlUnwatch, this.alreadyWatched, this.imageUrlWatched,this.watchSuccessCallBack}) : super(key: key);
+  AdIconRow({Key key, this.adIconHeight, this.countInOneRow, this.imageUrlUnwatch, this.alreadyWatched, this.imageUrlWatched, this.watchSuccessCallBack}) : super(key: key);
 
   @override
   _AdIconRow createState() => _AdIconRow();
