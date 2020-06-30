@@ -41,11 +41,13 @@ class _StoreDetailState extends State<StoreDetail> {
     });
   }
 
-  void buyVoucher(BaseUserInfoProvider baseUserInfo) {
+  void buyVoucher(String productId,BaseUserInfoProvider baseUserInfo) {
     this.widget.HUD();
-    StoreService.buyVoucher((VoucherModel model) {
+    StoreService.buyVoucher(productId,(VoucherModel model) {
       this.widget.HUD();
-      baseUserInfo.buyVoucher(model.voucher);
+      if(model!=null) {
+        baseUserInfo.buyVoucher(model.voucher);
+      }
     });
   }
 
@@ -65,28 +67,28 @@ class _StoreDetailState extends State<StoreDetail> {
                 new ProductItem(
                   volumeAmount: storeList == null ? "" : storeList[0].amount.toString(),
                   callback: () {
-                    this.buyVoucher(baseUserInfo);
+                    this.buyVoucher(storeList[0].productid,baseUserInfo);
                   },
                   cashAmount: storeList == null ? "" : storeList[0].price.toString(),
                 ),
                 new ProductItem(
                   volumeAmount: storeList == null ? "" : storeList[1].amount.toString(),
                   callback: () {
-                    this.buyVoucher(baseUserInfo);
+                    this.buyVoucher(storeList[1].productid,baseUserInfo);
                   },
                   cashAmount: storeList == null ? "" : storeList[1].price.toString(),
                 ),
                 new ProductItem(
                   volumeAmount: storeList == null ? "" : storeList[2].amount.toString(),
                   callback: () {
-                    this.buyVoucher(baseUserInfo);
+                    this.buyVoucher(storeList[2].productid,baseUserInfo);
                   },
                   cashAmount: storeList == null ? "" : storeList[2].price.toString(),
                 ),
                 new ProductItem(
                   volumeAmount: storeList == null ? "" : storeList[3].amount.toString(),
                   callback: () {
-                    this.buyVoucher(baseUserInfo);
+                    this.buyVoucher(storeList[3].productid,baseUserInfo);
                   },
                   cashAmount: storeList == null ? "" : storeList[3].price.toString(),
                 )

@@ -35,6 +35,11 @@ class ServiceUrl {
     return "${host}api/v1/voucher/list";
   }
 
+  ///购买英雄
+  static buyHero() {
+    return "${host}api/v1/hero/buy";
+  }
+
   ///购买赠送券
   static buyVocher() {
     return "${host}api/v1/voucher/buy";
