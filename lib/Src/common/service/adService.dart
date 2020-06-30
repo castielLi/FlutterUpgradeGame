@@ -32,23 +32,21 @@ class AdService {
     try {
       print('show add');
       await platform.invokeMethod('showAd', <String, dynamic>{'type': type, "showType": showType, "posId": posId});
-      print('show add done');
     } on PlatformException catch (e) {
       print(e);
     }
   }
 
   void _onEvent(Object event) {
-    print(event.toString()+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    print("广告观看状态!!!!!："+event.toString());
     if("5"==event.toString()){
       print("广告观看成功!!!!!!");
-      this.adWatchSuccessCallback();
+//      this.adWatchSuccessCallback();
     }
-    print("event »" + event);
+    print("event »" + event.toString());
   }
 
   void _onError(Object error) {
-    print(error.toString()+"fail");
-    print("error »" + error);
+    print("error »" + error.toString());
   }
 }

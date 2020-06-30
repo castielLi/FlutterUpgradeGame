@@ -16,8 +16,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  static const platform = const MethodChannel('samples.flutter.ad');
-  static const EventChannel _eventChannel = const EventChannel('samples.flutter.ad.event');
+//  static const platform = const MethodChannel('samples.flutter.ad');
+//  static const EventChannel _eventChannel = const EventChannel('samples.flutter.ad.event');
   ProgressHUD _progressHUD;
   bool _loading = false;
 
@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void initState() {
     super.initState();
-    _eventChannel.receiveBroadcastStream().listen(_onEvent, onError: _onError);
+//    _eventChannel.receiveBroadcastStream().listen(_onEvent, onError: _onError);
     _progressHUD = new ProgressHUD(
       backgroundColor: Colors.transparent,
       color: Colors.white,
@@ -144,21 +144,16 @@ class _LoginPageState extends State<LoginPage> {
 
   void toast(int type,int showType,[String posId]) async {
     try {
-      await platform.invokeMethod('showAd', <String, dynamic>{'type': type,"showType":showType,"posId":posId});
+//      await platform.invokeMethod('showAd', <String, dynamic>{'type': type,"showType":showType,"posId":posId});
     } on PlatformException catch (e) {
       print(e);
     }
   }
   void _onEvent(Object event) {
-    print(event.toString()+"111111111111111111");
-    if("5"==event.toString()){
-      print("广告观看成功!!!!!!");
-    }
-    print("event »ØÀ´ÁË³É¹¦");
+    print("event »"+event);
   }
 
   void _onError(Object error) {
-    print(error.toString()+"222222222222");
-    print("event »ØÀ´ÁËÊ§°Ü");
+    print("event »"+error);
   }
 }

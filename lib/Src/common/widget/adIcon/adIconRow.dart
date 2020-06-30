@@ -12,7 +12,7 @@ class AdIconRow extends StatefulWidget {
   String imageUrlUnwatch;
   String imageUrlWatched;
   VoidCallback watchSuccessCallBack;
-  int testAdType = 2;
+  static int testAdType = 2;
 
   AdIconRow({Key key, this.adIconHeight, this.countInOneRow, this.imageUrlUnwatch, this.alreadyWatched, this.imageUrlWatched, this.watchSuccessCallBack}) : super(key: key);
 
@@ -41,8 +41,8 @@ class _AdIconRow extends State<AdIconRow> {
           onTap: () {
             AdService as = new AdService();
             as.adWatchSuccessCallback = this.widget.watchSuccessCallBack;
-            this.widget.testAdType = this.widget.testAdType==1?2:1;
-            as.showAd(1, this.widget.testAdType);
+            AdIconRow.testAdType = AdIconRow.testAdType==1?2:1;
+            as.showAd(1, AdIconRow.testAdType);
 
           },
         ),

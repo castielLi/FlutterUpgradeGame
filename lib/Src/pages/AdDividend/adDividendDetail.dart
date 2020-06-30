@@ -17,7 +17,7 @@ class AdDividendDetail extends StatefulWidget {
 }
 
 class _AdDividendDetailState extends State<AdDividendDetail> {
-  List<AdDividendModel> adDividendDataList;
+//  List<AdDividendModel> adDividendDataList;
   AdDividendModel warrior = AdDividendModel(type: Heroes.WARRIOR);
   AdDividendModel hunter = AdDividendModel(type: Heroes.HUNTER);
   AdDividendModel shaman = AdDividendModel(type: Heroes.SHAMAN);
@@ -27,27 +27,22 @@ class _AdDividendDetailState extends State<AdDividendDetail> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
-      AdDividendService.getAdDividendList().then((data) {
-        if (data.code == ConfigSetting.SUCCESS && data.data != null) {
+      AdDividendService.getAdDividendList((data){
+        if(null != data){
           setState(() {
-            adDividendDataList = AdDividendListModel.fromJson(data.data).datalist;
-            if (null != adDividendDataList) {
-              adDividendDataList.forEach((adDividend) {
-                switch (adDividend.type) {
-                  case Heroes.WARRIOR:
-                    warrior = adDividend;
-                    break;
-                  case Heroes.HUNTER:
-                    hunter = adDividend;
-                    break;
-                  case Heroes.SHAMAN:
-                    shaman = adDividend;
-                }
-              });
-            }
+            data.forEach((adDividend) {
+              switch (adDividend.type) {
+                case Heroes.WARRIOR:
+                  warrior = adDividend;
+                  break;
+                case Heroes.HUNTER:
+                  hunter = adDividend;
+                  break;
+                case Heroes.SHAMAN:
+                  shaman = adDividend;
+              }
+            });
           });
-        } else {
-          CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
         }
         this.widget.HUD();
       });
