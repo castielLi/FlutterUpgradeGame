@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'package:upgradegame/Common/http/configSetting.dart';
-import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/pages/AdDividend/adPool.dart';
 import 'package:upgradegame/Src/pages/adDividend/model/AdDividendModel.dart';
@@ -17,7 +15,7 @@ class AdDividendDetail extends StatefulWidget {
 }
 
 class _AdDividendDetailState extends State<AdDividendDetail> {
-//  List<AdDividendModel> adDividendDataList;
+  List<AdDividendModel> adDividendDataList;
   AdDividendModel warrior = AdDividendModel(type: Heroes.WARRIOR);
   AdDividendModel hunter = AdDividendModel(type: Heroes.HUNTER);
   AdDividendModel shaman = AdDividendModel(type: Heroes.SHAMAN);
@@ -27,10 +25,11 @@ class _AdDividendDetailState extends State<AdDividendDetail> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
-      AdDividendService.getAdDividendList((data){
-        if(null != data){
+      AdDividendService.getAdDividendList((data) {
+        if (null != data) {
           setState(() {
-            data.forEach((adDividend) {
+            adDividendDataList = AdDividendListModel.fromJson(data).datalist;
+            adDividendDataList.forEach((adDividend) {
               switch (adDividend.type) {
                 case Heroes.WARRIOR:
                   warrior = adDividend;

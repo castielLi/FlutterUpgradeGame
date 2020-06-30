@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
-import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/pages/setting/aboutUs/model/aboutUsModel.dart';
 import 'package:upgradegame/Src/pages/setting/aboutUs/service/aboutUsService.dart';
-
-import 'model/aboutUsModel.dart';
 
 class AboutUsDetail extends StatefulWidget {
   @override
@@ -19,23 +16,21 @@ class AboutUsDetail extends StatefulWidget {
 }
 
 class _AboutUsDetailState extends State<AboutUsDetail> {
-  String content = "关于我们";
+  String content = "";
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
-      AboutUsService.getAboutUs().then((data) {
-        if (data.code == ConfigSetting.SUCCESS && data.data != null) {
+      AboutUsService.getAboutUs((data) {
+        if (null != data) {
           setState(() {
-            content = AboutUsModel.fromJson(data.data).content;
+            content = AboutUsModel.fromJson(data).content;
           });
-        } else {
-          CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
         }
-        this.widget.HUD();
       });
+      this.widget.HUD();
     });
   }
 
@@ -68,7 +63,6 @@ class _AboutUsDetailState extends State<AboutUsDetail> {
             buttonName: "返回",
             imageUrl: "resource/images/upgradeButton.png",
             callback: () {
-              print('点击升级');
 //                this.widget.HUD();
               this.widget.viewCallback();
             },

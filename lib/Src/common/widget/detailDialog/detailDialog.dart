@@ -74,7 +74,6 @@ class _DetailDialogState extends State<DetailDialog> {
     void changeCurrentDialogTitle(String title){
       setState(() {
         currentDisplayTitle = title;
-        print(currentDisplayTitle);
       });
     }
 

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
-import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/setting/protocol/service/protocolService.dart';
 
 import 'model/protocol.dart';
@@ -26,16 +24,12 @@ class _ProtocolDetailState extends State<ProtocolDetail> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
-      ProtocolService.getProtocolList().then((data) {
-        if (data.code == ConfigSetting.SUCCESS && data.data != null) {
-          setState(() {
-            content = ProtocolModel.fromJson(data.data).content;
-          });
-        } else {
-          CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
+      ProtocolService.getProtocolList((data) {
+        if (null != data) {
+          content = ProtocolModel.fromJson(data).content;
         }
-        this.widget.HUD();
       });
+      this.widget.HUD();
     });
   }
 
@@ -68,7 +62,6 @@ class _ProtocolDetailState extends State<ProtocolDetail> {
             buttonName: "返回",
             imageUrl: "resource/images/upgradeButton.png",
             callback: () {
-              print('点击升级');
 //                this.widget.HUD();
               this.widget.viewCallback();
             },

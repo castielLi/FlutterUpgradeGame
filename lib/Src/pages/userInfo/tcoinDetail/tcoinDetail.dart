@@ -29,7 +29,6 @@ class _TCoinDetailState extends State<TCoinDetail> {
             child:Center(
               child:
               new ImageButton(height:ScreenUtil().setHeight(200),width: ScreenUtil().setWidth(400),buttonName: "升 级",imageUrl: "resource/images/upgradeButton.png",callback: (){
-                print('点击升级');
 //                this.widget.HUD();
                 this.widget.viewCallback();
               },),

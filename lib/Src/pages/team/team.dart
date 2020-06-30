@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
-import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/team/model/invitation.dart';
 import 'package:upgradegame/Src/pages/team/service/teamService.dart';
 import 'package:upgradegame/Src/pages/team/teamItem.dart';
@@ -33,18 +31,14 @@ class _TeamDetailState extends State<TeamDetail> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
-      TeamService.getTeamList().then((data) {
-        if (data.code == ConfigSetting.SUCCESS && data.data != null) {
-          setState(() {
-            first = InvitationListModel.fromJson(data.data).first;
-            second = InvitationListModel.fromJson(data.data).second;
-            hideTeamResult = false;
-          });
-        } else {
-          CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
-        }
-        this.widget.HUD();
+      TeamService.getTeamList((data){
+        setState(() {
+          first = InvitationListModel.fromJson(data).first;
+          second = InvitationListModel.fromJson(data).second;
+          hideTeamResult = false;
+        });
       });
+      this.widget.HUD();
     });
   }
 

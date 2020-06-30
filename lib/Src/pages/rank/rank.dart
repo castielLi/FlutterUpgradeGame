@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
-import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/rank/model/rankModel.dart';
 import 'package:upgradegame/Src/pages/rank/rankItem.dart';
 import 'package:upgradegame/Src/pages/rank/service/rankService.dart';
@@ -28,17 +26,16 @@ class _RankDetailState extends State<RankDetail> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
-      RankService.getRankList().then((data) {
-        if (data.code == ConfigSetting.SUCCESS && data.data != null) {
+      RankService.getRankList((data){
+        if(null !=data){
           setState(() {
-            coinList = RankListModel.fromJson(data.data).coinList;
-            incomeList = RankListModel.fromJson(data.data).incomeList;
+            coinList = RankListModel.fromJson(data).coinList;
+            incomeList = RankListModel.fromJson(data).incomeList;
           });
-        } else {
-          CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
+
         }
-        this.widget.HUD();
       });
+      this.widget.HUD();
     });
   }
 

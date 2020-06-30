@@ -9,7 +9,6 @@ import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:provide/provide.dart';
 import 'package:progress_hud/progress_hud.dart';
 
-
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => new _LoginPageState();
@@ -20,7 +19,6 @@ class _LoginPageState extends State<LoginPage> {
 //  static const EventChannel _eventChannel = const EventChannel('samples.flutter.ad.event');
   ProgressHUD _progressHUD;
   bool _loading = false;
-
 
   var adview = "POSID8rbrja0ih10i";
   var baidu = "7111030";
@@ -43,19 +41,17 @@ class _LoginPageState extends State<LoginPage> {
 
   initParams() async {
     currentToken = await LoginService.getToken();
-    if(currentToken!=null){
+    if (currentToken != null) {
       this.showOrDismissProgressHUD();
-      LoginService.loginWithToken((model){
+      LoginService.loginWithToken((model) {
         this.showOrDismissProgressHUD();
-        if(model!=null) {
+        if (model != null) {
           Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
-          Application.router
-              .navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+          Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
         }
       });
     }
   }
-
 
   void showOrDismissProgressHUD() {
     setState(() {
@@ -72,7 +68,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
   }
 
   @override
@@ -80,61 +75,67 @@ class _LoginPageState extends State<LoginPage> {
     return new Container(
       color: Colors.black,
       child: ProvideMulti(
-        builder: (context,child,model){
-          return Stack(
-            children: <Widget>[
-              new Container(
-                child:Center(
-                  child:Column(
+          builder: (context, child, model) {
+            return Stack(
+              children: <Widget>[
+                new Container(
+                  child: Center(
+                      child: Column(
                     children: <Widget>[
-                      new RaisedButton(child:Text("adview kaipin"),onPressed: (){
-                        toast(1, 1);
-                      }),
-                      new RaisedButton(child:Text("adview video"),onPressed: (){
+                      new RaisedButton(
+                          child: Text("adview kaipin"),
+                          onPressed: () {
+                            toast(1, 1);
+                          }),
+                      new RaisedButton(
+                          child: Text("adview video"),
+                          onPressed: () {
 //                        toast(1, 2);
-                        toast(1, 2);
-                      }),
-                      new RaisedButton(child:Text("baidu kaipin"),onPressed: (){
-                        toast(2, 1);
-                      }),
-                      new RaisedButton(child:Text("baidu video"),onPressed: (){
+                            toast(1, 2);
+                          }),
+                      new RaisedButton(
+                          child: Text("baidu kaipin"),
+                          onPressed: () {
+                            toast(2, 1);
+                          }),
+                      new RaisedButton(
+                          child: Text("baidu video"),
+                          onPressed: () {
 //                        toast(2, 2);
-                        toast(2, 2);
-                      }),
-                      new RaisedButton(child:Text("Tencent kaipin"),onPressed: (){
-                        toast(3, 1);
-                      }),
-                      new RaisedButton(child:Text("Tencent video"),onPressed: (){
+                            toast(2, 2);
+                          }),
+                      new RaisedButton(
+                          child: Text("Tencent kaipin"),
+                          onPressed: () {
+                            toast(3, 1);
+                          }),
+                      new RaisedButton(
+                          child: Text("Tencent video"),
+                          onPressed: () {
 //                        toast(3, 2);
-                        toast(3, 2);
-                      }),
-                      new RaisedButton(child:Text("login"),onPressed: (){
-                        this.showOrDismissProgressHUD();
-                        LoginService.login("asdf",(model){
-                          this.showOrDismissProgressHUD();
-
-                          if(model!=null) {
-                            Provide.value<BaseUserInfoProvider>(context)
-                                .initBaseUserInfo(model);
-                            Application.router
-                                .navigateTo(context, UpgradeGameRoute.mainPage,
-                                clearStack: true);
-                          }
-
-                        });
-                      }),
+                            toast(3, 2);
+                          }),
+                      new RaisedButton(
+                          child: Text("login"),
+                          onPressed: () {
+                            this.showOrDismissProgressHUD();
+                            LoginService.login("asdf", (model) {
+                              this.showOrDismissProgressHUD();
+                              if (model != null) {
+                                Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
+                                Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                              }
+                            });
+                          }),
                     ],
-                  )
-
+                  )),
+                  margin: EdgeInsets.only(top: 200),
                 ),
-                margin: EdgeInsets.only(top: 200),
-              ),
-              _progressHUD
-            ],
-          );
-        },
-          requestedValues: [BaseUserInfoProvider]
-      ),
+                _progressHUD
+              ],
+            );
+          },
+          requestedValues: [BaseUserInfoProvider]),
     );
   }
 
@@ -142,18 +143,19 @@ class _LoginPageState extends State<LoginPage> {
   ///showType 选择展示 方式 1：开屏广告 2：视频广告
   ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
 
-  void toast(int type,int showType,[String posId]) async {
+  void toast(int type, int showType, [String posId]) async {
     try {
 //      await platform.invokeMethod('showAd', <String, dynamic>{'type': type,"showType":showType,"posId":posId});
     } on PlatformException catch (e) {
       print(e);
     }
   }
+
   void _onEvent(Object event) {
-    print("event »"+event);
+    print("event »" + event);
   }
 
   void _onError(Object error) {
-    print("event »"+error);
+    print("event »" + error);
   }
 }

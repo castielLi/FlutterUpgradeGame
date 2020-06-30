@@ -94,7 +94,6 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                   ),
                 ),
                 onTap: () {
-                  print('点击购买');
                 },
               ),
             ],

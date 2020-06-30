@@ -27,17 +27,14 @@ class _StoreDetailState extends State<StoreDetail> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
-      StoreService.getStoreList().then((data) {
-        if (data.code == ConfigSetting.SUCCESS && data.data != null) {
+      StoreService.getStoreList((data) {
+        if (null != data) {
           setState(() {
-            storeList = StoreListModel.fromJson(data.data).datalist;
+            storeList = StoreListModel.fromJson(data).datalist;
           });
-        } else {
-          CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
         }
         this.widget.HUD();
       });

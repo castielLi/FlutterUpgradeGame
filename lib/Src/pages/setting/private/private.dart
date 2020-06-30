@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
-import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/pages/setting/private/service/privacyService.dart';
 
@@ -19,23 +17,19 @@ class PrivateDetail extends StatefulWidget {
 }
 
 class _PrivateDetailState extends State<PrivateDetail> {
-  String content = '';
+  String privacy = '';
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
-      PrivacyService.getPrivacy().then((data) {
-        if (data.code == ConfigSetting.SUCCESS && data.data != null) {
-          setState(() {
-            content = PrivacyModel.fromJson(data.data).content;
-          });
-        } else {
-          CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
+      PrivacyService.getPrivacy((data) {
+        if (null != data) {
+          privacy = PrivacyModel.fromJson(data).content;
         }
-        this.widget.HUD();
       });
+      this.widget.HUD();
     });
   }
 
@@ -54,7 +48,9 @@ class _PrivateDetailState extends State<PrivateDetail> {
             height: ScreenUtil().setHeight(820),
             child: ListView(
               children: <Widget>[
-                Text(this.content,textAlign: TextAlign.center,
+                Text(
+                  this.privacy,
+                  textAlign: TextAlign.center,
                   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                 ),
               ],
@@ -66,8 +62,6 @@ class _PrivateDetailState extends State<PrivateDetail> {
             buttonName: "返回",
             imageUrl: "resource/images/upgradeButton.png",
             callback: () {
-              print('点击升级');
-//                this.widget.HUD();
               this.widget.viewCallback();
             },
           ),

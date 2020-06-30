@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Common/widget/toast/toast.dart';
-import 'package:upgradegame/Src/pages/setting/raiders/model/RaidersModel.dart';
 import 'package:upgradegame/Src/pages/setting/raiders/service/raidersService.dart';
+
+import 'model/raidersModel.dart';
 
 class RaidersDetail extends StatefulWidget {
   @override
@@ -29,14 +28,12 @@ class _RaidersDetailState extends State<RaidersDetail> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
-      RaidersService.getRaidersList().then((data) {
-        if (data.code == ConfigSetting.SUCCESS && data.data != null) {
+      RaidersService.getRaidersList((data) {
+        if (null != data) {
           setState(() {
-            basic = RaidersModel.fromJson(data.data).basic;
-            advanced = RaidersModel.fromJson(data.data).advanced;
+            basic = RaidersModel.fromJson(data).basic;
+            advanced = RaidersModel.fromJson(data).advanced;
           });
-        } else {
-          CommonUtils.showErrorMessage(msg: "网络请求失败，请重试");
         }
         this.widget.HUD();
       });

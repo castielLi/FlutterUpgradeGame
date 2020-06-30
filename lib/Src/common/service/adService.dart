@@ -15,7 +15,6 @@ class AdService {
   VoidCallback adWatchSuccessCallback;
 
   AdService({this.adWatchSuccessCallback}){
-    print('初始化');
     _eventChannel.receiveBroadcastStream().listen(this._onEvent, onError: this._onError);
   }
 
@@ -30,7 +29,6 @@ class AdService {
 
   void showAd(int type, int showType, [String posId]) async {
     try {
-      print('show add');
       await platform.invokeMethod('showAd', <String, dynamic>{'type': type, "showType": showType, "posId": posId});
     } on PlatformException catch (e) {
       print(e);
