@@ -56,28 +56,28 @@ class _SettingDetailState extends State<SettingDetail> {
                   ImageTextButton(
                     buttonName: '攻 略',
                     callback: () {
-                      switchPageBetweenFatherAndSon(sonPageName: "raiders");
+                      switchPageBetweenFatherAndSon(sonPageName: "攻略");
                       this.widget.changeTitleCallback("攻略");
                     },
                   ),
                   ImageTextButton(
                     buttonName: '用户协议',
                     callback: () {
-                      switchPageBetweenFatherAndSon(sonPageName: "protocol");
+                      switchPageBetweenFatherAndSon(sonPageName: "用户协议");
                       this.widget.changeTitleCallback("用户协议");
                     },
                   ),
                   ImageTextButton(
                     buttonName: '隐私条款',
                     callback: () {
-                      switchPageBetweenFatherAndSon(sonPageName: "privacy");
+                      switchPageBetweenFatherAndSon(sonPageName: "隐私条款");
                       this.widget.changeTitleCallback("隐私条款");
                     },
                   ),
                   ImageTextButton(
                     buttonName: '关于我们',
                     callback: () {
-                      switchPageBetweenFatherAndSon(sonPageName: "aboutUs");
+                      switchPageBetweenFatherAndSon(sonPageName: "关于我们");
                       this.widget.changeTitleCallback("关于我们");
                     },
                   ),
@@ -86,7 +86,7 @@ class _SettingDetailState extends State<SettingDetail> {
             ),
           ),
           new Offstage(
-            offstage: buttonName != "raiders",
+            offstage: buttonName != "攻略",
             child: new RaidersDetail(
               HUD: this.widget.HUD,
               viewCallback: () {
@@ -96,7 +96,7 @@ class _SettingDetailState extends State<SettingDetail> {
             ),
           ),
           new Offstage(
-            offstage: buttonName != "protocol",
+            offstage: buttonName != "用户协议",
             child: new ProtocolDetail(
               HUD: this.widget.HUD,
               viewCallback: () {
@@ -106,7 +106,7 @@ class _SettingDetailState extends State<SettingDetail> {
             ),
           ),
           new Offstage(
-            offstage: buttonName != "privacy",
+            offstage: buttonName != "隐私条款",
             child: new PrivateDetail(
               HUD: this.widget.HUD,
               viewCallback: () {
@@ -116,7 +116,7 @@ class _SettingDetailState extends State<SettingDetail> {
             ),
           ),
           new Offstage(
-            offstage: buttonName != "aboutUs",
+            offstage: buttonName != "关于我们",
             child: new AboutUsDetail(
               HUD: this.widget.HUD,
               viewCallback: () {

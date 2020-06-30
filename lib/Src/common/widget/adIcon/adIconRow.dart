@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provide/provide.dart';
-import 'package:upgradegame/Src/common/model/userInfoAd.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/service/adService.dart';
-import 'package:upgradegame/Src/pages/login/login.dart';
-import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
 class AdIconRow extends StatefulWidget {
   double adIconHeight;
@@ -29,7 +26,7 @@ class _AdIconRow extends State<AdIconRow> {
         GestureDetector(
           child: new Image(image: new AssetImage(this.widget.imageUrlWatched), height: this.widget.adIconHeight),
           onTap: () {
-            print('已经观看过该广告了');
+            CommonUtils.showErrorMessage(msg: '您已经看过该广告了');
           },
         ),
       );
@@ -41,9 +38,8 @@ class _AdIconRow extends State<AdIconRow> {
           onTap: () {
             AdService as = new AdService();
             as.adWatchSuccessCallback = this.widget.watchSuccessCallBack;
-            AdIconRow.testAdType = AdIconRow.testAdType==1?2:1;
+            AdIconRow.testAdType = AdIconRow.testAdType == 1 ? 2 : 1;
             as.showAd(1, AdIconRow.testAdType);
-
           },
         ),
       );

@@ -17,7 +17,7 @@ class ProtocolDetail extends StatefulWidget {
 }
 
 class _ProtocolDetailState extends State<ProtocolDetail> {
-  String content = "用户协议";
+  String content = "";
 
   @override
   void initState() {

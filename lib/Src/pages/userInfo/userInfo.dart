@@ -154,6 +154,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                 },
               ),
             ),
+
             ///提现
             new Offstage(
               offstage: "提现" != buttonName,
@@ -163,7 +164,6 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                   switchPageBetweenFatherAndSon();
                   this.widget.displayOriginalTitleCallback();
                 },
-
               ),
             ),
           ],

@@ -2,7 +2,6 @@ import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/http/httpManager.dart';
 import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
-
 import 'dart:async';
 import 'package:upgradegame/Src/service/serviceUrl.dart';
 

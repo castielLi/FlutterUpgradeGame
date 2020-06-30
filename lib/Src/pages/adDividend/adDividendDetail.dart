@@ -15,7 +15,6 @@ class AdDividendDetail extends StatefulWidget {
 }
 
 class _AdDividendDetailState extends State<AdDividendDetail> {
-  List<AdDividendModel> adDividendDataList;
   AdDividendModel warrior = AdDividendModel(type: Heroes.WARRIOR);
   AdDividendModel hunter = AdDividendModel(type: Heroes.HUNTER);
   AdDividendModel shaman = AdDividendModel(type: Heroes.SHAMAN);
@@ -28,7 +27,7 @@ class _AdDividendDetailState extends State<AdDividendDetail> {
       AdDividendService.getAdDividendList((data) {
         if (null != data) {
           setState(() {
-            adDividendDataList = AdDividendListModel.fromJson(data).datalist;
+            List<AdDividendModel> adDividendDataList = AdDividendListModel.fromJson(data).datalist;
             adDividendDataList.forEach((adDividend) {
               switch (adDividend.type) {
                 case Heroes.WARRIOR:

@@ -26,13 +26,12 @@ class _RankDetailState extends State<RankDetail> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
-      RankService.getRankList((data){
-        if(null !=data){
+      RankService.getRankList((data) {
+        if (null != data) {
           setState(() {
             coinList = RankListModel.fromJson(data).coinList;
             incomeList = RankListModel.fromJson(data).incomeList;
           });
-
         }
       });
       this.widget.HUD();

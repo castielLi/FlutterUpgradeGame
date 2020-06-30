@@ -82,7 +82,6 @@ class _FarmDetailState extends State<FarmDetail> {
               watchSuccessCallBack: () {
                 setState(() {
                   baseUserInfo.watchedAnAd(AdType.farm);
-                  print('广告观看个数!!!!!:'+baseUserInfo.ad.farm.toString());
                 });
               },
             ),
@@ -115,9 +114,9 @@ class _FarmDetailState extends State<FarmDetail> {
                   CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
                 } else {
                   this.widget.HUD();
-                  BaseService.upgradeBuilding(BuildingEnum.farm.index, (model){
+                  BaseService.upgradeBuilding(BuildingEnum.farm.index, (model) {
                     this.widget.HUD();
-                    if(model != null){
+                    if (model != null) {
                       Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
                     }
                   });
