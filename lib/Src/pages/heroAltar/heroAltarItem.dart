@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/pages/heroAltar/model/buyHeroModel.dart';
+import 'package:upgradegame/Src/pages/heroAltar/service/heroService.dart';
+import 'package:provide/provide.dart';
+import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
 import 'heroAltarClock.dart';
 
@@ -17,13 +21,26 @@ class HeroAltarItem extends StatefulWidget {
   //英雄图片
   String heroImageUrl;
 
-  HeroAltarItem({Key key, this.description, this.revenueUp, this.remainDays, this.heroImageUrl}) : super(key: key);
+  VoidCallback HUD;
+
+  HeroAltarItem({Key key, this.description, this.revenueUp, this.remainDays, this.heroImageUrl,this.HUD}) : super(key: key);
 
   @override
   _HeroAltarItem createState() => _HeroAltarItem();
 }
 
 class _HeroAltarItem extends State<HeroAltarItem> {
+
+  buyHero(int type){
+    this.widget.HUD();
+    HeroService.buyHero(type, (BuyHeroModel model){
+      this.widget.HUD();
+      if(model!=null){
+        Provide.value<BaseUserInfoProvider>(context).buyHero(model.tcoinamount, model.datalist);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -94,7 +111,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                   ),
                 ),
                 onTap: () {
-                  print('点击购买');
+                  this.buyHero(1);
                 },
               ),
             ],

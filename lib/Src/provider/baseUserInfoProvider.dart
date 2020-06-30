@@ -74,6 +74,13 @@ class BaseUserInfoProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  ///购买英雄
+  buyHero(int tcoinamount,List<Heroes> hero){
+    this.tcoinamount = tcoinamount;
+    this.hero = hero;
+    notifyListeners();
+  }
+
   ///升级建筑
   upgradeBuilding(BaseResourceModel model){
     this.tcoinamount = model.tcoinamount;
