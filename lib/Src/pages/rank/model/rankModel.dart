@@ -52,7 +52,7 @@ class RankCoinModel {
 
 class RankCashModel {
   String displayname;
-  int amount;
+  double amount;
 
   RankCashModel({this.displayname, this.amount});
 
