@@ -27,9 +27,27 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   bool mainBuilding = true;
   bool mainBuildingCoin = false;
+  double autoProfitSharing = 0.00;
+  double perFiveSecondProfit = 0.00;
 
   ProgressHUD _progressHUD;
   bool _loading = false;
+
+  displayInitProfitSharing(){
+    ///当前时间戳
+    int time = DateTime.now().millisecondsSinceEpoch;
+    ///零点时间戳
+    int zeroTime = DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day).millisecondsSinceEpoch;
+    double profitSharing = Provide.value<BaseUserInfoProvider>(context).Todayprofitsharing;
+    ///要将分红分成17280份  5秒为一份
+    perFiveSecondProfit = profitSharing / 17280;
+
+    int dTime = time - zeroTime;
+    int dPer = int.parse(((time - zeroTime) / 5000).toStringAsFixed(0));
+    ///保留两位小数
+    autoProfitSharing = dPer * perFiveSecondProfit;
+    return autoProfitSharing.toStringAsFixed(2);
+  }
 
   @override
   void initState() {
@@ -44,6 +62,14 @@ class _MainPageState extends State<MainPage> {
       text: '',
       loading: false,
     );
+
+    ///每5秒更改一次广告分红  要将分红分成17280份
+    Timer.periodic( Duration( seconds: 5 ), ( timer ) {
+      ///当前时间戳
+      setState(() {
+        autoProfitSharing += perFiveSecondProfit;
+      });
+    });
 
 
     ///系统自动判断是否需要产生t币
@@ -284,7 +310,7 @@ class _MainPageState extends State<MainPage> {
                         imageWidth: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize),
                         title: "今日分红",
                         amount: "¥" +
-                            baseUserInfo.Todayprofitsharing.toInt().toString(),
+                            (autoProfitSharing == 0.00?this.displayInitProfitSharing():autoProfitSharing.toStringAsFixed(2)),
                         callback: () {
                           Application.showDetailDialog(
                               context, UpgradeGameRoute.detailDialogPage,
