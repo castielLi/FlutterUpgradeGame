@@ -26,8 +26,7 @@ class _HeroAltarState extends State<HeroAltar> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      child: Provide<BaseUserInfoProvider>(
-          builder: (context, child, baseUserInfo) {
+      child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
         List<Heroes> heroes = baseUserInfo.hero;
         List<int> warriors = [];
         List<int> hunters = [];
@@ -61,6 +60,7 @@ class _HeroAltarState extends State<HeroAltar> {
                 description: '战士:守卫家园',
                 revenueUp: 10,
                 remainDays: warriors,
+                heroType: Heroes.WARRIOR,
                 HUD: this.widget.HUD,
               ),
               HeroAltarItem(
@@ -68,6 +68,7 @@ class _HeroAltarState extends State<HeroAltar> {
                 description: '猎人:在野外获取食物',
                 revenueUp: 10,
                 remainDays: hunters,
+                heroType: Heroes.HUNTER,
                 HUD: this.widget.HUD,
               ),
               HeroAltarItem(
@@ -75,6 +76,7 @@ class _HeroAltarState extends State<HeroAltar> {
                 description: '萨满:保佑你的灵魂',
                 revenueUp: 10,
                 remainDays: shamans,
+                heroType: Heroes.SHAMAN,
                 HUD: this.widget.HUD,
               ),
             ],

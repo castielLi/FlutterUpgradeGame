@@ -14,7 +14,7 @@ class AnnouncementDetail extends StatefulWidget {
 }
 
 class _AnnouncementDetailState extends State<AnnouncementDetail> {
-  String announcement = '';
+  String announcement;
 
   @override
   void initState() {
@@ -43,7 +43,7 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
       child: ListView(
         children: <Widget>[
           Text(
-            announcement,
+            null==announcement?'':announcement,
             textAlign: TextAlign.center,
             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
           ),

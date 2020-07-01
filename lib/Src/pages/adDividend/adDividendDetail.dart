@@ -26,20 +26,22 @@ class _AdDividendDetailState extends State<AdDividendDetail> {
       this.widget.HUD();
       AdDividendService.getAdDividendList((data) {
         if (null != data) {
+          List<AdDividendModel> adDividendDataList = AdDividendListModel.fromJson(data).datalist;
           setState(() {
-            List<AdDividendModel> adDividendDataList = AdDividendListModel.fromJson(data).datalist;
-            adDividendDataList.forEach((adDividend) {
-              switch (adDividend.type) {
-                case Heroes.WARRIOR:
-                  warrior = adDividend;
-                  break;
-                case Heroes.HUNTER:
-                  hunter = adDividend;
-                  break;
-                case Heroes.SHAMAN:
-                  shaman = adDividend;
-              }
-            });
+            if (null != adDividendDataList) {
+              adDividendDataList.forEach((adDividend) {
+                switch (adDividend.type) {
+                  case Heroes.WARRIOR:
+                    warrior = adDividend;
+                    break;
+                  case Heroes.HUNTER:
+                    hunter = adDividend;
+                    break;
+                  case Heroes.SHAMAN:
+                    shaman = adDividend;
+                }
+              });
+            }
           });
         }
         this.widget.HUD();

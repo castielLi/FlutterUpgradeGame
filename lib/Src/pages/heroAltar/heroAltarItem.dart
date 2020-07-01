@@ -21,22 +21,25 @@ class HeroAltarItem extends StatefulWidget {
   //英雄图片
   String heroImageUrl;
 
+  int heroType;
+
   VoidCallback HUD;
 
-  HeroAltarItem({Key key, this.description, this.revenueUp, this.remainDays, this.heroImageUrl,this.HUD}) : super(key: key);
+  HeroAltarItem({Key key, this.description, this.revenueUp, this.remainDays, this.heroImageUrl, this.heroType, this.HUD}) : super(key: key);
 
   @override
   _HeroAltarItem createState() => _HeroAltarItem();
 }
 
 class _HeroAltarItem extends State<HeroAltarItem> {
-
-  buyHero(int type){
+  buyHero(int type) {
     this.widget.HUD();
-    HeroService.buyHero(type, (BuyHeroModel model){
+    HeroService.buyHero(type, (BuyHeroModel model) {
       this.widget.HUD();
-      if(model!=null){
-        Provide.value<BaseUserInfoProvider>(context).buyHero(model.tcoinamount, model.datalist);
+      if (model != null) {
+        setState(() {
+          Provide.value<BaseUserInfoProvider>(context).buyHero(model.tcoinamount, model.datalist);
+        });
       }
     });
   }
@@ -111,7 +114,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                   ),
                 ),
                 onTap: () {
-                  this.buyHero(1);
+                  this.buyHero(this.widget.heroType);
                 },
               ),
             ],
