@@ -90,5 +90,9 @@ class ServiceUrl {
   static upgradeBuilding(){
     return "${host}api/v1/upgradebuilding";
   }
+  ///  搜索用户
+  static searchUser(){
+    return "${host}api/v1/searchuser";
+  }
 }
 

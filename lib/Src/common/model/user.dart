@@ -1,17 +1,27 @@
 class User {
-  //头像
+  // 头像
   String avatarUrl;
+
   // 名称
   String name;
+
   // id
   String id;
 
-  User({this.avatarUrl, this.name, this.id});
+  // phone
+  String phone;
+
+  User({this.avatarUrl, this.name, this.id, this.phone});
 
   User.fromJson(Map<String, dynamic> json) {
     avatarUrl = json['avatarUrl'];
     name = json['name'];
     id = json['id'];
+  }
+
+  User.fromSearchJson(Map<String, dynamic> json) {
+    name = json['displayname'];
+    id = json['userid'];
   }
 
   Map<String, dynamic> toJson() {

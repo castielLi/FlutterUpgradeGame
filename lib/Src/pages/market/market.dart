@@ -8,6 +8,7 @@ import 'package:upgradegame/Src/common/model/const/resource.dart';
 import 'package:upgradegame/Src/common/model/user.dart';
 import 'package:upgradegame/Src/pages/market/marketAsk.dart';
 import 'package:upgradegame/Src/pages/market/marketBid.dart';
+import 'package:upgradegame/Src/pages/market/service/marketService.dart';
 import 'package:upgradegame/Src/pages/market/userSearchResult.dart';
 
 class MarketDetail extends StatefulWidget {
@@ -114,28 +115,19 @@ class _MarketDetailState extends State<MarketDetail> {
                                             alignment: Alignment.center,
                                             child: TextField(
                                               controller: controller,
-                                              decoration: new InputDecoration(hintText: '输入用户名搜索', border: InputBorder.none),
-                                              onSubmitted: (String input) {
-                                                // TODO 获取搜索用户数据
-                                                input = controller.text;
-                                                setState(() {
-                                                  searchResult.clear();
-                                                  userSearchResultHide = false;
-                                                  searchResult.add(User(
-                                                    avatarUrl: 'resource/images/avatar.png',
-                                                    name: '黄小龙',
-                                                    id: '1000' + (falseId++).toString(),
-                                                  ));
-                                                  searchResult.add(User(
-                                                    avatarUrl: 'resource/images/avatar.png',
-                                                    name: '张三',
-                                                    id: '1000' + (falseId++).toString(),
-                                                  ));
-                                                  searchResult.add(User(
-                                                    avatarUrl: 'resource/images/avatar.png',
-                                                    name: '李四',
-                                                    id: '1000' + (falseId++).toString(),
-                                                  ));
+                                              keyboardType: TextInputType.number,
+                                              decoration: new InputDecoration(hintText: '输入用户手机号搜索', border: InputBorder.none),
+                                              onSubmitted: (String phone) {
+                                                phone = controller.text;
+                                                MarketService.searchUser(phone, (data) {
+                                                  if (null != data) {
+                                                    setState(() {
+                                                      searchResult.clear();
+                                                      userSearchResultHide = false;
+                                                      User user = User.fromSearchJson(data);
+                                                      searchResult.add(user);
+                                                    });
+                                                  }
                                                 });
                                               },
                                               // onChanged: onSearchTextChanged,
