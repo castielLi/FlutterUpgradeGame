@@ -12,10 +12,14 @@ class AdService {
   static AdType adType;
   static const platform = const MethodChannel('samples.flutter.ad');
   static const EventChannel _eventChannel = const EventChannel('samples.flutter.ad.event');
+  static bool single = false;
   VoidCallback adWatchSuccessCallback;
 
   AdService({this.adWatchSuccessCallback}){
-    _eventChannel.receiveBroadcastStream().listen(this._onEvent, onError: this._onError);
+    if(!single){
+      _eventChannel.receiveBroadcastStream().listen(this._onEvent, onError: this._onError);
+      single = true;
+    }
   }
 
   static Future<ResultData> watchAd(int type, callback) async {
@@ -39,7 +43,7 @@ class AdService {
     print("广告观看状态!!!!!："+event.toString());
     if("5"==event.toString()){
       print("广告观看成功!!!!!!");
-//      this.adWatchSuccessCallback();
+      this.adWatchSuccessCallback();
     }
     print("event »" + event.toString());
   }
