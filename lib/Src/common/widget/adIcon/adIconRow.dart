@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/service/adService.dart';
+import 'package:upgradegame/Src/common/widget/adDialog/adDialog.dart';
 
 class AdIconRow extends StatefulWidget {
   double adIconHeight;
@@ -18,6 +19,11 @@ class AdIconRow extends StatefulWidget {
 }
 
 class _AdIconRow extends State<AdIconRow> {
+  
+  void adFinishedCallback(){
+    print("广告已经看完了要执行代码了");
+  }
+  
   Widget buildList() {
     List<Widget> adIconList = [];
     Widget content;
@@ -36,10 +42,12 @@ class _AdIconRow extends State<AdIconRow> {
         GestureDetector(
           child: new Image(image: new AssetImage(this.widget.imageUrlUnwatch), height: this.widget.adIconHeight),
           onTap: () {
-            AdService as = new AdService();
-            as.adWatchSuccessCallback = this.widget.watchSuccessCallBack;
-            AdIconRow.testAdType = AdIconRow.testAdType == 1 ? 2 : 1;
-            as.showAd(1, AdIconRow.testAdType);
+
+            ///type选择平台  1：adview 2：baidu 3：腾讯
+            ///showType 选择展示 方式 1：开屏广告 2：视频广告
+            ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
+
+            AdDialog().showAd(1, 1);
           },
         ),
       );
