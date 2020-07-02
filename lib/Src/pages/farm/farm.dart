@@ -36,11 +36,11 @@ class _FarmDetailState extends State<FarmDetail> {
       if (null != baseUserInfo) {
         levelFrom = baseUserInfo.Farmlevel;
         level = baseUserInfo.Farmlevel + 1;
-        farmBuildingRule = Global.getFarmBuildingRule()[level - 1];
+        farmBuildingRule = null==Global.getFarmBuildingRule()?null:Global.getFarmBuildingRule()[level - 1];
         adSetting = Global.getAdSettingRule();
         neededCoin = farmBuildingRule.tcoinamount;
-        watchedAd = baseUserInfo.ad.farm;
-        maxWatchableAd = adSetting.farm;
+        watchedAd = null==baseUserInfo.ad?0:baseUserInfo.ad.farm;
+        maxWatchableAd = null==adSetting?5:adSetting.farm;
         speedUpPercent = farmBuildingRule.product;
       }
 
