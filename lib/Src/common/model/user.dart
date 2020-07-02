@@ -29,6 +29,7 @@ class User {
     data['avatarUrl'] = this.avatarUrl;
     data['name'] = this.name;
     data['id'] = this.id;
+    data['phone'] = this.phone;
     return data;
   }
 }

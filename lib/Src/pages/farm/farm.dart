@@ -22,25 +22,27 @@ class FarmDetail extends StatefulWidget {
 }
 
 class _FarmDetailState extends State<FarmDetail> {
-  // 获取数据
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Container(child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
-      int levelFrom = baseUserInfo.Farmlevel;
-      int level = baseUserInfo.Farmlevel + 1;
-
-      Farm farmBuildingRule = Global.getFarmBuildingRule()[level - 1];
-      AdSetting adSetting = Global.getAdSettingRule();
-      int neededCoin = farmBuildingRule.tcoinamount;
-      int watchedAd = baseUserInfo.ad.farm;
-      int maxWatchableAd = adSetting.farm;
-      int speedUpPercent = farmBuildingRule.product;
+      int levelFrom = 0;
+      int level = 0;
+      int neededCoin = 0;
+      int watchedAd = 0;
+      int maxWatchableAd = 0;
+      int speedUpPercent = 0;
+      Farm farmBuildingRule;
+      AdSetting adSetting;
+      if (null != baseUserInfo) {
+        levelFrom = baseUserInfo.Farmlevel;
+        level = baseUserInfo.Farmlevel + 1;
+        farmBuildingRule = Global.getFarmBuildingRule()[level - 1];
+        adSetting = Global.getAdSettingRule();
+        neededCoin = farmBuildingRule.tcoinamount;
+        watchedAd = baseUserInfo.ad.farm;
+        maxWatchableAd = adSetting.farm;
+        speedUpPercent = farmBuildingRule.product;
+      }
 
       return new Container(
         margin: EdgeInsets.fromLTRB(
@@ -82,6 +84,7 @@ class _FarmDetailState extends State<FarmDetail> {
               watchSuccessCallBack: () {
                 setState(() {
                   baseUserInfo.watchedAnAd(AdType.farm);
+                  print("广告观看个数:"+baseUserInfo.ad.farm.toString());
                 });
               },
             ),
@@ -110,16 +113,18 @@ class _FarmDetailState extends State<FarmDetail> {
               buttonName: "升 级",
               imageUrl: "resource/images/upgradeButton.png",
               callback: () {
-                if (baseUserInfo.tcoinamount < farmBuildingRule.tcoinamount) {
-                  CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
-                } else {
-                  this.widget.HUD();
-                  BaseService.upgradeBuilding(BuildingEnum.farm.index, (model) {
+                if (null != baseUserInfo && null != farmBuildingRule) {
+                  if (baseUserInfo.tcoinamount < farmBuildingRule.tcoinamount) {
+                    CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
+                  } else {
                     this.widget.HUD();
-                    if (model != null) {
-                      Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
-                    }
-                  });
+                    BaseService.upgradeBuilding(BuildingEnum.farm.index, (model) {
+                      this.widget.HUD();
+                      if (model != null) {
+                        Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
+                      }
+                    });
+                  }
                 }
               },
             ),

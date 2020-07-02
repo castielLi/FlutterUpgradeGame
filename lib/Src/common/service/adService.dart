@@ -9,7 +9,6 @@ import 'package:upgradegame/Src/service/serviceUrl.dart';
 import 'dart:convert' as convert;
 
 class AdService {
-
   static Future<ResultData> watchAd(int type, callback) async {
     WatchAd ad = new WatchAd(type: type);
     String params = convert.jsonEncode(ad);

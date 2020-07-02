@@ -10,6 +10,7 @@ class MarketService {
   static Future<ResultData> searchUser(phoneNo, callback) async {
     User user = new User(phone: phoneNo);
     String params = convert.jsonEncode(user);
+    print("params:"+params);
     var response = await httpManager.request(ServiceUrl.searchUser(), params, null, Options(method: "post"));
     if (response.code == 200) {
       callback(response.data);
