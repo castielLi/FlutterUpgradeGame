@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
+import 'package:upgradegame/Src/common/widget/adDialog/adDialog.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Src/common/service/baseService.dart';
@@ -16,6 +17,10 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
 
   bool hadInit = false;
+
+  void initBaseWidget(){
+    AdDialog();
+  }
 
   void getRules() async{
     dynamic content = await FileStorage.getContent("rule");
@@ -44,6 +49,7 @@ class _WelcomePageState extends State<WelcomePage> {
     // TODO: implement initState
     super.initState();
     this.getRules();
+
   }
 
   @override
