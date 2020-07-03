@@ -73,7 +73,7 @@ class _StoneDetailState extends State<StoneDetail> {
             ),
             AdIconRow(
               countInOneRow: maxWatchableAd,
-              adIconHeight: ScreenUtil().setHeight(150),
+              adIconHeight: ScreenUtil().setHeight(SystemIconSize.adIconSize),
               imageUrlWatched: 'resource/images/adWatched.png',
               imageUrlUnwatch: "resource/images/adUnwatch.png",
               alreadyWatched: watchedAd,

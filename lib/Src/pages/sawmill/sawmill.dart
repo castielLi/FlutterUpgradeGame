@@ -76,7 +76,7 @@ class _SawmillDetailState extends State<SawmillDetail> {
             ),
             AdIconRow(
               countInOneRow: maxWatchableAd,
-              adIconHeight: ScreenUtil().setHeight(150),
+              adIconHeight: ScreenUtil().setHeight(SystemIconSize.adIconSize),
               imageUrlWatched: 'resource/images/adWatched.png',
               imageUrlUnwatch: "resource/images/adUnwatch.png",
               alreadyWatched: watchedAd,
@@ -124,9 +124,9 @@ class _SawmillDetailState extends State<SawmillDetail> {
                   CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
                 } else {
                   this.widget.HUD();
-                  BaseService.upgradeBuilding(BuildingEnum.sawmill.index, (model){
+                  BaseService.upgradeBuilding(BuildingEnum.sawmill.index, (model) {
                     this.widget.HUD();
-                    if(model != null){
+                    if (model != null) {
                       Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
                     }
                   });

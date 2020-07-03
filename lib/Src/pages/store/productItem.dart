@@ -23,10 +23,11 @@ class _ProductItemState extends State<ProductItem> {
       child: new Column(
         children: <Widget>[
           new Row(
+            mainAxisAlignment:MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               new Container(
                 margin:EdgeInsets.only(left: ScreenUtil().setWidth(70)),
-                width: ScreenUtil().setWidth(180),
+                width: ScreenUtil().setWidth(130),
                 child:
                 new Text("¥" + this.widget.cashAmount,textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize))),
@@ -35,13 +36,13 @@ class _ProductItemState extends State<ProductItem> {
               new Container(
                 margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
                 child: Image(image: new AssetImage("resource/images/cashGold.png"),
-                  width: ScreenUtil().setHeight(130),
+                  width: ScreenUtil().setWidth(130),
                   height: ScreenUtil().setHeight(130),
                   fit: BoxFit.fill,
                 ),
               ),
               new Container(
-                width: ScreenUtil().setWidth(180),
+                width: ScreenUtil().setWidth(130),
                 margin: EdgeInsets.only(left: ScreenUtil().setWidth(100)),
                 child:new Text(this.widget.volumeAmount+"*",textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize))),
@@ -62,7 +63,7 @@ class _ProductItemState extends State<ProductItem> {
               new ImageTextButton(
                 imageUrl: "resource/images/upgradeButton.png",
                 imageWidth: ScreenUtil().setWidth(320),
-                imageHeight: ScreenUtil().setHeight(150),
+                imageHeight: ScreenUtil().setHeight(130),
                 buttonName: "购 买",
                 callback: (){
                   this.widget.callback();

@@ -77,8 +77,9 @@ class _MarketBidItem extends State<MarketBidItem> {
             ],
           ),
           Container(
-            padding: EdgeInsets.only(left: 172),
+            padding: EdgeInsets.only(right:ScreenUtil().setSp(10)),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 Image(
                   image: new AssetImage('resource/images/coin.png'),
@@ -89,6 +90,7 @@ class _MarketBidItem extends State<MarketBidItem> {
                   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                 ),
               ],
+
             ),
           ),
           ImageTextButton(
