@@ -30,6 +30,7 @@ class _DividendPartState extends State<DividendPart> {
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),
         child: new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             new Stack(
               children: <Widget>[
@@ -57,7 +58,7 @@ class _DividendPartState extends State<DividendPart> {
                   Text(this.widget.title,textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.dividendContentTextFontSize)),
                   Text(this.widget.amount,textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.dividendTitleTextFontSize)),
+                      style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: SystemFontSize.dividendContentTextFontSize)),
                 ],
               ),
             )

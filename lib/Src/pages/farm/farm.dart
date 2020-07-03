@@ -36,12 +36,14 @@ class _FarmDetailState extends State<FarmDetail> {
       if (null != baseUserInfo) {
         levelFrom = baseUserInfo.Farmlevel;
         level = baseUserInfo.Farmlevel + 1;
-        farmBuildingRule = Global.getFarmBuildingRule()[level - 1];
+        farmBuildingRule = null == Global.getFarmBuildingRule() ? null : Global.getFarmBuildingRule()[level - 1];
         adSetting = Global.getAdSettingRule();
-        neededCoin = farmBuildingRule.tcoinamount;
-        watchedAd = baseUserInfo.ad.farm;
-        maxWatchableAd = adSetting.farm;
-        speedUpPercent = farmBuildingRule.product;
+        if (null != farmBuildingRule) {
+          neededCoin = farmBuildingRule.tcoinamount;
+          speedUpPercent = farmBuildingRule.product;
+        }
+        watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.farm;
+        maxWatchableAd = null == adSetting ? 5 : adSetting.farm;
       }
 
       return new Container(
@@ -77,14 +79,14 @@ class _FarmDetailState extends State<FarmDetail> {
             ),
             AdIconRow(
               countInOneRow: maxWatchableAd,
-              adIconHeight: ScreenUtil().setHeight(150),
+              adIconHeight: ScreenUtil().setHeight(SystemIconSize.adIconSize),
               imageUrlWatched: 'resource/images/adWatched.png',
               imageUrlUnwatch: "resource/images/adUnwatch.png",
               alreadyWatched: watchedAd,
               watchSuccessCallBack: () {
                 setState(() {
                   baseUserInfo.watchedAnAd(AdType.farm);
-                  print("广告观看个数:"+baseUserInfo.ad.farm.toString());
+                  print("广告观看个数:" + baseUserInfo.ad.farm.toString());
                 });
               },
             ),

@@ -16,8 +16,7 @@ import 'dart:convert' as convert;
 class BaseService{
   static Future<ResultData> getRule(callback) async{
 
-    var response = await httpManager.request(
-        ServiceUrl.getRule(), {}, null, null);
+    var response = await httpManager.request(ServiceUrl.getRule(), {}, null, null);
     if(response.code == 200) {
       BaseRuleModel model = BaseRuleModel.fromJson(response.data);
       FileStorage.saveContent(convert.jsonEncode(model), "rule");
