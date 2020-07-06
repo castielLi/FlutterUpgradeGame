@@ -49,7 +49,7 @@ class _WelcomePageState extends State<WelcomePage> {
     // TODO: implement initState
     super.initState();
     this.getRules();
-
+    this.initBaseWidget();
   }
 
   @override

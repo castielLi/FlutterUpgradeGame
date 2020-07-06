@@ -33,7 +33,6 @@ class _ServerCenterState extends State<ServerCenter> {
             buttonName: "返回",
             imageUrl: "resource/images/upgradeButton.png",
             callback: () {
-              print('点击升级');
 //                this.widget.HUD();
               this.widget.viewCallback();
             },

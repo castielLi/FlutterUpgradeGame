@@ -30,16 +30,26 @@ class _StoneDetailState extends State<StoneDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
-      int levelFrom = baseUserInfo.Stonelevel;
-      int level = baseUserInfo.Stonelevel + 1;
-
-      ///当前建筑规则
-      Stone stoneBuildingRule = Global.getStoneBuildingRule()[level - 1];
-      AdSetting adSetting = Global.getAdSettingRule();
-      int needTCoin = stoneBuildingRule.tcoinamount;
-      int woodPerAd = stoneBuildingRule.product;
-      int watchedAd = baseUserInfo.ad.stone;
-      int maxWatchableAd = adSetting.stone;
+      int levelFrom = 0;
+      int level = 0;
+      Stone stoneBuildingRule;
+      AdSetting adSetting;
+      int needTCoin = 0;
+      int woodPerAd = 0;
+      int watchedAd = 0;
+      int maxWatchableAd = 0;
+      if (null != baseUserInfo) {
+        levelFrom = baseUserInfo.Stonelevel;
+        level = baseUserInfo.Stonelevel + 1;
+        stoneBuildingRule = null == Global.getStoneBuildingRule() ? null : Global.getStoneBuildingRule()[level - 1];
+        adSetting = Global.getAdSettingRule();
+        if (null != stoneBuildingRule) {
+          needTCoin = stoneBuildingRule.tcoinamount;
+          woodPerAd = stoneBuildingRule.product;
+        }
+        watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.stone;
+        maxWatchableAd = null == adSetting ? 5 : adSetting.stone;
+      }
 
       return new Container(
         margin: EdgeInsets.fromLTRB(
@@ -73,7 +83,7 @@ class _StoneDetailState extends State<StoneDetail> {
             ),
             AdIconRow(
               countInOneRow: maxWatchableAd,
-              adIconHeight: ScreenUtil().setHeight(150),
+              adIconHeight: ScreenUtil().setHeight(SystemIconSize.adIconSize),
               imageUrlWatched: 'resource/images/adWatched.png',
               imageUrlUnwatch: "resource/images/adUnwatch.png",
               alreadyWatched: watchedAd,
@@ -122,9 +132,9 @@ class _StoneDetailState extends State<StoneDetail> {
                   CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
                 } else {
                   this.widget.HUD();
-                  BaseService.upgradeBuilding(BuildingEnum.stone.index, (model){
+                  BaseService.upgradeBuilding(BuildingEnum.stone.index, (model) {
                     this.widget.HUD();
-                    if(model != null){
+                    if (model != null) {
                       Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
                     }
                   });

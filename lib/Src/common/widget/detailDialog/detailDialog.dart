@@ -154,7 +154,16 @@ class _DetailDialogState extends State<DetailDialog> {
     }
 
     return new Container(
+        width: ScreenUtil().setWidth(1080),
+        height: ScreenUtil().setHeight(1920),
+        decoration: new BoxDecoration(
+          image: new DecorationImage(
+            image: new AssetImage('resource/images/dialogBackgroundImage.png'),
+            fit: BoxFit.cover
+          ),
+    ),
             child: new Container(
+              color: Colors.transparent,
                 margin: EdgeInsets.fromLTRB((ScreenUtil().setWidth(1080) - this.widget.width)/2,
                     (ScreenUtil().setHeight(1920) - this.widget.height)/2,
                     (ScreenUtil().setWidth(1080) - this.widget.width)/2,

@@ -107,7 +107,6 @@ class _RaidersDetailState extends State<RaidersDetail> {
             buttonName: "返回",
             imageUrl: "resource/images/upgradeButton.png",
             callback: () {
-              print('点击升级');
 //                this.widget.HUD();
               this.widget.viewCallback();
             },
