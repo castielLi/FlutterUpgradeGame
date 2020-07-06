@@ -16,6 +16,8 @@ import com.kuaiyou.open.AdManager;
 import com.kuaiyou.open.SpreadManager;
 import com.kuaiyou.open.interfaces.AdViewSpreadListener;
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * 开屏
  */
@@ -90,6 +92,7 @@ public class AdSpreadActivity extends Activity implements AdViewSpreadListener {
 
     @Override
     public void onAdSpreadPrepareClosed() {
+        EventBus.getDefault().post(Constant.STATUS_FINISH);
         Log.i("AdViewDemo", "onAdSpreadPrepareClosed");
         jump();
     }

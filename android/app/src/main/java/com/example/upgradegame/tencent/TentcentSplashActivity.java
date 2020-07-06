@@ -25,6 +25,8 @@ import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
 import com.qq.e.comm.util.AdError;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -196,6 +198,7 @@ public class TentcentSplashActivity extends Activity implements SplashADListener
   public void onADDismissed() {
     Log.i("AD_DEMO", "SplashADDismissed");
     next();
+    EventBus.getDefault().post(Constant.STATUS_FINISH);
   }
 
   @Override

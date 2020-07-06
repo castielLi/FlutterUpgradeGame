@@ -86,4 +86,5 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.multidex:multidex:2.0.1'
 //    compileOnly(name:'Baidu_MobAds_SDK',ext:'aar')
+    implementation 'org.greenrobot:eventbus:3.0.0'
 }

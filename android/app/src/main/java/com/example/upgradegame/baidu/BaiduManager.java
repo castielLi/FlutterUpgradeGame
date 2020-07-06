@@ -7,6 +7,8 @@ import android.util.Log;
 import com.baidu.mobads.rewardvideo.RewardVideoAd;
 import com.example.upgradegame.Constant;
 
+import org.greenrobot.eventbus.EventBus;
+
 public class BaiduManager {
     private static final String TAG = "zhoux";
 
@@ -52,6 +54,7 @@ public class BaiduManager {
         public void playCompletion() {
             // 播放完成回调，媒体可以在这儿给用户奖励
             Log.i(TAG, "playCompletion");
+            EventBus.getDefault().post(Constant.STATUS_FINISH);
         }
 
         @Override

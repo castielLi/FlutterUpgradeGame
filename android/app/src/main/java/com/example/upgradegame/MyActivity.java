@@ -24,6 +24,10 @@ import com.kuaiyou.open.InitSDKManager;
 import com.kuaiyou.open.InstlManager;
 import com.kuaiyou.open.VideoManager;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -68,7 +72,7 @@ public class MyActivity extends FlutterActivity {
                                         intent.putExtra("posId",posId);
                                         startActivity(intent);
                                     } else  if(showType == 2){
-                                        AdViewManager.getInstance(MyActivity.this,sink).adView(posId);
+                                        AdViewManager.getInstance(MyActivity.this).adView(posId);
                                     }
                                 } else if(type == 2){
                                     if(showType == 1){
@@ -114,7 +118,7 @@ public class MyActivity extends FlutterActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        EventBus.getDefault().register(this);
         Log.e(TAG, "onCreate");
         //下载类广告默认弹出二次确认框，如需关闭提示请设置如下；设置后对全部广告生效
         InitSDKManager.setDownloadNotificationEnable(false);
@@ -221,4 +225,13 @@ public class MyActivity extends FlutterActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void event(Integer integer){
+        sink.success(integer);
+    }
 }

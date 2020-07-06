@@ -18,6 +18,8 @@ import com.baidu.mobads.SplashLpCloseListener;
 import com.example.upgradegame.Constant;
 import com.example.upgradegame.R;
 
+import org.greenrobot.eventbus.EventBus;
+
 public class SplashActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class SplashActivity extends Activity {
         public void onAdDismissed() {
             Log.i("RSplashActivity", "onAdDismissed");
             jump();
+            EventBus.getDefault().post(Constant.STATUS_FINISH);
         }
 
         @Override

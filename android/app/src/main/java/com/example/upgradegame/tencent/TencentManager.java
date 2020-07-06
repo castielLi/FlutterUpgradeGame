@@ -9,6 +9,8 @@ import com.qq.e.ads.rewardvideo.RewardVideoAD;
 import com.qq.e.ads.rewardvideo.RewardVideoADListener;
 import com.qq.e.comm.util.AdError;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.Locale;
 import java.util.Map;
 
@@ -98,6 +100,7 @@ public class TencentManager {
         @Override
         public void onVideoComplete() {
             Log.i(TAG, "onVideoComplete");
+            EventBus.getDefault().post(Constant.STATUS_FINISH);
         }
 
         /**
