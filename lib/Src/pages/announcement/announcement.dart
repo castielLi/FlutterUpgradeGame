@@ -43,7 +43,7 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
       child: ListView(
         children: <Widget>[
           Text(
-            null==announcement?'':announcement,
+            null == announcement ? '' : announcement,
             textAlign: TextAlign.center,
             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
           ),

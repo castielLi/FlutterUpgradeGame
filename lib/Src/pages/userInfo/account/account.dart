@@ -35,17 +35,14 @@ class _AccountDetailState extends State<AccountDetail> {
             children: <Widget>[
               TextField(
                 obscureText: true,
-                decoration: InputDecoration(
-                    labelText: "原密码", prefixIcon: Icon(Icons.lock)),
+                decoration: InputDecoration(labelText: "原密码", prefixIcon: Icon(Icons.lock)),
               ),
               TextField(
-                decoration: InputDecoration(
-                    labelText: "新密码", prefixIcon: Icon(Icons.lock)),
+                decoration: InputDecoration(labelText: "新密码", prefixIcon: Icon(Icons.lock)),
                 obscureText: true,
               ),
               TextField(
-                decoration: InputDecoration(
-                    labelText: "重复密码", prefixIcon: Icon(Icons.lock)),
+                decoration: InputDecoration(labelText: "重复密码", prefixIcon: Icon(Icons.lock)),
                 obscureText: true,
               ),
               new ImageButton(
@@ -54,7 +51,6 @@ class _AccountDetailState extends State<AccountDetail> {
                 buttonName: "返回",
                 imageUrl: "resource/images/upgradeButton.png",
                 callback: () {
-                  print('点击升级');
                   this.widget.viewCallback();
                 },
               ),

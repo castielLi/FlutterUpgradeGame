@@ -63,7 +63,6 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
           buttonName: "返回",
           imageUrl: "resource/images/upgradeButton.png",
           callback: () {
-            print('点击升级');
 //                this.widget.HUD();
             this.widget.viewCallback();
           },

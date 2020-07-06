@@ -25,7 +25,7 @@ class _RankItem extends State<RankItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-    margin: EdgeInsets.fromLTRB(
+      margin: EdgeInsets.fromLTRB(
           ScreenUtil().setWidth(20), // 左
           ScreenUtil().setHeight(0), // 上
           ScreenUtil().setWidth(30), // 右

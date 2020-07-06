@@ -22,24 +22,29 @@ class SawmillDetail extends StatefulWidget {
 }
 
 class _SawmillDetailState extends State<SawmillDetail> {
-  // 获取数据
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Container(child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
-      int levelFrom = baseUserInfo.Woodlevel;
-      int level = baseUserInfo.Woodlevel + 1;
-      Wood woodBuildingRule = Global.getWoodBuildingRule()[level - 1];
-      AdSetting adSetting = Global.getAdSettingRule();
-      int needTCoin = woodBuildingRule.tcoinamount;
-      int woodPerAd = woodBuildingRule.product;
-      int watchedAd = baseUserInfo.ad.wood;
-      int maxWatchableAd = adSetting.farm;
+      int levelFrom = 0;
+      int level = 0;
+      Wood woodBuildingRule;
+      AdSetting adSetting;
+      int needTCoin = 0;
+      int woodPerAd = 0;
+      int watchedAd = 0;
+      int maxWatchableAd = 0;
+      if (null != baseUserInfo) {
+        levelFrom = baseUserInfo.Woodlevel;
+        level = baseUserInfo.Woodlevel + 1;
+        woodBuildingRule = null == Global.getWoodBuildingRule() ? null : Global.getWoodBuildingRule()[level - 1];
+        adSetting = Global.getAdSettingRule();
+        if (null != woodBuildingRule) {
+          needTCoin = woodBuildingRule.tcoinamount;
+          woodPerAd = woodBuildingRule.product;
+        }
+        watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.wood;
+        maxWatchableAd = null == adSetting ? 5 : adSetting.wood;
+      }
 
       return new Container(
         margin: EdgeInsets.fromLTRB(
