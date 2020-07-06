@@ -31,7 +31,7 @@ class _TeamDetailState extends State<TeamDetail> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
-      TeamService.getTeamList((data){
+      TeamService.getTeamList((data) {
         setState(() {
           first = InvitationListModel.fromJson(data).first;
           second = InvitationListModel.fromJson(data).second;
