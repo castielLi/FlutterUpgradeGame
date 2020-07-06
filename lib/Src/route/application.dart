@@ -41,6 +41,6 @@ class Application{
     }
     print('我是navigateTo传递的参数：$query');
     path = path + query;
-    return router.navigateTo(context,path,transitionDuration:const Duration(milliseconds:500),transition: TransitionType.native);
+    return router.navigateTo(context,path,transitionDuration:const Duration(milliseconds:500),transition: TransitionType.materialFullScreenDialog);
   }
 }
