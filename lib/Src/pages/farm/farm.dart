@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
+import 'package:upgradegame/Src/common/model/enum/adTypeEnum.dart';
 import 'package:upgradegame/Src/common/model/enum/buildingEnum.dart';
 import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 import 'package:upgradegame/Src/common/service/baseService.dart';
@@ -83,6 +84,8 @@ class _FarmDetailState extends State<FarmDetail> {
               imageUrlWatched: 'resource/images/adWatched.png',
               imageUrlUnwatch: "resource/images/adUnwatch.png",
               alreadyWatched: watchedAd,
+              HUD: this.widget.HUD,
+              type: AdTypeEnum.farm,
               watchSuccessCallBack: () {
                 setState(() {
                   baseUserInfo.watchedAnAd(AdType.farm);

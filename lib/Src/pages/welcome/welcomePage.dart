@@ -7,6 +7,7 @@ import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
 import 'package:upgradegame/Src/common/service/baseService.dart';
 import 'package:upgradegame/Common/storge/fileStore.dart';
+import 'package:upgradegame/Src/common/widget/adDialog/adDialog.dart';
 import 'dart:convert' as convert;
 
 class WelcomePage extends StatefulWidget {
@@ -44,12 +45,20 @@ class _WelcomePageState extends State<WelcomePage> {
     }
   }
 
+  adCallback(){
+    Application.router
+        .navigateTo(context, UpgradeGameRoute.loginPage, replace: true);
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     this.getRules();
     this.initBaseWidget();
+    ///显示开屏广告
+    AdDialog().showAd(1, 1);
+    AdDialog().setCallback(this.adCallback,true);
   }
 
   @override
@@ -61,15 +70,15 @@ class _WelcomePageState extends State<WelcomePage> {
 
 
 
-    ///防止多次进入
-    hadInit = true;
-
-    ///延迟2.5秒进入
-    new Future.delayed(const Duration(seconds: 2, milliseconds: 500), () {
-      //直接进入首页
-      Application.router
-          .navigateTo(context, UpgradeGameRoute.loginPage, replace: true);
-    });
+//    ///防止多次进入
+//    hadInit = true;
+//
+//    ///延迟2.5秒进入
+//    new Future.delayed(const Duration(seconds: 2, milliseconds: 500), () {
+//      //直接进入首页
+//      Application.router
+//          .navigateTo(context, UpgradeGameRoute.loginPage, replace: true);
+//    });
   }
 
   @override
