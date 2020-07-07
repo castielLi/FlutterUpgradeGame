@@ -156,7 +156,7 @@ class _MainPageState extends State<MainPage> {
               ///资源栏
               new Container(
                 height: ScreenUtil().setHeight(SystemIconSize.mainPageBarIconHeight),
-                margin:EdgeInsets.only(top:ScreenUtil().setHeight(SystemIconSize.mainPageSignalBarHeight)),
+                margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageSignalBarHeight)),
                 child: new Row(
                   children: <Widget>[
                     new Expanded(
@@ -233,7 +233,7 @@ class _MainPageState extends State<MainPage> {
 
               ///功能栏
               new Container(
-                margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageBarIconHeight+SystemIconSize.mainPageSignalBarHeight)),
+                margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageBarIconHeight + SystemIconSize.mainPageSignalBarHeight)),
                 height: ScreenUtil().setHeight(SystemIconSize.mainPageBarIconHeight),
                 child: new Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -295,7 +295,7 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                     new Container(
-                      margin: EdgeInsets.only(top:ScreenUtil().setHeight(10)),
+                      margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
                       width: ScreenUtil().setWidth(200),
                       child: new Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -35,18 +35,16 @@ class _LoginPageState extends State<LoginPage> {
 
   initParams() async {
     currentToken = await LoginService.getToken();
-    // TODO 测试
-
-//    if (currentToken != null) {
-//      this.showOrDismissProgressHUD();
-//      LoginService.loginWithToken((model) {
-//        this.showOrDismissProgressHUD();
-//        if (model != null) {
-//          Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
-//          Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
-//        }
-//      });
-//    }
+    if (currentToken != null) {
+      this.showOrDismissProgressHUD();
+      LoginService.loginWithToken((model) {
+        this.showOrDismissProgressHUD();
+        if (model != null) {
+          Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
+          Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+        }
+      });
+    }
   }
 
   void showOrDismissProgressHUD() {
