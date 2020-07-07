@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
+import 'package:upgradegame/Src/common/model/enum/adTypeEnum.dart';
 import 'package:upgradegame/Src/common/model/enum/buildingEnum.dart';
 import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 import 'package:upgradegame/Src/common/service/baseService.dart';
@@ -84,6 +85,9 @@ class _SawmillDetailState extends State<SawmillDetail> {
               adIconHeight: ScreenUtil().setHeight(SystemIconSize.adIconSize),
               imageUrlWatched: 'resource/images/adWatched.png',
               imageUrlUnwatch: "resource/images/adUnwatch.png",
+              imageUrlWaiting:"resource/images/adWaiting.png",
+              HUD: this.widget.HUD,
+              type: AdTypeEnum.sawmill,
               alreadyWatched: watchedAd,
               watchSuccessCallBack: () {
                 setState(() {

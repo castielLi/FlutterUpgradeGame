@@ -16,6 +16,9 @@ class AdDialog {
   factory AdDialog() =>_getInstance();
   static AdDialog get instance => _getInstance();
   static AdDialog _instance;
+
+  bool openApp;
+
   AdDialog._internal() {
     // 初始化
     _eventChannel.receiveBroadcastStream().listen(this._onEvent, onError: this._onError);
@@ -28,7 +31,8 @@ class AdDialog {
     return _instance;
   }
 
-  void setCallback(VoidCallback adWatchSuccessCallback){
+  void setCallback(VoidCallback adWatchSuccessCallback,bool openApp){
+    this.openApp = openApp;
     this.adWatchSuccessCallback = adWatchSuccessCallback;
   }
 
@@ -45,11 +49,17 @@ class AdDialog {
 
   void _onEvent(Object event) {
     print("广告观看状态!!!!!："+event.toString());
-    if("5"==event.toString()){
+    if(openApp){
+      if("5"==event.toString() || "4" == event.toString()){
+        print("广告观看成功!!!!!!");
+        if(this.adWatchSuccessCallback != null){
+          this.adWatchSuccessCallback();
+        }
+      }
+    }else if ("5"==event.toString()){
       print("广告观看成功!!!!!!");
       if(this.adWatchSuccessCallback != null){
         this.adWatchSuccessCallback();
-        this.adWatchSuccessCallback = null;
       }
     }
     print("event »" + event.toString());
