@@ -50,8 +50,8 @@ class _TeamDetailState extends State<TeamDetail> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           ButtonsList(
-            buttonWidth: ScreenUtil().setWidth(SystemIconSize.largeButtonWithIconWidth),
-            buttonHeight: ScreenUtil().setHeight(SystemIconSize.largeButtonWithIconWidth / 2),
+            buttonWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonWithIconWidth),
+            buttonHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonWithIconHeight),
             buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
             textSize: SystemFontSize.settingTextFontSize,
             buttons: [
@@ -91,7 +91,7 @@ class _TeamDetailState extends State<TeamDetail> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Text(
-                              '日期',
+                              '用户',
                               style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                             ),
                             Text(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
+import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 
 class Withdraw extends StatefulWidget {
   @override
@@ -41,14 +43,25 @@ class _WithdrawState extends State<Withdraw> {
                 decoration: InputDecoration(labelText: "密码", prefixIcon: Icon(Icons.lock)),
                 obscureText: true,
               ),
-              new ImageButton(
-                height: ScreenUtil().setHeight(200),
-                width: ScreenUtil().setWidth(400),
-                buttonName: "返 回",
-                imageUrl: "resource/images/upgradeButton.png",
-                callback: () {
-                  this.widget.viewCallback();
-                },
+              ButtonsList(
+                buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+                buttonHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+                buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
+                textSize: SystemFontSize.buttonTextFontSize,
+                buttons: [
+                  ImageTextButton(
+                    buttonName: '返 回',
+                    callback: () {
+                      this.widget.viewCallback();
+                    },
+                  ),
+                  ImageTextButton(
+                    buttonName: '确 定',
+                    callback: () {
+                      print('提现');
+                    },
+                  ),
+                ],
               ),
             ],
           ),

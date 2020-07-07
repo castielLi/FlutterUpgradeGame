@@ -86,8 +86,8 @@ class _MarketBidItem extends State<MarketBidItem> {
           ),
           ImageTextButton(
             imageUrl: "resource/images/upgradeButton.png",
-            imageWidth: ScreenUtil().setWidth(270),
-            imageHeight: ScreenUtil().setHeight(120),
+            imageWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+            imageHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
             buttonName: "购 买",
             callback: () {
               print(this.widget.bidType);

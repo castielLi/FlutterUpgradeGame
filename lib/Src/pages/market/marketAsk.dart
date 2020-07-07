@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 
 class MarketAsk extends StatefulWidget {
   String sellType;
@@ -103,26 +105,23 @@ class _MarketAskState extends State<MarketAsk> {
               ),
             )),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ImageButton(
-                height: ScreenUtil().setHeight(150),
-                width: ScreenUtil().setWidth(300),
-                buttonName: "取消",
-                imageUrl: "resource/images/upgradeButton.png",
+          ButtonsList(
+            buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+            buttonHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+            buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
+            textSize: SystemFontSize.buttonTextFontSize,
+            buttons: [
+              ImageTextButton(
+                buttonName: '取消',
                 callback: () {
-                  setState(() {
-                    this.widget.viewCallback();
-                  });
+                  this.widget.viewCallback();
                 },
               ),
-              ImageButton(
-                height: ScreenUtil().setHeight(150),
-                width: ScreenUtil().setWidth(300),
-                buttonName: "确定",
-                imageUrl: "resource/images/upgradeButton.png",
-                callback: () {},
+              ImageTextButton(
+                buttonName: '确定',
+                callback: () {
+                  print('发布');
+                },
               ),
             ],
           ),

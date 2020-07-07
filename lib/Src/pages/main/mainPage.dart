@@ -155,23 +155,23 @@ class _MainPageState extends State<MainPage> {
 
               ///资源栏
               new Container(
-                height: ScreenUtil().setHeight(230),
+                height: ScreenUtil().setHeight(SystemIconSize.mainPageBarIconHeight),
+                margin:EdgeInsets.only(top:ScreenUtil().setHeight(SystemIconSize.mainPageSignalBarHeight)),
                 child: new Row(
                   children: <Widget>[
                     new Expanded(
                       child: new Container(
-                        margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(20), ScreenUtil().setHeight(80), ScreenUtil().setWidth(20), ScreenUtil().setHeight(20)),
+                        margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(20), ScreenUtil().setHeight(0), ScreenUtil().setWidth(20), ScreenUtil().setHeight(0)),
                         decoration: new BoxDecoration(
                           color: Color.fromRGBO(0, 0, 0, 0.7),
                           borderRadius: BorderRadius.all(Radius.circular(8.0)),
                         ),
                         child: new Row(
-                          mainAxisAlignment:MainAxisAlignment.center,
                           children: <Widget>[
                             new Expanded(
                               child: new ResourceWidget(
                                 amount: baseUserInfo.TCoinAmount.toString(),
-                                size: ScreenUtil().setSp(SystemIconSize.mainPageResourceBarIconSize),
+                                iconSize: ScreenUtil().setWidth(SystemIconSize.mainPageResourceBarIconSize),
                                 imageUrl: "resource/images/coin.png",
                               ),
                               flex: 1,
@@ -179,7 +179,7 @@ class _MainPageState extends State<MainPage> {
                             new Expanded(
                               child: new ResourceWidget(
                                 amount: baseUserInfo.WoodAmount.toString(),
-                                size: ScreenUtil().setSp(SystemIconSize.mainPageResourceBarIconSize),
+                                iconSize: ScreenUtil().setWidth(SystemIconSize.mainPageResourceBarIconSize),
                                 imageUrl: "resource/images/wood.png",
                               ),
                               flex: 1,
@@ -187,7 +187,7 @@ class _MainPageState extends State<MainPage> {
                             new Expanded(
                               child: new ResourceWidget(
                                 amount: baseUserInfo.StoneAmount.toString(),
-                                size: ScreenUtil().setSp(SystemIconSize.mainPageResourceBarIconSize),
+                                iconSize: ScreenUtil().setWidth(SystemIconSize.mainPageResourceBarIconSize),
                                 imageUrl: "resource/images/stone.png",
                               ),
                               flex: 1,
@@ -199,8 +199,7 @@ class _MainPageState extends State<MainPage> {
                     ),
                     new Expanded(
                       child: new Container(
-                        margin: EdgeInsets.only(top: ScreenUtil().setHeight(60)),
-                        height: ScreenUtil().setHeight(180),
+                        height: ScreenUtil().setHeight(SystemIconSize.mainPageBarIconHeight),
                         child: new Stack(
                           children: <Widget>[
                             new Center(
@@ -211,7 +210,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                             new Center(
                               child: new UserImageButton(
-                                size: ScreenUtil().setSp(180),
+                                size: ScreenUtil().setSp(SystemIconSize.mainPageBarIconHeight),
                                 buttonName: "",
                                 textSize: SystemFontSize.operationTextFontSize,
                                 imageUrl: "resource/images/avatar.png",
@@ -234,17 +233,16 @@ class _MainPageState extends State<MainPage> {
 
               ///功能栏
               new Container(
-                margin: EdgeInsets.only(top: ScreenUtil().setHeight(230)),
-                height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarIconSize),
+                margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageBarIconHeight+SystemIconSize.mainPageSignalBarHeight)),
+                height: ScreenUtil().setHeight(SystemIconSize.mainPageBarIconHeight),
                 child: new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     new Container(
-                      margin: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
                       child: new Row(
                         children: <Widget>[
                           new UserImageButton(
-                            size: ScreenUtil().setSp(SystemIconSize.mainPageStatusBarIconSize),
+                            size: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize),
                             buttonName: "排行榜",
                             imageUrl: "resource/images/rank.png",
                             textSize: SystemFontSize.operationTextFontSize,
@@ -258,7 +256,7 @@ class _MainPageState extends State<MainPage> {
                             },
                           ),
                           new UserImageButton(
-                            size: ScreenUtil().setSp(SystemIconSize.mainPageStatusBarIconSize),
+                            size: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize),
                             buttonName: "团队",
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/team.png",
@@ -268,7 +266,7 @@ class _MainPageState extends State<MainPage> {
                             },
                           ),
                           new UserImageButton(
-                            size: ScreenUtil().setSp(SystemIconSize.mainPageStatusBarIconSize),
+                            size: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize),
                             buttonName: "商城",
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/marketStores.png",
@@ -282,12 +280,12 @@ class _MainPageState extends State<MainPage> {
                     ),
                     new Container(
                       height: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize),
-                      width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize * 3),
+                      width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize * 2),
                       child: new DividendPart(
                         imageTitle: "分红",
                         imageUrl: "resource/images/dividend.png",
-                        imageHeight: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarIconSize),
-                        imageWidth: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize),
+                        imageHeight: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize),
+                        imageWidth: ScreenUtil().setWidth(SystemIconSize.mainPageResourceBarIconSize),
                         title: "今日分红",
                         amount: "¥" + (autoProfitSharing == 0.00 ? this.displayInitProfitSharing() : autoProfitSharing.toStringAsFixed(2)),
                         callback: () {
@@ -297,27 +295,54 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                     new Container(
-                      child: new Row(
-                        children: <Widget>[
-                          new UserImageButton(
-                            size: ScreenUtil().setSp(SystemIconSize.mainPageStatusBarIconSize),
-                            buttonName: "设置",
-                            textSize: SystemFontSize.operationTextFontSize,
-                            imageUrl: "resource/images/setting.png",
-                            callback: () {
-                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,
-                                  params: {'height': ScreenUtil().setHeight(1660), 'width': ScreenUtil().setWidth(1020), 'childName': 'settingDetail', "title": "设 置"});
-                            },
+                      margin: EdgeInsets.only(top:ScreenUtil().setHeight(10)),
+                      width: ScreenUtil().setWidth(200),
+                      child: new Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          new Container(
+                            decoration: new BoxDecoration(
+                              color: Color.fromRGBO(0, 0, 0, 0.7),
+                              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                            ),
+                            child: new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                new Image(
+                                  image: new AssetImage("resource/images/volume.png"),
+                                  width: ScreenUtil().setWidth(80),
+                                  height: ScreenUtil().setHeight(80),
+                                ),
+                                new Text(
+                                  '*' + baseUserInfo.voucher.toString(),
+                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                ),
+                              ],
+                            ),
                           ),
-                          new UserImageButton(
-                            size: ScreenUtil().setSp(SystemIconSize.mainPageStatusBarIconSize),
-                            buttonName: "公告",
-                            textSize: SystemFontSize.operationTextFontSize,
-                            imageUrl: "resource/images/announcement.png",
-                            callback: () {
-                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,
-                                  params: {'height': ScreenUtil().setHeight(1660), 'width': ScreenUtil().setWidth(1020), 'childName': 'announcementDetail', "title": "公 告"});
-                            },
+                          new Row(
+                            children: <Widget>[
+                              new UserImageButton(
+                                size: ScreenUtil().setSp(100),
+                                buttonName: "设置",
+                                textSize: SystemFontSize.operationTextFontSize,
+                                imageUrl: "resource/images/setting.png",
+                                callback: () {
+                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,
+                                      params: {'height': ScreenUtil().setHeight(1660), 'width': ScreenUtil().setWidth(1020), 'childName': 'settingDetail', "title": "设 置"});
+                                },
+                              ),
+                              new UserImageButton(
+                                size: ScreenUtil().setSp(100),
+                                buttonName: "公告",
+                                textSize: SystemFontSize.operationTextFontSize,
+                                imageUrl: "resource/images/announcement.png",
+                                callback: () {
+                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,
+                                      params: {'height': ScreenUtil().setHeight(1660), 'width': ScreenUtil().setWidth(1020), 'childName': 'announcementDetail', "title": "公 告"});
+                                },
+                              ),
+                            ],
                           ),
                         ],
                       ),

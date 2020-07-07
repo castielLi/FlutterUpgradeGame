@@ -62,8 +62,8 @@ class _ProductItemState extends State<ProductItem> {
             children: <Widget>[
               new ImageTextButton(
                 imageUrl: "resource/images/upgradeButton.png",
-                imageWidth: ScreenUtil().setWidth(320),
-                imageHeight: ScreenUtil().setHeight(130),
+                imageWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+                imageHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
                 buttonName: "购 买",
                 callback: (){
                   this.widget.callback();
