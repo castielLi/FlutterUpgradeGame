@@ -85,6 +85,7 @@ class _SawmillDetailState extends State<SawmillDetail> {
               adIconHeight: ScreenUtil().setHeight(SystemIconSize.adIconSize),
               imageUrlWatched: 'resource/images/adWatched.png',
               imageUrlUnwatch: "resource/images/adUnwatch.png",
+              imageUrlWaiting:"resource/images/adWaiting.png",
               HUD: this.widget.HUD,
               type: AdTypeEnum.sawmill,
               alreadyWatched: watchedAd,

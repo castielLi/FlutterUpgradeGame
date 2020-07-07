@@ -54,14 +54,12 @@ class AdDialog {
         print("广告观看成功!!!!!!");
         if(this.adWatchSuccessCallback != null){
           this.adWatchSuccessCallback();
-          this.adWatchSuccessCallback = null;
         }
       }
     }else if ("5"==event.toString()){
       print("广告观看成功!!!!!!");
       if(this.adWatchSuccessCallback != null){
         this.adWatchSuccessCallback();
-        this.adWatchSuccessCallback = null;
       }
     }
     print("event »" + event.toString());
