@@ -83,6 +83,7 @@ class _FarmDetailState extends State<FarmDetail> {
               adIconHeight: ScreenUtil().setHeight(SystemIconSize.adIconSize),
               imageUrlWatched: 'resource/images/adWatched.png',
               imageUrlUnwatch: "resource/images/adUnwatch.png",
+              imageUrlWaiting:"resource/images/adWaiting.png",
               alreadyWatched: watchedAd,
               HUD: this.widget.HUD,
               type: AdTypeEnum.farm,

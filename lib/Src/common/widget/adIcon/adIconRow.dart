@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/enum/adTypeEnum.dart';
 import 'package:upgradegame/Src/common/widget/adDialog/adDialog.dart';
+import 'package:upgradegame/Src/provider/baseAdTimerProvider.dart';
+import 'package:provide/provide.dart';
 
 class AdIconRow extends StatefulWidget {
   double adIconHeight;
@@ -9,11 +11,12 @@ class AdIconRow extends StatefulWidget {
   int alreadyWatched;
   String imageUrlUnwatch;
   String imageUrlWatched;
+  String imageUrlWaiting;
   VoidCallback watchSuccessCallBack;
   AdTypeEnum type;
   VoidCallback HUD;
 
-  AdIconRow({Key key, this.adIconHeight, this.type ,this.HUD,this.countInOneRow, this.imageUrlUnwatch, this.alreadyWatched, this.imageUrlWatched, this.watchSuccessCallBack}) : super(key: key);
+  AdIconRow({Key key, this.adIconHeight, this.type ,this.HUD,this.imageUrlWaiting,this.countInOneRow, this.imageUrlUnwatch, this.alreadyWatched, this.imageUrlWatched, this.watchSuccessCallBack}) : super(key: key);
 
   @override
   _AdIconRow createState() => _AdIconRow();
@@ -31,10 +34,23 @@ class _AdIconRow extends State<AdIconRow> {
   void adFinishedCallback() {
     this.widget.HUD();
     print("广告已经看完了要执行代码了");
+    Provide.value<BaseAdTimerProvider>(context).watchAd(this.widget.type);
   }
 
-  Widget buildList() {
+  Widget buildList(BaseAdTimerProvider baseAdTimerInfo) {
     List<Widget> adIconList = [];
+    bool waiting =  false;
+    switch(this.widget.type){
+      case AdTypeEnum.sawmill:
+        waiting = baseAdTimerInfo.Sawmill;
+        break;
+      case AdTypeEnum.farm:
+        waiting = baseAdTimerInfo.Farm;
+        break;
+      case AdTypeEnum.stone:
+        waiting = baseAdTimerInfo.Stone;
+        break;
+    }
     Widget content;
     for (int i = 0; i < this.widget.alreadyWatched; i++) {
       adIconList.add(
@@ -49,7 +65,7 @@ class _AdIconRow extends State<AdIconRow> {
     for (int i = 0; i < (this.widget.countInOneRow - this.widget.alreadyWatched); i++) {
       adIconList.add(
         GestureDetector(
-          child: new Image(image: new AssetImage(this.widget.imageUrlUnwatch), height: this.widget.adIconHeight),
+          child: new Image(image: new AssetImage(waiting?this.widget.imageUrlWaiting:this.widget.imageUrlUnwatch), height: this.widget.adIconHeight),
           onTap: () {
             ///type选择平台  1：adview 2：baidu 3：腾讯
             ///showType 选择展示 方式 1：开屏广告 2：视频广告
@@ -68,13 +84,18 @@ class _AdIconRow extends State<AdIconRow> {
     }
     content = new Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: adIconList,
+      children: adIconList
     );
     return content;
   }
 
   @override
   Widget build(BuildContext context) {
-    return buildList();
+    return new Container(
+      child: Provide<BaseAdTimerProvider>(builder: (context, child, baseAdTimerInfo) {
+        return buildList(baseAdTimerInfo);
+      },
+    ),
+    );
   }
 }
