@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
+import 'package:upgradegame/Src/common/model/enum/adTypeEnum.dart';
 import 'package:upgradegame/Src/common/model/enum/buildingEnum.dart';
 import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 import 'package:upgradegame/Src/common/service/baseService.dart';
@@ -86,6 +87,8 @@ class _StoneDetailState extends State<StoneDetail> {
               adIconHeight: ScreenUtil().setHeight(SystemIconSize.adIconSize),
               imageUrlWatched: 'resource/images/adWatched.png',
               imageUrlUnwatch: "resource/images/adUnwatch.png",
+              HUD: this.widget.HUD,
+              type: AdTypeEnum.stone,
               alreadyWatched: watchedAd,
               watchSuccessCallBack: () {
                 setState(() {
