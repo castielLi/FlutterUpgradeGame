@@ -90,49 +90,4 @@ public class AdViewManager {
             videoManager.playVideo(activity);
         }
     };
-    private AdViewSpreadListener adViewSpreadListener = new AdViewSpreadListener() {
-        @Override
-        public void onAdClicked() {
-            Log.i("AdViewDemo", "onAdClicked");
-        }
-
-        @Override
-        public void onAdClosed() {
-            Log.i(TAG, "onAdClosedAd");
-//            jump();
-        }
-
-        @Override
-        public void onAdClosedByUser() {
-            Log.i(TAG, "onAdClosedByUser");
-//            jump();
-        }
-
-        @Override
-        public void onRenderSuccess() {
-            Log.i(TAG, "onRenderSuccess");
-        }
-
-        @Override
-        public void onAdDisplayed() {
-            Log.i(TAG, "onAdDisplayed");
-        }
-
-        @Override
-        public void onAdFailedReceived(String arg1) {
-            Log.i(TAG, "onAdRecieveFailed");
-//            jump();
-        }
-
-        @Override
-        public void onAdReceived() {
-            Log.i(TAG, "onAdRecieved");
-        }
-
-        @Override
-        public void onAdSpreadPrepareClosed() {
-            Log.i(TAG, "onAdSpreadPrepareClosed");
-//            jump();
-        }
-    };
 }

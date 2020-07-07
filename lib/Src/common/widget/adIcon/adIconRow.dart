@@ -43,7 +43,7 @@ class _AdIconRow extends State<AdIconRow> {
             ///showType 选择展示 方式 1：开屏广告 2：视频广告
             ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
 
-            AdDialog().showAd(1, 2);
+            AdDialog().showAd(3, 2);
           },
         ),
       );

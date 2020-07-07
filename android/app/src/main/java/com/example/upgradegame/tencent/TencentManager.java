@@ -74,6 +74,7 @@ public class TencentManager {
         @Override
         public void onADExpose() {
             Log.i(TAG, "onADExpose");
+
         }
 
         /**
@@ -82,6 +83,7 @@ public class TencentManager {
         @Override
         public void onReward() {
             Log.i(TAG, "onReward");
+            EventBus.getDefault().post(Constant.STATUS_FINISH);
         }
 
         /**
