@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/enum/adTypeEnum.dart';
+import 'package:upgradegame/Src/common/model/watchAdModel.dart';
+import 'package:upgradegame/Src/common/service/adService.dart';
 import 'package:upgradegame/Src/common/widget/adDialog/adDialog.dart';
 import 'package:upgradegame/Src/provider/baseAdTimerProvider.dart';
 import 'package:provide/provide.dart';
+import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
 class AdIconRow extends StatefulWidget {
   double adIconHeight;
@@ -12,11 +15,10 @@ class AdIconRow extends StatefulWidget {
   String imageUrlUnwatch;
   String imageUrlWatched;
   String imageUrlWaiting;
-  VoidCallback watchSuccessCallBack;
   AdTypeEnum type;
   VoidCallback HUD;
 
-  AdIconRow({Key key, this.adIconHeight, this.type ,this.HUD,this.imageUrlWaiting,this.countInOneRow, this.imageUrlUnwatch, this.alreadyWatched, this.imageUrlWatched, this.watchSuccessCallBack}) : super(key: key);
+  AdIconRow({Key key, this.adIconHeight, this.type ,this.HUD,this.imageUrlWaiting,this.countInOneRow, this.imageUrlUnwatch, this.alreadyWatched, this.imageUrlWatched}) : super(key: key);
 
   @override
   _AdIconRow createState() => _AdIconRow();
@@ -32,9 +34,15 @@ class _AdIconRow extends State<AdIconRow> {
   }
 
   void adFinishedCallback() {
-    this.widget.HUD();
     print("广告已经看完了要执行代码了");
-    Provide.value<BaseAdTimerProvider>(context).watchAd(this.widget.type);
+    AdService.watchAd(this.widget.type.index, (WatchAdModel model){
+      this.widget.HUD();
+      if(model!=null){
+        CommonUtils.showSuccessMessage(msg: "获取资源成功");
+        Provide.value<BaseAdTimerProvider>(context).watchAd(this.widget.type);
+        Provide.value<BaseUserInfoProvider>(context).watchedAnAd(model);
+      }
+    });
   }
 
   Widget buildList(BaseAdTimerProvider baseAdTimerInfo) {
@@ -67,12 +75,21 @@ class _AdIconRow extends State<AdIconRow> {
         GestureDetector(
           child: new Image(image: new AssetImage(waiting?this.widget.imageUrlWaiting:this.widget.imageUrlUnwatch), height: this.widget.adIconHeight),
           onTap: () {
+            if(waiting){
+              CommonUtils.showErrorMessage(msg: '您需要等待一段时间才能继续操作,去看看其他资源吧');
+              return;
+            }
             ///type选择平台  1：adview 2：baidu 3：腾讯
             ///showType 选择展示 方式 1：开屏广告 2：视频广告
             ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
             this.widget.HUD();
             if(this.widget.type == AdTypeEnum.farm){
-              AdDialog().showAd(1, 2);
+              ///如果adview的开屏广告初始化成功,那么就展示adview的广告，否则展示腾讯广告
+              if(AdDialog().initAdViewSuccess) {
+                AdDialog().showAd(1, 2);
+              }else{
+                AdDialog().showAd(3, 2);
+              }
             }else if(this.widget.type == AdTypeEnum.stone){
               AdDialog().showAd(2, 2);
             }else{
@@ -92,9 +109,12 @@ class _AdIconRow extends State<AdIconRow> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      child: Provide<BaseAdTimerProvider>(builder: (context, child, baseAdTimerInfo) {
+      child:ProvideMulti(
+        builder: (context, child, model) {
+          BaseAdTimerProvider baseAdTimerInfo = model.get<BaseAdTimerProvider>();
         return buildList(baseAdTimerInfo);
       },
+        requestedValues: [BaseUserInfoProvider,BaseAdTimerProvider],
     ),
     );
   }

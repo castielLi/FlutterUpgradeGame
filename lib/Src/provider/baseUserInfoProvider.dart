@@ -4,6 +4,7 @@ import 'package:upgradegame/Src/common/model/baseResourceModel.dart';
 import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/common/model/baseUserInfoModel.dart';
 import 'package:upgradegame/Src/common/model/userInfoAd.dart';
+import 'package:upgradegame/Src/common/model/watchAdModel.dart';
 
 //混入
 class BaseUserInfoProvider with ChangeNotifier {
@@ -92,17 +93,16 @@ class BaseUserInfoProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  ///增加观看广告次数
-  watchedAnAd(AdType adType) {
-    switch (adType) {
-      case AdType.wood:
-        this.ad.wood++;
-        break;
-      case AdType.stone:
-        this.ad.stone++;
-        break;
-      case AdType.farm:
-        this.ad.farm++;
-    }
+
+
+  ///观看广告
+  watchedAnAd(WatchAdModel model) {
+    this.tcoinamount = model.tcoinamount;
+    this.woodamount = model.woodamount;
+    this.stoneamount = model.stoneamount;
+    this.ad.stone = model.stone;
+    this.ad.farm = model.farm;
+    this.ad.wood = model.wood;
+    notifyListeners();
   }
 }
