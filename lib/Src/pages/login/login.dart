@@ -6,6 +6,7 @@ import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:provide/provide.dart';
 import 'package:progress_hud/progress_hud.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluwx/fluwx.dart' as fluwx;
 
 class LoginPage extends StatefulWidget {
   @override
@@ -174,6 +175,13 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           onTap: () {
                             print("微信登录");
+                            fluwx
+                                .sendWeChatAuth(
+                                scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
+                                .then((data) {
+                                  print(data);
+                            })
+                                .catchError((e) {});
                           },
                         ),
                       ],
