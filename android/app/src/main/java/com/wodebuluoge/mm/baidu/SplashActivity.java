@@ -1,22 +1,19 @@
-package com.example.upgradegame.baidu;
+package com.wodebuluoge.mm.baidu;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.baidu.mobads.SplashAd;
 import com.baidu.mobads.SplashLpCloseListener;
-import com.example.upgradegame.Constant;
-import com.example.upgradegame.R;
+import com.wodebuluoge.mm.Constant;
+import com.wodebuluoge.mm.R;
 
 import org.greenrobot.eventbus.EventBus;
 

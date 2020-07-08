@@ -1,8 +1,4 @@
-package com.example.upgradegame;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+package com.wodebuluoge.mm;
 
 public class Constant {
     // 测试  百度的appid 只能在androidManifest 里面进行配置

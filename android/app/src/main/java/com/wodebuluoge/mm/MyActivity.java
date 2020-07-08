@@ -1,4 +1,4 @@
-package com.example.upgradegame;
+package com.wodebuluoge.mm;
 
 import android.Manifest;
 import android.content.Intent;
@@ -13,13 +13,13 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.upgradegame.adview.AdSpreadActivity;
-import com.example.upgradegame.adview.AdViewManager;
-import com.example.upgradegame.adview.PermissionListener;
-import com.example.upgradegame.baidu.BaiduManager;
-import com.example.upgradegame.baidu.SplashActivity;
-import com.example.upgradegame.tencent.TencentManager;
-import com.example.upgradegame.tencent.TentcentSplashActivity;
+import com.wodebuluoge.mm.adview.AdSpreadActivity;
+import com.wodebuluoge.mm.adview.AdViewManager;
+import com.wodebuluoge.mm.adview.PermissionListener;
+import com.wodebuluoge.mm.baidu.BaiduManager;
+import com.wodebuluoge.mm.baidu.SplashActivity;
+import com.wodebuluoge.mm.tencent.TencentManager;
+import com.wodebuluoge.mm.tencent.TentcentSplashActivity;
 import com.kuaiyou.open.InitSDKManager;
 import com.kuaiyou.open.InstlManager;
 import com.kuaiyou.open.VideoManager;
@@ -30,14 +30,12 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
-import io.flutter.plugins.GeneratedPluginRegistrant;
 
 public class MyActivity extends FlutterActivity {
     private static final String TAG = "zhoux";

@@ -1,10 +1,10 @@
-package com.example.upgradegame.tencent;
+package com.wodebuluoge.mm.tencent;
 
 import android.app.Activity;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.example.upgradegame.Constant;
+import com.wodebuluoge.mm.Constant;
 import com.qq.e.ads.rewardvideo.RewardVideoAD;
 import com.qq.e.ads.rewardvideo.RewardVideoADListener;
 import com.qq.e.comm.util.AdError;

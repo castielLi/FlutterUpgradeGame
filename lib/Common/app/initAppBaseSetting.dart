@@ -21,18 +21,24 @@ class _InitAppSetting extends State<InitAppSetting> {
     return widget.child;
   }
 
+  _initFluwx() async {
+    await fluwx.registerWxApi(
+        appId: "wxae76a2eb695df231",
+        doOnAndroid: true,
+        doOnIOS: true,
+        universalLink: ""
+    );
+    var result = await fluwx.isWeChatInstalled;
+    print("is installed $result");
+    if(!result){
+      CommonUtils.showSystemErrorMessage(msg: '微信初始化失败');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-//    stream = ConfigSetting.eventBus.on<HttpErrorEvent>().listen((event) {
-//      errorHandleFunction(event.code, event.message);
-//    });
-//    fluwx.registerWxApi(
-//        appId: "wxea0b8491b5101053",
-//        doOnAndroid: true,
-//        doOnIOS: true,
-//        universalLink: ""
-//    );
+    _initFluwx();
   }
 
   @override

@@ -1,4 +1,4 @@
-package com.example.upgradegame.tencent;
+package com.wodebuluoge.mm.tencent;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -19,8 +19,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.example.upgradegame.Constant;
-import com.example.upgradegame.R;
+import com.wodebuluoge.mm.Constant;
+import com.wodebuluoge.mm.R;
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
 import com.qq.e.comm.util.AdError;
