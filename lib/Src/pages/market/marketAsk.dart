@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
-import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 
 class MarketAsk extends StatefulWidget {
@@ -34,7 +33,7 @@ class _MarketAskState extends State<MarketAsk> {
             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
           ),
           Container(
-            height: ScreenUtil().setHeight(150),
+            height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
             padding: EdgeInsets.only(top: 5),
             child: new Card(
                 child: new Container(
@@ -72,7 +71,7 @@ class _MarketAskState extends State<MarketAsk> {
             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
           ),
           Container(
-            height: ScreenUtil().setHeight(150),
+            height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
             padding: EdgeInsets.only(top: 5),
             child: new Card(
                 child: new Container(
@@ -106,8 +105,8 @@ class _MarketAskState extends State<MarketAsk> {
             )),
           ),
           ButtonsList(
-            buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
-            buttonHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+            buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+            buttonHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
             buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
             textSize: SystemFontSize.buttonTextFontSize,
             buttons: [
@@ -128,5 +127,11 @@ class _MarketAskState extends State<MarketAsk> {
         ],
       ),
     );
+  }
+  @override
+  void dispose() {
+    amountController.dispose();
+    coinController.dispose();
+    super.dispose();
   }
 }

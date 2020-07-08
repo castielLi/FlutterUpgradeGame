@@ -45,7 +45,7 @@ class _PrivateDetailState extends State<PrivateDetail> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Container(
-            height: ScreenUtil().setHeight(820),
+            height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
             child: ListView(
               children: <Widget>[
                 Text(
@@ -57,8 +57,8 @@ class _PrivateDetailState extends State<PrivateDetail> {
             ),
           ),
           new ImageButton(
-            height: ScreenUtil().setHeight(200),
-            width: ScreenUtil().setWidth(400),
+            height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+            width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
             buttonName: "返回",
             imageUrl: "resource/images/upgradeButton.png",
             callback: () {

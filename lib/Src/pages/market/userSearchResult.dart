@@ -26,7 +26,7 @@ class _UserSearchResult extends State<UserSearchResult> {
             )
           : ListView.builder(
               itemCount: this.widget.searchResult.length,
-              itemExtent: ScreenUtil().setSp(150),
+              itemExtent: ScreenUtil().setHeight(150),
               itemBuilder: (BuildContext context, int index) {
                 User user = this.widget.searchResult[index];
                 return GestureDetector(

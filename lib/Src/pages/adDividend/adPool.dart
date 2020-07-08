@@ -40,7 +40,7 @@ class _AdPool extends State<AdPool> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(left: ScreenUtil().setSp(270)),
+                padding: EdgeInsets.only(left: ScreenUtil().setWidth(270)),
                 width: ScreenUtil().setWidth(600),
                 height: ScreenUtil().setHeight(80),
                 child: Row(

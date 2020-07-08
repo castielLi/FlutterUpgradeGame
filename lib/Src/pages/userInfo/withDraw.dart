@@ -44,8 +44,8 @@ class _WithdrawState extends State<Withdraw> {
                 obscureText: true,
               ),
               ButtonsList(
-                buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
-                buttonHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+                buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+                buttonHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
                 buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
                 textSize: SystemFontSize.buttonTextFontSize,
                 buttons: [
