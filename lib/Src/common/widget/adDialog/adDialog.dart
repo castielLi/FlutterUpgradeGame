@@ -18,10 +18,13 @@ class AdDialog {
   static AdDialog _instance;
 
   bool openApp;
+  bool initAdViewSuccess;
 
   AdDialog._internal() {
     // 初始化
     _eventChannel.receiveBroadcastStream().listen(this._onEvent, onError: this._onError);
+    this.openApp = true;
+    this.initAdViewSuccess = false;
   }
 
   static AdDialog _getInstance() {
@@ -52,9 +55,12 @@ class AdDialog {
     if(openApp){
       if("5"==event.toString() || "4" == event.toString()){
         print("广告观看成功!!!!!!");
+        this.initAdViewSuccess = true;
         if(this.adWatchSuccessCallback != null){
           this.adWatchSuccessCallback();
         }
+      }else if("-1"==event.toString()){
+        this.initAdViewSuccess = false;
       }
     }else if ("5"==event.toString()){
       print("广告观看成功!!!!!!");
