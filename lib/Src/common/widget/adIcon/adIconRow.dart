@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/enum/adTypeEnum.dart';
+import 'package:upgradegame/Src/common/model/watchAdModel.dart';
+import 'package:upgradegame/Src/common/service/adService.dart';
 import 'package:upgradegame/Src/common/widget/adDialog/adDialog.dart';
 import 'package:upgradegame/Src/provider/baseAdTimerProvider.dart';
 import 'package:provide/provide.dart';
+import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
 class AdIconRow extends StatefulWidget {
   double adIconHeight;
@@ -12,11 +15,10 @@ class AdIconRow extends StatefulWidget {
   String imageUrlUnwatch;
   String imageUrlWatched;
   String imageUrlWaiting;
-  VoidCallback watchSuccessCallBack;
   AdTypeEnum type;
   VoidCallback HUD;
 
-  AdIconRow({Key key, this.adIconHeight, this.type ,this.HUD,this.imageUrlWaiting,this.countInOneRow, this.imageUrlUnwatch, this.alreadyWatched, this.imageUrlWatched, this.watchSuccessCallBack}) : super(key: key);
+  AdIconRow({Key key, this.adIconHeight, this.type ,this.HUD,this.imageUrlWaiting,this.countInOneRow, this.imageUrlUnwatch, this.alreadyWatched, this.imageUrlWatched}) : super(key: key);
 
   @override
   _AdIconRow createState() => _AdIconRow();
@@ -32,9 +34,15 @@ class _AdIconRow extends State<AdIconRow> {
   }
 
   void adFinishedCallback() {
-    this.widget.HUD();
     print("广告已经看完了要执行代码了");
-    Provide.value<BaseAdTimerProvider>(context).watchAd(this.widget.type);
+    AdService.watchAd(this.widget.type.index, (WatchAdModel model){
+      this.widget.HUD();
+      if(model!=null){
+        CommonUtils.showSuccessMessage(msg: "获取资源成功");
+        Provide.value<BaseAdTimerProvider>(context).watchAd(this.widget.type);
+        Provide.value<BaseUserInfoProvider>(context).watchedAnAd(model);
+      }
+    });
   }
 
   Widget buildList(BaseAdTimerProvider baseAdTimerInfo) {
@@ -101,9 +109,12 @@ class _AdIconRow extends State<AdIconRow> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      child: Provide<BaseAdTimerProvider>(builder: (context, child, baseAdTimerInfo) {
+      child:ProvideMulti(
+        builder: (context, child, model) {
+          BaseAdTimerProvider baseAdTimerInfo = model.get<BaseAdTimerProvider>();
         return buildList(baseAdTimerInfo);
       },
+        requestedValues: [BaseUserInfoProvider,BaseAdTimerProvider],
     ),
     );
   }

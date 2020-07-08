@@ -87,12 +87,6 @@ class _FarmDetailState extends State<FarmDetail> {
               alreadyWatched: watchedAd,
               HUD: this.widget.HUD,
               type: AdTypeEnum.farm,
-              watchSuccessCallBack: () {
-                setState(() {
-                  baseUserInfo.watchedAnAd(AdType.farm);
-                  print("广告观看个数:" + baseUserInfo.ad.farm.toString());
-                });
-              },
             ),
             new Container(
               margin: EdgeInsets.only(left: ScreenUtil().setHeight(20)),

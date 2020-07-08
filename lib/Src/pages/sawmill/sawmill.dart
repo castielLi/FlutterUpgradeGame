@@ -89,11 +89,6 @@ class _SawmillDetailState extends State<SawmillDetail> {
               HUD: this.widget.HUD,
               type: AdTypeEnum.sawmill,
               alreadyWatched: watchedAd,
-              watchSuccessCallBack: () {
-                setState(() {
-                  baseUserInfo.watchedAnAd(AdType.wood);
-                });
-              },
             ),
             new Container(
               margin: EdgeInsets.only(

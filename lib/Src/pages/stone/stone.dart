@@ -91,11 +91,6 @@ class _StoneDetailState extends State<StoneDetail> {
               HUD: this.widget.HUD,
               type: AdTypeEnum.stone,
               alreadyWatched: watchedAd,
-              watchSuccessCallBack: () {
-                setState(() {
-                  baseUserInfo.watchedAnAd(AdType.stone);
-                });
-              },
             ),
             new Container(
               margin: EdgeInsets.only(
