@@ -1,11 +1,11 @@
-package com.example.upgradegame.baidu;
+package com.wodebuluoge.mm.baidu;
 
 import android.app.Activity;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.baidu.mobads.rewardvideo.RewardVideoAd;
-import com.example.upgradegame.Constant;
+import com.wodebuluoge.mm.Constant;
 
 import org.greenrobot.eventbus.EventBus;
 

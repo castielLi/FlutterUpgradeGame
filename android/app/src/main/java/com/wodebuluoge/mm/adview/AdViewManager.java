@@ -1,11 +1,11 @@
-package com.example.upgradegame.adview;
+package com.wodebuluoge.mm.adview;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.example.upgradegame.Constant;
+import com.wodebuluoge.mm.Constant;
 import com.kuaiyou.open.AdManager;
 import com.kuaiyou.open.InstlManager;
 import com.kuaiyou.open.VideoManager;
@@ -14,8 +14,6 @@ import com.kuaiyou.open.interfaces.AdViewSpreadListener;
 import com.kuaiyou.open.interfaces.AdViewVideoListener;
 
 import org.greenrobot.eventbus.EventBus;
-
-import io.flutter.plugin.common.EventChannel;
 
 public class AdViewManager {
     private static final String TAG = "zhoux";

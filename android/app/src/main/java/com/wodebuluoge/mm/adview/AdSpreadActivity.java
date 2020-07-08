@@ -1,4 +1,4 @@
-package com.example.upgradegame.adview;
+package com.wodebuluoge.mm.adview;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -10,8 +10,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
-import com.example.upgradegame.Constant;
-import com.example.upgradegame.R;
+import com.wodebuluoge.mm.Constant;
+import com.wodebuluoge.mm.R;
 import com.kuaiyou.open.AdManager;
 import com.kuaiyou.open.SpreadManager;
 import com.kuaiyou.open.interfaces.AdViewSpreadListener;

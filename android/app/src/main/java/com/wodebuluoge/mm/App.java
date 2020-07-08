@@ -1,4 +1,4 @@
-package com.example.upgradegame;
+package com.wodebuluoge.mm;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
