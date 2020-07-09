@@ -34,7 +34,6 @@ class _MarketDetailState extends State<MarketDetail> {
   void changeTabs(String tab) {
     setState(() {
       tabName = tab;
-      sellType = Resource.WOOD == tab ? "木材" : "石材";
     });
   }
 
@@ -126,6 +125,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                                       searchResult.clear();
                                                       userSearchResultHide = false;
                                                       User user = User.fromSearchJson(data);
+                                                      user.phone = phone;
                                                       searchResult.add(user);
                                                     });
                                                   }
@@ -151,7 +151,7 @@ class _MarketDetailState extends State<MarketDetail> {
                               Container(
                                 height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight - SystemButtonSize.inputDecorationHeight),
                                 child: UserSearchResult(
-                                  hideWidget: userSearchResultHide,
+                                  userSearchResultHide: userSearchResultHide,
                                   searchResult: searchResult,
                                 ),
                               ),

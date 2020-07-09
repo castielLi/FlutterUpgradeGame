@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/model/const/resource.dart';
+import 'package:upgradegame/Src/pages/market/service/marketService.dart';
 
 class MarketAsk extends StatefulWidget {
   String sellType;
@@ -29,7 +33,7 @@ class _MarketAskState extends State<MarketAsk> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '出售的' + this.widget.sellType + '数量:',
+            '出售的' + (Resource.WOOD == this.widget.sellType ? "木材" : "石材") + '数量:',
             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
           ),
           Container(
@@ -119,7 +123,14 @@ class _MarketAskState extends State<MarketAsk> {
               ImageTextButton(
                 buttonName: '确定',
                 callback: () {
-                  print('发布');
+                  MarketService.sellResource(this.widget.sellType, double.parse(this.amountController.text), double.parse(this.coinController.text), (data) {
+                    if (ConfigSetting.SUCCESS == data) {
+                      CommonUtils.showSuccessMessage(msg: "订单发布成功");
+                      amountController.clear();
+                      coinController.clear();
+                      this.widget.viewCallback();
+                    }
+                  });
                 },
               ),
             ],
@@ -128,6 +139,7 @@ class _MarketAskState extends State<MarketAsk> {
       ),
     );
   }
+
   @override
   void dispose() {
     amountController.dispose();

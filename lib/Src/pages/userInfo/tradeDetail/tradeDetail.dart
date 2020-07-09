@@ -16,11 +16,6 @@ class TradeDetail extends StatefulWidget {
 
 class _TradeDetailState extends State<TradeDetail> {
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return new Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -32,19 +27,19 @@ class _TradeDetailState extends State<TradeDetail> {
             children: <Widget>[
               Text(
                 '日期',
-                style: CustomFontSize.defaultTextStyle(55),
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
               ),
               Text(
                 '种类',
-                style: CustomFontSize.defaultTextStyle(55),
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
               ),
               Text(
                 '数量',
-                style: CustomFontSize.defaultTextStyle(55),
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
               ),
               Text(
                 '金额',
-                style: CustomFontSize.defaultTextStyle(55),
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
               ),
             ],
           ),

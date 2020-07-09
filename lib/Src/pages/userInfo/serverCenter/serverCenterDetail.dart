@@ -27,7 +27,11 @@ class _ServerCenterState extends State<ServerCenter> {
           width: ScreenUtil().setWidth(850),
           margin: EdgeInsets.only(top: 50),
           height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
-          child: Text('客服中心',textAlign: TextAlign.center,style: CustomFontSize.defaultTextStyle(70),),
+          child: Text(
+            '客服中心',
+            textAlign: TextAlign.center,
+            style: CustomFontSize.defaultTextStyle(70),
+          ),
         ),
         new ImageButton(
           height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),

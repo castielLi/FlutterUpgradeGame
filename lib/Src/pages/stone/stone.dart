@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
 import 'package:upgradegame/Src/common/model/enum/adTypeEnum.dart';
 import 'package:upgradegame/Src/common/model/enum/buildingEnum.dart';
-import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 import 'package:upgradegame/Src/common/service/baseService.dart';
 import 'package:upgradegame/Src/common/widget/adIcon/adIconRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
@@ -23,11 +22,6 @@ class StoneDetail extends StatefulWidget {
 }
 
 class _StoneDetailState extends State<StoneDetail> {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Container(child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
@@ -87,17 +81,14 @@ class _StoneDetailState extends State<StoneDetail> {
               adIconHeight: ScreenUtil().setHeight(SystemIconSize.adIconSize),
               imageUrlWatched: 'resource/images/adWatched.png',
               imageUrlUnwatch: "resource/images/adUnwatch.png",
-              imageUrlWaiting:"resource/images/adWaiting.png",
+              imageUrlWaiting: "resource/images/adWaiting.png",
               HUD: this.widget.HUD,
               type: AdTypeEnum.stone,
               alreadyWatched: watchedAd,
             ),
             new Container(
-              margin: EdgeInsets.only(
-                left: ScreenUtil().setWidth(20),
-              ),
+              margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Row(
@@ -107,7 +98,7 @@ class _StoneDetailState extends State<StoneDetail> {
                         '每次获取 ',
                         style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                       ),
-                      new Image(
+                      Image(
                         image: new AssetImage('resource/images/stone.png'),
                         height: ScreenUtil().setHeight(100),
                       ),
@@ -122,8 +113,8 @@ class _StoneDetailState extends State<StoneDetail> {
               ),
             ),
             new ImageButton(
-              height: ScreenUtil().setHeight(200),
-              width: ScreenUtil().setWidth(400),
+              height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+              width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
               buttonName: "升 级",
               imageUrl: "resource/images/upgradeButton.png",
               callback: () {

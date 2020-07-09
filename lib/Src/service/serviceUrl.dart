@@ -94,5 +94,13 @@ class ServiceUrl {
   static searchUser(){
     return "${host}api/v1/searchuser";
   }
+  ///  发布订单
+  static sellResource(){
+    return "${host}api/v1/market/sell";
+  }
+  ///  发布订单
+  static sendCoin(){
+    return "${host}api/v1/account/sendtcoin";
+  }
 }
 

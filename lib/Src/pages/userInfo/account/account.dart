@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
-import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 
@@ -83,7 +82,8 @@ class _AccountDetailState extends State<AccountDetail> {
                       print("原密码：" + originalPasswordController.text + "新密码：" + newPasswordController.text + "重复：" + repeatPasswordController.text);
                       if (newPassword != repeatPassword) {
                         CommonUtils.showErrorMessage(msg: '两次输入密码不一致');
-                      }else{
+                      } else {
+
                         print("修改密码");
                       }
                     },
@@ -96,6 +96,7 @@ class _AccountDetailState extends State<AccountDetail> {
       ),
     );
   }
+
   @override
   void dispose() {
     originalPasswordController.dispose();

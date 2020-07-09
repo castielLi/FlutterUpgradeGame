@@ -12,8 +12,7 @@ class WithdrawItem extends StatefulWidget {
   // 提现数量
   int tAmount;
 
-  WithdrawItem({Key key, this.tDate, this.tTypeImageUrl, this.tAmount})
-      : super(key: key);
+  WithdrawItem({Key key, this.tDate, this.tTypeImageUrl, this.tAmount}) : super(key: key);
 
   @override
   _WithdrawItem createState() => _WithdrawItem();
@@ -27,7 +26,7 @@ class _WithdrawItem extends State<WithdrawItem> {
       children: <Widget>[
         Text(
           this.widget.tDate,
-          style: CustomFontSize.defaultTextStyle(55),
+          style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
         ),
         Image(
           image: new AssetImage(this.widget.tTypeImageUrl),
@@ -35,7 +34,7 @@ class _WithdrawItem extends State<WithdrawItem> {
         ),
         Text(
           this.widget.tAmount.toString(),
-          style: CustomFontSize.defaultTextStyle(55),
+          style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
         ),
       ],
     );
