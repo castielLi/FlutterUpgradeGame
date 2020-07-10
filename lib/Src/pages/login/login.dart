@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Src/pages/login/service/loginService.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
@@ -14,8 +16,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool loginPageHide = false;
+  bool registerPageHide = true;
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final phoneController = TextEditingController();
+  final iDController = TextEditingController();
+  final nameController = TextEditingController();
+  final registerPasswordController = TextEditingController();
+  final repeatPasswordController = TextEditingController();
   ProgressHUD _progressHUD;
   bool _loading = false;
 
@@ -36,16 +45,16 @@ class _LoginPageState extends State<LoginPage> {
 
   initParams() async {
     currentToken = await LoginService.getToken();
-    if (currentToken != null) {
-      this.showOrDismissProgressHUD();
-      LoginService.loginWithToken((model) {
-        this.showOrDismissProgressHUD();
-        if (model != null) {
-          Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
-          Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
-        }
-      });
-    }
+//    if (currentToken != null) {
+//      this.showOrDismissProgressHUD();
+//      LoginService.loginWithToken((model) {
+//        this.showOrDismissProgressHUD();
+//        if (model != null) {
+//          Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
+//          Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+//        }
+//      });
+//    }
   }
 
   void showOrDismissProgressHUD() {
@@ -78,114 +87,127 @@ class _LoginPageState extends State<LoginPage> {
                       ScreenUtil().setWidth(100), // 左
                       ScreenUtil().setHeight(600), // 上
                       ScreenUtil().setWidth(100), // 右
-                      ScreenUtil().setHeight(600)), // 下
-                  child: Scaffold(
-                    resizeToAvoidBottomInset: false,
-                    backgroundColor: Colors.transparent,
-                    body: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: ScreenUtil().setHeight(150),
-                          padding: EdgeInsets.only(top: 5),
-                          child: new Card(
-                              child: new Container(
-                            child: new Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Expanded(
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    child: TextField(
-                                      controller: usernameController,
-                                      decoration: new InputDecoration(hintText: '用户名:', border: InputBorder.none, prefixIcon: Icon(Icons.account_box)),
-                                      onSubmitted: (String input) {
-                                        input = usernameController.text;
-                                      },
-                                      // onChanged: onSearchTextChanged,
-                                    ),
-                                  ),
-                                ),
-                                new IconButton(
-                                  icon: new Icon(Icons.cancel),
-                                  color: Colors.grey,
-                                  iconSize: 18.0,
+                      ScreenUtil().setHeight(400)), // 下
+                  child: Stack(
+                    children: [
+                      Offstage(
+                        offstage: loginPageHide,
+                        child: Scaffold(
+                          resizeToAvoidBottomInset: false,
+                          backgroundColor: Colors.transparent,
+                          body: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              MyTextField(
+                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                hintText: "用户名",
+                                controller: usernameController,
+                                icon: Icon(Icons.account_box),
+                              ),
+                              MyTextField(
+                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                hintText: "密码",
+                                controller: passwordController,
+                                icon: Icon(Icons.lock),
+                                obscureText: true,
+                              ),
+                              new RaisedButton(
+                                  child: Text("登 录"),
+                                  color: Colors.blue,
+                                  textColor: Colors.white,
                                   onPressed: () {
-                                    usernameController.clear();
-                                  },
+                                    print("user:" + usernameController.text + ",password:" + passwordController.text);
+                                    this.showOrDismissProgressHUD();
+                                    LoginService.login("asdf", (model) {
+                                      this.showOrDismissProgressHUD();
+                                      if (model != null) {
+                                        Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
+                                        Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                                      }
+                                    });
+                                  }),
+                              new GestureDetector(
+                                child: new Image(
+                                  image: AssetImage("resource/images/wechat.png"),
+                                  width: ScreenUtil().setWidth(150),
+                                  fit: BoxFit.fill,
                                 ),
-                              ],
-                            ),
-                          )),
-                        ),
-                        Container(
-                          height: ScreenUtil().setHeight(150),
-                          padding: EdgeInsets.only(top: 5),
-                          child: new Card(
-                              child: new Container(
-                            child: new Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Expanded(
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    child: TextField(
-                                      controller: passwordController,
-                                      decoration: new InputDecoration(hintText: '密码:', border: InputBorder.none, prefixIcon: Icon(Icons.lock)),
-                                      onSubmitted: (String input) {
-                                        input = passwordController.text;
-                                      },
-                                      // onChanged: onSearchTextChanged,
-                                    ),
-                                  ),
-                                ),
-                                new IconButton(
-                                  icon: new Icon(Icons.cancel),
-                                  color: Colors.grey,
-                                  iconSize: 18.0,
-                                  onPressed: () {
-                                    passwordController.clear();
-                                  },
-                                ),
-                              ],
-                            ),
-                          )),
-                        ),
-                        new RaisedButton(
-                            child: Text("登 录"),
-                            color: Colors.blue,
-                            textColor: Colors.white,
-                            onPressed: () {
-                              print("user:" + usernameController.text + ",password:" + passwordController.text);
-                              this.showOrDismissProgressHUD();
-                              LoginService.login("asdf", (model) {
-                                this.showOrDismissProgressHUD();
-                                if (model != null) {
-                                  Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
-                                  Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
-                                }
-                              });
-                            }),
-                        new GestureDetector(
-                          child: new Image(
-                            image: AssetImage("resource/images/wechat.png"),
-                            width: ScreenUtil().setWidth(150),
-                            fit: BoxFit.fill,
+                                onTap: () {
+                                  setState(() {
+                                    loginPageHide = true;
+                                    registerPageHide = false;
+                                  });
+                                  fluwx.sendWeChatAuth(scope: "snsapi_userinfo", state: "wechat_sdk_demo_test").then((data) {
+                                    print(data);
+                                  }).catchError((e) {});
+                                },
+                              ),
+                            ],
                           ),
-                          onTap: () {
-                            print("微信登录");
-                            fluwx
-                                .sendWeChatAuth(
-                                scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
-                                .then((data) {
-                                  print(data);
-                            })
-                                .catchError((e) {});
-                          },
                         ),
-                      ],
-                    ),
+                      ),
+                      Offstage(
+                        offstage: registerPageHide,
+                        child: Scaffold(
+                          resizeToAvoidBottomInset: false,
+                          backgroundColor: Colors.transparent,
+                          body: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              MyTextField(
+                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                hintText: "手机",
+                                controller: phoneController,
+                                inputType: TextInputType.number,
+                                icon: Icon(Icons.phone),
+                              ),
+                              MyTextField(
+                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                hintText: "身份证",
+                                controller: iDController,
+                                icon: Icon(Icons.account_box),
+                              ),
+                              MyTextField(
+                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                hintText: "姓名",
+                                controller: nameController,
+                                icon: Icon(Icons.account_box),
+                              ),
+                              MyTextField(
+                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                hintText: "密码",
+                                controller: registerPasswordController,
+                                icon: Icon(Icons.lock),
+                                obscureText: true,
+                              ),
+                              MyTextField(
+                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                hintText: "确认密码",
+                                controller: repeatPasswordController,
+                                icon: Icon(Icons.lock),
+                                obscureText: true,
+                              ),
+                              new RaisedButton(
+                                  child: Text("注 册"),
+                                  color: Colors.blue,
+                                  textColor: Colors.white,
+                                  onPressed: () {
+                                    this.showOrDismissProgressHUD();
+                                    LoginService.login("asdf", (model) {
+                                      this.showOrDismissProgressHUD();
+                                      if (model != null) {
+                                        Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
+                                        Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                                      }
+                                    });
+                                  }),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 _progressHUD
@@ -195,6 +217,7 @@ class _LoginPageState extends State<LoginPage> {
           requestedValues: [BaseUserInfoProvider]),
     );
   }
+
   @override
   void dispose() {
     usernameController.dispose();
