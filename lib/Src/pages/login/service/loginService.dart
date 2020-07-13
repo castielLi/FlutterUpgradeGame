@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Src/pages/login/model/LoginResponseModel.dart';
 import 'package:upgradegame/Src/pages/login/requstModel/login.dart';
+import 'package:upgradegame/Src/pages/login/requstModel/setUserInfoRequestModel.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'dart:async';
 import 'package:upgradegame/Src/service/serviceUrl.dart';
@@ -26,10 +27,46 @@ class LoginService{
       LoginReponseModel responseModel = LoginReponseModel.fromJson(response.data);
       LocalStorage.save(Config.TOKEN_KEY, responseModel.token);
       FileStorage.saveContent(responseModel.token, "token");
-      callback(responseModel.userinfo);
+      FileStorage.saveContent(responseModel.verified.toString(), "verified");
+      callback(responseModel);
     }else{
       CommonUtils.showErrorMessage(msg: '登录出错');
       callback(null);
+    }
+  }
+
+  static Future<ResultData> setUserInfo(String realName , String idCard
+      ,String phone ,String account , String password,callback) async{
+
+    SetUserInfoRequestModel requestModel = SetUserInfoRequestModel(password: password,realname: realName,
+    idcard: idCard,telephone: phone,account: account);
+    String params = convert.jsonEncode(requestModel);
+
+    var response = await httpManager.request(
+        ServiceUrl.setuserinfo(), params, null, Options(method: "post"));
+
+    if(response.code != 200){
+      callback(false);
+      CommonUtils.showErrorMessage(msg: response.message);
+    }else{
+      FileStorage.saveContent("true", "verified");
+      callback(true);
+    }
+  }
+
+
+  static Future<ResultData> loginWithAccount(String account , String password,callback) async{
+
+    var response = await httpManager.request(
+        ServiceUrl.getuser(), {}, null, null);
+
+    if(response.code != 200){
+      clearAll();
+      FileStorage.saveContent("", "token");
+      callback(null);
+    }else{
+      BaseUserInfoModel model = BaseUserInfoModel.fromJson(response.data);
+      callback(model);
     }
   }
 
@@ -60,5 +97,18 @@ class LoginService{
       return token;
     }
     return null;
+  }
+
+  //用于判断用户是否实名认证
+  static Future<bool> getVerified() async {
+    var verified = await FileStorage.getContent("verified");
+    if (verified != null && verified != "") {
+      if(verified == "true"){
+        return true;
+      }else{
+        return false;
+      }
+    }
+    return false;
   }
 }

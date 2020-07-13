@@ -8,6 +8,8 @@ import 'package:progress_hud/progress_hud.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluwx/fluwx.dart' as fluwx;
 
+import 'model/LoginResponseModel.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => new _LoginPageState();
@@ -20,6 +22,8 @@ class _LoginPageState extends State<LoginPage> {
   bool _loading = false;
 
   var currentToken = "";
+  var currentVerfied = false;
+  bool userVerified = true;
 
   void initState() {
     super.initState();
@@ -36,7 +40,8 @@ class _LoginPageState extends State<LoginPage> {
 
   initParams() async {
     currentToken = await LoginService.getToken();
-    if (currentToken != null) {
+    currentVerfied = await LoginService.getVerified();
+    if (currentToken != null && currentVerfied) {
       this.showOrDismissProgressHUD();
       LoginService.loginWithToken((model) {
         this.showOrDismissProgressHUD();
@@ -73,118 +78,363 @@ class _LoginPageState extends State<LoginPage> {
           builder: (context, child, model) {
             return Stack(
               children: <Widget>[
-                new Container(
-                  margin: EdgeInsets.fromLTRB(
-                      ScreenUtil().setWidth(100), // 左
-                      ScreenUtil().setHeight(600), // 上
-                      ScreenUtil().setWidth(100), // 右
-                      ScreenUtil().setHeight(600)), // 下
-                  child: Scaffold(
-                    resizeToAvoidBottomInset: false,
-                    backgroundColor: Colors.transparent,
-                    body: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: ScreenUtil().setHeight(150),
-                          padding: EdgeInsets.only(top: 5),
-                          child: new Card(
-                              child: new Container(
-                            child: new Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Expanded(
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    child: TextField(
-                                      controller: usernameController,
-                                      decoration: new InputDecoration(hintText: '用户名:', border: InputBorder.none, prefixIcon: Icon(Icons.account_box)),
-                                      onSubmitted: (String input) {
-                                        input = usernameController.text;
-                                      },
-                                      // onChanged: onSearchTextChanged,
-                                    ),
+                ///登录界面
+                new Offstage(
+                  offstage: !this.userVerified,
+                  child:  new Container(
+                    margin: EdgeInsets.fromLTRB(
+                        ScreenUtil().setWidth(100), // 左
+                        ScreenUtil().setHeight(600), // 上
+                        ScreenUtil().setWidth(100), // 右
+                        ScreenUtil().setHeight(600)), // 下
+                    child: Scaffold(
+                      resizeToAvoidBottomInset: false,
+                      backgroundColor: Colors.transparent,
+                      body: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: ScreenUtil().setHeight(150),
+                            padding: EdgeInsets.only(top: 5),
+                            child: new Card(
+                                child: new Container(
+                                  child: new Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          child: TextField(
+                                            controller: usernameController,
+                                            decoration: new InputDecoration(hintText: '用户名:', border: InputBorder.none, prefixIcon: Icon(Icons.account_box)),
+                                            onSubmitted: (String input) {
+                                              input = usernameController.text;
+                                            },
+                                            // onChanged: onSearchTextChanged,
+                                          ),
+                                        ),
+                                      ),
+                                      new IconButton(
+                                        icon: new Icon(Icons.cancel),
+                                        color: Colors.grey,
+                                        iconSize: 18.0,
+                                        onPressed: () {
+                                          usernameController.clear();
+                                        },
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                new IconButton(
-                                  icon: new Icon(Icons.cancel),
-                                  color: Colors.grey,
-                                  iconSize: 18.0,
-                                  onPressed: () {
-                                    usernameController.clear();
-                                  },
-                                ),
-                              ],
-                            ),
-                          )),
-                        ),
-                        Container(
-                          height: ScreenUtil().setHeight(150),
-                          padding: EdgeInsets.only(top: 5),
-                          child: new Card(
-                              child: new Container(
-                            child: new Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Expanded(
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    child: TextField(
-                                      controller: passwordController,
-                                      decoration: new InputDecoration(hintText: '密码:', border: InputBorder.none, prefixIcon: Icon(Icons.lock)),
-                                      onSubmitted: (String input) {
-                                        input = passwordController.text;
-                                      },
-                                      // onChanged: onSearchTextChanged,
-                                    ),
-                                  ),
-                                ),
-                                new IconButton(
-                                  icon: new Icon(Icons.cancel),
-                                  color: Colors.grey,
-                                  iconSize: 18.0,
-                                  onPressed: () {
-                                    passwordController.clear();
-                                  },
-                                ),
-                              ],
-                            ),
-                          )),
-                        ),
-                        new RaisedButton(
-                            child: Text("登 录"),
-                            color: Colors.blue,
-                            textColor: Colors.white,
-                            onPressed: () {
-                              print("user:" + usernameController.text + ",password:" + passwordController.text);
-                              this.showOrDismissProgressHUD();
-                              LoginService.login("asdf", (model) {
-                                this.showOrDismissProgressHUD();
-                                if (model != null) {
-                                  Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
-                                  Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
-                                }
-                              });
-                            }),
-                        new GestureDetector(
-                          child: new Image(
-                            image: AssetImage("resource/images/wechat.png"),
-                            width: ScreenUtil().setWidth(150),
-                            fit: BoxFit.fill,
+                                )),
                           ),
-                          onTap: () {
-                            print("微信登录");
-                            fluwx
-                                .sendWeChatAuth(
-                                scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
-                                .then((data) {
-                                  print(data);
-                            })
-                                .catchError((e) {});
-                          },
-                        ),
-                      ],
+                          Container(
+                            height: ScreenUtil().setHeight(150),
+                            padding: EdgeInsets.only(top: 5),
+                            child: new Card(
+                                child: new Container(
+                                  child: new Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          child: TextField(
+                                            controller: passwordController,
+                                            decoration: new InputDecoration(hintText: '密码:', border: InputBorder.none, prefixIcon: Icon(Icons.lock)),
+                                            onSubmitted: (String input) {
+                                              input = passwordController.text;
+                                            },
+                                            // onChanged: onSearchTextChanged,
+                                          ),
+                                        ),
+                                      ),
+                                      new IconButton(
+                                        icon: new Icon(Icons.cancel),
+                                        color: Colors.grey,
+                                        iconSize: 18.0,
+                                        onPressed: () {
+                                          passwordController.clear();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ),
+                          new RaisedButton(
+                              child: Text("登 录"),
+                              color: Colors.blue,
+                              textColor: Colors.white,
+                              onPressed: () {
+                                print("user:" + usernameController.text + ",password:" + passwordController.text);
+                                this.showOrDismissProgressHUD();
+                                LoginService.login("asdf", (LoginReponseModel model) {
+                                  this.showOrDismissProgressHUD();
+                                  if (model != null) {
+                                    if(model.verified){
+                                      ///初始化用户
+                                      Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+                                      Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                                    }else{
+                                      ///初始化用户
+                                      Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+                                      setState(() {
+                                        this.userVerified = false;
+                                      });
+                                    }
+                                  }
+                                });
+                              }),
+                          new GestureDetector(
+                            child: new Image(
+                              image: AssetImage("resource/images/wechat.png"),
+                              width: ScreenUtil().setWidth(150),
+                              fit: BoxFit.fill,
+                            ),
+                            onTap: () {
+                              print("微信登录");
+                              fluwx
+                                  .sendWeChatAuth(
+                                  scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
+                                  .then((data) {
+                                print(data);
+                              })
+                                  .catchError((e) {});
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                ///实名认证界面
+                new Offstage(
+                  offstage: this.userVerified,
+                  child: new Container(
+//                    margin: EdgeInsets.fromLTRB(
+//                        ScreenUtil().setWidth(100), // 左
+//                        ScreenUtil().setHeight(600), // 上
+//                        ScreenUtil().setWidth(100), // 右
+//                        ScreenUtil().setHeight(600)), // 下
+                    child: Scaffold(
+                      resizeToAvoidBottomInset: false,
+                      backgroundColor: Colors.transparent,
+                      body: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: ScreenUtil().setHeight(150),
+                            padding: EdgeInsets.only(top: 5),
+                            child: new Card(
+                                child: new Container(
+                                  child: new Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          child: TextField(
+                                            controller: usernameController,
+                                            decoration: new InputDecoration(hintText: '真实姓名:', border: InputBorder.none, prefixIcon: Icon(Icons.account_box)),
+                                            onSubmitted: (String input) {
+                                              input = usernameController.text;
+                                            },
+                                            // onChanged: onSearchTextChanged,
+                                          ),
+                                        ),
+                                      ),
+                                      new IconButton(
+                                        icon: new Icon(Icons.cancel),
+                                        color: Colors.grey,
+                                        iconSize: 18.0,
+                                        onPressed: () {
+                                          usernameController.clear();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ),
+                          Container(
+                            height: ScreenUtil().setHeight(150),
+                            padding: EdgeInsets.only(top: 5),
+                            child: new Card(
+                                child: new Container(
+                                  child: new Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          child: TextField(
+                                            controller: usernameController,
+                                            decoration: new InputDecoration(hintText: '电话:', border: InputBorder.none, prefixIcon: Icon(Icons.account_box)),
+                                            onSubmitted: (String input) {
+                                              input = usernameController.text;
+                                            },
+                                            // onChanged: onSearchTextChanged,
+                                          ),
+                                        ),
+                                      ),
+                                      new IconButton(
+                                        icon: new Icon(Icons.cancel),
+                                        color: Colors.grey,
+                                        iconSize: 18.0,
+                                        onPressed: () {
+                                          usernameController.clear();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ),
+                          Container(
+                            height: ScreenUtil().setHeight(150),
+                            padding: EdgeInsets.only(top: 5),
+                            child: new Card(
+                                child: new Container(
+                                  child: new Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          child: TextField(
+                                            controller: usernameController,
+                                            decoration: new InputDecoration(hintText: '身份证件:', border: InputBorder.none, prefixIcon: Icon(Icons.account_box)),
+                                            onSubmitted: (String input) {
+                                              input = usernameController.text;
+                                            },
+                                            // onChanged: onSearchTextChanged,
+                                          ),
+                                        ),
+                                      ),
+                                      new IconButton(
+                                        icon: new Icon(Icons.cancel),
+                                        color: Colors.grey,
+                                        iconSize: 18.0,
+                                        onPressed: () {
+                                          usernameController.clear();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ),
+                          Container(
+                            height: ScreenUtil().setHeight(150),
+                            padding: EdgeInsets.only(top: 5),
+                            child: new Card(
+                                child: new Container(
+                                  child: new Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          child: TextField(
+                                            controller: usernameController,
+                                            decoration: new InputDecoration(hintText: '账号:', border: InputBorder.none, prefixIcon: Icon(Icons.account_box)),
+                                            onSubmitted: (String input) {
+                                              input = usernameController.text;
+                                            },
+                                            // onChanged: onSearchTextChanged,
+                                          ),
+                                        ),
+                                      ),
+                                      new IconButton(
+                                        icon: new Icon(Icons.cancel),
+                                        color: Colors.grey,
+                                        iconSize: 18.0,
+                                        onPressed: () {
+                                          usernameController.clear();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ),
+                          Container(
+                            height: ScreenUtil().setHeight(150),
+                            padding: EdgeInsets.only(top: 5),
+                            child: new Card(
+                                child: new Container(
+                                  child: new Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          child: TextField(
+                                            controller: usernameController,
+                                            decoration: new InputDecoration(hintText: '密码:', border: InputBorder.none, prefixIcon: Icon(Icons.account_box)),
+                                            onSubmitted: (String input) {
+                                              input = usernameController.text;
+                                            },
+                                            // onChanged: onSearchTextChanged,
+                                          ),
+                                        ),
+                                      ),
+                                      new IconButton(
+                                        icon: new Icon(Icons.cancel),
+                                        color: Colors.grey,
+                                        iconSize: 18.0,
+                                        onPressed: () {
+                                          usernameController.clear();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ),
+                          Container(
+                            height: ScreenUtil().setHeight(150),
+                            padding: EdgeInsets.only(top: 5),
+                            child: new Card(
+                                child: new Container(
+                                  child: new Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          child: TextField(
+                                            controller: passwordController,
+                                            decoration: new InputDecoration(hintText: '确认密码:', border: InputBorder.none, prefixIcon: Icon(Icons.lock)),
+                                            onSubmitted: (String input) {
+                                              input = passwordController.text;
+                                            },
+                                            // onChanged: onSearchTextChanged,
+                                          ),
+                                        ),
+                                      ),
+                                      new IconButton(
+                                        icon: new Icon(Icons.cancel),
+                                        color: Colors.grey,
+                                        iconSize: 18.0,
+                                        onPressed: () {
+                                          passwordController.clear();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ),
+                          new RaisedButton(
+                              child: Text("注 册"),
+                              color: Colors.blue,
+                              textColor: Colors.white,
+                              onPressed: () {
+                                print("user:" + usernameController.text + ",password:" + passwordController.text);
+                                this.showOrDismissProgressHUD();
+                                LoginService.setUserInfo("","","","","",(bool success){
+                                  if(success){
+                                    Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                                  }
+                                });
+                              }),
+                        ],
+                      ),
                     ),
                   ),
                 ),

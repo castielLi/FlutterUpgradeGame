@@ -33,6 +33,12 @@ class FileStorage {
       } catch (e) {
         print(e);
       }
+    }else{
+      try {
+        writeToFile(file, content);
+      } catch (e) {
+        print(e);
+      }
     }
   }
 
