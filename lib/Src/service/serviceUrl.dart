@@ -21,6 +21,11 @@ class ServiceUrl {
     return "${host}api/v1/user";
   }
 
+  ///loginwithaccount
+  static loginwithaccount(){
+    return "${host}api/v1/accountlogin";
+  }
+
   ///setUserInfo
   static setuserinfo() {
     return "${host}api/v1/userinfo";

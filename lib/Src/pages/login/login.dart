@@ -176,20 +176,12 @@ class _LoginPageState extends State<LoginPage> {
                               onPressed: () {
                                 print("user:" + usernameController.text + ",password:" + passwordController.text);
                                 this.showOrDismissProgressHUD();
-                                LoginService.login("asdf", (LoginReponseModel model) {
+                                LoginService.loginWithAccount("account", "password", (LoginReponseModel model){
                                   this.showOrDismissProgressHUD();
                                   if (model != null) {
-                                    if(model.verified){
-                                      ///初始化用户
-                                      Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
-                                      Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
-                                    }else{
-                                      ///初始化用户
-                                      Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
-                                      setState(() {
-                                        this.userVerified = false;
-                                      });
-                                    }
+                                    ///初始化用户
+                                    Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+                                    Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
                                   }
                                 });
                               }),
@@ -201,13 +193,31 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             onTap: () {
                               print("微信登录");
-                              fluwx
-                                  .sendWeChatAuth(
-                                  scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
-                                  .then((data) {
-                                print(data);
-                              })
-                                  .catchError((e) {});
+                              this.showOrDismissProgressHUD();
+                              LoginService.login("asdf", (LoginReponseModel model) {
+                                this.showOrDismissProgressHUD();
+                                if (model != null) {
+                                  if(model.verified){
+                                    ///初始化用户
+                                    Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+                                    Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                                  }else{
+                                    ///初始化用户
+                                    Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+                                    setState(() {
+                                      this.userVerified = false;
+                                    });
+                                  }
+                                }
+                              });
+
+//                              fluwx
+//                                  .sendWeChatAuth(
+//                                  scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
+//                                  .then((data) {
+//                                print(data);
+//                              })
+//                                  .catchError((e) {});
                             },
                           ),
                         ],

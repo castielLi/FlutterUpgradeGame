@@ -13,6 +13,12 @@ class UserInfoService{
     LocalStorage.remove(Config.TOKEN_KEY);
     await FileStorage.removeContent("token");
     await FileStorage.removeContent("verified");
+    clearAll();
     callback();
+  }
+
+  ///清除所有信息
+  static clearAll() async {
+    httpManager.clearAuthorization();
   }
 }

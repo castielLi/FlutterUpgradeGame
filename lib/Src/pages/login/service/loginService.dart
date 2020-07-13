@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Src/pages/login/model/LoginResponseModel.dart';
 import 'package:upgradegame/Src/pages/login/requstModel/login.dart';
+import 'package:upgradegame/Src/pages/login/requstModel/loginWithAccountRequestModel.dart';
 import 'package:upgradegame/Src/pages/login/requstModel/setUserInfoRequestModel.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'dart:async';
@@ -57,16 +58,20 @@ class LoginService{
 
   static Future<ResultData> loginWithAccount(String account , String password,callback) async{
 
-    var response = await httpManager.request(
-        ServiceUrl.getuser(), {}, null, null);
+    LoginWithAccountRequestModel requestModel = LoginWithAccountRequestModel(account:account,password: password);
+    String params = convert.jsonEncode(requestModel);
 
-    if(response.code != 200){
-      clearAll();
-      FileStorage.saveContent("", "token");
-      callback(null);
+    var response = await httpManager.request(
+        ServiceUrl.loginwithaccount(), params, null, Options(method: "post"));
+
+    if(response.code == 200){
+      LoginReponseModel responseModel = LoginReponseModel.fromJson(response.data);
+      LocalStorage.save(Config.TOKEN_KEY, responseModel.token);
+      FileStorage.saveContent(responseModel.token, "token");
+      callback(responseModel);
     }else{
-      BaseUserInfoModel model = BaseUserInfoModel.fromJson(response.data);
-      callback(model);
+      CommonUtils.showErrorMessage(msg: '登录出错');
+      callback(null);
     }
   }
 
@@ -76,7 +81,6 @@ class LoginService{
         ServiceUrl.getuser(), {}, null, null);
 
     if(response.code != 200){
-      clearAll();
       FileStorage.saveContent("", "token");
       callback(null);
     }else{
