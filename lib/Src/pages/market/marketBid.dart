@@ -38,9 +38,10 @@ class _MarketBidItem extends State<MarketBidItem> {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Row(
                 children: <Widget>[
@@ -68,7 +69,7 @@ class _MarketBidItem extends State<MarketBidItem> {
                 children: <Widget>[
                   Image(
                     image: new AssetImage('resource/images/' + this.widget.bidType + '.png'),
-                    height: ScreenUtil().setHeight(90),
+                    height: ScreenUtil().setHeight(85),
                   ),
                   Text(
                     '数量:' + this.widget.amount.toString(),

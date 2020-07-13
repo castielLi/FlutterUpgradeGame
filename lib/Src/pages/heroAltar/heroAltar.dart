@@ -53,7 +53,7 @@ class _HeroAltarState extends State<HeroAltar> {
               ScreenUtil().setWidth(80), // 右
               ScreenUtil().setHeight(200)),
           child: ListView(
-            padding: EdgeInsets.only(top: 0),
+            padding: EdgeInsets.only(top: 20),
             children: <Widget>[
               HeroAltarItem(
                 heroImageUrl: 'resource/images/warrior.png',

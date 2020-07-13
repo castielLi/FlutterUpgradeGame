@@ -4,7 +4,6 @@ import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
 import 'package:upgradegame/Src/common/model/enum/adTypeEnum.dart';
 import 'package:upgradegame/Src/common/model/enum/buildingEnum.dart';
-import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 import 'package:upgradegame/Src/common/service/baseService.dart';
 import 'package:upgradegame/Src/common/widget/adIcon/adIconRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
@@ -59,7 +58,6 @@ class _FarmDetailState extends State<FarmDetail> {
             new Container(
               margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text('LV $levelFrom > LV $level', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
@@ -83,13 +81,13 @@ class _FarmDetailState extends State<FarmDetail> {
               adIconHeight: ScreenUtil().setHeight(SystemIconSize.adIconSize),
               imageUrlWatched: 'resource/images/adWatched.png',
               imageUrlUnwatch: "resource/images/adUnwatch.png",
-              imageUrlWaiting:"resource/images/adWaiting.png",
+              imageUrlWaiting: "resource/images/adWaiting.png",
               alreadyWatched: watchedAd,
               HUD: this.widget.HUD,
               type: AdTypeEnum.farm,
             ),
             new Container(
-              margin: EdgeInsets.only(left: ScreenUtil().setHeight(20)),
+              margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,8 +106,8 @@ class _FarmDetailState extends State<FarmDetail> {
               ),
             ),
             new ImageButton(
-              height: ScreenUtil().setHeight(200),
-              width: ScreenUtil().setWidth(400),
+              height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+              width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
               buttonName: "升 级",
               imageUrl: "resource/images/upgradeButton.png",
               callback: () {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Src/pages/login/service/loginService.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
@@ -16,8 +18,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool loginPageHide = false;
+  bool registerPageHide = true;
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final phoneController = TextEditingController();
+  final iDController = TextEditingController();
+  final nameController = TextEditingController();
+  final registerPasswordController = TextEditingController();
+  final repeatPasswordController = TextEditingController();
   ProgressHUD _progressHUD;
   bool _loading = false;
 
@@ -210,11 +219,6 @@ class _LoginPageState extends State<LoginPage> {
                 new Offstage(
                   offstage: this.userVerified,
                   child: new Container(
-//                    margin: EdgeInsets.fromLTRB(
-//                        ScreenUtil().setWidth(100), // 左
-//                        ScreenUtil().setHeight(600), // 上
-//                        ScreenUtil().setWidth(100), // 右
-//                        ScreenUtil().setHeight(600)), // 下
                     child: Scaffold(
                       resizeToAvoidBottomInset: false,
                       backgroundColor: Colors.transparent,
@@ -435,8 +439,8 @@ class _LoginPageState extends State<LoginPage> {
                               }),
                         ],
                       ),
+                      )
                     ),
-                  ),
                 ),
                 _progressHUD
               ],
@@ -444,5 +448,12 @@ class _LoginPageState extends State<LoginPage> {
           },
           requestedValues: [BaseUserInfoProvider]),
     );
+  }
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }

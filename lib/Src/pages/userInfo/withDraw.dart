@@ -15,10 +15,9 @@ class Withdraw extends StatefulWidget {
 }
 
 class _WithdrawState extends State<Withdraw> {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
+  final accountController = TextEditingController();
+  final nameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +35,17 @@ class _WithdrawState extends State<Withdraw> {
           child: ListView(
             children: <Widget>[
               TextField(
-                obscureText: true,
-                decoration: InputDecoration(labelText: "提现数量", prefixIcon: Icon(Icons.lock)),
+                decoration: InputDecoration(labelText: "支付宝账号", prefixIcon: Icon(Icons.person)),
+                controller: accountController,
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: "姓名", prefixIcon: Icon(Icons.person)),
+                controller: nameController,
               ),
               TextField(
                 decoration: InputDecoration(labelText: "密码", prefixIcon: Icon(Icons.lock)),
                 obscureText: true,
+                controller: passwordController,
               ),
               ButtonsList(
                 buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
@@ -58,7 +62,7 @@ class _WithdrawState extends State<Withdraw> {
                   ImageTextButton(
                     buttonName: '确 定',
                     callback: () {
-                      print('提现');
+                      print("Account:" + accountController.text + ",name:" + nameController.text + ",password:" + passwordController.text);
                     },
                   ),
                 ],
@@ -68,5 +72,13 @@ class _WithdrawState extends State<Withdraw> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    accountController.dispose();
+    nameController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }
