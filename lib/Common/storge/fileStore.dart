@@ -42,6 +42,17 @@ class FileStorage {
     }
   }
 
+  ///按照文件路径名称删除文件
+  static removeContent(String fileName) async {
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    String appDocPath = appDocDir.path;
+
+    File file = new File('$appDocPath/$fileName');
+    if(file.existsSync()) {
+      file.deleteSync();
+    }
+  }
+
   static writeToFile(File file, String notes) async {
     File fileRule = await file.writeAsString(notes);
     if(fileRule.existsSync()) {

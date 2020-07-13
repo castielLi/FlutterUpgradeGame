@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
+import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
 import 'package:upgradegame/Src/pages/userInfo/withDraw.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Src/pages/userInfo/userResourceDetail.dart';
@@ -9,6 +10,8 @@ import 'package:upgradegame/Src/pages/userInfo/tradeDetail/tradeDetail.dart';
 import 'package:upgradegame/Src/pages/userInfo/account/account.dart';
 import 'package:upgradegame/Src/pages/userInfo/withdraw/withdrawDetail.dart';
 import 'package:upgradegame/Src/pages/userInfo/serverCenter/serverCenterDetail.dart';
+import 'package:upgradegame/Src/route/application.dart';
+import 'package:upgradegame/Src/route/upgradegame_route.dart';
 
 class UserInfoDetail extends StatefulWidget {
   @override
@@ -91,6 +94,14 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                           callback: () {
                             switchPageBetweenFatherAndSon(sonPageName: "客服中心");
                             this.widget.changeTitleCallback("客服中心");
+                          },
+                        ),
+                        ImageTextButton(
+                          buttonName: '退出登录',
+                          callback: () {
+                            UserInfoService.logout((){
+                              Application.router.navigateTo(context, UpgradeGameRoute.loginPage, clearStack: true);
+                            });
                           },
                         ),
                       ],
