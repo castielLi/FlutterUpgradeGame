@@ -7,8 +7,9 @@ class MyTextField extends StatefulWidget {
   Icon icon;
   bool obscureText;
   TextInputType inputType = TextInputType.text;
+  VoidCallback onSubmittedCallback;
 
-  MyTextField({this.height, this.controller, this.hintText, this.icon, this.inputType,this.obscureText});
+  MyTextField({this.height, this.controller, this.hintText, this.icon, this.inputType,this.obscureText, this.onSubmittedCallback});
 
   _MyTextFieldState createState() => new _MyTextFieldState();
 }
@@ -39,8 +40,9 @@ class _MyTextFieldState extends State<MyTextField> {
                   keyboardType: this.widget.inputType,
                   obscureText: this.widget.obscureText,
                   decoration: new InputDecoration(hintText: this.widget.hintText, border: InputBorder.none, prefixIcon: this.widget.icon),
-                  onSubmitted: (String input) {
+                  onSubmitted: (input) {
                     input = this.widget.controller.text;
+                    this.widget.onSubmittedCallback();
                   },
                   // onChanged: onSearchTextChanged,
                 ),
