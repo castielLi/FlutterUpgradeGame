@@ -92,10 +92,12 @@ class _UserSearchResult extends State<UserSearchResult> {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            body: Container(
-              child: ListView(
+            body: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   TextField(
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(labelText: "赠送数量", prefixIcon: Icon(Icons.attach_money)),
                   ),
                   TextField(
@@ -120,7 +122,6 @@ class _UserSearchResult extends State<UserSearchResult> {
                       ImageTextButton(
                         buttonName: '确 定',
                         callback: () {
-                          print('发送');
                           MarketService.sendCoin(this.widget.user, (data) {
                             if (ConfigSetting.SUCCESS == data) {
                               CommonUtils.showSuccessMessage(msg: "发送成功");

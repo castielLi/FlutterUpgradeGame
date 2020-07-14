@@ -51,10 +51,8 @@ class AdDialog {
   }
 
   void _onEvent(Object event) {
-    print("广告观看状态!!!!!："+event.toString());
     if(openApp){
       if("5"==event.toString() || "4" == event.toString()){
-        print("广告观看成功!!!!!!");
         this.initAdViewSuccess = true;
         if(this.adWatchSuccessCallback != null){
           this.adWatchSuccessCallback();
@@ -63,7 +61,6 @@ class AdDialog {
         this.initAdViewSuccess = false;
       }
     }else if ("5"==event.toString()){
-      print("广告观看成功!!!!!!");
       if(this.adWatchSuccessCallback != null){
         this.adWatchSuccessCallback();
       }

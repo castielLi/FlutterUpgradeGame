@@ -4,6 +4,7 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
+import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Src/common/model/const/resource.dart';
 import 'package:upgradegame/Src/common/model/user.dart';
 import 'package:upgradegame/Src/pages/market/marketAsk.dart';
@@ -94,59 +95,26 @@ class _MarketDetailState extends State<MarketDetail> {
                           backgroundColor: Colors.transparent,
                           body: Column(
                             children: [
-                              Container(
-                                child: Container(
-                                  height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-                                  padding: EdgeInsets.only(top: 5),
-                                  child: new Card(
-                                      child: new Container(
-                                    child: new Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        SizedBox(
-                                          width: 5.0,
-                                        ),
-                                        Icon(
-                                          Icons.search,
-                                          color: Colors.grey,
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            child: TextField(
-                                              controller: controller,
-                                              keyboardType: TextInputType.number,
-                                              decoration: new InputDecoration(hintText: '输入用户手机号搜索', border: InputBorder.none),
-                                              onSubmitted: (String phone) {
-                                                phone = controller.text;
-                                                MarketService.searchUser(phone, (data) {
-                                                  if (null != data) {
-                                                    setState(() {
-                                                      searchResult.clear();
-                                                      userSearchResultHide = false;
-                                                      User user = User.fromSearchJson(data);
-                                                      user.phone = phone;
-                                                      searchResult.add(user);
-                                                    });
-                                                  }
-                                                });
-                                              },
-                                              // onChanged: onSearchTextChanged,
-                                            ),
-                                          ),
-                                        ),
-                                        new IconButton(
-                                          icon: new Icon(Icons.cancel),
-                                          color: Colors.grey,
-                                          iconSize: 18.0,
-                                          onPressed: () {
-                                            controller.clear();
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  )),
-                                ),
+                              MyTextField(
+                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                controller: controller,
+                                inputType: TextInputType.number,
+                                hintText: '输入用户手机号搜索',
+                                icon: Icon(Icons.search),
+                                onSubmittedCallback: () {
+                                  String phone = controller.text;
+                                  MarketService.searchUser(phone, (data) {
+                                    if (null != data) {
+                                      setState(() {
+                                        searchResult.clear();
+                                        userSearchResultHide = false;
+                                        User user = User.fromSearchJson(data);
+                                        user.phone = phone;
+                                        searchResult.add(user);
+                                      });
+                                    }
+                                  });
+                                },
                               ),
                               Container(
                                 height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight - SystemButtonSize.inputDecorationHeight),

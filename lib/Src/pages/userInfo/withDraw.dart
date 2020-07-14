@@ -24,18 +24,18 @@ class _WithdrawState extends State<Withdraw> {
     return new Container(
       margin: EdgeInsets.fromLTRB(
         ScreenUtil().setWidth(0), // 左
-        ScreenUtil().setHeight(120), // 上
+        ScreenUtil().setHeight(125), // 上
         ScreenUtil().setWidth(0), // 右
         ScreenUtil().setHeight(150),
       ),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
-        body: Container(
-          child: ListView(
+        body: SingleChildScrollView(
+          child: Column(
             children: <Widget>[
               TextField(
-                decoration: InputDecoration(labelText: "支付宝账号", prefixIcon: Icon(Icons.person)),
+                decoration: InputDecoration(labelText: "支付宝账号", prefixIcon: Icon(Icons.email)),
                 controller: accountController,
               ),
               TextField(
