@@ -108,9 +108,20 @@ class ServiceUrl {
   static sellResource(){
     return "${host}api/v1/market/sell";
   }
+
+  ///提现
+  static withdraw(){
+    return "${host}api/v1/account/withdraw";
+  }
+
   ///  发布订单
   static sendCoin(){
     return "${host}api/v1/account/sendtcoin";
+  }
+
+  ///获取用户现金账户
+  static getUserCashInfo(){
+    return "${host}api/v1/account/cashinfo";
   }
 }
 
