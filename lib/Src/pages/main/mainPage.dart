@@ -1,13 +1,10 @@
 //import 'dart:html';
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
-import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/pages/main/model/takeCoinModel.dart';
 import 'package:upgradegame/Src/pages/main/service/mainService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
@@ -155,7 +152,6 @@ class _MainPageState extends State<MainPage> {
 
               ///资源栏
               new Container(
-                height: ScreenUtil().setHeight(SystemIconSize.mainPageBarIconHeight),
                 margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageSignalBarHeight)),
                 child: new Row(
                   children: <Widget>[
@@ -199,7 +195,7 @@ class _MainPageState extends State<MainPage> {
                     ),
                     new Expanded(
                       child: new Container(
-                        height: ScreenUtil().setHeight(SystemIconSize.mainPageBarIconHeight),
+                        height: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + 25),
                         child: new Stack(
                           children: <Widget>[
                             new Center(
@@ -210,7 +206,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                             new Center(
                               child: new UserImageButton(
-                                size: ScreenUtil().setSp(SystemIconSize.mainPageBarIconHeight),
+                                size: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + SystemIconSize.mainPageAvatarBiggerThanResource),
                                 buttonName: "",
                                 textSize: SystemFontSize.operationTextFontSize,
                                 imageUrl: "resource/images/avatar.png",
@@ -233,9 +229,10 @@ class _MainPageState extends State<MainPage> {
 
               ///功能栏
               new Container(
-                margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageBarIconHeight + SystemIconSize.mainPageSignalBarHeight)),
-                height: ScreenUtil().setHeight(SystemIconSize.mainPageBarIconHeight),
+                margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + SystemIconSize.mainPageSignalBarHeight + SystemIconSize.mainPageAvatarBiggerThanResource)),
+                height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize * 2),
                 child: new Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     new Container(
@@ -280,7 +277,6 @@ class _MainPageState extends State<MainPage> {
                     ),
                     new Container(
                       height: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize),
-                      width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize * 2),
                       child: new DividendPart(
                         imageTitle: "分红",
                         imageUrl: "resource/images/dividend.png",
@@ -295,10 +291,7 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                     new Container(
-                      margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
-                      width: ScreenUtil().setWidth(200),
                       child: new Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           new Container(
                             decoration: new BoxDecoration(
@@ -306,12 +299,11 @@ class _MainPageState extends State<MainPage> {
                               borderRadius: BorderRadius.all(Radius.circular(8.0)),
                             ),
                             child: new Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 new Image(
                                   image: new AssetImage("resource/images/volume.png"),
-                                  width: ScreenUtil().setWidth(80),
-                                  height: ScreenUtil().setHeight(80),
+                                  width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarSmallIconSize),
+                                  height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
                                 ),
                                 new Text(
                                   '*' + baseUserInfo.voucher.toString(),
@@ -323,7 +315,7 @@ class _MainPageState extends State<MainPage> {
                           new Row(
                             children: <Widget>[
                               new UserImageButton(
-                                size: ScreenUtil().setSp(100),
+                                size: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
                                 buttonName: "设置",
                                 textSize: SystemFontSize.operationTextFontSize,
                                 imageUrl: "resource/images/setting.png",
@@ -333,7 +325,7 @@ class _MainPageState extends State<MainPage> {
                                 },
                               ),
                               new UserImageButton(
-                                size: ScreenUtil().setSp(100),
+                                size: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
                                 buttonName: "公告",
                                 textSize: SystemFontSize.operationTextFontSize,
                                 imageUrl: "resource/images/announcement.png",

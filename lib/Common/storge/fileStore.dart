@@ -33,6 +33,23 @@ class FileStorage {
       } catch (e) {
         print(e);
       }
+    }else{
+      try {
+        writeToFile(file, content);
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
+
+  ///按照文件路径名称删除文件
+  static removeContent(String fileName) async {
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    String appDocPath = appDocDir.path;
+
+    File file = new File('$appDocPath/$fileName');
+    if(file.existsSync()) {
+      file.deleteSync();
     }
   }
 

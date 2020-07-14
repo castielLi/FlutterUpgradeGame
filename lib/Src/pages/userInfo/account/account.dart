@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
+import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 
 class AccountDetail extends StatefulWidget {
   @override
@@ -13,10 +16,9 @@ class AccountDetail extends StatefulWidget {
 }
 
 class _AccountDetailState extends State<AccountDetail> {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
+  final originalPasswordController = TextEditingController();
+  final newPasswordController = TextEditingController();
+  final repeatPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class _AccountDetailState extends State<AccountDetail> {
         ScreenUtil().setWidth(0), // 左
         ScreenUtil().setHeight(120), // 上
         ScreenUtil().setWidth(0), // 右
-        ScreenUtil().setHeight(150),
+        ScreenUtil().setHeight(120),
       ),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -36,28 +38,70 @@ class _AccountDetailState extends State<AccountDetail> {
               TextField(
                 obscureText: true,
                 decoration: InputDecoration(labelText: "原密码", prefixIcon: Icon(Icons.lock)),
+                controller: originalPasswordController,
+                onSubmitted: (original) {
+                  original = originalPasswordController.text;
+                  print(original);
+                },
               ),
               TextField(
                 decoration: InputDecoration(labelText: "新密码", prefixIcon: Icon(Icons.lock)),
                 obscureText: true,
+                controller: newPasswordController,
+                onSubmitted: (newPassword) {
+                  newPassword = newPasswordController.text;
+                  print(newPassword);
+                },
               ),
               TextField(
                 decoration: InputDecoration(labelText: "重复密码", prefixIcon: Icon(Icons.lock)),
                 obscureText: true,
-              ),
-              new ImageButton(
-                height: ScreenUtil().setHeight(200),
-                width: ScreenUtil().setWidth(400),
-                buttonName: "返回",
-                imageUrl: "resource/images/upgradeButton.png",
-                callback: () {
-                  this.widget.viewCallback();
+                controller: repeatPasswordController,
+                onSubmitted: (repeat) {
+                  repeat = repeatPasswordController.text;
+                  print(repeat);
                 },
+              ),
+              ButtonsList(
+                buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+                buttonHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+                buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
+                textSize: SystemFontSize.buttonTextFontSize,
+                buttons: [
+                  ImageTextButton(
+                    buttonName: '返回',
+                    callback: () {
+                      this.widget.viewCallback();
+                    },
+                  ),
+                  ImageTextButton(
+                    buttonName: '确定',
+                    callback: () {
+                      String newPassword = newPasswordController.text;
+                      String repeatPassword = repeatPasswordController.text;
+                      print("原密码：" + originalPasswordController.text + "新密码：" + newPasswordController.text + "重复：" + repeatPasswordController.text);
+                      if (newPassword != repeatPassword) {
+                        CommonUtils.showErrorMessage(msg: '两次输入密码不一致');
+                      } else {
+
+                        print("修改密码");
+                      }
+                    },
+                  ),
+                ],
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    originalPasswordController.dispose();
+    newPasswordController.dispose();
+    repeatPasswordController.dispose();
+    super.dispose();
   }
 }

@@ -51,22 +51,26 @@ class SystemIconSize {
   static const mediumIconSize = 250.0;
   static const largeIconSize = 333.0;
 
-  static const mainPageBarIconHeight = 200.0;
-  static const mainPageSignalBarHeight = 80.0;
-  static const mainPageIconSize = 350.0;
+  static const mainPageAvatarBiggerThanResource = 25.0;
+  static const mainPageSignalBarHeight = 65.0;
   static const mainPageResourceBarIconSize = 125.0;
   static const mainPageStatusBarIconSize = 150.0;
+  static const mainPageStatusBarSmallIconSize = 90.0;
+  static const mainPageIconSize = 350.0;
+
   static const adIconSize = 135.0;
 }
 
 class SystemButtonSize {
-  static const smallButtonWithIconWidth = 240.0;
-  static const smallButtonWithIconHeight = 120.0;
-  static const largeButtonWithIconWidth = 360.0;
-  static const largeButtonWithIconHeight = 144.0;
-
-  static const smallButtonWidth = 300.0;
+  static const smallButtonWidth = 240.0;
   static const smallButtonHeight = 120.0;
+  static const mediumButtonWidth = 300.0;
+  static const mediumButtonHeight = 120.0;
+  static const largeButtonWidth = 360.0;
+  static const largeButtonHeight = 144.0;
+
+  static const settingsTextHeight = 820.0;
+  static const inputDecorationHeight = 150.0;
 }
 
 ///系统字体大小

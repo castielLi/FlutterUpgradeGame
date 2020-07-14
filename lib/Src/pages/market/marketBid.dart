@@ -29,17 +29,19 @@ class _MarketBidItem extends State<MarketBidItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: ScreenUtil().setHeight(320),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: new AssetImage('resource/images/woodButton.png'),
           fit: BoxFit.fill,
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Row(
                 children: <Widget>[
@@ -56,9 +58,18 @@ class _MarketBidItem extends State<MarketBidItem> {
               Row(
                 children: <Widget>[
                   Text('出售:', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+                ],
+              ),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: <Widget>[
                   Image(
                     image: new AssetImage('resource/images/' + this.widget.bidType + '.png'),
-                    height: ScreenUtil().setHeight(90),
+                    height: ScreenUtil().setHeight(85),
                   ),
                   Text(
                     '数量:' + this.widget.amount.toString(),
@@ -66,34 +77,31 @@ class _MarketBidItem extends State<MarketBidItem> {
                   ),
                 ],
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Image(
+                    image: new AssetImage('resource/images/coin.png'),
+                    height: ScreenUtil().setHeight(100),
+                  ),
+                  Text(
+                    '数量:' + this.widget.needCoin.toString(),
+                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                  ),
+                ],
+              ),
+              ImageTextButton(
+                imageUrl: "resource/images/upgradeButton.png",
+                imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+                imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+                buttonName: "购 买",
+                callback: () {
+                  print(this.widget.bidType);
+                },
+                textSize: SystemFontSize.settingTextFontSize,
+              )
             ],
           ),
-          Container(
-            padding: EdgeInsets.only(right: ScreenUtil().setSp(10)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Image(
-                  image: new AssetImage('resource/images/coin.png'),
-                  height: ScreenUtil().setHeight(100),
-                ),
-                Text(
-                  '数量:' + this.widget.needCoin.toString(),
-                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                ),
-              ],
-            ),
-          ),
-          ImageTextButton(
-            imageUrl: "resource/images/upgradeButton.png",
-            imageWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
-            imageHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
-            buttonName: "购 买",
-            callback: () {
-              print(this.widget.bidType);
-            },
-            textSize: SystemFontSize.settingTextFontSize,
-          )
         ],
       ),
     );

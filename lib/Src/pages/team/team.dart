@@ -50,8 +50,8 @@ class _TeamDetailState extends State<TeamDetail> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           ButtonsList(
-            buttonWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonWithIconWidth),
-            buttonHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonWithIconHeight),
+            buttonWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+            buttonHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
             buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
             textSize: SystemFontSize.settingTextFontSize,
             buttons: [
@@ -165,8 +165,8 @@ class _TeamDetailState extends State<TeamDetail> {
                   ),
                 ),
           new ImageButton(
-            height: ScreenUtil().setHeight(150),
-            width: ScreenUtil().setWidth(400),
+            height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+            width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
             buttonName: "邀 请",
             imageUrl: "resource/images/upgradeButton.png",
             callback: () {

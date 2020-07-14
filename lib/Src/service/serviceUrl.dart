@@ -21,6 +21,16 @@ class ServiceUrl {
     return "${host}api/v1/user";
   }
 
+  ///loginwithaccount
+  static loginwithaccount(){
+    return "${host}api/v1/accountlogin";
+  }
+
+  ///setUserInfo
+  static setuserinfo() {
+    return "${host}api/v1/userinfo";
+  }
+
   ///观看广告
   static watchAd(){
     return "${host}api/v1/ad/watch";
@@ -93,6 +103,25 @@ class ServiceUrl {
   ///  搜索用户
   static searchUser(){
     return "${host}api/v1/searchuser";
+  }
+  ///  发布订单
+  static sellResource(){
+    return "${host}api/v1/market/sell";
+  }
+
+  ///提现
+  static withdraw(){
+    return "${host}api/v1/account/withdraw";
+  }
+
+  ///  发布订单
+  static sendCoin(){
+    return "${host}api/v1/account/sendtcoin";
+  }
+
+  ///获取用户现金账户
+  static getUserCashInfo(){
+    return "${host}api/v1/account/cashinfo";
   }
 }
 

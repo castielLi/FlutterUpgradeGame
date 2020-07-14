@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
-import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
+import 'package:upgradegame/Common/widget/textField/myTextField.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/model/const/resource.dart';
+import 'package:upgradegame/Src/pages/market/service/marketService.dart';
 
 class MarketAsk extends StatefulWidget {
   String sellType;
@@ -30,84 +34,26 @@ class _MarketAskState extends State<MarketAsk> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '出售的' + this.widget.sellType + '数量:',
+            '出售的' + (Resource.WOOD == this.widget.sellType ? "木材" : "石材") + '数量:',
             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
           ),
-          Container(
-            height: ScreenUtil().setHeight(150),
-            padding: EdgeInsets.only(top: 5),
-            child: new Card(
-                child: new Container(
-              child: new Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: TextField(
-                        controller: amountController,
-                        keyboardType: TextInputType.number,
-                        decoration: new InputDecoration(border: InputBorder.none),
-                        onSubmitted: (String input) {
-                          input = amountController.text;
-                        },
-                        // onChanged: onSearchTextChanged,
-                      ),
-                    ),
-                  ),
-                  new IconButton(
-                    icon: new Icon(Icons.cancel),
-                    color: Colors.grey,
-                    iconSize: 18.0,
-                    onPressed: () {
-                      amountController.clear();
-                    },
-                  ),
-                ],
-              ),
-            )),
+          MyTextField(
+            height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+            controller: amountController,
+            inputType: TextInputType.number,
           ),
           Text(
             '需要的T币数量:',
             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
           ),
-          Container(
-            height: ScreenUtil().setHeight(150),
-            padding: EdgeInsets.only(top: 5),
-            child: new Card(
-                child: new Container(
-              child: new Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: TextField(
-                        controller: coinController,
-                        keyboardType: TextInputType.number,
-                        decoration: new InputDecoration(border: InputBorder.none),
-                        onSubmitted: (String input) {
-                          input = coinController.text;
-                        },
-                        // onChanged: onSearchTextChanged,
-                      ),
-                    ),
-                  ),
-                  new IconButton(
-                    icon: new Icon(Icons.cancel),
-                    color: Colors.grey,
-                    iconSize: 18.0,
-                    onPressed: () {
-                      coinController.clear();
-                    },
-                  ),
-                ],
-              ),
-            )),
+          MyTextField(
+            height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+            controller: coinController,
+            inputType: TextInputType.number,
           ),
           ButtonsList(
-            buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
-            buttonHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+            buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+            buttonHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
             buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
             textSize: SystemFontSize.buttonTextFontSize,
             buttons: [
@@ -120,7 +66,14 @@ class _MarketAskState extends State<MarketAsk> {
               ImageTextButton(
                 buttonName: '确定',
                 callback: () {
-                  print('发布');
+                  MarketService.sellResource(this.widget.sellType, double.parse(this.amountController.text), double.parse(this.coinController.text), (data) {
+                    if (ConfigSetting.SUCCESS == data) {
+                      CommonUtils.showSuccessMessage(msg: "订单发布成功");
+                      amountController.clear();
+                      coinController.clear();
+                      this.widget.viewCallback();
+                    }
+                  });
                 },
               ),
             ],
@@ -128,5 +81,12 @@ class _MarketAskState extends State<MarketAsk> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    amountController.dispose();
+    coinController.dispose();
+    super.dispose();
   }
 }

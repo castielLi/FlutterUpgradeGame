@@ -32,21 +32,21 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
             children: <Widget>[
               Text(
                 '日期',
-                style: CustomFontSize.defaultTextStyle(55),
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
               ),
               Text(
                 '种类',
-                style: CustomFontSize.defaultTextStyle(55),
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
               ),
               Text(
                 '数量',
-                style: CustomFontSize.defaultTextStyle(55),
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
               ),
             ],
           ),
         ),
         Container(
-          height: ScreenUtil().setHeight(800),
+          height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
           child: ListView.builder(
               itemCount: 10,
               itemBuilder: (content, index) {
@@ -58,8 +58,8 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
               }),
         ),
         new ImageButton(
-          height: ScreenUtil().setHeight(160),
-          width: ScreenUtil().setWidth(320),
+          height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+          width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
           buttonName: "返回",
           imageUrl: "resource/images/upgradeButton.png",
           callback: () {

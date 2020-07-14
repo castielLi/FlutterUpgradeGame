@@ -50,11 +50,11 @@ class _HeroAltarItem extends State<HeroAltarItem> {
       children: <Widget>[
         Container(
           width: ScreenUtil().setWidth(900),
-          height: ScreenUtil().setHeight(360),
+          height: ScreenUtil().setHeight(320),
           decoration: BoxDecoration(
             image: DecorationImage(
               image: new AssetImage('resource/images/woodButton.png'),
-              fit: BoxFit.fitWidth,
+              fit: BoxFit.fill,
             ),
           ),
           child: Row(
@@ -66,7 +66,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                 width: ScreenUtil().setWidth(SystemIconSize.mediumIconSize),
               ),
               Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
@@ -97,9 +97,8 @@ class _HeroAltarItem extends State<HeroAltarItem> {
               ),
               GestureDetector(
                 child: Container(
-                  width: ScreenUtil().setWidth(200),
-                  height: ScreenUtil().setHeight(100),
-                  padding: EdgeInsets.all(0),
+                  width: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+                  height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: new AssetImage('resource/images/upgradeButton.png'),

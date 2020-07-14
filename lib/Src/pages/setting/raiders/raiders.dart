@@ -51,8 +51,8 @@ class _RaidersDetailState extends State<RaidersDetail> {
       child: new Column(
         children: <Widget>[
           ButtonsList(
-            buttonWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonWithIconWidth),
-            buttonHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonWithIconHeight),
+            buttonWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+            buttonHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
             buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
             textSize: SystemFontSize.settingTextFontSize,
             buttons: [
@@ -71,7 +71,7 @@ class _RaidersDetailState extends State<RaidersDetail> {
             ],
           ),
           Container(
-            height: ScreenUtil().setHeight(600),
+            height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight-SystemButtonSize.largeButtonHeight),
             child: Stack(
               children: [
                 Offstage(
@@ -102,8 +102,8 @@ class _RaidersDetailState extends State<RaidersDetail> {
             ),
           ),
           new ImageButton(
-            height: ScreenUtil().setHeight(200),
-            width: ScreenUtil().setWidth(400),
+            height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+            width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
             buttonName: "返回",
             imageUrl: "resource/images/upgradeButton.png",
             callback: () {

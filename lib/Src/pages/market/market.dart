@@ -4,6 +4,7 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
+import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Src/common/model/const/resource.dart';
 import 'package:upgradegame/Src/common/model/user.dart';
 import 'package:upgradegame/Src/pages/market/marketAsk.dart';
@@ -44,7 +45,7 @@ class _MarketDetailState extends State<MarketDetail> {
           ScreenUtil().setWidth(100), // 左
           ScreenUtil().setHeight(400), // 上
           ScreenUtil().setWidth(100), // 右
-          ScreenUtil().setHeight(200)), // 下
+          ScreenUtil().setHeight(100)), // 下
       child: Stack(
         children: [
           Offstage(
@@ -52,8 +53,8 @@ class _MarketDetailState extends State<MarketDetail> {
             child: Column(
               children: <Widget>[
                 ButtonsList(
-                  buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWithIconWidth),
-                  buttonHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonWithIconHeight),
+                  buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+                  buttonHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
                   iconWidth: ScreenUtil().setWidth(SystemIconSize.smallIconSize),
                   iconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
                   buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
@@ -84,7 +85,7 @@ class _MarketDetailState extends State<MarketDetail> {
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 10),
-                  height: ScreenUtil().setHeight(900),
+                  height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
                   child: Stack(
                     children: <Widget>[
                       Offstage(
@@ -94,63 +95,31 @@ class _MarketDetailState extends State<MarketDetail> {
                           backgroundColor: Colors.transparent,
                           body: Column(
                             children: [
-                              Container(
-                                child: Container(
-                                  height: ScreenUtil().setHeight(150),
-                                  padding: EdgeInsets.only(top: 5),
-                                  child: new Card(
-                                      child: new Container(
-                                    child: new Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        SizedBox(
-                                          width: 5.0,
-                                        ),
-                                        Icon(
-                                          Icons.search,
-                                          color: Colors.grey,
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            child: TextField(
-                                              controller: controller,
-                                              keyboardType: TextInputType.number,
-                                              decoration: new InputDecoration(hintText: '输入用户手机号搜索', border: InputBorder.none),
-                                              onSubmitted: (String phone) {
-                                                phone = controller.text;
-                                                MarketService.searchUser(phone, (data) {
-                                                  if (null != data) {
-                                                    setState(() {
-                                                      searchResult.clear();
-                                                      userSearchResultHide = false;
-                                                      User user = User.fromSearchJson(data);
-                                                      searchResult.add(user);
-                                                    });
-                                                  }
-                                                });
-                                              },
-                                              // onChanged: onSearchTextChanged,
-                                            ),
-                                          ),
-                                        ),
-                                        new IconButton(
-                                          icon: new Icon(Icons.cancel),
-                                          color: Colors.grey,
-                                          iconSize: 18.0,
-                                          onPressed: () {
-                                            controller.clear();
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  )),
-                                ),
+                              MyTextField(
+                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                controller: controller,
+                                inputType: TextInputType.number,
+                                hintText: '输入用户手机号搜索',
+                                icon: Icon(Icons.search),
+                                onSubmittedCallback: () {
+                                  String phone = controller.text;
+                                  MarketService.searchUser(phone, (data) {
+                                    if (null != data) {
+                                      setState(() {
+                                        searchResult.clear();
+                                        userSearchResultHide = false;
+                                        User user = User.fromSearchJson(data);
+                                        user.phone = phone;
+                                        searchResult.add(user);
+                                      });
+                                    }
+                                  });
+                                },
                               ),
                               Container(
-                                height: ScreenUtil().setHeight(700),
+                                height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight - SystemButtonSize.inputDecorationHeight),
                                 child: UserSearchResult(
-                                  hideWidget: userSearchResultHide,
+                                  userSearchResultHide: userSearchResultHide,
                                   searchResult: searchResult,
                                 ),
                               ),
@@ -160,75 +129,56 @@ class _MarketDetailState extends State<MarketDetail> {
                       ),
                       Offstage(
                         offstage: tabName != Resource.WOOD,
-                        child: Column(
-                          children: [
-                            Container(
-                              height: ScreenUtil().setHeight(750),
-                              child: ListView.builder(
-                                  padding: EdgeInsets.only(top: 0),
-                                  itemCount: 4,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return MarketBidItem(
-                                      avatarUrl: 'resource/images/avatar.png',
-                                      name: '黄小龙',
-                                      bidType: 'wood',
-                                      amount: 21231,
-                                      needCoin: 192,
-                                    );
-                                  }),
-                            ),
-                            ImageButton(
-                              height: ScreenUtil().setHeight(150),
-                              width: ScreenUtil().setWidth(400),
-                              buttonName: "发布订单",
-                              imageUrl: "resource/images/upgradeButton.png",
-                              callback: () {
-                                setState(() {
-                                  sellType = "木材";
-                                  askPageHide = false;
-                                  bidPageHide = true;
-                                });
-                              },
-                            ),
-                          ],
+                        child: Container(
+                          height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
+                          child: ListView.builder(
+                              padding: EdgeInsets.only(top: 0),
+                              itemCount: 4,
+                              itemBuilder: (BuildContext context, int index) {
+                                return MarketBidItem(
+                                  avatarUrl: 'resource/images/avatar.png',
+                                  name: '黄小龙',
+                                  bidType: 'wood',
+                                  amount: 21231,
+                                  needCoin: 192,
+                                );
+                              }),
                         ),
                       ),
                       Offstage(
                         offstage: tabName != Resource.STONE,
-                        child: Column(
-                          children: [
-                            Container(
-                              height: ScreenUtil().setHeight(750),
-                              child: ListView.builder(
-                                  padding: EdgeInsets.only(top: 0),
-                                  itemCount: 2,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return MarketBidItem(
-                                      avatarUrl: 'resource/images/avatar.png',
-                                      name: '黄小龙',
-                                      bidType: 'stone',
-                                      amount: 21231,
-                                      needCoin: 192,
-                                    );
-                                  }),
-                            ),
-                            ImageButton(
-                              height: ScreenUtil().setHeight(150),
-                              width: ScreenUtil().setWidth(400),
-                              buttonName: "发布订单",
-                              imageUrl: "resource/images/upgradeButton.png",
-                              callback: () {
-                                setState(() {
-                                  askPageHide = false;
-                                  bidPageHide = true;
-                                });
-                                sellType = "石头";
-                              },
-                            ),
-                          ],
+                        child: Container(
+                          height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
+                          child: ListView.builder(
+                              padding: EdgeInsets.only(top: 0),
+                              itemCount: 2,
+                              itemBuilder: (BuildContext context, int index) {
+                                return MarketBidItem(
+                                  avatarUrl: 'resource/images/avatar.png',
+                                  name: '黄小龙',
+                                  bidType: 'stone',
+                                  amount: 21231,
+                                  needCoin: 192,
+                                );
+                              }),
                         ),
                       ),
                     ],
+                  ),
+                ),
+                Offstage(
+                  offstage: tabName != Resource.WOOD && tabName != Resource.STONE,
+                  child: ImageButton(
+                    height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+                    width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+                    buttonName: "发布订单",
+                    imageUrl: "resource/images/upgradeButton.png",
+                    callback: () {
+                      setState(() {
+                        askPageHide = false;
+                        bidPageHide = true;
+                      });
+                    },
                   ),
                 ),
               ],

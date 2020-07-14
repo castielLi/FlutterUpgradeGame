@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 
 class ServerCenter extends StatefulWidget {
@@ -20,25 +21,29 @@ class _ServerCenterState extends State<ServerCenter> {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      width: ScreenUtil().setWidth(850),
-      margin: EdgeInsets.only(top: 50),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text('客服中心'),
-          new ImageButton(
-            height: ScreenUtil().setHeight(200),
-            width: ScreenUtil().setWidth(400),
-            buttonName: "返回",
-            imageUrl: "resource/images/upgradeButton.png",
-            callback: () {
-//                this.widget.HUD();
-              this.widget.viewCallback();
-            },
+    return new Column(
+      children: [
+        new Container(
+          width: ScreenUtil().setWidth(850),
+          margin: EdgeInsets.only(top: 50),
+          height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
+          child: Text(
+            '客服中心',
+            textAlign: TextAlign.center,
+            style: CustomFontSize.defaultTextStyle(70),
           ),
-        ],
-      ),
+        ),
+        new ImageButton(
+          height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+          width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+          buttonName: "返回",
+          imageUrl: "resource/images/upgradeButton.png",
+          callback: () {
+//                this.widget.HUD();
+            this.widget.viewCallback();
+          },
+        ),
+      ],
     );
   }
 }
