@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Src/pages/setting/event/settingEventBus.dart';
 import 'package:upgradegame/Src/pages/setting/protocol/service/protocolService.dart';
 
 import 'model/protocol.dart';
@@ -22,15 +23,19 @@ class _ProtocolDetailState extends State<ProtocolDetail> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      this.widget.HUD();
-      ProtocolService.getProtocolList((data) {
-        if (null != data) {
+    SettingHttpRequestEvent().on("protocol", this.getProtocol);
+  }
+
+  void getProtocol(){
+    this.widget.HUD();
+    ProtocolService.getProtocolList((data) {
+      if (null != data) {
+        setState(() {
           content = ProtocolModel.fromJson(data).content;
-        }
-      });
-      this.widget.HUD();
+        });
+      }
     });
+    this.widget.HUD();
   }
 
   @override
@@ -46,14 +51,12 @@ class _ProtocolDetailState extends State<ProtocolDetail> {
         children: <Widget>[
           Container(
             height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
-            child: ListView(
-              children: <Widget>[
-                Text(
-                  this.content,
-                  textAlign: TextAlign.center,
-                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                ),
-              ],
+            child: SingleChildScrollView(
+              child: Text(
+                this.content,
+                textAlign: TextAlign.center,
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+              ),
             ),
           ),
           new ImageButton(

@@ -4,6 +4,7 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/pages/userInfo/event/userInfoEventBus.dart';
 import 'package:upgradegame/Src/pages/userInfo/model/cashInfoModel.dart';
 import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
 import 'package:upgradegame/Src/pages/userInfo/withDraw.dart';
@@ -53,9 +54,17 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    UserInfoHttpRequestEvent().off();
+  }
+
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    UserInfoHttpRequestEvent();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.getUserCashInfo();
     });
@@ -109,6 +118,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                             callback: () {
                               switchPageBetweenFatherAndSon(sonPageName: "交易明细");
                               this.widget.changeTitleCallback("交易明细");
+                              UserInfoHttpRequestEvent().emit("tcoinDetail");
                             },
                           ),
                           ImageTextButton(
@@ -116,6 +126,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                             callback: () {
                               switchPageBetweenFatherAndSon(sonPageName: "提现记录");
                               this.widget.changeTitleCallback("提现记录");
+                              UserInfoHttpRequestEvent().emit("tradeDetail");
                             },
                           ),
                           ImageTextButton(
@@ -123,6 +134,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                             callback: () {
                               switchPageBetweenFatherAndSon(sonPageName: "客服中心");
                               this.widget.changeTitleCallback("客服中心");
+                              UserInfoHttpRequestEvent().emit("serverCenter");
                             },
                           ),
                           ImageTextButton(

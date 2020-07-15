@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/pages/userInfo/event/userInfoEventBus.dart';
 import 'package:upgradegame/Src/pages/userInfo/withdraw/withdrawItem.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 
@@ -15,6 +16,18 @@ class WithDrawDetail extends StatefulWidget {
 }
 
 class _WithDrawDetailState extends State<WithDrawDetail> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    UserInfoHttpRequestEvent().on("withdrawDetail",this.getWithdrawDetail);
+  }
+
+  void getWithdrawDetail(){
+    print("开始请求withdrawdetail");
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();

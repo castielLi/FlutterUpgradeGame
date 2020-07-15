@@ -4,6 +4,7 @@ import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/pages/setting/event/settingEventBus.dart';
 import 'package:upgradegame/Src/pages/setting/raiders/service/raidersService.dart';
 
 import 'model/raidersModel.dart';
@@ -26,17 +27,19 @@ class _RaidersDetailState extends State<RaidersDetail> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    SettingHttpRequestEvent().on("raiders", this.getRaiders);
+  }
+
+  void getRaiders(){
+    this.widget.HUD();
+    RaidersService.getRaidersList((data) {
+      if (null != data) {
+        setState(() {
+          basic = RaidersModel.fromJson(data).basic;
+          advanced = RaidersModel.fromJson(data).advanced;
+        });
+      }
       this.widget.HUD();
-      RaidersService.getRaidersList((data) {
-        if (null != data) {
-          setState(() {
-            basic = RaidersModel.fromJson(data).basic;
-            advanced = RaidersModel.fromJson(data).advanced;
-          });
-        }
-        this.widget.HUD();
-      });
     });
   }
 
@@ -71,31 +74,27 @@ class _RaidersDetailState extends State<RaidersDetail> {
             ],
           ),
           Container(
-            height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight-SystemButtonSize.largeButtonHeight),
+            height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight - SystemButtonSize.largeButtonHeight),
             child: Stack(
               children: [
                 Offstage(
                   offstage: tabName != 'basic',
-                  child: ListView(
-                    children: [
-                      Text(
-                        basic,
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                  child: SingleChildScrollView(
+                    child: Text(
+                      basic,
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
                 Offstage(
                   offstage: tabName != 'advanced',
-                  child: ListView(
-                    children: [
-                      Text(
-                        advanced,
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                  child: SingleChildScrollView(
+                    child: Text(
+                      advanced,
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ],

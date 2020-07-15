@@ -24,11 +24,12 @@ class _UserResourceDetailState extends State<UserResourceDetail> {
         children: <Widget>[
           new Column(
             children: <Widget>[
-              Image(
-                image: new AssetImage(this.widget.imageUrl),
+              Container(
                 width: ScreenUtil().setHeight(160),
                 height: ScreenUtil().setHeight(160),
-                fit: BoxFit.fill,
+                child: FadeInImage.assetNetwork(
+                    placeholder: "resource/images/defaultAvatar.png",
+                    image: this.widget.imageUrl),
               ),
               ImageText(
                 imageUrl: "resource/images/verified.png",

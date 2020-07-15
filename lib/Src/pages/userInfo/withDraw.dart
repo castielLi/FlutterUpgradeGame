@@ -46,53 +46,47 @@ class _WithdrawState extends State<Withdraw> {
       ),
 
       child: Provide<BaseUserCashProvider>(builder: (context, child, cashInfo){
-        return Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.transparent,
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              TextField(
-                decoration: InputDecoration(labelText: "支付宝账号", prefixIcon: Icon(Icons.email)),
-                controller: accountController,
-              ),
-              TextField(
-                decoration: InputDecoration(labelText: "姓名", prefixIcon: Icon(Icons.person)),
-                controller: nameController,
-              ),
-              TextField(
-                decoration: InputDecoration(labelText: "密码", prefixIcon: Icon(Icons.lock)),
-                obscureText: true,
-                controller: passwordController,
-              ),
-              ButtonsList(
-                buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
-                buttonHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
-                buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
-                textSize: SystemFontSize.buttonTextFontSize,
-                buttons: [
-                  ImageTextButton(
-                    buttonName: '返 回',
-                    callback: () {
-                      this.widget.viewCallback();
-                    },
-                  ),
-                  ImageTextButton(
-                    buttonName: '确 定',
-                    callback: () {
-                      if(!cashInfo.hasWithdraw){
-                        this.withdraw();
-                      }else{
-                        CommonUtils.showWarningMessage(msg: "你已经发起了提现操作,若要取消操作请在客服中心联系管理员");
-                      }
-                      print("Account:" + accountController.text + ",name:" + nameController.text + ",password:" + passwordController.text);
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+        return Column(
+          children: <Widget>[
+            TextField(
+              decoration: InputDecoration(labelText: "支付宝账号", prefixIcon: Icon(Icons.email)),
+              controller: accountController,
+            ),
+            TextField(
+              decoration: InputDecoration(labelText: "姓名", prefixIcon: Icon(Icons.person)),
+              controller: nameController,
+            ),
+            TextField(
+              decoration: InputDecoration(labelText: "密码", prefixIcon: Icon(Icons.lock)),
+              obscureText: true,
+              controller: passwordController,
+            ),
+            ButtonsList(
+              buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+              buttonHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+              buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
+              textSize: SystemFontSize.buttonTextFontSize,
+              buttons: [
+                ImageTextButton(
+                  buttonName: '返 回',
+                  callback: () {
+                    this.widget.viewCallback();
+                  },
+                ),
+                ImageTextButton(
+                  buttonName: '确 定',
+                  callback: () {
+                    if(!cashInfo.hasWithdraw){
+                      this.withdraw();
+                    }else{
+                      CommonUtils.showWarningMessage(msg: "你已经发起了提现操作,若要取消操作请在客服中心联系管理员");
+                    }
+                    print("Account:" + accountController.text + ",name:" + nameController.text + ",password:" + passwordController.text);
+                  },
+                ),
+              ],
+            ),
+          ],
         );
       }),
     );

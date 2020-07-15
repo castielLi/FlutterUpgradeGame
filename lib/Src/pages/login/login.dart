@@ -84,76 +84,78 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return new Container(
       color: Colors.black,
-      child: ProvideMulti(
-          builder: (context, child, model) {
-            return Stack(
-              children: <Widget>[
-                ///登录界面
-                new Offstage(
-                  offstage: !this.userVerified,
-                  child: new Container(
-                    margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(0), ScreenUtil().setWidth(100), ScreenUtil().setHeight(0)),
-                    child: Scaffold(
-                      resizeToAvoidBottomInset: true,
-                      backgroundColor: Colors.transparent,
-                      body: SingleChildScrollView(
-                        padding: EdgeInsets.only(top: ScreenUtil().setHeight(800)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            new MyTextField(
-                              height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-                              controller: usernameController,
-                              hintText: '用户名:',
-                              icon: Icon(Icons.person),
-                            ),
-                            new MyTextField(
-                              height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-                              controller: passwordController,
-                              hintText: '密码:',
-                              icon: Icon(Icons.lock),
-                              obscureText: true,
-                            ),
-                            new RaisedButton(
-                                child: Text("登 录"),
-                                color: Colors.blue,
-                                textColor: Colors.white,
-                                onPressed: () {
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: ProvideMulti(
+            builder: (context, child, model) {
+              return Stack(
+                children: <Widget>[
+                  ///登录界面
+                  new Offstage(
+                    offstage: !this.userVerified,
+                    child: new Container(
+                      margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(0), ScreenUtil().setWidth(100), ScreenUtil().setHeight(0)),
+                      child: Scaffold(
+                        resizeToAvoidBottomInset: true,
+                        backgroundColor: Colors.transparent,
+                        body: SingleChildScrollView(
+                          padding: EdgeInsets.only(top: ScreenUtil().setHeight(800)),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              new MyTextField(
+                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                controller: usernameController,
+                                hintText: '用户名:',
+                                icon: Icon(Icons.person),
+                              ),
+                              new MyTextField(
+                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                controller: passwordController,
+                                hintText: '密码:',
+                                icon: Icon(Icons.lock),
+                                obscureText: true,
+                              ),
+                              new RaisedButton(
+                                  child: Text("登 录"),
+                                  color: Colors.blue,
+                                  textColor: Colors.white,
+                                  onPressed: () {
+                                    this.showOrDismissProgressHUD();
+                                    LoginService.loginWithAccount("account", "password", (LoginReponseModel model) {
+                                      this.showOrDismissProgressHUD();
+                                      if (model != null) {
+                                        ///初始化用户
+                                        Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+                                        Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                                      }
+                                    });
+                                  }),
+                              new GestureDetector(
+                                child: new Image(
+                                  image: AssetImage("resource/images/wechat.png"),
+                                  width: ScreenUtil().setWidth(SystemButtonSize.inputDecorationHeight),
+                                  fit: BoxFit.fill,
+                                ),
+                                onTap: () {
                                   this.showOrDismissProgressHUD();
-                                  LoginService.loginWithAccount("account", "password", (LoginReponseModel model) {
+                                  LoginService.login("asdf", (LoginReponseModel model) {
                                     this.showOrDismissProgressHUD();
                                     if (model != null) {
-                                      ///初始化用户
-                                      Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
-                                      Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                                      if (model.verified) {
+                                        ///初始化用户
+                                        Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+                                        Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                                      } else {
+                                        ///初始化用户
+                                        Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+                                        setState(() {
+                                          this.userVerified = false;
+                                        });
+                                      }
                                     }
                                   });
-                                }),
-                            new GestureDetector(
-                              child: new Image(
-                                image: AssetImage("resource/images/wechat.png"),
-                                width: ScreenUtil().setWidth(SystemButtonSize.inputDecorationHeight),
-                                fit: BoxFit.fill,
-                              ),
-                              onTap: () {
-                                this.showOrDismissProgressHUD();
-                                LoginService.login("asdf", (LoginReponseModel model) {
-                                  this.showOrDismissProgressHUD();
-                                  if (model != null) {
-                                    if (model.verified) {
-                                      ///初始化用户
-                                      Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
-                                      Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
-                                    } else {
-                                      ///初始化用户
-                                      Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
-                                      setState(() {
-                                        this.userVerified = false;
-                                      });
-                                    }
-                                  }
-                                });
 
 //                              fluwx
 //                                  .sendWeChatAuth(
@@ -162,88 +164,97 @@ class _LoginPageState extends State<LoginPage> {
 //                                print(data);
 //                              })
 //                                  .catchError((e) {});
-                              },
-                            ),
-                          ],
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
 
-                ///实名认证界面
-                new Offstage(
-                  offstage: this.userVerified,
-                  child: new Container(
-                      margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(0), ScreenUtil().setWidth(100), ScreenUtil().setHeight(0)),
-                      child: Scaffold(
-                        resizeToAvoidBottomInset: true,
-                        backgroundColor: Colors.transparent,
-                        body: SingleChildScrollView(
-                          padding: EdgeInsets.only(top: ScreenUtil().setHeight(500)),
-                          child: Column(
-                            children: [
-                              new MyTextField(
-                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-                                controller: trueNameController,
-                                hintText: '真实姓名:',
-                                icon: Icon(Icons.person),
+                  ///实名认证界面
+                  new Offstage(
+                    offstage: this.userVerified,
+                    child: new Container(
+                        margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(0), ScreenUtil().setWidth(100), ScreenUtil().setHeight(0)),
+                        child: Scaffold(
+                          resizeToAvoidBottomInset: true,
+                          backgroundColor: Colors.transparent,
+                          body: Container(
+//                          decoration: BoxDecoration(
+//                            image: DecorationImage(
+//                              image: new AssetImage('resource/images/loginBackground.png'),
+//                              fit: BoxFit.fill,
+//                            ),
+//                          ),
+                            child: SingleChildScrollView(
+                              padding: EdgeInsets.only(top: ScreenUtil().setHeight(500)),
+                              child: Column(
+                                children: [
+                                  new MyTextField(
+                                    height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                    controller: trueNameController,
+                                    hintText: '真实姓名:',
+                                    icon: Icon(Icons.person),
+                                  ),
+                                  new MyTextField(
+                                    height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                    controller: phoneController,
+                                    hintText: '电话:',
+                                    icon: Icon(Icons.phone),
+                                    inputType: TextInputType.number,
+                                  ),
+                                  new MyTextField(
+                                    height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                    controller: iDController,
+                                    hintText: '身份证件:',
+                                    icon: Icon(Icons.account_box),
+                                  ),
+                                  new MyTextField(
+                                    height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                    controller: accountController,
+                                    hintText: '账号:',
+                                    icon: Icon(Icons.email),
+                                  ),
+                                  new MyTextField(
+                                    height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                    controller: registerPasswordController,
+                                    hintText: '密码:',
+                                    icon: Icon(Icons.lock),
+                                    obscureText: true,
+                                  ),
+                                  new MyTextField(
+                                    height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                                    controller: repeatPasswordController,
+                                    hintText: '确认密码:',
+                                    icon: Icon(Icons.lock),
+                                    obscureText: true,
+                                  ),
+                                  new RaisedButton(
+                                      child: Text("注 册"),
+                                      color: Colors.blue,
+                                      textColor: Colors.white,
+                                      onPressed: () {
+                                        this.showOrDismissProgressHUD();
+                                        LoginService.setUserInfo("", "", "", "", "", (bool success) {
+                                          if (success) {
+                                            Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                                          }
+                                        });
+                                      }),
+                                ],
                               ),
-                              new MyTextField(
-                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-                                controller: phoneController,
-                                hintText: '电话:',
-                                icon: Icon(Icons.phone),
-                                inputType: TextInputType.number,
-                              ),
-                              new MyTextField(
-                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-                                controller: iDController,
-                                hintText: '身份证件:',
-                                icon: Icon(Icons.account_box),
-                              ),
-                              new MyTextField(
-                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-                                controller: accountController,
-                                hintText: '账号:',
-                                icon: Icon(Icons.email),
-                              ),
-                              new MyTextField(
-                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-                                controller: registerPasswordController,
-                                hintText: '密码:',
-                                icon: Icon(Icons.lock),
-                                obscureText: true,
-                              ),
-                              new MyTextField(
-                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-                                controller: repeatPasswordController,
-                                hintText: '确认密码:',
-                                icon: Icon(Icons.lock),
-                                obscureText: true,
-                              ),
-                              new RaisedButton(
-                                  child: Text("注 册"),
-                                  color: Colors.blue,
-                                  textColor: Colors.white,
-                                  onPressed: () {
-                                    this.showOrDismissProgressHUD();
-                                    LoginService.setUserInfo("", "", "", "", "", (bool success) {
-                                      if (success) {
-                                        Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
-                                      }
-                                    });
-                                  }),
-                            ],
+                            ),
                           ),
-                        ),
-                      )),
-                ),
-                _progressHUD
-              ],
-            );
-          },
-          requestedValues: [BaseUserInfoProvider]),
+                        )),
+                  ),
+                  _progressHUD
+                ],
+              );
+            },
+            requestedValues: [BaseUserInfoProvider]),
+      ),
     );
   }
 

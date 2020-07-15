@@ -11,7 +11,9 @@ class User {
   // phone
   String phone;
 
-  User({this.avatarUrl, this.name, this.id, this.phone});
+  String password;
+
+  User({this.avatarUrl, this.name, this.id, this.phone, this.password});
 
   User.fromJson(Map<String, dynamic> json) {
     avatarUrl = json['avatarUrl'];

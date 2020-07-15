@@ -27,59 +27,55 @@ class _MarketAskState extends State<MarketAsk> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.transparent,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '出售的' + (Resource.WOOD == this.widget.sellType ? "木材" : "石材") + '数量:',
-            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-          ),
-          MyTextField(
-            height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-            controller: amountController,
-            inputType: TextInputType.number,
-          ),
-          Text(
-            '需要的T币数量:',
-            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-          ),
-          MyTextField(
-            height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-            controller: coinController,
-            inputType: TextInputType.number,
-          ),
-          ButtonsList(
-            buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
-            buttonHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
-            buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
-            textSize: SystemFontSize.buttonTextFontSize,
-            buttons: [
-              ImageTextButton(
-                buttonName: '取消',
-                callback: () {
-                  this.widget.viewCallback();
-                },
-              ),
-              ImageTextButton(
-                buttonName: '确定',
-                callback: () {
-                  MarketService.sellResource(this.widget.sellType, double.parse(this.amountController.text), double.parse(this.coinController.text), (data) {
-                    if (ConfigSetting.SUCCESS == data) {
-                      CommonUtils.showSuccessMessage(msg: "订单发布成功");
-                      amountController.clear();
-                      coinController.clear();
-                      this.widget.viewCallback();
-                    }
-                  });
-                },
-              ),
-            ],
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '出售的' + (Resource.WOOD == this.widget.sellType ? "木材" : "石材") + '数量:',
+          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+        ),
+        MyTextField(
+          height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+          controller: amountController,
+          inputType: TextInputType.number,
+        ),
+        Text(
+          '需要的T币数量:',
+          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+        ),
+        MyTextField(
+          height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+          controller: coinController,
+          inputType: TextInputType.number,
+        ),
+        ButtonsList(
+          buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+          buttonHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+          buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
+          textSize: SystemFontSize.buttonTextFontSize,
+          buttons: [
+            ImageTextButton(
+              buttonName: '取消',
+              callback: () {
+                this.widget.viewCallback();
+              },
+            ),
+            ImageTextButton(
+              buttonName: '确定',
+              callback: () {
+                MarketService.sellResource(this.widget.sellType, double.parse(this.amountController.text), double.parse(this.coinController.text), (data) {
+                  if (ConfigSetting.SUCCESS == data) {
+                    CommonUtils.showSuccessMessage(msg: "订单发布成功");
+                    amountController.clear();
+                    coinController.clear();
+                    this.widget.viewCallback();
+                  }
+                });
+              },
+            ),
+          ],
+        ),
+      ],
     );
   }
 

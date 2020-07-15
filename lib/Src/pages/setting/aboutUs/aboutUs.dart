@@ -4,6 +4,7 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/setting/aboutUs/model/aboutUsModel.dart';
 import 'package:upgradegame/Src/pages/setting/aboutUs/service/aboutUsService.dart';
+import 'package:upgradegame/Src/pages/setting/event/settingEventBus.dart';
 
 class AboutUsDetail extends StatefulWidget {
   @override
@@ -21,17 +22,19 @@ class _AboutUsDetailState extends State<AboutUsDetail> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      this.widget.HUD();
-      AboutUsService.getAboutUs((data) {
-        if (null != data) {
-          setState(() {
-            content = AboutUsModel.fromJson(data).content;
-          });
-        }
-      });
-      this.widget.HUD();
+    SettingHttpRequestEvent().on("aboutus", this.getAboutUs);
+  }
+
+  void getAboutUs(){
+    this.widget.HUD();
+    AboutUsService.getAboutUs((data) {
+      if (null != data) {
+        setState(() {
+          content = AboutUsModel.fromJson(data).content;
+        });
+      }
     });
+    this.widget.HUD();
   }
 
   @override
@@ -47,14 +50,12 @@ class _AboutUsDetailState extends State<AboutUsDetail> {
         children: <Widget>[
           Container(
             height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
-            child: ListView(
-              children: <Widget>[
-                Text(
-                  this.content,
-                  textAlign: TextAlign.center,
-                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                ),
-              ],
+            child: SingleChildScrollView(
+              child: Text(
+                this.content,
+                textAlign: TextAlign.center,
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+              ),
             ),
           ),
           new ImageButton(
