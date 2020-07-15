@@ -74,31 +74,27 @@ class _RaidersDetailState extends State<RaidersDetail> {
             ],
           ),
           Container(
-            height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight-SystemButtonSize.largeButtonHeight),
+            height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight - SystemButtonSize.largeButtonHeight),
             child: Stack(
               children: [
                 Offstage(
                   offstage: tabName != 'basic',
-                  child: ListView(
-                    children: [
-                      Text(
-                        basic,
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                  child: SingleChildScrollView(
+                    child: Text(
+                      basic,
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
                 Offstage(
                   offstage: tabName != 'advanced',
-                  child: ListView(
-                    children: [
-                      Text(
-                        advanced,
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                  child: SingleChildScrollView(
+                    child: Text(
+                      advanced,
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ],

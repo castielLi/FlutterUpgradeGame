@@ -89,55 +89,49 @@ class _UserSearchResult extends State<UserSearchResult> {
         ),
         Offstage(
           offstage: this.widget.sendCoinPageHide,
-          child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            backgroundColor: Colors.transparent,
-            body: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  TextField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(labelText: "赠送数量", prefixIcon: Icon(Icons.attach_money)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              TextField(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: "赠送数量", prefixIcon: Icon(Icons.attach_money)),
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: "密码", prefixIcon: Icon(Icons.lock)),
+                obscureText: true,
+              ),
+              ButtonsList(
+                buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+                buttonHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+                buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
+                textSize: SystemFontSize.buttonTextFontSize,
+                buttons: [
+                  ImageTextButton(
+                    buttonName: '返 回',
+                    callback: () {
+                      setState(() {
+                        this.widget.sendCoinPageHide = true;
+                        this.widget.userSearchResultHide = false;
+                      });
+                    },
                   ),
-                  TextField(
-                    decoration: InputDecoration(labelText: "密码", prefixIcon: Icon(Icons.lock)),
-                    obscureText: true,
-                  ),
-                  ButtonsList(
-                    buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
-                    buttonHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
-                    buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
-                    textSize: SystemFontSize.buttonTextFontSize,
-                    buttons: [
-                      ImageTextButton(
-                        buttonName: '返 回',
-                        callback: () {
+                  ImageTextButton(
+                    buttonName: '确 定',
+                    callback: () {
+                      MarketService.sendCoin(this.widget.user, (data) {
+                        if (ConfigSetting.SUCCESS == data) {
+                          CommonUtils.showSuccessMessage(msg: "发送成功");
                           setState(() {
                             this.widget.sendCoinPageHide = true;
                             this.widget.userSearchResultHide = false;
                           });
-                        },
-                      ),
-                      ImageTextButton(
-                        buttonName: '确 定',
-                        callback: () {
-                          MarketService.sendCoin(this.widget.user, (data) {
-                            if (ConfigSetting.SUCCESS == data) {
-                              CommonUtils.showSuccessMessage(msg: "发送成功");
-                              setState(() {
-                                this.widget.sendCoinPageHide = true;
-                                this.widget.userSearchResultHide = false;
-                              });
-                            }
-                          });
-                        },
-                      ),
-                    ],
+                        }
+                      });
+                    },
                   ),
                 ],
               ),
-            ),
+            ],
           ),
         ),
       ],

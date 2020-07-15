@@ -133,7 +133,6 @@ class _MainPageState extends State<MainPage> {
       child: ProvideMulti(
         builder: (context, child, model) {
           BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
-
           if (baseUserInfo.tobecollectedcoin > 0) {
             this.mainBuildingCoin = false;
             this.mainBuilding = true;
@@ -195,7 +194,7 @@ class _MainPageState extends State<MainPage> {
                     ),
                     new Expanded(
                       child: new Container(
-                        height: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + 25),
+                        height: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize),
                         child: new Stack(
                           children: <Widget>[
                             new Center(
@@ -206,11 +205,11 @@ class _MainPageState extends State<MainPage> {
                             ),
                             new Center(
                               child: new UserImageButton(
-                                size: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + SystemIconSize.mainPageAvatarBiggerThanResource),
+                                size: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize),
                                 buttonName: "",
                                 textSize: SystemFontSize.operationTextFontSize,
-                                imageUrl: "resource/images/avatar.png",
-                                netWorkImageUrl: baseUserInfo.Avatar,
+                                imageUrl: "",
+                                netWorkImageUrl: baseUserInfo.avatar,
                                 netWorkImage: true,
                                 callback: () {
                                   Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,
@@ -229,7 +228,7 @@ class _MainPageState extends State<MainPage> {
 
               ///功能栏
               new Container(
-                margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + SystemIconSize.mainPageSignalBarHeight + SystemIconSize.mainPageAvatarBiggerThanResource)),
+                margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + SystemIconSize.mainPageSignalBarHeight)),
                 height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize * 2),
                 child: new Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
