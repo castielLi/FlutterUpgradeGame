@@ -46,14 +46,12 @@ class _ProtocolDetailState extends State<ProtocolDetail> {
         children: <Widget>[
           Container(
             height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
-            child: ListView(
-              children: <Widget>[
-                Text(
-                  this.content,
-                  textAlign: TextAlign.center,
-                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                ),
-              ],
+            child: SingleChildScrollView(
+              child: Text(
+                this.content,
+                textAlign: TextAlign.center,
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+              ),
             ),
           ),
           new ImageButton(

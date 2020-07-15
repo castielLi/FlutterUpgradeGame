@@ -153,52 +153,57 @@ class _DetailDialogState extends State<DetailDialog> {
       }
     }
 
-    return new Container(
-        width: ScreenUtil().setWidth(1080),
-        height: ScreenUtil().setHeight(1920),
-        decoration: new BoxDecoration(
-          image: new DecorationImage(
-            image: new AssetImage('resource/images/dialogBackgroundImage.png'),
-            fit: BoxFit.cover
-          ),
-    ),
-            child: new Container(
-              color: Colors.transparent,
-                margin: EdgeInsets.fromLTRB((ScreenUtil().setWidth(1080) - this.widget.width)/2,
-                    (ScreenUtil().setHeight(1920) - this.widget.height)/2,
-                    (ScreenUtil().setWidth(1080) - this.widget.width)/2,
-                    (ScreenUtil().setHeight(1920) - this.widget.height)/2),
-                child:Stack(
-                  children: <Widget>[
-
-                    Center(
-                      child:
-                      new Image(image: new AssetImage('resource/images/detailDialogbackgroundImage.png'),
-                        fit: BoxFit.fill,
-                        height: widget.height ,
-                        width: widget.width,
-                      ),
-                    ),
-                    Container(
-                        height: ScreenUtil().setHeight(380),
-                        child:Center(
-                          child: Text(this.currentDisplayTitle == ""?this.widget.title:this.currentDisplayTitle,textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: ScreenUtil().setSp(SystemFontSize.detailDialogTitleTextFontSize)),),
-                        )
-                    ),
-                    Container(
-                      height: ScreenUtil().setHeight(200),
-                      width: this.widget.height,
-                      padding: EdgeInsets.only(left: ScreenUtil().setWidth(820)),
-                      child: ImageButton(height:ScreenUtil().setHeight(140),width: ScreenUtil().setWidth(140),imageUrl: "resource/images/cancelDialog.png",callback: () {
-                        Application.router.pop(context);
-                      }),
-                    ),
-                    currentWidget,
-                    _progressHUD,
-                  ],
-                )
+    return new Scaffold(
+      backgroundColor: Colors.transparent,
+      body: SingleChildScrollView(
+        child: Container(
+          width: ScreenUtil().setWidth(1080),
+          height: ScreenUtil().setHeight(1920),
+          decoration: new BoxDecoration(
+            image: new DecorationImage(
+                image: new AssetImage('resource/images/dialogBackgroundImage.png'),
+                fit: BoxFit.cover
             ),
+          ),
+          child: new Container(
+              color: Colors.transparent,
+              margin: EdgeInsets.fromLTRB((ScreenUtil().setWidth(1080) - this.widget.width)/2,
+                  (ScreenUtil().setHeight(1920) - this.widget.height)/2,
+                  (ScreenUtil().setWidth(1080) - this.widget.width)/2,
+                  (ScreenUtil().setHeight(1920) - this.widget.height)/2),
+              child:Stack(
+                children: <Widget>[
+
+                  Center(
+                    child:
+                    new Image(image: new AssetImage('resource/images/detailDialogbackgroundImage.png'),
+                      fit: BoxFit.fill,
+                      height: widget.height ,
+                      width: widget.width,
+                    ),
+                  ),
+                  Container(
+                      height: ScreenUtil().setHeight(380),
+                      child:Center(
+                        child: Text(this.currentDisplayTitle == ""?this.widget.title:this.currentDisplayTitle,textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white,decoration: TextDecoration.none,fontSize: ScreenUtil().setSp(SystemFontSize.detailDialogTitleTextFontSize)),),
+                      )
+                  ),
+                  Container(
+                    height: ScreenUtil().setHeight(200),
+                    width: this.widget.height,
+                    padding: EdgeInsets.only(left: ScreenUtil().setWidth(820)),
+                    child: ImageButton(height:ScreenUtil().setHeight(140),width: ScreenUtil().setWidth(140),imageUrl: "resource/images/cancelDialog.png",callback: () {
+                      Application.router.pop(context);
+                    }),
+                  ),
+                  currentWidget,
+                  _progressHUD,
+                ],
+              )
+          ),
+        ),
+      ),
     );
   }
 }

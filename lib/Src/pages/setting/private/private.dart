@@ -46,14 +46,12 @@ class _PrivateDetailState extends State<PrivateDetail> {
         children: <Widget>[
           Container(
             height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
-            child: ListView(
-              children: <Widget>[
-                Text(
-                  this.privacy,
-                  textAlign: TextAlign.center,
-                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                ),
-              ],
+            child: SingleChildScrollView(
+              child: Text(
+                this.privacy,
+                textAlign: TextAlign.center,
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+              ),
             ),
           ),
           new ImageButton(

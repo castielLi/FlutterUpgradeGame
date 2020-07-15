@@ -40,14 +40,12 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
           ScreenUtil().setHeight(400), // 上
           ScreenUtil().setWidth(120), // 右
           ScreenUtil().setHeight(220)),
-      child: ListView(
-        children: <Widget>[
-          Text(
-            null == announcement ? '' : announcement,
-            textAlign: TextAlign.center,
-            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Text(
+          null == announcement ? '' : announcement,
+          textAlign: TextAlign.center,
+          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+        ),
       ),
     );
   }

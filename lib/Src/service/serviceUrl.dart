@@ -114,7 +114,7 @@ class ServiceUrl {
     return "${host}api/v1/account/withdraw";
   }
 
-  ///  发布订单
+  ///  赠送T币
   static sendCoin(){
     return "${host}api/v1/account/sendtcoin";
   }
@@ -122,6 +122,10 @@ class ServiceUrl {
   ///获取用户现金账户
   static getUserCashInfo(){
     return "${host}api/v1/account/cashinfo";
+  }
+  ///更改密码
+  static changePassword(){
+    return "${host}api/v1/account/password";
   }
 }
 

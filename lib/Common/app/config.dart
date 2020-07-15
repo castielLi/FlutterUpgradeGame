@@ -51,7 +51,6 @@ class SystemIconSize {
   static const mediumIconSize = 250.0;
   static const largeIconSize = 333.0;
 
-  static const mainPageAvatarBiggerThanResource = 25.0;
   static const mainPageSignalBarHeight = 65.0;
   static const mainPageResourceBarIconSize = 125.0;
   static const mainPageStatusBarIconSize = 150.0;
