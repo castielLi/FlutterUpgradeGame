@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Src/pages/userInfo/event/userInfoEventBus.dart';
 
 class TCoinDetail extends StatefulWidget {
   @override
@@ -12,7 +13,16 @@ class TCoinDetail extends StatefulWidget {
 
 class _TCoinDetailState extends State<TCoinDetail> {
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    UserInfoHttpRequestEvent().on("tcoinDetail",this.getTCoinDetail);
+  }
 
+  void getTCoinDetail(){
+    print("开始请求tcoindetail");
+  }
 
   @override
   void didChangeDependencies() {

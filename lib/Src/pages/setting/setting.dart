@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
+import 'package:upgradegame/Src/pages/setting/event/settingEventBus.dart';
 import 'package:upgradegame/Src/pages/setting/raiders/raiders.dart';
 import 'package:upgradegame/Src/pages/setting/protocol/protocol.dart';
 import 'package:upgradegame/Src/pages/setting/private/private.dart';
@@ -23,6 +24,19 @@ class _SettingDetailState extends State<SettingDetail> {
   bool settingHide = false;
   String buttonName = '';
 
+  @override
+  void initState() {
+    super.initState();
+    SettingHttpRequestEvent();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    SettingHttpRequestEvent().off();
+  }
+
   switchPageBetweenFatherAndSon({String sonPageName}) {
     setState(() {
       // 子界面名称
@@ -31,6 +45,8 @@ class _SettingDetailState extends State<SettingDetail> {
       settingHide = (null != sonPageName && '' != sonPageName);
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +74,7 @@ class _SettingDetailState extends State<SettingDetail> {
                     callback: () {
                       switchPageBetweenFatherAndSon(sonPageName: "攻略");
                       this.widget.changeTitleCallback("攻略");
+                      SettingHttpRequestEvent().emit("raiders");
                     },
                   ),
                   ImageTextButton(
@@ -65,6 +82,7 @@ class _SettingDetailState extends State<SettingDetail> {
                     callback: () {
                       switchPageBetweenFatherAndSon(sonPageName: "用户协议");
                       this.widget.changeTitleCallback("用户协议");
+                      SettingHttpRequestEvent().emit("protocol");
                     },
                   ),
                   ImageTextButton(
@@ -72,6 +90,7 @@ class _SettingDetailState extends State<SettingDetail> {
                     callback: () {
                       switchPageBetweenFatherAndSon(sonPageName: "隐私条款");
                       this.widget.changeTitleCallback("隐私条款");
+                      SettingHttpRequestEvent().emit("private");
                     },
                   ),
                   ImageTextButton(
@@ -79,6 +98,7 @@ class _SettingDetailState extends State<SettingDetail> {
                     callback: () {
                       switchPageBetweenFatherAndSon(sonPageName: "关于我们");
                       this.widget.changeTitleCallback("关于我们");
+                      SettingHttpRequestEvent().emit("aboutus");
                     },
                   ),
                 ],

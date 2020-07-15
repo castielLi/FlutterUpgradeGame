@@ -4,6 +4,7 @@ import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/pages/setting/event/settingEventBus.dart';
 import 'package:upgradegame/Src/pages/setting/raiders/service/raidersService.dart';
 
 import 'model/raidersModel.dart';
@@ -26,17 +27,19 @@ class _RaidersDetailState extends State<RaidersDetail> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    SettingHttpRequestEvent().on("raiders", this.getRaiders);
+  }
+
+  void getRaiders(){
+    this.widget.HUD();
+    RaidersService.getRaidersList((data) {
+      if (null != data) {
+        setState(() {
+          basic = RaidersModel.fromJson(data).basic;
+          advanced = RaidersModel.fromJson(data).advanced;
+        });
+      }
       this.widget.HUD();
-      RaidersService.getRaidersList((data) {
-        if (null != data) {
-          setState(() {
-            basic = RaidersModel.fromJson(data).basic;
-            advanced = RaidersModel.fromJson(data).advanced;
-          });
-        }
-        this.widget.HUD();
-      });
     });
   }
 

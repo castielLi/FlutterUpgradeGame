@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/pages/setting/event/settingEventBus.dart';
 import 'package:upgradegame/Src/pages/setting/private/service/privacyService.dart';
 
 import 'model/privacyModel.dart';
@@ -22,15 +23,19 @@ class _PrivateDetailState extends State<PrivateDetail> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      this.widget.HUD();
-      PrivacyService.getPrivacy((data) {
-        if (null != data) {
+    SettingHttpRequestEvent().on("private", this.getPrivacy);
+  }
+
+  void getPrivacy(){
+    this.widget.HUD();
+    PrivacyService.getPrivacy((data) {
+      if (null != data) {
+        setState(() {
           privacy = PrivacyModel.fromJson(data).content;
-        }
-      });
-      this.widget.HUD();
+        });
+      }
     });
+    this.widget.HUD();
   }
 
   @override

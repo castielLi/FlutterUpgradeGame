@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Src/pages/userInfo/event/userInfoEventBus.dart';
 
 class ServerCenter extends StatefulWidget {
   @override
@@ -14,6 +15,18 @@ class ServerCenter extends StatefulWidget {
 }
 
 class _ServerCenterState extends State<ServerCenter> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    UserInfoHttpRequestEvent().on("serverCenter",this.getServerCenter);
+  }
+
+  void getServerCenter(){
+    print("开始请求serverCenter");
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
