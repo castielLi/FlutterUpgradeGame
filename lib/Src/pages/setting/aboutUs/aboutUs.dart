@@ -40,6 +40,7 @@ class _AboutUsDetailState extends State<AboutUsDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
+      width: ScreenUtil().setWidth(SystemButtonSize.settingsTextHeight),
       margin: EdgeInsets.fromLTRB(
           ScreenUtil().setWidth(0), // 左
           ScreenUtil().setHeight(120), // 上

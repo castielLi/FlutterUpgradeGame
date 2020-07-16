@@ -37,7 +37,7 @@ class _ServerCenterState extends State<ServerCenter> {
     return new Column(
       children: [
         new Container(
-          width: ScreenUtil().setWidth(850),
+          width: ScreenUtil().setWidth(SystemButtonSize.settingsTextHeight),
           margin: EdgeInsets.only(top: 50),
           height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
           child: Text(

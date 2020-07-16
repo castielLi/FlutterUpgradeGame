@@ -66,9 +66,11 @@ class _MarketAskState extends State<MarketAsk> {
                 MarketService.sellResource(this.widget.sellType, double.parse(this.amountController.text), double.parse(this.coinController.text), (data) {
                   if (ConfigSetting.SUCCESS == data) {
                     CommonUtils.showSuccessMessage(msg: "订单发布成功");
-                    amountController.clear();
-                    coinController.clear();
-                    this.widget.viewCallback();
+                    Future.delayed(Duration(seconds: 1), () {
+                      this.widget.viewCallback();
+                      amountController.clear();
+                      coinController.clear();
+                    });
                   }
                 });
               },

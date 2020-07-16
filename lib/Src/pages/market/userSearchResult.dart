@@ -14,6 +14,7 @@ class UserSearchResult extends StatefulWidget {
   bool sendCoinPageHide = true;
   User user;
 
+
   UserSearchResult({Key key, this.userSearchResultHide, this.searchResult}) : super(key: key);
 
   @override
@@ -21,6 +22,9 @@ class UserSearchResult extends StatefulWidget {
 }
 
 class _UserSearchResult extends State<UserSearchResult> {
+  final amountController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -95,10 +99,12 @@ class _UserSearchResult extends State<UserSearchResult> {
               TextField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(labelText: "赠送数量", prefixIcon: Icon(Icons.attach_money)),
+                controller: amountController,
               ),
               TextField(
                 decoration: InputDecoration(labelText: "密码", prefixIcon: Icon(Icons.lock)),
                 obscureText: true,
+                controller: passwordController,
               ),
               ButtonsList(
                 buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
@@ -121,10 +127,15 @@ class _UserSearchResult extends State<UserSearchResult> {
                       MarketService.sendCoin(this.widget.user, (data) {
                         if (ConfigSetting.SUCCESS == data) {
                           CommonUtils.showSuccessMessage(msg: "发送成功");
-                          setState(() {
-                            this.widget.sendCoinPageHide = true;
-                            this.widget.userSearchResultHide = false;
+                          Future.delayed(Duration(seconds: 1), () {
+                            setState(() {
+                              this.widget.sendCoinPageHide = true;
+                              this.widget.userSearchResultHide = false;
+                            });
+                            amountController.clear();
+                            passwordController.clear();
                           });
+
                         }
                       });
                     },

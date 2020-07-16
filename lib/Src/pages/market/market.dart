@@ -90,41 +90,37 @@ class _MarketDetailState extends State<MarketDetail> {
                     children: <Widget>[
                       Offstage(
                         offstage: tabName != Resource.COIN,
-                        child: Scaffold(
-                          resizeToAvoidBottomInset: false,
-                          backgroundColor: Colors.transparent,
-                          body: Column(
-                            children: [
-                              MyTextField(
-                                height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-                                controller: controller,
-                                inputType: TextInputType.number,
-                                hintText: '输入用户手机号搜索',
-                                icon: Icon(Icons.search),
-                                onSubmittedCallback: () {
-                                  String phone = controller.text;
-                                  MarketService.searchUser(phone, (data) {
-                                    if (null != data) {
-                                      setState(() {
-                                        searchResult.clear();
-                                        userSearchResultHide = false;
-                                        User user = User.fromSearchJson(data);
-                                        user.phone = phone;
-                                        searchResult.add(user);
-                                      });
-                                    }
-                                  });
-                                },
+                        child: Column(
+                          children: [
+                            MyTextField(
+                              height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                              controller: controller,
+                              inputType: TextInputType.number,
+                              hintText: '输入用户手机号搜索',
+                              icon: Icon(Icons.search),
+                              onSubmittedCallback: () {
+                                String phone = controller.text;
+                                MarketService.searchUser(phone, (data) {
+                                  if (null != data) {
+                                    setState(() {
+                                      searchResult.clear();
+                                      userSearchResultHide = false;
+                                      User user = User.fromSearchJson(data);
+                                      user.phone = phone;
+                                      searchResult.add(user);
+                                    });
+                                  }
+                                });
+                              },
+                            ),
+                            Container(
+                              height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight - SystemButtonSize.inputDecorationHeight),
+                              child: UserSearchResult(
+                                userSearchResultHide: userSearchResultHide,
+                                searchResult: searchResult,
                               ),
-                              Container(
-                                height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight - SystemButtonSize.inputDecorationHeight),
-                                child: UserSearchResult(
-                                  userSearchResultHide: userSearchResultHide,
-                                  searchResult: searchResult,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                       Offstage(

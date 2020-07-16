@@ -45,10 +45,10 @@ class _MarketBidItem extends State<MarketBidItem> {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  Image(
-                    image: new AssetImage(this.widget.avatarUrl),
-                    height: ScreenUtil().setHeight(90),
-                  ),
+//                  Image(
+//                    image: new AssetImage(this.widget.avatarUrl),
+//                    height: ScreenUtil().setHeight(90),
+//                  ),
                   Text(
                     this.widget.name,
                     style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),

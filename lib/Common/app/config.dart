@@ -108,6 +108,6 @@ class SystemFontSize {
 /// 自定义字体格式
 class CustomFontSize {
   static TextStyle defaultTextStyle(double fontSize) {
-    return TextStyle(fontSize: ScreenUtil().setSp(fontSize), color: Colors.white, decoration: TextDecoration.none);
+    return TextStyle(fontSize: ScreenUtil().setSp(fontSize), color: Colors.white);
   }
 }

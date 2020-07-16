@@ -41,6 +41,7 @@ class _PrivateDetailState extends State<PrivateDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
+      width: ScreenUtil().setWidth(SystemButtonSize.settingsTextHeight),
       margin: EdgeInsets.fromLTRB(
           ScreenUtil().setWidth(0), // 左
           ScreenUtil().setHeight(120), // 上
