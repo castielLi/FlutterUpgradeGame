@@ -59,12 +59,12 @@ class MarketService {
     CancelTradeRequestModel requestModel = CancelTradeRequestModel(productid: productId,type: type.index);
     String params = convert.jsonEncode(requestModel);
 
-    var response = await httpManager.request(ServiceUrl.getMyMarketTrade(), params, null, Options(method: "post"));
+    var response = await httpManager.request(ServiceUrl.cancelMyMarketTrade(), params, null, Options(method: "post"));
     if (response.code == 200) {
-      callback(response.data);
+      callback(true);
     } else {
       CommonUtils.showErrorMessage(msg: "搜索用户出错");
-      callback(null);
+      callback(false);
     }
   }
 
@@ -74,10 +74,10 @@ class MarketService {
     String params = convert.jsonEncode(sellResourceModel);
     var response = await httpManager.request(ServiceUrl.sellResource(), params, null, Options(method: "post"));
     if (response.code == 200) {
-      callback(response.code);
+      callback(true);
     } else {
       CommonUtils.showErrorMessage(msg: "发布订单出错");
-      callback(null);
+      callback(false);
     }
   }
 
@@ -85,10 +85,10 @@ class MarketService {
     String params = convert.jsonEncode(user);
     var response = await httpManager.request(ServiceUrl.sendCoin(), params, null, Options(method: "post"));
     if (response.code == 200) {
-      callback(response.code);
+      callback(true);
     } else {
       CommonUtils.showErrorMessage(msg: "赠送T币出错");
-      callback(null);
+      callback(false);
     }
   }
 }
