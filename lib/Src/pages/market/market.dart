@@ -43,6 +43,7 @@ class _MarketDetailState extends State<MarketDetail> {
     MarketHttpRequestEvent().on("getMyTradeList", this.getMyTradeList);
     MarketHttpRequestEvent().on("getWoodTradeList", this.getWoodTradeList);
     MarketHttpRequestEvent().on("getStoneTradeList", this.getStoneTradeList);
+    ///默认会显示木材的市场，所以第一次进界面的时候需要请求木材和我的发布订单两个http
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
       Future.wait([this.getMyTradeList(),this.getStoneTradeList()]).then((List array){
