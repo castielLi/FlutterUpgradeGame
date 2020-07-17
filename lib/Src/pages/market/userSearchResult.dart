@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
@@ -10,12 +9,8 @@ import 'package:upgradegame/Src/pages/market/service/marketService.dart';
 
 class UserSearchResult extends StatefulWidget {
   List<User> searchResult = [];
-  bool userSearchResultHide = true;
-  bool sendCoinPageHide = true;
-  User user;
 
-
-  UserSearchResult({Key key, this.userSearchResultHide, this.searchResult}) : super(key: key);
+  UserSearchResult({Key key, this.searchResult}) : super(key: key);
 
   @override
   _UserSearchResult createState() => _UserSearchResult();
@@ -24,31 +19,35 @@ class UserSearchResult extends StatefulWidget {
 class _UserSearchResult extends State<UserSearchResult> {
   final amountController = TextEditingController();
   final passwordController = TextEditingController();
+  bool userSearchResultHide = false;
+  bool sendCoinPageHide = true;
+  User user;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Offstage(
-          offstage: this.widget.userSearchResultHide,
+          offstage: this.userSearchResultHide,
           child: this.widget.searchResult.length == 0
               ? Text(
-                  '没有搜索到用户',
+//                  '没有搜索到用户',
+                  '',
                   textAlign: TextAlign.center,
                   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                 )
               : ListView.builder(
                   itemCount: this.widget.searchResult.length,
-                  itemExtent: ScreenUtil().setHeight(150),
+                  itemExtent: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
                   itemBuilder: (BuildContext context, int index) {
                     User user = this.widget.searchResult[index];
                     return GestureDetector(
                       onTap: () {
                         setState(() {
-                          this.widget.sendCoinPageHide = false;
-                          this.widget.userSearchResultHide = true;
+                          this.sendCoinPageHide = false;
+                          this.userSearchResultHide = true;
                         });
-                        this.widget.user = user;
+                        this.user = user;
                         print('Send coin to ' + user.name);
                       },
                       child: Container(
@@ -92,7 +91,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                   }),
         ),
         Offstage(
-          offstage: this.widget.sendCoinPageHide,
+          offstage: this.sendCoinPageHide,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -115,27 +114,20 @@ class _UserSearchResult extends State<UserSearchResult> {
                   ImageTextButton(
                     buttonName: '返 回',
                     callback: () {
-                      setState(() {
-                        this.widget.sendCoinPageHide = true;
-                        this.widget.userSearchResultHide = false;
-                      });
+                      showUserSearchResultPage();
                     },
                   ),
                   ImageTextButton(
                     buttonName: '确 定',
                     callback: () {
-                      MarketService.sendCoin(this.widget.user, (data) {
-                        if (ConfigSetting.SUCCESS == data) {
+                      MarketService.sendCoin(this.user, (data) {
+                        if (data) {
                           CommonUtils.showSuccessMessage(msg: "发送成功");
                           Future.delayed(Duration(seconds: 1), () {
-                            setState(() {
-                              this.widget.sendCoinPageHide = true;
-                              this.widget.userSearchResultHide = false;
-                            });
+                            showUserSearchResultPage();
                             amountController.clear();
                             passwordController.clear();
                           });
-
                         }
                       });
                     },
@@ -147,5 +139,12 @@ class _UserSearchResult extends State<UserSearchResult> {
         ),
       ],
     );
+  }
+
+  void showUserSearchResultPage() {
+    setState(() {
+      this.sendCoinPageHide = true;
+      this.userSearchResultHide = false;
+    });
   }
 }

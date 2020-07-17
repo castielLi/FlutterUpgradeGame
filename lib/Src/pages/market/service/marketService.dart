@@ -63,7 +63,7 @@ class MarketService {
     if (response.code == 200) {
       callback(true);
     } else {
-      CommonUtils.showErrorMessage(msg: "搜索用户出错");
+      CommonUtils.showErrorMessage(msg: "取消订单出错");
       callback(false);
     }
   }

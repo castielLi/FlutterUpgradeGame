@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/textField/myTextField.dart';
@@ -58,13 +57,15 @@ class _MarketAskState extends State<MarketAsk> {
               buttonName: '取消',
               callback: () {
                 this.widget.viewCallback();
+                amountController.clear();
+                coinController.clear();
               },
             ),
             ImageTextButton(
               buttonName: '确定',
               callback: () {
                 MarketService.sellResource(this.widget.sellType, double.parse(this.amountController.text), double.parse(this.coinController.text), (data) {
-                  if (ConfigSetting.SUCCESS == data) {
+                  if (data) {
                     CommonUtils.showSuccessMessage(msg: "订单发布成功");
                     Future.delayed(Duration(seconds: 1), () {
                       this.widget.viewCallback();
