@@ -68,6 +68,7 @@ class LoginService{
       LoginReponseModel responseModel = LoginReponseModel.fromJson(response.data);
       LocalStorage.save(Config.TOKEN_KEY, responseModel.token);
       FileStorage.saveContent(responseModel.token, "token");
+      FileStorage.saveContent("true", "verified");
       callback(responseModel);
     }else{
       CommonUtils.showErrorMessage(msg: '登录出错');

@@ -5,10 +5,14 @@ import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/textField/myTextField.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/const/resource.dart';
+import 'package:upgradegame/Src/common/model/enum/marketTradeTypeEnum.dart';
 import 'package:upgradegame/Src/common/model/user.dart';
+import 'package:upgradegame/Src/pages/market/event/marketEventBus.dart';
 import 'package:upgradegame/Src/pages/market/marketAsk.dart';
 import 'package:upgradegame/Src/pages/market/marketBid.dart';
+import 'package:upgradegame/Src/pages/market/model/tradeListModel.dart';
 import 'package:upgradegame/Src/pages/market/service/marketService.dart';
 import 'package:upgradegame/Src/pages/market/userSearchResult.dart';
 
@@ -31,6 +35,71 @@ class _MarketDetailState extends State<MarketDetail> {
 
   int falseId = 0;
   String sellType;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    MarketHttpRequestEvent().on("getMyTradeList", this.getMyTradeList);
+    MarketHttpRequestEvent().on("getWoodTradeList", this.getWoodTradeList);
+    MarketHttpRequestEvent().on("getStoneTradeList", this.getStoneTradeList);
+    ///默认会显示木材的市场，所以第一次进界面的时候需要请求木材和我的发布订单两个http
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      this.widget.HUD();
+      Future.wait([this.getMyTradeList(),this.getStoneTradeList()]).then((List array){
+        this.widget.HUD();
+        if(this.judgeAllRequestSuccess(array)){
+          CommonUtils.showErrorMessage(msg: "请求市场数据出错，请关闭界面重新获取");
+        }
+      });
+    });
+  }
+
+  ///判断当前的请求都请求成功
+  bool judgeAllRequestSuccess(List array){
+    for(int i = 0; i<array.length;i++){
+      if(!array[i]){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /// 获取我所发布的市场订单
+  Future<bool> getMyTradeList() async{
+    MarketService.getMyMarketTrade((model){
+      if(model!=null){
+        print(model);
+        return true;
+      }else{
+        return false;
+      }
+    });
+  }
+  
+  void getWoodTradeList(){
+    this.widget.HUD();
+    MarketService.getMarketTradeByType(1,MarketTradeTypeEnum.wood,(TradeListModel model){
+      if(model!=null){
+        print(model);
+      }else{
+
+      }
+      this.widget.HUD();
+    });
+  }
+
+  ///获取石材的市场订单情况
+  Future<bool> getStoneTradeList() async{
+    MarketService.getMarketTradeByType(1,MarketTradeTypeEnum.stone,(TradeListModel model){
+      if(model!=null){
+        print(model);
+        return true;
+      }else{
+        return false;
+      }
+    });
+  }
 
   void changeTabs(String tab) {
     setState(() {
@@ -72,6 +141,7 @@ class _MarketDetailState extends State<MarketDetail> {
                       iconUrl: 'resource/images/wood.png',
                       callback: () {
                         changeTabs(Resource.WOOD);
+                        MarketHttpRequestEvent().emit("getWoodTradeList");
                       },
                     ),
                     ImageTextButton(
@@ -79,6 +149,7 @@ class _MarketDetailState extends State<MarketDetail> {
                       iconUrl: 'resource/images/stone.png',
                       callback: () {
                         changeTabs(Resource.STONE);
+                        MarketHttpRequestEvent().emit("getStoneTradeList");
                       },
                     ),
                   ],
