@@ -127,5 +127,25 @@ class ServiceUrl {
   static changePassword(){
     return "${host}api/v1/account/password";
   }
+
+  ///获取我的市场发布订单
+  static getMyMarketTrade(){
+    return "${host}api/v1/market/mytrade";
+  }
+
+  ///取消我发布的市场订单
+  static cancelMyMarketTrade(){
+    return "${host}api/v1/market/cancel";
+  }
+
+  ///市场发布订单
+  static publishMyMarkedTrade(){
+    return "${host}api/v1/market/sell";
+  }
+
+  ///获取市场订单
+  static getTradeList(){
+    return "${host}api/v1/market/list";
+  }
 }
 
