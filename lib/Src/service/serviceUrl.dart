@@ -1,6 +1,6 @@
 class ServiceUrl {
   static const String host =
-  ///fastock
+  ///fastmock
       "https://www.fastmock.site/mock/095e3520b3833640934d29559631cc16/";
   ///server
 //  "https://test.buluo888.com/";

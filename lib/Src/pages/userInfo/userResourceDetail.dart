@@ -27,9 +27,7 @@ class _UserResourceDetailState extends State<UserResourceDetail> {
               Container(
                 width: ScreenUtil().setHeight(160),
                 height: ScreenUtil().setHeight(160),
-                child: FadeInImage.assetNetwork(
-                    placeholder: "resource/images/defaultAvatar.png",
-                    image: this.widget.imageUrl),
+                child: FadeInImage.assetNetwork(placeholder: "resource/images/defaultAvatar.png", image: this.widget.imageUrl),
               ),
               ImageText(
                 imageUrl: "resource/images/verified.png",
