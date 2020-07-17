@@ -147,5 +147,10 @@ class ServiceUrl {
   static getTradeList(){
     return "${host}api/v1/market/list";
   }
+
+  ///获取用户二维码
+  static getQRCode(){
+    return "${host}api/v1/account/qrcode";
+  }
 }
 
