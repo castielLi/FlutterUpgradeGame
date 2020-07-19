@@ -134,23 +134,32 @@ class _LoginPageState extends State<LoginPage> {
                                 fit: BoxFit.fill,
                               ),
                               onTap: () {
-                                this.showOrDismissProgressHUD();
-                                LoginService.login("asdf", (LoginReponseModel model) {
-                                  this.showOrDismissProgressHUD();
-                                  if (model != null) {
-                                    if (model.verified) {
-                                      ///初始化用户
-                                      Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
-                                      Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
-                                    } else {
-                                      ///初始化用户
-                                      Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
-                                      setState(() {
-                                        this.userVerified = false;
-                                      });
-                                    }
-                                  }
+                                fluwx
+                                    .sendWeChatAuth(
+                                    scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
+                                    .then((data) {
+                                  print(data);
+                                })
+                                    .catchError((e) {
+                                      print(e);
                                 });
+//                                this.showOrDismissProgressHUD();
+//                                LoginService.login("asdf", (LoginReponseModel model) {
+//                                  this.showOrDismissProgressHUD();
+//                                  if (model != null) {
+//                                    if (model.verified) {
+//                                      ///初始化用户
+//                                      Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+//                                      Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+//                                    } else {
+//                                      ///初始化用户
+//                                      Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+//                                      setState(() {
+//                                        this.userVerified = false;
+//                                      });
+//                                    }
+//                                  }
+//                                });
                               },
                             ),
                           ],
