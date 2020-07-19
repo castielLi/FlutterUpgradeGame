@@ -49,6 +49,7 @@ public class TencentManager {
         @Override
         public void onADLoad() {
             Log.d(TAG, "eCPMLevel = " + rewardVideoAD.getECPMLevel());
+            EventBus.getDefault().post(Constant.STATUS_RECEIVE);
         }
 
         /**
@@ -94,6 +95,7 @@ public class TencentManager {
             Map<String, String> map = rewardVideoAD.getExts();
             String clickUrl = map.get("clickUrl");
             Log.i(TAG, "onADClick clickUrl: " + clickUrl);
+            EventBus.getDefault().post(Constant.STATUS_CLICK);
         }
 
         /**
@@ -111,6 +113,7 @@ public class TencentManager {
         @Override
         public void onADClose() {
             Log.i(TAG, "onADClose");
+            EventBus.getDefault().post(Constant.STATUS_CLOSE);
         }
 
         /**

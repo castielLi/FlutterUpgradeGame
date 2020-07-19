@@ -49,6 +49,7 @@ public class SplashActivity extends Activity {
     SplashLpCloseListener listener = new SplashLpCloseListener() {
         @Override
         public void onLpClosed() {
+            EventBus.getDefault().post(Constant.STATUS_CLOSE);
             Log.i("RSplashActivity", "onLpClosed");
             jump();
         }
@@ -75,6 +76,7 @@ public class SplashActivity extends Activity {
         public void onAdClick() {
             Log.i("RSplashActivity", "onAdClick");
             // 设置开屏可接受点击时，该回调可用
+            EventBus.getDefault().post(Constant.STATUS_CLICK);
         }
     };
     /**

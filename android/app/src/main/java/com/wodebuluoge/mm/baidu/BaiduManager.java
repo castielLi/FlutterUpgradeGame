@@ -61,12 +61,14 @@ public class BaiduManager {
         public void onAdShow() {
             // 视频开始播放时候的回调
             Log.i(TAG, "onAdShow");
+            EventBus.getDefault().post(Constant.STATUS_RECEIVE);
         }
 
         @Override
         public void onAdClick() {
             // 广告被点击的回调
             Log.i(TAG, "onAdClick");
+            EventBus.getDefault().post(Constant.STATUS_CLICK);
         }
 
         @Override
@@ -79,6 +81,7 @@ public class BaiduManager {
             if(playScale > 0.7f){
                 EventBus.getDefault().post(Constant.STATUS_30_COMPLETE);
             }
+            EventBus.getDefault().post(Constant.STATUS_CLOSE);
         }
 
         @Override
