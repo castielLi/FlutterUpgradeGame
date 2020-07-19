@@ -77,7 +77,7 @@ public class BaiduManager {
             // playScale[0.0-1.0],1.0表示播放完成，媒体可以按照自己的设计给予奖励
             Log.i(TAG, "onAdClose" + playScale);
             if(playScale > 0.7f){
-                EventBus.getDefault().post(Constant.STATUS_FINISH);
+                EventBus.getDefault().post(Constant.STATUS_30_COMPLETE);
             }
         }
 
@@ -86,7 +86,7 @@ public class BaiduManager {
             // 广告失败回调 原因：广告内容填充为空；网络原因请求广告超时
             // 建议：收到该回调之后，可以重新load下一条广告，最好限制load次数（4-5次即可）
             Log.i(TAG, "onAdFailed");
-
+            EventBus.getDefault().post(Constant.STATUS_FAIL);
         }
     };
 }

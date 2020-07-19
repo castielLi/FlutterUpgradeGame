@@ -65,6 +65,7 @@ class AdDialog {
         this.adWatchSuccessCallback();
       }
     }
+    print("=========================================================");
     print("event »" + event.toString());
   }
 

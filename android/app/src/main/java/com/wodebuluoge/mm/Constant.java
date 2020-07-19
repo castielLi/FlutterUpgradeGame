@@ -31,6 +31,7 @@ public class Constant {
     public static  int STATUS_CLICK = 3;
     public static  int STATUS_CLOSE = 4;
     public static  int STATUS_FINISH = 5;
+    public static  int STATUS_30_COMPLETE = 6;
     public static  int STATUS_FAIL = -1;
 
 

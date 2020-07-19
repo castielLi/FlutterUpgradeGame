@@ -80,6 +80,7 @@ public class AdViewManager {
         @Override
         public void onPlayedError(String arg0) {
             Log.i(TAG, "onPlayedError:" + arg0);
+            EventBus.getDefault().post(Constant.STATUS_FAIL);
         }
 
         @Override
