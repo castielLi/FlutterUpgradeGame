@@ -84,6 +84,10 @@ class _AdIconRow extends State<AdIconRow> {
               CommonUtils.showErrorMessage(msg: '您需要等待一段时间才能继续操作,去看看其他资源吧');
               return;
             }
+
+//            adview = "POSID8rbrja0ih10i";
+//            baidu = "7111030";
+//            tencent = "6031610694170610";
             ///type选择平台  1：adview 2：baidu 3：腾讯
             ///showType 选择展示 方式 1：开屏广告 2：视频广告
             ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
@@ -92,13 +96,17 @@ class _AdIconRow extends State<AdIconRow> {
               ///如果adview的开屏广告初始化成功,那么就展示adview的广告，否则展示腾讯广告
               if(AdDialog().initAdViewSuccess) {
                 AdDialog().showAd(1, 2);
+//                AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
               }else{
                 AdDialog().showAd(3, 2);
+//                AdDialog().showAd(3, 2,"6031610694170610");
               }
             }else if(this.widget.type == AdTypeEnum.stone){
               AdDialog().showAd(2, 2);
+//              AdDialog().showAd(2, 2,"7111030");
             }else{
               AdDialog().showAd(3, 2);
+//              AdDialog().showAd(3, 2,"6031610694170610");
             }
           },
         ),
