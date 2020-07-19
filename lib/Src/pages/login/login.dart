@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/textField/myTextField.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/pages/login/model/WeChatLoginModel.dart';
 import 'package:upgradegame/Src/pages/login/service/loginService.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
@@ -47,7 +49,32 @@ class _LoginPageState extends State<LoginPage> {
     );
     this.initParams();
     fluwx.weChatResponseEventHandler.listen((response){
-      print(response);
+      this.showOrDismissProgressHUD();
+      if(response.errCode.toString() == "0") {
+        if(response is fluwx.WeChatAuthResponse){
+          LoginService.login(response.code, (LoginReponseModel model) {
+            this.showOrDismissProgressHUD();
+            if (model != null) {
+              if (model.verified) {
+                ///初始化用户
+                Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(
+                    model.userinfo);
+                Application.router.navigateTo(
+                    context, UpgradeGameRoute.mainPage, clearStack: true);
+              } else {
+                ///初始化用户
+                Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(
+                    model.userinfo);
+                setState(() {
+                  this.userVerified = false;
+                });
+              }
+            }
+          });
+        }
+      }else{
+        CommonUtils.showErrorMessage(msg: "微信登录失败");
+      }
     });
   }
 
@@ -146,23 +173,6 @@ class _LoginPageState extends State<LoginPage> {
                                     .catchError((e) {
                                       print(e);
                                 });
-//                                this.showOrDismissProgressHUD();
-//                                LoginService.login("asdf", (LoginReponseModel model) {
-//                                  this.showOrDismissProgressHUD();
-//                                  if (model != null) {
-//                                    if (model.verified) {
-//                                      ///初始化用户
-//                                      Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
-//                                      Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
-//                                    } else {
-//                                      ///初始化用户
-//                                      Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
-//                                      setState(() {
-//                                        this.userVerified = false;
-//                                      });
-//                                    }
-//                                  }
-//                                });
                               },
                             ),
                           ],
