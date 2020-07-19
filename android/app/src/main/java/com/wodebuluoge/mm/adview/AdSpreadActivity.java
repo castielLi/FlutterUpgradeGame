@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
@@ -23,13 +25,14 @@ import org.greenrobot.eventbus.EventBus;
  */
 public class AdSpreadActivity extends Activity implements AdViewSpreadListener {
     private SpreadManager spreadManager = null;
-
+    private ViewGroup viewGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.spread_layout);
+        viewGroup = findViewById(R.id.spreadlayout);
         requestSpreadAd(getIntent().getStringExtra("posId"));
     }
 
@@ -39,7 +42,7 @@ public class AdSpreadActivity extends Activity implements AdViewSpreadListener {
         }
         spreadManager = AdManager.createSpreadAd();
         spreadManager.loadSpreadAd(this, Constant.ADVIEW_APPID, posId,
-                (RelativeLayout) findViewById(R.id.spreadlayout));
+                viewGroup);
         spreadManager.setBackgroundColor(Color.WHITE);
         spreadManager.setSpreadNotifyType(AdManager.NOTIFY_COUNTER_NUM);
         spreadManager.setSpreadListener(this);
@@ -81,12 +84,14 @@ public class AdSpreadActivity extends Activity implements AdViewSpreadListener {
 
     @Override
     public void onAdFailedReceived(String arg1) {
+        EventBus.getDefault().post(Constant.STATUS_FAIL);
         Log.i("AdViewDemo", "onAdRecieveFailed");
         jump();
     }
 
     @Override
     public void onAdReceived() {
+        viewGroup.setVisibility(View.VISIBLE);
         Log.i("AdViewDemo", "onAdRecieved");
     }
 

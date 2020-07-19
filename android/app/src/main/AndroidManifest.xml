@@ -41,7 +41,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".adview.AdSpreadActivity"/>
+        <activity android:name=".adview.AdSpreadActivity"
+            android:theme="@style/AdTheme"/>
         <activity android:name=".baidu.SplashActivity"/>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
