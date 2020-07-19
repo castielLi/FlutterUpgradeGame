@@ -46,6 +46,9 @@ class _LoginPageState extends State<LoginPage> {
       loading: false,
     );
     this.initParams();
+    fluwx.weChatResponseEventHandler.listen((response){
+      print(response);
+    });
   }
 
   initParams() async {
