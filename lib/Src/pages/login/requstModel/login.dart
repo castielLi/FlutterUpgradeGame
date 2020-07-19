@@ -1,15 +1,15 @@
 class Login {
-  String wechat;
+  String code;
 
-  Login({this.wechat});
+  Login({this.code});
 
   Login.fromJson(Map<String, dynamic> json) {
-    wechat = json['wechat'];
+    code = json['code'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['wechat'] = this.wechat;
+    data['code'] = this.code;
     return data;
   }
 }

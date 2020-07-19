@@ -1,15 +1,15 @@
 class VoucherModel {
-  int voucher;
+  int amount;
 
-  VoucherModel({this.voucher});
+  VoucherModel({this.amount});
 
   VoucherModel.fromJson(Map<String, dynamic> json) {
-    voucher = json['voucher'];
+    amount = json['amount'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['voucher'] = this.voucher;
+    data['amount'] = this.amount;
     return data;
   }
 }
