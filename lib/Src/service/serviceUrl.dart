@@ -1,9 +1,10 @@
 class ServiceUrl {
   static const String host =
   ///fastmock
-      "https://www.fastmock.site/mock/095e3520b3833640934d29559631cc16/";
+//      "https://www.fastmock.site/mock/095e3520b3833640934d29559631cc16/";
   ///server
 //  "https://test.buluo888.com/";
+  "http://192.168.31.46:8080/";
   static const String downloadUrl = '';
 
   /// rule
@@ -53,6 +54,11 @@ class ServiceUrl {
   ///购买赠送券
   static buyVocher() {
     return "${host}api/v1/voucher/buy";
+  }
+
+  ///微信确认订单情况
+  static confirmOrder(){
+    return "${host}api/v1/voucher/confirmorder";
   }
 
   /// 广告分红

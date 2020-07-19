@@ -18,7 +18,7 @@ import 'dart:convert' as convert;
 class LoginService{
   static Future<ResultData> login(String wechat,callback) async{
 
-    Login requstModel = Login(wechat: wechat);
+    Login requstModel = Login(code: wechat);
     String params = convert.jsonEncode(requstModel);
 
     var response = await httpManager.request(

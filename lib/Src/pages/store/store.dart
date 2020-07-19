@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluwx/fluwx.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Src/pages/store/model/storeModel.dart';
 import 'package:upgradegame/Src/pages/store/model/voucherModel.dart';
 import 'package:upgradegame/Src/pages/store/storeService/storeService.dart';
 import 'package:upgradegame/Src/pages/store/productItem.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
+import 'package:fluwx/fluwx.dart' as fluwx;
+
+import 'model/buyVoucherWeChatResponseModel.dart';
 
 class StoreDetail extends StatefulWidget {
   @override
@@ -19,9 +23,23 @@ class StoreDetail extends StatefulWidget {
 class _StoreDetailState extends State<StoreDetail> {
   List<StoreModel> storeList;
 
+  String orderId = "";
+
   @override
   void initState() {
     super.initState();
+    fluwx.weChatResponseEventHandler.listen((response) async {
+      print("WeChatPaymentResponse"+response.errCode.toString());
+      if(response.errCode == 0 && response is WeChatPaymentResponse )  {
+        StoreService.ConfirmOrder(this.orderId, (VoucherModel model){
+          if(model!=null){
+            Provide.value<BaseUserInfoProvider>(context).buyVoucher(model.amount);
+          }
+        });
+      }
+      // eventBus.fire(new RefreshMineInfo(true));
+      // Navigator.of(context).pop();
+    });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
       StoreService.getStoreList((data) {
@@ -37,10 +55,20 @@ class _StoreDetailState extends State<StoreDetail> {
 
   void buyVoucher(String productId,BaseUserInfoProvider baseUserInfo) {
     this.widget.HUD();
-    StoreService.buyVoucher(productId,(VoucherModel model) {
-      this.widget.HUD();
+    StoreService.buyVoucher(productId,(BuyVoucherWeChatResponseModel model) {
       if(model!=null) {
-        baseUserInfo.buyVoucher(model.voucher);
+      this.orderId = model.orderid;
+        fluwx.payWithWeChat(
+            appId: model.appid,
+            partnerId: model.partnerid,
+            prepayId: model.prepayid,
+            packageValue: model.package,
+            nonceStr: model.noncestr,
+            timeStamp: int.parse(model.timestamp),
+            sign: model.sign
+        ).then((data) {
+          print(data);
+        });
       }
     });
   }

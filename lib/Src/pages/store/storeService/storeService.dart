@@ -7,7 +7,9 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/http/httpManager.dart';
 import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/pages/store/model/buyVoucherWeChatResponseModel.dart';
 import 'package:upgradegame/Src/pages/store/model/requestModel/buyVoucherRequestModel.dart';
+import 'package:upgradegame/Src/pages/store/model/requestModel/weChatConfirmOrderRequestModel.dart';
 import 'dart:async';
 import 'package:upgradegame/Src/service/serviceUrl.dart';
 import 'package:upgradegame/Src/pages/store/model/voucherModel.dart';
@@ -35,10 +37,27 @@ class StoreService {
         ServiceUrl.buyVocher(), params, null, Options(method: "post"));
 
     if(response.code == 200){
-      VoucherModel model = VoucherModel.fromJson(response.data);
+      BuyVoucherWeChatResponseModel model = BuyVoucherWeChatResponseModel.fromJson(response.data);
       callback(model);
     }else{
       CommonUtils.showErrorMessage(msg: "购买出错");
+      callback(null);
+    }
+  }
+
+  static Future<ResultData> ConfirmOrder(String orderId,callback) async{
+
+    WeChatConfirmOrderRequestModel requestModel = WeChatConfirmOrderRequestModel(orderid: orderId);
+    String params = convert.jsonEncode(requestModel);
+
+    var response = await httpManager.request(
+        ServiceUrl.confirmOrder(), params, null, Options(method: "post"));
+
+    if(response.code == 200){
+      VoucherModel model = VoucherModel.fromJson(response.data);
+      callback(model);
+    }else{
+      CommonUtils.showErrorMessage(msg: "购买出错,请联系管理员");
       callback(null);
     }
   }

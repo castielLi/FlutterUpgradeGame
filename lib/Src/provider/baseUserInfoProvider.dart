@@ -18,7 +18,7 @@ class BaseUserInfoProvider with ChangeNotifier {
   int stonelevel;
   int woodlevel;
   List<Heroes> hero;
-  double todayprofitsharing;
+  String todayprofitsharing;
   int voucher;
   Ad ad;
   int tobecollectedcoin;
@@ -31,7 +31,7 @@ class BaseUserInfoProvider with ChangeNotifier {
 
   String get Avatar => avatar;
 
-  double get Todayprofitsharing => todayprofitsharing;
+  String get Todayprofitsharing => todayprofitsharing;
 
   int get Mainbuildlevel => mainbuildlevel;
 

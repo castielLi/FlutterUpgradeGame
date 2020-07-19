@@ -14,7 +14,7 @@ class BaseUserInfoModel {
   int woodlevel;
   Ad ad;
   List<Heroes> hero;
-  double todayprofitsharing;
+  String todayprofitsharing;
   int voucher;
 
   BaseUserInfoModel(

@@ -36,10 +36,14 @@ class _MainPageState extends State<MainPage> {
 
     ///零点时间戳
     int zeroTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day).millisecondsSinceEpoch;
-    double profitSharing = Provide.value<BaseUserInfoProvider>(context).Todayprofitsharing;
+    String profitSharing = Provide.value<BaseUserInfoProvider>(context).Todayprofitsharing;
 
     ///要将分红分成17280份  5秒为一份
-    perFiveSecondProfit = profitSharing / 17280;
+    if(perFiveSecondProfit != "0") {
+      perFiveSecondProfit = double.parse(profitSharing) / 17280;
+    }else{
+      perFiveSecondProfit = 0;
+    }
 
     int dTime = time - zeroTime;
     int dPer = int.parse(((time - zeroTime) / 5000).toStringAsFixed(0));
