@@ -181,6 +181,7 @@ public class TentcentSplashActivity extends Activity implements SplashADListener
   @Override
   public void onADTick(long millisUntilFinished) {
     Log.i("AD_DEMO", "SplashADTick " + millisUntilFinished + "ms");
+    EventBus.getDefault().post(Constant.STATUS_CLICK);
   }
 
   @Override
@@ -191,7 +192,7 @@ public class TentcentSplashActivity extends Activity implements SplashADListener
   @Override
   public void onADLoaded(long expireTimestamp) {
     Log.i("AD_DEMO", "SplashADFetch expireTimestamp:"+expireTimestamp);
-
+    EventBus.getDefault().post(Constant.STATUS_RECEIVE);
   }
 
   @Override

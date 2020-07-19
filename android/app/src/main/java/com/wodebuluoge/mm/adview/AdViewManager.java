@@ -48,6 +48,7 @@ public class AdViewManager {
         @Override
         public void onReceivedVideo() {
             Log.i(TAG, "onReceivedVideo");
+            EventBus.getDefault().post(Constant.STATUS_RECEIVE);
         }
 
         @Override
@@ -69,12 +70,13 @@ public class AdViewManager {
         @Override
         public void onVideoClicked() {
             Log.i(TAG, "onVideoClicked");
+            EventBus.getDefault().post(Constant.STATUS_CLICK);
         }
 
         @Override
         public void onVideoClosed() {
             Log.i(TAG, "onVideoClosed");
-
+            EventBus.getDefault().post(Constant.STATUS_CLOSE);
         }
 
         @Override

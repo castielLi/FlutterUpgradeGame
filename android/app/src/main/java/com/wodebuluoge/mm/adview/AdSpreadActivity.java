@@ -58,12 +58,14 @@ public class AdSpreadActivity extends Activity implements AdViewSpreadListener {
     @Override
     public void onAdClicked() {
         Log.i("AdViewDemo", "onAdClicked");
+        EventBus.getDefault().post(Constant.STATUS_CLICK);
     }
 
     @Override
     public void onAdClosed() {
         Log.i("AdViewDemo", "onAdClosedAd");
         jump();
+        EventBus.getDefault().post(Constant.STATUS_CLOSE);
     }
 
     @Override
@@ -91,6 +93,7 @@ public class AdSpreadActivity extends Activity implements AdViewSpreadListener {
 
     @Override
     public void onAdReceived() {
+        EventBus.getDefault().post(Constant.STATUS_RECEIVE);
         viewGroup.setVisibility(View.VISIBLE);
         Log.i("AdViewDemo", "onAdRecieved");
     }
