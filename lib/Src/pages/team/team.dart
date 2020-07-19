@@ -122,7 +122,7 @@ class _TeamDetailState extends State<TeamDetail> {
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(left: ScreenUtil().setWidth(120)),
+                        margin: EdgeInsets.only(left: ScreenUtil().setWidth(70)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[

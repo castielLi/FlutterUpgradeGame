@@ -95,10 +95,10 @@ class _AccountDetailState extends State<AccountDetail> {
                           CommonUtils.showSuccessMessage(msg: "密码修改成功");
                           Future.delayed(Duration(seconds: 1), () {
                             this.widget.viewCallback();
+                            originalPasswordController.clear();
+                            newPasswordController.clear();
+                            repeatPasswordController.clear();
                           });
-                          originalPasswordController.clear();
-                          newPasswordController.clear();
-                          repeatPasswordController.clear();
                         }
                       });
                     }

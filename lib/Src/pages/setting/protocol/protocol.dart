@@ -41,6 +41,7 @@ class _ProtocolDetailState extends State<ProtocolDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
+      width: ScreenUtil().setWidth(SystemButtonSize.settingsTextHeight),
       margin: EdgeInsets.fromLTRB(
           ScreenUtil().setWidth(0), // 左
           ScreenUtil().setHeight(120), // 上

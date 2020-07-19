@@ -5,7 +5,7 @@ import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 
 class MarketBidItem extends StatefulWidget {
   // 头像
-  String avatarUrl;
+//  String avatarUrl;
 
   // 名称
   String name;
@@ -19,7 +19,13 @@ class MarketBidItem extends StatefulWidget {
   // T币数量
   int needCoin;
 
-  MarketBidItem({Key key, this.avatarUrl, this.name, this.bidType, this.amount, this.needCoin}) : super(key: key);
+  // 按钮名称
+  String buttonName;
+
+  // 按钮方法
+  VoidCallback buttonCallback;
+
+  MarketBidItem({Key key, this.name, this.bidType, this.amount, this.needCoin, this.buttonName, this.buttonCallback}) : super(key: key);
 
   @override
   _MarketBidItem createState() => _MarketBidItem();
@@ -45,10 +51,10 @@ class _MarketBidItem extends State<MarketBidItem> {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  Image(
-                    image: new AssetImage(this.widget.avatarUrl),
-                    height: ScreenUtil().setHeight(90),
-                  ),
+//                  Image(
+//                    image: new AssetImage(this.widget.avatarUrl),
+//                    height: ScreenUtil().setHeight(90),
+//                  ),
                   Text(
                     this.widget.name,
                     style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
@@ -94,9 +100,9 @@ class _MarketBidItem extends State<MarketBidItem> {
                 imageUrl: "resource/images/upgradeButton.png",
                 imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
                 imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
-                buttonName: "购 买",
+                buttonName: this.widget.buttonName,
                 callback: () {
-                  print(this.widget.bidType);
+                  this.widget.buttonCallback();
                 },
                 textSize: SystemFontSize.settingTextFontSize,
               )

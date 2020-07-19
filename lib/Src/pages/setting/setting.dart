@@ -61,48 +61,46 @@ class _SettingDetailState extends State<SettingDetail> {
         children: <Widget>[
           new Offstage(
             offstage: this.settingHide,
-            child: new Center(
-              child: ButtonsList(
-                buttonWidth: ScreenUtil().setWidth(900),
-                buttonHeight: ScreenUtil().setHeight(190),
-                buttonBackgroundImageUrl: 'resource/images/settingButtonBackground.png',
-                textSize: SystemFontSize.settingTextFontSize,
-                isColumn: true,
-                buttons: [
-                  ImageTextButton(
-                    buttonName: '攻 略',
-                    callback: () {
-                      switchPageBetweenFatherAndSon(sonPageName: "攻略");
-                      this.widget.changeTitleCallback("攻略");
-                      SettingHttpRequestEvent().emit("raiders");
-                    },
-                  ),
-                  ImageTextButton(
-                    buttonName: '用户协议',
-                    callback: () {
-                      switchPageBetweenFatherAndSon(sonPageName: "用户协议");
-                      this.widget.changeTitleCallback("用户协议");
-                      SettingHttpRequestEvent().emit("protocol");
-                    },
-                  ),
-                  ImageTextButton(
-                    buttonName: '隐私条款',
-                    callback: () {
-                      switchPageBetweenFatherAndSon(sonPageName: "隐私条款");
-                      this.widget.changeTitleCallback("隐私条款");
-                      SettingHttpRequestEvent().emit("private");
-                    },
-                  ),
-                  ImageTextButton(
-                    buttonName: '关于我们',
-                    callback: () {
-                      switchPageBetweenFatherAndSon(sonPageName: "关于我们");
-                      this.widget.changeTitleCallback("关于我们");
-                      SettingHttpRequestEvent().emit("aboutus");
-                    },
-                  ),
-                ],
-              ),
+            child: ButtonsList(
+              buttonWidth: ScreenUtil().setWidth(900),
+              buttonHeight: ScreenUtil().setHeight(190),
+              buttonBackgroundImageUrl: 'resource/images/settingButtonBackground.png',
+              textSize: SystemFontSize.settingTextFontSize,
+              isColumn: true,
+              buttons: [
+                ImageTextButton(
+                  buttonName: '攻 略',
+                  callback: () {
+                    switchPageBetweenFatherAndSon(sonPageName: "攻略");
+                    this.widget.changeTitleCallback("攻略");
+                    SettingHttpRequestEvent().emit("raiders");
+                  },
+                ),
+                ImageTextButton(
+                  buttonName: '用户协议',
+                  callback: () {
+                    switchPageBetweenFatherAndSon(sonPageName: "用户协议");
+                    this.widget.changeTitleCallback("用户协议");
+                    SettingHttpRequestEvent().emit("protocol");
+                  },
+                ),
+                ImageTextButton(
+                  buttonName: '隐私条款',
+                  callback: () {
+                    switchPageBetweenFatherAndSon(sonPageName: "隐私条款");
+                    this.widget.changeTitleCallback("隐私条款");
+                    SettingHttpRequestEvent().emit("private");
+                  },
+                ),
+                ImageTextButton(
+                  buttonName: '关于我们',
+                  callback: () {
+                    switchPageBetweenFatherAndSon(sonPageName: "关于我们");
+                    this.widget.changeTitleCallback("关于我们");
+                    SettingHttpRequestEvent().emit("aboutus");
+                  },
+                ),
+              ],
             ),
           ),
           new Offstage(

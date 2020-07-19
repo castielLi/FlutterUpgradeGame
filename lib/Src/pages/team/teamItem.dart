@@ -29,12 +29,12 @@ class _TeamItem extends State<TeamItem> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Image(
-              image: new AssetImage(this.widget.invite.avatar == ""
-                  ? 'resource/images/avatar.png'
-                  : this.widget.invite.avatar),
-              height: ScreenUtil().setHeight(100),
-            ),
+//            Image(
+//              image: new AssetImage(this.widget.invite.avatar == ""
+//                  ? 'resource/images/avatar.png'
+//                  : this.widget.invite.avatar),
+//              height: ScreenUtil().setHeight(100),
+//            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
