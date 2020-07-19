@@ -32,9 +32,11 @@ class _StoreDetailState extends State<StoreDetail> {
       print("WeChatPaymentResponse"+response.errCode.toString());
       if(response.errCode == 0 && response is WeChatPaymentResponse )  {
         StoreService.ConfirmOrder(this.orderId, (VoucherModel model){
+          this.widget.HUD();
           if(model!=null){
             Provide.value<BaseUserInfoProvider>(context).buyVoucher(model.amount);
           }
+          fluwx.weChatResponseEventHandler.skip(1);
         });
       }
       // eventBus.fire(new RefreshMineInfo(true));

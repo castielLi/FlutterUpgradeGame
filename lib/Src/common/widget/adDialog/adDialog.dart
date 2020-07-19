@@ -95,7 +95,7 @@ class AdDialog {
             this.dialogState = false;
           }
         }else{
-          if(this.adWatchFailedCallback != null){
+          if(this.adWatchFailedCallback != null && this.dialogState){
             this.adWatchFailedCallback();
             this.adStatus = -100;
             this.dialogState = false;

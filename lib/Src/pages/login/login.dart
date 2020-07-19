@@ -61,6 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                     model.userinfo);
                 Application.router.navigateTo(
                     context, UpgradeGameRoute.mainPage, clearStack: true);
+                fluwx.weChatResponseEventHandler.skip(1);
               } else {
                 ///初始化用户
                 Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(
