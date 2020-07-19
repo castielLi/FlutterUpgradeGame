@@ -30,7 +30,12 @@ class _AdIconRow extends State<AdIconRow> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    AdDialog().setCallback(this.adFinishedCallback,false);
+    AdDialog().setCallback(this.adFinishedCallback,this.adFailedCallback,false);
+  }
+
+  void adFailedCallback(){
+    this.widget.HUD();
+    CommonUtils.showErrorMessage(msg: "广告观看失败");
   }
 
   void adFinishedCallback() {

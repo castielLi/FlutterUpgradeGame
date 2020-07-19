@@ -50,6 +50,11 @@ class _WelcomePageState extends State<WelcomePage> {
         .navigateTo(context, UpgradeGameRoute.loginPage, replace: true);
   }
 
+  adFailedCallback(){
+    Application.router
+        .navigateTo(context, UpgradeGameRoute.loginPage, replace: true);
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -58,7 +63,7 @@ class _WelcomePageState extends State<WelcomePage> {
     this.initBaseWidget();
     ///显示开屏广告
     AdDialog().showAd(1, 1);
-    AdDialog().setCallback(this.adCallback,true);
+    AdDialog().setCallback(this.adCallback,this.adFailedCallback,true);
   }
 
   @override

@@ -20,7 +20,7 @@ class BaseUserCashProvider with ChangeNotifier {
 
   initUserCashProvider(CashInfoModel model){
     this.hasWithdraw = model.withdrawing;
-    this.cashAmount = model.cashamount;
+    this.cashAmount = double.parse(model.cashamount);
     notifyListeners();
   }
 }

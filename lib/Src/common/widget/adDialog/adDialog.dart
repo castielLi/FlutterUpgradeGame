@@ -12,6 +12,7 @@ class AdDialog {
   static const platform = const MethodChannel('samples.flutter.ad');
   static const EventChannel _eventChannel = const EventChannel('samples.flutter.ad.event');
   VoidCallback adWatchSuccessCallback;
+  VoidCallback adWatchFailedCallback;
 
   factory AdDialog() =>_getInstance();
   static AdDialog get instance => _getInstance();
@@ -19,6 +20,8 @@ class AdDialog {
 
   bool openApp;
   bool initAdViewSuccess;
+  int adStatus = -100;
+  bool dialogState = false;
 
   AdDialog._internal() {
     // 初始化
@@ -34,18 +37,21 @@ class AdDialog {
     return _instance;
   }
 
-  void setCallback(VoidCallback adWatchSuccessCallback,bool openApp){
+  void setCallback(VoidCallback adWatchSuccessCallback,VoidCallback adWatchFailedCallback,bool openApp){
     this.openApp = openApp;
     this.adWatchSuccessCallback = adWatchSuccessCallback;
+    this.adWatchFailedCallback = adWatchFailedCallback;
   }
 
   ///type选择平台  1：adview 2：baidu 3：腾讯
   ///showType 选择展示 方式 1：开屏广告 2：视频广告
   ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
   void showAd(int type, int showType, [String posId]) async {
+    this.dialogState = true;
     try {
       await platform.invokeMethod('showAd', <String, dynamic>{'type': type, "showType": showType, "posId": posId});
     } on PlatformException catch (e) {
+      this.dialogState = false;
       print(e);
     }
   }
@@ -56,13 +62,45 @@ class AdDialog {
         this.initAdViewSuccess = true;
         if(this.adWatchSuccessCallback != null){
           this.adWatchSuccessCallback();
+          this.dialogState = false;
         }
       }else if("-1"==event.toString()){
         this.initAdViewSuccess = false;
+        if(this.adWatchFailedCallback != null){
+          this.adWatchFailedCallback();
+          this.dialogState = false;
+        }
       }
-    }else if ("5"==event.toString()){
-      if(this.adWatchSuccessCallback != null){
-        this.adWatchSuccessCallback();
+    }else{
+      ///返回广告看完的回调
+      if ("5"==event.toString()){
+        if(this.adWatchSuccessCallback != null){
+          this.adWatchSuccessCallback();
+          this.adStatus = -100;
+          this.dialogState = false;
+        }
+      }
+      ///返回广告已经观看了30秒可以领取资源的回调
+      if("6" == event.toString()){
+        if(dialogState) {
+          this.adStatus = 6;
+        }
+      }
+      ///返回广告关闭的回调
+      if("4" == event.toString()){
+        if(this.adStatus == 6){
+          if(this.adWatchSuccessCallback != null){
+            this.adWatchSuccessCallback();
+            this.adStatus = -100;
+            this.dialogState = false;
+          }
+        }else{
+          if(this.adWatchFailedCallback != null){
+            this.adWatchFailedCallback();
+            this.adStatus = -100;
+            this.dialogState = false;
+          }
+        }
       }
     }
     print("=========================================================");

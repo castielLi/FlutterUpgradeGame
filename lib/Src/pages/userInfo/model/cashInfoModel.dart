@@ -1,5 +1,5 @@
 class CashInfoModel {
-  double cashamount;
+  String cashamount;
   bool withdrawing;
 
   CashInfoModel({this.cashamount, this.withdrawing});
