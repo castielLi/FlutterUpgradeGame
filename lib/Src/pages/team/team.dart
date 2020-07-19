@@ -5,7 +5,9 @@ import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
+import 'package:upgradegame/Src/pages/team/event/teamEventBus.dart';
 import 'package:upgradegame/Src/pages/team/model/invitation.dart';
+import 'package:upgradegame/Src/pages/team/model/qrCodeModel.dart';
 import 'package:upgradegame/Src/pages/team/service/teamService.dart';
 import 'package:upgradegame/Src/pages/team/teamItem.dart';
 
@@ -25,6 +27,36 @@ class _TeamDetailState extends State<TeamDetail> {
   bool hideTeamResult = true;
   int initFirstLength = 20;
   int initSecondLength = 20;
+  bool showQRCode = false;
+  bool showTeamDetail = true;
+  String qrCodeUrl = "";
+
+
+  void getShareQRCode(){
+    this.widget.HUD();
+    TeamService.getQRCode((QRCodeModel model){
+      this.widget.HUD();
+      if(model != null){
+        setState(() {
+          qrCodeUrl = model.url;
+        });
+      }
+    });
+  }
+
+  void showMyTeamDetail(){
+    setState(() {
+      showQRCode = true;
+      showTeamDetail = false;
+    });
+  }
+
+  void showQRCodeDetail(){
+    setState(() {
+      showQRCode = false;
+      showTeamDetail = true;
+    });
+  }
 
   @override
   void initState() {
@@ -49,28 +81,32 @@ class _TeamDetailState extends State<TeamDetail> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          ButtonsList(
-            buttonWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
-            buttonHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
-            buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
-            textSize: SystemFontSize.settingTextFontSize,
-            buttons: [
-              ImageTextButton(
-                buttonName: '徒 弟',
-                callback: () {
-                  changeTabs('first');
-                },
-              ),
-              ImageTextButton(
-                buttonName: '徒 孙',
-                callback: () {
-                  changeTabs('second');
-                },
-              ),
-            ],
-          ),
-          second.length == 0 && first.length == 0
-              ? Container(
+          Offstage(
+            offstage: !this.showTeamDetail,
+            child: Stack(
+              children: <Widget>[
+                ButtonsList(
+                  buttonWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+                  buttonHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+                  buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
+                  textSize: SystemFontSize.settingTextFontSize,
+                  buttons: [
+                    ImageTextButton(
+                      buttonName: '徒 弟',
+                      callback: () {
+                        changeTabs('first');
+                      },
+                    ),
+                    ImageTextButton(
+                      buttonName: '徒 孙',
+                      callback: () {
+                        changeTabs('second');
+                      },
+                    ),
+                  ],
+                ),
+                second.length == 0 && first.length == 0
+                    ? Container(
                   height: ScreenUtil().setHeight(730),
                   child: Offstage(
                     offstage: hideTeamResult,
@@ -81,7 +117,7 @@ class _TeamDetailState extends State<TeamDetail> {
                     ),
                   ),
                 )
-              : Container(
+                    : Container(
                   height: ScreenUtil().setHeight(730),
                   child: Column(
                     children: [
@@ -120,19 +156,19 @@ class _TeamDetailState extends State<TeamDetail> {
                                 },
                                 child: first.length == 0
                                     ? Text(
-                                        '团队成员还为0',
-                                        textAlign: TextAlign.center,
-                                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                                      )
+                                  '团队成员还为0',
+                                  textAlign: TextAlign.center,
+                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                                )
                                     : ListView.builder(
-                                        itemCount: first.length > initFirstLength ? initFirstLength : first.length,
-                                        padding: EdgeInsets.all(1.0),
-                                        itemBuilder: (BuildContext context, int index) {
-                                          return TeamItem(
-                                            invite: first[index],
-                                          );
-                                        },
-                                      ),
+                                  itemCount: first.length > initFirstLength ? initFirstLength : first.length,
+                                  padding: EdgeInsets.all(1.0),
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return TeamItem(
+                                      invite: first[index],
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                             Offstage(
@@ -164,14 +200,47 @@ class _TeamDetailState extends State<TeamDetail> {
                     ],
                   ),
                 ),
-          new ImageButton(
-            height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
-            width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
-            buttonName: "邀 请",
-            imageUrl: "resource/images/upgradeButton.png",
-            callback: () {
-              print('点击邀请');
-            },
+                new ImageButton(
+                  height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+                  width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+                  buttonName: "邀 请",
+                  imageUrl: "resource/images/upgradeButton.png",
+                  callback: () {
+                    print('点击邀请');
+                    this.showQRCodeDetail();
+                  },
+                ),
+              ],
+            ),
+          ),
+          Offstage(
+            offstage: !this.showQRCode,
+            child: Stack(
+              children: <Widget>[
+                FadeInImage.assetNetwork(
+                    placeholder: "resource/images/defaultAvatar.png",
+                    image: this.qrCodeUrl),
+                ImageButton(
+                  height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+                  width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+                  buttonName: "返 回",
+                  imageUrl: "resource/images/upgradeButton.png",
+                  callback: () {
+                    print('点击邀请');
+                    this.showMyTeamDetail();
+                  },
+                ),
+                ImageButton(
+                  height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+                  width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+                  buttonName: "分享微信",
+                  imageUrl: "resource/images/upgradeButton.png",
+                  callback: () {
+                    print('点击邀请');
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       ),
