@@ -83,7 +83,7 @@ public class TencentManager {
         @Override
         public void onReward() {
             Log.i(TAG, "onReward");
-            EventBus.getDefault().post(Constant.STATUS_FINISH);
+            EventBus.getDefault().post(Constant.STATUS_30_COMPLETE);
         }
 
         /**
@@ -121,6 +121,7 @@ public class TencentManager {
             String msg = String.format(Locale.getDefault(), "onError, error code: %d, error msg: %s",
                     adError.getErrorCode(), adError.getErrorMsg());
             Log.i(TAG, "onError, adError=" + msg);
+            EventBus.getDefault().post(Constant.STATUS_FAIL);
         }
     };
 }
