@@ -31,8 +31,7 @@ class _UserSearchResult extends State<UserSearchResult> {
           offstage: this.userSearchResultHide,
           child: this.widget.searchResult.length == 0
               ? Text(
-//                  '没有搜索到用户',
-                  '',
+                  '没有搜索到用户',
                   textAlign: TextAlign.center,
                   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                 )
@@ -115,6 +114,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                     buttonName: '返 回',
                     callback: () {
                       showUserSearchResultPage();
+                      FocusScope.of(context).requestFocus(FocusNode());
                     },
                   ),
                   ImageTextButton(
@@ -130,6 +130,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                           });
                         }
                       });
+                      FocusScope.of(context).requestFocus(FocusNode());
                     },
                   ),
                 ],
