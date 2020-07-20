@@ -26,6 +26,10 @@ class _MainPageState extends State<MainPage> {
   bool mainBuildingCoin = false;
   double autoProfitSharing = 0.00;
   double perFiveSecondProfit = 0.00;
+  Timer adShareTimer;
+  Timer productTCoin10;
+  Timer productTCoin60;
+
 
   ProgressHUD _progressHUD;
   bool _loading = false;
@@ -68,7 +72,7 @@ class _MainPageState extends State<MainPage> {
     );
 
     ///每5秒更改一次广告分红  要将分红分成17280份
-    Timer.periodic(Duration(seconds: 5), (timer) {
+    this.adShareTimer = Timer.periodic(Duration(seconds: 5), (timer) {
       ///当前时间戳
       setState(() {
         autoProfitSharing += perFiveSecondProfit;
@@ -76,7 +80,7 @@ class _MainPageState extends State<MainPage> {
     });
 
     ///系统自动判断是否需要产生t币
-    Timer.periodic(Duration(seconds: 10), (timer) {
+    this.productTCoin10 = Timer.periodic(Duration(seconds: 10), (timer) {
       int timeMinute = DateTime.now().minute;
 
       /// 前九分钟  userinfo请求 获取用户最新的资源动态
@@ -87,7 +91,7 @@ class _MainPageState extends State<MainPage> {
       }
     });
 
-    Timer.periodic(Duration(seconds: 60), (timer) {
+    this.productTCoin60 = Timer.periodic(Duration(seconds: 10), (timer) {
       int timeMinute = DateTime.now().minute;
 
       /// 十分钟进行一次 userinfo请求 获取用户最新的资源动态
@@ -97,6 +101,23 @@ class _MainPageState extends State<MainPage> {
         });
       }
     });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    if(this.adShareTimer != null){
+      this.adShareTimer.cancel();
+    }
+
+    if(this.productTCoin10 != null){
+      this.productTCoin10.cancel();
+    }
+
+    if(this.productTCoin60 != null){
+      this.productTCoin60.cancel();
+    }
   }
 
   void setMainBuildingNormal() {

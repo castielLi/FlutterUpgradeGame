@@ -4,6 +4,8 @@ import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/event/errorEvent.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:fluwx/fluwx.dart' as fluwx;
+import 'package:upgradegame/Src/route/application.dart';
+import 'package:upgradegame/Src/route/upgradegame_route.dart';
 
 ///配置app基础组件 例如:错误信息弹窗
 class InitAppSetting extends StatefulWidget {
@@ -38,6 +40,9 @@ class _InitAppSetting extends State<InitAppSetting> {
   @override
   void initState() {
     super.initState();
+    stream = ConfigSetting.eventBus.on<HttpErrorEvent>().listen((event) {
+      errorHandleFunction(event.code, event.message);
+    });
     _initFluwx();
   }
 
@@ -59,6 +64,7 @@ class _InitAppSetting extends State<InitAppSetting> {
       case 401:
         CommonUtils.showSystemErrorMessage(
             msg: '[401错误可能: 未授权 \\ 授权登录失败 \\ 登录过期]');
+        Application.router.navigateTo(context, UpgradeGameRoute.loginPage, clearStack: true);
         break;
       case 403:
         CommonUtils.showSystemErrorMessage(msg: '403权限错误');
