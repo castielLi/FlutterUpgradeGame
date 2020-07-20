@@ -84,6 +84,7 @@ class _AccountDetailState extends State<AccountDetail> {
                   buttonName: '返回',
                   callback: () {
                     this.widget.viewCallback();
+                    FocusScope.of(context).requestFocus(FocusNode());
                   },
                 ),
                 ImageTextButton(
@@ -102,6 +103,7 @@ class _AccountDetailState extends State<AccountDetail> {
                         }
                       });
                     }
+                    FocusScope.of(context).requestFocus(FocusNode());
                   },
                 ),
               ],

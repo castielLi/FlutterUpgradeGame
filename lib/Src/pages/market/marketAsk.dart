@@ -59,6 +59,7 @@ class _MarketAskState extends State<MarketAsk> {
                 this.widget.viewCallback();
                 amountController.clear();
                 coinController.clear();
+                FocusScope.of(context).requestFocus(FocusNode());
               },
             ),
             ImageTextButton(
@@ -74,6 +75,7 @@ class _MarketAskState extends State<MarketAsk> {
                     });
                   }
                 });
+                FocusScope.of(context).requestFocus(FocusNode());
               },
             ),
           ],
