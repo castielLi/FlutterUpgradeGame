@@ -55,12 +55,6 @@ class _InitAppSetting extends State<InitAppSetting> {
     super.dispose();
   }
 
-  handleLoginFailed(){
-    CommonUtils.showSystemErrorMessage(
-        msg: '[401错误可能: 未授权 \\ 授权登录失败 \\ 登录过期]');
-    Application.router.navigateTo(context, UpgradeGameRoute.loginPage, clearStack: true);
-  }
-
   ///网络错误
   errorHandleFunction(int code, message) {
     switch (code) {
@@ -68,7 +62,8 @@ class _InitAppSetting extends State<InitAppSetting> {
         CommonUtils.showSystemErrorMessage(msg: '网络错误');
         break;
       case 401:
-        this.handleLoginFailed();
+        CommonUtils.showSystemErrorMessage(
+            msg: '[401错误可能: 未授权 \\ 授权登录失败 \\ 登录过期]');
         break;
       case 403:
         CommonUtils.showSystemErrorMessage(msg: '403权限错误');

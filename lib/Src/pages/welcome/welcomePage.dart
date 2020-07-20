@@ -47,12 +47,12 @@ class _WelcomePageState extends State<WelcomePage> {
 
   adCallback(){
     Application.router
-        .navigateTo(context, UpgradeGameRoute.loginPage, replace: true);
+        .navigateTo(context, UpgradeGameRoute.loginPage, replace: true,clearStack: true);
   }
 
   adFailedCallback(){
     Application.router
-        .navigateTo(context, UpgradeGameRoute.loginPage, replace: true);
+        .navigateTo(context, UpgradeGameRoute.loginPage, replace: true,clearStack: true);
   }
 
   @override

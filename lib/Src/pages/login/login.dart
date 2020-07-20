@@ -149,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                                 textColor: Colors.white,
                                 onPressed: () {
                                   this.showOrDismissProgressHUD();
-                                  LoginService.loginWithAccount("account", "password", (LoginReponseModel model) {
+                                  LoginService.loginWithAccount("lizj", "112233", (LoginReponseModel model) {
                                     this.showOrDismissProgressHUD();
                                     if (model != null) {
                                       ///初始化用户

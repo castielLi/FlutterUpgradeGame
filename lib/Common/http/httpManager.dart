@@ -67,7 +67,14 @@ class HttpManager {
           ConfigSetting.errorHandleFunction(errorResponse.statusCode, e.message, noTip),
           errorResponse.statusCode);
     }
-    return ResultData.fromJson(response.data);
+    ResultData data = ResultData.fromJson(response.data);
+    if(data.code == 401){
+      return new ResultData(null,
+          ConfigSetting.errorHandleFunction(401, "登录信息失效", noTip),
+          401);
+    }else{
+      return ResultData.fromJson(response.data);
+    }
   }
 
   ///清除授权
