@@ -27,6 +27,11 @@ class ServiceUrl {
     return "${host}api/v1/accountlogin";
   }
 
+  ///登出
+  static logout(){
+    return "${host}api/v1/logout";
+  }
+
   ///setUserInfo
   static setuserinfo() {
     return "${host}api/v1/userinfo";

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:upgradegame/Common/http/configSetting.dart';
-import 'package:upgradegame/Common/event/errorEvent.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:fluwx/fluwx.dart' as fluwx;
-import 'package:upgradegame/Src/route/application.dart';
-import 'package:upgradegame/Src/route/upgradegame_route.dart';
+import 'package:jpush_flutter/jpush_flutter.dart';
+import 'package:flutter/services.dart';
 
 ///配置app基础组件 例如:错误信息弹窗
 class InitAppSetting extends StatefulWidget {
@@ -17,10 +15,71 @@ class InitAppSetting extends StatefulWidget {
 }
 
 class _InitAppSetting extends State<InitAppSetting> {
-  StreamSubscription stream;
+
+  String debugLable = 'Unknown';
+  final JPush jpush = new JPush();
+
   @override
   Widget build(BuildContext context) {
     return widget.child;
+  }
+
+  Future<void> initPlatformState() async {
+    String platformVersion;
+
+    try {
+      jpush.addEventHandler(
+          onReceiveNotification: (Map<String, dynamic> message) async {
+            print("flutter onReceiveNotification: $message");
+            setState(() {
+              debugLable = "flutter onReceiveNotification: $message";
+            });
+          }, onOpenNotification: (Map<String, dynamic> message) async {
+        print("flutter onOpenNotification: $message");
+        setState(() {
+          debugLable = "flutter onOpenNotification: $message";
+        });
+      }, onReceiveMessage: (Map<String, dynamic> message) async {
+        print("flutter onReceiveMessage: $message");
+        setState(() {
+          debugLable = "flutter onReceiveMessage: $message";
+        });
+      }, onReceiveNotificationAuthorization:
+          (Map<String, dynamic> message) async {
+        print("flutter onReceiveNotificationAuthorization: $message");
+        setState(() {
+          debugLable = "flutter onReceiveNotificationAuthorization: $message";
+        });
+      });
+    } on PlatformException {
+      platformVersion = 'Failed to get platform version.';
+    }
+
+    jpush.setup(
+      appKey: "ea59157f48e85a676b239564", //你自己应用的 AppKey
+      channel: "theChannel",
+      production: false,
+      debug: true,
+    );
+    jpush.applyPushAuthority(
+        new NotificationSettingsIOS(sound: true, alert: true, badge: true));
+
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    jpush.getRegistrationID().then((rid) {
+      print("flutter get registration id : $rid");
+      setState(() {
+        debugLable = "flutter getRegistrationID: $rid";
+      });
+    });
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      debugLable = platformVersion;
+    });
   }
 
   _initFluwx() async {
@@ -40,45 +99,12 @@ class _InitAppSetting extends State<InitAppSetting> {
   @override
   void initState() {
     super.initState();
-//    stream = ConfigSetting.eventBus.on<HttpErrorEvent>().listen((event) {
-//      errorHandleFunction(event.code, event.message);
-//    });
     _initFluwx();
   }
 
   @override
   void dispose() {
-    if (stream != null) {
-      stream.cancel();
-      stream = null;
-    }
     super.dispose();
   }
 
-//  ///网络错误
-//  errorHandleFunction(int code, message) {
-//    switch (code) {
-//      case ConfigSetting.NETWORK_ERROR:
-//        CommonUtils.showSystemErrorMessage(msg: '网络错误');
-//        break;
-//      case 401:
-//        CommonUtils.showSystemErrorMessage(
-//            msg: '[401错误可能: 未授权 \\ 授权登录失败 \\ 登录过期]');
-//        break;
-//      case 403:
-//        CommonUtils.showSystemErrorMessage(msg: '403权限错误');
-//        break;
-//      case 404:
-//        CommonUtils.showSystemErrorMessage(msg: '404错误,请稍后重试！');
-//        break;
-//      case ConfigSetting.NETWORK_TIMEOUT:
-//        CommonUtils.showSystemErrorMessage(msg: '请求超时');
-//        break;
-//      default:
-//        CommonUtils.showSystemErrorMessage(
-//          msg: "其他异常" + " " + message,
-//        );
-//        break;
-//    }
-//  }
 }

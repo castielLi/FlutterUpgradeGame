@@ -110,9 +110,10 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  void handleLoginFailed() {
-    CommonUtils.showSystemErrorMessage(msg: '[401错误可能: 未授权 \\ 授权登录失败 \\ 登录过期]');
-    Application.router.navigateTo(context, UpgradeGameRoute.loginPage, clearStack: true);
+  void handleLoginFailed(){
+    CommonUtils.showSystemErrorMessage(
+        msg: '账号在其他设备登录 \\ 授权登录失败 \\ 登录过期');
+    Application.router.navigateTo(context, UpgradeGameRoute.loginPage,clearStack: true);
   }
 
   ///网络错误
