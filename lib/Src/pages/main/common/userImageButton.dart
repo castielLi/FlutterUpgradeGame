@@ -32,9 +32,15 @@ class _UserImageButtonState extends State<UserImageButton> {
             children: <Widget>[
               new Offstage(
                 offstage:!this.widget.netWorkImage,
-                child: new FadeInImage.assetNetwork(
-                    placeholder: "resource/images/defaultAvatar.png",
-                    image: this.widget.netWorkImageUrl),
+                child: CircleAvatar(
+                  radius: ScreenUtil().setHeight(60),
+                  backgroundImage: NetworkImage(
+                      this.widget.netWorkImageUrl
+                  ),
+                )
+//                new FadeInImage.assetNetwork(
+//                    placeholder: "resource/images/defaultAvatar.png",
+//                    image: this.widget.netWorkImageUrl),
               ),
               new Offstage(
                 offstage:this.widget.netWorkImage,

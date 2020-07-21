@@ -57,7 +57,7 @@ class _MarketBidItem extends State<MarketBidItem> {
                 children: <Widget>[
                   Image(
                     image: new AssetImage('resource/images/' + this.widget.bidType + '.png'),
-                    height: ScreenUtil().setHeight(85),
+                    height: ScreenUtil().setHeight(100),
                   ),
                   Text(
                     '数量:' + this.widget.amount.toString(),

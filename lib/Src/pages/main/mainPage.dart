@@ -34,7 +34,6 @@ class _MainPageState extends State<MainPage> {
   Timer productTCoin60;
   StreamSubscription stream;
 
-
   ProgressHUD _progressHUD;
   bool _loading = false;
 
@@ -111,10 +110,9 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  void handleLoginFailed(){
-    CommonUtils.showSystemErrorMessage(
-        msg: '[401错误可能: 未授权 \\ 授权登录失败 \\ 登录过期]');
-    Application.router.navigateTo(context, UpgradeGameRoute.loginPage,clearStack: true);
+  void handleLoginFailed() {
+    CommonUtils.showSystemErrorMessage(msg: '[401错误可能: 未授权 \\ 授权登录失败 \\ 登录过期]');
+    Application.router.navigateTo(context, UpgradeGameRoute.loginPage, clearStack: true);
   }
 
   ///网络错误
@@ -130,15 +128,15 @@ class _MainPageState extends State<MainPage> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    if(this.adShareTimer != null){
+    if (this.adShareTimer != null) {
       this.adShareTimer.cancel();
     }
 
-    if(this.productTCoin10 != null){
+    if (this.productTCoin10 != null) {
       this.productTCoin10.cancel();
     }
 
-    if(this.productTCoin60 != null){
+    if (this.productTCoin60 != null) {
       this.productTCoin60.cancel();
     }
     stream.cancel();
@@ -350,7 +348,7 @@ class _MainPageState extends State<MainPage> {
                               borderRadius: BorderRadius.all(Radius.circular(8.0)),
                             ),
                             child: new Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 new Image(
                                   image: new AssetImage("resource/images/volume.png"),
@@ -359,7 +357,6 @@ class _MainPageState extends State<MainPage> {
                                 ),
                                 new Text(
                                   baseUserInfo.voucher.toString(),
-                                  textAlign: TextAlign.left,
                                   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                 ),
                               ],
