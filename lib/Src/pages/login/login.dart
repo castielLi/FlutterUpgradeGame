@@ -48,24 +48,21 @@ class _LoginPageState extends State<LoginPage> {
       loading: false,
     );
     this.initParams();
-    fluwx.weChatResponseEventHandler.listen((response){
+    fluwx.weChatResponseEventHandler.listen((response) {
       this.showOrDismissProgressHUD();
-      if(response.errCode.toString() == "0") {
-        if(response is fluwx.WeChatAuthResponse){
+      if (response.errCode.toString() == "0") {
+        if (response is fluwx.WeChatAuthResponse) {
           LoginService.login(response.code, (LoginReponseModel model) {
             this.showOrDismissProgressHUD();
             if (model != null) {
               if (model.verified) {
                 ///初始化用户
-                Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(
-                    model.userinfo);
-                Application.router.navigateTo(
-                    context, UpgradeGameRoute.mainPage, clearStack: true);
+                Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+                Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
                 fluwx.weChatResponseEventHandler.skip(1);
               } else {
                 ///初始化用户
-                Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(
-                    model.userinfo);
+                Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
                 setState(() {
                   this.userVerified = false;
                 });
@@ -73,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
             }
           });
         }
-      }else{
+      } else {
         CommonUtils.showErrorMessage(msg: "微信登录失败");
       }
     });
@@ -148,7 +145,18 @@ class _LoginPageState extends State<LoginPage> {
                                 color: Colors.blue,
                                 textColor: Colors.white,
                                 onPressed: () {
+                                  String username = usernameController.text;
+                                  String password = passwordController.text;
+                                  if ("" == username) {
+                                    CommonUtils.showErrorMessage(msg: "用户名不能为空");
+                                    return;
+                                  }
+                                  if ("" == password) {
+                                    CommonUtils.showErrorMessage(msg: "密码不能为空");
+                                    return;
+                                  }
                                   this.showOrDismissProgressHUD();
+//                                  LoginService.loginWithAccount(username, password, (LoginReponseModel model) {
                                   LoginService.loginWithAccount("lizj", "112233", (LoginReponseModel model) {
                                     this.showOrDismissProgressHUD();
                                     if (model != null) {
@@ -165,14 +173,13 @@ class _LoginPageState extends State<LoginPage> {
                                 fit: BoxFit.fill,
                               ),
                               onTap: () {
-                                fluwx
-                                    .sendWeChatAuth(
-                                    scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
-                                    .then((data) {
+//                                setState(() {
+//                                  this.userVerified = false;
+//                                });
+                                fluwx.sendWeChatAuth(scope: "snsapi_userinfo", state: "wechat_sdk_demo_test").then((data) {
                                   print(data);
-                                })
-                                    .catchError((e) {
-                                      print(e);
+                                }).catchError((e) {
+                                  print(e);
                                 });
                               },
                             ),
@@ -235,8 +242,38 @@ class _LoginPageState extends State<LoginPage> {
                                 color: Colors.blue,
                                 textColor: Colors.white,
                                 onPressed: () {
+                                  String name = trueNameController.text;
+                                  String phone = phoneController.text;
+                                  String iD = iDController.text;
+                                  String account = accountController.text;
+                                  String registerPassword = registerPasswordController.text;
+                                  String repeatPassword = repeatPasswordController.text;
+                                  bool isInputsEmpty = false;
+                                  var inputs = [name, phone, iD, account, registerPassword, repeatPassword];
+                                  inputs.forEach((input) {
+                                    if ("" == input) {
+                                      isInputsEmpty = true;
+                                      return;
+                                    }
+                                  });
+                                  if (isInputsEmpty) {
+                                    CommonUtils.showErrorMessage(msg: "输入不能为空");
+                                    return;
+                                  }
+                                  if (!RegExp(r"^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$").hasMatch(phone)) {
+                                    CommonUtils.showErrorMessage(msg: "请输入正确的手机号码");
+                                    return;
+                                  }
+                                  if (!RegExp(r"^(\d{6})(18|19|20)?(\d{2})([01]\d)([0123]\d)(\d{3})(\d|X|x)?$").hasMatch(iD)) {
+                                    CommonUtils.showErrorMessage(msg: "请输入正确的身份证号码");
+                                    return;
+                                  }
+                                  if (registerPassword != repeatPassword) {
+                                    CommonUtils.showErrorMessage(msg: "两次输入密码不一致");
+                                    return;
+                                  }
                                   this.showOrDismissProgressHUD();
-                                  LoginService.setUserInfo("", "", "", "", "", (bool success) {
+                                  LoginService.setUserInfo(name, iD, phone, account, registerPassword, (bool success) {
                                     if (success) {
                                       Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
                                     }
