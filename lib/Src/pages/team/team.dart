@@ -65,8 +65,8 @@ class _TeamDetailState extends State<TeamDetail> {
       this.widget.HUD();
       TeamService.getTeamList((data) {
         setState(() {
-          first = InvitationListModel.fromJson(data).first !=null ?  InvitationListModel.fromJson(data).first:[];
-          second = InvitationListModel.fromJson(data).second != null ? InvitationListModel.fromJson(data).second:[];
+          first = InvitationListModel.fromJson(data).first;
+          second = InvitationListModel.fromJson(data).second;
           hideTeamResult = false;
         });
       });

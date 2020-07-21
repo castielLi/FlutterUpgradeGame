@@ -38,9 +38,9 @@ class MarketService {
   }
 
 
-  static Future<ResultData> getMarketTradeByType(int page ,MarketTradeTypeEnum type,callback) async {
+  static Future<ResultData> getMarketTradeByType(int page ,int type,callback) async {
 
-    GetTradeByTypeRequestModel requestModel = GetTradeByTypeRequestModel(page: page,type: type.index);
+    GetTradeByTypeRequestModel requestModel = GetTradeByTypeRequestModel(page: page,type: type);
     String params = convert.jsonEncode(requestModel);
 
     var response = await httpManager.request(ServiceUrl.getTradeList(), params, null, Options(method: "post"));

@@ -34,6 +34,9 @@ class _MarketDetailState extends State<MarketDetail> {
   final controller = TextEditingController();
   String contentName = Resource.WOOD;
 
+  int RequestHttpWood = 1;
+  int RequestHttpStone = 2;
+
   List<TradeItemModel> myTrades = [];
   TradeListModel woodList;
   TradeListModel stoneList;
@@ -88,7 +91,7 @@ class _MarketDetailState extends State<MarketDetail> {
 
   void getWoodTradeList() {
     this.widget.HUD();
-    MarketService.getMarketTradeByType(this.woodPage, MarketTradeTypeEnum.wood, (TradeListModel model) {
+    MarketService.getMarketTradeByType(this.woodPage, this.RequestHttpWood, (TradeListModel model) {
       print("请求page:" + this.woodPage.toString() + ", type: wood");
       if (model != null) {
         woodList = model;
@@ -100,7 +103,7 @@ class _MarketDetailState extends State<MarketDetail> {
   ///获取石材的市场订单情况
   Future<bool> getStoneTradeList() async {
     this.widget.HUD();
-    MarketService.getMarketTradeByType(this.stonePage, MarketTradeTypeEnum.stone, (TradeListModel model) {
+    MarketService.getMarketTradeByType(this.stonePage, this.RequestHttpStone, (TradeListModel model) {
       print("请求page:" + this.stonePage.toString() + ", type: stone");
       this.widget.HUD();
       if (model != null) {

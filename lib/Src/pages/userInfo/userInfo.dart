@@ -139,8 +139,10 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                         ImageTextButton(
                           buttonName: '退出登录',
                           callback: () {
-                            UserInfoService.logout(() {
-                              Application.router.navigateTo(context, UpgradeGameRoute.loginPage, clearStack: true);
+                            UserInfoService.logout((bool success) {
+                              if(success){
+                                Application.router.navigateTo(context, UpgradeGameRoute.loginPage, clearStack: true);
+                              }
                             });
                           },
                         ),
