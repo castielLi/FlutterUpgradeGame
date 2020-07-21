@@ -29,8 +29,8 @@ class _RankDetailState extends State<RankDetail> {
       RankService.getRankList((data) {
         if (null != data) {
           setState(() {
-            coinList = RankListModel.fromJson(data).coinList != null ?RankListModel.fromJson(data).coinList:[];
-            incomeList = RankListModel.fromJson(data).incomeList != null ? RankListModel.fromJson(data).incomeList:[];
+            coinList = RankListModel.fromJson(data).coinList;
+            incomeList = RankListModel.fromJson(data).incomeList;
           });
         }
       });

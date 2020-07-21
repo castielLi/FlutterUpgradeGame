@@ -15,11 +15,17 @@ import 'package:upgradegame/Src/service/serviceUrl.dart';
 class UserInfoService{
   static Future<ResultData> logout(callback) async{
 
-    LocalStorage.remove(Config.TOKEN_KEY);
-    await FileStorage.removeContent("token");
-    await FileStorage.removeContent("verified");
-    clearAll();
-    callback();
+    var response = await httpManager.request(ServiceUrl.logout(), {}, null, Options(method: "post"));
+    if(response.code==200){
+      LocalStorage.remove(Config.TOKEN_KEY);
+      await FileStorage.removeContent("token");
+      await FileStorage.removeContent("verified");
+      clearAll();
+      callback(true);
+    }else{
+      CommonUtils.showErrorMessage(msg: "登出失败");
+      callback(false);
+    }
   }
 
   static Future<ResultData> withdraw(String aliaccount,String cashamount ,String password ,callback) async{

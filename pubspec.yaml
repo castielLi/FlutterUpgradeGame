@@ -34,6 +34,7 @@ dependencies:
   progress_hud: ^1.1.0 #hud
   path_provider: ^1.6.10 #本地文件储存
   fluwx: ^2.1.0
+  jpush_flutter: ^0.5.5
 
 
   flutter:
