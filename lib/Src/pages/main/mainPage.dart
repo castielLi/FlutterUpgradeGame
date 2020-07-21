@@ -43,9 +43,9 @@ class _MainPageState extends State<MainPage> {
     String profitSharing = Provide.value<BaseUserInfoProvider>(context).Todayprofitsharing;
 
     ///要将分红分成17280份  5秒为一份
-    if(perFiveSecondProfit != "0") {
+    if (perFiveSecondProfit != "0") {
       perFiveSecondProfit = double.parse(profitSharing) / 17280;
-    }else{
+    } else {
       perFiveSecondProfit = 0;
     }
 
@@ -318,11 +318,14 @@ class _MainPageState extends State<MainPage> {
                       child: new Column(
                         children: [
                           new Container(
+                            // 设置加公告的宽度
+                            width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarSmallIconSize * 2),
                             decoration: new BoxDecoration(
                               color: Color.fromRGBO(0, 0, 0, 0.7),
                               borderRadius: BorderRadius.all(Radius.circular(8.0)),
                             ),
                             child: new Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 new Image(
                                   image: new AssetImage("resource/images/volume.png"),
@@ -330,7 +333,8 @@ class _MainPageState extends State<MainPage> {
                                   height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
                                 ),
                                 new Text(
-                                  '*' + baseUserInfo.voucher.toString(),
+                                  baseUserInfo.voucher.toString(),
+                                  textAlign: TextAlign.left,
                                   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                 ),
                               ],
