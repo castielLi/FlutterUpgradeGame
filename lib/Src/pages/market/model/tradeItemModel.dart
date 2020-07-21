@@ -5,6 +5,7 @@ class TradeItemModel {
   int type;
   int amount;
   int price;
+  bool mytrade;
 
   TradeItemModel(
       {this.productid,
@@ -12,7 +13,8 @@ class TradeItemModel {
         this.avatar,
         this.type,
         this.amount,
-        this.price});
+        this.price,
+      this.mytrade});
 
   TradeItemModel.fromJson(Map<String, dynamic> json) {
     productid = json['productid'];
@@ -21,6 +23,7 @@ class TradeItemModel {
     type = json['type'];
     amount = json['amount'];
     price = json['price'];
+    mytrade = json['mytrade'];
   }
 
   Map<String, dynamic> toJson() {
@@ -31,6 +34,7 @@ class TradeItemModel {
     data['type'] = this.type;
     data['amount'] = this.amount;
     data['price'] = this.price;
+    data['mytrade'] = this.mytrade;
     return data;
   }
 }

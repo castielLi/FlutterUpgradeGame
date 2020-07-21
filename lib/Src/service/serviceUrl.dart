@@ -163,5 +163,10 @@ class ServiceUrl {
   static getQRCode(){
     return "${host}api/v1/account/qrcode";
   }
+
+  ///购买市场商品
+  static marketBuy(){
+    return "${host}api/v1/market/buy";
+  }
 }
 

@@ -7,9 +7,11 @@ import 'package:upgradegame/Src/common/model/user.dart';
 import 'package:upgradegame/Src/pages/market/model/myTradeListModel.dart';
 import 'package:upgradegame/Src/pages/market/model/requstModel/cancelTradeRequestModel.dart';
 import 'package:upgradegame/Src/pages/market/model/requstModel/getTradeByTypeRequstModel.dart';
+import 'package:upgradegame/Src/pages/market/model/requstModel/marketBuyRequestModel.dart';
 import 'package:upgradegame/Src/pages/market/model/sellResourceModel.dart';
 import 'package:upgradegame/Src/pages/market/model/tradeListModel.dart';
 import 'package:upgradegame/Src/service/serviceUrl.dart';
+import 'package:upgradegame/Src/pages/market/model/requstModel/sendCoinRequestModel.dart';
 import 'dart:convert' as convert;
 
 class MarketService {
@@ -37,6 +39,19 @@ class MarketService {
     }
   }
 
+  static Future<ResultData> marketBuy(String productId,callback) async {
+
+    MarketBuyRequestModel requestModel = MarketBuyRequestModel(productid:productId);
+    String params = convert.jsonEncode(requestModel);
+
+    var response = await httpManager.request(ServiceUrl.marketBuy(), params, null, Options(method: "post"));
+    if (response.code == 200) {
+      callback(true);
+    } else {
+      CommonUtils.showErrorMessage(msg: "请求市场订单出错");
+      callback(false);
+    }
+  }
 
   static Future<ResultData> getMarketTradeByType(int page ,int type,callback) async {
 
@@ -54,9 +69,9 @@ class MarketService {
   }
 
 
-  static Future<ResultData> cancelMyMarketTrade(String productId,MarketTradeTypeEnum type,callback) async {
-
-    CancelTradeRequestModel requestModel = CancelTradeRequestModel(productid: productId,type: type.index);
+  static Future<ResultData> cancelMyMarketTrade(String productId,int type,callback) async {
+    ///wood = 1 stone = 2
+    CancelTradeRequestModel requestModel = CancelTradeRequestModel(productid: productId,type: type);
     String params = convert.jsonEncode(requestModel);
 
     var response = await httpManager.request(ServiceUrl.cancelMyMarketTrade(), params, null, Options(method: "post"));
@@ -70,7 +85,9 @@ class MarketService {
 
 
   static Future<ResultData> sellResource(type, amount, price, callback) async {
-    SellResourceModel sellResourceModel = new SellResourceModel(type: type, amount: amount, price: price);
+    ///wood = 1 stone = 2
+
+    SellResourceModel sellResourceModel = new SellResourceModel(type: type=="wood"?1:2, amount: amount, price: price);
     String params = convert.jsonEncode(sellResourceModel);
     var response = await httpManager.request(ServiceUrl.sellResource(), params, null, Options(method: "post"));
     if (response.code == 200) {
@@ -81,8 +98,9 @@ class MarketService {
     }
   }
 
-  static Future<ResultData> sendCoin(User user, callback) async {
-    String params = convert.jsonEncode(user);
+  static Future<ResultData> sendCoin(String userId,int amount ,String password, callback) async {
+    SendCoinRequestModel requestModel = SendCoinRequestModel(userid:userId,amount:amount,password:password);
+    String params = convert.jsonEncode(requestModel);
     var response = await httpManager.request(ServiceUrl.sendCoin(), params, null, Options(method: "post"));
     if (response.code == 200) {
       callback(true);
@@ -91,4 +109,5 @@ class MarketService {
       callback(false);
     }
   }
+
 }

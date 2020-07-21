@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
@@ -7,6 +8,7 @@ import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/const/resource.dart';
 import 'package:upgradegame/Src/pages/market/service/marketService.dart';
+import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
 class MarketAsk extends StatefulWidget {
   String sellType;
@@ -26,61 +28,67 @@ class _MarketAskState extends State<MarketAsk> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          '出售的' + (Resource.WOOD == this.widget.sellType ? "木材" : "石材") + '数量:',
-          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-        ),
-        MyTextField(
-          height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-          controller: amountController,
-          inputType: TextInputType.number,
-        ),
-        Text(
-          '需要的T币数量:',
-          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-        ),
-        MyTextField(
-          height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-          controller: coinController,
-          inputType: TextInputType.number,
-        ),
-        ButtonsList(
-          buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
-          buttonHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
-          buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
-          textSize: SystemFontSize.buttonTextFontSize,
-          buttons: [
-            ImageTextButton(
-              buttonName: '取消',
-              callback: () {
-                this.widget.viewCallback();
-                amountController.clear();
-                coinController.clear();
-                FocusScope.of(context).requestFocus(FocusNode());
-              },
+    return Container(
+      child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '出售的' + (Resource.WOOD == this.widget.sellType ? "木材" : "石材") + '数量:',
+              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
             ),
-            ImageTextButton(
-              buttonName: '确定',
-              callback: () {
-                MarketService.sellResource(this.widget.sellType, double.parse(this.amountController.text), double.parse(this.coinController.text), (data) {
-                  if (data) {
-                    CommonUtils.showSuccessMessage(msg: "订单发布成功");
-                    Future.delayed(Duration(seconds: 1), () {
-                      this.widget.viewCallback();
-                      amountController.clear();
-                      coinController.clear();
+            MyTextField(
+              height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+              controller: amountController,
+              inputType: TextInputType.number,
+            ),
+            Text(
+              '需要的T币数量:',
+              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+            ),
+            MyTextField(
+              height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+              controller: coinController,
+              inputType: TextInputType.number,
+            ),
+            ButtonsList(
+              buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+              buttonHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+              buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
+              textSize: SystemFontSize.buttonTextFontSize,
+              buttons: [
+                ImageTextButton(
+                  buttonName: '取消',
+                  callback: () {
+                    this.widget.viewCallback();
+                    amountController.clear();
+                    coinController.clear();
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  },
+                ),
+                ImageTextButton(
+                  buttonName: '确定',
+                  callback: () {
+                    ///todo:huanghe   把这里的两个输入框加上判断只准输入整数指
+                    MarketService.sellResource(this.widget.sellType, int.parse(this.amountController.text), int.parse(this.coinController.text), (data) {
+                      if (data) {
+                        CommonUtils.showSuccessMessage(msg: "订单发布成功");
+                        baseUserInfo.publishBid(this.widget.sellType =="wood"?1:2,int.parse(this.amountController.text));
+//                    Future.delayed(Duration(seconds: 1), () {
+//                      this.widget.viewCallback();
+//                      amountController.clear();
+//                      coinController.clear();
+//                    });
+                      }
                     });
-                  }
-                });
-                FocusScope.of(context).requestFocus(FocusNode());
-              },
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  },
+                ),
+              ],
             ),
           ],
-        ),
-      ],
+        );
+      }),
     );
   }
 

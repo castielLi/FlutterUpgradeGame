@@ -1,7 +1,7 @@
 class SellResourceModel {
-  String type;
-  double amount;
-  double price;
+  int type;
+  int amount;
+  int price;
 
   SellResourceModel({this.type, this.amount, this.price});
 
