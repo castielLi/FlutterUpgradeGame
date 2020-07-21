@@ -93,7 +93,43 @@ class BaseUserInfoProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  ///赠送t币
+  sendCoin(int amount){
+    this.tcoinamount -= amount;
+    notifyListeners();
+  }
 
+  ///发布资源订单
+  publishBid(int type,int resource){
+    ///wood = 1 stone = 2
+    if(type == 1){
+      this.woodamount -= resource;
+    }else{
+      this.stoneamount -= resource;
+    }
+    notifyListeners();
+  }
+
+  ///取消发布的资源
+  cancelBid(int type,int resource){
+    if(type == 1){
+      this.woodamount += resource;
+    }else{
+      this.stoneamount += resource;
+    }
+    notifyListeners();
+  }
+
+  ///购买资源
+  buyResource(int type,int resource,int price){
+    if(type == 1){
+      this.woodamount += resource;
+    }else{
+      this.stoneamount += resource;
+    }
+    this.tcoinamount -= price;
+    notifyListeners();
+  }
 
   ///观看广告
   watchedAnAd(WatchAdModel model) {

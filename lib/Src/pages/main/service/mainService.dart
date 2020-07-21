@@ -1,4 +1,5 @@
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/storge/fileStore.dart';
 import 'package:upgradegame/Common/storge/localStore.dart';
 import 'package:upgradegame/Common/http/httpManager.dart';
 import 'package:dio/dio.dart';
@@ -22,5 +23,18 @@ class MainService{
         ServiceUrl.takeCoin(), {}, null, null);
     TakeCoinModel model = TakeCoinModel.fromJson(response.data);
     callback(model);
+  }
+
+  static Future<ResultData> localLogout(callback) async{
+    LocalStorage.remove(Config.TOKEN_KEY);
+    await FileStorage.removeContent("token");
+    await FileStorage.removeContent("verified");
+    clearAll();
+    callback(true);
+  }
+
+  ///清除所有信息
+  static clearAll() async {
+    httpManager.clearAuthorization();
   }
 }

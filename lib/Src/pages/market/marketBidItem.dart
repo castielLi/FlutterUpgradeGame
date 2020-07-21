@@ -22,16 +22,22 @@ class MarketBidItem extends StatefulWidget {
   // 按钮名称
   String buttonName;
 
+  //是否是自己发布的订单
+  bool myTrade;
+
   // 按钮方法
   VoidCallback buttonCallback;
 
-  MarketBidItem({Key key, this.name, this.bidType, this.amount, this.needCoin, this.buttonName, this.buttonCallback}) : super(key: key);
+  MarketBidItem({Key key, this.name, this.myTrade=false,this.bidType, this.amount, this.needCoin, this.buttonName, this.buttonCallback}) : super(key: key);
 
   @override
   _MarketBidItem createState() => _MarketBidItem();
 }
 
 class _MarketBidItem extends State<MarketBidItem> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -77,16 +83,19 @@ class _MarketBidItem extends State<MarketBidItem> {
                   ),
                 ],
               ),
-              ImageTextButton(
-                imageUrl: "resource/images/upgradeButton.png",
-                imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
-                imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
-                buttonName: this.widget.buttonName,
-                callback: () {
-                  this.widget.buttonCallback();
-                },
-                textSize: SystemFontSize.settingTextFontSize,
-              )
+             Visibility(
+               visible: !this.widget.myTrade,
+               child:  ImageTextButton(
+                 imageUrl: "resource/images/upgradeButton.png",
+                 imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+                 imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+                 buttonName: this.widget.buttonName,
+                 callback: () {
+                   this.widget.buttonCallback();
+                 },
+                 textSize: SystemFontSize.settingTextFontSize,
+               ),
+             )
             ],
           ),
         ],
