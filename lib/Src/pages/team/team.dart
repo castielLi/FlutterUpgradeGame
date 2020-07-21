@@ -46,15 +46,15 @@ class _TeamDetailState extends State<TeamDetail> {
 
   void showMyTeamDetail(){
     setState(() {
-      showQRCode = true;
-      showTeamDetail = false;
+      showQRCode = false;
+      showTeamDetail = true;
     });
   }
 
   void showQRCodeDetail(){
     setState(() {
-      showQRCode = false;
-      showTeamDetail = true;
+      showQRCode = true;
+      showTeamDetail = false;
     });
   }
 
@@ -65,8 +65,8 @@ class _TeamDetailState extends State<TeamDetail> {
       this.widget.HUD();
       TeamService.getTeamList((data) {
         setState(() {
-          first = InvitationListModel.fromJson(data).first;
-          second = InvitationListModel.fromJson(data).second;
+          first = InvitationListModel.fromJson(data).first !=null ?  InvitationListModel.fromJson(data).first:[];
+          second = InvitationListModel.fromJson(data).second != null ? InvitationListModel.fromJson(data).second:[];
           hideTeamResult = false;
         });
       });
@@ -78,12 +78,12 @@ class _TeamDetailState extends State<TeamDetail> {
   Widget build(BuildContext context) {
     return new Container(
       margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(400), ScreenUtil().setWidth(100), ScreenUtil().setHeight(200)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      child: Stack(
         children: <Widget>[
           Offstage(
             offstage: !this.showTeamDetail,
-            child: Stack(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 ButtonsList(
                   buttonWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
@@ -215,30 +215,35 @@ class _TeamDetailState extends State<TeamDetail> {
           ),
           Offstage(
             offstage: !this.showQRCode,
-            child: Stack(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 FadeInImage.assetNetwork(
                     placeholder: "resource/images/defaultAvatar.png",
                     image: this.qrCodeUrl),
-                ImageButton(
-                  height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
-                  width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
-                  buttonName: "返 回",
-                  imageUrl: "resource/images/upgradeButton.png",
-                  callback: () {
-                    print('点击邀请');
-                    this.showMyTeamDetail();
-                  },
-                ),
-                ImageButton(
-                  height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
-                  width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
-                  buttonName: "分享微信",
-                  imageUrl: "resource/images/upgradeButton.png",
-                  callback: () {
-                    print('点击邀请');
-                  },
-                ),
+                new Row(
+                  children: <Widget>[
+                    ImageButton(
+                      height: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+                      width: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+                      buttonName: "返 回",
+                      imageUrl: "resource/images/upgradeButton.png",
+                      callback: () {
+                        print('点击邀请');
+                        this.showMyTeamDetail();
+                      },
+                    ),
+                    ImageButton(
+                      height: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+                      width: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+                      buttonName: "分享微信",
+                      imageUrl: "resource/images/upgradeButton.png",
+                      callback: () {
+                        print('点击邀请');
+                      },
+                    ),
+                  ],
+                )
               ],
             ),
           ),
