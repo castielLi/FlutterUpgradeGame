@@ -312,7 +312,7 @@ class _MainPageState extends State<MainPage> {
                                   height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
                                 ),
                                 new Text(
-                                  (baseUserInfo.voucher * 1000).toString(),
+                                  baseUserInfo.voucher.toString(),
                                   textAlign: TextAlign.left,
                                   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                 ),
