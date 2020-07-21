@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/common/widget/adDialog/adDialog.dart';
 import 'package:upgradegame/Src/route/application.dart';
@@ -61,6 +64,8 @@ class _WelcomePageState extends State<WelcomePage> {
     super.initState();
     this.getRules();
     this.initBaseWidget();
+
+
     ///显示开屏广告
     AdDialog().showAd(1, 1);
     AdDialog().setCallback(this.adCallback,this.adFailedCallback,true);
@@ -72,9 +77,6 @@ class _WelcomePageState extends State<WelcomePage> {
     if (hadInit) {
       return;
     }
-
-
-
 //    ///防止多次进入
 //    hadInit = true;
 //

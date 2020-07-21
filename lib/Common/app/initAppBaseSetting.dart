@@ -40,9 +40,9 @@ class _InitAppSetting extends State<InitAppSetting> {
   @override
   void initState() {
     super.initState();
-    stream = ConfigSetting.eventBus.on<HttpErrorEvent>().listen((event) {
-      errorHandleFunction(event.code, event.message);
-    });
+//    stream = ConfigSetting.eventBus.on<HttpErrorEvent>().listen((event) {
+//      errorHandleFunction(event.code, event.message);
+//    });
     _initFluwx();
   }
 
@@ -55,30 +55,30 @@ class _InitAppSetting extends State<InitAppSetting> {
     super.dispose();
   }
 
-  ///网络错误
-  errorHandleFunction(int code, message) {
-    switch (code) {
-      case ConfigSetting.NETWORK_ERROR:
-        CommonUtils.showSystemErrorMessage(msg: '网络错误');
-        break;
-      case 401:
-        CommonUtils.showSystemErrorMessage(
-            msg: '[401错误可能: 未授权 \\ 授权登录失败 \\ 登录过期]');
-        break;
-      case 403:
-        CommonUtils.showSystemErrorMessage(msg: '403权限错误');
-        break;
-      case 404:
-        CommonUtils.showSystemErrorMessage(msg: '404错误,请稍后重试！');
-        break;
-      case ConfigSetting.NETWORK_TIMEOUT:
-        CommonUtils.showSystemErrorMessage(msg: '请求超时');
-        break;
-      default:
-        CommonUtils.showSystemErrorMessage(
-          msg: "其他异常" + " " + message,
-        );
-        break;
-    }
-  }
+//  ///网络错误
+//  errorHandleFunction(int code, message) {
+//    switch (code) {
+//      case ConfigSetting.NETWORK_ERROR:
+//        CommonUtils.showSystemErrorMessage(msg: '网络错误');
+//        break;
+//      case 401:
+//        CommonUtils.showSystemErrorMessage(
+//            msg: '[401错误可能: 未授权 \\ 授权登录失败 \\ 登录过期]');
+//        break;
+//      case 403:
+//        CommonUtils.showSystemErrorMessage(msg: '403权限错误');
+//        break;
+//      case 404:
+//        CommonUtils.showSystemErrorMessage(msg: '404错误,请稍后重试！');
+//        break;
+//      case ConfigSetting.NETWORK_TIMEOUT:
+//        CommonUtils.showSystemErrorMessage(msg: '请求超时');
+//        break;
+//      default:
+//        CommonUtils.showSystemErrorMessage(
+//          msg: "其他异常" + " " + message,
+//        );
+//        break;
+//    }
+//  }
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/main/model/takeCoinModel.dart';
 import 'package:upgradegame/Src/pages/main/service/mainService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
@@ -15,6 +16,8 @@ import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/main/common/dividendPart.dart';
 import 'package:progress_hud/progress_hud.dart';
+import 'package:upgradegame/Common/event/errorEvent.dart';
+import 'package:upgradegame/Common/http/configSetting.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -29,6 +32,7 @@ class _MainPageState extends State<MainPage> {
   Timer adShareTimer;
   Timer productTCoin10;
   Timer productTCoin60;
+  StreamSubscription stream;
 
 
   ProgressHUD _progressHUD;
@@ -71,6 +75,10 @@ class _MainPageState extends State<MainPage> {
       loading: false,
     );
 
+    stream = ConfigSetting.eventBus.on<HttpErrorEvent>().listen((event) {
+      this.errorHandleFunction(event.code, event.message);
+    });
+
     ///每5秒更改一次广告分红  要将分红分成17280份
     this.adShareTimer = Timer.periodic(Duration(seconds: 5), (timer) {
       ///当前时间戳
@@ -91,7 +99,7 @@ class _MainPageState extends State<MainPage> {
       }
     });
 
-    this.productTCoin60 = Timer.periodic(Duration(seconds: 10), (timer) {
+    this.productTCoin60 = Timer.periodic(Duration(seconds: 60), (timer) {
       int timeMinute = DateTime.now().minute;
 
       /// 十分钟进行一次 userinfo请求 获取用户最新的资源动态
@@ -101,6 +109,21 @@ class _MainPageState extends State<MainPage> {
         });
       }
     });
+  }
+
+  void handleLoginFailed(){
+    CommonUtils.showSystemErrorMessage(
+        msg: '[401错误可能: 未授权 \\ 授权登录失败 \\ 登录过期]');
+    Application.router.navigateTo(context, UpgradeGameRoute.loginPage,clearStack: true);
+  }
+
+  ///网络错误
+  void errorHandleFunction(int code, message) {
+    switch (code) {
+      case 401:
+        this.handleLoginFailed();
+        break;
+    }
   }
 
   @override
@@ -118,6 +141,8 @@ class _MainPageState extends State<MainPage> {
     if(this.productTCoin60 != null){
       this.productTCoin60.cancel();
     }
+    stream.cancel();
+    stream = null;
   }
 
   void setMainBuildingNormal() {
