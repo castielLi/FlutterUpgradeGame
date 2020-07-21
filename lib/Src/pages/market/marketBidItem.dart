@@ -46,27 +46,9 @@ class _MarketBidItem extends State<MarketBidItem> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-//                  Image(
-//                    image: new AssetImage(this.widget.avatarUrl),
-//                    height: ScreenUtil().setHeight(90),
-//                  ),
-                  Text(
-                    this.widget.name,
-                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                  ),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Text('出售:', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
-                ],
-              ),
-            ],
+          Text(
+            this.widget.name + ' 出售:',
+            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +66,6 @@ class _MarketBidItem extends State<MarketBidItem> {
                 ],
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Image(
                     image: new AssetImage('resource/images/coin.png'),

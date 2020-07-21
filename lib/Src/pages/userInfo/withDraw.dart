@@ -7,7 +7,6 @@ import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
 import 'package:upgradegame/Src/provider/baseUserCashProvider.dart';
-import 'package:upgradegame/Src/route/application.dart';
 
 class Withdraw extends StatefulWidget {
   @override
@@ -71,6 +70,7 @@ class _WithdrawState extends State<Withdraw> {
                   buttonName: '返 回',
                   callback: () {
                     this.widget.viewCallback();
+                    FocusScope.of(context).requestFocus(FocusNode());
                   },
                 ),
                 ImageTextButton(
@@ -81,6 +81,7 @@ class _WithdrawState extends State<Withdraw> {
                     }else{
                       CommonUtils.showWarningMessage(msg: "你已经发起了提现操作,若要取消操作请在客服中心联系管理员");
                     }
+                    FocusScope.of(context).requestFocus(FocusNode());
                     print("Account:" + accountController.text + ",name:" + nameController.text + ",password:" + passwordController.text);
                   },
                 ),
