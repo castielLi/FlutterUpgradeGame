@@ -82,7 +82,6 @@ class _WithdrawState extends State<Withdraw> {
                       CommonUtils.showWarningMessage(msg: "你已经发起了提现操作,若要取消操作请在客服中心联系管理员");
                     }
                     FocusScope.of(context).requestFocus(FocusNode());
-                    print("Account:" + accountController.text + ",name:" + nameController.text + ",password:" + passwordController.text);
                   },
                 ),
               ],

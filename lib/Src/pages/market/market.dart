@@ -10,7 +10,6 @@ import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/const/resource.dart';
-import 'package:upgradegame/Src/common/model/enum/marketTradeTypeEnum.dart';
 import 'package:upgradegame/Src/common/model/user.dart';
 import 'package:upgradegame/Src/pages/market/event/marketEventBus.dart';
 import 'package:upgradegame/Src/pages/market/marketAsk.dart';
@@ -32,16 +31,17 @@ class MarketDetail extends StatefulWidget {
 }
 
 class _MarketDetailState extends State<MarketDetail> {
-  List<User> searchResult = [];
-  final controller = TextEditingController();
-  String contentName = Resource.WOOD;
+  User searchedUser;
+  bool showResult = false;
+  final phoneController = TextEditingController();
 
   int RequestHttpWood = 1;
   int RequestHttpStone = 2;
 
+  TradeListModel woodList = new TradeListModel(datalist: []);
+  TradeListModel stoneList = new TradeListModel(datalist: []);
   List<TradeItemModel> myTrades = [];
-  TradeListModel woodList;
-  TradeListModel stoneList;
+  String contentName = Resource.WOOD;
   int woodPage = 0;
   int stonePage = 0;
   String sellType = "wood";
@@ -79,16 +79,16 @@ class _MarketDetailState extends State<MarketDetail> {
 
   /// 获取我所发布的市场订单
   Future<bool> getMyTradeList() async {
+    bool flag = false;
     MarketService.getMyMarketTrade((model) {
       if (model != null) {
         setState(() {
           myTrades = model.datalist;
         });
-        return true;
-      } else {
-        return false;
+        flag = true;
       }
     });
+    return flag;
   }
 
   void getWoodTradeList() {
@@ -96,7 +96,15 @@ class _MarketDetailState extends State<MarketDetail> {
     MarketService.getMarketTradeByType(this.woodPage, this.RequestHttpWood, (TradeListModel model) {
       print("请求page:" + this.woodPage.toString() + ", type: wood");
       if (model != null) {
-        woodList = model;
+        woodList.total = model.total;
+        woodList.page = model.page;
+        if (model.page == 0) {
+          woodList.datalist = [];
+        }
+        if (model.datalist.length == 0) {
+          CommonUtils.showErrorMessage(msg: "没有更多了");
+        }
+        woodList.datalist += model.datalist;
       }
       this.widget.HUD();
     });
@@ -104,17 +112,25 @@ class _MarketDetailState extends State<MarketDetail> {
 
   ///获取石材的市场订单情况
   Future<bool> getStoneTradeList() async {
+    bool flag = false;
     this.widget.HUD();
     MarketService.getMarketTradeByType(this.stonePage, this.RequestHttpStone, (TradeListModel model) {
       print("请求page:" + this.stonePage.toString() + ", type: stone");
       this.widget.HUD();
       if (model != null) {
-        stoneList = model;
-        return true;
-      } else {
-        return false;
+        stoneList.total = model.total;
+        stoneList.page = model.page;
+        if (model.page == 0) {
+          stoneList.datalist = [];
+        }
+        if (model.datalist.length == 0) {
+          CommonUtils.showErrorMessage(msg: "没有更多了");
+        }
+        stoneList.datalist += model.datalist;
+        flag = true;
       }
     });
+    return flag;
   }
 
   void changeDisplayContent(String tab) {
@@ -127,7 +143,7 @@ class _MarketDetailState extends State<MarketDetail> {
   Widget build(BuildContext context) {
     return Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
-        return  Container(
+        return Container(
           margin: EdgeInsets.fromLTRB(
               ScreenUtil().setWidth(100), // 左
               ScreenUtil().setHeight(400), // 上
@@ -155,6 +171,7 @@ class _MarketDetailState extends State<MarketDetail> {
                     iconUrl: 'resource/images/wood.png',
                     callback: () {
                       this.sellType = "wood";
+                      this.woodPage = 0;
                       changeDisplayContent(Resource.WOOD);
                       MarketHttpRequestEvent().emit("getWoodTradeList");
                     },
@@ -164,6 +181,7 @@ class _MarketDetailState extends State<MarketDetail> {
                     iconUrl: 'resource/images/stone.png',
                     callback: () {
                       this.sellType = "stone";
+                      this.stonePage = 0;
                       changeDisplayContent(Resource.STONE);
                       MarketHttpRequestEvent().emit("getStoneTradeList");
                     },
@@ -181,19 +199,22 @@ class _MarketDetailState extends State<MarketDetail> {
                         children: [
                           MyTextField(
                             height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-                            controller: controller,
+                            controller: phoneController,
                             inputType: TextInputType.number,
                             hintText: '输入用户手机号搜索',
                             icon: Icon(Icons.search),
                             onSubmittedCallback: () {
-                              String phone = controller.text;
+                              String phone = phoneController.text;
+                              if (!RegExp(r"^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$").hasMatch(phone)) {
+                                CommonUtils.showErrorMessage(msg: "请输入正确的手机号码");
+                                return;
+                              }
                               MarketService.searchUser(phone, (data) {
                                 if (null != data) {
                                   setState(() {
-                                    searchResult.clear();
-                                    User user = User.fromSearchJson(data);
-                                    user.phone = phone;
-                                    searchResult.add(user);
+                                    this.searchedUser = User.fromSearchJson(data);
+                                    this.searchedUser.phone = phone;
+                                    this.showResult = true;
                                   });
                                 }
                               });
@@ -202,7 +223,8 @@ class _MarketDetailState extends State<MarketDetail> {
                           Container(
                             height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight - SystemButtonSize.inputDecorationHeight),
                             child: UserSearchResult(
-                              searchResult: searchResult,
+                              user: this.searchedUser,
+                              showResult: this.showResult,
                             ),
                           ),
                         ],
@@ -213,7 +235,6 @@ class _MarketDetailState extends State<MarketDetail> {
                       child: Container(
                         height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
                         child: EasyRefresh(
-                          ///todo:huanghe  这里上拉加载更多需要把原有的数据进行累加而不是直接把数据进行单纯的复制
                           refreshFooter: ClassicsFooter(
                             bgColor: Colors.transparent,
                             loadText: "上滑加载",
@@ -236,13 +257,14 @@ class _MarketDetailState extends State<MarketDetail> {
                           // ignore: missing_return
                           loadMore: () {
                             setState(() {
-                              woodPage++;
+                              this.woodPage++;
                               getWoodTradeList();
                             });
                           },
                           // ignore: missing_return
                           onRefresh: () {
                             setState(() {
+                              this.woodPage = 0;
                               getWoodTradeList();
                             });
                           },
@@ -251,19 +273,27 @@ class _MarketDetailState extends State<MarketDetail> {
                               itemCount: null == this.woodList ? 0 : this.woodList.datalist.length,
                               itemBuilder: (BuildContext context, int index) {
                                 TradeItemModel tradeItemModel = this.woodList.datalist[index];
+                                print("wood count:" + this.woodList.datalist.length.toString());
                                 return MarketBidItem(
                                   buttonName: "购 买",
                                   name: tradeItemModel.displayname,
                                   bidType: "wood",
-                                  myTrade:tradeItemModel.mytrade,
+                                  myTrade: tradeItemModel.mytrade,
                                   amount: tradeItemModel.amount,
                                   needCoin: tradeItemModel.price,
                                   buttonCallback: () {
-                                    MarketService.marketBuy(tradeItemModel.productid, (bool success){
-                                      if(success){
+                                    MarketService.marketBuy(tradeItemModel.productid, (bool success) {
+                                      if (success) {
                                         ///wood = 1 stone = 2
-                                        baseUserInfo.buyResource(1,tradeItemModel.amount,tradeItemModel.price);
-                                        ///todo:huanghe 将数组内这条消息进行删除，不进行重新请求
+                                        baseUserInfo.buyResource(1, tradeItemModel.amount, tradeItemModel.price);
+                                        setState(() {
+                                          for (int i = 0; i < this.woodList.datalist.length; i++) {
+                                            if (tradeItemModel.productid == this.woodList.datalist[i].productid) {
+                                              this.woodList.datalist.removeAt(i);
+                                              return;
+                                            }
+                                          }
+                                        });
                                       }
                                     });
                                   },
@@ -299,13 +329,14 @@ class _MarketDetailState extends State<MarketDetail> {
                           // ignore: missing_return
                           loadMore: () {
                             setState(() {
-                              stonePage++;
+                              this.stonePage++;
                               getStoneTradeList();
                             });
                           },
                           // ignore: missing_return
                           onRefresh: () {
                             setState(() {
+                              this.woodPage = 0;
                               getStoneTradeList();
                             });
                           },
@@ -314,19 +345,27 @@ class _MarketDetailState extends State<MarketDetail> {
                               itemCount: null == this.stoneList ? 0 : this.stoneList.datalist.length,
                               itemBuilder: (BuildContext context, int index) {
                                 TradeItemModel tradeItemModel = this.stoneList.datalist[index];
+                                print("stone count:" + this.stoneList.datalist.length.toString());
                                 return MarketBidItem(
                                   buttonName: "购 买",
                                   name: tradeItemModel.displayname,
                                   bidType: "stone",
-                                  myTrade:tradeItemModel.mytrade,
+                                  myTrade: tradeItemModel.mytrade,
                                   amount: tradeItemModel.amount,
                                   needCoin: tradeItemModel.price,
                                   buttonCallback: () {
-                                    MarketService.marketBuy(tradeItemModel.productid, (bool success){
-                                      if(success){
+                                    MarketService.marketBuy(tradeItemModel.productid, (bool success) {
+                                      if (success) {
                                         ///wood = 1 stone = 2
-                                        baseUserInfo.buyResource(2,tradeItemModel.amount,tradeItemModel.price);
-                                        ///todo:huanghe 将数组内这条消息进行删除，不进行重新请求
+                                        baseUserInfo.buyResource(2, tradeItemModel.amount, tradeItemModel.price);
+                                        setState(() {
+                                          for (int i = 0; i < this.stoneList.datalist.length; i++) {
+                                            if (tradeItemModel.productid == this.stoneList.datalist[i].productid) {
+                                              this.stoneList.datalist.removeAt(i);
+                                              return;
+                                            }
+                                          }
+                                        });
                                       }
                                     });
                                   },
@@ -400,28 +439,28 @@ class _MarketDetailState extends State<MarketDetail> {
                   textSize: SystemFontSize.buttonTextFontSize,
                   buttons: (null == myTrades || 0 == myTrades.length)
                       ? [
-                    ImageTextButton(
-                      buttonName: '发布订单',
-                      callback: () {
-                        changeDisplayContent("sellResource");
-                      },
-                    ),
-                  ]
+                          ImageTextButton(
+                            buttonName: '发布订单',
+                            callback: () {
+                              changeDisplayContent("sellResource");
+                            },
+                          ),
+                        ]
                       : [
-                    ImageTextButton(
-                      buttonName: '发布订单',
-                      callback: () {
-                        changeDisplayContent("sellResource");
-                      },
-                    ),
-                    ImageTextButton(
-                      buttonName: '我的订单',
-                      callback: () {
-                        changeDisplayContent('myTrade');
-                        MarketHttpRequestEvent().emit("getMyTradeList");
-                      },
-                    ),
-                  ],
+                          ImageTextButton(
+                            buttonName: '发布订单',
+                            callback: () {
+                              changeDisplayContent("sellResource");
+                            },
+                          ),
+                          ImageTextButton(
+                            buttonName: '我的订单',
+                            callback: () {
+                              changeDisplayContent('myTrade');
+                              MarketHttpRequestEvent().emit("getMyTradeList");
+                            },
+                          ),
+                        ],
                 ),
               ), // 发布订单
             ],
@@ -433,7 +472,7 @@ class _MarketDetailState extends State<MarketDetail> {
 
   @override
   void dispose() {
-    controller.dispose();
+    phoneController.dispose();
     super.dispose();
   }
 }
