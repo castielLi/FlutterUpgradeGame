@@ -69,16 +69,23 @@ class _MarketAskState extends State<MarketAsk> {
                 ImageTextButton(
                   buttonName: '确定',
                   callback: () {
-                    ///todo:huanghe   把这里的两个输入框加上判断只准输入整数指
+                    String amount = amountController.text;
+                    String coin = coinController.text;
+                    if ("" == amount || "" == coin) {
+                      CommonUtils.showErrorMessage(msg: "输入不能为空");
+                      return;
+                    }
+                    if (!RegExp(r"^\d*$").hasMatch(amount) || !RegExp(r"^\d*$").hasMatch(coin)) {
+                      CommonUtils.showErrorMessage(msg: "请输入整数");
+                      return;
+                    }
                     MarketService.sellResource(this.widget.sellType, int.parse(this.amountController.text), int.parse(this.coinController.text), (data) {
                       if (data) {
                         CommonUtils.showSuccessMessage(msg: "订单发布成功");
-                        baseUserInfo.publishBid(this.widget.sellType =="wood"?1:2,int.parse(this.amountController.text));
-//                    Future.delayed(Duration(seconds: 1), () {
-//                      this.widget.viewCallback();
-//                      amountController.clear();
-//                      coinController.clear();
-//                    });
+                        baseUserInfo.publishBid(this.widget.sellType == "wood" ? 1 : 2, int.parse(this.amountController.text));
+                        this.widget.viewCallback();
+                        amountController.clear();
+                        coinController.clear();
                       }
                     });
                     FocusScope.of(context).requestFocus(FocusNode());

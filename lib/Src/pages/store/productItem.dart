@@ -24,8 +24,8 @@ class _ProductItemState extends State<ProductItem> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             new Container(
-              margin: EdgeInsets.only(left: ScreenUtil().setWidth(70)),
-              width: ScreenUtil().setWidth(130),
+              margin: EdgeInsets.only(left: ScreenUtil().setWidth(50)),
+              width: ScreenUtil().setWidth(150),
               child: new Text("¥" + this.widget.cashAmount,
                   textAlign: TextAlign.center, style: TextStyle(color: Colors.white, decoration: TextDecoration.none, fontSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize))),
             ),

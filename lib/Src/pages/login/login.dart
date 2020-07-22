@@ -147,17 +147,13 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   String username = usernameController.text;
                                   String password = passwordController.text;
-                                  if ("" == username) {
-                                    CommonUtils.showErrorMessage(msg: "用户名不能为空");
-                                    return;
-                                  }
-                                  if ("" == password) {
-                                    CommonUtils.showErrorMessage(msg: "密码不能为空");
+                                  if ("" == username || "" == password) {
+                                    CommonUtils.showErrorMessage(msg: "输入不能为空");
                                     return;
                                   }
                                   this.showOrDismissProgressHUD();
                                   LoginService.loginWithAccount(username, password, (LoginReponseModel model) {
-//                                  LoginService.loginWithAccount("lizj", "112233", (LoginReponseModel model) {
+
                                     this.showOrDismissProgressHUD();
                                     if (model != null) {
                                       ///初始化用户

@@ -10,9 +10,10 @@ import 'package:upgradegame/Src/pages/market/service/marketService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
 class UserSearchResult extends StatefulWidget {
-  List<User> searchResult = [];
+  User user;
+  bool showResult;
 
-  UserSearchResult({Key key, this.searchResult}) : super(key: key);
+  UserSearchResult({Key key, this.user, this.showResult}) : super(key: key);
 
   @override
   _UserSearchResult createState() => _UserSearchResult();
@@ -21,41 +22,36 @@ class UserSearchResult extends StatefulWidget {
 class _UserSearchResult extends State<UserSearchResult> {
   final amountController = TextEditingController();
   final passwordController = TextEditingController();
-  bool userSearchResultHide = false;
+  bool userSearchResultPageHide = false;
   bool sendCoinPageHide = true;
-  User user;
 
   @override
   Widget build(BuildContext context) {
-    return
-      Container(
-        child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
-          return Stack(
+    return Container(
+      child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
+        return Offstage(
+          offstage: !this.widget.showResult,
+          child: Stack(
             children: [
               Offstage(
-                offstage: this.userSearchResultHide,
-                child: this.widget.searchResult.length == 0
+                offstage: this.userSearchResultPageHide,
+                child: null == this.widget.user
                     ? Text(
-                  '没有搜索到用户',
-                  textAlign: TextAlign.center,
-                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                )
-                    : ListView.builder(
-                    itemCount: this.widget.searchResult.length,
-                    itemExtent: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-                    itemBuilder: (BuildContext context, int index) {
-                      User user = this.widget.searchResult[index];
-                      return GestureDetector(
+                        '没有搜索到用户',
+                        textAlign: TextAlign.center,
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                      )
+                    : GestureDetector(
                         onTap: () {
                           setState(() {
                             this.sendCoinPageHide = false;
-                            this.userSearchResultHide = true;
+                            this.userSearchResultPageHide = true;
                           });
-                          this.user = user;
-                          print('Send coin to ' + user.name);
+                          print('Send coin to ' + this.widget.user.name);
                         },
                         child: Container(
-                          margin: EdgeInsets.only(bottom: 3),
+                          margin: EdgeInsets.only(top: 30),
+                          height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: new AssetImage('resource/images/userSearchItemBackground.png'),
@@ -82,7 +78,7 @@ class _UserSearchResult extends State<UserSearchResult> {
 //                                height: ScreenUtil().setHeight(90),
 //                              ),
                                     Text(
-                                      user.name,
+                                      this.widget.user.name,
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                   ],
@@ -91,8 +87,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                             ],
                           ),
                         ),
-                      );
-                    }),
+                      ),
               ),
               Offstage(
                 offstage: this.sendCoinPageHide,
@@ -125,13 +120,14 @@ class _UserSearchResult extends State<UserSearchResult> {
                         ImageTextButton(
                           buttonName: '确 定',
                           callback: () {
-                            MarketService.sendCoin(this.user.id,int.parse(amountController.text),passwordController.text, (data) {
+                            //TODO 与原密码比较
+                            MarketService.sendCoin(this.widget.user.id, int.parse(amountController.text), passwordController.text, (data) {
                               if (data) {
                                 CommonUtils.showSuccessMessage(msg: "发送成功");
                                 baseUserInfo.sendCoin(int.parse(amountController.text));
-                                  showUserSearchResultPage();
-                                  amountController.clear();
-                                  passwordController.clear();
+                                showUserSearchResultPage();
+                                amountController.clear();
+                                passwordController.clear();
                               }
                             });
                             FocusScope.of(context).requestFocus(FocusNode());
@@ -143,15 +139,16 @@ class _UserSearchResult extends State<UserSearchResult> {
                 ),
               ),
             ],
-          );
-        }),
-      );
+          ),
+        );
+      }),
+    );
   }
 
   void showUserSearchResultPage() {
     setState(() {
       this.sendCoinPageHide = true;
-      this.userSearchResultHide = false;
+      this.userSearchResultPageHide = false;
     });
   }
 }

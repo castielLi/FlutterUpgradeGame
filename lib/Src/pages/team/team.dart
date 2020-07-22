@@ -5,7 +5,6 @@ import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
-import 'package:upgradegame/Src/pages/team/event/teamEventBus.dart';
 import 'package:upgradegame/Src/pages/team/model/invitation.dart';
 import 'package:upgradegame/Src/pages/team/model/qrCodeModel.dart';
 import 'package:upgradegame/Src/pages/team/service/teamService.dart';
@@ -111,7 +110,7 @@ class _TeamDetailState extends State<TeamDetail> {
                   child: Offstage(
                     offstage: hideTeamResult,
                     child: Text(
-                      '团队成员还为0',
+                      '还没有团队成员',
                       textAlign: TextAlign.center,
                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                     ),
@@ -146,7 +145,22 @@ class _TeamDetailState extends State<TeamDetail> {
                               child: EasyRefresh(
                                 refreshFooter: ClassicsFooter(
                                   bgColor: Colors.transparent,
+                                  loadText: "上滑加载",
+                                  loadReadyText: "松开加载",
+                                  loadingText: "正在加载",
+                                  loadedText: "加载完成",
+                                  noMoreText: "没有更多了",
+                                  loadHeight: 35,
                                   key: new GlobalKey<RefreshFooterState>(),
+                                ),
+                                refreshHeader: ClassicsHeader(
+                                  bgColor: Colors.transparent,
+                                  refreshText: "下拉刷新",
+                                  refreshReadyText: "松开刷新",
+                                  refreshingText: "正在刷新",
+                                  refreshedText: "刷新完成",
+                                  refreshHeight: 35,
+                                  key: new GlobalKey<RefreshHeaderState>(),
                                 ),
                                 // ignore: missing_return
                                 loadMore: () {
@@ -156,7 +170,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                 },
                                 child: first.length == 0
                                     ? Text(
-                                  '团队成员还为0',
+                                  '还没有团队成员',
                                   textAlign: TextAlign.center,
                                   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                                 )
@@ -176,7 +190,22 @@ class _TeamDetailState extends State<TeamDetail> {
                                 child: EasyRefresh(
                                   refreshFooter: ClassicsFooter(
                                     bgColor: Colors.transparent,
+                                    loadText: "上滑加载",
+                                    loadReadyText: "松开加载",
+                                    loadingText: "正在加载",
+                                    loadedText: "加载完成",
+                                    noMoreText: "没有更多了",
+                                    loadHeight: 35,
                                     key: new GlobalKey<RefreshFooterState>(),
+                                  ),
+                                  refreshHeader: ClassicsHeader(
+                                    bgColor: Colors.transparent,
+                                    refreshText: "下拉刷新",
+                                    refreshReadyText: "松开刷新",
+                                    refreshingText: "正在刷新",
+                                    refreshedText: "刷新完成",
+                                    refreshHeight: 35,
+                                    key: new GlobalKey<RefreshHeaderState>(),
                                   ),
                                   // ignore: missing_return
                                   loadMore: () {
