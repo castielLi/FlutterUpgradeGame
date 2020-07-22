@@ -168,5 +168,20 @@ class ServiceUrl {
   static marketBuy(){
     return "${host}api/v1/market/buy";
   }
+
+  ///获取t币明细
+  static getTCoinDetail(){
+    return "${host}api/v1/bill/tcoin";
+  }
+
+  ///获取提现明细
+  static getWithdrawDetail(){
+    return "${host}api/v1/bill/cash";
+  }
+
+  ///获取客服中心
+  static serverCenter(){
+    return "${host}api/v1/servercenter";
+  }
 }
 
