@@ -94,12 +94,11 @@ class _AccountDetailState extends State<AccountDetail> {
                       AccountService.changePassword(repeatPasswordController.text, (data) {
                         if (ConfigSetting.SUCCESS == data) {
                           CommonUtils.showSuccessMessage(msg: "密码修改成功");
-                          Future.delayed(Duration(seconds: 1), () {
-                            this.widget.viewCallback();
-                            originalPasswordController.clear();
-                            newPasswordController.clear();
-                            repeatPasswordController.clear();
-                          });
+                          ///todo:huanghe
+                          originalPasswordController.clear();
+                          newPasswordController.clear();
+                          repeatPasswordController.clear();
+                          this.widget.viewCallback();
                         }
                       });
                     }

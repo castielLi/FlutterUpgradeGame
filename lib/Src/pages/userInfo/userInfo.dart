@@ -105,18 +105,18 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                       textSize: SystemFontSize.settingTextFontSize,
                       isColumn: true,
                       buttons: [
+//                        ImageTextButton(
+//                          buttonName: '账号及安全',
+//                          callback: () {
+//                            switchPageBetweenFatherAndSon(sonPageName: "账号及安全");
+//                            this.widget.changeTitleCallback("账号及安全");
+//                          },
+//                        ),
                         ImageTextButton(
-                          buttonName: '账号及安全',
+                          buttonName: 'T币明细',
                           callback: () {
-                            switchPageBetweenFatherAndSon(sonPageName: "账号及安全");
-                            this.widget.changeTitleCallback("账号及安全");
-                          },
-                        ),
-                        ImageTextButton(
-                          buttonName: '交易明细',
-                          callback: () {
-                            switchPageBetweenFatherAndSon(sonPageName: "交易明细");
-                            this.widget.changeTitleCallback("交易明细");
+                            switchPageBetweenFatherAndSon(sonPageName: "T币明细");
+                            this.widget.changeTitleCallback("T币明细");
                             UserInfoHttpRequestEvent().emit("tcoinDetail");
                           },
                         ),
@@ -125,7 +125,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                           callback: () {
                             switchPageBetweenFatherAndSon(sonPageName: "提现记录");
                             this.widget.changeTitleCallback("提现记录");
-                            UserInfoHttpRequestEvent().emit("tradeDetail");
+                            UserInfoHttpRequestEvent().emit("withdrawDetail");
                           },
                         ),
                         ImageTextButton(
@@ -165,9 +165,9 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
               ),
             ),
 
-            ///交易明细
+            ///T币明细
             new Offstage(
-              offstage: "交易明细" != buttonName,
+              offstage: "T币明细" != buttonName,
               child: new TradeDetail(
                 HUD: this.widget.HUD,
                 viewCallback: () {
