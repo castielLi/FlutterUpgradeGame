@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/userInfo/event/userInfoEventBus.dart';
+import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
 import 'package:upgradegame/Src/pages/userInfo/tradeDetail/tradeItem.dart';
 
 class TradeDetail extends StatefulWidget {
@@ -17,16 +18,20 @@ class TradeDetail extends StatefulWidget {
 
 class _TradeDetailState extends State<TradeDetail> {
 
+  int page = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    UserInfoHttpRequestEvent().on("tradeDetail",this.getTradeDetail);
+    UserInfoHttpRequestEvent().on("tcoinDetail",this.getTCoinDetail);
   }
 
-  void getTradeDetail(){
-    print("开始获取TradeDetail");
+  void getTCoinDetail(){
+    this.widget.HUD();
+    UserInfoService.getUserTCoinDetail(this.page,(){
+      this.widget.HUD();
+    });
   }
 
   @override

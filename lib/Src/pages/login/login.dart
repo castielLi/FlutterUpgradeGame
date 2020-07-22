@@ -152,9 +152,8 @@ class _LoginPageState extends State<LoginPage> {
                                     return;
                                   }
                                   this.showOrDismissProgressHUD();
-//                                  LoginService.loginWithAccount(username, password, (LoginReponseModel model) {
-                                  LoginService.loginWithAccount("lizj", "112233", (LoginReponseModel model) {
-//                                  LoginService.loginWithAccount("shisheng", "123321", (LoginReponseModel model) {
+                                  LoginService.loginWithAccount(username, password, (LoginReponseModel model) {
+
                                     this.showOrDismissProgressHUD();
                                     if (model != null) {
                                       ///初始化用户

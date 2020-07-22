@@ -20,16 +20,17 @@ class Withdraw extends StatefulWidget {
 
 class _WithdrawState extends State<Withdraw> {
   final accountController = TextEditingController();
-  final nameController = TextEditingController();
+  final amountController = TextEditingController();
   final passwordController = TextEditingController();
 
-  withdraw(){
+  withdraw(String account,String password,String amount){
     this.widget.HUD();
-    UserInfoService.withdraw("aliaccount", "cashamount", "password", (bool success){
+    UserInfoService.withdraw(account, amount, password, (bool success){
       this.widget.HUD();
       if(success){
         CommonUtils.showSuccessMessage(msg: "你已经发起了提现操作,等待工作人员发放,若要修改请在客服中心联系管理员");
         Provide.value<BaseUserCashProvider>(context).withdraw();
+        this.widget.viewCallback();
       }
     });
   }
@@ -52,8 +53,8 @@ class _WithdrawState extends State<Withdraw> {
               controller: accountController,
             ),
             TextField(
-              decoration: InputDecoration(labelText: "姓名", prefixIcon: Icon(Icons.person)),
-              controller: nameController,
+              decoration: InputDecoration(labelText: "金额", prefixIcon: Icon(Icons.attach_money)),
+              controller: amountController,
             ),
             TextField(
               decoration: InputDecoration(labelText: "密码", prefixIcon: Icon(Icons.lock)),
@@ -77,11 +78,12 @@ class _WithdrawState extends State<Withdraw> {
                   buttonName: '确 定',
                   callback: () {
                     if(!cashInfo.hasWithdraw){
-                      this.withdraw();
+                      this.withdraw(accountController.text,passwordController.text,amountController.text);
                     }else{
                       CommonUtils.showWarningMessage(msg: "你已经发起了提现操作,若要取消操作请在客服中心联系管理员");
                     }
                     FocusScope.of(context).requestFocus(FocusNode());
+
                   },
                 ),
               ],
@@ -95,7 +97,7 @@ class _WithdrawState extends State<Withdraw> {
   @override
   void dispose() {
     accountController.dispose();
-    nameController.dispose();
+    amountController.dispose();
     passwordController.dispose();
     super.dispose();
   }
