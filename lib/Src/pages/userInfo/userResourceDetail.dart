@@ -5,7 +5,6 @@ import 'package:upgradegame/Common/widget/imageText/imageText.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 
 class UserResourceDetail extends StatefulWidget {
-  @override
   String imageUrl;
   String amountCash;
   VoidCallback withdrawCallback;
@@ -27,7 +26,10 @@ class _UserResourceDetailState extends State<UserResourceDetail> {
               Container(
                 width: ScreenUtil().setHeight(160),
                 height: ScreenUtil().setHeight(160),
-                child: FadeInImage.assetNetwork(placeholder: "resource/images/defaultAvatar.png", image: this.widget.imageUrl),
+                child: CircleAvatar(
+                  radius: ScreenUtil().setHeight(80),
+                  backgroundImage: NetworkImage(this.widget.imageUrl),
+                ),
               ),
               ImageText(
                 imageUrl: "resource/images/verified.png",
