@@ -224,7 +224,7 @@ class _MarketDetailState extends State<MarketDetail> {
                             height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight - SystemButtonSize.inputDecorationHeight),
                             child: UserSearchResult(
                               user: this.searchedUser,
-                              showResult: this.showResult,
+                              showWidget: this.showResult,
                             ),
                           ),
                         ],

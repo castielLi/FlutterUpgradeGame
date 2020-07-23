@@ -22,7 +22,8 @@ class RaidersDetail extends StatefulWidget {
 class _RaidersDetailState extends State<RaidersDetail> {
   String basic = '';
   String advanced = '';
-  String tabName = 'basic';
+  bool showTabOneOfTwoTabs = true;
+
 
   @override
   void initState() {
@@ -62,13 +63,13 @@ class _RaidersDetailState extends State<RaidersDetail> {
               ImageTextButton(
                 buttonName: '基 础',
                 callback: () {
-                  changeTabs('basic');
+                  switchBetweenTwoTabs();
                 },
               ),
               ImageTextButton(
                 buttonName: '进 阶',
                 callback: () {
-                  changeTabs('advanced');
+                  switchBetweenTwoTabs();
                 },
               ),
             ],
@@ -78,7 +79,7 @@ class _RaidersDetailState extends State<RaidersDetail> {
             child: Stack(
               children: [
                 Offstage(
-                  offstage: tabName != 'basic',
+                  offstage: !showTabOneOfTwoTabs,
                   child: SingleChildScrollView(
                     child: Text(
                       basic,
@@ -88,7 +89,7 @@ class _RaidersDetailState extends State<RaidersDetail> {
                   ),
                 ),
                 Offstage(
-                  offstage: tabName != 'advanced',
+                  offstage: showTabOneOfTwoTabs,
                   child: SingleChildScrollView(
                     child: Text(
                       advanced,
@@ -115,9 +116,9 @@ class _RaidersDetailState extends State<RaidersDetail> {
     );
   }
 
-  void changeTabs(String tab) {
+  void switchBetweenTwoTabs() {
     setState(() {
-      tabName = tab;
+      this.showTabOneOfTwoTabs = !this.showTabOneOfTwoTabs;
     });
   }
 }

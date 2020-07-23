@@ -11,9 +11,9 @@ import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
 class UserSearchResult extends StatefulWidget {
   User user;
-  bool showResult;
+  bool showWidget;
 
-  UserSearchResult({Key key, this.user, this.showResult}) : super(key: key);
+  UserSearchResult({Key key, this.user, this.showWidget}) : super(key: key);
 
   @override
   _UserSearchResult createState() => _UserSearchResult();
@@ -22,19 +22,18 @@ class UserSearchResult extends StatefulWidget {
 class _UserSearchResult extends State<UserSearchResult> {
   final amountController = TextEditingController();
   final passwordController = TextEditingController();
-  bool userSearchResultPageHide = false;
-  bool sendCoinPageHide = true;
+  bool showFirstOfTwoPages = true;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
         return Offstage(
-          offstage: !this.widget.showResult,
+          offstage: !this.widget.showWidget,
           child: Stack(
             children: [
               Offstage(
-                offstage: this.userSearchResultPageHide,
+                offstage: !this.showFirstOfTwoPages,
                 child: null == this.widget.user
                     ? Text(
                         '没有搜索到用户',
@@ -43,10 +42,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                       )
                     : GestureDetector(
                         onTap: () {
-                          setState(() {
-                            this.sendCoinPageHide = false;
-                            this.userSearchResultPageHide = true;
-                          });
+                          switchBetweenTwoPages();
                           print('Send coin to ' + this.widget.user.name);
                         },
                         child: Container(
@@ -90,7 +86,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                       ),
               ),
               Offstage(
-                offstage: this.sendCoinPageHide,
+                offstage: this.showFirstOfTwoPages,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
@@ -113,7 +109,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                         ImageTextButton(
                           buttonName: '返 回',
                           callback: () {
-                            showUserSearchResultPage();
+                            switchBetweenTwoPages();
                             FocusScope.of(context).requestFocus(FocusNode());
                           },
                         ),
@@ -125,7 +121,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                               if (data) {
                                 CommonUtils.showSuccessMessage(msg: "发送成功");
                                 baseUserInfo.sendCoin(int.parse(amountController.text));
-                                showUserSearchResultPage();
+                                switchBetweenTwoPages();
                                 amountController.clear();
                                 passwordController.clear();
                               }
@@ -145,10 +141,9 @@ class _UserSearchResult extends State<UserSearchResult> {
     );
   }
 
-  void showUserSearchResultPage() {
+  void switchBetweenTwoPages(){
     setState(() {
-      this.sendCoinPageHide = true;
-      this.userSearchResultPageHide = false;
+      this.showFirstOfTwoPages=!this.showFirstOfTwoPages;
     });
   }
 }

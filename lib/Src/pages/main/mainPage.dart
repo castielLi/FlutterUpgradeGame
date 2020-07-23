@@ -84,11 +84,10 @@ class _MainPageState extends State<MainPage> {
     });
 
     ///收到通知的监听
-    notification = NotificationEvent().eventBus.on<RecieveNotificationEvent>().listen((message){
-      Map<String ,dynamic> model = convert.jsonDecode(message.message['extras']['cn.jpush.android.EXTRA']);
+    notification = NotificationEvent().eventBus.on<RecieveNotificationEvent>().listen((message) {
+      Map<String, dynamic> model = convert.jsonDecode(message.message['extras']['cn.jpush.android.EXTRA']);
       print(model);
     });
-
 
     ///每5秒更改一次广告分红  要将分红分成17280份
     this.adShareTimer = Timer.periodic(Duration(seconds: 5), (timer) {
@@ -122,11 +121,10 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  void handleLoginFailed(){
-    CommonUtils.showSystemErrorMessage(
-        msg: '账号在其他设备登录 \\ 授权登录失败 \\ 登录过期');
-    MainService.localLogout((bool success){
-      Application.router.navigateTo(context, UpgradeGameRoute.loginPage,clearStack: true);
+  void handleLoginFailed() {
+    CommonUtils.showSystemErrorMessage(msg: '账号在其他设备登录 \\ 授权登录失败 \\ 登录过期');
+    MainService.localLogout((bool success) {
+      Application.router.navigateTo(context, UpgradeGameRoute.loginPage, clearStack: true);
     });
   }
 
@@ -292,53 +290,85 @@ class _MainPageState extends State<MainPage> {
               ///功能栏
               new Container(
                 margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + SystemIconSize.mainPageSignalBarHeight)),
-                height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize * 2),
+                height: ScreenUtil().setHeight(SystemIconSize.mainPageFunctionBarIconSize * 2 + 30),
                 child: new Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     new Container(
-                      child: new Row(
-                        children: <Widget>[
-                          new UserImageButton(
-                            size: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize),
-                            buttonName: "排行榜",
-                            imageUrl: "resource/images/rank.png",
-                            textSize: SystemFontSize.operationTextFontSize,
-                            callback: () {
-                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                                'height': ScreenUtil().setHeight(1660),
-                                'width': ScreenUtil().setWidth(1020),
-                                'childName': 'rankDetail',
-                                "title": "排行榜",
-                              });
-                            },
+                      child: new Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          new Row(
+                            children: <Widget>[
+                              new UserImageButton(
+                                size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                                buttonName: "排行榜",
+                                imageUrl: "resource/images/rank.png",
+                                textSize: SystemFontSize.operationTextFontSize,
+                                callback: () {
+                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+                                    'height': ScreenUtil().setHeight(1660),
+                                    'width': ScreenUtil().setWidth(1020),
+                                    'childName': 'rankDetail',
+                                    "title": "排行榜",
+                                  });
+                                },
+                              ),
+                              new UserImageButton(
+                                size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                                buttonName: "团队",
+                                textSize: SystemFontSize.operationTextFontSize,
+                                imageUrl: "resource/images/team.png",
+                                callback: () {
+                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,
+                                      params: {'height': ScreenUtil().setHeight(1660), 'width': ScreenUtil().setWidth(1020), 'childName': 'teamDetail', "title": "团 队"});
+                                },
+                              ),
+                              new UserImageButton(
+                                size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                                buttonName: "商城",
+                                textSize: SystemFontSize.operationTextFontSize,
+                                imageUrl: "resource/images/marketStores.png",
+                                callback: () {
+                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,
+                                      params: {'height': ScreenUtil().setHeight(1660), 'width': ScreenUtil().setWidth(1020), 'childName': 'storeDetail', "title": "商 城"});
+                                },
+                              ),
+                            ],
                           ),
-                          new UserImageButton(
-                            size: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize),
-                            buttonName: "团队",
-                            textSize: SystemFontSize.operationTextFontSize,
-                            imageUrl: "resource/images/team.png",
-                            callback: () {
-                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,
-                                  params: {'height': ScreenUtil().setHeight(1660), 'width': ScreenUtil().setWidth(1020), 'childName': 'teamDetail', "title": "团 队"});
-                            },
-                          ),
-                          new UserImageButton(
-                            size: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize),
-                            buttonName: "商城",
-                            textSize: SystemFontSize.operationTextFontSize,
-                            imageUrl: "resource/images/marketStores.png",
-                            callback: () {
-                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,
-                                  params: {'height': ScreenUtil().setHeight(1660), 'width': ScreenUtil().setWidth(1020), 'childName': 'storeDetail', "title": "商 城"});
-                            },
+                          new Row(
+                            children: <Widget>[
+                              new UserImageButton(
+                                size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                                buttonName: "贡献值",
+                                imageUrl: "resource/images/rank.png",
+                                textSize: SystemFontSize.operationTextFontSize,
+                                callback: () {
+                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+                                    'height': ScreenUtil().setHeight(1660),
+                                    'width': ScreenUtil().setWidth(1020),
+                                    'childName': 'contributionDetail',
+                                    "title": "贡献值",
+                                  });
+                                },
+                              ),
+                              new UserImageButton(
+                                size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                                buttonName: "刷新",
+                                textSize: SystemFontSize.operationTextFontSize,
+                                imageUrl: "resource/images/refresh.png",
+                                callback: () {
+                                  CommonUtils.showSuccessMessage(msg: "刷新页面");
+                                },
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ),
                     new Container(
-                      height: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarIconSize),
+                      height: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
                       child: new DividendPart(
                         imageTitle: "分红",
                         imageUrl: "resource/images/dividend.png",
