@@ -1,4 +1,6 @@
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
+import 'package:upgradegame/Common/app/notificationEvent.dart';
 import 'dart:async';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:fluwx/fluwx.dart' as fluwx;
@@ -18,6 +20,7 @@ class _InitAppSetting extends State<InitAppSetting> {
 
   String debugLable = 'Unknown';
   final JPush jpush = new JPush();
+  final eventBus = new NotificationEvent();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +34,7 @@ class _InitAppSetting extends State<InitAppSetting> {
       jpush.addEventHandler(
           onReceiveNotification: (Map<String, dynamic> message) async {
             print("flutter onReceiveNotification: $message");
+            eventBus.eventBus.fire(RecieveNotificationEvent(message));
             setState(() {
               debugLable = "flutter onReceiveNotification: $message";
             });
@@ -100,6 +104,7 @@ class _InitAppSetting extends State<InitAppSetting> {
   void initState() {
     super.initState();
     _initFluwx();
+    initPlatformState();
   }
 
   @override

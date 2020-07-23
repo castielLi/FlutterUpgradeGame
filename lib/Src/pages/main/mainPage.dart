@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/app/notificationEvent.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/main/model/takeCoinModel.dart';
 import 'package:upgradegame/Src/pages/main/service/mainService.dart';
@@ -18,6 +19,8 @@ import 'package:upgradegame/Src/pages/main/common/dividendPart.dart';
 import 'package:progress_hud/progress_hud.dart';
 import 'package:upgradegame/Common/event/errorEvent.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
+import 'package:upgradegame/Common/app/notificationEvent.dart';
+import 'dart:convert' as convert;
 
 class MainPage extends StatefulWidget {
   @override
@@ -33,6 +36,7 @@ class _MainPageState extends State<MainPage> {
   Timer productTCoin10;
   Timer productTCoin60;
   StreamSubscription stream;
+  StreamSubscription notification;
 
   ProgressHUD _progressHUD;
   bool _loading = false;
@@ -74,9 +78,17 @@ class _MainPageState extends State<MainPage> {
       loading: false,
     );
 
+    ///获取401的监听
     stream = ConfigSetting.eventBus.on<HttpErrorEvent>().listen((event) {
       this.errorHandleFunction(event.code, event.message);
     });
+
+    ///收到通知的监听
+    notification = NotificationEvent().eventBus.on<RecieveNotificationEvent>().listen((message){
+      Map<String ,dynamic> model = convert.jsonDecode(message.message['extras']['cn.jpush.android.EXTRA']);
+      print(model);
+    });
+
 
     ///每5秒更改一次广告分红  要将分红分成17280份
     this.adShareTimer = Timer.periodic(Duration(seconds: 5), (timer) {

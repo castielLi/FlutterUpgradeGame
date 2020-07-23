@@ -3,8 +3,8 @@ class ServiceUrl {
   ///fastmock
 //      "https://www.fastmock.site/mock/095e3520b3833640934d29559631cc16/";
   ///server
-//  "https://test.buluo888.com/";
-  "http://192.168.31.46:8080/";
+  "https://test.buluo888.com/";
+//  "http://192.168.31.46:8080/";
   static const String downloadUrl = '';
 
   /// rule
@@ -167,6 +167,21 @@ class ServiceUrl {
   ///购买市场商品
   static marketBuy(){
     return "${host}api/v1/market/buy";
+  }
+
+  ///获取t币明细
+  static getTCoinDetail(){
+    return "${host}api/v1/bill/tcoin";
+  }
+
+  ///获取提现明细
+  static getWithdrawDetail(){
+    return "${host}api/v1/bill/cash";
+  }
+
+  ///获取客服中心
+  static serverCenter(){
+    return "${host}api/v1/servercenter";
   }
 }
 

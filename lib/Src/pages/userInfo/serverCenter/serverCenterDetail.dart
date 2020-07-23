@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/userInfo/event/userInfoEventBus.dart';
+import 'package:upgradegame/Src/pages/userInfo/model/serverCenterModel.dart';
+import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
 
 class ServerCenter extends StatefulWidget {
   @override
@@ -25,6 +27,13 @@ class _ServerCenterState extends State<ServerCenter> {
 
   void getServerCenter(){
     print("开始请求serverCenter");
+    this.widget.HUD();
+    UserInfoService.ServerCenter((ServerCenterModel model){
+      if(model != null){
+
+      }
+      this.widget.HUD();
+    });
   }
 
   @override
