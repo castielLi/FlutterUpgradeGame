@@ -82,7 +82,10 @@ class LoginService{
         ServiceUrl.getuser(), {}, null, null);
 
     if(response.code != 200){
-      FileStorage.saveContent("", "token");
+      LocalStorage.remove(Config.TOKEN_KEY);
+      await FileStorage.removeContent("token");
+      await FileStorage.removeContent("verified");
+      clearAll();
       callback(null);
     }else{
       BaseUserInfoModel model = BaseUserInfoModel.fromJson(response.data);

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/userInfo/event/userInfoEventBus.dart';
+import 'package:upgradegame/Src/pages/userInfo/model/tCoinDetailModel.dart';
 import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
 import 'package:upgradegame/Src/pages/userInfo/tradeDetail/tradeItem.dart';
 
@@ -29,7 +30,7 @@ class _TradeDetailState extends State<TradeDetail> {
 
   void getTCoinDetail(){
     this.widget.HUD();
-    UserInfoService.getUserTCoinDetail(this.page,(){
+    UserInfoService.getUserTCoinDetail(this.page,(TCoinDetailModel model){
       this.widget.HUD();
     });
   }

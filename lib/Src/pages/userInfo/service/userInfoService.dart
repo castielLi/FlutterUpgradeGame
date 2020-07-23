@@ -14,6 +14,7 @@ import 'dart:convert' as convert;
 import 'package:upgradegame/Src/pages/userInfo/model/requestModel/withdrawRequestModel.dart';
 import 'package:upgradegame/Src/pages/userInfo/model/serverCenterModel.dart';
 import 'package:upgradegame/Src/service/serviceUrl.dart';
+import 'package:upgradegame/Src/pages/userInfo/model/tCoinDetailModel.dart';
 
 class UserInfoService{
   static Future<ResultData> logout(callback) async{
@@ -59,8 +60,8 @@ class UserInfoService{
     String params = convert.jsonEncode(requestModel);
     var response = await httpManager.request(ServiceUrl.getTCoinDetail(), params, null, Options(method: "post"));
     if (response.code == 200) {
-
-//      callback(responseModel);
+      TCoinDetailModel model = TCoinDetailModel.fromJson(response.data);
+      callback(model);
     } else {
       CommonUtils.showErrorMessage(msg: "获取T币明细失败");
       callback(null);
