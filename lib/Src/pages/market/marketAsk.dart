@@ -76,7 +76,7 @@ class _MarketAskState extends State<MarketAsk> {
                       return;
                     }
                     if (!RegExp(r"^\d*$").hasMatch(amount) || !RegExp(r"^\d*$").hasMatch(coin)) {
-                      CommonUtils.showErrorMessage(msg: "请输入整数");
+                      CommonUtils.showErrorMessage(msg: "请输入正整数");
                       return;
                     }
                     MarketService.sellResource(this.widget.sellType, int.parse(this.amountController.text), int.parse(this.coinController.text), (data) {

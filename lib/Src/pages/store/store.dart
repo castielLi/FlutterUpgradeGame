@@ -21,7 +21,7 @@ class StoreDetail extends StatefulWidget {
 }
 
 class _StoreDetailState extends State<StoreDetail> {
-  List<StoreModel> storeList;
+  List<StoreModel> storeList = [];
 
   String orderId = "";
 
@@ -29,11 +29,11 @@ class _StoreDetailState extends State<StoreDetail> {
   void initState() {
     super.initState();
     fluwx.weChatResponseEventHandler.listen((response) async {
-      print("WeChatPaymentResponse"+response.errCode.toString());
-      if(response.errCode == 0 && response is WeChatPaymentResponse )  {
-        StoreService.ConfirmOrder(this.orderId, (VoucherModel model){
+      print("WeChatPaymentResponse" + response.errCode.toString());
+      if (response.errCode == 0 && response is WeChatPaymentResponse) {
+        StoreService.ConfirmOrder(this.orderId, (VoucherModel model) {
           this.widget.HUD();
-          if(model!=null){
+          if (model != null) {
             Provide.value<BaseUserInfoProvider>(context).buyVoucher(model.amount);
           }
           fluwx.weChatResponseEventHandler.skip(1);
@@ -55,70 +55,53 @@ class _StoreDetailState extends State<StoreDetail> {
     });
   }
 
-  void buyVoucher(String productId,BaseUserInfoProvider baseUserInfo) {
+  void buyVoucher(String productId, BaseUserInfoProvider baseUserInfo) {
     this.widget.HUD();
-    StoreService.buyVoucher(productId,(BuyVoucherWeChatResponseModel model) {
-      if(model!=null) {
-      this.orderId = model.orderid;
-        fluwx.payWithWeChat(
-            appId: model.appid,
-            partnerId: model.partnerid,
-            prepayId: model.prepayid,
-            packageValue: model.package,
-            nonceStr: model.noncestr,
-            timeStamp: int.parse(model.timestamp),
-            sign: model.sign
-        ).then((data) {
+    StoreService.buyVoucher(productId, (BuyVoucherWeChatResponseModel model) {
+      if (model != null) {
+        this.orderId = model.orderid;
+        fluwx
+            .payWithWeChat(
+                appId: model.appid,
+                partnerId: model.partnerid,
+                prepayId: model.prepayid,
+                packageValue: model.package,
+                nonceStr: model.noncestr,
+                timeStamp: int.parse(model.timestamp),
+                sign: model.sign)
+            .then((data) {
           print(data);
         });
       }
     });
+    this.widget.HUD();
   }
 
   @override
   Widget build(BuildContext context) {
     return new Container(
-        margin: EdgeInsets.fromLTRB(
-            ScreenUtil().setWidth(80), // 左
-            ScreenUtil().setHeight(280), // 上
-            ScreenUtil().setWidth(80), // 右
-            ScreenUtil().setHeight(100)), // 下
-        child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
+      margin: EdgeInsets.fromLTRB(
+          ScreenUtil().setWidth(80), // 左
+          ScreenUtil().setHeight(350), // 上
+          ScreenUtil().setWidth(80), // 右
+          ScreenUtil().setHeight(100)), // 下
+      child: Provide<BaseUserInfoProvider>(
+        builder: (context, child, baseUserInfo) {
           return new Center(
-            child: new Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new ProductItem(
-                  volumeAmount: storeList == null ? "" : storeList[0].amount.toString(),
-                  callback: () {
-                    this.buyVoucher(storeList[0].productid,baseUserInfo);
-                  },
-                  cashAmount: storeList == null ? "" : storeList[0].price.toString(),
-                ),
-                new ProductItem(
-                  volumeAmount: storeList == null ? "" : storeList[1].amount.toString(),
-                  callback: () {
-                    this.buyVoucher(storeList[1].productid,baseUserInfo);
-                  },
-                  cashAmount: storeList == null ? "" : storeList[1].price.toString(),
-                ),
-                new ProductItem(
-                  volumeAmount: storeList == null ? "" : storeList[2].amount.toString(),
-                  callback: () {
-                    this.buyVoucher(storeList[2].productid,baseUserInfo);
-                  },
-                  cashAmount: storeList == null ? "" : storeList[2].price.toString(),
-                ),
-                new ProductItem(
-                  volumeAmount: storeList == null ? "" : storeList[3].amount.toString(),
-                  callback: () {
-                    this.buyVoucher(storeList[3].productid,baseUserInfo);
-                  },
-                  cashAmount: storeList == null ? "" : storeList[3].price.toString(),
-                )
-              ],
-            ),
+            child: ListView.builder(
+                itemCount: storeList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return new ProductItem(
+                    volumeAmount: storeList == null ? "" : storeList[index].amount.toString(),
+                    callback: () {
+                      this.buyVoucher(storeList[index].productid, baseUserInfo);
+                    },
+                    cashAmount: storeList == null ? "" : storeList[index].price.toString(),
+                  );
+                }),
           );
-        }));
+        },
+      ),
+    );
   }
 }
