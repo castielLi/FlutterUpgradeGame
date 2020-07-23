@@ -359,7 +359,11 @@ class _MainPageState extends State<MainPage> {
                                 textSize: SystemFontSize.operationTextFontSize,
                                 imageUrl: "resource/images/refresh.png",
                                 callback: () {
-                                  CommonUtils.showSuccessMessage(msg: "刷新页面");
+                                  this.showOrDismissProgressHUD();
+                                  MainService.getBaseInfo((userInfoModel) {
+                                    this.showOrDismissProgressHUD();
+                                    Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(userInfoModel);
+                                  });
                                 },
                               ),
                             ],

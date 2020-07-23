@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Src/common/model/hero.dart';
+import 'package:upgradegame/Src/pages/heroAltar/service/heroService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
 import 'heroAltarItem.dart';
+import 'model/heroBaseInfoListModel.dart';
 
 class HeroAltar extends StatefulWidget {
   @override
@@ -21,6 +23,25 @@ class _HeroAltarState extends State<HeroAltar> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+  }
+  
+  void getHeroBaseInfoList(){
+    this.widget.HUD();
+    HeroService.getHeroList((HeroBaseInfoListModel model){
+      this.widget.HUD();
+      if(model!= null){
+        //todo:huanghe 这里的数据是英雄价格列表，数组只有三个。type1战士 价格，type2 猎人 价格  type3 萨满 价格
+      }
+    });
+  }
+  
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      this.getHeroBaseInfoList();
+    });
   }
 
   @override

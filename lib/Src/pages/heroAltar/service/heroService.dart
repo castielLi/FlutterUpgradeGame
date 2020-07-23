@@ -3,6 +3,7 @@ import 'package:upgradegame/Common/http/httpManager.dart';
 import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/buyHeroModel.dart';
+import 'package:upgradegame/Src/pages/heroAltar/model/heroBaseInfoListModel.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/requestModel/buyHeroRequestModel.dart';
 import 'dart:async';
 import 'package:upgradegame/Src/service/serviceUrl.dart';
@@ -16,6 +17,18 @@ class HeroService {
     var response = await httpManager.request(ServiceUrl.buyHero(), params, null, Options(method: "post"));
     if (response.code == 200) {
       BuyHeroModel model = BuyHeroModel.fromJson(response.data);
+      callback(model);
+    } else {
+      CommonUtils.showErrorMessage(msg: "购买英雄出错");
+      callback(null);
+    }
+  }
+
+  static Future<ResultData> getHeroList(callback) async {
+
+    var response = await httpManager.request(ServiceUrl.getHeroList(), {}, null, null);
+    if (response.code == 200) {
+      HeroBaseInfoListModel model = HeroBaseInfoListModel.fromJson(response.data);
       callback(model);
     } else {
       CommonUtils.showErrorMessage(msg: "购买英雄出错");

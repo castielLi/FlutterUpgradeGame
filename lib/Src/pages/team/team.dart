@@ -51,10 +51,20 @@ class _TeamDetailState extends State<TeamDetail> {
   }
 
   void showQRCodeDetail(){
-    setState(() {
-      showQRCode = true;
-      showTeamDetail = false;
+
+    this.widget.HUD();
+    TeamService.getQRCode((QRCodeModel model){
+      this.widget.HUD();
+      if(model!=null){
+        setState(() {
+          showQRCode = true;
+          showTeamDetail = false;
+          qrCodeUrl = model.url;
+        });
+      }
     });
+
+
   }
 
   @override
