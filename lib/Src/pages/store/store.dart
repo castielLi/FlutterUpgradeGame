@@ -36,7 +36,7 @@ class _StoreDetailState extends State<StoreDetail> {
           if (model != null) {
             Provide.value<BaseUserInfoProvider>(context).buyVoucher(model.amount);
           }
-          fluwx.weChatResponseEventHandler.skip(1);
+//          fluwx.weChatResponseEventHandler.skip(1);
         });
       }
       // eventBus.fire(new RefreshMineInfo(true));
@@ -74,7 +74,6 @@ class _StoreDetailState extends State<StoreDetail> {
         });
       }
     });
-    this.widget.HUD();
   }
 
   @override
