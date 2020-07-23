@@ -20,6 +20,7 @@ import 'package:progress_hud/progress_hud.dart';
 import 'package:upgradegame/Common/event/errorEvent.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/app/notificationEvent.dart';
+import 'dart:convert' as convert;
 
 class MainPage extends StatefulWidget {
   @override
@@ -84,7 +85,8 @@ class _MainPageState extends State<MainPage> {
 
     ///收到通知的监听
     notification = NotificationEvent().eventBus.on<RecieveNotificationEvent>().listen((message){
-      print("收到了通知");
+      Map<String ,dynamic> model = convert.jsonDecode(message.message['extras']['cn.jpush.android.EXTRA']);
+      print(model);
     });
 
 

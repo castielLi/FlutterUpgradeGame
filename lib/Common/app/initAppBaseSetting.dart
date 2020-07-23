@@ -34,6 +34,7 @@ class _InitAppSetting extends State<InitAppSetting> {
       jpush.addEventHandler(
           onReceiveNotification: (Map<String, dynamic> message) async {
             print("flutter onReceiveNotification: $message");
+            eventBus.eventBus.fire(RecieveNotificationEvent(message));
             setState(() {
               debugLable = "flutter onReceiveNotification: $message";
             });
