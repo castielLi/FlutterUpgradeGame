@@ -18,19 +18,25 @@ class TradeDetail extends StatefulWidget {
 }
 
 class _TradeDetailState extends State<TradeDetail> {
-
+  TCoinDetailModel tCoinDetail;
   int page = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    UserInfoHttpRequestEvent().on("tcoinDetail",this.getTCoinDetail);
+    UserInfoHttpRequestEvent().on("tcoinDetail", this.getTCoinDetail);
   }
 
-  void getTCoinDetail(){
+  void getTCoinDetail() {
     this.widget.HUD();
-    UserInfoService.getUserTCoinDetail(this.page,(TCoinDetailModel model){
+    UserInfoService.getUserTCoinDetail(this.page, (TCoinDetailModel model) {
+      /// TODO 加载更多跟市场一样叠加
+      this.tCoinDetail = model;
+      //测试
+      for (int i = 0; i < 2; i++) {
+        this.tCoinDetail.datalist += model.datalist;
+      }
       this.widget.HUD();
     });
   }
@@ -41,7 +47,7 @@ class _TradeDetailState extends State<TradeDetail> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Container(
-          padding: EdgeInsets.only(left: ScreenUtil().setWidth(150)),
+          padding: EdgeInsets.only(left: ScreenUtil().setWidth(100)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -50,11 +56,7 @@ class _TradeDetailState extends State<TradeDetail> {
                 style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
               ),
               Text(
-                '种类',
-                style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
-              ),
-              Text(
-                '数量',
+                '事项',
                 style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
               ),
               Text(
@@ -67,13 +69,13 @@ class _TradeDetailState extends State<TradeDetail> {
         Container(
           height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
           child: ListView.builder(
-              itemCount: 10,
+              itemCount: this.tCoinDetail == null ? 0 : this.tCoinDetail.datalist.length,
               itemBuilder: (content, index) {
+                Datalist tCoinTx = this.tCoinDetail.datalist[index];
                 return TradeItem(
-                  tDate: '2020-06-04',
-                  tTypeImageUrl: 'resource/images/wood.png',
-                  tAmount: 2314,
-                  tCoin: 123,
+                  tDate: tCoinTx.datetime,
+                  detail: tCoinTx.detail,
+                  tCoin: tCoinTx.change,
                 );
               }),
         ),
