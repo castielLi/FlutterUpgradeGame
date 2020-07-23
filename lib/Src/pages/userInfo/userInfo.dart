@@ -124,10 +124,10 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                             },
                           ),
                           ImageTextButton(
-                            buttonName: '提现记录',
+                            buttonName: '现金记录',
                             callback: () {
-                              switchPageBetweenFatherAndSon(sonPageName: "提现记录");
-                              this.widget.changeTitleCallback("提现记录");
+                              switchPageBetweenFatherAndSon(sonPageName: "现金记录");
+                              this.widget.changeTitleCallback("现金记录");
                               UserInfoHttpRequestEvent().emit("withdrawDetail");
                             },
                           ),
@@ -182,7 +182,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
 
               ///提现明细
               new Offstage(
-                offstage: "提现记录" != buttonName,
+                offstage: "现金记录" != buttonName,
                 child: new WithDrawDetail(
                   HUD: this.widget.HUD,
                   viewCallback: () {

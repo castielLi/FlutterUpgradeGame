@@ -5,6 +5,7 @@ import 'package:upgradegame/Common/http/httpManager.dart';
 import 'package:dio/dio.dart';
 import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/pages/userInfo/model/cashDetailModel.dart';
 import 'package:upgradegame/Src/pages/userInfo/model/cashInfoModel.dart';
 import 'package:upgradegame/Src/pages/userInfo/model/requestModel/getUserTCoinRequestModel.dart';
 import 'package:upgradegame/Src/pages/userInfo/model/requestModel/getUserWithdrawRequestModel.dart';
@@ -74,8 +75,8 @@ class UserInfoService{
     String params = convert.jsonEncode(requestModel);
     var response = await httpManager.request(ServiceUrl.getWithdrawDetail(), params, null, Options(method: "post"));
     if (response.code == 200) {
-
-//      callback(responseModel);
+      CashDetailModel model = CashDetailModel.fromJson(response.data);
+      callback(model);
     } else {
       CommonUtils.showErrorMessage(msg: "获取现金明细失败");
       callback(null);

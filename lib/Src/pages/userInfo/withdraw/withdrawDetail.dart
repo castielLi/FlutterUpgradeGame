@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/pages/userInfo/event/userInfoEventBus.dart';
+import 'package:upgradegame/Src/pages/userInfo/model/cashDetailModel.dart';
 import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
 import 'package:upgradegame/Src/pages/userInfo/withdraw/withdrawItem.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
@@ -30,7 +31,7 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
   void getWithdrawDetail(){
     print("开始请求withdrawdetail");
     this.widget.HUD();
-    UserInfoService.getUserWithdrawDetail(this.page, (){
+    UserInfoService.getUserWithdrawDetail(this.page, (CashDetailModel model){
       this.widget.HUD();
     });
   }
