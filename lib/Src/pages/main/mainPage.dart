@@ -1,6 +1,4 @@
-//import 'dart:html';
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
@@ -19,7 +17,6 @@ import 'package:upgradegame/Src/pages/main/common/dividendPart.dart';
 import 'package:progress_hud/progress_hud.dart';
 import 'package:upgradegame/Common/event/errorEvent.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
-import 'package:upgradegame/Common/app/notificationEvent.dart';
 import 'dart:convert' as convert;
 
 class MainPage extends StatefulWidget {
@@ -290,83 +287,79 @@ class _MainPageState extends State<MainPage> {
               ///功能栏
               new Container(
                 margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + SystemIconSize.mainPageSignalBarHeight)),
-                height: ScreenUtil().setHeight(SystemIconSize.mainPageFunctionBarIconSize * 2 + 30),
+                height: ScreenUtil().setHeight(SystemIconSize.mainPageFunctionBarIconSize * 2),
                 child: new Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     new Container(
-                      child: new Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      width: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize * 3),
+                      child: new GridView.count(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        crossAxisCount: 3,
+                        childAspectRatio: 1,
                         children: [
-                          new Row(
-                            children: <Widget>[
-                              new UserImageButton(
-                                size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
-                                buttonName: "排行榜",
-                                imageUrl: "resource/images/rank.png",
-                                textSize: SystemFontSize.operationTextFontSize,
-                                callback: () {
-                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                                    'height': ScreenUtil().setHeight(1660),
-                                    'width': ScreenUtil().setWidth(1020),
-                                    'childName': 'rankDetail',
-                                    "title": "排行榜",
-                                  });
-                                },
-                              ),
-                              new UserImageButton(
-                                size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
-                                buttonName: "团队",
-                                textSize: SystemFontSize.operationTextFontSize,
-                                imageUrl: "resource/images/team.png",
-                                callback: () {
-                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,
-                                      params: {'height': ScreenUtil().setHeight(1660), 'width': ScreenUtil().setWidth(1020), 'childName': 'teamDetail', "title": "团 队"});
-                                },
-                              ),
-                              new UserImageButton(
-                                size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
-                                buttonName: "商城",
-                                textSize: SystemFontSize.operationTextFontSize,
-                                imageUrl: "resource/images/marketStores.png",
-                                callback: () {
-                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,
-                                      params: {'height': ScreenUtil().setHeight(1660), 'width': ScreenUtil().setWidth(1020), 'childName': 'storeDetail', "title": "商 城"});
-                                },
-                              ),
-                            ],
+                          new UserImageButton(
+                            size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                            buttonName: "排行榜",
+                            imageUrl: "resource/images/rank.png",
+                            textSize: SystemFontSize.operationTextFontSize,
+                            callback: () {
+                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+                                'height': ScreenUtil().setHeight(1660),
+                                'width': ScreenUtil().setWidth(1020),
+                                'childName': 'rankDetail',
+                                "title": "排行榜",
+                              });
+                            },
                           ),
-                          new Row(
-                            children: <Widget>[
-                              new UserImageButton(
-                                size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
-                                buttonName: "贡献值",
-                                imageUrl: "resource/images/contribution.png",
-                                textSize: SystemFontSize.operationTextFontSize,
-                                callback: () {
-                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                                    'height': ScreenUtil().setHeight(1660),
-                                    'width': ScreenUtil().setWidth(1020),
-                                    'childName': 'contributionDetail',
-                                    "title": "贡献值",
-                                  });
-                                },
-                              ),
-                              new UserImageButton(
-                                size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
-                                buttonName: "刷新",
-                                textSize: SystemFontSize.operationTextFontSize,
-                                imageUrl: "resource/images/refresh.png",
-                                callback: () {
-                                  this.showOrDismissProgressHUD();
-                                  MainService.getBaseInfo((userInfoModel) {
-                                    this.showOrDismissProgressHUD();
-                                    Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(userInfoModel);
-                                  });
-                                },
-                              ),
-                            ],
+                          new UserImageButton(
+                            size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                            buttonName: "团队",
+                            textSize: SystemFontSize.operationTextFontSize,
+                            imageUrl: "resource/images/team.png",
+                            callback: () {
+                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,
+                                  params: {'height': ScreenUtil().setHeight(1660), 'width': ScreenUtil().setWidth(1020), 'childName': 'teamDetail', "title": "团 队"});
+                            },
+                          ),
+                          new UserImageButton(
+                            size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                            buttonName: "商城",
+                            textSize: SystemFontSize.operationTextFontSize,
+                            imageUrl: "resource/images/marketStores.png",
+                            callback: () {
+                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage,
+                                  params: {'height': ScreenUtil().setHeight(1660), 'width': ScreenUtil().setWidth(1020), 'childName': 'storeDetail', "title": "商 城"});
+                            },
+                          ),
+                          new UserImageButton(
+                            size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                            buttonName: "贡献值",
+                            imageUrl: "resource/images/contribution.png",
+                            textSize: SystemFontSize.operationTextFontSize,
+                            callback: () {
+                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+                                'height': ScreenUtil().setHeight(1660),
+                                'width': ScreenUtil().setWidth(1020),
+                                'childName': 'contributionDetail',
+                                "title": "贡献值",
+                              });
+                            },
+                          ),
+                          new UserImageButton(
+                            size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                            buttonName: "刷新",
+                            textSize: SystemFontSize.operationTextFontSize,
+                            imageUrl: "resource/images/refresh.png",
+                            callback: () {
+                              this.showOrDismissProgressHUD();
+                              MainService.getBaseInfo((userInfoModel) {
+                                this.showOrDismissProgressHUD();
+                                Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(userInfoModel);
+                              });
+                            },
                           ),
                         ],
                       ),

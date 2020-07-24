@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/userInfo/event/userInfoEventBus.dart';
 import 'package:upgradegame/Src/pages/userInfo/model/tCoinDetailModel.dart';
 import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
 import 'package:upgradegame/Src/pages/userInfo/tradeDetail/tradeItem.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 class TradeDetail extends StatefulWidget {
   @override
@@ -18,7 +20,7 @@ class TradeDetail extends StatefulWidget {
 }
 
 class _TradeDetailState extends State<TradeDetail> {
-  TCoinDetailModel tCoinDetail;
+  TCoinDetailModel tCoinDetail = new TCoinDetailModel(total: 0,page: 0,datalist: []);
   int page = 0;
 
   @override
@@ -31,13 +33,20 @@ class _TradeDetailState extends State<TradeDetail> {
   void getTCoinDetail() {
     this.widget.HUD();
     UserInfoService.getUserTCoinDetail(this.page, (TCoinDetailModel model) {
-      /// TODO 加载更多跟市场一样叠加
-      this.tCoinDetail = model;
-//      //测试
+      //测试数据
 //      model.datalist =[new Datalist(datetime: "2020-07-24",detail: "购买英雄",change:"100")];
-//      for (int i = 0; i < 4; i++) {
-//        this.tCoinDetail.datalist = this.tCoinDetail.datalist+this.tCoinDetail.datalist;
+//      for (int i = 0; i < 3; i++) {
+//        model.datalist += model.datalist;
 //      }
+      this.tCoinDetail.page = model.page;
+      if(this.page==0){
+        this.tCoinDetail.datalist = [];
+      }
+      if(model.datalist.length==0){
+        CommonUtils.showErrorMessage(msg: "没有更多了");
+      }
+      this.tCoinDetail.datalist += model.datalist;
+      print("page:"+this.page.toString()+", data length:"+this.tCoinDetail.datalist.length.toString());
       this.widget.HUD();
     });
   }
@@ -69,7 +78,41 @@ class _TradeDetailState extends State<TradeDetail> {
         ),
         Container(
           height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
-          child: ListView.builder(
+          child: EasyRefresh(
+            refreshFooter: ClassicsFooter(
+              bgColor: Colors.transparent,
+              loadText: "上滑加载",
+              loadReadyText: "松开加载",
+              loadingText: "正在加载",
+              loadedText: "加载完成",
+              noMoreText: "没有更多了",
+              loadHeight: 35,
+              key: new GlobalKey<RefreshFooterState>(),
+            ),
+            refreshHeader: ClassicsHeader(
+              bgColor: Colors.transparent,
+              refreshText: "下拉刷新",
+              refreshReadyText: "松开刷新",
+              refreshingText: "正在刷新",
+              refreshedText: "刷新完成",
+              refreshHeight: 35,
+              key: new GlobalKey<RefreshHeaderState>(),
+            ),
+            // ignore: missing_return
+            loadMore: () {
+              setState(() {
+                this.page++;
+                getTCoinDetail();
+              });
+            },
+            // ignore: missing_return
+            onRefresh: () {
+              setState(() {
+                this.page = 0;
+                getTCoinDetail();
+              });
+            },
+            child: ListView.builder(
               itemCount: this.tCoinDetail == null ? 0 : this.tCoinDetail.datalist.length,
               itemBuilder: (content, index) {
                 Datalist tCoinTx = this.tCoinDetail.datalist[index];
@@ -79,6 +122,7 @@ class _TradeDetailState extends State<TradeDetail> {
                   tCoin: tCoinTx.change,
                 );
               }),
+          ),
         ),
         new ImageButton(
           height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),

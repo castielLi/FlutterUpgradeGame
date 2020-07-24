@@ -4,7 +4,6 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/pages/heroAltar/service/heroService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
-
 import 'heroAltarItem.dart';
 import 'model/heroBaseInfoListModel.dart';
 
@@ -24,17 +23,18 @@ class _HeroAltarState extends State<HeroAltar> {
   void didChangeDependencies() {
     super.didChangeDependencies();
   }
-  
-  void getHeroBaseInfoList(){
+
+  void getHeroBaseInfoList() {
     this.widget.HUD();
-    HeroService.getHeroList((HeroBaseInfoListModel model){
+    HeroService.getHeroList((HeroBaseInfoListModel model) {
       this.widget.HUD();
-      if(model!= null){
+      if (model != null) {
         //todo:huanghe 这里的数据是英雄价格列表，数组只有三个。type1战士 价格，type2 猎人 价格  type3 萨满 价格
+
       }
     });
   }
-  
+
   @override
   void initState() {
     // TODO: implement initState
@@ -66,7 +66,6 @@ class _HeroAltarState extends State<HeroAltar> {
             }
           });
         }
-
         return new Container(
           margin: EdgeInsets.fromLTRB(
               ScreenUtil().setWidth(80), // 左
@@ -84,14 +83,14 @@ class _HeroAltarState extends State<HeroAltar> {
                 heroType: Heroes.WARRIOR,
                 HUD: this.widget.HUD,
               ),
-              HeroAltarItem(
-                heroImageUrl: 'resource/images/hunter.png',
-                description: '猎人:在野外获取食物',
-                revenueUp: 10,
-                remainDays: hunters,
-                heroType: Heroes.HUNTER,
-                HUD: this.widget.HUD,
-              ),
+//              HeroAltarItem(
+//                heroImageUrl: 'resource/images/hunter.png',
+//                description: '猎人:在野外获取食物',
+//                revenueUp: 10,
+//                remainDays: hunters,
+//                heroType: Heroes.HUNTER,
+//                HUD: this.widget.HUD,
+//              ),
               HeroAltarItem(
                 heroImageUrl: 'resource/images/shaman.png',
                 description: '萨满:保佑你的灵魂',

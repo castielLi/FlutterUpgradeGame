@@ -23,14 +23,18 @@ class _HeroAltarClockState extends State<HeroAltarClock> {
           children: <Widget>[
             Image(image: new AssetImage(this.widget.imageUrl), height: ScreenUtil().setHeight(this.widget.adIconHeight)),
             Text(
-              this.widget.remainDays[i].toString() + '天',
+              this.widget.remainDays[i] > 30 ? "永久" : this.widget.remainDays[i].toString() + '天',
               style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
             ),
           ],
         ),
       );
     }
-    content = new Row(
+    content = GridView.count(
+      shrinkWrap: true,
+      padding: EdgeInsets.zero,
+      crossAxisCount: 3,
+      childAspectRatio: 1.8,
       children: clockDayList,
     );
     return content;
