@@ -87,6 +87,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
           ),
         ),
         Container(
+          ///TODO 钟太多的情况
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[

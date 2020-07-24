@@ -6,16 +6,13 @@ class TradeItem extends StatefulWidget {
   // 交易日期
   String tDate;
 
-  // 交易种类
-  String tTypeImageUrl;
-
-  // 交易数量
-  int tAmount;
+  // 备注
+  String detail;
 
   // 花费金币
-  int tCoin;
+  String tCoin;
 
-  TradeItem({Key key, this.tDate, this.tTypeImageUrl, this.tAmount, this.tCoin}) : super(key: key);
+  TradeItem({Key key, this.tDate, this.detail, this.tCoin}) : super(key: key);
 
   @override
   _TradeItem createState() => _TradeItem();
@@ -31,16 +28,15 @@ class _TradeItem extends State<TradeItem> {
           this.widget.tDate,
           style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
         ),
-        Image(
-          image: new AssetImage(this.widget.tTypeImageUrl),
-          height: ScreenUtil().setHeight(100),
+        Expanded(
+          child: Text(
+            this.widget.detail,
+            textAlign: TextAlign.center,
+            style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+          ),
         ),
         Text(
-          this.widget.tAmount.toString(),
-          style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
-        ),
-        Text(
-          this.widget.tCoin.toString(),
+          this.widget.tCoin,
           style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
         ),
       ],
