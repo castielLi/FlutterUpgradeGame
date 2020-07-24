@@ -287,7 +287,7 @@ class _MainPageState extends State<MainPage> {
               ///功能栏
               new Container(
                 margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + SystemIconSize.mainPageSignalBarHeight)),
-                height: ScreenUtil().setHeight(SystemIconSize.mainPageFunctionBarIconSize * 2),
+                height: ScreenUtil().setHeight(SystemIconSize.mainPageFunctionBarIconSize * 3),
                 child: new Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -296,6 +296,7 @@ class _MainPageState extends State<MainPage> {
                       width: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize * 3),
                       child: new GridView.count(
                         shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.zero,
                         crossAxisCount: 3,
                         childAspectRatio: 1,

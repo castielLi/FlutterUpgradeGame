@@ -31,7 +31,6 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
   }
 
   void getWithdrawDetail(){
-    print("开始请求withdrawdetail");
     this.widget.HUD();
     UserInfoService.getUserWithdrawDetail(this.page, (CashDetailModel model){
       //测试数据
@@ -39,6 +38,9 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
 //      for (int i = 0; i < 3; i++) {
 //        model.datalist += model.datalist;
 //      }
+      if(null==model){
+        return;
+      }
       this.cashDetailModel.page = model.page;
       if(this.page==0){
         this.cashDetailModel.datalist = [];
