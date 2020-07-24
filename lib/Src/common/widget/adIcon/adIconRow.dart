@@ -51,7 +51,8 @@ class _AdIconRow extends State<AdIconRow> {
   }
 
   Widget buildList(BaseAdTimerProvider baseAdTimerInfo) {
-    List<Widget> adIconList = [];
+    List<Widget> firstAdIconList = [];
+    List<Widget> secondAdIconList = [];
     bool waiting =  false;
     switch(this.widget.type){
       case AdTypeEnum.sawmill:
@@ -65,57 +66,184 @@ class _AdIconRow extends State<AdIconRow> {
         break;
     }
     Widget content;
-    for (int i = 0; i < this.widget.alreadyWatched; i++) {
-      adIconList.add(
-        GestureDetector(
-          child: new Image(image: new AssetImage(this.widget.imageUrlWatched), height: this.widget.adIconHeight),
-          onTap: () {
-            CommonUtils.showErrorMessage(msg: '您已经看过该广告了');
-          },
-        ),
+
+    ///伐木场 采石场显示6 - 10个广告的显示逻辑
+    if(this.widget.type == AdTypeEnum.farm){
+      content = new Column(
+        children: <Widget>[
+          new Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: firstAdIconList
+          )
+        ],
       );
     }
-    for (int i = 0; i < (this.widget.countInOneRow - this.widget.alreadyWatched); i++) {
-      adIconList.add(
-        GestureDetector(
-          child: new Image(image: new AssetImage(waiting?this.widget.imageUrlWaiting:this.widget.imageUrlUnwatch), height: this.widget.adIconHeight),
-          onTap: () {
-            if(waiting){
-              CommonUtils.showErrorMessage(msg: '您需要等待一段时间才能继续操作,去看看其他资源吧');
-              return;
-            }
+    else{
+      if(this.widget.alreadyWatched < 5){
+        for (int i = 0; i < this.widget.alreadyWatched; i++) {
+          firstAdIconList.add(
+            GestureDetector(
+              child: new Image(image: new AssetImage(this.widget.imageUrlWatched), height: this.widget.adIconHeight),
+              onTap: () {
+                CommonUtils.showErrorMessage(msg: '您已经看过该广告了');
+              },
+            ),
+          );
+        }
+        for (int i = 0; i < (5 - this.widget.alreadyWatched); i++) {
+          firstAdIconList.add(
+            GestureDetector(
+              child: new Image(image: new AssetImage(waiting?this.widget.imageUrlWaiting:this.widget.imageUrlUnwatch), height: this.widget.adIconHeight),
+              onTap: () {
+                if(waiting){
+                  CommonUtils.showErrorMessage(msg: '您需要等待一段时间才能继续操作,去看看其他资源吧');
+                  return;
+                }
 
 //            adview = "POSID8rbrja0ih10i";
 //            baidu = "7111030";
 //            tencent = "6031610694170610";
-            ///type选择平台  1：adview 2：baidu 3：腾讯
-            ///showType 选择展示 方式 1：开屏广告 2：视频广告
-            ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
-            this.widget.HUD();
-            if(this.widget.type == AdTypeEnum.farm){
-              ///如果adview的开屏广告初始化成功,那么就展示adview的广告，否则展示腾讯广告
-              if(AdDialog().initAdViewSuccess) {
-                AdDialog().showAd(1, 2);
+                ///type选择平台  1：adview 2：baidu 3：腾讯
+                ///showType 选择展示 方式 1：开屏广告 2：视频广告
+                ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
+                this.widget.HUD();
+                if(this.widget.type == AdTypeEnum.farm){
+                  ///如果adview的开屏广告初始化成功,那么就展示adview的广告，否则展示腾讯广告
+                  if(AdDialog().initAdViewSuccess) {
+                    AdDialog().showAd(1, 2);
 //                AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
-              }else{
-                AdDialog().showAd(3, 2);
+                  }else{
+                    AdDialog().showAd(3, 2);
 //                AdDialog().showAd(3, 2,"6031610694170610");
-              }
-            }else if(this.widget.type == AdTypeEnum.stone){
-              AdDialog().showAd(2, 2);
+                  }
+                }else if(this.widget.type == AdTypeEnum.stone){
+                  AdDialog().showAd(2, 2);
 //              AdDialog().showAd(2, 2,"7111030");
-            }else{
-              AdDialog().showAd(3, 2);
+                }else{
+                  AdDialog().showAd(3, 2);
 //              AdDialog().showAd(3, 2,"6031610694170610");
-            }
-          },
-        ),
+                }
+              },
+            ),
+          );
+        }
+
+        ///第二排显示逻辑
+        for (int i = 0; i < (this.widget.countInOneRow  - 5); i++) {
+          secondAdIconList.add(
+            GestureDetector(
+              child: new Image(image: new AssetImage(waiting?this.widget.imageUrlWaiting:this.widget.imageUrlUnwatch), height: this.widget.adIconHeight),
+              onTap: () {
+                if(waiting){
+                  CommonUtils.showErrorMessage(msg: '您需要等待一段时间才能继续操作,去看看其他资源吧');
+                  return;
+                }
+
+//            adview = "POSID8rbrja0ih10i";
+//            baidu = "7111030";
+//            tencent = "6031610694170610";
+                ///type选择平台  1：adview 2：baidu 3：腾讯
+                ///showType 选择展示 方式 1：开屏广告 2：视频广告
+                ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
+                this.widget.HUD();
+                if(this.widget.type == AdTypeEnum.farm){
+                  ///如果adview的开屏广告初始化成功,那么就展示adview的广告，否则展示腾讯广告
+                  if(AdDialog().initAdViewSuccess) {
+                    AdDialog().showAd(1, 2);
+//                AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
+                  }else{
+                    AdDialog().showAd(3, 2);
+//                AdDialog().showAd(3, 2,"6031610694170610");
+                  }
+                }else if(this.widget.type == AdTypeEnum.stone){
+                  AdDialog().showAd(2, 2);
+//              AdDialog().showAd(2, 2,"7111030");
+                }else{
+                  AdDialog().showAd(3, 2);
+//              AdDialog().showAd(3, 2,"6031610694170610");
+                }
+              },
+            ),
+          );
+        }
+      }else{
+        ///第一排广告全部显示完成
+        for (int i = 0; i < 5; i++) {
+          firstAdIconList.add(
+            GestureDetector(
+              child: new Image(image: new AssetImage(this.widget.imageUrlWatched), height: this.widget.adIconHeight),
+              onTap: () {
+                CommonUtils.showErrorMessage(msg: '您已经看过该广告了');
+              },
+            ),
+          );
+        }
+        ///第二排显示逻辑
+        for (int i = 0; i < (this.widget.alreadyWatched - 5); i++) {
+          secondAdIconList.add(
+            GestureDetector(
+              child: new Image(image: new AssetImage(this.widget.imageUrlWatched), height: this.widget.adIconHeight),
+              onTap: () {
+                CommonUtils.showErrorMessage(msg: '您已经看过该广告了');
+              },
+            ),
+          );
+        }
+
+
+        for (int i = 0; i < (this.widget.countInOneRow  - this.widget.alreadyWatched); i++) {
+          secondAdIconList.add(
+            GestureDetector(
+              child: new Image(image: new AssetImage(waiting?this.widget.imageUrlWaiting:this.widget.imageUrlUnwatch), height: this.widget.adIconHeight),
+              onTap: () {
+                if(waiting){
+                  CommonUtils.showErrorMessage(msg: '您需要等待一段时间才能继续操作,去看看其他资源吧');
+                  return;
+                }
+
+//            adview = "POSID8rbrja0ih10i";
+//            baidu = "7111030";
+//            tencent = "6031610694170610";
+                ///type选择平台  1：adview 2：baidu 3：腾讯
+                ///showType 选择展示 方式 1：开屏广告 2：视频广告
+                ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
+                this.widget.HUD();
+                if(this.widget.type == AdTypeEnum.farm){
+                  ///如果adview的开屏广告初始化成功,那么就展示adview的广告，否则展示腾讯广告
+                  if(AdDialog().initAdViewSuccess) {
+                    AdDialog().showAd(1, 2);
+//                AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
+                  }else{
+                    AdDialog().showAd(3, 2);
+//                AdDialog().showAd(3, 2,"6031610694170610");
+                  }
+                }else if(this.widget.type == AdTypeEnum.stone){
+                  AdDialog().showAd(2, 2);
+//              AdDialog().showAd(2, 2,"7111030");
+                }else{
+                  AdDialog().showAd(3, 2);
+//              AdDialog().showAd(3, 2,"6031610694170610");
+                }
+              },
+            ),
+          );
+        }
+      }
+
+      content = new Column(
+        children: <Widget>[
+          new Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: firstAdIconList
+          ),
+          new Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: secondAdIconList
+          ),
+        ],
       );
     }
-    content = new Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: adIconList
-    );
+
     return content;
   }
 

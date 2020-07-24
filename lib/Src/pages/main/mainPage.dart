@@ -342,7 +342,7 @@ class _MainPageState extends State<MainPage> {
                               new UserImageButton(
                                 size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
                                 buttonName: "贡献值",
-                                imageUrl: "resource/images/rank.png",
+                                imageUrl: "resource/images/contribution.png",
                                 textSize: SystemFontSize.operationTextFontSize,
                                 callback: () {
                                   Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {

@@ -92,16 +92,11 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
     return new Container(
-      color: SystemColor.primaryWhite,
-      child: Stack(
-
-        children: <Widget>[
-          new Center(
-
-            child:
-            new Image(image: new AssetImage('resource/images/welcome.png')),
-          ),
-        ],
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("resource/images/loginBackground.png"),
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

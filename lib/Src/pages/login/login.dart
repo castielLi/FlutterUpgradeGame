@@ -111,7 +111,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      color: Colors.black,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("resource/images/loginBackground.png"),
+          fit: BoxFit.cover,
+        ),
+      ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: ProvideMulti(
