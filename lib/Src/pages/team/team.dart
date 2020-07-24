@@ -258,7 +258,7 @@ class _TeamDetailState extends State<TeamDetail> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 FadeInImage.assetNetwork(
-                    placeholder: "resource/images/defaultAvatar.png",
+                    placeholder: "",
                     image: this.qrCodeUrl),
                 new Row(
                   children: <Widget>[
