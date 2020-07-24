@@ -35,9 +35,12 @@ class _TradeDetailState extends State<TradeDetail> {
     UserInfoService.getUserTCoinDetail(this.page, (TCoinDetailModel model) {
       //测试数据
 //      model.datalist =[new Datalist(datetime: "2020-07-24",detail: "购买英雄",change:"100")];
-//      for (int i = 0; i < 3; i++) {
+//      for (int i = 0; i < 4; i++) {
 //        model.datalist += model.datalist;
 //      }
+      if(null==model){
+        return;
+      }
       this.tCoinDetail.page = model.page;
       if(this.page==0){
         this.tCoinDetail.datalist = [];

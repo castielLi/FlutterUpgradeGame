@@ -32,9 +32,10 @@ class _HeroAltarClockState extends State<HeroAltarClock> {
     }
     content = GridView.count(
       shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
       crossAxisCount: 3,
-      childAspectRatio: 1.8,
+      childAspectRatio: 2,
       children: clockDayList,
     );
     return content;
