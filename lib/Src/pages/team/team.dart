@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +10,9 @@ import 'package:upgradegame/Src/pages/team/model/invitation.dart';
 import 'package:upgradegame/Src/pages/team/model/qrCodeModel.dart';
 import 'package:upgradegame/Src/pages/team/service/teamService.dart';
 import 'package:upgradegame/Src/pages/team/teamItem.dart';
+import 'package:fluwx/fluwx.dart' as fluwx;
+import 'dart:io';
+import 'dart:async';
 
 class TeamDetail extends StatefulWidget {
   @override
@@ -29,6 +33,7 @@ class _TeamDetailState extends State<TeamDetail> {
   bool showQRCode = false;
   bool showTeamDetail = true;
   String qrCodeUrl = "";
+  GlobalKey repaintWidgetKey = GlobalKey();
 
 
   void getShareQRCode(){
@@ -257,10 +262,15 @@ class _TeamDetailState extends State<TeamDetail> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                FadeInImage.assetNetwork(
-                    placeholder: "",
-                    image: this.qrCodeUrl),
+                RepaintBoundary(
+                  key: repaintWidgetKey,
+                  child:  FadeInImage.assetNetwork(
+                      placeholder: "",
+                      image: this.qrCodeUrl),
+                ),
+
                 new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     ImageButton(
                       height: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
@@ -268,7 +278,6 @@ class _TeamDetailState extends State<TeamDetail> {
                       buttonName: "返 回",
                       imageUrl: "resource/images/upgradeButton.png",
                       callback: () {
-                        print('点击邀请');
                         this.showMyTeamDetail();
                       },
                     ),
@@ -278,7 +287,14 @@ class _TeamDetailState extends State<TeamDetail> {
                       buttonName: "分享微信",
                       imageUrl: "resource/images/upgradeButton.png",
                       callback: () {
-                        print('点击邀请');
+                        this.widget.HUD();
+                        TeamService.shareImageToWeChat(this.repaintWidgetKey,(File file,String desc){
+                          this.widget.HUD();
+                          fluwx.WeChatImage image = fluwx.WeChatImage.file(file);
+                          fluwx.shareToWeChat(fluwx.WeChatShareImageModel(image,description: desc,scene: fluwx.WeChatScene.SESSION));
+                        });
+
+                        print('点击分享微信');
                       },
                     ),
                   ],
