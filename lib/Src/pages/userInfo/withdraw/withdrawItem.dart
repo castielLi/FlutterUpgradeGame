@@ -3,16 +3,16 @@ import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 
 class WithdrawItem extends StatefulWidget {
-  // 提现日期
-  String tDate;
+  // 日期
+  String date;
 
-  // 提现种类
-  String tTypeImageUrl;
+  // 备注
+  String detail;
 
-  // 提现数量
-  int tAmount;
+  // 数量
+  String change;
 
-  WithdrawItem({Key key, this.tDate, this.tTypeImageUrl, this.tAmount}) : super(key: key);
+  WithdrawItem({Key key, this.date, this.detail, this.change}) : super(key: key);
 
   @override
   _WithdrawItem createState() => _WithdrawItem();
@@ -25,15 +25,18 @@ class _WithdrawItem extends State<WithdrawItem> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Text(
-          this.widget.tDate,
+          this.widget.date,
           style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
         ),
-        Image(
-          image: new AssetImage(this.widget.tTypeImageUrl),
-          height: ScreenUtil().setHeight(100),
+        Expanded(
+          child: Text(
+            this.widget.detail,
+            textAlign: TextAlign.center,
+            style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+          ),
         ),
         Text(
-          this.widget.tAmount.toString(),
+          this.widget.change.toString(),
           style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
         ),
       ],

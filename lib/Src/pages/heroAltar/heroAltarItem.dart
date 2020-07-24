@@ -87,14 +87,17 @@ class _HeroAltarItem extends State<HeroAltarItem> {
           ),
         ),
         Container(
-          ///TODO 钟太多的情况
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              HeroAltarClock(
-                imageUrl: 'resource/images/clock.png',
-                adIconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
-                remainDays: this.widget.remainDays,
+              Container(
+                width: ScreenUtil().setWidth(600),
+                child: HeroAltarClock(
+                  imageUrl: 'resource/images/clock.png',
+                  adIconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
+                  remainDays: this.widget.remainDays,
+                ),
               ),
               GestureDetector(
                 child: Container(
