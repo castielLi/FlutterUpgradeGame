@@ -33,10 +33,11 @@ class _TradeDetailState extends State<TradeDetail> {
     UserInfoService.getUserTCoinDetail(this.page, (TCoinDetailModel model) {
       /// TODO 加载更多跟市场一样叠加
       this.tCoinDetail = model;
-      //测试
-      for (int i = 0; i < 2; i++) {
-        this.tCoinDetail.datalist += model.datalist;
-      }
+//      //测试
+//      model.datalist =[new Datalist(datetime: "2020-07-24",detail: "购买英雄",change:"100")];
+//      for (int i = 0; i < 4; i++) {
+//        this.tCoinDetail.datalist = this.tCoinDetail.datalist+this.tCoinDetail.datalist;
+//      }
       this.widget.HUD();
     });
   }
