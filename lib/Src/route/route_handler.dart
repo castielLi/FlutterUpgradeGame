@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:upgradegame/Src/common/widget/resourceDialog/resourceDialog.dart';
 import 'package:upgradegame/Src/pages/welcome/welcomePage.dart';
 import 'package:upgradegame/Src/pages/login/login.dart';
 import 'package:upgradegame/Src/pages/main/mainPage.dart';
@@ -32,4 +33,11 @@ Handler detailDialogHandler = Handler(
       String childName = params['childName']?.first;
       String title = params['title']?.first;
       return DetailDialog(height: height,width: width,childWidgetName: childName,title: title,);
+    });
+
+Handler resourceDialogHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      double height = double.parse(params['height']?.first);
+      double width = double.parse(params['width']?.first);
+      return ResourceDialog(height: height,width: width);
     });

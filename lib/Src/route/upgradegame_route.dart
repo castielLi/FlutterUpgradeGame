@@ -7,6 +7,7 @@ class UpgradeGameRoute {
   static String loginPage = "/loginPage";
   static String mainPage = "/mainPage";
   static String detailDialogPage = "/detailDialogPage";
+  static String resourceDialogPage = "/resourceDialogPage";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -18,6 +19,6 @@ class UpgradeGameRoute {
     router.define(loginPage, handler: loginPageHandler);
     router.define(mainPage, handler: mainPageHandler);
     router.define(detailDialogPage, handler: detailDialogHandler);
-
+    router.define(resourceDialogPage, handler: resourceDialogHandler);
   }
 }
