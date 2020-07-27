@@ -72,6 +72,15 @@ class AdDialog {
         }
       }
     }else{
+      ///广告出错回调
+      if("-1"==event.toString()){
+        this.initAdViewSuccess = false;
+        if(this.adWatchFailedCallback != null){
+          this.adWatchFailedCallback();
+          this.dialogState = false;
+        }
+      }
+
       ///返回广告看完的回调
       if ("5"==event.toString()){
         if(this.adWatchSuccessCallback != null){
