@@ -5,6 +5,7 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/app/notificationEvent.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/model/baseResourceChangeDialogDataModel.dart';
 import 'package:upgradegame/Src/pages/main/model/takeCoinModel.dart';
 import 'package:upgradegame/Src/pages/main/service/mainService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
@@ -65,6 +66,9 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    ///初始化要获取资源时候的弹窗显示 以后版本再做
+//    BaseResourceChangeDialogDataModel();
 
     _progressHUD = new ProgressHUD(
       backgroundColor: Colors.transparent,
