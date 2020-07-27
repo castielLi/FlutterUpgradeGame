@@ -26,7 +26,6 @@ class _ServerCenterState extends State<ServerCenter> {
   }
 
   void getServerCenter(){
-    print("开始请求serverCenter");
     this.widget.HUD();
     UserInfoService.ServerCenter((ServerCenterModel model){
       if(model != null){

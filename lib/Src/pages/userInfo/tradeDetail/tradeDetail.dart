@@ -20,7 +20,7 @@ class TradeDetail extends StatefulWidget {
 }
 
 class _TradeDetailState extends State<TradeDetail> {
-  TCoinDetailModel tCoinDetail = new TCoinDetailModel(total: 0,page: 0,datalist: []);
+  TCoinDetailModel tCoinDetail = new TCoinDetailModel(total: 0, page: 0, datalist: []);
   int page = 0;
 
   @override
@@ -34,22 +34,22 @@ class _TradeDetailState extends State<TradeDetail> {
     this.widget.HUD();
     UserInfoService.getUserTCoinDetail(this.page, (TCoinDetailModel model) {
       //测试数据
-//      model.datalist =[new Datalist(datetime: "2020-07-24",detail: "购买英雄",change:"100")];
 //      for (int i = 0; i < 4; i++) {
-//        model.datalist += model.datalist;
+//        model.datalist.add(new Datalist(datetime: "2020-07-24", detail: "购买英雄", change: this.tCoinDetail.datalist.length.toString()));
 //      }
-      if(null==model){
+      //测试数据
+      if (null == model) {
         return;
       }
       this.tCoinDetail.page = model.page;
-      if(this.page==0){
+      if (this.page == 0) {
         this.tCoinDetail.datalist = [];
       }
-      if(model.datalist.length==0){
+      if (model.datalist.length == 0) {
         CommonUtils.showErrorMessage(msg: "没有更多了");
       }
       this.tCoinDetail.datalist += model.datalist;
-      print("page:"+this.page.toString()+", data length:"+this.tCoinDetail.datalist.length.toString());
+      print("page:" + this.page.toString() + ", data length:" + this.tCoinDetail.datalist.length.toString());
       this.widget.HUD();
     });
   }
@@ -116,15 +116,15 @@ class _TradeDetailState extends State<TradeDetail> {
               });
             },
             child: ListView.builder(
-              itemCount: this.tCoinDetail == null ? 0 : this.tCoinDetail.datalist.length,
-              itemBuilder: (content, index) {
-                Datalist tCoinTx = this.tCoinDetail.datalist[index];
-                return TradeItem(
-                  tDate: tCoinTx.datetime,
-                  detail: tCoinTx.detail,
-                  tCoin: tCoinTx.change,
-                );
-              }),
+                itemCount: this.tCoinDetail == null ? 0 : this.tCoinDetail.datalist.length,
+                itemBuilder: (content, index) {
+                  Datalist tCoinTx = this.tCoinDetail.datalist[index];
+                  return TradeItem(
+                    tDate: tCoinTx.datetime,
+                    detail: tCoinTx.detail,
+                    tCoin: tCoinTx.change,
+                  );
+                }),
           ),
         ),
         new ImageButton(

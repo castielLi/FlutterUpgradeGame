@@ -22,8 +22,7 @@ class RaidersDetail extends StatefulWidget {
 class _RaidersDetailState extends State<RaidersDetail> {
   String basic = '';
   String advanced = '';
-  bool showTabOneOfTwoTabs = true;
-
+  String tabName = "basic";
 
   @override
   void initState() {
@@ -31,7 +30,7 @@ class _RaidersDetailState extends State<RaidersDetail> {
     SettingHttpRequestEvent().on("raiders", this.getRaiders);
   }
 
-  void getRaiders(){
+  void getRaiders() {
     this.widget.HUD();
     RaidersService.getRaidersList((data) {
       if (null != data) {
@@ -63,13 +62,13 @@ class _RaidersDetailState extends State<RaidersDetail> {
               ImageTextButton(
                 buttonName: '基 础',
                 callback: () {
-                  switchBetweenTwoTabs();
+                  changeTab('basic');
                 },
               ),
               ImageTextButton(
                 buttonName: '进 阶',
                 callback: () {
-                  switchBetweenTwoTabs();
+                  changeTab('advanced');
                 },
               ),
             ],
@@ -79,7 +78,7 @@ class _RaidersDetailState extends State<RaidersDetail> {
             child: Stack(
               children: [
                 Offstage(
-                  offstage: !showTabOneOfTwoTabs,
+                  offstage: this.tabName != 'basic',
                   child: SingleChildScrollView(
                     child: Text(
                       basic,
@@ -89,7 +88,7 @@ class _RaidersDetailState extends State<RaidersDetail> {
                   ),
                 ),
                 Offstage(
-                  offstage: showTabOneOfTwoTabs,
+                  offstage: this.tabName != 'advanced',
                   child: SingleChildScrollView(
                     child: Text(
                       advanced,
@@ -116,9 +115,9 @@ class _RaidersDetailState extends State<RaidersDetail> {
     );
   }
 
-  void switchBetweenTwoTabs() {
+  void changeTab(String tabName) {
     setState(() {
-      this.showTabOneOfTwoTabs = !this.showTabOneOfTwoTabs;
+      this.tabName = tabName;
     });
   }
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
+import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 
 class ContributionDetail extends StatefulWidget {
   @override
@@ -11,13 +14,18 @@ class ContributionDetail extends StatefulWidget {
 }
 
 class _ContributionDetailState extends State<ContributionDetail> {
+  String tabName = "showContribution";
+  int standard = 10000;
+  int ratio = 100;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
+
       ///加载数据
+
       this.widget.HUD();
     });
   }
@@ -30,8 +38,145 @@ class _ContributionDetailState extends State<ContributionDetail> {
           ScreenUtil().setHeight(400), // 上
           ScreenUtil().setWidth(100), // 右
           ScreenUtil().setHeight(200)), // 下
-      child: Text("贡献值"),
+      child: Column(
+        children: [
+          ButtonsList(
+            buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+            buttonHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+            buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
+            textSize: SystemFontSize.smallButtonWithIconFontSize,
+            buttons: [
+              ImageTextButton(
+                buttonName: '分红',
+                callback: () {
+                  changeTab("showContribution");
+                },
+              ),
+              ImageTextButton(
+                buttonName: '购买',
+                callback: () {
+                  changeTab("buyContribution");
+                },
+              ),
+            ],
+          ),
+          Offstage(
+            offstage: "buyContribution" != this.tabName,
+            child: Text("购买贡献值"),
+          ),
+          Offstage(
+            offstage: "showContribution" != this.tabName,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  child: Column(
+                    children: [
+                      Text(
+                        "个人贡献值",
+                        style: CustomFontSize.defaultTextStyle(70),
+                      ),
+                      Text(
+                        "(每天中午12点更新结算)",
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                      ),
+                      Text(
+                        "130",
+                        style: CustomFontSize.defaultTextStyle(70),
+                      ),
+                      Text(
+                        "昨日累计贡献值",
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: ScreenUtil().setWidth(250),
+                            child: Column(
+                              children: [
+                                Text(
+                                  "单价",
+                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                ),
+                                Text(
+                                  "8",
+                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: ScreenUtil().setWidth(250),
+                            child: Column(
+                              children: [
+                                Text(
+                                  "比例达标状态",
+                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                ),
+                                Text(
+                                  "已达标",
+                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: ScreenUtil().setWidth(250),
+                            child: Column(
+                              children: [
+                                Text(
+                                  "分红比例",
+                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                ),
+                                Text(
+                                  "5%",
+                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(
+                  height: 1.0,
+                  color: Colors.white,
+                ),
+                Container(
+                  height: ScreenUtil().setHeight(450),
+                  child: ListView.builder(
+                      padding: EdgeInsets.only(top: 0),
+                      itemCount: 10,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              (standard - index * 1000).toString(),
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                            ),
+                            Text(
+                              (ratio - index * 10).toString() + '%',
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                            ),
+                          ],
+                        );
+                      }),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
+  void changeTab(String tabName) {
+    setState(() {
+      this.tabName = tabName;
+    });
+  }
 }
