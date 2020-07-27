@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/model/baseResourceChangeDialogDataModel.dart';
 import 'package:upgradegame/Src/common/model/enum/adTypeEnum.dart';
 import 'package:upgradegame/Src/common/model/watchAdModel.dart';
 import 'package:upgradegame/Src/common/service/adService.dart';
 import 'package:upgradegame/Src/common/widget/adDialog/adDialog.dart';
+import 'package:upgradegame/Src/common/widget/resourceDialog/enum/resourceDialogEnum.dart';
+import 'package:upgradegame/Src/common/widget/resourceDialog/model/resourceDialogModel.dart';
 import 'package:upgradegame/Src/provider/baseAdTimerProvider.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
+import 'package:upgradegame/Src/route/application.dart';
+import 'package:upgradegame/Src/route/upgradegame_route.dart';
+import 'package:upgradegame/main.dart';
 
 class AdIconRow extends StatefulWidget {
   double adIconHeight;
@@ -40,12 +47,39 @@ class _AdIconRow extends State<AdIconRow> {
 
   void adFinishedCallback() {
     print("广告已经看完了要执行代码了");
+
+
+
+
     AdService.watchAd(this.widget.type.index, (WatchAdModel model){
       this.widget.HUD();
       if(model!=null){
         CommonUtils.showSuccessMessage(msg: "获取资源成功");
         Provide.value<BaseAdTimerProvider>(context).watchAd(this.widget.type);
         Provide.value<BaseUserInfoProvider>(context).watchedAnAd(model);
+//
+
+      ///以后版本再说显示一个弹窗显示资源获取情况
+//        ResourceDialogModel contribution = ResourceDialogModel(ResourceDialogEnum.contribution,"5");
+//        List<ResourceDialogModel> list = new List<ResourceDialogModel>();
+//        list.add(contribution);
+//        switch(this.widget.type){
+//          case AdTypeEnum.stone:
+//            ResourceDialogModel stone = ResourceDialogModel(ResourceDialogEnum.contribution,"100");
+//            list.add(stone);
+//            break;
+//          case AdTypeEnum.sawmill:
+//            ResourceDialogModel wood = ResourceDialogModel(ResourceDialogEnum.contribution,"200");
+//            list.add(wood);
+//            break;
+//          case AdTypeEnum.farm:
+//            break;
+//        }
+//        BaseResourceChangeDialogDataModel.setNeedDisplay(list);
+//        Application.showResourceDialog(context, UpgradeGameRoute.resourceDialogPage,
+//            params: {'height':
+//            ScreenUtil().setHeight(830), 'width': ScreenUtil().setWidth(510)});
+
       }
     });
   }

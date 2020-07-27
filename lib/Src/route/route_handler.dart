@@ -39,6 +39,5 @@ Handler resourceDialogHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       double height = double.parse(params['height']?.first);
       double width = double.parse(params['width']?.first);
-      List source = params['source'];
-      return ResourceDialog(height: height,width: width,source:source);
+      return ResourceDialog(height: height,width: width);
     });

@@ -4,5 +4,5 @@ class ResourceDialogModel{
   ResourceDialogEnum type;
   String amount;
 
-  ResourceDialogModel(ResourceDialogEnum wood, String s);
+  ResourceDialogModel(this.type, this.amount);
 }
