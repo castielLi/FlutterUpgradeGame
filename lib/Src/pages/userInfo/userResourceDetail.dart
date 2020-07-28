@@ -41,7 +41,7 @@ class _UserResourceDetailState extends State<UserResourceDetail> {
             ],
           ),
           new Container(
-            padding: EdgeInsets.only(top: ScreenUtil().setHeight(50)),
+            padding: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
             child: new Column(
               children: <Widget>[
                 new Row(
@@ -68,8 +68,8 @@ class _UserResourceDetailState extends State<UserResourceDetail> {
                 ),
                 new ImageTextButton(
                   imageUrl: "resource/images/withdrawCash.png",
-                  imageHeight: ScreenUtil().setHeight(150),
-                  imageWidth: ScreenUtil().setHeight(280),
+                  imageHeight: ScreenUtil().setHeight(100),
+                  imageWidth: ScreenUtil().setHeight(300),
                   textSize: SystemFontSize.userInfoResourceWithdrawTextFontSize,
                   buttonName: "提 现",
                   callback: () {
