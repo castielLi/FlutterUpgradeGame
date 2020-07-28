@@ -101,7 +101,7 @@ class _MarketDetailState extends State<MarketDetail> {
         if (model.page == 0) {
           woodList.datalist = [];
         }
-        if (model.datalist.length == 0) {
+        if (model.datalist.length == 0 && this.woodPage != 0) {
           CommonUtils.showErrorMessage(msg: "没有更多了");
         }
         woodList.datalist += model.datalist;
@@ -123,7 +123,7 @@ class _MarketDetailState extends State<MarketDetail> {
         if (model.page == 0) {
           stoneList.datalist = [];
         }
-        if (model.datalist.length == 0) {
+        if (model.datalist.length == 0 && this.stonePage != 0) {
           CommonUtils.showErrorMessage(msg: "没有更多了");
         }
         stoneList.datalist += model.datalist;
@@ -234,144 +234,156 @@ class _MarketDetailState extends State<MarketDetail> {
                       offstage: contentName != Resource.WOOD,
                       child: Container(
                         height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
-                        child: EasyRefresh(
-                          refreshFooter: ClassicsFooter(
-                            bgColor: Colors.transparent,
-                            loadText: "上滑加载",
-                            loadReadyText: "松开加载",
-                            loadingText: "正在加载",
-                            loadedText: "加载完成",
-                            noMoreText: "没有更多了",
-                            loadHeight: 35,
-                            key: new GlobalKey<RefreshFooterState>(),
-                          ),
-                          refreshHeader: ClassicsHeader(
-                            bgColor: Colors.transparent,
-                            refreshText: "下拉刷新",
-                            refreshReadyText: "松开刷新",
-                            refreshingText: "正在刷新",
-                            refreshedText: "刷新完成",
-                            refreshHeight: 35,
-                            key: new GlobalKey<RefreshHeaderState>(),
-                          ),
-                          // ignore: missing_return
-                          loadMore: () {
-                            setState(() {
-                              this.woodPage++;
-                              getWoodTradeList();
-                            });
-                          },
-                          // ignore: missing_return
-                          onRefresh: () {
-                            setState(() {
-                              this.woodPage = 0;
-                              getWoodTradeList();
-                            });
-                          },
-                          child: ListView.builder(
-                              padding: EdgeInsets.only(top: 0),
-                              itemCount: null == this.woodList ? 0 : this.woodList.datalist.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                TradeItemModel tradeItemModel = this.woodList.datalist[index];
-                                print("wood count:" + this.woodList.datalist.length.toString());
-                                return MarketBidItem(
-                                  buttonName: "购 买",
-                                  name: tradeItemModel.displayname,
-                                  bidType: "wood",
-                                  myTrade: tradeItemModel.mytrade,
-                                  amount: tradeItemModel.amount,
-                                  needCoin: tradeItemModel.price,
-                                  buttonCallback: () {
-                                    MarketService.marketBuy(tradeItemModel.productid, (bool success) {
-                                      if (success) {
-                                        ///wood = 1 stone = 2
-                                        baseUserInfo.buyResource(1, tradeItemModel.amount, tradeItemModel.price);
-                                        setState(() {
-                                          for (int i = 0; i < this.woodList.datalist.length; i++) {
-                                            if (tradeItemModel.productid == this.woodList.datalist[i].productid) {
-                                              this.woodList.datalist.removeAt(i);
-                                              return;
+                        child: this.woodList.datalist.length == 0
+                            ? Text(
+                                '目前没有订单',
+                                textAlign: TextAlign.center,
+                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                              )
+                            : EasyRefresh(
+                                refreshFooter: ClassicsFooter(
+                                  bgColor: Colors.transparent,
+                                  loadText: "上滑加载",
+                                  loadReadyText: "松开加载",
+                                  loadingText: "正在加载",
+                                  loadedText: "加载完成",
+                                  noMoreText: "没有更多了",
+                                  loadHeight: 35,
+                                  key: new GlobalKey<RefreshFooterState>(),
+                                ),
+                                refreshHeader: ClassicsHeader(
+                                  bgColor: Colors.transparent,
+                                  refreshText: "下拉刷新",
+                                  refreshReadyText: "松开刷新",
+                                  refreshingText: "正在刷新",
+                                  refreshedText: "刷新完成",
+                                  refreshHeight: 35,
+                                  key: new GlobalKey<RefreshHeaderState>(),
+                                ),
+                                // ignore: missing_return
+                                loadMore: () {
+                                  setState(() {
+                                    this.woodPage++;
+                                    getWoodTradeList();
+                                  });
+                                },
+                                // ignore: missing_return
+                                onRefresh: () {
+                                  setState(() {
+                                    this.woodPage = 0;
+                                    getWoodTradeList();
+                                  });
+                                },
+                                child: ListView.builder(
+                                    padding: EdgeInsets.only(top: 0),
+                                    itemCount: this.woodList.datalist.length,
+                                    itemBuilder: (BuildContext context, int index) {
+                                      TradeItemModel tradeItemModel = this.woodList.datalist[index];
+                                      print("wood count:" + this.woodList.datalist.length.toString());
+                                      return MarketBidItem(
+                                        buttonName: "购 买",
+                                        name: tradeItemModel.displayname,
+                                        bidType: "wood",
+                                        myTrade: tradeItemModel.mytrade,
+                                        amount: tradeItemModel.amount,
+                                        needCoin: tradeItemModel.price,
+                                        buttonCallback: () {
+                                          MarketService.marketBuy(tradeItemModel.productid, (bool success) {
+                                            if (success) {
+                                              ///wood = 1 stone = 2
+                                              baseUserInfo.buyResource(1, tradeItemModel.amount, tradeItemModel.price);
+                                              setState(() {
+                                                for (int i = 0; i < this.woodList.datalist.length; i++) {
+                                                  if (tradeItemModel.productid == this.woodList.datalist[i].productid) {
+                                                    this.woodList.datalist.removeAt(i);
+                                                    return;
+                                                  }
+                                                }
+                                              });
                                             }
-                                          }
-                                        });
-                                      }
-                                    });
-                                  },
-                                );
-                              }),
-                        ),
+                                          });
+                                        },
+                                      );
+                                    }),
+                              ),
                       ),
                     ), // wood
                     Offstage(
                       offstage: contentName != Resource.STONE,
                       child: Container(
                         height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
-                        child: EasyRefresh(
-                          refreshFooter: ClassicsFooter(
-                            bgColor: Colors.transparent,
-                            loadText: "上滑加载",
-                            loadReadyText: "松开加载",
-                            loadingText: "正在加载",
-                            loadedText: "加载完成",
-                            noMoreText: "没有更多了",
-                            loadHeight: 35,
-                            key: new GlobalKey<RefreshFooterState>(),
-                          ),
-                          refreshHeader: ClassicsHeader(
-                            bgColor: Colors.transparent,
-                            refreshText: "下拉刷新",
-                            refreshReadyText: "松开刷新",
-                            refreshingText: "正在刷新",
-                            refreshedText: "刷新完成",
-                            refreshHeight: 35,
-                            key: new GlobalKey<RefreshHeaderState>(),
-                          ),
-                          // ignore: missing_return
-                          loadMore: () {
-                            setState(() {
-                              this.stonePage++;
-                              getStoneTradeList();
-                            });
-                          },
-                          // ignore: missing_return
-                          onRefresh: () {
-                            setState(() {
-                              this.woodPage = 0;
-                              getStoneTradeList();
-                            });
-                          },
-                          child: ListView.builder(
-                              padding: EdgeInsets.only(top: 0),
-                              itemCount: null == this.stoneList ? 0 : this.stoneList.datalist.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                TradeItemModel tradeItemModel = this.stoneList.datalist[index];
-                                print("stone count:" + this.stoneList.datalist.length.toString());
-                                return MarketBidItem(
-                                  buttonName: "购 买",
-                                  name: tradeItemModel.displayname,
-                                  bidType: "stone",
-                                  myTrade: tradeItemModel.mytrade,
-                                  amount: tradeItemModel.amount,
-                                  needCoin: tradeItemModel.price,
-                                  buttonCallback: () {
-                                    MarketService.marketBuy(tradeItemModel.productid, (bool success) {
-                                      if (success) {
-                                        ///wood = 1 stone = 2
-                                        baseUserInfo.buyResource(2, tradeItemModel.amount, tradeItemModel.price);
-                                        setState(() {
-                                          for (int i = 0; i < this.stoneList.datalist.length; i++) {
-                                            if (tradeItemModel.productid == this.stoneList.datalist[i].productid) {
-                                              this.stoneList.datalist.removeAt(i);
-                                              return;
+                        child: this.stoneList.datalist.length == 0
+                            ? Text(
+                                '目前没有订单',
+                                textAlign: TextAlign.center,
+                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                              )
+                            : EasyRefresh(
+                                refreshFooter: ClassicsFooter(
+                                  bgColor: Colors.transparent,
+                                  loadText: "上滑加载",
+                                  loadReadyText: "松开加载",
+                                  loadingText: "正在加载",
+                                  loadedText: "加载完成",
+                                  noMoreText: "没有更多了",
+                                  loadHeight: 35,
+                                  key: new GlobalKey<RefreshFooterState>(),
+                                ),
+                                refreshHeader: ClassicsHeader(
+                                  bgColor: Colors.transparent,
+                                  refreshText: "下拉刷新",
+                                  refreshReadyText: "松开刷新",
+                                  refreshingText: "正在刷新",
+                                  refreshedText: "刷新完成",
+                                  refreshHeight: 35,
+                                  key: new GlobalKey<RefreshHeaderState>(),
+                                ),
+                                // ignore: missing_return
+                                loadMore: () {
+                                  setState(() {
+                                    this.stonePage++;
+                                    getStoneTradeList();
+                                  });
+                                },
+                                // ignore: missing_return
+                                onRefresh: () {
+                                  setState(() {
+                                    this.woodPage = 0;
+                                    getStoneTradeList();
+                                  });
+                                },
+                                child: ListView.builder(
+                                    padding: EdgeInsets.only(top: 0),
+                                    itemCount: this.stoneList.datalist.length,
+                                    itemBuilder: (BuildContext context, int index) {
+                                      TradeItemModel tradeItemModel = this.stoneList.datalist[index];
+                                      print("stone count:" + this.stoneList.datalist.length.toString());
+                                      return MarketBidItem(
+                                        buttonName: "购 买",
+                                        name: tradeItemModel.displayname,
+                                        bidType: "stone",
+                                        myTrade: tradeItemModel.mytrade,
+                                        amount: tradeItemModel.amount,
+                                        needCoin: tradeItemModel.price,
+                                        buttonCallback: () {
+                                          MarketService.marketBuy(tradeItemModel.productid, (bool success) {
+                                            if (success) {
+                                              ///wood = 1 stone = 2
+                                              baseUserInfo.buyResource(2, tradeItemModel.amount, tradeItemModel.price);
+                                              setState(() {
+                                                for (int i = 0; i < this.stoneList.datalist.length; i++) {
+                                                  if (tradeItemModel.productid == this.stoneList.datalist[i].productid) {
+                                                    this.stoneList.datalist.removeAt(i);
+                                                    return;
+                                                  }
+                                                }
+                                              });
                                             }
-                                          }
-                                        });
-                                      }
-                                    });
-                                  },
-                                );
-                              }),
-                        ),
+                                          });
+                                        },
+                                      );
+                                    }),
+                              ),
                       ),
                     ), // stone
                     Offstage(

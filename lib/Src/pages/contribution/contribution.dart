@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 
 class ContributionDetail extends StatefulWidget {
   @override
@@ -14,8 +15,9 @@ class ContributionDetail extends StatefulWidget {
 }
 
 class _ContributionDetailState extends State<ContributionDetail> {
-  var amountController = TextEditingController();
+  final amountController = TextEditingController();
   String tabName = "showContribution";
+  int coin = 0;
   int standard = 10000;
   int ratio = 100;
 
@@ -70,14 +72,28 @@ class _ContributionDetailState extends State<ContributionDetail> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(labelText: "购买数量", prefixIcon: Icon(Icons.attach_money)),
                   controller: amountController,
+                  onChanged: (String amount) {
+                    setState(() {
+                      amount = amountController.text;
+                      if (!RegExp(r"^\d*$").hasMatch(amount)) {
+                        print('input:' + amount);
+                        CommonUtils.showErrorMessage(msg: "请输入正整数");
+                        this.coin = 0;
+//                        return;
+                      }
+                      this.coin = int.parse(amount) * 2;
+                    });
+                  },
                 ),
-                Text('价格:' + (5).toString() + 'T币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+                Text('价格:' + this.coin.toString() + 'T币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
                 ImageTextButton(
                   imageUrl: "resource/images/upgradeButton.png",
                   imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
                   imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
                   buttonName: '确 定',
-                  callback: () {},
+                  callback: () {
+                    print('购买贡献值');
+                  },
                   textSize: SystemFontSize.settingTextFontSize,
                 ),
               ],

@@ -16,7 +16,7 @@ class AdDividendDetail extends StatefulWidget {
 
 class _AdDividendDetailState extends State<AdDividendDetail> {
   AdDividendModel warrior = AdDividendModel(type: Heroes.WARRIOR);
-  AdDividendModel hunter = AdDividendModel(type: Heroes.HUNTER);
+//  AdDividendModel hunter = AdDividendModel(type: Heroes.HUNTER);
   AdDividendModel shaman = AdDividendModel(type: Heroes.SHAMAN);
 
   @override
@@ -34,9 +34,9 @@ class _AdDividendDetailState extends State<AdDividendDetail> {
                   case Heroes.WARRIOR:
                     warrior = adDividend;
                     break;
-                  case Heroes.HUNTER:
-                    hunter = adDividend;
-                    break;
+//                  case Heroes.HUNTER:
+//                    hunter = adDividend;
+//                    break;
                   case Heroes.SHAMAN:
                     shaman = adDividend;
                 }
@@ -58,9 +58,10 @@ class _AdDividendDetailState extends State<AdDividendDetail> {
           ScreenUtil().setWidth(80), // 右
           ScreenUtil().setHeight(200)),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           AdPool(heroImageUrl: 'resource/images/warrior.png', poolName: '勇士', adDividend: warrior),
-          AdPool(heroImageUrl: 'resource/images/hunter.png', poolName: '猎人', adDividend: hunter),
+//          AdPool(heroImageUrl: 'resource/images/hunter.png', poolName: '猎人', adDividend: hunter),
           AdPool(heroImageUrl: 'resource/images/shaman.png', poolName: '萨满', adDividend: shaman),
         ],
       ),

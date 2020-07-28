@@ -37,44 +37,45 @@ class _AdPool extends State<AdPool> {
             width: ScreenUtil().setWidth(SystemIconSize.mediumIconSize),
           ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
+//              Container(
+//                padding: EdgeInsets.only(left: ScreenUtil().setWidth(270)),
+//                width: ScreenUtil().setWidth(600),
+//                height: ScreenUtil().setHeight(80),
+//                child: Row(
+//                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                  children: <Widget>[
+//                    Text(
+//                      '昨日收益',
+//                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+//                    ),
+//                    Text(
+//                      '历史收益',
+//                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+//                    ),
+//                  ],
+//                ),
+//              ),
               Container(
-                padding: EdgeInsets.only(left: ScreenUtil().setWidth(270)),
                 width: ScreenUtil().setWidth(600),
                 height: ScreenUtil().setHeight(80),
+                padding: EdgeInsets.only(right: 50),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      '昨日收益',
-                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                    ),
-                    Text(
-                      '历史收益',
-                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: ScreenUtil().setWidth(600),
-                height: ScreenUtil().setHeight(80),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      '我的' + this.widget.poolName + '奖池',
+                      '昨日分红(元/位)',
                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                     Text(
                       this.widget.adDividend.yesterdayincome.toString(),
                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
-                    Text(
-                      this.widget.adDividend.totalincome.toString(),
-                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                    ),
+//                    Text(
+//                      this.widget.adDividend.totalincome.toString(),
+//                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+//                    ),
                   ],
                 ),
               ),
