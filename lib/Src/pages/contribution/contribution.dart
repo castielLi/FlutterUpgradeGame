@@ -14,6 +14,7 @@ class ContributionDetail extends StatefulWidget {
 }
 
 class _ContributionDetailState extends State<ContributionDetail> {
+  var amountController = TextEditingController();
   String tabName = "showContribution";
   int standard = 10000;
   int ratio = 100;
@@ -62,7 +63,25 @@ class _ContributionDetailState extends State<ContributionDetail> {
           ),
           Offstage(
             offstage: "buyContribution" != this.tabName,
-            child: Text("购买贡献值"),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                TextField(
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(labelText: "购买数量", prefixIcon: Icon(Icons.attach_money)),
+                  controller: amountController,
+                ),
+                Text('价格:' + (5).toString() + 'T币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+                ImageTextButton(
+                  imageUrl: "resource/images/upgradeButton.png",
+                  imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+                  imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+                  buttonName: '确 定',
+                  callback: () {},
+                  textSize: SystemFontSize.settingTextFontSize,
+                ),
+              ],
+            ),
           ),
           Offstage(
             offstage: "showContribution" != this.tabName,
