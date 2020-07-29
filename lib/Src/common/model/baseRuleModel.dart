@@ -1,6 +1,6 @@
 
 class BaseRuleModel {
-  AdSetting adSetting;
+  Adsetting adSetting;
   List<Mainbuild> mainbuild;
   List<Farm> farm;
   List<Wood> wood;
@@ -11,7 +11,7 @@ class BaseRuleModel {
 
   BaseRuleModel.fromJson(Map<String, dynamic> json) {
     adSetting = json['adsetting'] != null
-        ? new AdSetting.fromJson(json['adsetting'])
+        ? new Adsetting.fromJson(json['adsetting'])
         : null;
     if (json['mainbuild'] != null) {
       mainbuild = new List<Mainbuild>();
@@ -60,41 +60,59 @@ class BaseRuleModel {
   }
 }
 
-class AdSetting {
+class Adsetting {
   int wood;
-  int farm;
+  int farmone;
+  int farmtwo;
+  int farmthree;
   int stone;
 
-  AdSetting({this.wood, this.farm, this.stone});
+  Adsetting(
+      {this.wood, this.farmone, this.farmtwo, this.farmthree, this.stone});
 
-  AdSetting.fromJson(Map<String, dynamic> json) {
+  Adsetting.fromJson(Map<String, dynamic> json) {
     wood = json['wood'];
-    farm = json['farm'];
+    farmone = json['farmone'];
+    farmtwo = json['farmtwo'];
+    farmthree = json['farmthree'];
     stone = json['stone'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['wood'] = this.wood;
-    data['farm'] = this.farm;
+    data['farmone'] = this.farmone;
+    data['farmtwo'] = this.farmtwo;
+    data['farmthree'] = this.farmthree;
     data['stone'] = this.stone;
     return data;
   }
 }
+
 
 class Mainbuild {
   int level;
   int woodamount;
   int stoneamount;
   int product;
+  int consumewood;
+  int consumestone;
 
-  Mainbuild({this.level, this.woodamount, this.stoneamount, this.product});
+  Mainbuild(
+      {this.level,
+        this.woodamount,
+        this.stoneamount,
+        this.product,
+        this.consumewood,
+        this.consumestone});
 
   Mainbuild.fromJson(Map<String, dynamic> json) {
     level = json['level'];
     woodamount = json['woodamount'];
     stoneamount = json['stoneamount'];
     product = json['product'];
+    consumewood = json['consumewood'];
+    consumestone = json['consumestone'];
   }
 
   Map<String, dynamic> toJson() {
@@ -103,6 +121,8 @@ class Mainbuild {
     data['woodamount'] = this.woodamount;
     data['stoneamount'] = this.stoneamount;
     data['product'] = this.product;
+    data['consumewood'] = this.consumewood;
+    data['consumestone'] = this.consumestone;
     return data;
   }
 }
@@ -112,21 +132,14 @@ class Farm {
   int tcoinamount;
   int woodlevel;
   int stonelevel;
-  int product;
 
-  Farm(
-      {this.level,
-        this.tcoinamount,
-        this.woodlevel,
-        this.stonelevel,
-        this.product});
+  Farm({this.level, this.tcoinamount, this.woodlevel, this.stonelevel});
 
   Farm.fromJson(Map<String, dynamic> json) {
     level = json['level'];
     tcoinamount = json['tcoinamount'];
     woodlevel = json['woodlevel'];
     stonelevel = json['stonelevel'];
-    product = json['product'];
   }
 
   Map<String, dynamic> toJson() {
@@ -135,7 +148,6 @@ class Farm {
     data['tcoinamount'] = this.tcoinamount;
     data['woodlevel'] = this.woodlevel;
     data['stonelevel'] = this.stonelevel;
-    data['product'] = this.product;
     return data;
   }
 }
@@ -143,13 +155,15 @@ class Farm {
 class Wood {
   int level;
   int tcoinamount;
+  int farmlevel;
   int product;
 
-  Wood({this.level, this.tcoinamount, this.product});
+  Wood({this.level, this.tcoinamount, this.farmlevel, this.product});
 
   Wood.fromJson(Map<String, dynamic> json) {
     level = json['level'];
     tcoinamount = json['tcoinamount'];
+    farmlevel = json['farmlevel'];
     product = json['product'];
   }
 
@@ -157,6 +171,7 @@ class Wood {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['level'] = this.level;
     data['tcoinamount'] = this.tcoinamount;
+    data['farmlevel'] = this.farmlevel;
     data['product'] = this.product;
     return data;
   }
@@ -165,13 +180,15 @@ class Wood {
 class Stone {
   int level;
   int tcoinamount;
+  int farmlevel;
   int product;
 
-  Stone({this.level, this.tcoinamount, this.product});
+  Stone({this.level, this.tcoinamount, this.farmlevel, this.product});
 
   Stone.fromJson(Map<String, dynamic> json) {
     level = json['level'];
     tcoinamount = json['tcoinamount'];
+    farmlevel = json['farmlevel'];
     product = json['product'];
   }
 
@@ -179,6 +196,7 @@ class Stone {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['level'] = this.level;
     data['tcoinamount'] = this.tcoinamount;
+    data['farmlevel'] = this.farmlevel;
     data['product'] = this.product;
     return data;
   }

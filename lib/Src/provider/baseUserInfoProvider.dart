@@ -5,6 +5,8 @@ import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/common/model/baseUserInfoModel.dart';
 import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 import 'package:upgradegame/Src/common/model/watchAdModel.dart';
+import 'package:upgradegame/Src/pages/main/model/productCoinModel.dart';
+import 'package:upgradegame/Src/pages/main/model/requestGetCoinModel.dart';
 
 //混入
 class BaseUserInfoProvider with ChangeNotifier {
@@ -60,6 +62,19 @@ class BaseUserInfoProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  ///生产t币数据绑定
+  backendProductTCoin(ProductCoinModel model){
+    this.tcoinamount = model.tcoinamount;
+    this.woodamount = model.woodamount;
+    this.stoneamount = model.stoneamount;
+    this.woodlevel = model.woodlevel;
+    this.stonelevel = model.stonelevel;
+    this.farmlevel = model.farmlevel;
+    this.mainbuildlevel = model.mainbuildlevel;
+    this.tobecollectedcoin += model.tobecollectedcoin;
+    notifyListeners();
+  }
+
   ///获取t币
   takeCoin(int tconamount, int woodamount, int stoneamount) {
     this.tcoinamount = tconamount;
@@ -89,7 +104,9 @@ class BaseUserInfoProvider with ChangeNotifier {
     this.stoneamount = model.stoneamount;
     this.mainbuildlevel = model.mainbuildlevel;
     this.stonelevel = model.stonelevel;
-    this.woodamount = model.woodlevel;
+    this.woodlevel = model.woodlevel;
+    this.farmlevel = model.farmlevel;
+    this.tobecollectedcoin = model.tobecollectedcoin;
     notifyListeners();
   }
 
@@ -137,7 +154,9 @@ class BaseUserInfoProvider with ChangeNotifier {
     this.woodamount = model.woodamount;
     this.stoneamount = model.stoneamount;
     this.ad.stone = model.stone;
-    this.ad.farm = model.farm;
+    this.ad.farmone = model.farmone;
+    this.ad.farmtwo = model.farmtwo;
+    this.ad.farmthree = model.farmthree;
     this.ad.wood = model.wood;
     notifyListeners();
   }

@@ -12,9 +12,11 @@ import 'dart:convert' as convert;
 class AdService {
 
   static Future<ResultData> watchAd(int type, callback) async {
-    WatchAd ad = new WatchAd(type: type);
+    int dateTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    WatchAd ad = new WatchAd(type: type,datetime: dateTime);
     String params = convert.jsonEncode(ad);
 
+    ///农场1 伐木场2 采石场3
     var response = await httpManager.request(ServiceUrl.watchAd(), params, null, Options(method: "post"));
     if(response.code == 200){
       WatchAdModel model = WatchAdModel.fromJson(response.data);

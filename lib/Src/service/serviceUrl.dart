@@ -3,8 +3,8 @@ class ServiceUrl {
   ///fastmock
 //      "https://www.fastmock.site/mock/095e3520b3833640934d29559631cc16/";
   ///server
-  "https://test.buluo888.com/";
-//  "http://192.168.31.46:8080/";
+//  "https://test.buluo888.com/";
+  "http://192.168.0.107:8080/";
   static const String downloadUrl = '';
 
   /// rule
@@ -20,6 +20,11 @@ class ServiceUrl {
   ///getuser
   static getuser() {
     return "${host}api/v1/user";
+  }
+
+  ///requestBackendFetchCoin
+  static requestBackendProductCoin(){
+    return "${host}api/v1/mainbuild/tcoin/product";
   }
 
   ///loginwithaccount

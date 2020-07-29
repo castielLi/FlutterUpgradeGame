@@ -1,6 +1,7 @@
 enum BuildingEnum {
+  none,
   mainBuilding,
-  stone,
   farm,
-  sawmill
+  sawmill,
+  stone
 }
