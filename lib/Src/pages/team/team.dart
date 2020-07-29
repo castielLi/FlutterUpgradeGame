@@ -151,7 +151,6 @@ class _TeamDetailState extends State<TeamDetail> {
                       Offstage(
                         offstage: !this.showTeamDetail,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
                             ButtonsList(
                               buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),

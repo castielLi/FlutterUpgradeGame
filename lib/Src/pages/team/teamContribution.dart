@@ -28,7 +28,6 @@ class _TeamContribution extends State<TeamContribution> {
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             this.widget.title,

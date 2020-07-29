@@ -23,9 +23,11 @@ class HeroAltarItem extends StatefulWidget {
 
   int heroType;
 
+  int price;
+
   VoidCallback HUD;
 
-  HeroAltarItem({Key key, this.description, this.revenueUp, this.remainDays, this.heroImageUrl, this.heroType, this.HUD}) : super(key: key);
+  HeroAltarItem({Key key, this.description, this.revenueUp, this.remainDays, this.heroImageUrl, this.heroType, this.price,this.HUD}) : super(key: key);
 
   @override
   _HeroAltarItem createState() => _HeroAltarItem();
@@ -74,7 +76,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                     style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                   ),
                   Text(
-                    '效率:收益提高' + this.widget.revenueUp.toInt().toString() + '%',
+                    '价格:' + this.widget.price.toString() + 'T币',
                     style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                   ),
                   Text(

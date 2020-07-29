@@ -39,24 +39,6 @@ class _AdPool extends State<AdPool> {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-//              Container(
-//                padding: EdgeInsets.only(left: ScreenUtil().setWidth(270)),
-//                width: ScreenUtil().setWidth(600),
-//                height: ScreenUtil().setHeight(80),
-//                child: Row(
-//                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                  children: <Widget>[
-//                    Text(
-//                      '昨日收益',
-//                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-//                    ),
-//                    Text(
-//                      '历史收益',
-//                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-//                    ),
-//                  ],
-//                ),
-//              ),
               Container(
                 width: ScreenUtil().setWidth(600),
                 height: ScreenUtil().setHeight(80),
@@ -72,10 +54,6 @@ class _AdPool extends State<AdPool> {
                       this.widget.adDividend.yesterdayincome.toString(),
                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
-//                    Text(
-//                      this.widget.adDividend.totalincome.toString(),
-//                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-//                    ),
                   ],
                 ),
               ),
