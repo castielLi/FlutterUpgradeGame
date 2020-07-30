@@ -22,6 +22,7 @@ class TradeDetail extends StatefulWidget {
 class _TradeDetailState extends State<TradeDetail> {
   TCoinDetailModel tCoinDetail = new TCoinDetailModel(total: 0, page: 0, datalist: []);
   int page = 0;
+  String noTxText = '';
 
   @override
   void initState() {
@@ -46,7 +47,10 @@ class _TradeDetailState extends State<TradeDetail> {
         this.tCoinDetail.datalist = [];
       }
       if (model.datalist.length == 0) {
-        CommonUtils.showErrorMessage(msg: "没有更多了");
+        this.noTxText = '目前没有明细';
+        if (this.page != 0) {
+          CommonUtils.showErrorMessage(msg: "没有更多了");
+        }
       }
       this.tCoinDetail.datalist += model.datalist;
       print("page:" + this.page.toString() + ", data length:" + this.tCoinDetail.datalist.length.toString());
@@ -59,26 +63,31 @@ class _TradeDetailState extends State<TradeDetail> {
     return new Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Container(
-          padding: EdgeInsets.only(left: ScreenUtil().setWidth(100)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                '日期',
+        this.tCoinDetail.datalist.length == 0
+            ? Text(
+                this.noTxText,
                 style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+              )
+            : Container(
+                padding: EdgeInsets.only(left: ScreenUtil().setWidth(100)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      '日期',
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+                    ),
+                    Text(
+                      '事项',
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+                    ),
+                    Text(
+                      '金额',
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+                    ),
+                  ],
+                ),
               ),
-              Text(
-                '事项',
-                style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
-              ),
-              Text(
-                '金额',
-                style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
-              ),
-            ],
-          ),
-        ),
         Container(
           height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
           child: EasyRefresh(
@@ -133,7 +142,6 @@ class _TradeDetailState extends State<TradeDetail> {
           buttonName: "返回",
           imageUrl: "resource/images/upgradeButton.png",
           callback: () {
-//                this.widget.HUD();
             this.widget.viewCallback();
           },
         ),

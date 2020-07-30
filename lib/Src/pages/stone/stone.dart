@@ -25,22 +25,24 @@ class _StoneDetailState extends State<StoneDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
-      int levelFrom = 0;
       int level = 0;
+      int nextLevel = 0;
       Stone stoneBuildingRule;
       Adsetting adSetting;
       int needTCoin = 0;
       int woodPerAd = 0;
       int watchedAd = 0;
       int maxWatchableAd = 0;
+      int farmLevel = 0;
       if (null != baseUserInfo) {
-        levelFrom = baseUserInfo.Stonelevel;
-        level = baseUserInfo.Stonelevel + 1;
-        stoneBuildingRule = null == Global.getStoneBuildingRule() ? null : Global.getStoneBuildingRule()[level - 1];
+        level = baseUserInfo.Stonelevel;
+        nextLevel = baseUserInfo.Stonelevel + 1;
+        stoneBuildingRule = null == Global.getStoneBuildingRule() ? null : Global.getStoneBuildingRule()[nextLevel - 1];
         adSetting = Global.getAdSettingRule();
         if (null != stoneBuildingRule) {
           needTCoin = stoneBuildingRule.tcoinamount;
           woodPerAd = stoneBuildingRule.product;
+          farmLevel = stoneBuildingRule.farmlevel;
         }
         watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.stone;
         maxWatchableAd = null == adSetting ? 5 : adSetting.stone;
@@ -52,6 +54,7 @@ class _StoneDetailState extends State<StoneDetail> {
             ScreenUtil().setHeight(350), // 上
             ScreenUtil().setWidth(80), // 右
             ScreenUtil().setHeight(100)), // 下
+//        color:Colors.red,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -60,19 +63,24 @@ class _StoneDetailState extends State<StoneDetail> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('LV $levelFrom > LV $level', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
-                  Text('升级所需资料', style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
+                  Text('LV $level > LV $nextLevel', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
+                  Text('升级条件', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      new Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(100)),
+                      Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                       Text(
                         '$needTCoin ',
                         style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
                       ),
+                      Image(image: new AssetImage('resource/images/farmBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                      Text(
+                        'lv' + '$farmLevel ',
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
+                      ),
                     ],
                   ),
-                  Text('观看广告获取升级资源', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+                  Text('观看广告获取升级资源', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                 ],
               ),
             ),
@@ -96,19 +104,19 @@ class _StoneDetailState extends State<StoneDetail> {
                     children: <Widget>[
                       Text(
                         '每次获取 ',
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
                       ),
                       Image(
                         image: new AssetImage('resource/images/stone.png'),
-                        height: ScreenUtil().setHeight(100),
+                        height: ScreenUtil().setHeight(SystemIconSize.adIconSize),
                       ),
                       Text(
                         ' $woodPerAd',
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
                       ),
                     ],
                   ),
-                  Text('今日观看次数 $watchedAd/$maxWatchableAd', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+                  Text('今日观看次数 $watchedAd/$maxWatchableAd', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                 ],
               ),
             ),
@@ -118,8 +126,8 @@ class _StoneDetailState extends State<StoneDetail> {
               buttonName: "升 级",
               imageUrl: "resource/images/upgradeButton.png",
               callback: () {
-                if (baseUserInfo.tcoinamount < stoneBuildingRule.tcoinamount) {
-                  CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
+                if (baseUserInfo.tcoinamount < stoneBuildingRule.tcoinamount || baseUserInfo.farmlevel < stoneBuildingRule.farmlevel) {
+                  CommonUtils.showErrorMessage(msg: "未达到升级条件");
                 } else {
                   this.widget.HUD();
                   BaseService.upgradeBuilding(BuildingEnum.stone.index, (model) {

@@ -4,6 +4,7 @@ import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
 import 'package:upgradegame/Src/common/model/enum/adTypeEnum.dart';
 import 'package:upgradegame/Src/common/model/enum/buildingEnum.dart';
+import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 import 'package:upgradegame/Src/common/service/baseService.dart';
 import 'package:upgradegame/Src/common/widget/adIcon/adIconRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
@@ -33,25 +34,31 @@ class _FarmDetailState extends State<FarmDetail> {
       int speedUpPercent = 0;
       Farm farmBuildingRule;
       Adsetting adSetting;
+      int woodLevel = 0;
+      int stoneLevel = 0;
       if (null != baseUserInfo) {
         levelFrom = baseUserInfo.Farmlevel;
         level = baseUserInfo.Farmlevel + 1;
+
         ///农场等级是从1级开始
         farmBuildingRule = null == Global.getFarmBuildingRule() ? null : Global.getFarmBuildingRule()[level - 1];
         adSetting = Global.getAdSettingRule();
         if (null != farmBuildingRule) {
           neededCoin = farmBuildingRule.tcoinamount;
+          woodLevel = farmBuildingRule.woodlevel;
+          stoneLevel = farmBuildingRule.stonelevel;
         }
+
         ///农产的广告在每天0点12点18点的时候进行刷新
 
         int timeHour = DateTime.now().hour;
-        if(timeHour>=0 && timeHour<12){
+        if (timeHour >= 0 && timeHour < 12) {
           watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.farmone;
           maxWatchableAd = null == adSetting ? 5 : adSetting.farmone;
-        }else if(timeHour >= 12 && timeHour < 18){
+        } else if (timeHour >= 12 && timeHour < 18) {
           watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.farmtwo;
           maxWatchableAd = null == adSetting ? 5 : adSetting.farmtwo;
-        }else{
+        } else {
           watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.farmthree;
           maxWatchableAd = null == adSetting ? 5 : adSetting.farmthree;
         }
@@ -72,18 +79,28 @@ class _FarmDetailState extends State<FarmDetail> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text('LV $levelFrom > LV $level', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
-                  Text('升级所需资料', style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
+                  Text('升级所需资料', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      new Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(100)),
+                      Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                       Text(
-                        '$neededCoin ',
+                        '$neededCoin  ',
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
+                      ),
+                      Image(image: new AssetImage('resource/images/fellingBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                      Text(
+                        'lv' + '$woodLevel ',
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
+                      ),
+                      Image(image: new AssetImage('resource/images/stoneBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                      Text(
+                        'lv' + '$stoneLevel ',
                         style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
                       ),
                     ],
                   ),
-                  Text('观看广告获取升级资源', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+                  Text('观看广告以随机获取资源', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                 ],
               ),
             ),
@@ -108,11 +125,11 @@ class _FarmDetailState extends State<FarmDetail> {
                     children: <Widget>[
                       Text(
                         '每次采石场和伐木场提速 $speedUpPercent%',
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
                       ),
                     ],
                   ),
-                  Text('今日观看次数 $watchedAd/$maxWatchableAd', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+                  Text('本阶段观看次数 $watchedAd/$maxWatchableAd', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                 ],
               ),
             ),
@@ -123,8 +140,8 @@ class _FarmDetailState extends State<FarmDetail> {
               imageUrl: "resource/images/upgradeButton.png",
               callback: () {
                 if (null != baseUserInfo && null != farmBuildingRule) {
-                  if (baseUserInfo.tcoinamount < farmBuildingRule.tcoinamount) {
-                    CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
+                  if (baseUserInfo.tcoinamount < farmBuildingRule.tcoinamount || baseUserInfo.stonelevel < farmBuildingRule.stonelevel || baseUserInfo.woodlevel < farmBuildingRule.woodlevel) {
+                    CommonUtils.showErrorMessage(msg: "未达到升级条件");
                   } else {
                     this.widget.HUD();
                     BaseService.upgradeBuilding(BuildingEnum.farm.index, (model) {

@@ -150,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                                 color: Colors.blue,
                                 textColor: Colors.white,
                                 onPressed: () {
-                                  String username = usernameController.text;
+                                  String username = usernameController.text.trim();
                                   String password = passwordController.text;
                                   if ("" == username || "" == password) {
                                     CommonUtils.showErrorMessage(msg: "输入不能为空");
