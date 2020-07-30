@@ -20,36 +20,40 @@ class WithDrawDetail extends StatefulWidget {
 }
 
 class _WithDrawDetailState extends State<WithDrawDetail> {
-  CashDetailModel cashDetailModel = new CashDetailModel(total: 0,page: 0,datalist: []);
+  CashDetailModel cashDetailModel = new CashDetailModel(total: 0, page: 0, datalist: []);
   int page = 0;
+  String noTxText = '';
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    UserInfoHttpRequestEvent().on("withdrawDetail",this.getWithdrawDetail);
+    UserInfoHttpRequestEvent().on("withdrawDetail", this.getWithdrawDetail);
   }
 
-  void getWithdrawDetail(){
+  void getWithdrawDetail() {
     this.widget.HUD();
-    UserInfoService.getUserWithdrawDetail(this.page, (CashDetailModel model){
+    UserInfoService.getUserWithdrawDetail(this.page, (CashDetailModel model) {
       //测试数据
 //      model.datalist =[new Datalist(datetime: "2020-07-24",detail: "购买英雄",change:"100")];
 //      for (int i = 0; i < 3; i++) {
 //        model.datalist += model.datalist;
 //      }
-      if(null==model){
+      if (null == model) {
         return;
       }
       this.cashDetailModel.page = model.page;
-      if(this.page==0){
+      if (this.page == 0) {
         this.cashDetailModel.datalist = [];
       }
-      if(model.datalist.length==0){
-        CommonUtils.showErrorMessage(msg: "没有更多了");
+      if (model.datalist.length == 0) {
+        this.noTxText = "目前没有记录";
+        if (this.page != 0) {
+          CommonUtils.showErrorMessage(msg: "没有更多了");
+        }
       }
       this.cashDetailModel.datalist += model.datalist;
-      print("page:"+this.page.toString()+", data length:"+this.cashDetailModel.datalist.length.toString());
+      print("page:" + this.page.toString() + ", data length:" + this.cashDetailModel.datalist.length.toString());
       this.widget.HUD();
     });
   }
@@ -64,26 +68,31 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
     return new Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Container(
-          padding: EdgeInsets.only(left: ScreenUtil().setWidth(150)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                '日期',
+        this.cashDetailModel.datalist.length == 0
+            ? Text(
+                this.noTxText,
                 style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+              )
+            : Container(
+                padding: EdgeInsets.only(left: ScreenUtil().setWidth(150)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      '日期',
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+                    ),
+                    Text(
+                      '事项',
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+                    ),
+                    Text(
+                      '金额',
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+                    ),
+                  ],
+                ),
               ),
-              Text(
-                '事项',
-                style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
-              ),
-              Text(
-                '金额',
-                style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
-              ),
-            ],
-          ),
-        ),
         Container(
           height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
           child: EasyRefresh(
@@ -121,7 +130,7 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
               });
             },
             child: ListView.builder(
-                itemCount: this.cashDetailModel==null?0:this.cashDetailModel.datalist.length,
+                itemCount: this.cashDetailModel == null ? 0 : this.cashDetailModel.datalist.length,
                 itemBuilder: (content, index) {
                   Datalist cashTx = this.cashDetailModel.datalist[index];
                   return WithdrawItem(
@@ -131,8 +140,6 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
                   );
                 }),
           ),
-
-
         ),
         new ImageButton(
           height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),

@@ -25,22 +25,24 @@ class _SawmillDetailState extends State<SawmillDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
-      int levelFrom = 0;
       int level = 0;
+      int nextLevel = 0;
       Wood woodBuildingRule;
       Adsetting adSetting;
       int needTCoin = 0;
       int woodPerAd = 0;
       int watchedAd = 0;
       int maxWatchableAd = 0;
+      int farmLevel = 0;
       if (null != baseUserInfo) {
-        levelFrom = baseUserInfo.Woodlevel;
-        level = baseUserInfo.Woodlevel + 1;
-        woodBuildingRule = null == Global.getWoodBuildingRule() ? null : Global.getWoodBuildingRule()[level - 1];
+        level = baseUserInfo.Woodlevel;
+        nextLevel = baseUserInfo.Woodlevel + 1;
+        woodBuildingRule = null == Global.getWoodBuildingRule() ? null : Global.getWoodBuildingRule()[nextLevel - 1];
         adSetting = Global.getAdSettingRule();
         if (null != woodBuildingRule) {
           needTCoin = woodBuildingRule.tcoinamount;
           woodPerAd = woodBuildingRule.product;
+          farmLevel = woodBuildingRule.farmlevel;
         }
         watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.wood;
         maxWatchableAd = null == adSetting ? 5 : adSetting.wood;
@@ -60,19 +62,24 @@ class _SawmillDetailState extends State<SawmillDetail> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('LV $levelFrom > LV $level', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
-                  Text('升级所需资料', style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
+                  Text('LV $level > LV $nextLevel', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
+                  Text('升级条件', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      new Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(100)),
+                      new Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                       Text(
                         '$needTCoin ',
                         style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
                       ),
+                      Image(image: new AssetImage('resource/images/farmBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                      Text(
+                        'lv' + '$farmLevel ',
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
+                      ),
                     ],
                   ),
-                  Text('观看广告获取升级资源', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+                  Text('观看广告获取升级资源', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                 ],
               ),
             ),
@@ -96,19 +103,19 @@ class _SawmillDetailState extends State<SawmillDetail> {
                     children: <Widget>[
                       Text(
                         '每次获取 ',
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
                       ),
                       Image(
                         image: new AssetImage('resource/images/wood.png'),
-                        height: ScreenUtil().setHeight(100),
+                        height: ScreenUtil().setHeight(SystemIconSize.adIconSize),
                       ),
                       Text(
                         '$woodPerAd',
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
                       ),
                     ],
                   ),
-                  Text('今日观看次数 $watchedAd/$maxWatchableAd', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+                  Text('今日观看次数 $watchedAd/$maxWatchableAd', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                 ],
               ),
             ),
@@ -118,8 +125,8 @@ class _SawmillDetailState extends State<SawmillDetail> {
               buttonName: "升 级",
               imageUrl: "resource/images/upgradeButton.png",
               callback: () {
-                if (baseUserInfo.tcoinamount < woodBuildingRule.tcoinamount) {
-                  CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
+                if (baseUserInfo.tcoinamount < woodBuildingRule.tcoinamount || baseUserInfo.farmlevel < woodBuildingRule.farmlevel) {
+                  CommonUtils.showErrorMessage(msg: "未达到升级条件");
                 } else {
                   this.widget.HUD();
                   BaseService.upgradeBuilding(BuildingEnum.sawmill.index, (model) {
