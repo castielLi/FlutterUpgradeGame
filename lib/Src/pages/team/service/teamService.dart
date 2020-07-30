@@ -7,6 +7,7 @@ import 'package:upgradegame/Common/http/httpManager.dart';
 import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/team/model/qrCodeModel.dart';
+import 'package:upgradegame/Src/pages/team/model/teamContributionModel.dart';
 import 'dart:async';
 import 'package:upgradegame/Src/service/serviceUrl.dart';
 import 'dart:ui' as ui;
@@ -59,6 +60,18 @@ class TeamService {
     var response = await httpManager.request(ServiceUrl.getQRCode(), {}, null, null);
     if (ConfigSetting.SUCCESS == response.code) {
       QRCodeModel model = QRCodeModel.fromJson(response.data);
+      callback(model);
+    } else {
+      CommonUtils.showErrorMessage(msg: '网络请求失败，请重试');
+      callback(null);
+    }
+    return response;
+  }
+
+  static Future<ResultData> getMyContribution(callback) async {
+    var response = await httpManager.request(ServiceUrl.getTeamContribution(), {}, null, null);
+    if (ConfigSetting.SUCCESS == response.code) {
+      TeamContributionModel model = TeamContributionModel.fromJson(response.data);
       callback(model);
     } else {
       CommonUtils.showErrorMessage(msg: '网络请求失败，请重试');

@@ -5,6 +5,7 @@ import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
+import 'package:upgradegame/Src/pages/team/event/teamEventBus.dart';
 import 'package:upgradegame/Src/pages/team/model/invitation.dart';
 import 'package:upgradegame/Src/pages/team/model/qrCodeModel.dart';
 import 'package:upgradegame/Src/pages/team/service/teamService.dart';
@@ -12,6 +13,8 @@ import 'package:upgradegame/Src/pages/team/teamContribution.dart';
 import 'package:upgradegame/Src/pages/team/teamItem.dart';
 import 'package:fluwx/fluwx.dart' as fluwx;
 import 'dart:io';
+
+import 'model/teamContributionModel.dart';
 
 class TeamDetail extends StatefulWidget {
   @override
@@ -35,6 +38,7 @@ class _TeamDetailState extends State<TeamDetail> {
   bool showTeamDetail = true;
   String qrCodeUrl = "";
   GlobalKey repaintWidgetKey = GlobalKey();
+  TeamContributionModel currentContribution;
 
   void getShareQRCode() {
     this.widget.HUD();
@@ -69,20 +73,46 @@ class _TeamDetailState extends State<TeamDetail> {
     });
   }
 
+  void getMyContribution(){
+    this.widget.HUD();
+    TeamService.getMyContribution((TeamContributionModel model){
+      this.widget.HUD();
+      if(model != null){
+        setState(() {
+          this.currentContribution = model;
+        });
+      }
+    });
+  }
+
+  void getTeamList(){
+    this.widget.HUD();
+
+    TeamService.getTeamList((data) {
+      setState(() {
+        first = InvitationListModel.fromJson(data).first;
+        second = InvitationListModel.fromJson(data).second;
+        hideTeamResult = false;
+      });
+    });
+    this.widget.HUD();
+  }
+
   @override
   void initState() {
     super.initState();
+    TeamHttpRequestEvent().on("getTeamList",this.getTeamList);
+    TeamHttpRequestEvent().on("getMyContribution",this.getMyContribution);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      this.widget.HUD();
-      TeamService.getTeamList((data) {
-        setState(() {
-          first = InvitationListModel.fromJson(data).first;
-          second = InvitationListModel.fromJson(data).second;
-          hideTeamResult = false;
-        });
-      });
-      this.widget.HUD();
+     this.getMyContribution();
     });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    TeamHttpRequestEvent().off();
   }
 
   @override
@@ -105,6 +135,7 @@ class _TeamDetailState extends State<TeamDetail> {
                     this.showContribution = true;
                     this.showTeamMembers = false;
                   });
+                  TeamHttpRequestEvent().emit("getMyContribution");
                 },
               ),
               ImageTextButton(
@@ -114,6 +145,7 @@ class _TeamDetailState extends State<TeamDetail> {
                     this.showContribution = false;
                     this.showTeamMembers = true;
                   });
+                  TeamHttpRequestEvent().emit("getTeamList");
                 },
               ),
             ],
@@ -129,17 +161,17 @@ class _TeamDetailState extends State<TeamDetail> {
                     children: [
                       TeamContribution(
                         title: '今日贡献',
-                        total: 1138,
-                        my: 120,
-                        secondGrade: 700,
-                        thirdGrade: 138,
+                        total: this.currentContribution == null?0:this.currentContribution.today.total,
+                        my: this.currentContribution == null?0:this.currentContribution.today.my,
+                        secondGrade: this.currentContribution == null?0:this.currentContribution.today.first,
+                        thirdGrade: this.currentContribution == null?0:this.currentContribution.today.second,
                       ),
                       TeamContribution(
                         title: '昨日贡献',
-                        total: 1138,
-                        my: 120,
-                        secondGrade: 700,
-                        thirdGrade: 138,
+                        total: this.currentContribution == null?0:this.currentContribution.yesterday.total,
+                        my: this.currentContribution == null?0:this.currentContribution.yesterday.my,
+                        secondGrade: this.currentContribution == null?0:this.currentContribution.yesterday.first,
+                        thirdGrade: this.currentContribution == null?0:this.currentContribution.yesterday.second,
                       ),
                     ],
                   ),

@@ -110,6 +110,12 @@ class BaseUserInfoProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  ///购买贡献值
+  buyContribution(BaseResourceModel model){
+    this.tcoinamount = model.tcoinamount;
+    notifyListeners();
+  }
+
   ///赠送t币
   sendCoin(int amount){
     this.tcoinamount -= amount;
