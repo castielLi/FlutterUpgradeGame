@@ -1,13 +1,15 @@
 class MyContributionModel {
   int amount;
   String price;
+  int myrate;
   List<Conditions> conditions;
 
-  MyContributionModel({this.amount, this.price, this.conditions});
+  MyContributionModel({this.amount, this.price, this.conditions,this.myrate});
 
   MyContributionModel.fromJson(Map<String, dynamic> json) {
     amount = json['amount'];
     price = json['price'];
+    myrate = json['myrate'];
     if (json['conditions'] != null) {
       conditions = new List<Conditions>();
       json['conditions'].forEach((v) {
@@ -20,6 +22,7 @@ class MyContributionModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['amount'] = this.amount;
     data['price'] = this.price;
+    data['myrate']=this.myrate;
     if (this.conditions != null) {
       data['conditions'] = this.conditions.map((v) => v.toJson()).toList();
     }

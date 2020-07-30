@@ -26,6 +26,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
   int coin = 0;
   int standard = 10000;
   int ratio = 100;
+  MyContributionModel currentContributionModel;
 
   @override
   void initState() {
@@ -41,7 +42,9 @@ class _ContributionDetailState extends State<ContributionDetail> {
     ContributionService.getContribution((MyContributionModel model){
       this.widget.HUD();
       if(model != null){
-
+        setState(() {
+          this.currentContributionModel = model;
+        });
       }
     });
   }
@@ -151,7 +154,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                           ),
                           Text(
-                            "130",
+                            this.currentContributionModel == null?"0":this.currentContributionModel.amount.toString(),
                             style: CustomFontSize.defaultTextStyle(70),
                           ),
                           Text(
@@ -170,7 +173,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                     Text(
-                                      "8",
+                                      this.currentContributionModel == null?"0":this.currentContributionModel.price,
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                   ],
@@ -200,7 +203,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                     Text(
-                                      "5%",
+                                      this.currentContributionModel == null?"0":this.currentContributionModel.myrate.toString()+"%",
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                   ],
