@@ -28,7 +28,7 @@ class _StoneDetailState extends State<StoneDetail> {
       int levelFrom = 0;
       int level = 0;
       Stone stoneBuildingRule;
-      AdSetting adSetting;
+      Adsetting adSetting;
       int needTCoin = 0;
       int woodPerAd = 0;
       int watchedAd = 0;

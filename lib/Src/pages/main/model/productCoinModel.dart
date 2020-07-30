@@ -1,4 +1,4 @@
-class BaseResourceModel {
+class ProductCoinModel {
   int tcoinamount;
   int stoneamount;
   int woodamount;
@@ -8,24 +8,25 @@ class BaseResourceModel {
   int woodlevel;
   int tobecollectedcoin;
 
-  BaseResourceModel(
+  ProductCoinModel(
       {this.tcoinamount,
         this.stoneamount,
         this.woodamount,
         this.mainbuildlevel,
         this.farmlevel,
         this.stonelevel,
-        this.woodlevel,this.tobecollectedcoin});
+        this.woodlevel,
+      this.tobecollectedcoin});
 
-  BaseResourceModel.fromJson(Map<String, dynamic> json) {
+  ProductCoinModel.fromJson(Map<String, dynamic> json) {
     tcoinamount = json['tcoinamount'];
     stoneamount = json['stoneamount'];
     woodamount = json['woodamount'];
     mainbuildlevel = json['mainbuildlevel'];
-    tobecollectedcoin = json['tobecollectedcoin'];
     farmlevel = json['farmlevel'];
     stonelevel = json['stonelevel'];
     woodlevel = json['woodlevel'];
+    tobecollectedcoin = json['tobecollectedcoin'];
   }
 
   Map<String, dynamic> toJson() {
@@ -37,7 +38,7 @@ class BaseResourceModel {
     data['farmlevel'] = this.farmlevel;
     data['stonelevel'] = this.stonelevel;
     data['woodlevel'] = this.woodlevel;
-    data['tobecollectedcoin'] = this.tobecollectedcoin;
+    data['tobecollectedcoin'] =  this.tobecollectedcoin;
     return data;
   }
 }

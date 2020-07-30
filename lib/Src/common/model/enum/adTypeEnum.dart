@@ -1,5 +1,6 @@
 enum AdTypeEnum {
-  stone,
+  none,
   farm,
-  sawmill
+  sawmill,
+  stone
 }

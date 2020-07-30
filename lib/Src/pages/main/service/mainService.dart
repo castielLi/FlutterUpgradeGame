@@ -5,6 +5,7 @@ import 'package:upgradegame/Common/http/httpManager.dart';
 import 'package:dio/dio.dart';
 import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Src/common/model/baseUserInfoModel.dart';
+import 'package:upgradegame/Src/pages/main/model/productCoinModel.dart';
 import 'package:upgradegame/Src/pages/main/model/takeCoinModel.dart';
 import 'dart:async';
 import 'package:upgradegame/Src/service/serviceUrl.dart';
@@ -18,9 +19,16 @@ class MainService{
     callback(model);
   }
 
+  static Future<ResultData> requestBackendProductCoin(callback) async{
+    var response = await httpManager.request(
+        ServiceUrl.requestBackendProductCoin(), {}, null, Options(method: "post"));
+    ProductCoinModel model = ProductCoinModel.fromJson(response.data);
+    callback(model);
+  }
+
   static Future<ResultData> takeCoin(callback) async{
     var response = await httpManager.request(
-        ServiceUrl.takeCoin(), {}, null, null);
+        ServiceUrl.takeCoin(), {}, null, Options(method: "post"));
     TakeCoinModel model = TakeCoinModel.fromJson(response.data);
     callback(model);
   }

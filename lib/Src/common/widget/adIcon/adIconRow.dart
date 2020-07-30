@@ -47,14 +47,10 @@ class _AdIconRow extends State<AdIconRow> {
 
   void adFinishedCallback() {
     print("广告已经看完了要执行代码了");
-
-
-
-
     AdService.watchAd(this.widget.type.index, (WatchAdModel model){
       this.widget.HUD();
       if(model!=null){
-        CommonUtils.showSuccessMessage(msg: "获取资源成功");
+        CommonUtils.showSuccessMessage(msg: model.content);
         Provide.value<BaseAdTimerProvider>(context).watchAd(this.widget.type);
         Provide.value<BaseUserInfoProvider>(context).watchedAnAd(model);
 //
@@ -98,11 +94,64 @@ class _AdIconRow extends State<AdIconRow> {
       case AdTypeEnum.stone:
         waiting = baseAdTimerInfo.Stone;
         break;
+      case AdTypeEnum.none:
+        break;
     }
     Widget content;
 
     ///伐木场 采石场显示6 - 10个广告的显示逻辑
     if(this.widget.type == AdTypeEnum.farm){
+
+      for (int i = 0; i < this.widget.alreadyWatched; i++) {
+        firstAdIconList.add(
+          GestureDetector(
+            child: new Image(image: new AssetImage(this.widget.imageUrlWatched), height: this.widget.adIconHeight),
+            onTap: () {
+              CommonUtils.showErrorMessage(msg: '您已经看过该广告了');
+            },
+          ),
+        );
+      }
+      for (int i = 0; i < (5 - this.widget.alreadyWatched); i++) {
+        firstAdIconList.add(
+          GestureDetector(
+            child: new Image(image: new AssetImage(waiting?this.widget.imageUrlWaiting:this.widget.imageUrlUnwatch), height: this.widget.adIconHeight),
+            onTap: () {
+              if(waiting){
+                CommonUtils.showErrorMessage(msg: '您需要等待一段时间才能继续操作,去看看其他资源吧');
+                return;
+              }
+
+//            adview = "POSID8rbrja0ih10i";
+//            baidu = "7111030";
+//            tencent = "6031610694170610";
+              ///type选择平台  1：adview 2：baidu 3：腾讯
+              ///showType 选择展示 方式 1：开屏广告 2：视频广告
+              ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
+              this.widget.HUD();
+              if(this.widget.type == AdTypeEnum.farm){
+                ///如果adview的开屏广告初始化成功,那么就展示adview的广告，否则展示腾讯广告
+                if(AdDialog().initAdViewSuccess) {
+                  AdDialog().showAd(1, 2);
+//                AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
+                }else{
+                  AdDialog().showAd(3, 2);
+//                AdDialog().showAd(3, 2,"6031610694170610");
+                }
+              }else if(this.widget.type == AdTypeEnum.stone){
+                AdDialog().showAd(2, 2);
+//              AdDialog().showAd(2, 2,"7111030");
+              }else{
+                AdDialog().showAd(3, 2);
+//              AdDialog().showAd(3, 2,"6031610694170610");
+              }
+            },
+          ),
+        );
+      }
+
+
+
       content = new Column(
         children: <Widget>[
           new Row(

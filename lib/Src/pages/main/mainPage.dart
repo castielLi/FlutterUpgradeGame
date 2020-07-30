@@ -6,6 +6,7 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/app/notificationEvent.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/baseResourceChangeDialogDataModel.dart';
+import 'package:upgradegame/Src/pages/main/model/requestGetCoinModel.dart';
 import 'package:upgradegame/Src/pages/main/model/takeCoinModel.dart';
 import 'package:upgradegame/Src/pages/main/service/mainService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
@@ -67,6 +68,10 @@ class _MainPageState extends State<MainPage> {
     // TODO: implement initState
     super.initState();
 
+    ///初始化在0-5分钟的时候前台自动去生成t币，并且请求后台进行计算
+    RequestGetCoinModel();
+    RequestGetCoinModel.setIfNeedCoin(true);
+
     ///初始化要获取资源时候的弹窗显示 以后版本再做
 //    BaseResourceChangeDialogDataModel();
 
@@ -99,22 +104,26 @@ class _MainPageState extends State<MainPage> {
     });
 
     ///系统自动判断是否需要产生t币
-    this.productTCoin10 = Timer.periodic(Duration(seconds: 10), (timer) {
+    this.productTCoin10 = Timer.periodic(Duration(seconds: 30), (timer) {
       int timeMinute = DateTime.now().minute;
 
       /// 前九分钟  userinfo请求 获取用户最新的资源动态
-      if (timeMinute >= 0 && timeMinute <= 9) {
-        MainService.getBaseInfo((userInfoModel) {
-          Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(userInfoModel);
+      if (timeMinute >= 0 && timeMinute <= 5 && RequestGetCoinModel().ifNeedGetCoin) {
+        MainService.requestBackendProductCoin((model) {
+          Provide.value<BaseUserInfoProvider>(context).backendProductTCoin(model);
+          RequestGetCoinModel.setIfNeedCoin(false);
         });
+      }
+      if(timeMinute >= 58){
+        RequestGetCoinModel.setIfNeedCoin(true);
       }
     });
 
     this.productTCoin60 = Timer.periodic(Duration(seconds: 60), (timer) {
       int timeMinute = DateTime.now().minute;
 
-      /// 十分钟进行一次 userinfo请求 获取用户最新的资源动态
-      if (timeMinute >= 10 && (timeMinute % 10 == 0)) {
+      /// 3分钟进行一次 userinfo请求 获取用户最新的资源动态
+      if (timeMinute % 3 == 0) {
         MainService.getBaseInfo((userInfoModel) {
           Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(userInfoModel);
         });

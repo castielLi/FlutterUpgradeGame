@@ -1,21 +1,27 @@
 class Ad {
   int wood;
   int stone;
-  int farm;
+  int farmone;
+  int farmtwo;
+  int farmthree;
 
-  Ad({this.wood, this.stone, this.farm});
+  Ad({this.wood, this.stone, this.farmone, this.farmtwo, this.farmthree});
 
   Ad.fromJson(Map<String, dynamic> json) {
     wood = json['wood'];
     stone = json['stone'];
-    farm = json['farm'];
+    farmone = json['farmone'];
+    farmtwo = json['farmtwo'];
+    farmthree = json['farmthree'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['wood'] = this.wood;
     data['stone'] = this.stone;
-    data['farm'] = this.farm;
+    data['farmone'] = this.farmone;
+    data['farmtwo'] = this.farmtwo;
+    data['farmthree'] = this.farmthree;
     return data;
   }
 }

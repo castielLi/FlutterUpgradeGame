@@ -32,18 +32,29 @@ class _FarmDetailState extends State<FarmDetail> {
       int maxWatchableAd = 0;
       int speedUpPercent = 0;
       Farm farmBuildingRule;
-      AdSetting adSetting;
+      Adsetting adSetting;
       if (null != baseUserInfo) {
         levelFrom = baseUserInfo.Farmlevel;
         level = baseUserInfo.Farmlevel + 1;
+        ///农场等级是从1级开始
         farmBuildingRule = null == Global.getFarmBuildingRule() ? null : Global.getFarmBuildingRule()[level - 1];
         adSetting = Global.getAdSettingRule();
         if (null != farmBuildingRule) {
           neededCoin = farmBuildingRule.tcoinamount;
-          speedUpPercent = farmBuildingRule.product;
         }
-        watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.farm;
-        maxWatchableAd = null == adSetting ? 5 : adSetting.farm;
+        ///农产的广告在每天0点12点18点的时候进行刷新
+
+        int timeHour = DateTime.now().hour;
+        if(timeHour>=0 && timeHour<12){
+          watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.farmone;
+          maxWatchableAd = null == adSetting ? 5 : adSetting.farmone;
+        }else if(timeHour >= 12 && timeHour < 18){
+          watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.farmtwo;
+          maxWatchableAd = null == adSetting ? 5 : adSetting.farmtwo;
+        }else{
+          watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.farmthree;
+          maxWatchableAd = null == adSetting ? 5 : adSetting.farmthree;
+        }
       }
 
       return new Container(
