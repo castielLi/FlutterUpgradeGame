@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/pages/AdDividend/adPool.dart';
 import 'package:upgradegame/Src/pages/adDividend/model/AdDividendModel.dart';
 import 'package:upgradegame/Src/pages/adDividend/service/adDividendService.dart';
@@ -16,8 +15,8 @@ class AdDividendDetail extends StatefulWidget {
 }
 
 class _AdDividendDetailState extends State<AdDividendDetail> {
-  HeroProfitModel warrior = HeroProfitModel(total: 0,product: 0,price: "0");
-  HeroProfitModel shaman = HeroProfitModel(total: 0,product: 0,price: "0");
+  HeroProfitModel warrior = HeroProfitModel(total: 0, product: 0, price: "0");
+  HeroProfitModel shaman = HeroProfitModel(total: 0, product: 0, price: "0");
 
   @override
   void initState() {
@@ -27,8 +26,8 @@ class _AdDividendDetailState extends State<AdDividendDetail> {
       AdDividendService.getAdDividendList((AdDividendListModel model) {
         if (null != model) {
           setState(() {
-            warrior = HeroProfitModel(total: model.onetotal,price: model.oneyesterdayprice,product: model.oneproduct);
-            shaman = HeroProfitModel(total: model.threetotal,price: model.threeyesterdayprice,product: model.threeproduct);
+            warrior = HeroProfitModel(total: model.onetotal, price: model.oneyesterdayprice, product: model.oneproduct);
+            shaman = HeroProfitModel(total: model.threetotal, price: model.threeyesterdayprice, product: model.threeproduct);
           });
         }
         this.widget.HUD();
@@ -47,8 +46,8 @@ class _AdDividendDetailState extends State<AdDividendDetail> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          AdPool(heroImageUrl: 'resource/images/warrior.png', poolName: '勇士', adDividend: warrior),
-          AdPool(heroImageUrl: 'resource/images/shaman.png', poolName: '萨满', adDividend: shaman),
+          AdPool(heroImageUrl: 'resource/images/warrior.png', adDividend: warrior),
+          AdPool(heroImageUrl: 'resource/images/shaman.png', adDividend: shaman),
         ],
       ),
     );

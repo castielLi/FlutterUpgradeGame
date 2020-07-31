@@ -50,7 +50,6 @@ class _HeroAltarState extends State<HeroAltar> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.getHeroBaseInfoList();
@@ -63,7 +62,6 @@ class _HeroAltarState extends State<HeroAltar> {
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
         List<Heroes> heroes = baseUserInfo.hero;
         List<int> warriors = [];
-        List<int> hunters = [];
         List<int> shamans = [];
         if (null != baseUserInfo) {
           heroes.forEach((hero) {
@@ -71,11 +69,9 @@ class _HeroAltarState extends State<HeroAltar> {
               case Heroes.WARRIOR:
                 warriors.add(hero.days);
                 break;
-              case Heroes.HUNTER:
-                hunters.add(hero.days);
-                break;
               case Heroes.SHAMAN:
                 shamans.add(hero.days);
+                break;
             }
           });
         }
@@ -86,12 +82,12 @@ class _HeroAltarState extends State<HeroAltar> {
               ScreenUtil().setWidth(80), // 右
               ScreenUtil().setHeight(200)),
           child: ListView(
-            padding: EdgeInsets.only(top: 20),
+            padding: EdgeInsets.only(top: 50),
+            physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
               HeroAltarItem(
                 heroImageUrl: 'resource/images/warrior.png',
                 description: '战士:守卫家园',
-                revenueUp: 10,
                 remainDays: warriors,
                 heroType: Heroes.WARRIOR,
                 HUD: this.widget.HUD,
@@ -100,7 +96,6 @@ class _HeroAltarState extends State<HeroAltar> {
               HeroAltarItem(
                 heroImageUrl: 'resource/images/shaman.png',
                 description: '萨满:保佑你的灵魂',
-                revenueUp: 10,
                 remainDays: shamans,
                 heroType: Heroes.SHAMAN,
                 HUD: this.widget.HUD,

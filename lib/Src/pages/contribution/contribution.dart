@@ -26,6 +26,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
   String tabName = "showContribution";
   int coin = 0;
   MyContributionModel currentContributionModel;
+  Color highlight = Colors.red;
 
   @override
   void initState() {
@@ -50,8 +51,8 @@ class _ContributionDetailState extends State<ContributionDetail> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
+    amountController.dispose();
     ContributionHttpRequestEvent().off();
   }
 
@@ -101,7 +102,6 @@ class _ContributionDetailState extends State<ContributionDetail> {
               Offstage(
                 offstage: "buyContribution" != this.tabName,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     MyTextField(
                       height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
@@ -110,13 +110,13 @@ class _ContributionDetailState extends State<ContributionDetail> {
                       icon: Icon(Icons.attach_money),
                       onChanged: () {
                         setState(() {
+                          //TODO 兑换贡献值规则
                           String amount = amountController.text;
                           if (!RegExp(r"^\d*$").hasMatch(amount)) {
-//                            print('input:' + amount);
                             CommonUtils.showErrorMessage(msg: "请输入正整数");
                             this.coin = 0;
                           }
-                          this.coin = int.parse(amount) * 2;
+                          this.coin = int.parse(amount);
                         });
                       },
                     ),
@@ -127,7 +127,6 @@ class _ContributionDetailState extends State<ContributionDetail> {
                       imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
                       buttonName: '确 定',
                       callback: () {
-                        print('购买贡献值');
                         this.buyContribution(int.parse(amountController.text));
                         amountController.clear();
                       },
@@ -154,11 +153,15 @@ class _ContributionDetailState extends State<ContributionDetail> {
                           ),
                           Text(
                             this.currentContributionModel == null ? "0" : this.currentContributionModel.amount.toString(),
-                            style: CustomFontSize.defaultTextStyle(70),
+                            style: TextStyle(fontSize: ScreenUtil().setSp(70), color: highlight),
+                          ),
+                          Divider(
+                            height: 1.0,
+                            color: Colors.white,
                           ),
                           Text(
                             "昨日累计贡献值",
-                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                            style: CustomFontSize.defaultTextStyle(50),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -173,7 +176,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                     ),
                                     Text(
                                       this.currentContributionModel == null ? "0" : this.currentContributionModel.price,
-                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                      style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreLargerTextSize), color: highlight),
                                     ),
                                   ],
                                 ),
@@ -187,8 +190,8 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                     Text(
-                                      "已达标",
-                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                      (this.currentContributionModel == null || this.currentContributionModel.myrate <= 0) ? "未达标" : "已达标",
+                                      style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreLargerTextSize), color: highlight),
                                     ),
                                   ],
                                 ),
@@ -203,7 +206,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                     ),
                                     Text(
                                       this.currentContributionModel == null ? "0" : this.currentContributionModel.myrate.toString() + "%",
-                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                      style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreLargerTextSize), color: highlight),
                                     ),
                                   ],
                                 ),
@@ -229,11 +232,13 @@ class _ContributionDetailState extends State<ContributionDetail> {
                               children: [
                                 Text(
                                   condition.amount.toString(),
-                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                  style: TextStyle(
+                                      fontSize: ScreenUtil().setSp(SystemFontSize.moreLargerTextSize), color: this.currentContributionModel.myrate < condition.rate ? Colors.white : highlight),
                                 ),
                                 Text(
                                   condition.rate.toString() + '%',
-                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                  style: TextStyle(
+                                      fontSize: ScreenUtil().setSp(SystemFontSize.moreLargerTextSize), color: this.currentContributionModel.myrate < condition.rate ? Colors.white : highlight),
                                 ),
                               ],
                             );

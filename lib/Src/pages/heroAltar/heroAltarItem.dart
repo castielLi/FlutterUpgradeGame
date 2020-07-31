@@ -12,9 +12,6 @@ class HeroAltarItem extends StatefulWidget {
   // 描述
   String description;
 
-  // 收益提高
-  double revenueUp;
-
   // 剩余天数
   List<int> remainDays;
 
@@ -27,7 +24,7 @@ class HeroAltarItem extends StatefulWidget {
 
   VoidCallback HUD;
 
-  HeroAltarItem({Key key, this.description, this.revenueUp, this.remainDays, this.heroImageUrl, this.heroType, this.price,this.HUD}) : super(key: key);
+  HeroAltarItem({Key key, this.description, this.remainDays, this.heroImageUrl, this.heroType, this.price, this.HUD}) : super(key: key);
 
   @override
   _HeroAltarItem createState() => _HeroAltarItem();

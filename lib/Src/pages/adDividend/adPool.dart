@@ -8,12 +8,9 @@ class AdPool extends StatefulWidget {
   // 英雄图片
   String heroImageUrl;
 
-  // 奖池名称
-  String poolName;
-
   HeroProfitModel adDividend;
 
-  AdPool({Key key, this.adDividend, this.heroImageUrl, this.poolName}) : super(key: key);
+  AdPool({Key key, this.adDividend, this.heroImageUrl}) : super(key: key);
 
   @override
   _AdPool createState() => _AdPool();

@@ -44,7 +44,7 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
           ScreenUtil().setHeight(220)),
       child: SingleChildScrollView(
         child: Text(
-          null == announcement ? '' : announcement,
+          null == announcement || '' == announcement ? "目前没有公告" : announcement,
           textAlign: TextAlign.center,
           style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
         ),
