@@ -50,6 +50,10 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
         ///当前建筑规则可以产出多少t币
         int coinPerHour = currentMainBuildRude.product;
 
+        int wood = baseUserInfo.WoodAmount;
+
+        int stone = baseUserInfo.StoneAmount;
+
         return new Container(
           margin: EdgeInsets.fromLTRB(
               ScreenUtil().setWidth(150), // 左
@@ -68,10 +72,12 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
                   Image(image: new AssetImage('resource/images/wood.png'), height: ScreenUtil().setHeight(100)),
                   Text(
                     '$neededWood ',
-                    style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
+                    style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: wood>=neededWood?Colors.lightGreenAccent:Colors.grey),
                   ),
                   Image(image: new AssetImage('resource/images/stone.png'), height: ScreenUtil().setHeight(100)),
-                  Text('$neededStone', style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
+                  Text('$neededStone',
+                      style:TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: stone>=neededStone?Colors.lightGreenAccent:Colors.grey),
+                  )
                 ],
               ),
               Text('升级后产出:' + '$coinPerHour' + 'T币一小时', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
