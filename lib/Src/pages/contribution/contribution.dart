@@ -4,6 +4,7 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
+import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/baseResourceModel.dart';
 import 'package:upgradegame/Src/pages/contribution/event/contributionEventBus.dart';
@@ -24,8 +25,6 @@ class _ContributionDetailState extends State<ContributionDetail> {
   final amountController = TextEditingController();
   String tabName = "showContribution";
   int coin = 0;
-  int standard = 10000;
-  int ratio = 100;
   MyContributionModel currentContributionModel;
 
   @override
@@ -37,18 +36,18 @@ class _ContributionDetailState extends State<ContributionDetail> {
     });
   }
 
-  void getMyContribution(){
+  void getMyContribution() {
     this.widget.HUD();
-    ContributionService.getContribution((MyContributionModel model){
+    ContributionService.getContribution((MyContributionModel model) {
       this.widget.HUD();
-      if(model != null){
+      if (model != null) {
         setState(() {
           this.currentContributionModel = model;
         });
       }
     });
   }
-  
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -56,11 +55,11 @@ class _ContributionDetailState extends State<ContributionDetail> {
     ContributionHttpRequestEvent().off();
   }
 
-  void buyContribution(int tcoinamount){
+  void buyContribution(int tcoinamount) {
     this.widget.HUD();
-    ContributionService.buyContribution(tcoinamount, (BaseResourceModel model){
+    ContributionService.buyContribution(tcoinamount, (BaseResourceModel model) {
       this.widget.HUD();
-      if(model != null){
+      if (model != null) {
         Provide.value<BaseUserInfoProvider>(context).buyContribution(model);
       }
     });
@@ -70,7 +69,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
   Widget build(BuildContext context) {
     return new Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
-        return  Container(
+        return Container(
           margin: EdgeInsets.fromLTRB(
               ScreenUtil().setWidth(100), // 左
               ScreenUtil().setHeight(400), // 上
@@ -104,18 +103,18 @@ class _ContributionDetailState extends State<ContributionDetail> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    TextField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(labelText: "购买数量", prefixIcon: Icon(Icons.attach_money)),
+                    MyTextField(
+                      height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
                       controller: amountController,
-                      onChanged: (String amount) {
+                      hintText: '购买数量',
+                      icon: Icon(Icons.attach_money),
+                      onChanged: () {
                         setState(() {
-                          amount = amountController.text;
+                          String amount = amountController.text;
                           if (!RegExp(r"^\d*$").hasMatch(amount)) {
-                            print('input:' + amount);
+//                            print('input:' + amount);
                             CommonUtils.showErrorMessage(msg: "请输入正整数");
                             this.coin = 0;
-//                        return;
                           }
                           this.coin = int.parse(amount) * 2;
                         });
@@ -154,7 +153,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                           ),
                           Text(
-                            this.currentContributionModel == null?"0":this.currentContributionModel.amount.toString(),
+                            this.currentContributionModel == null ? "0" : this.currentContributionModel.amount.toString(),
                             style: CustomFontSize.defaultTextStyle(70),
                           ),
                           Text(
@@ -173,7 +172,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                     Text(
-                                      this.currentContributionModel == null?"0":this.currentContributionModel.price,
+                                      this.currentContributionModel == null ? "0" : this.currentContributionModel.price,
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                   ],
@@ -203,7 +202,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                     Text(
-                                      this.currentContributionModel == null?"0":this.currentContributionModel.myrate.toString()+"%",
+                                      this.currentContributionModel == null ? "0" : this.currentContributionModel.myrate.toString() + "%",
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                   ],
@@ -222,17 +221,18 @@ class _ContributionDetailState extends State<ContributionDetail> {
                       height: ScreenUtil().setHeight(450),
                       child: ListView.builder(
                           padding: EdgeInsets.only(top: 0),
-                          itemCount: 10,
+                          itemCount: this.currentContributionModel == null ? 0 : this.currentContributionModel.conditions.length,
                           itemBuilder: (BuildContext context, int index) {
+                            Conditions condition = this.currentContributionModel.conditions[index];
                             return Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(
-                                  (standard - index * 1000).toString(),
+                                  condition.amount.toString(),
                                   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                 ),
                                 Text(
-                                  (ratio - index * 10).toString() + '%',
+                                  condition.rate.toString() + '%',
                                   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                 ),
                               ],
@@ -247,10 +247,6 @@ class _ContributionDetailState extends State<ContributionDetail> {
         );
       }),
     );
-
-
-
-
   }
 
   void changeTab(String tabName) {

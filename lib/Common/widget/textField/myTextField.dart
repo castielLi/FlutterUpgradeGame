@@ -8,20 +8,20 @@ class MyTextField extends StatefulWidget {
   bool obscureText;
   TextInputType inputType = TextInputType.text;
   VoidCallback onSubmittedCallback;
+  VoidCallback onChanged;
 
-  MyTextField({this.height, this.controller, this.hintText, this.icon, this.inputType,this.obscureText, this.onSubmittedCallback});
+  MyTextField({this.height, this.controller, this.hintText, this.icon, this.inputType, this.obscureText, this.onChanged, this.onSubmittedCallback});
 
   _MyTextFieldState createState() => new _MyTextFieldState();
 }
 
 class _MyTextFieldState extends State<MyTextField> {
-
   @override
   Widget build(BuildContext context) {
-    if(null == this.widget.obscureText){
+    if (null == this.widget.obscureText) {
       this.widget.obscureText = false;
     }
-    if(null == this.widget.inputType){
+    if (null == this.widget.inputType) {
       this.widget.inputType = TextInputType.text;
     }
     return Container(
@@ -41,10 +41,13 @@ class _MyTextFieldState extends State<MyTextField> {
                   obscureText: this.widget.obscureText,
                   decoration: new InputDecoration(hintText: this.widget.hintText, border: InputBorder.none, prefixIcon: this.widget.icon),
                   onSubmitted: (input) {
-                    input = this.widget.controller.text;
+//                    input = this.widget.controller.text;
                     this.widget.onSubmittedCallback();
                   },
                   // onChanged: onSearchTextChanged,
+                  onChanged: (input) {
+                    this.widget.onChanged();
+                  },
                 ),
               ),
             ),

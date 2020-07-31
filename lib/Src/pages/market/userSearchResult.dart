@@ -43,7 +43,6 @@ class _UserSearchResult extends State<UserSearchResult> {
                     : GestureDetector(
                         onTap: () {
                           switchBetweenTwoPages();
-                          print('Send coin to ' + this.widget.user.name);
                         },
                         child: Container(
                           margin: EdgeInsets.only(top: 30),
@@ -141,9 +140,9 @@ class _UserSearchResult extends State<UserSearchResult> {
     );
   }
 
-  void switchBetweenTwoPages(){
+  void switchBetweenTwoPages() {
     setState(() {
-      this.showFirstOfTwoPages=!this.showFirstOfTwoPages;
+      this.showFirstOfTwoPages = !this.showFirstOfTwoPages;
     });
   }
 }

@@ -4,7 +4,6 @@ import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
 import 'package:upgradegame/Src/common/model/enum/adTypeEnum.dart';
 import 'package:upgradegame/Src/common/model/enum/buildingEnum.dart';
-import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 import 'package:upgradegame/Src/common/service/baseService.dart';
 import 'package:upgradegame/Src/common/widget/adIcon/adIconRow.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
@@ -63,6 +62,21 @@ class _FarmDetailState extends State<FarmDetail> {
           maxWatchableAd = null == adSetting ? 5 : adSetting.farmthree;
         }
       }
+      bool canUpdate() {
+        if (baseUserInfo.tcoinamount < farmBuildingRule.tcoinamount) {
+          CommonUtils.showErrorMessage(msg: "T币不足");
+          return false;
+        }
+        if (baseUserInfo.stonelevel < farmBuildingRule.stonelevel) {
+          CommonUtils.showErrorMessage(msg: "采石场等级不足");
+          return false;
+        }
+        if (baseUserInfo.woodlevel < farmBuildingRule.woodlevel) {
+          CommonUtils.showErrorMessage(msg: "伐木场等级不足");
+          return false;
+        }
+        return true;
+      }
 
       return new Container(
         margin: EdgeInsets.fromLTRB(
@@ -79,7 +93,7 @@ class _FarmDetailState extends State<FarmDetail> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text('LV $levelFrom > LV $level', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
-                  Text('升级所需资料', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
+                  Text('升级条件', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
@@ -129,7 +143,7 @@ class _FarmDetailState extends State<FarmDetail> {
                       ),
                     ],
                   ),
-                  Text('本阶段观看次数 $watchedAd/$maxWatchableAd', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
+                  Text('本时段观看次数 $watchedAd/$maxWatchableAd', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                 ],
               ),
             ),
@@ -139,18 +153,14 @@ class _FarmDetailState extends State<FarmDetail> {
               buttonName: "升 级",
               imageUrl: "resource/images/upgradeButton.png",
               callback: () {
-                if (null != baseUserInfo && null != farmBuildingRule) {
-                  if (baseUserInfo.tcoinamount < farmBuildingRule.tcoinamount || baseUserInfo.stonelevel < farmBuildingRule.stonelevel || baseUserInfo.woodlevel < farmBuildingRule.woodlevel) {
-                    CommonUtils.showErrorMessage(msg: "未达到升级条件");
-                  } else {
+                if (canUpdate()) {
+                  this.widget.HUD();
+                  BaseService.upgradeBuilding(BuildingEnum.farm.index, (model) {
                     this.widget.HUD();
-                    BaseService.upgradeBuilding(BuildingEnum.farm.index, (model) {
-                      this.widget.HUD();
-                      if (model != null) {
-                        Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
-                      }
-                    });
-                  }
+                    if (model != null) {
+                      Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
+                    }
+                  });
                 }
               },
             ),

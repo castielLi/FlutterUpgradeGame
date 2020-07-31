@@ -47,13 +47,12 @@ class _TradeDetailState extends State<TradeDetail> {
         this.tCoinDetail.datalist = [];
       }
       if (model.datalist.length == 0) {
-        this.noTxText = '目前没有明细';
+        this.noTxText = '目前没有记录';
         if (this.page != 0) {
           CommonUtils.showErrorMessage(msg: "没有更多了");
         }
       }
       this.tCoinDetail.datalist += model.datalist;
-      print("page:" + this.page.toString() + ", data length:" + this.tCoinDetail.datalist.length.toString());
       this.widget.HUD();
     });
   }

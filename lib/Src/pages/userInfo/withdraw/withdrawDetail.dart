@@ -53,7 +53,6 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
         }
       }
       this.cashDetailModel.datalist += model.datalist;
-      print("page:" + this.page.toString() + ", data length:" + this.cashDetailModel.datalist.length.toString());
       this.widget.HUD();
     });
   }

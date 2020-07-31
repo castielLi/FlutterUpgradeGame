@@ -47,6 +47,17 @@ class _SawmillDetailState extends State<SawmillDetail> {
         watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.wood;
         maxWatchableAd = null == adSetting ? 5 : adSetting.wood;
       }
+      bool canUpdate() {
+        if (baseUserInfo.tcoinamount < woodBuildingRule.tcoinamount) {
+          CommonUtils.showErrorMessage(msg: "T币不足");
+          return false;
+        }
+        if (baseUserInfo.farmlevel < woodBuildingRule.farmlevel) {
+          CommonUtils.showErrorMessage(msg: "农场等级不足");
+          return false;
+        }
+        return true;
+      }
 
       return new Container(
         margin: EdgeInsets.fromLTRB(
@@ -125,9 +136,7 @@ class _SawmillDetailState extends State<SawmillDetail> {
               buttonName: "升 级",
               imageUrl: "resource/images/upgradeButton.png",
               callback: () {
-                if (baseUserInfo.tcoinamount < woodBuildingRule.tcoinamount || baseUserInfo.farmlevel < woodBuildingRule.farmlevel) {
-                  CommonUtils.showErrorMessage(msg: "未达到升级条件");
-                } else {
+                if (canUpdate()) {
                   this.widget.HUD();
                   BaseService.upgradeBuilding(BuildingEnum.sawmill.index, (model) {
                     this.widget.HUD();

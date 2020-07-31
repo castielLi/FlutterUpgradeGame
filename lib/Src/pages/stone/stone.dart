@@ -48,6 +48,18 @@ class _StoneDetailState extends State<StoneDetail> {
         maxWatchableAd = null == adSetting ? 5 : adSetting.stone;
       }
 
+      bool canUpdate() {
+        if (baseUserInfo.tcoinamount < stoneBuildingRule.tcoinamount) {
+          CommonUtils.showErrorMessage(msg: "T币不足");
+          return false;
+        }
+        if (baseUserInfo.farmlevel < stoneBuildingRule.farmlevel) {
+          CommonUtils.showErrorMessage(msg: "农场等级不足");
+          return false;
+        }
+        return true;
+      }
+
       return new Container(
         margin: EdgeInsets.fromLTRB(
             ScreenUtil().setWidth(80), // 左
@@ -125,9 +137,7 @@ class _StoneDetailState extends State<StoneDetail> {
               buttonName: "升 级",
               imageUrl: "resource/images/upgradeButton.png",
               callback: () {
-                if (baseUserInfo.tcoinamount < stoneBuildingRule.tcoinamount || baseUserInfo.farmlevel < stoneBuildingRule.farmlevel) {
-                  CommonUtils.showErrorMessage(msg: "未达到升级条件");
-                } else {
+                if (canUpdate()) {
                   this.widget.HUD();
                   BaseService.upgradeBuilding(BuildingEnum.stone.index, (model) {
                     this.widget.HUD();
