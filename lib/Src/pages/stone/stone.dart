@@ -28,6 +28,7 @@ class _StoneDetailState extends State<StoneDetail> {
       int level = 0;
       int nextLevel = 0;
       Stone stoneBuildingRule;
+      Stone currentStoneBuildingRule;
       Adsetting adSetting;
       int needTCoin = 0;
       int woodPerAd = 0;
@@ -40,10 +41,11 @@ class _StoneDetailState extends State<StoneDetail> {
         level = baseUserInfo.Stonelevel;
         nextLevel = baseUserInfo.Stonelevel + 1;
         stoneBuildingRule = null == Global.getStoneBuildingRule() ? null : Global.getStoneBuildingRule()[nextLevel - 1];
+        currentStoneBuildingRule = null == Global.getStoneBuildingRule() ? null : Global.getStoneBuildingRule()[level - 1];
         adSetting = Global.getAdSettingRule();
         if (null != stoneBuildingRule) {
           needTCoin = stoneBuildingRule.tcoinamount;
-          woodPerAd = stoneBuildingRule.product;
+          woodPerAd = currentStoneBuildingRule.product;
           needFarmLevel = stoneBuildingRule.farmlevel;
         }
         watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.stone;

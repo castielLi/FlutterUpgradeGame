@@ -28,6 +28,7 @@ class _SawmillDetailState extends State<SawmillDetail> {
       int level = 0;
       int nextLevel = 0;
       Wood woodBuildingRule;
+      Wood currentWoodBuildingRule;
       Adsetting adSetting;
       int needTCoin = 0;
       int woodPerAd = 0;
@@ -40,10 +41,11 @@ class _SawmillDetailState extends State<SawmillDetail> {
         level = baseUserInfo.Woodlevel;
         nextLevel = baseUserInfo.Woodlevel + 1;
         woodBuildingRule = null == Global.getWoodBuildingRule() ? null : Global.getWoodBuildingRule()[nextLevel - 1];
+        currentWoodBuildingRule = null == Global.getWoodBuildingRule() ? null : Global.getWoodBuildingRule()[level - 1];
         adSetting = Global.getAdSettingRule();
         if (null != woodBuildingRule) {
           needTCoin = woodBuildingRule.tcoinamount;
-          woodPerAd = woodBuildingRule.product;
+          woodPerAd = currentWoodBuildingRule.product;
           needFarmLevel = woodBuildingRule.farmlevel;
         }
         watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.wood;

@@ -45,8 +45,9 @@ class _FarmDetailState extends State<FarmDetail> {
         levelFrom = baseUserInfo.Farmlevel;
         level = baseUserInfo.Farmlevel + 1;
 
-        ///农场等级是从1级开始
+        ///升级农场等级是从1级开始
         farmBuildingRule = null == Global.getFarmBuildingRule() ? null : Global.getFarmBuildingRule()[level - 1];
+
         adSetting = Global.getAdSettingRule();
         if (null != farmBuildingRule) {
           neededCoin = farmBuildingRule.tcoinamount;
@@ -105,7 +106,7 @@ class _FarmDetailState extends State<FarmDetail> {
                       ),
                     ],
                   ),
-                  Text('观看广告以随机获取资源', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
+                  Text('观看广告以随机获取资源,可能会获取到T币哟!!', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                 ],
               ),
             ),
