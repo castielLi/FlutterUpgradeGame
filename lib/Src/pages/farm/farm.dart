@@ -34,8 +34,13 @@ class _FarmDetailState extends State<FarmDetail> {
       int speedUpPercent = 0;
       Farm farmBuildingRule;
       Adsetting adSetting;
-      int woodLevel = 0;
-      int stoneLevel = 0;
+      int needWoodLevel = 0;
+      int needStoneLevel = 0;
+
+      int tocinamount = baseUserInfo.TCoinAmount;
+      int woodLevel = baseUserInfo.Woodlevel;
+      int stoneLevel = baseUserInfo.Stonelevel;
+
       if (null != baseUserInfo) {
         levelFrom = baseUserInfo.Farmlevel;
         level = baseUserInfo.Farmlevel + 1;
@@ -45,8 +50,8 @@ class _FarmDetailState extends State<FarmDetail> {
         adSetting = Global.getAdSettingRule();
         if (null != farmBuildingRule) {
           neededCoin = farmBuildingRule.tcoinamount;
-          woodLevel = farmBuildingRule.woodlevel;
-          stoneLevel = farmBuildingRule.stonelevel;
+          needWoodLevel = farmBuildingRule.woodlevel;
+          needStoneLevel = farmBuildingRule.stonelevel;
         }
 
         ///农产的广告在每天0点12点18点的时候进行刷新
@@ -86,17 +91,17 @@ class _FarmDetailState extends State<FarmDetail> {
                       Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                       Text(
                         '$neededCoin  ',
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
+                        style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: tocinamount>=neededCoin?Colors.lightGreenAccent:Colors.grey),
                       ),
                       Image(image: new AssetImage('resource/images/fellingBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                       Text(
-                        'lv' + '$woodLevel ',
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
+                        'lv' + '$needWoodLevel ',
+                        style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: woodLevel>=needWoodLevel?Colors.lightGreenAccent:Colors.grey),
                       ),
                       Image(image: new AssetImage('resource/images/stoneBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                       Text(
-                        'lv' + '$stoneLevel ',
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
+                        'lv' + '$needStoneLevel ',
+                        style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: stoneLevel>=needStoneLevel?Colors.lightGreenAccent:Colors.grey),
                       ),
                     ],
                   ),

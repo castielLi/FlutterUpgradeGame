@@ -33,7 +33,9 @@ class _StoneDetailState extends State<StoneDetail> {
       int woodPerAd = 0;
       int watchedAd = 0;
       int maxWatchableAd = 0;
-      int farmLevel = 0;
+      int needFarmLevel = 0;
+      int tCoinAmount = baseUserInfo.TCoinAmount;
+      int farmLevel = baseUserInfo.Farmlevel;
       if (null != baseUserInfo) {
         level = baseUserInfo.Stonelevel;
         nextLevel = baseUserInfo.Stonelevel + 1;
@@ -42,7 +44,7 @@ class _StoneDetailState extends State<StoneDetail> {
         if (null != stoneBuildingRule) {
           needTCoin = stoneBuildingRule.tcoinamount;
           woodPerAd = stoneBuildingRule.product;
-          farmLevel = stoneBuildingRule.farmlevel;
+          needFarmLevel = stoneBuildingRule.farmlevel;
         }
         watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.stone;
         maxWatchableAd = null == adSetting ? 5 : adSetting.stone;
@@ -71,12 +73,12 @@ class _StoneDetailState extends State<StoneDetail> {
                       Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                       Text(
                         '$needTCoin ',
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
+                        style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: tCoinAmount>=needTCoin?Colors.lightGreenAccent:Colors.grey),
                       ),
                       Image(image: new AssetImage('resource/images/farmBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                       Text(
-                        'lv' + '$farmLevel ',
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
+                        'lv' + '$needFarmLevel ',
+                        style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: farmLevel>=needFarmLevel?Colors.lightGreenAccent:Colors.grey),
                       ),
                     ],
                   ),
