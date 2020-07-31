@@ -3,8 +3,8 @@ class ServiceUrl {
   ///fastmock
 //      "https://www.fastmock.site/mock/095e3520b3833640934d29559631cc16/";
   ///server
-  "https://test.buluo888.com/";
-//  "http://192.168.0.107:8080/";
+//  "https://test.buluo888.com/";
+  "http://192.168.0.107:8080/";
   static const String downloadUrl = '';
 
   /// rule
@@ -78,7 +78,7 @@ class ServiceUrl {
 
   /// 广告分红
   static getAdDividendList() {
-    return "${host}api/v1/adincome";
+    return "${host}api/v1/profitsharing";
   }
 
   /// 排行榜
@@ -192,6 +192,21 @@ class ServiceUrl {
   ///获取客服中心
   static serverCenter(){
     return "${host}api/v1/servercenter";
+  }
+
+  ///获取团队贡献值
+  static getTeamContribution(){
+    return "${host}api/v1/team/contribution";
+  }
+
+  ///获取我的贡献值
+  static getMyContribution(){
+    return "${host}api/v1/contribution";
+  }
+
+  ///t币购买贡献值
+  static buyContribution(){
+    return "${host}api/v1/contribution/buy";
   }
 }
 

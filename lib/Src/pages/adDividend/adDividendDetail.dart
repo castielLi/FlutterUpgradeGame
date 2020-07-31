@@ -4,6 +4,7 @@ import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/pages/AdDividend/adPool.dart';
 import 'package:upgradegame/Src/pages/adDividend/model/AdDividendModel.dart';
 import 'package:upgradegame/Src/pages/adDividend/service/adDividendService.dart';
+import 'package:upgradegame/Src/pages/adDividend/model/heroProfitModel.dart';
 
 class AdDividendDetail extends StatefulWidget {
   @override
@@ -15,29 +16,19 @@ class AdDividendDetail extends StatefulWidget {
 }
 
 class _AdDividendDetailState extends State<AdDividendDetail> {
-  AdDividendModel warrior = AdDividendModel(type: Heroes.WARRIOR);
-  AdDividendModel shaman = AdDividendModel(type: Heroes.SHAMAN);
+  HeroProfitModel warrior = HeroProfitModel(total: 0,product: 0,price: "0");
+  HeroProfitModel shaman = HeroProfitModel(total: 0,product: 0,price: "0");
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
-      AdDividendService.getAdDividendList((data) {
-        if (null != data) {
-          List<AdDividendModel> adDividendDataList = AdDividendListModel.fromJson(data).datalist;
+      AdDividendService.getAdDividendList((AdDividendListModel model) {
+        if (null != model) {
           setState(() {
-            if (null != adDividendDataList) {
-              adDividendDataList.forEach((adDividend) {
-                switch (adDividend.type) {
-                  case Heroes.WARRIOR:
-                    warrior = adDividend;
-                    break;
-                  case Heroes.SHAMAN:
-                    shaman = adDividend;
-                }
-              });
-            }
+            warrior = HeroProfitModel(total: model.onetotal,price: model.oneyesterdayprice,product: model.oneproduct);
+            shaman = HeroProfitModel(total: model.threetotal,price: model.threeyesterdayprice,product: model.threeproduct);
           });
         }
         this.widget.HUD();

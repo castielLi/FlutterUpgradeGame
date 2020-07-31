@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Src/pages/adDividend/model/AdDividendModel.dart';
+
+import 'package:upgradegame/Src/pages/adDividend/model/heroProfitModel.dart';
 
 class AdPool extends StatefulWidget {
   // 英雄图片
@@ -10,7 +11,7 @@ class AdPool extends StatefulWidget {
   // 奖池名称
   String poolName;
 
-  AdDividendModel adDividend;
+  HeroProfitModel adDividend;
 
   AdPool({Key key, this.adDividend, this.heroImageUrl, this.poolName}) : super(key: key);
 
@@ -51,7 +52,7 @@ class _AdPool extends State<AdPool> {
                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                     Text(
-                      this.widget.adDividend.yesterdayincome.toString(),
+                      this.widget.adDividend.price,
                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                   ],
@@ -68,7 +69,7 @@ class _AdPool extends State<AdPool> {
                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                     Text(
-                      this.widget.adDividend.totalheroamount.toString(),
+                      this.widget.adDividend.total.toString(),
                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                     Text(
@@ -76,7 +77,7 @@ class _AdPool extends State<AdPool> {
                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                     Text(
-                      this.widget.adDividend.todayheroamount.toString(),
+                      this.widget.adDividend.product.toString(),
                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                     ),
                   ],
