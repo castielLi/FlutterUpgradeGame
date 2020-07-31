@@ -230,7 +230,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                                               ),
                                               Text(
-                                                '现金 T币',
+                                                '现金 贡献值',
                                                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                                               ),
                                             ],
