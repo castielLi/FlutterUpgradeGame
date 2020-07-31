@@ -18,6 +18,9 @@ class ServerCenter extends StatefulWidget {
 
 class _ServerCenterState extends State<ServerCenter> {
 
+  String qq = "";
+  String wechat = "";
+
   @override
   void initState() {
     // TODO: implement initState
@@ -29,7 +32,10 @@ class _ServerCenterState extends State<ServerCenter> {
     this.widget.HUD();
     UserInfoService.ServerCenter((ServerCenterModel model){
       if(model != null){
-
+        setState(() {
+          this.qq = model.qq;
+          this.wechat = model.wechat;
+        });
       }
       this.widget.HUD();
     });
@@ -48,10 +54,30 @@ class _ServerCenterState extends State<ServerCenter> {
           width: ScreenUtil().setWidth(SystemButtonSize.displayContentHeight),
           margin: EdgeInsets.only(top: 50),
           height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
-          child: Text(
-            '客服中心',
-            textAlign: TextAlign.center,
-            style: CustomFontSize.defaultTextStyle(70),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              new Row(
+                children: <Widget>[
+                  Image(image: new AssetImage('resource/images/qq.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                  Text(
+                    this.qq,
+                    style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize),
+                  ),
+                ],
+              ),
+              new Padding(padding: new EdgeInsets.only(top:15),
+                child: new Row(
+                  children: <Widget>[
+                    Image(image: new AssetImage('resource/images/wechat.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                    Text(
+                      this.wechat,
+                      style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
         new ImageButton(
