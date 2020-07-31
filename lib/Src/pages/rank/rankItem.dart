@@ -38,6 +38,7 @@ class _RankItem extends State<RankItem> {
             children: <Widget>[
               Image(
                 image: new AssetImage(this.widget.imageUrl),
+                //TODO 修改大小
                 height: ScreenUtil().setHeight(120),
               ),
 //            Image(

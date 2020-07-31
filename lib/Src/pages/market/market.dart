@@ -32,7 +32,7 @@ class MarketDetail extends StatefulWidget {
 
 class _MarketDetailState extends State<MarketDetail> {
   User searchedUser;
-  bool showResult = false;
+  String noResultHintText = '';
   final phoneController = TextEditingController();
 
   int RequestHttpWood = 1;
@@ -148,7 +148,7 @@ class _MarketDetailState extends State<MarketDetail> {
               ScreenUtil().setWidth(100), // 左
               ScreenUtil().setHeight(400), // 上
               ScreenUtil().setWidth(100), // 右
-              ScreenUtil().setHeight(100)), // 下
+              ScreenUtil().setHeight(0)), // 下
           child: Column(
             children: <Widget>[
               ButtonsList(
@@ -190,7 +190,7 @@ class _MarketDetailState extends State<MarketDetail> {
               ),
               Container(
                 margin: EdgeInsets.only(top: 10),
-                height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
+                height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
                 child: Stack(
                   children: <Widget>[
                     Offstage(
@@ -214,17 +214,17 @@ class _MarketDetailState extends State<MarketDetail> {
                                   setState(() {
                                     this.searchedUser = User.fromSearchJson(data);
                                     this.searchedUser.phone = phone;
-                                    this.showResult = true;
+                                    this.noResultHintText = '没有搜索到用户';
                                   });
                                 }
                               });
                             },
                           ),
                           Container(
-                            height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight - SystemButtonSize.inputDecorationHeight),
+                            height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight - SystemButtonSize.inputDecorationHeight),
                             child: UserSearchResult(
                               user: this.searchedUser,
-                              showWidget: this.showResult,
+                              noUserHintText: this.noResultHintText,
                             ),
                           ),
                         ],
@@ -233,7 +233,7 @@ class _MarketDetailState extends State<MarketDetail> {
                     Offstage(
                       offstage: contentName != Resource.WOOD,
                       child: Container(
-                        height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
+                        height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
                         child: this.woodList.datalist.length == 0
                             ? Text(
                                 '目前没有订单',
@@ -311,7 +311,7 @@ class _MarketDetailState extends State<MarketDetail> {
                     Offstage(
                       offstage: contentName != Resource.STONE,
                       child: Container(
-                        height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
+                        height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
                         child: this.stoneList.datalist.length == 0
                             ? Text(
                                 '目前没有订单',
@@ -392,7 +392,7 @@ class _MarketDetailState extends State<MarketDetail> {
                         child: Column(
                           children: [
                             Container(
-                              height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight - SystemButtonSize.largeButtonHeight),
+                              height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight - SystemButtonSize.largeButtonHeight),
                               child: ListView.builder(
                                   padding: EdgeInsets.only(top: 0),
                                   itemCount: null == myTrades ? 0 : myTrades.length,

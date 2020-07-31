@@ -45,9 +45,9 @@ class _ServerCenterState extends State<ServerCenter> {
     return new Column(
       children: [
         new Container(
-          width: ScreenUtil().setWidth(SystemButtonSize.settingsTextHeight),
+          width: ScreenUtil().setWidth(SystemButtonSize.displayContentHeight),
           margin: EdgeInsets.only(top: 50),
-          height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
+          height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
           child: Text(
             '客服中心',
             textAlign: TextAlign.center,

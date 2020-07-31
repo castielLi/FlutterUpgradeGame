@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluwx/fluwx.dart';
 import 'package:provide/provide.dart';
+import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/pages/store/model/storeModel.dart';
 import 'package:upgradegame/Src/pages/store/model/voucherModel.dart';
 import 'package:upgradegame/Src/pages/store/storeService/storeService.dart';
@@ -79,11 +80,12 @@ class _StoreDetailState extends State<StoreDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
+//      color:Colors.red,
       margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(80), // 左
-          ScreenUtil().setHeight(350), // 上
-          ScreenUtil().setWidth(80), // 右
-          ScreenUtil().setHeight(100)), // 下
+          ScreenUtil().setWidth(100), // 左
+          ScreenUtil().setHeight(400), // 上
+          ScreenUtil().setWidth(100), // 右
+          ScreenUtil().setHeight(200)), // 下
       child: Provide<BaseUserInfoProvider>(
         builder: (context, child, baseUserInfo) {
           return new Center(

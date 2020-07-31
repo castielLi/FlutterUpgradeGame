@@ -31,7 +31,7 @@ class _TeamDetailState extends State<TeamDetail> {
   List<InvitationModel> first = [];
   List<InvitationModel> second = [];
   String tabName = 'first';
-  bool hideTeamResult = true;
+  String noMembersHintText = '';
   int initFirstLength = 20;
   int initSecondLength = 20;
   bool showQRCode = false;
@@ -73,11 +73,11 @@ class _TeamDetailState extends State<TeamDetail> {
     });
   }
 
-  void getMyContribution(){
+  void getMyContribution() {
     this.widget.HUD();
-    TeamService.getMyContribution((TeamContributionModel model){
+    TeamService.getMyContribution((TeamContributionModel model) {
       this.widget.HUD();
-      if(model != null){
+      if (model != null) {
         setState(() {
           this.currentContribution = model;
         });
@@ -85,14 +85,14 @@ class _TeamDetailState extends State<TeamDetail> {
     });
   }
 
-  void getTeamList(){
+  void getTeamList() {
     this.widget.HUD();
 
     TeamService.getTeamList((data) {
       setState(() {
         first = InvitationListModel.fromJson(data).first;
         second = InvitationListModel.fromJson(data).second;
-        hideTeamResult = false;
+        this.noMembersHintText = '还没有团队成员';
       });
     });
     this.widget.HUD();
@@ -101,10 +101,10 @@ class _TeamDetailState extends State<TeamDetail> {
   @override
   void initState() {
     super.initState();
-    TeamHttpRequestEvent().on("getTeamList",this.getTeamList);
-    TeamHttpRequestEvent().on("getMyContribution",this.getMyContribution);
+    TeamHttpRequestEvent().on("getTeamList", this.getTeamList);
+    TeamHttpRequestEvent().on("getMyContribution", this.getMyContribution);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-     this.getMyContribution();
+      this.getMyContribution();
     });
   }
 
@@ -118,7 +118,6 @@ class _TeamDetailState extends State<TeamDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-//      color: Colors.red,
       margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(400), ScreenUtil().setWidth(100), ScreenUtil().setHeight(0)),
       child: Column(
         children: [
@@ -151,29 +150,31 @@ class _TeamDetailState extends State<TeamDetail> {
             ],
           ),
           Container(
-            padding: EdgeInsets.only(top: 20),
+            height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
             child: Stack(
               children: [
                 Offstage(
                   offstage: !showContribution,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TeamContribution(
-                        title: '今日贡献',
-                        total: this.currentContribution == null?0:this.currentContribution.today.total,
-                        my: this.currentContribution == null?0:this.currentContribution.today.my,
-                        secondGrade: this.currentContribution == null?0:this.currentContribution.today.first,
-                        thirdGrade: this.currentContribution == null?0:this.currentContribution.today.second,
-                      ),
-                      TeamContribution(
-                        title: '昨日贡献',
-                        total: this.currentContribution == null?0:this.currentContribution.yesterday.total,
-                        my: this.currentContribution == null?0:this.currentContribution.yesterday.my,
-                        secondGrade: this.currentContribution == null?0:this.currentContribution.yesterday.first,
-                        thirdGrade: this.currentContribution == null?0:this.currentContribution.yesterday.second,
-                      ),
-                    ],
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        TeamContribution(
+                          title: '今日贡献',
+                          total: this.currentContribution == null ? 0 : this.currentContribution.today.total,
+                          my: this.currentContribution == null ? 0 : this.currentContribution.today.my,
+                          secondGrade: this.currentContribution == null ? 0 : this.currentContribution.today.first,
+                          thirdGrade: this.currentContribution == null ? 0 : this.currentContribution.today.second,
+                        ),
+                        TeamContribution(
+                          title: '昨日贡献',
+                          total: this.currentContribution == null ? 0 : this.currentContribution.yesterday.total,
+                          my: this.currentContribution == null ? 0 : this.currentContribution.yesterday.my,
+                          secondGrade: this.currentContribution == null ? 0 : this.currentContribution.yesterday.first,
+                          thirdGrade: this.currentContribution == null ? 0 : this.currentContribution.yesterday.second,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Offstage(
@@ -206,18 +207,15 @@ class _TeamDetailState extends State<TeamDetail> {
                             ),
                             second.length == 0 && first.length == 0
                                 ? Container(
-                                    height: ScreenUtil().setHeight(730),
-                                    child: Offstage(
-                                      offstage: hideTeamResult,
-                                      child: Text(
-                                        '还没有团队成员',
-                                        textAlign: TextAlign.center,
-                                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                                      ),
+                                    height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
+                                    child: Text(
+                                      noMembersHintText,
+                                      textAlign: TextAlign.center,
+                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                                     ),
                                   )
                                 : Container(
-                                    height: ScreenUtil().setHeight(730),
+                                    height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
                                     child: Column(
                                       children: [
                                         Container(
@@ -237,6 +235,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                           ),
                                         ),
                                         Container(
+                                          //TODO 修改数值
                                           height: ScreenUtil().setHeight(640),
                                           child: Stack(
                                             children: [
@@ -268,21 +267,15 @@ class _TeamDetailState extends State<TeamDetail> {
                                                       initFirstLength += 20;
                                                     });
                                                   },
-                                                  child: first.length == 0
-                                                      ? Text(
-                                                          '还没有团队成员',
-                                                          textAlign: TextAlign.center,
-                                                          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                                                        )
-                                                      : ListView.builder(
-                                                          itemCount: first.length > initFirstLength ? initFirstLength : first.length,
-                                                          padding: EdgeInsets.all(1.0),
-                                                          itemBuilder: (BuildContext context, int index) {
-                                                            return TeamItem(
-                                                              invite: first[index],
-                                                            );
-                                                          },
-                                                        ),
+                                                  child: ListView.builder(
+                                                    itemCount: first.length > initFirstLength ? initFirstLength : first.length,
+                                                    padding: EdgeInsets.all(1.0),
+                                                    itemBuilder: (BuildContext context, int index) {
+                                                      return TeamItem(
+                                                        invite: first[index],
+                                                      );
+                                                    },
+                                                  ),
                                                 ),
                                               ),
                                               Offstage(
@@ -313,15 +306,21 @@ class _TeamDetailState extends State<TeamDetail> {
                                                         initSecondLength += 20;
                                                       });
                                                     },
-                                                    child: ListView.builder(
-                                                      itemCount: second.length > initSecondLength ? initSecondLength : second.length,
-                                                      padding: EdgeInsets.all(1.0),
-                                                      itemBuilder: (BuildContext context, int index) {
-                                                        return TeamItem(
-                                                          invite: second[index],
-                                                        );
-                                                      },
-                                                    ),
+                                                    child: first.length == 0
+                                                        ? Text(
+                                                            '还没有团队成员',
+                                                            textAlign: TextAlign.center,
+                                                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                                                          )
+                                                        : ListView.builder(
+                                                            itemCount: second.length > initSecondLength ? initSecondLength : second.length,
+                                                            padding: EdgeInsets.all(1.0),
+                                                            itemBuilder: (BuildContext context, int index) {
+                                                              return TeamItem(
+                                                                invite: second[index],
+                                                              );
+                                                            },
+                                                          ),
                                                   )),
                                             ],
                                           ),
@@ -375,7 +374,6 @@ class _TeamDetailState extends State<TeamDetail> {
                                       fluwx.WeChatImage image = fluwx.WeChatImage.file(file);
                                       fluwx.shareToWeChat(fluwx.WeChatShareImageModel(image, description: desc, scene: fluwx.WeChatScene.SESSION));
                                     });
-
                                     print('点击分享微信');
                                   },
                                 ),

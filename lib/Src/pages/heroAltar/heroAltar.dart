@@ -92,6 +92,7 @@ class _HeroAltarState extends State<HeroAltar> {
                 heroType: Heroes.WARRIOR,
                 HUD: this.widget.HUD,
                 price: this.warriorPrice,
+                period: '30天（可叠加）',
               ),
               HeroAltarItem(
                 heroImageUrl: 'resource/images/shaman.png',
@@ -100,6 +101,7 @@ class _HeroAltarState extends State<HeroAltar> {
                 heroType: Heroes.SHAMAN,
                 HUD: this.widget.HUD,
                 price: this.shamanPrice,
+                period: '永久',
               ),
             ],
           ),

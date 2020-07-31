@@ -93,7 +93,7 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
                 ),
               ),
         Container(
-          height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
+          height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
           child: EasyRefresh(
             refreshFooter: ClassicsFooter(
               bgColor: Colors.transparent,

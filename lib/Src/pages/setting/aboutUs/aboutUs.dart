@@ -40,7 +40,7 @@ class _AboutUsDetailState extends State<AboutUsDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      width: ScreenUtil().setWidth(SystemButtonSize.settingsTextHeight),
+      width: ScreenUtil().setWidth(SystemButtonSize.displayContentHeight),
       margin: EdgeInsets.fromLTRB(
           ScreenUtil().setWidth(0), // 左
           ScreenUtil().setHeight(120), // 上
@@ -50,7 +50,7 @@ class _AboutUsDetailState extends State<AboutUsDetail> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Container(
-            height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
+            height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
             child: SingleChildScrollView(
               child: Text(
                 this.content,

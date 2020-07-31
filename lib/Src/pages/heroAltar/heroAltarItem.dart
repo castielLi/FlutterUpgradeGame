@@ -22,9 +22,11 @@ class HeroAltarItem extends StatefulWidget {
 
   int price;
 
+  String period;
+
   VoidCallback HUD;
 
-  HeroAltarItem({Key key, this.description, this.remainDays, this.heroImageUrl, this.heroType, this.price, this.HUD}) : super(key: key);
+  HeroAltarItem({Key key, this.description, this.period, this.remainDays, this.heroImageUrl, this.heroType, this.price, this.HUD}) : super(key: key);
 
   @override
   _HeroAltarItem createState() => _HeroAltarItem();
@@ -77,7 +79,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                     style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                   ),
                   Text(
-                    '期限:30天（可叠加）',
+                    '期限:' + this.widget.period,
                     style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                   ),
                 ],

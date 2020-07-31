@@ -35,8 +35,8 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      height: ScreenUtil().setHeight(SystemButtonSize.settingsTextHeight),
-      width: ScreenUtil().setWidth(SystemButtonSize.settingsTextHeight),
+      height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
+      width: ScreenUtil().setWidth(SystemButtonSize.displayContentHeight),
       margin: EdgeInsets.fromLTRB(
           ScreenUtil().setWidth(120), // 左
           ScreenUtil().setHeight(400), // 上

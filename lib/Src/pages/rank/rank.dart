@@ -74,12 +74,11 @@ class _RankDetailState extends State<RankDetail> {
             ],
           ),
           Container(
-            width: ScreenUtil().setWidth(800),
-            height: ScreenUtil().setHeight(840),
+            height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
             child: tabName == 'coin'
                 ? ListView.builder(
                     itemCount: coinList.length,
-                    itemExtent: ScreenUtil().setHeight(170),
+                    itemExtent: ScreenUtil().setHeight(SystemButtonSize.displayItemHeight),
                     padding: EdgeInsets.only(top: 0),
                     itemBuilder: (BuildContext context, int index) {
                       int count = index + 1;
@@ -97,7 +96,7 @@ class _RankDetailState extends State<RankDetail> {
                   )
                 : ListView.builder(
                     itemCount: incomeList.length,
-                    itemExtent: ScreenUtil().setHeight(170),
+                    itemExtent: ScreenUtil().setHeight(SystemButtonSize.displayItemHeight),
                     padding: EdgeInsets.only(top: 0),
                     itemBuilder: (BuildContext context, int index) {
                       int count = index + 1;

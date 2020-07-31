@@ -20,11 +20,11 @@ class _AdPool extends State<AdPool> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().setHeight(360),
+      height: ScreenUtil().setHeight(320),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: new AssetImage('resource/images/woodButton.png'),
-          fit: BoxFit.fitWidth,
+          fit: BoxFit.fill,
         ),
       ),
       child: Row(
@@ -46,11 +46,11 @@ class _AdPool extends State<AdPool> {
                   children: <Widget>[
                     Text(
                       '昨日分红(元/位)',
-                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                     ),
                     Text(
                       this.widget.adDividend.price,
-                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                     ),
                   ],
                 ),
@@ -63,19 +63,19 @@ class _AdPool extends State<AdPool> {
                   children: <Widget>[
                     Text(
                       '全网总数',
-                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                     ),
                     Text(
                       this.widget.adDividend.total.toString(),
-                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                     ),
                     Text(
                       '今日产出',
-                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                     ),
                     Text(
                       this.widget.adDividend.product.toString(),
-                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                     ),
                   ],
                 ),

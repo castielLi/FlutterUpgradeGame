@@ -41,7 +41,7 @@ class _ProductItemState extends State<ProductItem> {
             new Container(
               width: ScreenUtil().setWidth(130),
               margin: EdgeInsets.only(left: ScreenUtil().setWidth(100)),
-              child: new Text(this.widget.volumeAmount + "*",
+              child: new Text(this.widget.volumeAmount,
                   textAlign: TextAlign.center, style: TextStyle(color: Colors.white, decoration: TextDecoration.none, fontSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize))),
             ),
             new Container(
