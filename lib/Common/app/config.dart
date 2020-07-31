@@ -76,6 +76,7 @@ class SystemButtonSize {
 class SystemFontSize {
   static const buttonTextFontSize = 70.0;
   static const mainBuildingTextFontSize = 75.0;
+  static const buildingConditionTextFontSize = 28.0;
   static const otherBuildingTextFontSize = 50.0;
   static const resourceTextFontSize = 13.0;
   static const levelTextFontSize = 15.0;

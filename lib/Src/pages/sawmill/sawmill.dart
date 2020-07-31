@@ -28,21 +28,25 @@ class _SawmillDetailState extends State<SawmillDetail> {
       int level = 0;
       int nextLevel = 0;
       Wood woodBuildingRule;
+      Wood currentWoodBuildingRule;
       Adsetting adSetting;
       int needTCoin = 0;
       int woodPerAd = 0;
       int watchedAd = 0;
       int maxWatchableAd = 0;
-      int farmLevel = 0;
+      int needFarmLevel = 0;
+      int farmLevel = baseUserInfo.Farmlevel;
+      int tCoinAmount = baseUserInfo.TCoinAmount;
       if (null != baseUserInfo) {
         level = baseUserInfo.Woodlevel;
         nextLevel = baseUserInfo.Woodlevel + 1;
         woodBuildingRule = null == Global.getWoodBuildingRule() ? null : Global.getWoodBuildingRule()[nextLevel - 1];
+        currentWoodBuildingRule = null == Global.getWoodBuildingRule() ? null : Global.getWoodBuildingRule()[level - 1];
         adSetting = Global.getAdSettingRule();
         if (null != woodBuildingRule) {
           needTCoin = woodBuildingRule.tcoinamount;
-          woodPerAd = woodBuildingRule.product;
-          farmLevel = woodBuildingRule.farmlevel;
+          woodPerAd = currentWoodBuildingRule.product;
+          needFarmLevel = woodBuildingRule.farmlevel;
         }
         watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.wood;
         maxWatchableAd = null == adSetting ? 5 : adSetting.wood;
@@ -81,16 +85,17 @@ class _SawmillDetailState extends State<SawmillDetail> {
                       new Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                       Text(
                         '$needTCoin ',
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
+                        style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: tCoinAmount>=needTCoin?Colors.lightGreenAccent:Colors.grey),
                       ),
                       Image(image: new AssetImage('resource/images/farmBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                       Text(
-                        'lv' + '$farmLevel ',
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize),
+                        'lv' + '$needFarmLevel ',
+                        style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: farmLevel>=needFarmLevel?Colors.lightGreenAccent:Colors.grey),
                       ),
                     ],
                   ),
-                  Text('观看广告获取升级资源', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
+                  Text('观看广告获取升级资源',
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                 ],
               ),
             ),
