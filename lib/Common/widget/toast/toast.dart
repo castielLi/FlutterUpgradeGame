@@ -55,7 +55,7 @@ class CommonUtils {
       fontSize: ScreenUtil().setSp(
         SystemFontSize.normalTextSize,
       ),
-      backgroundColor: SystemColor.primaryBlue,
+      backgroundColor: SystemColor.primaryAddClick,
       textColor: SystemColor.primaryWhite,
       gravity: ToastGravity.CENTER,
     );
