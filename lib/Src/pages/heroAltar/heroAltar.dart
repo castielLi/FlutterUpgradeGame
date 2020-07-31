@@ -17,7 +17,8 @@ class HeroAltar extends StatefulWidget {
 }
 
 class _HeroAltarState extends State<HeroAltar> {
-  // 获取数据
+  int warriorPrice = 0;
+  int shamanPrice = 0;
 
   @override
   void didChangeDependencies() {
@@ -29,8 +30,20 @@ class _HeroAltarState extends State<HeroAltar> {
     HeroService.getHeroList((HeroBaseInfoListModel model) {
       this.widget.HUD();
       if (model != null) {
-        //todo:huanghe 这里的数据是英雄价格列表，数组只有三个。type1战士 价格，type2 猎人 价格  type3 萨满 价格
-
+        //获取英雄价格
+        List<Datalist> heroes = model.datalist;
+        if (null != heroes) {
+          heroes.forEach((hero) {
+            switch (hero.type) {
+              case Heroes.WARRIOR:
+                this.warriorPrice = hero.price;
+                break;
+              case Heroes.SHAMAN:
+                this.shamanPrice = hero.price;
+                break;
+            }
+          });
+        }
       }
     });
   }
@@ -82,7 +95,7 @@ class _HeroAltarState extends State<HeroAltar> {
                 remainDays: warriors,
                 heroType: Heroes.WARRIOR,
                 HUD: this.widget.HUD,
-                price: 100,
+                price: this.warriorPrice,
               ),
               HeroAltarItem(
                 heroImageUrl: 'resource/images/shaman.png',
@@ -91,7 +104,7 @@ class _HeroAltarState extends State<HeroAltar> {
                 remainDays: shamans,
                 heroType: Heroes.SHAMAN,
                 HUD: this.widget.HUD,
-                price: 300,
+                price: this.shamanPrice,
               ),
             ],
           ),

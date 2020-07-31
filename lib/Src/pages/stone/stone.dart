@@ -54,7 +54,6 @@ class _StoneDetailState extends State<StoneDetail> {
             ScreenUtil().setHeight(350), // 上
             ScreenUtil().setWidth(80), // 右
             ScreenUtil().setHeight(100)), // 下
-//        color:Colors.red,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
