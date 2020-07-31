@@ -15,6 +15,10 @@ class Global {
     Global.rule = ruleModel;
   }
 
+  static getCoinBuyContribution(){
+    return rule.contributionbuyrate;
+  }
+
   ///获取主建筑规则
   static getMainBuildingRule(){
     return rule.mainbuild;

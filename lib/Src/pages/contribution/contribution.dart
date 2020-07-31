@@ -11,6 +11,7 @@ import 'package:upgradegame/Src/pages/contribution/event/contributionEventBus.da
 import 'package:upgradegame/Src/pages/contribution/model/myContributionModel.dart';
 import 'package:upgradegame/Src/pages/contribution/service/contributionService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 
 class ContributionDetail extends StatefulWidget {
   @override
@@ -27,10 +28,12 @@ class _ContributionDetailState extends State<ContributionDetail> {
   int coin = 0;
   MyContributionModel currentContributionModel;
   Color highlight = Colors.red;
+  int contributionRate = 0;
 
   @override
   void initState() {
     super.initState();
+
     ContributionHttpRequestEvent().on("getMyContribution", this.getMyContribution);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.getMyContribution();
@@ -68,6 +71,9 @@ class _ContributionDetailState extends State<ContributionDetail> {
 
   @override
   Widget build(BuildContext context) {
+
+    this.contributionRate = Global.getCoinBuyContribution();
+
     return new Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
         return Container(
@@ -106,7 +112,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                     MyTextField(
                       height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
                       controller: amountController,
-                      hintText: '购买数量',
+                      hintText: '兑换T币数量',
                       icon: Icon(Icons.attach_money),
                       onChanged: () {
                         setState(() {
@@ -120,15 +126,19 @@ class _ContributionDetailState extends State<ContributionDetail> {
                         });
                       },
                     ),
-                    Text('价格:' + this.coin.toString() + 'T币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+                    Text('贡献值:' + this.contributionRate.toString() + '= 1T币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
                     ImageTextButton(
                       imageUrl: "resource/images/upgradeButton.png",
                       imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
                       imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
                       buttonName: '确 定',
                       callback: () {
-                        this.buyContribution(int.parse(amountController.text));
-                        amountController.clear();
+                        if(amountController.text != ""){
+                          this.buyContribution(int.parse(amountController.text));
+                          amountController.clear();
+                        }else{
+                          CommonUtils.showErrorMessage(msg: "输入有误,请重新输入");
+                        }
                       },
                       textSize: SystemFontSize.settingTextFontSize,
                     ),
