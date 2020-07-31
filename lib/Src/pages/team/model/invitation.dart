@@ -36,15 +36,15 @@ class InvitationModel {
   String displayname;
   String registertime;
   int level;
-  int income;
-  int voucherincome;
+  String contribution;
+  String voucherincome;
 
   InvitationModel(
       {this.avatar,
       this.displayname,
       this.registertime,
       this.level,
-      this.income,
+      this.contribution,
       this.voucherincome});
 
   InvitationModel.fromJson(Map<String, dynamic> json) {
@@ -52,7 +52,7 @@ class InvitationModel {
     displayname = json['displayname'];
     registertime = json['registertime'];
     level = json['level'];
-    income = json['income'];
+    contribution = json['contribution'];
     voucherincome = json['voucherincome'];
   }
 
@@ -62,7 +62,7 @@ class InvitationModel {
     data['displayname'] = this.displayname;
     data['registertime'] = this.registertime;
     data['level'] = this.level;
-    data['income'] = this.income;
+    data['contribution'] = this.contribution;
     data['voucherincome'] = this.voucherincome;
     return data;
   }

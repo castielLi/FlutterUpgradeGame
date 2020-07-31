@@ -54,9 +54,9 @@ class _TeamItem extends State<TeamItem> {
           margin: EdgeInsets.only(right: ScreenUtil().setWidth(20)),
           child: Text(
             '¥' +
-                this.widget.invite.income.toString() +
-                "(" +
                 this.widget.invite.voucherincome.toString() +
+                "(" +
+                this.widget.invite.contribution.toString() +
                 ')',
             style: CustomFontSize.defaultTextStyle(45),
           ),
