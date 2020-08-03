@@ -71,6 +71,7 @@ class _InitAppSetting extends State<InitAppSetting> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     jpush.getRegistrationID().then((rid) {
       print("flutter get registration id : $rid");
+      NotificationEvent.setDeviceId(rid);
       setState(() {
         debugLable = "flutter getRegistrationID: $rid";
       });

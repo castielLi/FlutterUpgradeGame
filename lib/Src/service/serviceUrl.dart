@@ -22,6 +22,12 @@ class ServiceUrl {
     return "${host}api/v1/user";
   }
 
+  ///bindDeviceId
+  static bindDeviceId() {
+    return "${host}api/v1/binddeviceid";
+  }
+
+
   ///requestBackendFetchCoin
   static requestBackendProductCoin(){
     return "${host}api/v1/mainbuild/tcoin/product";
