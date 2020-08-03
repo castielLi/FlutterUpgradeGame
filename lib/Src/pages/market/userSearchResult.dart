@@ -13,8 +13,9 @@ import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 class UserSearchResult extends StatefulWidget {
   User user;
   String noUserHintText;
+  bool showUserSearchResult = true;
 
-  UserSearchResult({Key key, this.user, this.noUserHintText}) : super(key: key);
+  UserSearchResult({Key key, this.user, this.noUserHintText = ''}) : super(key: key);
 
   @override
   _UserSearchResult createState() => _UserSearchResult();
@@ -23,7 +24,6 @@ class UserSearchResult extends StatefulWidget {
 class _UserSearchResult extends State<UserSearchResult> {
   final amountController = TextEditingController();
   final passwordController = TextEditingController();
-  bool showFirstOfTwoPages = true;
   int ticket = 0;
 
   @override
@@ -33,7 +33,7 @@ class _UserSearchResult extends State<UserSearchResult> {
         return Stack(
           children: [
             Offstage(
-              offstage: !this.showFirstOfTwoPages,
+              offstage: !this.widget.showUserSearchResult,
               child: null == this.widget.user
                   ? Text(
                       this.widget.noUserHintText,
@@ -81,7 +81,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                     ),
             ),
             Offstage(
-              offstage: this.showFirstOfTwoPages,
+              offstage: this.widget.showUserSearchResult,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -89,7 +89,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(labelText: "赠送数量", prefixIcon: Icon(Icons.attach_money)),
                     controller: amountController,
-                    onChanged: (String amount){
+                    onChanged: (String amount) {
                       setState(() {
                         amount = amountController.text;
                         if (!RegExp(r"^\d*$").hasMatch(amount)) {
@@ -141,6 +141,10 @@ class _UserSearchResult extends State<UserSearchResult> {
                       ImageTextButton(
                         buttonName: '确 定',
                         callback: () {
+                          if (amountController.text == '' || passwordController.text == '') {
+                            CommonUtils.showErrorMessage(msg: '输入不能为空');
+                            return;
+                          }
                           MarketService.sendCoin(this.widget.user.id, int.parse(amountController.text), passwordController.text, (data) {
                             if (data) {
                               CommonUtils.showSuccessMessage(msg: "发送成功");
@@ -166,7 +170,7 @@ class _UserSearchResult extends State<UserSearchResult> {
 
   void switchBetweenTwoPages() {
     setState(() {
-      this.showFirstOfTwoPages = !this.showFirstOfTwoPages;
+      this.widget.showUserSearchResult = !this.widget.showUserSearchResult;
     });
   }
 }
