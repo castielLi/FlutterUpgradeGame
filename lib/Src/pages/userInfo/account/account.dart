@@ -31,7 +31,6 @@ class _AccountDetailState extends State<AccountDetail> {
       CommonUtils.showErrorMessage(msg: '两次输入密码不一致');
       return false;
     }
-    //TODO 与原密码比较
     return true;
   }
 

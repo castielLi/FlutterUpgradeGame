@@ -23,11 +23,11 @@ class _WithdrawState extends State<Withdraw> {
   final amountController = TextEditingController();
   final passwordController = TextEditingController();
 
-  withdraw(String account,String password,String amount){
+  withdraw(String account, String password, String amount) {
     this.widget.HUD();
-    UserInfoService.withdraw(account, amount, password, (bool success){
+    UserInfoService.withdraw(account, amount, password, (bool success) {
       this.widget.HUD();
-      if(success){
+      if (success) {
         CommonUtils.showSuccessMessage(msg: "你已经发起了提现操作,等待工作人员发放,若要修改请在客服中心联系管理员");
         Provide.value<BaseUserCashProvider>(context).withdraw();
         this.widget.viewCallback();
@@ -44,8 +44,7 @@ class _WithdrawState extends State<Withdraw> {
         ScreenUtil().setWidth(0), // 右
         ScreenUtil().setHeight(150),
       ),
-
-      child: Provide<BaseUserCashProvider>(builder: (context, child, cashInfo){
+      child: Provide<BaseUserCashProvider>(builder: (context, child, cashInfo) {
         return Column(
           children: <Widget>[
             TextField(
@@ -77,13 +76,19 @@ class _WithdrawState extends State<Withdraw> {
                 ImageTextButton(
                   buttonName: '确 定',
                   callback: () {
-                    if(!cashInfo.hasWithdraw){
-                      this.withdraw(accountController.text,passwordController.text,amountController.text);
-                    }else{
+                    String aliPayAccount = accountController.text;
+                    String password = passwordController.text;
+                    String amount = amountController.text;
+                    if (aliPayAccount == "" || password == "" || amount == "") {
+                      CommonUtils.showErrorMessage(msg: "输入不能为空");
+                      return;
+                    }
+                    if (!cashInfo.hasWithdraw) {
+                      this.withdraw(accountController.text, passwordController.text, amountController.text);
+                    } else {
                       CommonUtils.showWarningMessage(msg: "你已经发起了提现操作,若要取消操作请在客服中心联系管理员");
                     }
                     FocusScope.of(context).requestFocus(FocusNode());
-
                   },
                 ),
               ],

@@ -17,7 +17,6 @@ class ServerCenter extends StatefulWidget {
 }
 
 class _ServerCenterState extends State<ServerCenter> {
-
   String qq = "";
   String wechat = "";
 
@@ -25,13 +24,13 @@ class _ServerCenterState extends State<ServerCenter> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    UserInfoHttpRequestEvent().on("serverCenter",this.getServerCenter);
+    UserInfoHttpRequestEvent().on("serverCenter", this.getServerCenter);
   }
 
-  void getServerCenter(){
+  void getServerCenter() {
     this.widget.HUD();
-    UserInfoService.ServerCenter((ServerCenterModel model){
-      if(model != null){
+    UserInfoService.ServerCenter((ServerCenterModel model) {
+      if (model != null) {
         setState(() {
           this.qq = model.qq;
           this.wechat = model.wechat;
@@ -62,17 +61,18 @@ class _ServerCenterState extends State<ServerCenter> {
                   Image(image: new AssetImage('resource/images/qq.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                   Text(
                     this.qq,
-                    style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize),
+                    style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize),
                   ),
                 ],
               ),
-              new Padding(padding: new EdgeInsets.only(top:15),
+              new Padding(
+                padding: new EdgeInsets.only(top: 15),
                 child: new Row(
                   children: <Widget>[
                     Image(image: new AssetImage('resource/images/wechat.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                     Text(
                       this.wechat,
-                      style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize),
+                      style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize),
                     ),
                   ],
                 ),

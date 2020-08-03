@@ -34,53 +34,49 @@ class _UserSearchResult extends State<UserSearchResult> {
               offstage: !this.showFirstOfTwoPages,
               child: null == this.widget.user
                   ? Text(
-                this.widget.noUserHintText,
-                textAlign: TextAlign.center,
-                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-              )
+                      this.widget.noUserHintText,
+                      textAlign: TextAlign.center,
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                    )
                   : GestureDetector(
-                onTap: () {
-                  switchBetweenTwoPages();
-                },
-                child: Container(
-                  margin: EdgeInsets.only(top: 30),
-                  height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: new AssetImage('resource/images/userSearchItemBackground.png'),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 20),
-                        child: Text(
-                          '用户:',
-                          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                      onTap: () {
+                        switchBetweenTwoPages();
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(top: 30),
+                        height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: new AssetImage('resource/images/userSearchItemBackground.png'),
+                            fit: BoxFit.fill,
+                          ),
                         ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(right: 30),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-//                              Image(
-//                                image: new AssetImage(user.avatarUrl),
-//                                height: ScreenUtil().setHeight(90),
-//                              ),
-                            Text(
-                              this.widget.user.name,
-                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                            Container(
+                              padding: EdgeInsets.only(left: 20),
+                              child: Text(
+                                '用户:',
+                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(right: 30),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    this.widget.user.name,
+                                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
+                    ),
             ),
             Offstage(
               offstage: this.showFirstOfTwoPages,
@@ -113,7 +109,6 @@ class _UserSearchResult extends State<UserSearchResult> {
                       ImageTextButton(
                         buttonName: '确 定',
                         callback: () {
-                          //TODO 与原密码比较
                           MarketService.sendCoin(this.widget.user.id, int.parse(amountController.text), passwordController.text, (data) {
                             if (data) {
                               CommonUtils.showSuccessMessage(msg: "发送成功");
