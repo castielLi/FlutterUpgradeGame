@@ -41,7 +41,7 @@ class _MarketBidItem extends State<MarketBidItem> {
       height: ScreenUtil().setHeight(320),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: new AssetImage('resource/images/woodButton.png'),
+          image: new AssetImage('resource/images/marketItemBackground.png'),
           fit: BoxFit.fill,
         ),
       ),

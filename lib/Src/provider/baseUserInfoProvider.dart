@@ -117,8 +117,9 @@ class BaseUserInfoProvider with ChangeNotifier {
   }
 
   ///赠送t币
-  sendCoin(int amount){
+  sendCoin(int amount,int voucher){
     this.tcoinamount -= amount;
+    this.voucher -= voucher;
     notifyListeners();
   }
 
