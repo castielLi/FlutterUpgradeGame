@@ -94,7 +94,6 @@ class _MarketDetailState extends State<MarketDetail> {
   void getWoodTradeList() {
     this.widget.HUD();
     MarketService.getMarketTradeByType(this.woodPage, this.RequestHttpWood, (TradeListModel model) {
-      print("请求page:" + this.woodPage.toString() + ", type: wood");
       if (model != null) {
         woodList.total = model.total;
         woodList.page = model.page;
@@ -115,7 +114,6 @@ class _MarketDetailState extends State<MarketDetail> {
     bool flag = false;
     this.widget.HUD();
     MarketService.getMarketTradeByType(this.stonePage, this.RequestHttpStone, (TradeListModel model) {
-      print("请求page:" + this.stonePage.toString() + ", type: stone");
       this.widget.HUD();
       if (model != null) {
         stoneList.total = model.total;
@@ -279,7 +277,6 @@ class _MarketDetailState extends State<MarketDetail> {
                                     itemCount: this.woodList.datalist.length,
                                     itemBuilder: (BuildContext context, int index) {
                                       TradeItemModel tradeItemModel = this.woodList.datalist[index];
-                                      print("wood count:" + this.woodList.datalist.length.toString());
                                       return MarketBidItem(
                                         buttonName: "购 买",
                                         name: tradeItemModel.displayname,
@@ -357,7 +354,6 @@ class _MarketDetailState extends State<MarketDetail> {
                                     itemCount: this.stoneList.datalist.length,
                                     itemBuilder: (BuildContext context, int index) {
                                       TradeItemModel tradeItemModel = this.stoneList.datalist[index];
-                                      print("stone count:" + this.stoneList.datalist.length.toString());
                                       return MarketBidItem(
                                         buttonName: "购 买",
                                         name: tradeItemModel.displayname,

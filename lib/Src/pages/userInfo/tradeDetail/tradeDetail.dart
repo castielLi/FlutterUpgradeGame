@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
@@ -7,7 +8,6 @@ import 'package:upgradegame/Src/pages/userInfo/event/userInfoEventBus.dart';
 import 'package:upgradegame/Src/pages/userInfo/model/tCoinDetailModel.dart';
 import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
 import 'package:upgradegame/Src/pages/userInfo/tradeDetail/tradeItem.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 class TradeDetail extends StatefulWidget {
   @override
@@ -26,7 +26,6 @@ class _TradeDetailState extends State<TradeDetail> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     UserInfoHttpRequestEvent().on("tcoinDetail", this.getTCoinDetail);
   }
@@ -34,11 +33,6 @@ class _TradeDetailState extends State<TradeDetail> {
   void getTCoinDetail() {
     this.widget.HUD();
     UserInfoService.getUserTCoinDetail(this.page, (TCoinDetailModel model) {
-      //测试数据
-//      for (int i = 0; i < 4; i++) {
-//        model.datalist.add(new Datalist(datetime: "2020-07-24", detail: "购买英雄", change: this.tCoinDetail.datalist.length.toString()));
-//      }
-      //测试数据
       if (null == model) {
         return;
       }

@@ -71,7 +71,6 @@ class _ContributionDetailState extends State<ContributionDetail> {
 
   @override
   Widget build(BuildContext context) {
-
     this.contributionRate = Global.getCoinBuyContribution();
 
     return new Container(
@@ -95,6 +94,8 @@ class _ContributionDetailState extends State<ContributionDetail> {
                     callback: () {
                       changeTab("showContribution");
                       ContributionHttpRequestEvent().emit("getMyContribution");
+                      //隐藏键盘
+                      FocusScope.of(context).requestFocus(FocusNode());
                     },
                   ),
                   ImageTextButton(
@@ -114,9 +115,9 @@ class _ContributionDetailState extends State<ContributionDetail> {
                       controller: amountController,
                       hintText: '兑换T币数量',
                       icon: Icon(Icons.attach_money),
+                      inputType: TextInputType.number,
                       onChanged: () {
                         setState(() {
-                          //TODO 兑换贡献值规则
                           String amount = amountController.text;
                           if (!RegExp(r"^\d*$").hasMatch(amount)) {
                             CommonUtils.showErrorMessage(msg: "请输入正整数");
@@ -133,10 +134,10 @@ class _ContributionDetailState extends State<ContributionDetail> {
                       imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
                       buttonName: '确 定',
                       callback: () {
-                        if(amountController.text != ""){
+                        if (amountController.text != "") {
                           this.buyContribution(int.parse(amountController.text));
                           amountController.clear();
-                        }else{
+                        } else {
                           CommonUtils.showErrorMessage(msg: "输入有误,请重新输入");
                         }
                       },
