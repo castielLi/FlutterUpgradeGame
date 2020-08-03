@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
@@ -23,6 +24,7 @@ class _UserSearchResult extends State<UserSearchResult> {
   final amountController = TextEditingController();
   final passwordController = TextEditingController();
   bool showFirstOfTwoPages = true;
+  int ticket = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -87,11 +89,41 @@ class _UserSearchResult extends State<UserSearchResult> {
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(labelText: "赠送数量", prefixIcon: Icon(Icons.attach_money)),
                     controller: amountController,
+                    onChanged: (String amount){
+                      setState(() {
+                        amount = amountController.text;
+                        if (!RegExp(r"^\d*$").hasMatch(amount)) {
+                          CommonUtils.showErrorMessage(msg: "请输入正整数");
+                          this.ticket = 0;
+                        }
+                        this.ticket = int.parse(amount);
+                      });
+                    },
                   ),
                   TextField(
                     decoration: InputDecoration(labelText: "密码", prefixIcon: Icon(Icons.lock)),
                     obscureText: true,
                     controller: passwordController,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          new Image(
+                            image: new AssetImage("resource/images/volume.png"),
+                            width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarSmallIconSize),
+                            height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
+                          ),
+                          new Text(
+                            baseUserInfo.voucher.toString(),
+                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                          ),
+                        ],
+                      ),
+                      Text('赠送1T币需要1张赠送券', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+                    ],
                   ),
                   ButtonsList(
                     buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
