@@ -291,6 +291,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                           MarketService.marketBuy(tradeItemModel.productid, (bool success) {
                                             if (success) {
                                               ///wood = 1 stone = 2
+                                              CommonUtils.showSuccessMessage(msg: "购买成功");
                                               baseUserInfo.buyResource(1, tradeItemModel.amount, tradeItemModel.price);
                                               setState(() {
                                                 for (int i = 0; i < this.woodList.datalist.length; i++) {

@@ -141,16 +141,20 @@ class _UserSearchResult extends State<UserSearchResult> {
                       ImageTextButton(
                         buttonName: '确 定',
                         callback: () {
-                          MarketService.sendCoin(this.widget.user.id, int.parse(amountController.text), passwordController.text, (data) {
-                            if (data) {
-                              CommonUtils.showSuccessMessage(msg: "发送成功");
-                              baseUserInfo.sendCoin(int.parse(amountController.text));
-                              switchBetweenTwoPages();
-                              amountController.clear();
-                              passwordController.clear();
-                            }
-                          });
-                          FocusScope.of(context).requestFocus(FocusNode());
+                          if(baseUserInfo.voucher >= int.parse(amountController.text)){
+                            MarketService.sendCoin(this.widget.user.id, int.parse(amountController.text), passwordController.text, (data) {
+                              if (data) {
+                                CommonUtils.showSuccessMessage(msg: "发送成功");
+                                baseUserInfo.sendCoin(int.parse(amountController.text),int.parse(amountController.text));
+                                switchBetweenTwoPages();
+                                amountController.clear();
+                                passwordController.clear();
+                              }
+                            });
+                            FocusScope.of(context).requestFocus(FocusNode());
+                          }else{
+                            CommonUtils.showErrorMessage(msg: "您的赠送券不足,请在商城购买赠送券");
+                          }
                         },
                       ),
                     ],
