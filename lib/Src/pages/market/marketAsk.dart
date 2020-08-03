@@ -10,6 +10,8 @@ import 'package:upgradegame/Src/common/model/const/resource.dart';
 import 'package:upgradegame/Src/pages/market/service/marketService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
+import 'event/marketEventBus.dart';
+
 class MarketAsk extends StatefulWidget {
   String sellType;
 
@@ -84,6 +86,7 @@ class _MarketAskState extends State<MarketAsk> {
                         CommonUtils.showSuccessMessage(msg: "订单发布成功");
                         baseUserInfo.publishBid(this.widget.sellType == "wood" ? 1 : 2, int.parse(this.amountController.text));
                         this.widget.viewCallback();
+                        MarketHttpRequestEvent().emit("getMyTradeList");
                         amountController.clear();
                         coinController.clear();
                       }
