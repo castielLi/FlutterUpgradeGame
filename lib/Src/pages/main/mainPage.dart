@@ -34,6 +34,7 @@ class _MainPageState extends State<MainPage> {
   Timer adShareTimer;
   Timer productTCoin10;
   Timer productTCoin60;
+  Timer deviceIdTimer;
   StreamSubscription stream;
   StreamSubscription notification;
 
@@ -94,6 +95,19 @@ class _MainPageState extends State<MainPage> {
       Map<String, dynamic> model = convert.jsonDecode(message.message['extras']['cn.jpush.android.EXTRA']);
       print(model);
     });
+
+    ///后台绑定用户和极光的registerid
+    this.deviceIdTimer = Timer.periodic(Duration(seconds: 20), (timer) {
+      if(NotificationEvent().deviceId != ""){
+        MainService.bindDeviceId(NotificationEvent().deviceId,(bool success){
+          if(success){
+            this.deviceIdTimer.cancel();
+            this.deviceIdTimer = null;
+          }
+        });
+      }
+    });
+
 
     ///每5秒更改一次广告分红  要将分红分成17280份
     this.adShareTimer = Timer.periodic(Duration(seconds: 5), (timer) {
@@ -161,6 +175,9 @@ class _MainPageState extends State<MainPage> {
 
     if (this.productTCoin60 != null) {
       this.productTCoin60.cancel();
+    }
+    if(this.deviceIdTimer != null){
+      this.deviceIdTimer.cancel();
     }
     stream.cancel();
     stream = null;
