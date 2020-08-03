@@ -69,7 +69,7 @@ class SystemButtonSize {
   static const largeButtonHeight = 144.0;
 
   static const displayItemHeight = 320.0;       //团队贡献，分红，英雄祭坛
-  static const displayContentHeight = 750.0;    //内容展示高度，不包括按钮
+  static const displayContentHeight = 850.0;    //内容展示高度，不包括按钮
   static const inputDecorationHeight = 150.0;
 }
 

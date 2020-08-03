@@ -26,7 +26,7 @@ class _ProtocolDetailState extends State<ProtocolDetail> {
     SettingHttpRequestEvent().on("protocol", this.getProtocol);
   }
 
-  void getProtocol(){
+  void getProtocol() {
     this.widget.HUD();
     ProtocolService.getProtocolList((data) {
       if (null != data) {

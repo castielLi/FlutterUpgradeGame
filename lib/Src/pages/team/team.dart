@@ -207,6 +207,7 @@ class _TeamDetailState extends State<TeamDetail> {
                             ),
                             second.length == 0 && first.length == 0
                                 ? Container(
+                                  //内容高度减去两列按钮高度
                                     height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
                                     child: Text(
                                       noMembersHintText,
@@ -215,10 +216,12 @@ class _TeamDetailState extends State<TeamDetail> {
                                     ),
                                   )
                                 : Container(
+
                                     height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
                                     child: Column(
                                       children: [
                                         Container(
+                                          height:ScreenUtil().setHeight(50),
                                           margin: EdgeInsets.only(left: ScreenUtil().setWidth(70)),
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -235,8 +238,8 @@ class _TeamDetailState extends State<TeamDetail> {
                                           ),
                                         ),
                                         Container(
-                                          //TODO 修改数值
-                                          height: ScreenUtil().setHeight(640),
+                                          //内容高度减去两列按钮加标题栏高度
+                                          height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight-50),
                                           child: Stack(
                                             children: [
                                               Offstage(
@@ -306,7 +309,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                                         initSecondLength += 20;
                                                       });
                                                     },
-                                                    child: first.length == 0
+                                                    child: second.length == 0
                                                         ? Text(
                                                             '还没有团队成员',
                                                             textAlign: TextAlign.center,

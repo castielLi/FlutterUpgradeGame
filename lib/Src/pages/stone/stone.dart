@@ -86,12 +86,12 @@ class _StoneDetailState extends State<StoneDetail> {
                       Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                       Text(
                         '$needTCoin ',
-                        style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: tCoinAmount>=needTCoin?Colors.lightGreenAccent:Colors.grey),
+                        style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: tCoinAmount >= needTCoin ? Colors.lightGreenAccent : Colors.grey),
                       ),
                       Image(image: new AssetImage('resource/images/farmBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                       Text(
                         'lv' + '$needFarmLevel ',
-                        style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: farmLevel>=needFarmLevel?Colors.lightGreenAccent:Colors.grey),
+                        style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: farmLevel >= needFarmLevel ? Colors.lightGreenAccent : Colors.grey),
                       ),
                     ],
                   ),
