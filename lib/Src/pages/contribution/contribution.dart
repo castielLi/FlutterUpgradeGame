@@ -72,7 +72,8 @@ class _ContributionDetailState extends State<ContributionDetail> {
   @override
   Widget build(BuildContext context) {
     this.contributionRate = Global.getCoinBuyContribution();
-
+    int rateContentHeight = 350;
+    int rowWidth = 250;
     return new Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
         return Container(
@@ -148,115 +149,120 @@ class _ContributionDetailState extends State<ContributionDetail> {
               ),
               Offstage(
                 offstage: "showContribution" != this.tabName,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      child: Column(
-                        children: [
-                          Text(
-                            "个人贡献值",
-                            style: CustomFontSize.defaultTextStyle(70),
-                          ),
-                          Text(
-                            "(每天中午12点更新结算)",
-                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                          ),
-                          Text(
-                            this.currentContributionModel == null ? "0" : this.currentContributionModel.amount.toString(),
-                            style: TextStyle(fontSize: ScreenUtil().setSp(70), color: highlight),
-                          ),
-                          Divider(
-                            height: 1.0,
-                            color: Colors.white,
-                          ),
-                          Text(
-                            "昨日累计贡献值",
-                            style: CustomFontSize.defaultTextStyle(50),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                width: ScreenUtil().setWidth(250),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "单价",
-                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                                    ),
-                                    Text(
-                                      this.currentContributionModel == null ? "0" : this.currentContributionModel.price,
-                                      style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreLargerTextSize), color: highlight),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                width: ScreenUtil().setWidth(250),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "比例达标状态",
-                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                                    ),
-                                    Text(
-                                      (this.currentContributionModel == null || this.currentContributionModel.myrate <= 0) ? "未达标" : "已达标",
-                                      style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreLargerTextSize), color: highlight),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                width: ScreenUtil().setWidth(250),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "分红比例",
-                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                                    ),
-                                    Text(
-                                      this.currentContributionModel == null ? "0" : this.currentContributionModel.myrate.toString() + "%",
-                                      style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreLargerTextSize), color: highlight),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Divider(
-                      height: 1.0,
-                      color: Colors.white,
-                    ),
-                    Container(
-                      height: ScreenUtil().setHeight(450),
-                      width: ScreenUtil().setWidth(500),
-                      child: ListView.builder(
-                          padding: EdgeInsets.only(top: 0),
-                          itemCount: this.currentContributionModel == null ? 0 : this.currentContributionModel.conditions.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            Conditions condition = this.currentContributionModel.conditions[this.currentContributionModel.conditions.length - 1 - index];
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Container(
+                  height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight - rateContentHeight),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "个人贡献值",
+                              style: CustomFontSize.defaultTextStyle(70),
+                            ),
+                            Text(
+                              "(每天中午12点更新结算)",
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                            ),
+                            Text(
+                              this.currentContributionModel == null ? "0" : this.currentContributionModel.amount.toString(),
+                              style: TextStyle(fontSize: ScreenUtil().setSp(70), color: highlight),
+                            ),
+                            Divider(
+                              height: 1.0,
+                              color: Colors.white,
+                            ),
+                            Text(
+                              "昨日累计贡献值",
+                              style: CustomFontSize.defaultTextStyle(50),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Text(
-                                  condition.amount.toString(),
-                                  style: TextStyle(
-                                      fontSize: ScreenUtil().setSp(SystemFontSize.moreLargerTextSize), color: this.currentContributionModel.myrate < condition.rate ? Colors.white : highlight),
+                                Container(
+                                  width: ScreenUtil().setWidth(rowWidth),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        "单价",
+                                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                      ),
+                                      Text(
+                                        this.currentContributionModel == null ? "0" : this.currentContributionModel.price,
+                                        style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreLargerTextSize), color: highlight),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                Text(
-                                  condition.rate.toString() + '%',
-                                  style: TextStyle(
-                                      fontSize: ScreenUtil().setSp(SystemFontSize.moreLargerTextSize), color: this.currentContributionModel.myrate < condition.rate ? Colors.white : highlight),
+                                Container(
+                                  width: ScreenUtil().setWidth(rowWidth),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        "比例达标状态",
+                                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                      ),
+                                      Text(
+                                        (this.currentContributionModel == null || this.currentContributionModel.myrate <= 0) ? "未达标" : "已达标",
+                                        style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreLargerTextSize), color: highlight),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  width: ScreenUtil().setWidth(rowWidth),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        "分红比例",
+                                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                      ),
+                                      Text(
+                                        this.currentContributionModel == null ? "0" : this.currentContributionModel.myrate.toString() + "%",
+                                        style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreLargerTextSize), color: highlight),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
-                            );
-                          }),
-                    ),
-                  ],
+                            ),
+                            Divider(
+                              height: 1.0,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: ScreenUtil().setHeight(rateContentHeight),
+                        width: ScreenUtil().setWidth(500),
+                        child: ListView.builder(
+                            padding: EdgeInsets.only(top: 0),
+                            itemCount: this.currentContributionModel == null ? 0 : this.currentContributionModel.conditions.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              Conditions condition = this.currentContributionModel.conditions[this.currentContributionModel.conditions.length - 1 - index];
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    condition.amount.toString(),
+                                    style: TextStyle(
+                                        fontSize: ScreenUtil().setSp(SystemFontSize.moreLargerTextSize), color: this.currentContributionModel.myrate < condition.rate ? Colors.white : highlight),
+                                  ),
+                                  Text(
+                                    condition.rate.toString() + '%',
+                                    style: TextStyle(
+                                        fontSize: ScreenUtil().setSp(SystemFontSize.moreLargerTextSize), color: this.currentContributionModel.myrate < condition.rate ? Colors.white : highlight),
+                                  ),
+                                ],
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

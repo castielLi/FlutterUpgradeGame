@@ -208,13 +208,14 @@ class _MarketDetailState extends State<MarketDetail> {
                                 return;
                               }
                               MarketService.searchUser(phone, (data) {
-                                if (null != data) {
-                                  setState(() {
+                                setState(() {
+                                  this.noResultHintText = '没有搜索到用户';
+                                  this.searchedUser = null;
+                                  if (null != data) {
                                     this.searchedUser = User.fromSearchJson(data);
                                     this.searchedUser.phone = phone;
-                                    this.noResultHintText = '没有搜索到用户';
-                                  });
-                                }
+                                  }
+                                });
                               });
                             },
                           ),
