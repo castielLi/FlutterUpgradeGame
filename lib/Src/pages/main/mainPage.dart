@@ -99,12 +99,12 @@ class _MainPageState extends State<MainPage> {
     ///后台绑定用户和极光的registerid
     this.deviceIdTimer = Timer.periodic(Duration(seconds: 20), (timer) {
       if(NotificationEvent().deviceId != ""){
-//        MainService.bindDeviceId(NotificationEvent().deviceId,(bool success){
-//          if(success){
-//            this.deviceIdTimer.cancel();
-//            this.deviceIdTimer = null;
-//          }
-//        });
+        MainService.bindDeviceId(NotificationEvent().deviceId,(bool success){
+          if(success){
+            this.deviceIdTimer.cancel();
+            this.deviceIdTimer = null;
+          }
+        });
       }
     });
 
