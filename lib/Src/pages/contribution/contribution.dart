@@ -7,11 +7,11 @@ import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/baseResourceModel.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/pages/contribution/event/contributionEventBus.dart';
 import 'package:upgradegame/Src/pages/contribution/model/myContributionModel.dart';
 import 'package:upgradegame/Src/pages/contribution/service/contributionService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
-import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 
 class ContributionDetail extends StatefulWidget {
   @override
@@ -233,13 +233,14 @@ class _ContributionDetailState extends State<ContributionDetail> {
                     ),
                     Container(
                       height: ScreenUtil().setHeight(450),
+                      width: ScreenUtil().setWidth(500),
                       child: ListView.builder(
                           padding: EdgeInsets.only(top: 0),
                           itemCount: this.currentContributionModel == null ? 0 : this.currentContributionModel.conditions.length,
                           itemBuilder: (BuildContext context, int index) {
-                            Conditions condition = this.currentContributionModel.conditions[index];
+                            Conditions condition = this.currentContributionModel.conditions[this.currentContributionModel.conditions.length - 1 - index];
                             return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   condition.amount.toString(),
