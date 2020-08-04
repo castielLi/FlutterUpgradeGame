@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluwx/fluwx.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/store/model/storeModel.dart';
 import 'package:upgradegame/Src/pages/store/model/voucherModel.dart';
 import 'package:upgradegame/Src/pages/store/storeService/storeService.dart';
@@ -39,6 +40,9 @@ class _StoreDetailState extends State<StoreDetail> {
           }
 //          fluwx.weChatResponseEventHandler.skip(1);
         });
+      }else if(response.errCode == -2 && response is WeChatPaymentResponse){
+        this.widget.HUD();
+        CommonUtils.showErrorMessage(msg: "已经取消购买");
       }
       // eventBus.fire(new RefreshMineInfo(true));
       // Navigator.of(context).pop();
