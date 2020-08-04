@@ -30,7 +30,6 @@ class _FarmDetailState extends State<FarmDetail> {
       int neededCoin = 0;
       int watchedAd = 0;
       int maxWatchableAd = 0;
-      int speedUpPercent = 0;
       Farm farmBuildingRule;
       Adsetting adSetting;
       int needWoodLevel = 0;
@@ -103,17 +102,17 @@ class _FarmDetailState extends State<FarmDetail> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                      Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.farmAdIconSize)),
                       Text(
                         '$neededCoin  ',
                         style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: tocinamount>=neededCoin?Colors.lightGreenAccent:Colors.grey),
                       ),
-                      Image(image: new AssetImage('resource/images/fellingBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                      Image(image: new AssetImage('resource/images/fellingBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.farmAdIconSize)),
                       Text(
                         'lv' + '$needWoodLevel ',
                         style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: woodLevel>=needWoodLevel?Colors.lightGreenAccent:Colors.grey),
                       ),
-                      Image(image: new AssetImage('resource/images/stoneBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                      Image(image: new AssetImage('resource/images/stoneBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.farmAdIconSize)),
                       Text(
                         'lv' + '$needStoneLevel ',
                         style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: stoneLevel>=needStoneLevel?Colors.lightGreenAccent:Colors.grey),
@@ -144,7 +143,7 @@ class _FarmDetailState extends State<FarmDetail> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        '每次采石场和伐木场提速 $speedUpPercent%',
+                        '每日0:00/12:00/18:00更新',
                         style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
                       ),
                     ],

@@ -58,6 +58,7 @@ class SystemIconSize {
   static const mainPageIconSize = 350.0;
 
   static const adIconSize = 135.0;
+  static const farmAdIconSize = 120.0;
 }
 
 class SystemButtonSize {
