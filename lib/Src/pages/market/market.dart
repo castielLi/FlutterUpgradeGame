@@ -33,6 +33,7 @@ class MarketDetail extends StatefulWidget {
 class _MarketDetailState extends State<MarketDetail> {
   User searchedUser;
   String noResultHintText = '';
+  String noOrderHintText = '';
   final phoneController = TextEditingController();
 
   int RequestHttpWood = 1;
@@ -105,6 +106,7 @@ class _MarketDetailState extends State<MarketDetail> {
         }
         woodList.datalist += model.datalist;
       }
+      this.noOrderHintText = '目前没有订单';
       this.widget.HUD();
     });
   }
@@ -235,7 +237,7 @@ class _MarketDetailState extends State<MarketDetail> {
                         height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
                         child: this.woodList.datalist.length == 0
                             ? Text(
-                                '目前没有订单',
+                                this.noOrderHintText,
                                 textAlign: TextAlign.center,
                                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                               )

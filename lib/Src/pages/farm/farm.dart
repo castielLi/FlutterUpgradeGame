@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provide/provide.dart';
+import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
 import 'package:upgradegame/Src/common/model/enum/adTypeEnum.dart';
 import 'package:upgradegame/Src/common/model/enum/buildingEnum.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/common/service/baseService.dart';
 import 'package:upgradegame/Src/common/widget/adIcon/adIconRow.dart';
-import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
-import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
-import 'package:provide/provide.dart';
-import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 
 class FarmDetail extends StatefulWidget {
   @override
@@ -105,17 +105,22 @@ class _FarmDetailState extends State<FarmDetail> {
                       Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.farmAdIconSize)),
                       Text(
                         '$neededCoin  ',
-                        style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: tocinamount>=neededCoin?Colors.lightGreenAccent:Colors.grey),
+                        style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: tocinamount >= neededCoin ? Colors.lightGreenAccent : Colors.grey),
                       ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
                       Image(image: new AssetImage('resource/images/fellingBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.farmAdIconSize)),
                       Text(
                         'lv' + '$needWoodLevel ',
-                        style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: woodLevel>=needWoodLevel?Colors.lightGreenAccent:Colors.grey),
+                        style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: woodLevel >= needWoodLevel ? Colors.lightGreenAccent : Colors.grey),
                       ),
                       Image(image: new AssetImage('resource/images/stoneBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.farmAdIconSize)),
                       Text(
                         'lv' + '$needStoneLevel ',
-                        style: TextStyle(fontSize:SystemFontSize.buildingConditionTextFontSize,color: stoneLevel>=needStoneLevel?Colors.lightGreenAccent:Colors.grey),
+                        style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: stoneLevel >= needStoneLevel ? Colors.lightGreenAccent : Colors.grey),
                       ),
                     ],
                   ),
