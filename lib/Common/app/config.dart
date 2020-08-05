@@ -69,8 +69,8 @@ class SystemButtonSize {
   static const largeButtonWidth = 360.0;
   static const largeButtonHeight = 144.0;
 
-  static const displayItemHeight = 320.0;       //团队贡献，分红，英雄祭坛
-  static const displayContentHeight = 850.0;    //内容展示高度，不包括按钮
+  static const displayItemHeight = 320.0; //团队贡献，分红，英雄祭坛
+  static const displayContentHeight = 850.0; //内容展示高度，不包括按钮
   static const inputDecorationHeight = 150.0;
 }
 
@@ -111,6 +111,6 @@ class SystemFontSize {
 /// 自定义字体格式
 class CustomFontSize {
   static TextStyle defaultTextStyle(double fontSize) {
-    return TextStyle(fontSize: ScreenUtil().setSp(fontSize), color: Colors.white,decoration: TextDecoration.none);
+    return TextStyle(fontSize: ScreenUtil().setSp(fontSize), color: Colors.white, decoration: TextDecoration.none);
   }
 }
