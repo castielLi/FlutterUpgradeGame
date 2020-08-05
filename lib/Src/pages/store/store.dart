@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluwx/fluwx.dart';
+import 'package:fluwx/fluwx.dart' as fluwx;
 import 'package:provide/provide.dart';
-import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/pages/store/model/storeModel.dart';
 import 'package:upgradegame/Src/pages/store/model/voucherModel.dart';
-import 'package:upgradegame/Src/pages/store/storeService/storeService.dart';
 import 'package:upgradegame/Src/pages/store/productItem.dart';
+import 'package:upgradegame/Src/pages/store/storeService/storeService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
-import 'package:fluwx/fluwx.dart' as fluwx;
 
 import 'model/buyVoucherWeChatResponseModel.dart';
 
@@ -98,7 +97,7 @@ class _StoreDetailState extends State<StoreDetail> {
                     callback: () {
                       this.buyVoucher(storeList[index].productid, baseUserInfo);
                     },
-                    cashAmount: storeList == null ? "" : storeList[index].price.toString(),
+                    cashAmount: storeList == null ? "" : storeList[index].price,
                   );
                 }),
           );

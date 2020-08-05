@@ -24,7 +24,7 @@ class StoreListModel {
 class StoreModel {
   String productid;
   int amount;
-  double price;
+  String price;
 
   StoreModel({this.productid, this.amount, this.price});
 

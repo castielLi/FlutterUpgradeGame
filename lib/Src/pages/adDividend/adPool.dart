@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
-
 import 'package:upgradegame/Src/pages/adDividend/model/heroProfitModel.dart';
 
 class AdPool extends StatefulWidget {
@@ -20,7 +19,7 @@ class _AdPool extends State<AdPool> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().setHeight(320),
+      height: ScreenUtil().setHeight(SystemButtonSize.displayItemHeight),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: new AssetImage('resource/images/woodButton.png'),
