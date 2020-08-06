@@ -34,7 +34,7 @@ class UserInfoService{
   }
 
   static Future<ResultData> withdraw(String aliaccount,String cashamount ,String password ,callback) async{
-    WithdrawRequestModel requestModel = WithdrawRequestModel(aliaccount: aliaccount,cashamount: cashamount,password: password);
+    WithdrawRequestModel requestModel = WithdrawRequestModel(account: aliaccount,amount: double.parse(cashamount) ,password: password);
     String params = convert.jsonEncode(requestModel);
     var response = await httpManager.request(ServiceUrl.withdraw(), params, null, Options(method: "post"));
     if (response.code == 200) {

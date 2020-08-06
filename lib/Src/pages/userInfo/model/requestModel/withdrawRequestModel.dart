@@ -1,20 +1,20 @@
 class WithdrawRequestModel {
-  String aliaccount;
-  String cashamount;
+  String account;
+  double amount;
   String password;
 
-  WithdrawRequestModel({this.aliaccount, this.cashamount, this.password});
+  WithdrawRequestModel({this.account, this.amount, this.password});
 
   WithdrawRequestModel.fromJson(Map<String, dynamic> json) {
-    aliaccount = json['aliaccount'];
-    cashamount = json['cashamount'];
+    account = json['account'];
+    amount = json['amount'];
     password = json['password'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['aliaccount'] = this.aliaccount;
-    data['cashamount'] = this.cashamount;
+    data['account'] = this.account;
+    data['amount'] = this.amount;
     data['password'] = this.password;
     return data;
   }
