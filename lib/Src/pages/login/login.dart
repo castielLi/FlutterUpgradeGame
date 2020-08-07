@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluwx/fluwx.dart' as fluwx;
+import 'package:progress_hud/progress_hud.dart';
+import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
-import 'package:upgradegame/Src/pages/login/model/WeChatLoginModel.dart';
 import 'package:upgradegame/Src/pages/login/service/loginService.dart';
+import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
-import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
-import 'package:provide/provide.dart';
-import 'package:progress_hud/progress_hud.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluwx/fluwx.dart' as fluwx;
 
 import 'model/LoginResponseModel.dart';
 

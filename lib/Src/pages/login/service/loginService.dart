@@ -1,93 +1,82 @@
+import 'dart:async';
+import 'dart:convert' as convert;
+
+import 'package:dio/dio.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/http/httpManager.dart';
+import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Common/storge/fileStore.dart';
 import 'package:upgradegame/Common/storge/localStore.dart';
-import 'package:upgradegame/Common/http/httpManager.dart';
-import 'package:dio/dio.dart';
-import 'package:upgradegame/Common/http/resultData.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/model/baseUserInfoModel.dart';
 import 'package:upgradegame/Src/pages/login/model/LoginResponseModel.dart';
 import 'package:upgradegame/Src/pages/login/requstModel/login.dart';
 import 'package:upgradegame/Src/pages/login/requstModel/loginWithAccountRequestModel.dart';
 import 'package:upgradegame/Src/pages/login/requstModel/setUserInfoRequestModel.dart';
-import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
-import 'dart:async';
 import 'package:upgradegame/Src/service/serviceUrl.dart';
-import 'package:upgradegame/Common/widget/toast/toast.dart';
-import 'package:upgradegame/Src/common/model/baseUserInfoModel.dart';
-import 'dart:convert' as convert;
 
-class LoginService{
-  static Future<ResultData> login(String wechat,callback) async{
-
+class LoginService {
+  static Future<ResultData> login(String wechat, callback) async {
     Login requstModel = Login(code: wechat);
     String params = convert.jsonEncode(requstModel);
 
-    var response = await httpManager.request(
-        ServiceUrl.login(), params, null, Options(method: "post"));
+    var response = await httpManager.request(ServiceUrl.login(), params, null, Options(method: "post"));
 
-    if(response.code == 200){
+    if (response.code == 200) {
       LoginReponseModel responseModel = LoginReponseModel.fromJson(response.data);
       LocalStorage.save(Config.TOKEN_KEY, responseModel.token);
       FileStorage.saveContent(responseModel.token, "token");
       FileStorage.saveContent(responseModel.verified.toString(), "verified");
       callback(responseModel);
-    }else{
+    } else {
       CommonUtils.showErrorMessage(msg: '登录出错');
       callback(null);
     }
   }
 
-  static Future<ResultData> setUserInfo(String realName , String idCard
-      ,String phone ,String account , String password,callback) async{
-
-    SetUserInfoRequestModel requestModel = SetUserInfoRequestModel(password: password,realname: realName,
-    idcard: idCard,telephone: phone,account: account);
+  static Future<ResultData> setUserInfo(String realName, String idCard, String phone, String account, String password, callback) async {
+    SetUserInfoRequestModel requestModel = SetUserInfoRequestModel(password: password, realname: realName, idcard: idCard, telephone: phone, account: account);
     String params = convert.jsonEncode(requestModel);
 
-    var response = await httpManager.request(
-        ServiceUrl.setuserinfo(), params, null, Options(method: "post"));
+    var response = await httpManager.request(ServiceUrl.setuserinfo(), params, null, Options(method: "post"));
 
-    if(response.code != 200){
+    if (response.code != 200) {
       callback(false);
       CommonUtils.showErrorMessage(msg: response.message);
-    }else{
+    } else {
       FileStorage.saveContent("true", "verified");
       callback(true);
     }
   }
 
-
-  static Future<ResultData> loginWithAccount(String account , String password,callback) async{
-
-    LoginWithAccountRequestModel requestModel = LoginWithAccountRequestModel(account:account,password: password);
+  static Future<ResultData> loginWithAccount(String account, String password, callback) async {
+    LoginWithAccountRequestModel requestModel = LoginWithAccountRequestModel(account: account, password: password);
     String params = convert.jsonEncode(requestModel);
 
-    var response = await httpManager.request(
-        ServiceUrl.loginwithaccount(), params, null, Options(method: "post"));
+    var response = await httpManager.request(ServiceUrl.loginwithaccount(), params, null, Options(method: "post"));
 
-    if(response.code == 200){
+    if (response.code == 200) {
       LoginReponseModel responseModel = LoginReponseModel.fromJson(response.data);
       LocalStorage.save(Config.TOKEN_KEY, responseModel.token);
       FileStorage.saveContent(responseModel.token, "token");
       FileStorage.saveContent("true", "verified");
       callback(responseModel);
-    }else{
+    } else {
       CommonUtils.showErrorMessage(msg: '登录出错');
       callback(null);
     }
   }
 
-  static Future<ResultData> loginWithToken(callback) async{
+  static Future<ResultData> loginWithToken(callback) async {
+    var response = await httpManager.request(ServiceUrl.getuser(), {}, null, null);
 
-    var response = await httpManager.request(
-        ServiceUrl.getuser(), {}, null, null);
-
-    if(response.code != 200){
+    if (response.code != 200) {
       LocalStorage.remove(Config.TOKEN_KEY);
       await FileStorage.removeContent("token");
       await FileStorage.removeContent("verified");
       clearAll();
       callback(null);
-    }else{
+    } else {
       BaseUserInfoModel model = BaseUserInfoModel.fromJson(response.data);
       callback(model);
     }
@@ -111,9 +100,9 @@ class LoginService{
   static Future<bool> getVerified() async {
     var verified = await FileStorage.getContent("verified");
     if (verified != null && verified != "") {
-      if(verified == "true"){
+      if (verified == "true") {
         return true;
-      }else{
+      } else {
         return false;
       }
     }

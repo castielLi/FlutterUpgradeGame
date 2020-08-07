@@ -56,7 +56,7 @@ class _MainPageState extends State<MainPage> {
       perFiveSecondProfit = 0;
     }
 
-    int dTime = time - zeroTime;
+//    int dTime = time - zeroTime;
     int dPer = int.parse(((time - zeroTime) / 5000).toStringAsFixed(0));
 
     ///保留两位小数

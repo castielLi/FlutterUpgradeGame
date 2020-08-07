@@ -1,12 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:upgradegame/Src/common/model/baseResourceModel.dart';
-import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/common/model/baseUserInfoModel.dart';
+import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 import 'package:upgradegame/Src/common/model/watchAdModel.dart';
 import 'package:upgradegame/Src/pages/main/model/productCoinModel.dart';
-import 'package:upgradegame/Src/pages/main/model/requestGetCoinModel.dart';
 
 //混入
 class BaseUserInfoProvider with ChangeNotifier {
@@ -63,7 +62,7 @@ class BaseUserInfoProvider with ChangeNotifier {
   }
 
   ///生产t币数据绑定
-  backendProductTCoin(ProductCoinModel model){
+  backendProductTCoin(ProductCoinModel model) {
     this.tcoinamount = model.tcoinamount;
     this.woodamount = model.woodamount;
     this.stoneamount = model.stoneamount;
@@ -91,14 +90,14 @@ class BaseUserInfoProvider with ChangeNotifier {
   }
 
   ///购买英雄
-  buyHero(int tcoinamount,List<Heroes> hero){
+  buyHero(int tcoinamount, List<Heroes> hero) {
     this.tcoinamount = tcoinamount;
     this.hero = hero;
     notifyListeners();
   }
 
   ///升级建筑
-  upgradeBuilding(BaseResourceModel model){
+  upgradeBuilding(BaseResourceModel model) {
     this.tcoinamount = model.tcoinamount;
     this.woodamount = model.woodamount;
     this.stoneamount = model.stoneamount;
@@ -111,44 +110,44 @@ class BaseUserInfoProvider with ChangeNotifier {
   }
 
   ///购买贡献值
-  buyContribution(BaseResourceModel model){
+  buyContribution(BaseResourceModel model) {
     this.tcoinamount = model.tcoinamount;
     notifyListeners();
   }
 
   ///赠送t币
-  sendCoin(int amount,int voucher){
+  sendCoin(int amount, int voucher) {
     this.tcoinamount -= amount;
     this.voucher -= voucher;
     notifyListeners();
   }
 
   ///发布资源订单
-  publishBid(int type,int resource){
+  publishBid(int type, int resource) {
     ///wood = 1 stone = 2
-    if(type == 1){
+    if (type == 1) {
       this.woodamount -= resource;
-    }else{
+    } else {
       this.stoneamount -= resource;
     }
     notifyListeners();
   }
 
   ///取消发布的资源
-  cancelBid(int type,int resource){
-    if(type == 1){
+  cancelBid(int type, int resource) {
+    if (type == 1) {
       this.woodamount += resource;
-    }else{
+    } else {
       this.stoneamount += resource;
     }
     notifyListeners();
   }
 
   ///购买资源
-  buyResource(int type,int resource,int price){
-    if(type == 1){
+  buyResource(int type, int resource, int price) {
+    if (type == 1) {
       this.woodamount += resource;
-    }else{
+    } else {
       this.stoneamount += resource;
     }
     this.tcoinamount -= price;

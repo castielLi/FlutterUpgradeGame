@@ -73,7 +73,6 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      color: Colors.blue,
       margin: EdgeInsets.fromLTRB(
           ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), // 左
           ScreenUtil().setHeight(SystemScreenSize.detailDialogTop), // 上
