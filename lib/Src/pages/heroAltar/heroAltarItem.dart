@@ -50,8 +50,8 @@ class _HeroAltarItem extends State<HeroAltarItem> {
     return Column(
       children: <Widget>[
         Container(
-          width: ScreenUtil().setWidth(SystemButtonSize.displayContentHeight),
-          height: ScreenUtil().setHeight(SystemButtonSize.displayItemHeight),
+          width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
+          height: ScreenUtil().setHeight(SystemScreenSize.displayItemHeight),
           decoration: BoxDecoration(
             image: DecorationImage(
               image: new AssetImage('resource/images/woodButton.png'),

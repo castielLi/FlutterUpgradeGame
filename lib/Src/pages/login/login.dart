@@ -133,13 +133,13 @@ class _LoginPageState extends State<LoginPage> {
                         child: Column(
                           children: [
                             new MyTextField(
-                              height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                               controller: usernameController,
                               hintText: '用户名:',
                               icon: Icon(Icons.person),
                             ),
                             new MyTextField(
-                              height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                               controller: passwordController,
                               hintText: '密码:',
                               icon: Icon(Icons.lock),
@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                             new GestureDetector(
                               child: new Image(
                                 image: AssetImage("resource/images/wechat.png"),
-                                width: ScreenUtil().setWidth(SystemButtonSize.inputDecorationHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.inputDecorationHeight),
                                 fit: BoxFit.fill,
                               ),
                               onTap: () {
@@ -199,39 +199,39 @@ class _LoginPageState extends State<LoginPage> {
                         child: Column(
                           children: [
                             new MyTextField(
-                              height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                               controller: trueNameController,
                               hintText: '真实姓名:',
                               icon: Icon(Icons.person),
                             ),
                             new MyTextField(
-                              height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                               controller: phoneController,
                               hintText: '电话:',
                               icon: Icon(Icons.phone),
                               inputType: TextInputType.number,
                             ),
                             new MyTextField(
-                              height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                               controller: iDController,
                               hintText: '身份证件:',
                               icon: Icon(Icons.account_box),
                             ),
                             new MyTextField(
-                              height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                               controller: accountController,
                               hintText: '账号:',
                               icon: Icon(Icons.email),
                             ),
                             new MyTextField(
-                              height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                               controller: registerPasswordController,
                               hintText: '密码:',
                               icon: Icon(Icons.lock),
                               obscureText: true,
                             ),
                             new MyTextField(
-                              height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                               controller: repeatPasswordController,
                               hintText: '确认密码:',
                               icon: Icon(Icons.lock),

@@ -190,7 +190,7 @@ class _MarketDetailState extends State<MarketDetail> {
               ),
               Container(
                 margin: EdgeInsets.only(top: 10),
-                height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
+                height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
                 child: Stack(
                   children: <Widget>[
                     Offstage(
@@ -198,7 +198,7 @@ class _MarketDetailState extends State<MarketDetail> {
                       child: Column(
                         children: [
                           MyTextField(
-                            height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                            height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                             controller: phoneController,
                             inputType: TextInputType.number,
                             hintText: '输入用户手机号搜索',
@@ -222,7 +222,7 @@ class _MarketDetailState extends State<MarketDetail> {
                             },
                           ),
                           Container(
-                            height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight - SystemButtonSize.inputDecorationHeight),
+                            height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemScreenSize.inputDecorationHeight),
                             child: UserSearchResult(
                               user: this.searchedUser,
                               noUserHintText: this.noResultHintText,
@@ -234,7 +234,7 @@ class _MarketDetailState extends State<MarketDetail> {
                     Offstage(
                       offstage: contentName != Resource.WOOD,
                       child: Container(
-                        height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
+                        height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
                         child: this.woodList.datalist.length == 0
                             ? Text(
                                 this.noOrderHintText,
@@ -312,7 +312,7 @@ class _MarketDetailState extends State<MarketDetail> {
                     Offstage(
                       offstage: contentName != Resource.STONE,
                       child: Container(
-                        height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
+                        height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
                         child: this.stoneList.datalist.length == 0
                             ? Text(
                                 '目前没有订单',
@@ -392,7 +392,7 @@ class _MarketDetailState extends State<MarketDetail> {
                         child: Column(
                           children: [
                             Container(
-                              height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight - SystemButtonSize.largeButtonHeight),
+                              height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemButtonSize.largeButtonHeight),
                               child: ListView.builder(
                                   padding: EdgeInsets.only(top: 0),
                                   itemCount: null == myTrades ? 0 : myTrades.length,

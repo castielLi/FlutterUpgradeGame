@@ -40,7 +40,7 @@ class _MarketAskState extends State<MarketAsk> {
               style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
             ),
             MyTextField(
-              height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
               controller: amountController,
               inputType: TextInputType.number,
             ),
@@ -49,7 +49,7 @@ class _MarketAskState extends State<MarketAsk> {
               style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
             ),
             MyTextField(
-              height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
               controller: coinController,
               inputType: TextInputType.number,
             ),

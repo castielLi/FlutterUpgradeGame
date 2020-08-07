@@ -112,7 +112,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                 child: Column(
                   children: <Widget>[
                     MyTextField(
-                      height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                      height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                       controller: amountController,
                       hintText: '兑换T币数量',
                       icon: Icon(Icons.attach_money),
@@ -150,12 +150,12 @@ class _ContributionDetailState extends State<ContributionDetail> {
               Offstage(
                 offstage: "showContribution" != this.tabName,
                 child: Container(
-                  height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
+                  height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight - rateContentHeight),
+                        height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - rateContentHeight),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

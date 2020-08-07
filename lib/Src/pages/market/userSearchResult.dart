@@ -46,7 +46,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                       },
                       child: Container(
                         margin: EdgeInsets.only(top: 30),
-                        height: ScreenUtil().setHeight(SystemButtonSize.inputDecorationHeight),
+                        height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: new AssetImage('resource/images/userSearchItemBackground.png'),

@@ -19,7 +19,7 @@ class _TeamContribution extends State<TeamContribution> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().setHeight(SystemButtonSize.displayItemHeight),
+      height: ScreenUtil().setHeight(SystemScreenSize.displayItemHeight),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: new AssetImage('resource/images/woodButton.png'),

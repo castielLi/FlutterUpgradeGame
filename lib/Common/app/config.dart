@@ -51,14 +51,26 @@ class SystemIconSize {
   static const mediumIconSize = 250.0;
   static const largeIconSize = 333.0;
 
-  static const mainPageSignalBarHeight = 65.0;
   static const mainPageResourceBarIconSize = 125.0;
   static const mainPageFunctionBarIconSize = 150.0;
   static const mainPageStatusBarSmallIconSize = 90.0;
   static const mainPageIconSize = 350.0;
 
   static const adIconSize = 135.0;
-  static const farmAdIconSize = 120.0;
+}
+
+class SystemScreenSize {
+  static var mainPageSignalBarHeight = ScreenUtil.pixelRatio * ScreenUtil.statusBarHeight;
+
+  static const detailDialogHeight = 1660;
+  static const detailDialogWidth = 1020;
+  static const detailDialogLeft = 100;
+  static const detailDialogTop = 400;
+  static const detailDialogBottom = 200;
+
+  static const displayItemHeight = 320.0; //团队贡献，分红，英雄祭坛
+  static const displayContentHeight = 850.0; //内容展示高度，不包括按钮
+  static const inputDecorationHeight = 150.0;
 }
 
 class SystemButtonSize {
@@ -68,10 +80,6 @@ class SystemButtonSize {
   static const mediumButtonHeight = 120.0;
   static const largeButtonWidth = 360.0;
   static const largeButtonHeight = 144.0;
-
-  static const displayItemHeight = 320.0; //团队贡献，分红，英雄祭坛
-  static const displayContentHeight = 850.0; //内容展示高度，不包括按钮
-  static const inputDecorationHeight = 150.0;
 }
 
 ///系统字体大小

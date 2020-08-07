@@ -82,7 +82,7 @@ class _TradeDetailState extends State<TradeDetail> {
                 ),
               ),
         Container(
-          height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
+          height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
           child: EasyRefresh(
             refreshFooter: ClassicsFooter(
               bgColor: Colors.transparent,

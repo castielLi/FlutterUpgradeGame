@@ -1,11 +1,8 @@
-import 'dart:async';
-
 import 'package:upgradegame/Src/common/widget/resourceDialog/enum/resourceDialogEnum.dart';
 import 'package:upgradegame/Src/common/widget/resourceDialog/model/resourceDialogModel.dart';
 
-
 //混入
-class BaseResourceChangeDialogDataModel{
+class BaseResourceChangeDialogDataModel {
   bool wood;
   bool stone;
   bool coin;
@@ -13,11 +10,11 @@ class BaseResourceChangeDialogDataModel{
 
   List<ResourceDialogModel> source;
 
+  factory BaseResourceChangeDialogDataModel() => _getInstance();
 
-
-  factory BaseResourceChangeDialogDataModel() =>_getInstance();
   static BaseResourceChangeDialogDataModel get instance => _getInstance();
   static BaseResourceChangeDialogDataModel _instance;
+
   BaseResourceChangeDialogDataModel._internal() {
     // 初始化
     this.wood = false;
@@ -34,11 +31,11 @@ class BaseResourceChangeDialogDataModel{
     return _instance;
   }
 
-  static getSource(){
+  static getSource() {
     return _instance.source;
   }
 
-  static setDisplayed(){
+  static setDisplayed() {
     _instance.wood = false;
     _instance.stone = false;
     _instance.coin = false;
@@ -64,5 +61,4 @@ class BaseResourceChangeDialogDataModel{
       }
     }
   }
-
 }

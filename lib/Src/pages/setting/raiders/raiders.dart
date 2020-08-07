@@ -74,7 +74,7 @@ class _RaidersDetailState extends State<RaidersDetail> {
             ],
           ),
           Container(
-            height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight - SystemButtonSize.largeButtonHeight),
+            height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemButtonSize.largeButtonHeight),
             child: Stack(
               children: [
                 Offstage(

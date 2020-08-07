@@ -102,7 +102,7 @@ class _FarmDetailState extends State<FarmDetail> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.farmAdIconSize)),
+                      Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                       Text(
                         '$neededCoin  ',
                         style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: tocinamount >= neededCoin ? Colors.lightGreenAccent : Colors.grey),
@@ -112,12 +112,12 @@ class _FarmDetailState extends State<FarmDetail> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Image(image: new AssetImage('resource/images/fellingBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.farmAdIconSize)),
+                      Image(image: new AssetImage('resource/images/fellingBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                       Text(
                         'lv' + '$needWoodLevel ',
                         style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: woodLevel >= needWoodLevel ? Colors.lightGreenAccent : Colors.grey),
                       ),
-                      Image(image: new AssetImage('resource/images/stoneBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.farmAdIconSize)),
+                      Image(image: new AssetImage('resource/images/stoneBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                       Text(
                         'lv' + '$needStoneLevel ',
                         style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: stoneLevel >= needStoneLevel ? Colors.lightGreenAccent : Colors.grey),

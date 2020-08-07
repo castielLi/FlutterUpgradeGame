@@ -3,17 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
+import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/pages/userInfo/account/account.dart';
 import 'package:upgradegame/Src/pages/userInfo/event/userInfoEventBus.dart';
 import 'package:upgradegame/Src/pages/userInfo/model/cashInfoModel.dart';
-import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
-import 'package:upgradegame/Src/pages/userInfo/withDraw.dart';
-import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
-import 'package:upgradegame/Src/pages/userInfo/userResourceDetail.dart';
-import 'package:upgradegame/Src/pages/userInfo/tradeDetail/tradeDetail.dart';
-import 'package:upgradegame/Src/pages/userInfo/account/account.dart';
-import 'package:upgradegame/Src/pages/userInfo/withdraw/withdrawDetail.dart';
 import 'package:upgradegame/Src/pages/userInfo/serverCenter/serverCenterDetail.dart';
+import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
+import 'package:upgradegame/Src/pages/userInfo/tradeDetail/tradeDetail.dart';
+import 'package:upgradegame/Src/pages/userInfo/userResourceDetail.dart';
+import 'package:upgradegame/Src/pages/userInfo/withDraw.dart';
+import 'package:upgradegame/Src/pages/userInfo/withdraw/withdrawDetail.dart';
 import 'package:upgradegame/Src/provider/baseUserCashProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
@@ -73,11 +73,12 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
+      color: Colors.blue,
       margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(80), // 左
-          ScreenUtil().setHeight(280), // 上
-          ScreenUtil().setWidth(80), // 右
-          ScreenUtil().setHeight(100)), // 下
+          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), // 左
+          ScreenUtil().setHeight(SystemScreenSize.detailDialogTop), // 上
+          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), // 右
+          ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)), // 下
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
         return Provide<BaseUserCashProvider>(builder: (context, child, cashInfo) {
           return Stack(
@@ -86,10 +87,9 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                 offstage: this.userInfoHide,
                 child: new Center(
                   child: new Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       new UserResourceDetail(
-//                        imageUrl: "resource/images/defaultAvatar.png",
                         imageUrl: baseUserInfo.avatar,
                         amountCash: cashInfo.cashAmount == null ? "0" : cashInfo.cashAmount.toString(),
                         withdrawCallback: () {
@@ -102,19 +102,11 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                         },
                       ),
                       ButtonsList(
-                        buttonWidth: ScreenUtil().setWidth(900),
                         buttonHeight: ScreenUtil().setHeight(190),
                         buttonBackgroundImageUrl: 'resource/images/settingButtonBackground.png',
                         textSize: SystemFontSize.settingTextFontSize,
                         isColumn: true,
                         buttons: [
-//                        ImageTextButton(
-//                          buttonName: '账号及安全',
-//                          callback: () {
-//                            switchPageBetweenFatherAndSon(sonPageName: "账号及安全");
-//                            this.widget.changeTitleCallback("账号及安全");
-//                          },
-//                        ),
                           ImageTextButton(
                             buttonName: 'T币明细',
                             callback: () {
@@ -191,14 +183,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                   },
                 ),
               ),
-//          ///t币明细
-//          new Offstage(
-//            offstage: "账号及安全"!=buttonName,
-//            child: new TCoinDetail(HUD: this.widget.HUD,viewCallback: (){
-//              showUserInfoDetail();
-//              this.widget.displayOriginalTitleCallback();
-//            },),
-//          ),
+
               ///客服中心
               new Offstage(
                 offstage: "客服中心" != buttonName,

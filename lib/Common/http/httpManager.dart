@@ -3,13 +3,11 @@ import 'dart:collection';
 
 import 'package:dio/dio.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
+import 'package:upgradegame/Common/http/intercepts/error_interceptor.dart';
 import 'package:upgradegame/Common/http/intercepts/header_interceptor.dart';
 import 'package:upgradegame/Common/http/intercepts/log_interceptor.dart';
 import 'package:upgradegame/Common/http/intercepts/token_interceptor.dart';
-import 'package:upgradegame/Common/http/intercepts/error_interceptor.dart';
 import 'package:upgradegame/Common/http/resultData.dart';
-import 'package:upgradegame/Src/route/application.dart';
-
 
 class HttpManager {
   static const CONTENT_TYPE_JSON = "application/json";
@@ -26,7 +24,6 @@ class HttpManager {
 
     //对网络错误进行拦截
     _dio.interceptors.add(new ErrorInterceptors(_dio));
-
   }
 
   ///网络请求
@@ -35,8 +32,7 @@ class HttpManager {
   ///[ header] 请求头额外参数
   ///[ option] 配置 post get
   ///返回结果，错误，不管，数据返回即可
-  Future<ResultData> request(url, params, Map<String, dynamic> header, Options option,
-      {noTip = false}) async {
+  Future<ResultData> request(url, params, Map<String, dynamic> header, Options option, {noTip = false}) async {
     Map<String, dynamic> headers = new HashMap();
     if (header != null) {
       headers.addAll(header);
@@ -59,20 +55,15 @@ class HttpManager {
       } else {
         errorResponse = new Response(statusCode: 666);
       }
-      if (e.type == DioErrorType.CONNECT_TIMEOUT ||
-          e.type == DioErrorType.RECEIVE_TIMEOUT) {
+      if (e.type == DioErrorType.CONNECT_TIMEOUT || e.type == DioErrorType.RECEIVE_TIMEOUT) {
         errorResponse.statusCode = ConfigSetting.NETWORK_TIMEOUT;
       }
-      return new ResultData(null,
-          ConfigSetting.errorHandleFunction(errorResponse.statusCode, e.message, noTip),
-          errorResponse.statusCode);
+      return new ResultData(null, ConfigSetting.errorHandleFunction(errorResponse.statusCode, e.message, noTip), errorResponse.statusCode);
     }
     ResultData data = ResultData.fromJson(response.data);
-    if(data.code == 401){
-      return new ResultData(null,
-          ConfigSetting.errorHandleFunction(401, "登录信息失效", noTip),
-          401);
-    }else{
+    if (data.code == 401) {
+      return new ResultData(null, ConfigSetting.errorHandleFunction(401, "登录信息失效", noTip), 401);
+    } else {
       return ResultData.fromJson(response.data);
     }
   }

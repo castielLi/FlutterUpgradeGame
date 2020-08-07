@@ -150,7 +150,7 @@ class _TeamDetailState extends State<TeamDetail> {
             ],
           ),
           Container(
-            height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight),
+            height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
             child: Stack(
               children: [
                 Offstage(
@@ -208,7 +208,7 @@ class _TeamDetailState extends State<TeamDetail> {
                             second.length == 0 && first.length == 0
                                 ? Container(
                                   //内容高度减去两列按钮高度
-                                    height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
+                                    height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
                                     child: Text(
                                       noMembersHintText,
                                       textAlign: TextAlign.center,
@@ -217,7 +217,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                   )
                                 : Container(
 
-                                    height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
+                                    height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
                                     child: Column(
                                       children: [
                                         Container(
@@ -239,7 +239,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                         ),
                                         Container(
                                           //内容高度减去两列按钮加标题栏高度
-                                          height: ScreenUtil().setHeight(SystemButtonSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight-50),
+                                          height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight-50),
                                           child: Stack(
                                             children: [
                                               Offstage(

@@ -1,23 +1,23 @@
-import 'package:event_bus/event_bus.dart';
-import 'package:flutter/material.dart';
-import 'package:upgradegame/Common/app/notificationEvent.dart';
 import 'dart:async';
-import 'package:upgradegame/Common/widget/toast/toast.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluwx/fluwx.dart' as fluwx;
 import 'package:jpush_flutter/jpush_flutter.dart';
-import 'package:flutter/services.dart';
+import 'package:upgradegame/Common/app/notificationEvent.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 
 ///配置app基础组件 例如:错误信息弹窗
 class InitAppSetting extends StatefulWidget {
   final Widget child;
 
   InitAppSetting({Key key, this.child}) : super(key: key);
+
   @override
   _InitAppSetting createState() => new _InitAppSetting();
 }
 
 class _InitAppSetting extends State<InitAppSetting> {
-
   String debugLable = 'Unknown';
   final JPush jpush = new JPush();
   final eventBus = new NotificationEvent();
@@ -31,14 +31,13 @@ class _InitAppSetting extends State<InitAppSetting> {
     String platformVersion;
 
     try {
-      jpush.addEventHandler(
-          onReceiveNotification: (Map<String, dynamic> message) async {
-            print("flutter onReceiveNotification: $message");
-            eventBus.eventBus.fire(RecieveNotificationEvent(message));
-            setState(() {
-              debugLable = "flutter onReceiveNotification: $message";
-            });
-          }, onOpenNotification: (Map<String, dynamic> message) async {
+      jpush.addEventHandler(onReceiveNotification: (Map<String, dynamic> message) async {
+        print("flutter onReceiveNotification: $message");
+        eventBus.eventBus.fire(RecieveNotificationEvent(message));
+        setState(() {
+          debugLable = "flutter onReceiveNotification: $message";
+        });
+      }, onOpenNotification: (Map<String, dynamic> message) async {
         print("flutter onOpenNotification: $message");
         setState(() {
           debugLable = "flutter onOpenNotification: $message";
@@ -48,8 +47,7 @@ class _InitAppSetting extends State<InitAppSetting> {
         setState(() {
           debugLable = "flutter onReceiveMessage: $message";
         });
-      }, onReceiveNotificationAuthorization:
-          (Map<String, dynamic> message) async {
+      }, onReceiveNotificationAuthorization: (Map<String, dynamic> message) async {
         print("flutter onReceiveNotificationAuthorization: $message");
         setState(() {
           debugLable = "flutter onReceiveNotificationAuthorization: $message";
@@ -65,8 +63,7 @@ class _InitAppSetting extends State<InitAppSetting> {
       production: false,
       debug: true,
     );
-    jpush.applyPushAuthority(
-        new NotificationSettingsIOS(sound: true, alert: true, badge: true));
+    jpush.applyPushAuthority(new NotificationSettingsIOS(sound: true, alert: true, badge: true));
 
     // Platform messages may fail, so we use a try/catch PlatformException.
     jpush.getRegistrationID().then((rid) {
@@ -88,15 +85,10 @@ class _InitAppSetting extends State<InitAppSetting> {
   }
 
   _initFluwx() async {
-    await fluwx.registerWxApi(
-        appId: "wxae76a2eb695df231",
-        doOnAndroid: true,
-        doOnIOS: true,
-        universalLink: ""
-    );
+    await fluwx.registerWxApi(appId: "wxae76a2eb695df231", doOnAndroid: true, doOnIOS: true, universalLink: "");
     var result = await fluwx.isWeChatInstalled;
     print("is installed $result");
-    if(!result){
+    if (!result) {
       CommonUtils.showSystemErrorMessage(msg: '微信初始化失败');
     }
   }
@@ -112,5 +104,4 @@ class _InitAppSetting extends State<InitAppSetting> {
   void dispose() {
     super.dispose();
   }
-
 }
