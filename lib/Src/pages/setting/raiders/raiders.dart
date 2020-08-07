@@ -57,7 +57,7 @@ class _RaidersDetailState extends State<RaidersDetail> {
             buttonWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
             buttonHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
             buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
-            textSize: SystemFontSize.settingTextFontSize,
+            textSize: ScreenUtil().setSp(SystemFontSize.settingTextFontSize),
             buttons: [
               ImageTextButton(
                 buttonName: '基 础',

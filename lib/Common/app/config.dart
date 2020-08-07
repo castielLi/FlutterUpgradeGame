@@ -47,9 +47,9 @@ class SystemColor {
 }
 
 class SystemIconSize {
-  static const smallIconSize = 180.0;
+  static const smallIconSize = 80.0;
   static const mediumIconSize = 250.0;
-  static const largeIconSize = 333.0;
+
 
   static const mainPageResourceBarIconSize = 125.0;
   static const mainPageFunctionBarIconSize = 150.0;
@@ -66,7 +66,7 @@ class SystemScreenSize {
   static const detailDialogWidth = 1020;
   static const detailDialogLeft = 100;
   static const detailDialogTop = 400;
-  static const detailDialogBottom = 200;
+  static const detailDialogBottom = 100;
 
   static const displayItemHeight = 320.0; //团队贡献，分红，英雄祭坛
   static const displayContentHeight = 850.0; //内容展示高度，不包括按钮
@@ -76,10 +76,17 @@ class SystemScreenSize {
 class SystemButtonSize {
   static const smallButtonWidth = 240.0;
   static const smallButtonHeight = 120.0;
+  static const smallButtonFontSize = 60.0;
+
   static const mediumButtonWidth = 300.0;
   static const mediumButtonHeight = 120.0;
+
   static const largeButtonWidth = 360.0;
   static const largeButtonHeight = 144.0;
+  static const largeButtonIconSize = 120.0;
+  static const largeButtonFontSize = 72.0;
+
+  static const settingButtonHeight = 200;
 }
 
 ///系统字体大小
@@ -93,8 +100,6 @@ class SystemFontSize {
   static const operationTextFontSize = 31.0;
   static const dividendTitleTextFontSize = 15.0;
   static const dividendContentTextFontSize = 12.0;
-  static const smallButtonWithIconFontSize = 60.0;
-  static const mediumButtonWithIconFontSize = 75.0;
 
   static const userInfoResourceTextFontSize = 30.0;
   static const userInfoResourceWithdrawTextFontSize = 40.0;

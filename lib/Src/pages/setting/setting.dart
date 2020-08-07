@@ -65,7 +65,7 @@ class _SettingDetailState extends State<SettingDetail> {
               buttonWidth: ScreenUtil().setWidth(900),
               buttonHeight: ScreenUtil().setHeight(190),
               buttonBackgroundImageUrl: 'resource/images/settingButtonBackground.png',
-              textSize: SystemFontSize.settingTextFontSize,
+              textSize: ScreenUtil().setSp(SystemFontSize.settingTextFontSize),
               isColumn: true,
               buttons: [
                 ImageTextButton(

@@ -66,7 +66,7 @@ class _ProductItemState extends State<ProductItem> {
               callback: () {
                 this.widget.callback();
               },
-              textSize: SystemFontSize.storeCashGoldTextFontSize,
+              textSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize),
             )
           ],
         )

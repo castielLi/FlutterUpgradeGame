@@ -70,7 +70,7 @@ class _UserResourceDetailState extends State<UserResourceDetail> {
                   imageUrl: "resource/images/withdrawCash.png",
                   imageHeight: ScreenUtil().setHeight(100),
                   imageWidth: ScreenUtil().setHeight(300),
-                  textSize: SystemFontSize.userInfoResourceWithdrawTextFontSize,
+                  textSize: ScreenUtil().setSp(SystemFontSize.userInfoResourceWithdrawTextFontSize),
                   buttonName: "提 现",
                   callback: () {
                     this.widget.withdrawCallback();

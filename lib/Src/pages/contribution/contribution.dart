@@ -88,7 +88,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                 buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
                 buttonHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
                 buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
-                textSize: SystemFontSize.smallButtonWithIconFontSize,
+                textSize: ScreenUtil().setSp(SystemButtonSize.smallButtonFontSize),
                 buttons: [
                   ImageTextButton(
                     buttonName: '分红',
@@ -142,7 +142,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                           CommonUtils.showErrorMessage(msg: "输入有误,请重新输入");
                         }
                       },
-                      textSize: SystemFontSize.settingTextFontSize,
+                      textSize: ScreenUtil().setSp(SystemFontSize.settingTextFontSize),
                     ),
                   ],
                 ),

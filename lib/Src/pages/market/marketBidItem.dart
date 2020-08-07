@@ -90,7 +90,7 @@ class _MarketBidItem extends State<MarketBidItem> {
                   callback: () {
                     this.widget.buttonCallback();
                   },
-                  textSize: SystemFontSize.settingTextFontSize,
+                  textSize: ScreenUtil().setSp(SystemFontSize.settingTextFontSize),
                 ),
               )
             ],

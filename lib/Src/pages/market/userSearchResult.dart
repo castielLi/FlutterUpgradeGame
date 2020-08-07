@@ -129,7 +129,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                     buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
                     buttonHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
                     buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
-                    textSize: SystemFontSize.buttonTextFontSize,
+                    textSize: ScreenUtil().setSp(SystemFontSize.buttonTextFontSize),
                     buttons: [
                       ImageTextButton(
                         buttonName: '返 回',

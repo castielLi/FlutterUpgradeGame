@@ -41,21 +41,18 @@ class _RankDetailState extends State<RankDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(100), // 左
-          ScreenUtil().setHeight(400), // 上
-          ScreenUtil().setWidth(100), // 右
-          ScreenUtil().setHeight(200)), // 下
+      margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
+          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           ButtonsList(
             buttonWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
             buttonHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
-            iconWidth: ScreenUtil().setWidth(SystemIconSize.largeIconSize),
-            iconHeight: ScreenUtil().setHeight(SystemIconSize.largeIconSize),
+            iconWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonIconSize),
+            iconHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonIconSize),
             buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
-            textSize: SystemFontSize.mediumButtonWithIconFontSize,
+            textSize: ScreenUtil().setSp(SystemButtonSize.largeButtonFontSize),
             buttons: [
               ImageTextButton(
                 buttonName: 'T币',

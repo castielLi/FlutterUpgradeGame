@@ -157,7 +157,7 @@ class _MarketDetailState extends State<MarketDetail> {
                 iconWidth: ScreenUtil().setWidth(SystemIconSize.smallIconSize),
                 iconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
                 buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
-                textSize: SystemFontSize.smallButtonWithIconFontSize,
+                textSize: ScreenUtil().setSp(SystemButtonSize.smallButtonFontSize),
                 buttons: [
                   ImageTextButton(
                     buttonName: 'T币',
@@ -448,7 +448,7 @@ class _MarketDetailState extends State<MarketDetail> {
                   buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
                   buttonHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
                   buttonBackgroundImageUrl: 'resource/images/upgradeButton.png',
-                  textSize: SystemFontSize.buttonTextFontSize,
+                  textSize: ScreenUtil().setSp(SystemFontSize.buttonTextFontSize),
                   buttons: (null == myTrades || 0 == myTrades.length)
                       ? [
                           ImageTextButton(

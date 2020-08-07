@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 
 class ImageTextButton extends StatefulWidget {
@@ -35,18 +34,18 @@ class _ImageTextButtonState extends State<ImageTextButton> {
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(this.widget.buttonName, style: TextStyle(fontSize: ScreenUtil().setSp(this.widget.textSize), color: Colors.white, decoration: TextDecoration.none)),
+                  Text(this.widget.buttonName, style: TextStyle(fontSize: this.widget.textSize, color: Colors.white, decoration: TextDecoration.none)),
                 ],
               )
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Image(
+                    height: this.widget.iconHeight,
                     image: new AssetImage(this.widget.iconUrl),
-                    height: ScreenUtil().setHeight(this.widget.iconHeight),
-                    width: ScreenUtil().setWidth(this.widget.iconWidth),
+                    width: this.widget.iconWidth,
                   ),
-                  Text(this.widget.buttonName, style: TextStyle(fontSize: ScreenUtil().setSp(this.widget.textSize), color: Colors.white, decoration: TextDecoration.none)),
+                  Text(this.widget.buttonName, style: TextStyle(fontSize: this.widget.textSize, color: Colors.white, decoration: TextDecoration.none)),
                 ],
               ),
       ),

@@ -54,7 +54,7 @@ class _TradeDetailState extends State<TradeDetail> {
   @override
   Widget build(BuildContext context) {
     return new Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         this.tCoinDetail.datalist.length == 0
             ? Text(

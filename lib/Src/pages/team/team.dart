@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluwx/fluwx.dart' as fluwx;
+import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
-import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Src/pages/team/event/teamEventBus.dart';
 import 'package:upgradegame/Src/pages/team/model/invitation.dart';
@@ -11,8 +14,6 @@ import 'package:upgradegame/Src/pages/team/model/qrCodeModel.dart';
 import 'package:upgradegame/Src/pages/team/service/teamService.dart';
 import 'package:upgradegame/Src/pages/team/teamContribution.dart';
 import 'package:upgradegame/Src/pages/team/teamItem.dart';
-import 'package:fluwx/fluwx.dart' as fluwx;
-import 'dart:io';
 
 import 'model/teamContributionModel.dart';
 
@@ -118,14 +119,15 @@ class _TeamDetailState extends State<TeamDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(400), ScreenUtil().setWidth(100), ScreenUtil().setHeight(0)),
+      margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
+          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
       child: Column(
         children: [
           ButtonsList(
             buttonWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
             buttonHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
             buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
-            textSize: SystemFontSize.settingTextFontSize,
+            textSize: ScreenUtil().setSp(SystemButtonSize.largeButtonFontSize),
             buttons: [
               ImageTextButton(
                 buttonName: '贡 献',
@@ -189,7 +191,7 @@ class _TeamDetailState extends State<TeamDetail> {
                               buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
                               buttonHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
                               buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
-                              textSize: SystemFontSize.smallButtonWithIconFontSize,
+                              textSize: ScreenUtil().setSp(SystemButtonSize.smallButtonFontSize),
                               buttons: [
                                 ImageTextButton(
                                   buttonName: '徒弟',
@@ -207,7 +209,7 @@ class _TeamDetailState extends State<TeamDetail> {
                             ),
                             second.length == 0 && first.length == 0
                                 ? Container(
-                                  //内容高度减去两列按钮高度
+                                    //内容高度减去两列按钮高度
                                     height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
                                     child: Text(
                                       noMembersHintText,
@@ -216,12 +218,11 @@ class _TeamDetailState extends State<TeamDetail> {
                                     ),
                                   )
                                 : Container(
-
                                     height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
                                     child: Column(
                                       children: [
                                         Container(
-                                          height:ScreenUtil().setHeight(50),
+                                          height: ScreenUtil().setHeight(50),
                                           margin: EdgeInsets.only(left: ScreenUtil().setWidth(70)),
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -239,7 +240,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                         ),
                                         Container(
                                           //内容高度减去两列按钮加标题栏高度
-                                          height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight-50),
+                                          height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight - 50),
                                           child: Stack(
                                             children: [
                                               Offstage(
