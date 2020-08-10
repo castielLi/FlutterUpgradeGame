@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/userInfo/event/userInfoEventBus.dart';
 import 'package:upgradegame/Src/pages/userInfo/model/cashDetailModel.dart';
 import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
 import 'package:upgradegame/Src/pages/userInfo/withdraw/withdrawItem.dart';
-import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
-import 'package:upgradegame/Common/widget/toast/toast.dart';
 
 class WithDrawDetail extends StatefulWidget {
   @override
@@ -34,11 +34,6 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
   void getWithdrawDetail() {
     this.widget.HUD();
     UserInfoService.getUserWithdrawDetail(this.page, (CashDetailModel model) {
-      //测试数据
-//      model.datalist =[new Datalist(datetime: "2020-07-24",detail: "购买英雄",change:"100")];
-//      for (int i = 0; i < 3; i++) {
-//        model.datalist += model.datalist;
-//      }
       if (null == model) {
         return;
       }
@@ -73,7 +68,7 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
                 style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
               )
             : Container(
-                padding: EdgeInsets.only(left: ScreenUtil().setWidth(150)),
+                padding: EdgeInsets.only(left: ScreenUtil().setWidth(100)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[

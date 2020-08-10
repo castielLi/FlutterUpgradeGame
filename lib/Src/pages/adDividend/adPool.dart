@@ -37,9 +37,8 @@ class _AdPool extends State<AdPool> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Container(
-                width: ScreenUtil().setWidth(600),
-                height: ScreenUtil().setHeight(80),
-                padding: EdgeInsets.only(right: 50),
+                width: ScreenUtil().setWidth(550),
+                padding: EdgeInsets.only(right: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -55,8 +54,7 @@ class _AdPool extends State<AdPool> {
                 ),
               ),
               Container(
-                width: ScreenUtil().setWidth(600),
-                height: ScreenUtil().setHeight(80),
+                width: ScreenUtil().setWidth(550),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[

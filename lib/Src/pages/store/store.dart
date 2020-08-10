@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluwx/fluwx.dart';
 import 'package:fluwx/fluwx.dart' as fluwx;
 import 'package:provide/provide.dart';
+import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/store/model/storeModel.dart';
 import 'package:upgradegame/Src/pages/store/model/voucherModel.dart';
@@ -83,12 +84,8 @@ class _StoreDetailState extends State<StoreDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-//      color:Colors.red,
-      margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(100), // 左
-          ScreenUtil().setHeight(400), // 上
-          ScreenUtil().setWidth(100), // 右
-          ScreenUtil().setHeight(200)), // 下
+      margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
+          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
       child: Provide<BaseUserInfoProvider>(
         builder: (context, child, baseUserInfo) {
           return new Center(

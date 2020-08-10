@@ -4,7 +4,6 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 
 class ProductItem extends StatefulWidget {
-  @override
   String cashAmount;
   String volumeAmount;
   VoidCallback callback;
@@ -19,6 +18,7 @@ class _ProductItemState extends State<ProductItem> {
   Widget build(BuildContext context) {
     return new Container(
         child: new Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         new Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -55,20 +55,15 @@ class _ProductItemState extends State<ProductItem> {
             ),
           ],
         ),
-        new Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            new ImageTextButton(
-              imageUrl: "resource/images/upgradeButton.png",
-              imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
-              imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
-              buttonName: "购 买",
-              callback: () {
-                this.widget.callback();
-              },
-              textSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize),
-            )
-          ],
+        new ImageTextButton(
+          imageUrl: "resource/images/upgradeButton.png",
+          imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+          imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+          buttonName: "购 买",
+          callback: () {
+            this.widget.callback();
+          },
+          textSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize),
         )
       ],
     ));

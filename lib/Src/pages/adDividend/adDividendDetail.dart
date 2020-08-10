@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/pages/AdDividend/adPool.dart';
 import 'package:upgradegame/Src/pages/adDividend/model/AdDividendModel.dart';
-import 'package:upgradegame/Src/pages/adDividend/service/adDividendService.dart';
 import 'package:upgradegame/Src/pages/adDividend/model/heroProfitModel.dart';
+import 'package:upgradegame/Src/pages/adDividend/service/adDividendService.dart';
 
 class AdDividendDetail extends StatefulWidget {
   @override
@@ -38,11 +39,8 @@ class _AdDividendDetailState extends State<AdDividendDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(80), // 左
-          ScreenUtil().setHeight(350), // 上
-          ScreenUtil().setWidth(80), // 右
-          ScreenUtil().setHeight(200)),
+      margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
+          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[

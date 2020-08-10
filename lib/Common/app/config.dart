@@ -50,7 +50,6 @@ class SystemIconSize {
   static const smallIconSize = 80.0;
   static const mediumIconSize = 250.0;
 
-
   static const mainPageResourceBarIconSize = 125.0;
   static const mainPageFunctionBarIconSize = 150.0;
   static const mainPageStatusBarSmallIconSize = 90.0;
