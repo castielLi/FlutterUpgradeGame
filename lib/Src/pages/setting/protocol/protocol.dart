@@ -40,10 +40,8 @@ class _ProtocolDetailState extends State<ProtocolDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
+    return new Center(
       child: new Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Container(
             height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),

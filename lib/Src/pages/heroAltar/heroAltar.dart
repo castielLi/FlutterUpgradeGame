@@ -82,6 +82,8 @@ class _HeroAltarState extends State<HeroAltar> {
               ScreenUtil().setHeight(350), // 上
               ScreenUtil().setWidth(80), // 右
               ScreenUtil().setHeight(200)),
+//          margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
+//              ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
           child: ListView(
             padding: EdgeInsets.only(top: 50),
             physics: NeverScrollableScrollPhysics(),
