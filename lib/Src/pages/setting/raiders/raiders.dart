@@ -46,11 +46,6 @@ class _RaidersDetailState extends State<RaidersDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(0), // 左
-          ScreenUtil().setHeight(120), // 上
-          ScreenUtil().setWidth(0), // 右
-          ScreenUtil().setHeight(120)),
       child: new Column(
         children: <Widget>[
           ButtonsList(

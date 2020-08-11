@@ -25,7 +25,7 @@ class _AboutUsDetailState extends State<AboutUsDetail> {
     SettingHttpRequestEvent().on("aboutus", this.getAboutUs);
   }
 
-  void getAboutUs(){
+  void getAboutUs() {
     this.widget.HUD();
     AboutUsService.getAboutUs((data) {
       if (null != data) {
@@ -41,11 +41,6 @@ class _AboutUsDetailState extends State<AboutUsDetail> {
   Widget build(BuildContext context) {
     return new Container(
       width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
-      margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(0), // 左
-          ScreenUtil().setHeight(120), // 上
-          ScreenUtil().setWidth(0), // 右
-          ScreenUtil().setHeight(120)),
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[

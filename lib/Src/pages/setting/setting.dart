@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
-import 'package:upgradegame/Src/pages/setting/event/settingEventBus.dart';
-import 'package:upgradegame/Src/pages/setting/raiders/raiders.dart';
-import 'package:upgradegame/Src/pages/setting/protocol/protocol.dart';
-import 'package:upgradegame/Src/pages/setting/private/private.dart';
 import 'package:upgradegame/Src/pages/setting/aboutUs/aboutUs.dart';
+import 'package:upgradegame/Src/pages/setting/event/settingEventBus.dart';
+import 'package:upgradegame/Src/pages/setting/private/private.dart';
+import 'package:upgradegame/Src/pages/setting/protocol/protocol.dart';
+import 'package:upgradegame/Src/pages/setting/raiders/raiders.dart';
 
 class SettingDetail extends StatefulWidget {
   @override
@@ -46,17 +46,12 @@ class _SettingDetailState extends State<SettingDetail> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
     return new Container(
-      margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(80), // 左
-          ScreenUtil().setHeight(280), // 上
-          ScreenUtil().setWidth(80), // 右
-          ScreenUtil().setHeight(100)), // 下
+      margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
+          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
       child: new Stack(
         children: <Widget>[
           new Offstage(

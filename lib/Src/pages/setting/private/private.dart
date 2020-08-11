@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/setting/event/settingEventBus.dart';
 import 'package:upgradegame/Src/pages/setting/private/service/privacyService.dart';
 
@@ -26,7 +26,7 @@ class _PrivateDetailState extends State<PrivateDetail> {
     SettingHttpRequestEvent().on("private", this.getPrivacy);
   }
 
-  void getPrivacy(){
+  void getPrivacy() {
     this.widget.HUD();
     PrivacyService.getPrivacy((data) {
       if (null != data) {
@@ -42,11 +42,6 @@ class _PrivateDetailState extends State<PrivateDetail> {
   Widget build(BuildContext context) {
     return new Container(
       width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
-      margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(0), // 左
-          ScreenUtil().setHeight(120), // 上
-          ScreenUtil().setWidth(0), // 右
-          ScreenUtil().setHeight(120)),
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[

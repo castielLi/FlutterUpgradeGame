@@ -77,11 +77,8 @@ class _ContributionDetailState extends State<ContributionDetail> {
     return new Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
         return Container(
-          margin: EdgeInsets.fromLTRB(
-              ScreenUtil().setWidth(100), // 左
-              ScreenUtil().setHeight(400), // 上
-              ScreenUtil().setWidth(100), // 右
-              ScreenUtil().setHeight(200)), // 下
+          margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
+              ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
           child: Column(
             children: [
               ButtonsList(

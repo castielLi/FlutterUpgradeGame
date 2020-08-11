@@ -42,11 +42,6 @@ class _ProtocolDetailState extends State<ProtocolDetail> {
   Widget build(BuildContext context) {
     return new Container(
       width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
-      margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(0), // 左
-          ScreenUtil().setHeight(120), // 上
-          ScreenUtil().setWidth(0), // 右
-          ScreenUtil().setHeight(120)),
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
