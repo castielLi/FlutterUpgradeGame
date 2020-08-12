@@ -8,8 +8,9 @@ class TeamContribution extends StatefulWidget {
   int my;
   int secondGrade;
   int thirdGrade;
+  int exchange;
 
-  TeamContribution({Key key, this.title, this.total, this.my, this.secondGrade, this.thirdGrade}) : super(key: key);
+  TeamContribution({Key key, this.title, this.total, this.exchange,this.my, this.secondGrade, this.thirdGrade}) : super(key: key);
 
   @override
   _TeamContribution createState() => _TeamContribution();
@@ -92,7 +93,7 @@ class _TeamContribution extends State<TeamContribution> {
                Column(
                  children: <Widget>[
                    Text(
-                     this.widget.thirdGrade.toString(),
+                     this.widget.exchange.toString(),
                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                    ),
                    Text(
