@@ -9,7 +9,7 @@ class BaseRuleModel {
   List<Stone> stone;
 
   BaseRuleModel(
-      {this.adSetting, this.mainbuild, this.farm, this.wood, this.stone});
+      {this.adSetting, this.mainbuild, this.farm, this.wood, this.stone,this.withdrawlimit});
 
   BaseRuleModel.fromJson(Map<String, dynamic> json) {
     contributionbuyrate = json['contributionbuyrate'];

@@ -199,7 +199,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                               bool isBuy = true;
                               String productId = "";
                               if (exchangeContributionModel != null && exchangeContributionModel.datalist != null) {
-                                contribution = exchangeContributionModel.datalist[index].contributionamount;
+                                contribution = exchangeContributionModel.datalist[index].contributionamount.toString();
                                 coin = exchangeContributionModel.datalist[index].tcoinamount.toString();
                                 isBuy = exchangeContributionModel.datalist[index].isbuy;
                                 productId = exchangeContributionModel.datalist[index].productid;

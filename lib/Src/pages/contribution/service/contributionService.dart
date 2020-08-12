@@ -54,7 +54,8 @@ class ContributionService {
     String params = convert.jsonEncode(requestModel);
     var response = await httpManager.request(ServiceUrl.exchangeContribution(), params, null, Options(method: "post"));
     if (response.code == 200) {
-      callback(true);
+      BaseResourceModel model = BaseResourceModel.fromJson(response.data);
+      callback(model);
     } else {
       CommonUtils.showErrorMessage(msg: '兑换贡献值出错');
       callback(null);

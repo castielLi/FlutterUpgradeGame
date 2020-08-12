@@ -28,11 +28,13 @@ class Today {
   int my;
   int first;
   int second;
+  int exchange;
 
-  Today({this.total, this.my, this.first, this.second});
+  Today({this.total, this.my, this.first, this.second,this.exchange});
 
   Today.fromJson(Map<String, dynamic> json) {
     total = json['total'];
+    exchange = json['exchange'];
     my = json['my'];
     first = json['first'];
     second = json['second'];
@@ -42,6 +44,7 @@ class Today {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['total'] = this.total;
     data['my'] = this.my;
+    data['exchange'] = this.exchange;
     data['first'] = this.first;
     data['second'] = this.second;
     return data;
