@@ -86,6 +86,23 @@ class _TeamContribution extends State<TeamContribution> {
               ),
             ],
           ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+               Column(
+                 children: <Widget>[
+                   Text(
+                     this.widget.thirdGrade.toString(),
+                     style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                   ),
+                   Text(
+                     '我兑换贡献',
+                     style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                   ),
+                 ],
+               )
+              ]
+          )
         ],
       ),
     );

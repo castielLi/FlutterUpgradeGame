@@ -20,7 +20,7 @@
         android:allowBackup="true"
         tools:replace="android:label"
         android:name=".App"
-        android:label="upgradegame"
+        android:label="我的部落格"
         android:networkSecurityConfig="@xml/network_security_config"
         android:icon="@mipmap/ic_launcher">
         <!-- f1fa4f6f 正式  e866cfb0 测试-->
