@@ -85,7 +85,7 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
                 ],
               ),
               Text('升级后产出:1小时生产' +'$coinPerHour'+'T币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
-              Text('每产生1T币需要消耗'+ productCoinNeedPerWood.toString()+'木头和'+ productCoinNeedPerStone.toString() +'石头', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize)),
+              Text('每次生产需要消耗'+ productCoinNeedPerWood.toString()+'木头和'+ productCoinNeedPerStone.toString() +'石头', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize)),
               Container(
                 padding: EdgeInsets.only(left: ScreenUtil().setWidth(100)),
                 child: ImageButton(

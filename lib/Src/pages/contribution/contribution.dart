@@ -24,6 +24,7 @@ class ContributionDetail extends StatefulWidget {
 
 class _ContributionDetailState extends State<ContributionDetail> {
   final amountController = TextEditingController();
+  final contributionController = TextEditingController();
   String tabName = "showContribution";
 //  int coin = 0;
   MyContributionModel currentContributionModel;
@@ -190,6 +191,39 @@ class _ContributionDetailState extends State<ContributionDetail> {
                         ),
                       ],
                     ),
+                    MyTextField(
+                      height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+                      controller: contributionController,
+                      hintText: '兑换贡献值数量',
+                      icon: Icon(Icons.attach_money),
+                      inputType: TextInputType.number,
+                      onChanged: () {
+                        setState(() {
+                          String amount = contributionController.text;
+                          if (!RegExp(r"^\d*$").hasMatch(amount)) {
+                            CommonUtils.showErrorMessage(msg: "请输入正整数");
+                            this.coin = 0;
+                          }
+                          this.coin = int.parse(amount);
+                        });
+                      },
+                    ),
+                    Text('1000贡献值会随机获得1-3T币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+                    ImageTextButton(
+                      imageUrl: "resource/images/upgradeButton.png",
+                      imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+                      imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+                      buttonName: '确 定',
+                      callback: () {
+                        if (contributionController.text != "") {
+                          this.buyContribution(int.parse(contributionController.text));
+                          contributionController.clear();
+                        } else {
+                          CommonUtils.showErrorMessage(msg: "输入有误,请重新输入");
+                        }
+                      },
+                      textSize: ScreenUtil().setSp(SystemFontSize.settingTextFontSize),
+                    ),
                   ],
                 ),
               ),
@@ -210,7 +244,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                               style: CustomFontSize.defaultTextStyle(70),
                             ),
                             Text(
-                              "(每天中午12点更新结算)",
+                              "(每天凌晨0点更新结算)",
                               style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                             ),
                             Text(

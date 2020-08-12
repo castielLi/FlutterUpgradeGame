@@ -214,5 +214,15 @@ class ServiceUrl {
   static buyContribution(){
     return "${host}api/v1/contribution/buy";
   }
+
+  ///贡献值兑换t币列表
+  static exchangeContributionList(){
+    return "${host}api/v1/contribution/exchange/list";
+  }
+
+  ///贡献值兑换t币兑换
+  static exchangeContribution(){
+    return "${host}api/v1/contribution/exchange";
+  }
 }
 
