@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Src/pages/announcement/service/announcementService.dart';
 import 'package:upgradegame/Src/pages/announcement/model/announcementModel.dart';
+import 'package:upgradegame/Src/pages/announcement/service/announcementService.dart';
 
 class AnnouncementDetail extends StatefulWidget {
   @override
@@ -34,19 +34,19 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
-      width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
-      margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(120), // 左
-          ScreenUtil().setHeight(400), // 上
-          ScreenUtil().setWidth(120), // 右
-          ScreenUtil().setHeight(220)),
-      child: SingleChildScrollView(
-        child: Text(
-          null == announcement || '' == announcement ? "目前没有公告" : announcement,
-          textAlign: TextAlign.center,
-          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+//    print("StatusBarHeight:" + ScreenUtil.statusBarHeight.toString() + ", ratio:" + ScreenUtil.pixelRatio.toString());
+//    print("Width:" + ScreenUtil().scaleWidth.toString() + ",height:" + ScreenUtil().scaleHeight.toString());
+    return new Center(
+      child: new Container(
+        height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
+        margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
+            ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
+        child: SingleChildScrollView(
+          child: Text(
+            null == announcement || '' == announcement ? "目前没有公告" : announcement,
+            textAlign: TextAlign.center,
+            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+          ),
         ),
       ),
     );

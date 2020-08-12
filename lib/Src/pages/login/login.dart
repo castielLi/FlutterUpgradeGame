@@ -118,176 +118,192 @@ class _LoginPageState extends State<LoginPage> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: ProvideMulti(
-            builder: (context, child, model) {
-              return Stack(
-                children: <Widget>[
-                  ///登录界面
-                  new Offstage(
-                    offstage: !this.userVerified,
-                    child: new Container(
-                      margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(0), ScreenUtil().setWidth(100), ScreenUtil().setHeight(0)),
-                      child: SingleChildScrollView(
-                        padding: EdgeInsets.only(top: ScreenUtil().setHeight(800)),
-                        child: Column(
-                          children: [
-                            new MyTextField(
-                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
-                              controller: usernameController,
-                              hintText: '用户名:',
-                              icon: Icon(Icons.person),
-                            ),
-                            new MyTextField(
-                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
-                              controller: passwordController,
-                              hintText: '密码:',
-                              icon: Icon(Icons.lock),
-                              obscureText: true,
-                            ),
-                            new RaisedButton(
-                                child: Text("登 录"),
-                                color: Colors.blue,
-                                textColor: Colors.white,
-                                onPressed: () {
-                                  String username = usernameController.text.trim();
-                                  String password = passwordController.text;
-                                  if ("" == username || "" == password) {
-                                    CommonUtils.showErrorMessage(msg: "输入不能为空");
-                                    return;
-                                  }
-                                  this.showOrDismissProgressHUD();
-                                  LoginService.loginWithAccount(username, password, (LoginReponseModel model) {
-                                    this.showOrDismissProgressHUD();
-                                    if (model != null) {
-                                      ///初始化用户
-                                      Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
-                                      Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
-                                    }
-                                  });
-                                }),
-                            new GestureDetector(
-                              child: new Image(
-                                image: AssetImage("resource/images/wechat.png"),
-                                width: ScreenUtil().setWidth(SystemScreenSize.inputDecorationHeight),
-                                fit: BoxFit.fill,
+        body: SingleChildScrollView(
+          child: ProvideMulti(
+              builder: (context, child, model) {
+                return Container(
+                  child: Stack(
+                    children: <Widget>[
+                      ///登录界面
+                      new Offstage(
+                        offstage: !this.userVerified,
+                        child: new Container(
+                          height: ScreenUtil().setHeight(640),
+                          margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(700), ScreenUtil().setWidth(100), ScreenUtil().setHeight(0)),
+                          child: Column(
+                            children: [
+                              new MyTextField(
+                                height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+                                controller: usernameController,
+                                hintText: '用户名:',
+                                icon: Icon(Icons.person),
                               ),
-                              onTap: () {
+                              new MyTextField(
+                                height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+                                controller: passwordController,
+                                hintText: '密码:',
+                                icon: Icon(Icons.lock),
+                                obscureText: true,
+                              ),
+                              new RaisedButton(
+                                  child: Text("登 录"),
+                                  color: Colors.blue,
+                                  textColor: Colors.white,
+                                  onPressed: () {
+                                    String username = usernameController.text.trim();
+                                    String password = passwordController.text;
+                                    if ("" == username || "" == password) {
+                                      CommonUtils.showErrorMessage(msg: "输入不能为空");
+                                      return;
+                                    }
+                                    this.showOrDismissProgressHUD();
+                                    LoginService.loginWithAccount(username, password, (LoginReponseModel model) {
+                                      this.showOrDismissProgressHUD();
+                                      if (model != null) {
+                                        ///初始化用户
+                                        Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+                                        Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                                      }
+                                    });
+                                  }),
+                              new GestureDetector(
+                                child: new Image(
+                                  image: AssetImage("resource/images/wechat.png"),
+                                  width: ScreenUtil().setWidth(SystemScreenSize.inputDecorationHeight),
+                                  fit: BoxFit.fill,
+                                ),
+                                onTap: () {
 //                                setState(() {
 //                                  this.userVerified = false;
 //                                });
-                                fluwx.sendWeChatAuth(scope: "snsapi_userinfo", state: "wechat_sdk_demo_test").then((data) {
-                                  print(data);
-                                }).catchError((e) {
-                                  print(e);
-                                });
-                              },
-                            ),
-                          ],
+                                  fluwx.sendWeChatAuth(scope: "snsapi_userinfo", state: "wechat_sdk_demo_test").then((data) {
+                                    print(data);
+                                  }).catchError((e) {
+                                    print(e);
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ),
 
-                  ///实名认证界面
-                  new Offstage(
-                    offstage: this.userVerified,
-                    child: new Container(
-                      margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(0), ScreenUtil().setWidth(100), ScreenUtil().setHeight(0)),
-                      child: SingleChildScrollView(
-                        padding: EdgeInsets.only(top: ScreenUtil().setHeight(500)),
-                        child: Column(
-                          children: [
-                            new MyTextField(
-                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
-                              controller: trueNameController,
-                              hintText: '真实姓名:',
-                              icon: Icon(Icons.person),
-                            ),
-                            new MyTextField(
-                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
-                              controller: phoneController,
-                              hintText: '电话:',
-                              icon: Icon(Icons.phone),
-                              inputType: TextInputType.number,
-                            ),
-                            new MyTextField(
-                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
-                              controller: iDController,
-                              hintText: '身份证件:',
-                              icon: Icon(Icons.account_box),
-                            ),
-                            new MyTextField(
-                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
-                              controller: accountController,
-                              hintText: '账号:',
-                              icon: Icon(Icons.email),
-                            ),
-                            new MyTextField(
-                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
-                              controller: registerPasswordController,
-                              hintText: '密码:',
-                              icon: Icon(Icons.lock),
-                              obscureText: true,
-                            ),
-                            new MyTextField(
-                              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
-                              controller: repeatPasswordController,
-                              hintText: '确认密码:',
-                              icon: Icon(Icons.lock),
-                              obscureText: true,
-                            ),
-                            new RaisedButton(
-                                child: Text("注 册"),
-                                color: Colors.blue,
-                                textColor: Colors.white,
-                                onPressed: () {
-                                  String name = trueNameController.text;
-                                  String phone = phoneController.text;
-                                  String iD = iDController.text;
-                                  String account = accountController.text;
-                                  String registerPassword = registerPasswordController.text;
-                                  String repeatPassword = repeatPasswordController.text;
-                                  bool isInputsEmpty = false;
-                                  var inputs = [name, phone, iD, account, registerPassword, repeatPassword];
-                                  inputs.forEach((input) {
-                                    if ("" == input) {
-                                      isInputsEmpty = true;
+                      ///实名认证界面
+                      new Offstage(
+                        offstage: this.userVerified,
+                        child: new Container(
+//                        color: Colors.red,
+                          margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(400), ScreenUtil().setWidth(100), ScreenUtil().setHeight(0)),
+                          height: ScreenUtil().setHeight(1120), //1920-400-400
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              new MyTextField(
+                                height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+                                controller: phoneController,
+                                hintText: '电话:',
+                                icon: Icon(Icons.phone),
+                                inputType: TextInputType.number,
+                              ),
+                              new Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  new MyTextField(
+                                    height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+                                    controller: trueNameController,
+                                    hintText: '姓名:',
+                                    icon: Icon(Icons.person),
+                                  ),
+                                  new Container(
+                                    padding: EdgeInsets.only(left: ScreenUtil().setWidth(55)),
+                                    child: new Text(
+                                      "请输入真实姓名，否则将导致无法提现",
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(fontSize: ScreenUtil().setSp(28), color: Colors.white, decoration: TextDecoration.none),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              new MyTextField(
+                                height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+                                controller: iDController,
+                                hintText: '身份证件:',
+                                icon: Icon(Icons.account_box),
+                              ),
+                              new MyTextField(
+                                height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+                                controller: accountController,
+                                hintText: '账号:',
+                                icon: Icon(Icons.email),
+                              ),
+                              new MyTextField(
+                                height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+                                controller: registerPasswordController,
+                                hintText: '密码:',
+                                icon: Icon(Icons.lock),
+                                obscureText: true,
+                              ),
+                              new MyTextField(
+                                height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+                                controller: repeatPasswordController,
+                                hintText: '确认密码:',
+                                icon: Icon(Icons.lock),
+                                obscureText: true,
+                              ),
+                              new RaisedButton(
+                                  child: Text("注 册"),
+                                  color: Colors.blue,
+                                  textColor: Colors.white,
+                                  onPressed: () {
+                                    String name = trueNameController.text;
+                                    String phone = phoneController.text;
+                                    String iD = iDController.text;
+                                    String account = accountController.text;
+                                    String registerPassword = registerPasswordController.text;
+                                    String repeatPassword = repeatPasswordController.text;
+                                    bool isInputsEmpty = false;
+                                    var inputs = [name, phone, iD, account, registerPassword, repeatPassword];
+                                    inputs.forEach((input) {
+                                      if ("" == input) {
+                                        isInputsEmpty = true;
+                                        return;
+                                      }
+                                    });
+                                    if (isInputsEmpty) {
+                                      CommonUtils.showErrorMessage(msg: "输入不能为空");
                                       return;
                                     }
-                                  });
-                                  if (isInputsEmpty) {
-                                    CommonUtils.showErrorMessage(msg: "输入不能为空");
-                                    return;
-                                  }
-                                  if (!RegExp(r"^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$").hasMatch(phone)) {
-                                    CommonUtils.showErrorMessage(msg: "请输入正确的手机号码");
-                                    return;
-                                  }
-                                  if (!RegExp(r"^(\d{6})(18|19|20)?(\d{2})([01]\d)([0123]\d)(\d{3})(\d|X|x)?$").hasMatch(iD)) {
-                                    CommonUtils.showErrorMessage(msg: "请输入正确的身份证号码");
-                                    return;
-                                  }
-                                  if (registerPassword != repeatPassword) {
-                                    CommonUtils.showErrorMessage(msg: "两次输入密码不一致");
-                                    return;
-                                  }
-                                  this.showOrDismissProgressHUD();
-                                  LoginService.setUserInfo(name, iD, phone, account, registerPassword, (bool success) {
-                                    if (success) {
-                                      Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                                    if (!RegExp(r"^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$").hasMatch(phone)) {
+                                      CommonUtils.showErrorMessage(msg: "请输入正确的手机号码");
+                                      return;
                                     }
-                                  });
-                                }),
-                          ],
+                                    if (!RegExp(r"^(\d{6})(18|19|20)?(\d{2})([01]\d)([0123]\d)(\d{3})(\d|X|x)?$").hasMatch(iD)) {
+                                      CommonUtils.showErrorMessage(msg: "请输入正确的身份证号码");
+                                      return;
+                                    }
+                                    if (registerPassword != repeatPassword) {
+                                      CommonUtils.showErrorMessage(msg: "两次输入密码不一致");
+                                      return;
+                                    }
+                                    this.showOrDismissProgressHUD();
+                                    LoginService.setUserInfo(name, iD, phone, account, registerPassword, (bool success) {
+                                      if (success) {
+                                        Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+                                      }
+                                    });
+                                  }),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
+                      _progressHUD
+                    ],
                   ),
-                  _progressHUD
-                ],
-              );
-            },
-            requestedValues: [BaseUserInfoProvider]),
+                );
+              },
+              requestedValues: [BaseUserInfoProvider]),
+        ),
       ),
     );
   }

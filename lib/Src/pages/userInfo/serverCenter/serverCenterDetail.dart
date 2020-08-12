@@ -50,7 +50,6 @@ class _ServerCenterState extends State<ServerCenter> {
     return new Column(
       children: [
         new Container(
-          width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
           margin: EdgeInsets.only(top: 50),
           height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
           child: Column(
