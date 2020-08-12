@@ -4,8 +4,8 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 
 class ExchangeCoinItem extends StatefulWidget {
-  String contributionAmount;
-  String coinAmount;
+  int contributionAmount;
+  int coinAmount;
   bool isBuy;
   VoidCallback callback;
 
@@ -17,48 +17,48 @@ class ExchangeCoinItem extends StatefulWidget {
 class _ExchangeCoinItemState extends State<ExchangeCoinItem> {
   @override
   Widget build(BuildContext context) {
-    return new Container(
-        child: new Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        new Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            new Container(
-              margin: EdgeInsets.only(left: ScreenUtil().setWidth(50)),
-              width: ScreenUtil().setWidth(160),
-              child: new Text(this.widget.contributionAmount,
-                  textAlign: TextAlign.center, style: TextStyle(color: Colors.white, decoration: TextDecoration.none, fontSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize))),
-            ),
-            new Container(
-              margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
-              child: Image(
-                image: new AssetImage("resource/images/contributionIcon.png"),
+    return new Visibility(
+      visible: !this.widget.isBuy,
+      child: Container(
+          child: new Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              new Container(
+                margin: EdgeInsets.only(left: ScreenUtil().setWidth(50)),
+                width: ScreenUtil().setWidth(160),
+                child: new Text(this.widget.contributionAmount.toString(),
+                    textAlign: TextAlign.center, style: TextStyle(color: Colors.white, decoration: TextDecoration.none, fontSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize))),
+              ),
+              new Container(
+                margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
+                child: Image(
+                  image: new AssetImage("resource/images/contributionIcon.png"),
+                  width: ScreenUtil().setWidth(130),
+                  height: ScreenUtil().setHeight(130),
+                  fit: BoxFit.fill,
+                ),
+              ),
+              new Container(
                 width: ScreenUtil().setWidth(130),
-                height: ScreenUtil().setHeight(130),
-                fit: BoxFit.fill,
+                margin: EdgeInsets.only(left: ScreenUtil().setWidth(100)),
+                child: new Text(this.widget.coinAmount.toString(),
+                    textAlign: TextAlign.center, style: TextStyle(color: Colors.white, decoration: TextDecoration.none, fontSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize))),
               ),
-            ),
-            new Container(
-              width: ScreenUtil().setWidth(130),
-              margin: EdgeInsets.only(left: ScreenUtil().setWidth(100)),
-              child: new Text(this.widget.coinAmount,
-                  textAlign: TextAlign.center, style: TextStyle(color: Colors.white, decoration: TextDecoration.none, fontSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize))),
-            ),
-            new Container(
-              margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
-              child: Image(
-                image: new AssetImage("resource/images/coin.png"),
-                width: ScreenUtil().setHeight(130),
-                height: ScreenUtil().setHeight(130),
-                fit: BoxFit.fill,
+              new Container(
+                margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
+                child: Image(
+                  image: new AssetImage("resource/images/coin.png"),
+                  width: ScreenUtil().setHeight(130),
+                  height: ScreenUtil().setHeight(130),
+                  fit: BoxFit.fill,
+                ),
               ),
-            ),
-          ],
-        ),
-        Visibility(
-          visible: !this.widget.isBuy,
-          child: new ImageTextButton(
+            ],
+          ),
+          new ImageTextButton(
             imageUrl: "resource/images/upgradeButton.png",
             imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
             imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
@@ -68,8 +68,8 @@ class _ExchangeCoinItemState extends State<ExchangeCoinItem> {
             },
             textSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize),
           ),
-        ),
-      ],
-    ));
+        ],
+      )),
+    );
   }
 }

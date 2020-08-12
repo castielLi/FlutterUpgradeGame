@@ -32,7 +32,7 @@ class Datalist {
   Datalist.fromJson(Map<String, dynamic> json) {
     productid = json['productid'];
     tcoinamount = json['tcoinamount'];
-    contributionamount = json['contributionamount'].toString();
+    contributionamount = json['contributionamount'];
     isbuy = json['isbuy'];
   }
 
