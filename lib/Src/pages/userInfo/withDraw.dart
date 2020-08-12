@@ -7,6 +7,7 @@ import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
 import 'package:upgradegame/Src/provider/baseUserCashProvider.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 
 class Withdraw extends StatefulWidget {
   @override
@@ -37,6 +38,7 @@ class _WithdrawState extends State<Withdraw> {
 
   @override
   Widget build(BuildContext context) {
+    int withdrawLimitAmount = Global.getWithdrawLimit();
     return new Container(
       margin: EdgeInsets.fromLTRB(
         ScreenUtil().setWidth(0), // 左
@@ -84,8 +86,12 @@ class _WithdrawState extends State<Withdraw> {
                       return;
                     }
                     if (!cashInfo.hasWithdraw) {
-                      this.withdraw(accountController.text, passwordController.text, amountController.text);
-                    } else {
+                      if(double.parse(amountController.text)<withdrawLimitAmount){
+                        CommonUtils.showWarningMessage(msg: "您的资产不足" + withdrawLimitAmount.toString() +"还需努力哟!");
+                      }else{
+                        this.withdraw(accountController.text, passwordController.text, amountController.text);
+                      }
+                    }else {
                       CommonUtils.showWarningMessage(msg: "你已经发起了提现操作,若要取消操作请在客服中心联系管理员");
                     }
                     FocusScope.of(context).requestFocus(FocusNode());

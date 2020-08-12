@@ -2,6 +2,7 @@
 class BaseRuleModel {
   Adsetting adSetting;
   int contributionbuyrate;
+  int withdrawlimit;
   List<Mainbuild> mainbuild;
   List<Farm> farm;
   List<Wood> wood;
@@ -12,6 +13,7 @@ class BaseRuleModel {
 
   BaseRuleModel.fromJson(Map<String, dynamic> json) {
     contributionbuyrate = json['contributionbuyrate'];
+    withdrawlimit = json['withdrawlimit'];
     adSetting = json['adsetting'] != null
         ? new Adsetting.fromJson(json['adsetting'])
         : null;
@@ -44,6 +46,7 @@ class BaseRuleModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['contributionbuyrate'] = this.contributionbuyrate;
+    data['withdrawlimit'] = this.withdrawlimit;
     if (this.adSetting != null) {
       data['adsetting'] = this.adSetting.toJson();
     }

@@ -19,6 +19,11 @@ class Global {
     return rule.contributionbuyrate;
   }
 
+  ///获取最低提现金额
+  static getWithdrawLimit(){
+    return rule.withdrawlimit;
+  }
+
   ///获取主建筑规则
   static getMainBuildingRule(){
     return rule.mainbuild;
