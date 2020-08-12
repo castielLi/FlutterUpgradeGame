@@ -192,7 +192,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                       height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemButtonSize.smallButtonHeight),
                       child: new Center(
                         child: ListView.builder(
-                            itemCount: 3,
+                            itemCount: exchangeContributionModel.datalist==null?0:exchangeContributionModel.datalist.length,
                             itemBuilder: (BuildContext context, int index) {
                               String contribution = "0";
                               String coin = "0";
@@ -204,24 +204,24 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                 isBuy = exchangeContributionModel.datalist[index].isbuy;
                                 productId = exchangeContributionModel.datalist[index].productid;
                               }
-//                                    return new ExchangeCoinItem(
-//                                      contributionAmount: contribution,
-//                                      coinAmount: coin,
-//                                      isBuy: isBuy,
-//                                      callback: () {
-//                                        ContributionService.exchangeContribution(productId, (bool response) {
-//                                          if (response) {
-//                                            CommonUtils.showSuccessMessage(msg: '兑换贡献值成功');
-//                                          }
-//                                        });
-//                                      },
-//                                    );
                               return new ExchangeCoinItem(
-                                contributionAmount: "100",
-                                callback: () {},
-                                coinAmount: "5",
-                                isBuy: true,
+                                contributionAmount: contribution,
+                                coinAmount: coin,
+                                isBuy: isBuy,
+                                callback: () {
+                                  ContributionService.exchangeContribution(productId, (bool response) {
+                                    if (response) {
+                                      CommonUtils.showSuccessMessage(msg: '兑换贡献值成功');
+                                    }
+                                  });
+                                },
                               );
+//                              return new ExchangeCoinItem(
+//                                contributionAmount: "100",
+//                                callback: () {},
+//                                coinAmount: "5",
+//                                isBuy: true,
+//                              );
                             }),
                       ),
                     ),

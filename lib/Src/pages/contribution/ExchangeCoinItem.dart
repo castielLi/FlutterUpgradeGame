@@ -26,7 +26,7 @@ class _ExchangeCoinItemState extends State<ExchangeCoinItem> {
           children: <Widget>[
             new Container(
               margin: EdgeInsets.only(left: ScreenUtil().setWidth(50)),
-              width: ScreenUtil().setWidth(150),
+              width: ScreenUtil().setWidth(160),
               child: new Text(this.widget.contributionAmount,
                   textAlign: TextAlign.center, style: TextStyle(color: Colors.white, decoration: TextDecoration.none, fontSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize))),
             ),
@@ -57,7 +57,7 @@ class _ExchangeCoinItemState extends State<ExchangeCoinItem> {
           ],
         ),
         Visibility(
-          visible: this.widget.isBuy,
+          visible: !this.widget.isBuy,
           child: new ImageTextButton(
             imageUrl: "resource/images/upgradeButton.png",
             imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
