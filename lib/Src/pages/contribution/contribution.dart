@@ -25,10 +25,12 @@ class ContributionDetail extends StatefulWidget {
 class _ContributionDetailState extends State<ContributionDetail> {
   final amountController = TextEditingController();
   String tabName = "showContribution";
-  int coin = 0;
+//  int coin = 0;
   MyContributionModel currentContributionModel;
   Color highlight = Colors.red;
   int contributionRate = 0;
+  bool hideBuyCoin = false;
+  bool hideBuyContribution = true;
 
   @override
   void initState() {
@@ -82,10 +84,10 @@ class _ContributionDetailState extends State<ContributionDetail> {
           child: Column(
             children: [
               ButtonsList(
-                buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
-                buttonHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
-                buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
-                textSize: ScreenUtil().setSp(SystemButtonSize.smallButtonFontSize),
+                buttonWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+                buttonHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+                buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
+                textSize: ScreenUtil().setSp(SystemButtonSize.largeButtonFontSize),
                 buttons: [
                   ImageTextButton(
                     buttonName: '分红',
@@ -108,38 +110,85 @@ class _ContributionDetailState extends State<ContributionDetail> {
                 offstage: "buyContribution" != this.tabName,
                 child: Column(
                   children: <Widget>[
-                    MyTextField(
-                      height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
-                      controller: amountController,
-                      hintText: '兑换T币数量',
-                      icon: Icon(Icons.attach_money),
-                      inputType: TextInputType.number,
-                      onChanged: () {
-                        setState(() {
-                          String amount = amountController.text;
-                          if (!RegExp(r"^\d*$").hasMatch(amount)) {
-                            CommonUtils.showErrorMessage(msg: "请输入正整数");
-                            this.coin = 0;
-                          }
-                          this.coin = int.parse(amount);
-                        });
-                      },
+                    ButtonsList(
+                      buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+                      buttonHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+                      buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
+                      textSize: ScreenUtil().setSp(SystemButtonSize.smallButtonFontSize),
+                      buttons: [
+                        ImageTextButton(
+                          buttonName: '贡献值',
+                          callback: () {
+                            setState(() {
+                              this.hideBuyCoin = false;
+                              this.hideBuyContribution = true;
+                            });
+                          },
+                        ),
+                        ImageTextButton(
+                          buttonName: 'T币',
+                          callback: () {
+                            setState(() {
+                              this.hideBuyCoin = true;
+                              this.hideBuyContribution = false;
+                            });
+                            //隐藏键盘
+                            FocusScope.of(context).requestFocus(FocusNode());
+                          },
+                        ),
+                      ],
                     ),
-                    Text('贡献值:' + this.contributionRate.toString() + '= 1T币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
-                    ImageTextButton(
-                      imageUrl: "resource/images/upgradeButton.png",
-                      imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
-                      imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
-                      buttonName: '确 定',
-                      callback: () {
-                        if (amountController.text != "") {
-                          this.buyContribution(int.parse(amountController.text));
-                          amountController.clear();
-                        } else {
-                          CommonUtils.showErrorMessage(msg: "输入有误,请重新输入");
-                        }
-                      },
-                      textSize: ScreenUtil().setSp(SystemFontSize.settingTextFontSize),
+                    Stack(
+                      children: <Widget>[
+                        Offstage(
+                          offstage: this.hideBuyCoin,
+                          child: Column(
+                            children: <Widget>[
+                              MyTextField(
+                                height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+                                controller: amountController,
+                                hintText: '兑换T币数量',
+                                icon: Icon(Icons.attach_money),
+                                inputType: TextInputType.number,
+                                onChanged: () {
+                                  setState(() {
+                                    String amount = amountController.text;
+                                    if (!RegExp(r"^\d*$").hasMatch(amount)) {
+                                      CommonUtils.showErrorMessage(msg: "请输入正整数");
+//                                      this.coin = 0;
+                                    }
+//                                    this.coin = int.parse(amount);
+                                  });
+                                },
+                              ),
+                              Text('贡献值:' + this.contributionRate.toString() + '= 1T币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+                              ImageTextButton(
+                                imageUrl: "resource/images/upgradeButton.png",
+                                imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+                                imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+                                buttonName: '确 定',
+                                callback: () {
+                                  if (amountController.text != "") {
+                                    this.buyContribution(int.parse(amountController.text));
+                                    amountController.clear();
+                                  } else {
+                                    CommonUtils.showErrorMessage(msg: "输入有误,请重新输入");
+                                  }
+                                },
+                                textSize: ScreenUtil().setSp(SystemFontSize.settingTextFontSize),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Offstage(
+                          offstage: this.hideBuyContribution,
+                          child: Container(
+                            height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight-SystemButtonSize.smallButtonHeight),
+                            color:Colors.red,
+                            child: Text("buyContribution"),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
