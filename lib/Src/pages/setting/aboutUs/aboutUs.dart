@@ -39,10 +39,8 @@ class _AboutUsDetailState extends State<AboutUsDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
+    return new Center(
       child: new Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Container(
             height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),

@@ -27,8 +27,7 @@ class Datalist {
   String contributionamount;
   bool isbuy;
 
-  Datalist(
-      {this.productid, this.tcoinamount, this.contributionamount, this.isbuy});
+  Datalist({this.productid, this.tcoinamount, this.contributionamount, this.isbuy});
 
   Datalist.fromJson(Map<String, dynamic> json) {
     productid = json['productid'];
