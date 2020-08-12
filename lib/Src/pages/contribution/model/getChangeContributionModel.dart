@@ -24,7 +24,7 @@ class GetChangeContributionModel {
 class Datalist {
   String productid;
   int tcoinamount;
-  String contributionamount;
+  int contributionamount;
   bool isbuy;
 
   Datalist({this.productid, this.tcoinamount, this.contributionamount, this.isbuy});
