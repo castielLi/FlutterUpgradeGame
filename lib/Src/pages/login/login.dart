@@ -241,6 +241,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               new Container(
 //                                color:Colors.red,
+                                height: ScreenUtil().setHeight(60),
                                 child: new Row(
                                   children: <Widget>[
                                     Checkbox(
@@ -248,33 +249,27 @@ class _LoginPageState extends State<LoginPage> {
                                       activeColor: Colors.blue,
                                       onChanged: (value) {
                                         setState(() {
-                                          print(value);
                                           this.agreeTerms = !this.agreeTerms;
                                         });
                                       },
                                     ),
-                                    new Row(
-                                      children: <Widget>[
-                                        new Text(
-                                          "我同意我的部落格",
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Colors.white, decoration: TextDecoration.none),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            Application.router.navigateTo(
-                                              context,
-                                              UpgradeGameRoute.privacyTerms,
-                                              clearStack: true,
-                                            );
-                                          },
-                                          child: new Text(
-                                            "《隐私协议》",
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Colors.blue, decoration: TextDecoration.none),
-                                          ),
-                                        ),
-                                      ],
+                                    new Text(
+                                      "我同意我的部落格",
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Colors.white, decoration: TextDecoration.none),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Application.router.navigateTo(
+                                          context,
+                                          UpgradeGameRoute.privacyTerms,
+                                        );
+                                      },
+                                      child: new Text(
+                                        "《隐私协议》",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Colors.blue, decoration: TextDecoration.none),
+                                      ),
                                     ),
                                   ],
                                 ),
