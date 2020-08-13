@@ -166,4 +166,10 @@ class BaseUserInfoProvider with ChangeNotifier {
     this.ad.wood = model.wood;
     notifyListeners();
   }
+
+  ///兑换贡献值
+  exchangeContribution(BaseResourceModel model){
+    this.tcoinamount = model.tcoinamount;
+    notifyListeners();
+  }
 }

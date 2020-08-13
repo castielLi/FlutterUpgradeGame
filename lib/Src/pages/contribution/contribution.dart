@@ -209,9 +209,20 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                 coinAmount: coin,
                                 isBuy: isBuy,
                                 callback: () {
+                                  this.widget.HUD();
                                   ContributionService.exchangeContribution(productId, (BaseResourceModel model) {
                                     if (model != null) {
-                                      CommonUtils.showSuccessMessage(msg: '兑换贡献值成功');
+                                      this.widget.HUD();
+                                      var array = exchangeContributionModel;
+                                      for(int i = 0; i<array.datalist.length;i++){
+                                        if(array.datalist[i].productid == productId){
+                                          array.datalist.removeAt(i);
+                                          setState(() {
+                                            exchangeContributionModel = array;
+                                          });
+                                        }
+                                      }
+                                      Provide.value<BaseUserInfoProvider>(context).exchangeContribution(model);
                                     }
                                   });
                                 },
