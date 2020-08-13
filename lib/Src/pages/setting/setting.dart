@@ -87,14 +87,14 @@ class _SettingDetailState extends State<SettingDetail> {
                     SettingHttpRequestEvent().emit("private");
                   },
                 ),
-                ImageTextButton(
-                  buttonName: '关于我们',
-                  callback: () {
-                    switchPageBetweenFatherAndSon(sonPageName: "关于我们");
-                    this.widget.changeTitleCallback("关于我们");
-                    SettingHttpRequestEvent().emit("aboutus");
-                  },
-                ),
+//                ImageTextButton(
+//                  buttonName: '关于我们',
+//                  callback: () {
+//                    switchPageBetweenFatherAndSon(sonPageName: "关于我们");
+//                    this.widget.changeTitleCallback("关于我们");
+//                    SettingHttpRequestEvent().emit("aboutus");
+//                  },
+//                ),
               ],
             ),
           ),

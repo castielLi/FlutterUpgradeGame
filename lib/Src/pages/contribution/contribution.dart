@@ -247,7 +247,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "个人贡献值",
+                            "个人贡献值(已兑换值)",
                             style: CustomFontSize.defaultTextStyle(70),
                           ),
                           Text(
@@ -255,16 +255,21 @@ class _ContributionDetailState extends State<ContributionDetail> {
                             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                           ),
                           Text(
-                            this.currentContributionModel == null ? "0" : this.currentContributionModel.amount.toString(),
+                            this.currentContributionModel == null ? "0(-0)" : this.currentContributionModel.amount.toString()+"("+ this.currentContributionModel.exchange.toString() +")",
                             style: TextStyle(fontSize: ScreenUtil().setSp(70), color: highlight),
                           ),
                           Divider(
                             height: 1.0,
                             color: Colors.white,
                           ),
+
                           Text(
-                            "昨日累计贡献值",
-                            style: CustomFontSize.defaultTextStyle(50),
+                            "每日中午12点进行分红结算",
+                            style: CustomFontSize.defaultTextStyle(30),
+                          ),
+                          Text(
+                            this.currentContributionModel == null ?"昨日累计贡献值(0)":"昨日累计贡献值("+ this.currentContributionModel.yesterdayamount.toString() +")",
+                            style: CustomFontSize.defaultTextStyle(45),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
