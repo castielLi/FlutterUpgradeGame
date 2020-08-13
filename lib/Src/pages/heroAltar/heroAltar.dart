@@ -86,7 +86,7 @@ class _HeroAltarState extends State<HeroAltar> {
 //              ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
           child: ListView(
             padding: EdgeInsets.only(top: 50),
-            physics: NeverScrollableScrollPhysics(),
+//            physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
               HeroAltarItem(
                 heroImageUrl: 'resource/images/warrior.png',

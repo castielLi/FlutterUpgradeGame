@@ -36,16 +36,16 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
         int level = baseUserInfo.Mainbuildlevel + 1;
 
         ///升级建筑规则
-        Mainbuild mainBuildRule = Global.getMainBuildingRule()[level - 1];
+//        Mainbuild mainBuildRule = Global.getMainBuildingRule()[level - 1];
 
         ///当前建筑等级的规则
         Mainbuild currentMainBuildRude = Global.getMainBuildingRule()[levelFrom - 1];
 
         ///当前建筑规则需要多少木材
-        int neededWood = mainBuildRule.woodamount;
+        int neededWood = currentMainBuildRude.woodamount;
 
         ///当前建筑规则需要多少石材
-        int neededStone = mainBuildRule.stoneamount;
+        int neededStone = currentMainBuildRude.stoneamount;
 
         ///当前建筑规则可以产出多少t币
         int coinPerHour = currentMainBuildRude.product;
