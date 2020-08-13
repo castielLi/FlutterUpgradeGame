@@ -30,6 +30,16 @@ class _InitAppSetting extends State<InitAppSetting> {
   Future<void> initPlatformState() async {
     String platformVersion;
 
+    jpush.setup(
+      appKey: "ea59157f48e85a676b239564", //你自己应用的 AppKey
+      channel: "theChannel",
+      production: false,
+      debug: true,
+    );
+
+    jpush.applyPushAuthority(new NotificationSettingsIOS(sound: true, alert: true, badge: true));
+
+
     try {
       jpush.addEventHandler(onReceiveNotification: (Map<String, dynamic> message) async {
         print("flutter onReceiveNotification: $message");
@@ -56,14 +66,6 @@ class _InitAppSetting extends State<InitAppSetting> {
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
-
-    jpush.setup(
-      appKey: "ea59157f48e85a676b239564", //你自己应用的 AppKey
-      channel: "theChannel",
-      production: false,
-      debug: true,
-    );
-    jpush.applyPushAuthority(new NotificationSettingsIOS(sound: true, alert: true, badge: true));
 
     // Platform messages may fail, so we use a try/catch PlatformException.
     jpush.getRegistrationID().then((rid) {
