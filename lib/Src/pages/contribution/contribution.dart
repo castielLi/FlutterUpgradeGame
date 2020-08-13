@@ -211,8 +211,8 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                 callback: () {
                                   this.widget.HUD();
                                   ContributionService.exchangeContribution(productId, (BaseResourceModel model) {
+                                    this.widget.HUD();
                                     if (model != null) {
-                                      this.widget.HUD();
                                       var array = exchangeContributionModel;
                                       for(int i = 0; i<array.datalist.length;i++){
                                         if(array.datalist[i].productid == productId){
