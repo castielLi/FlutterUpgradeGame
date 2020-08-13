@@ -4,6 +4,7 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/setting/event/settingEventBus.dart';
 import 'package:upgradegame/Src/pages/setting/protocol/service/protocolService.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 import 'model/protocol.dart';
 
@@ -26,16 +27,26 @@ class _ProtocolDetailState extends State<ProtocolDetail> {
     SettingHttpRequestEvent().on("protocol", this.getProtocol);
   }
 
+  Future<String> loadAsset(callback) async {
+    var content = await rootBundle.loadString('resource/file/serviceProtocol.txt');
+    callback(content);
+  }
+
   void getProtocol() {
-    this.widget.HUD();
-    ProtocolService.getProtocolList((data) {
-      if (null != data) {
-        setState(() {
-          content = ProtocolModel.fromJson(data).content;
-        });
-      }
+//    this.widget.HUD();
+//    ProtocolService.getProtocolList((data) {
+//      if (null != data) {
+//        setState(() {
+//          content = ProtocolModel.fromJson(data).content;
+//        });
+//      }
+//    });
+//    this.widget.HUD();
+    this.loadAsset((String content){
+      setState(() {
+        this.content = content;
+      });
     });
-    this.widget.HUD();
   }
 
   @override

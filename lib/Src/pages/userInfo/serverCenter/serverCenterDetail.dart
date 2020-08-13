@@ -60,7 +60,7 @@ class _ServerCenterState extends State<ServerCenter> {
                   Image(image: new AssetImage('resource/images/qq.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                   Text(
                     this.qq,
-                    style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize),
+                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                   ),
                 ],
               ),
@@ -71,7 +71,7 @@ class _ServerCenterState extends State<ServerCenter> {
                     Image(image: new AssetImage('resource/images/wechat.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                     Text(
                       this.wechat,
-                      style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                     ),
                   ],
                 ),

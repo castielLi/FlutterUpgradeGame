@@ -4,6 +4,7 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/setting/event/settingEventBus.dart';
 import 'package:upgradegame/Src/pages/setting/private/service/privacyService.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 import 'model/privacyModel.dart';
 
@@ -26,16 +27,26 @@ class _PrivateDetailState extends State<PrivateDetail> {
     SettingHttpRequestEvent().on("private", this.getPrivacy);
   }
 
+  Future<String> loadAsset(callback) async {
+    var content = await rootBundle.loadString('resource/file/privateProtocol.txt');
+    callback(content);
+  }
+
   void getPrivacy() {
-    this.widget.HUD();
-    PrivacyService.getPrivacy((data) {
-      if (null != data) {
-        setState(() {
-          privacy = PrivacyModel.fromJson(data).content;
-        });
-      }
+//    this.widget.HUD();
+//    PrivacyService.getPrivacy((data) {
+//      if (null != data) {
+//        setState(() {
+//          privacy = PrivacyModel.fromJson(data).content;
+//        });
+//      }
+//    });
+//    this.widget.HUD();
+  this.loadAsset((String content){
+    setState(() {
+      privacy = content;
     });
-    this.widget.HUD();
+  });
   }
 
   @override
