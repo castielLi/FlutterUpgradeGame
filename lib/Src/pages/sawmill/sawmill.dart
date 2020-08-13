@@ -27,7 +27,7 @@ class _SawmillDetailState extends State<SawmillDetail> {
     return new Container(child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
       int level = 0;
       int nextLevel = 0;
-//      Wood woodBuildingRule;
+      Wood woodBuildingRule;
       Wood currentWoodBuildingRule;
       Adsetting adSetting;
       int needTCoin = 0;
@@ -40,23 +40,23 @@ class _SawmillDetailState extends State<SawmillDetail> {
       if (null != baseUserInfo) {
         level = baseUserInfo.Woodlevel;
         nextLevel = baseUserInfo.Woodlevel + 1;
-//        woodBuildingRule = null == Global.getWoodBuildingRule() ? null : Global.getWoodBuildingRule()[nextLevel - 1];
+        woodBuildingRule = null == Global.getWoodBuildingRule() ? null : Global.getWoodBuildingRule()[nextLevel - 1];
         currentWoodBuildingRule = null == Global.getWoodBuildingRule() ? null : Global.getWoodBuildingRule()[level - 1];
         adSetting = Global.getAdSettingRule();
-        if (null != currentWoodBuildingRule) {
-          needTCoin = currentWoodBuildingRule.tcoinamount;
+        if (null != woodBuildingRule) {
+          needTCoin = woodBuildingRule.tcoinamount;
           woodPerAd = currentWoodBuildingRule.product;
-          needFarmLevel = currentWoodBuildingRule.farmlevel;
+          needFarmLevel = woodBuildingRule.farmlevel;
         }
         watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.wood;
         maxWatchableAd = null == adSetting ? 5 : adSetting.wood;
       }
       bool canUpdate() {
-        if (baseUserInfo.tcoinamount < currentWoodBuildingRule.tcoinamount) {
+        if (baseUserInfo.tcoinamount < woodBuildingRule.tcoinamount) {
           CommonUtils.showErrorMessage(msg: "T币不足");
           return false;
         }
-        if (baseUserInfo.farmlevel < currentWoodBuildingRule.farmlevel) {
+        if (baseUserInfo.farmlevel < woodBuildingRule.farmlevel) {
           CommonUtils.showErrorMessage(msg: "农场等级不足");
           return false;
         }

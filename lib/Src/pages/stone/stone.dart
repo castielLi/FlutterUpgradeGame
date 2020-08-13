@@ -27,7 +27,7 @@ class _StoneDetailState extends State<StoneDetail> {
     return new Container(child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
       int level = 0;
       int nextLevel = 0;
-//      Stone stoneBuildingRule;
+      Stone stoneBuildingRule;
       Stone currentStoneBuildingRule;
       Adsetting adSetting;
       int needTCoin = 0;
@@ -40,24 +40,24 @@ class _StoneDetailState extends State<StoneDetail> {
       if (null != baseUserInfo) {
         level = baseUserInfo.Stonelevel;
         nextLevel = baseUserInfo.Stonelevel + 1;
-//        stoneBuildingRule = null == Global.getStoneBuildingRule() ? null : Global.getStoneBuildingRule()[nextLevel - 1];
+        stoneBuildingRule = null == Global.getStoneBuildingRule() ? null : Global.getStoneBuildingRule()[nextLevel - 1];
         currentStoneBuildingRule = null == Global.getStoneBuildingRule() ? null : Global.getStoneBuildingRule()[level - 1];
         adSetting = Global.getAdSettingRule();
-        if (null != currentStoneBuildingRule) {
-          needTCoin = currentStoneBuildingRule.tcoinamount;
+        if (null != stoneBuildingRule) {
+          needTCoin = stoneBuildingRule.tcoinamount;
           woodPerAd = currentStoneBuildingRule.product;
-          needFarmLevel = currentStoneBuildingRule.farmlevel;
+          needFarmLevel = stoneBuildingRule.farmlevel;
         }
         watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.stone;
         maxWatchableAd = null == adSetting ? 5 : adSetting.stone;
       }
 
       bool canUpdate() {
-        if (baseUserInfo.tcoinamount < currentStoneBuildingRule.tcoinamount) {
+        if (baseUserInfo.tcoinamount < stoneBuildingRule.tcoinamount) {
           CommonUtils.showErrorMessage(msg: "T币不足");
           return false;
         }
-        if (baseUserInfo.farmlevel < currentStoneBuildingRule.farmlevel) {
+        if (baseUserInfo.farmlevel < stoneBuildingRule.farmlevel) {
           CommonUtils.showErrorMessage(msg: "农场等级不足");
           return false;
         }

@@ -36,23 +36,23 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
         int level = baseUserInfo.Mainbuildlevel + 1;
 
         ///升级建筑规则
-//        Mainbuild mainBuildRule = Global.getMainBuildingRule()[level - 1];
+        Mainbuild mainBuildRule = Global.getMainBuildingRule()[level - 1];
 
         ///当前建筑等级的规则
         Mainbuild currentMainBuildRude = Global.getMainBuildingRule()[levelFrom - 1];
 
         ///当前建筑规则需要多少木材
-        int neededWood = currentMainBuildRude.woodamount;
+        int neededWood = mainBuildRule.woodamount;
 
         ///当前建筑规则需要多少石材
-        int neededStone = currentMainBuildRude.stoneamount;
+        int neededStone = mainBuildRule.stoneamount;
 
         ///当前建筑规则可以产出多少t币
         int coinPerHour = currentMainBuildRude.product;
 
         int productCoinNeedPerWood = currentMainBuildRude.consumewood;
 
-        int productCoinNeedPerStone = currentMainBuildRude.stoneamount;
+        int productCoinNeedPerStone = currentMainBuildRude.consumestone;
 
         int wood = baseUserInfo.WoodAmount;
 
@@ -68,6 +68,8 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+//              Text('当前建筑等级LV' +'$levelFrom', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+              Text('产出:1小时生产' +'$coinPerHour'+'T币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
               Text('LV $levelFrom > LV $level', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
               Text('升级所需资料', style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
               Row(
@@ -84,7 +86,7 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
                   )
                 ],
               ),
-              Text('升级后产出:1小时生产' +'$coinPerHour'+'T币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+
               Text('每次生产需要消耗'+ productCoinNeedPerWood.toString()+'木头和'+ productCoinNeedPerStone.toString() +'石头', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize)),
               Container(
                 padding: EdgeInsets.only(left: ScreenUtil().setWidth(100)),
