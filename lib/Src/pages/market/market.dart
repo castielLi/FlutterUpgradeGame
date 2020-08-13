@@ -161,6 +161,7 @@ class _MarketDetailState extends State<MarketDetail> {
                     iconUrl: 'resource/images/coin.png',
                     callback: () {
                       changeDisplayContent(Resource.COIN);
+                      FocusScope.of(context).requestFocus(FocusNode());
                     },
                   ),
                   ImageTextButton(
@@ -171,6 +172,7 @@ class _MarketDetailState extends State<MarketDetail> {
                       this.woodPage = 0;
                       changeDisplayContent(Resource.WOOD);
                       MarketHttpRequestEvent().emit("getWoodTradeList");
+                      FocusScope.of(context).requestFocus(FocusNode());
                     },
                   ),
                   ImageTextButton(
@@ -181,6 +183,7 @@ class _MarketDetailState extends State<MarketDetail> {
                       this.stonePage = 0;
                       changeDisplayContent(Resource.STONE);
                       MarketHttpRequestEvent().emit("getStoneTradeList");
+                      FocusScope.of(context).requestFocus(FocusNode());
                     },
                   ),
                 ],

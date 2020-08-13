@@ -4,6 +4,7 @@ import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
 import 'package:upgradegame/Src/common/widget/resourceDialog/resourceDialog.dart';
 import 'package:upgradegame/Src/pages/login/login.dart';
 import 'package:upgradegame/Src/pages/main/mainPage.dart';
+import 'package:upgradegame/Src/pages/privacyTerms/privacyTerms.dart';
 import 'package:upgradegame/Src/pages/welcome/welcomePage.dart';
 
 //config
@@ -36,4 +37,8 @@ Handler resourceDialogHandler = Handler(handlerFunc: (BuildContext context, Map<
   double height = double.parse(params['height']?.first);
   double width = double.parse(params['width']?.first);
   return ResourceDialog(height: height, width: width);
+});
+
+Handler privacyTermsHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return PrivacyTermsPage();
 });
