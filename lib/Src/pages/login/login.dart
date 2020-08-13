@@ -31,6 +31,7 @@ class _LoginPageState extends State<LoginPage> {
   final repeatPasswordController = TextEditingController();
   ProgressHUD _progressHUD;
   bool _loading = false;
+  bool agreeTerms = true;
 
   var currentToken = "";
   var currentVerfied = false;
@@ -174,6 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                                   fit: BoxFit.fill,
                                 ),
                                 onTap: () {
+                                  //TODO delete
 //                                  setState(() {
 //                                    this.userVerified = false;
 //                                  });
@@ -237,6 +239,46 @@ class _LoginPageState extends State<LoginPage> {
                                 icon: Icon(Icons.phone),
                                 inputType: TextInputType.number,
                               ),
+                              new Container(
+//                                color:Colors.red,
+                                child: new Row(
+                                  children: <Widget>[
+                                    Checkbox(
+                                      value: this.agreeTerms,
+                                      activeColor: Colors.blue,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          print(value);
+                                          this.agreeTerms = !this.agreeTerms;
+                                        });
+                                      },
+                                    ),
+                                    new Row(
+                                      children: <Widget>[
+                                        new Text(
+                                          "我同意我的部落格",
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Colors.white, decoration: TextDecoration.none),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            Application.router.navigateTo(
+                                              context,
+                                              UpgradeGameRoute.privacyTerms,
+                                              clearStack: true,
+                                            );
+                                          },
+                                          child: new Text(
+                                            "《隐私协议》",
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Colors.blue, decoration: TextDecoration.none),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
                               new RaisedButton(
                                   child: Text("注 册"),
                                   color: Colors.blue,
@@ -270,6 +312,10 @@ class _LoginPageState extends State<LoginPage> {
                                     }
                                     if (registerPassword != repeatPassword) {
                                       CommonUtils.showErrorMessage(msg: "两次输入密码不一致");
+                                      return;
+                                    }
+                                    if (!this.agreeTerms) {
+                                      CommonUtils.showErrorMessage(msg: "请先同意隐私协议");
                                       return;
                                     }
                                     this.showOrDismissProgressHUD();
