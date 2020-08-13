@@ -109,16 +109,18 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("resource/images/loginBackground.png"),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SingleChildScrollView(
+    return new Scaffold(
+      backgroundColor: Colors.transparent,
+      body: SingleChildScrollView(
+        child: new Container(
+          width: ScreenUtil().setWidth(1080),
+          height: ScreenUtil().setHeight(1920),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("resource/images/loginBackground.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: ProvideMulti(
               builder: (context, child, model) {
                 return Container(
@@ -128,7 +130,6 @@ class _LoginPageState extends State<LoginPage> {
                       new Offstage(
                         offstage: !this.userVerified,
                         child: new Container(
-                          height: ScreenUtil().setHeight(640),
                           margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(700), ScreenUtil().setWidth(100), ScreenUtil().setHeight(0)),
                           child: Column(
                             children: [
@@ -173,9 +174,9 @@ class _LoginPageState extends State<LoginPage> {
                                   fit: BoxFit.fill,
                                 ),
                                 onTap: () {
-//                                setState(() {
-//                                  this.userVerified = false;
-//                                });
+//                                  setState(() {
+//                                    this.userVerified = false;
+//                                  });
                                   fluwx.sendWeChatAuth(scope: "snsapi_userinfo", state: "wechat_sdk_demo_test").then((data) {
                                     print(data);
                                   }).catchError((e) {
@@ -192,45 +193,10 @@ class _LoginPageState extends State<LoginPage> {
                       new Offstage(
                         offstage: this.userVerified,
                         child: new Container(
-//                        color: Colors.red,
+//                          color: Colors.red,
                           margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(400), ScreenUtil().setWidth(100), ScreenUtil().setHeight(0)),
-                          height: ScreenUtil().setHeight(1120), //1920-400-400
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              new MyTextField(
-                                height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
-                                controller: phoneController,
-                                hintText: '电话:',
-                                icon: Icon(Icons.phone),
-                                inputType: TextInputType.number,
-                              ),
-                              new Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  new MyTextField(
-                                    height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
-                                    controller: trueNameController,
-                                    hintText: '姓名:',
-                                    icon: Icon(Icons.person),
-                                  ),
-                                  new Container(
-                                    padding: EdgeInsets.only(left: ScreenUtil().setWidth(55)),
-                                    child: new Text(
-                                      "请输入真实姓名，否则将导致无法提现",
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(fontSize: ScreenUtil().setSp(28), color: Colors.white, decoration: TextDecoration.none),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              new MyTextField(
-                                height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
-                                controller: iDController,
-                                hintText: '身份证件:',
-                                icon: Icon(Icons.account_box),
-                              ),
                               new MyTextField(
                                 height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                                 controller: accountController,
@@ -250,6 +216,26 @@ class _LoginPageState extends State<LoginPage> {
                                 hintText: '确认密码:',
                                 icon: Icon(Icons.lock),
                                 obscureText: true,
+                              ),
+                              new MyTextField(
+                                height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+                                controller: trueNameController,
+                                hintText: '姓名:',
+                                icon: Icon(Icons.person),
+                                warningText: "请输入真实姓名，否则将导致无法提现",
+                              ),
+                              new MyTextField(
+                                height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+                                controller: iDController,
+                                hintText: '身份证件:',
+                                icon: Icon(Icons.account_box),
+                              ),
+                              new MyTextField(
+                                height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+                                controller: phoneController,
+                                hintText: '电话:',
+                                icon: Icon(Icons.phone),
+                                inputType: TextInputType.number,
                               ),
                               new RaisedButton(
                                   child: Text("注 册"),
