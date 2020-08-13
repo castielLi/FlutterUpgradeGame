@@ -78,7 +78,6 @@ class _RaidersDetailState extends State<RaidersDetail> {
                     child: Text(
                       basic,
                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
@@ -88,7 +87,6 @@ class _RaidersDetailState extends State<RaidersDetail> {
                     child: Text(
                       advanced,
                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
