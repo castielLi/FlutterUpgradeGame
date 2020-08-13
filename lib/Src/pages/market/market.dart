@@ -219,7 +219,7 @@ class _MarketDetailState extends State<MarketDetail> {
                             },
                           ),
                           Container(
-                            height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemScreenSize.inputDecorationHeight),
+                            height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemScreenSize.inputDecorationHeight - 50),
                             child: UserSearchResult(
                               user: this.searchedUser,
                               noUserHintText: this.noResultHintText,
