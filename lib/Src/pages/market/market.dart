@@ -282,7 +282,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                       TradeItemModel tradeItemModel = this.woodList.datalist[index];
                                       return MarketBidItem(
                                         buttonName: "购 买",
-                                        name: tradeItemModel.displayname,
+                                        name: tradeItemModel.mytrade ? "我" : tradeItemModel.displayname,
                                         bidType: "wood",
                                         myTrade: tradeItemModel.mytrade,
                                         amount: tradeItemModel.amount,
@@ -360,7 +360,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                       TradeItemModel tradeItemModel = this.stoneList.datalist[index];
                                       return MarketBidItem(
                                         buttonName: "购 买",
-                                        name: tradeItemModel.displayname,
+                                        name: tradeItemModel.mytrade ? "我" : tradeItemModel.displayname,
                                         bidType: "stone",
                                         myTrade: tradeItemModel.mytrade,
                                         amount: tradeItemModel.amount,
@@ -369,6 +369,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                           MarketService.marketBuy(tradeItemModel.productid, (bool success) {
                                             if (success) {
                                               CommonUtils.showSuccessMessage(msg: "购买成功");
+
                                               ///wood = 1 stone = 2
                                               baseUserInfo.buyResource(2, tradeItemModel.amount, tradeItemModel.price);
                                               setState(() {

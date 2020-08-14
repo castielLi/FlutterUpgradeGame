@@ -165,7 +165,7 @@ class _TeamDetailState extends State<TeamDetail> {
                           title: '今日贡献',
                           total: this.currentContribution == null ? 0 : this.currentContribution.today.total,
                           my: this.currentContribution == null ? 0 : this.currentContribution.today.my,
-                          exchange:this.currentContribution == null ? 0 : this.currentContribution.today.exchange,
+                          exchange: this.currentContribution == null ? 0 : this.currentContribution.today.exchange,
                           secondGrade: this.currentContribution == null ? 0 : this.currentContribution.today.first,
                           thirdGrade: this.currentContribution == null ? 0 : this.currentContribution.today.second,
                         ),
@@ -173,7 +173,7 @@ class _TeamDetailState extends State<TeamDetail> {
                           title: '昨日贡献',
                           total: this.currentContribution == null ? 0 : this.currentContribution.yesterday.total,
                           my: this.currentContribution == null ? 0 : this.currentContribution.yesterday.my,
-                          exchange:this.currentContribution == null ? 0 : this.currentContribution.yesterday.exchange,
+                          exchange: this.currentContribution == null ? 0 : this.currentContribution.yesterday.exchange,
                           secondGrade: this.currentContribution == null ? 0 : this.currentContribution.yesterday.first,
                           thirdGrade: this.currentContribution == null ? 0 : this.currentContribution.yesterday.second,
                         ),
@@ -211,7 +211,7 @@ class _TeamDetailState extends State<TeamDetail> {
                             ),
                             second.length == 0 && first.length == 0
                                 ? Container(
-                              color:Colors.red,
+//                              color:Colors.red,
                                     //内容高度减去两列按钮高度
                                     height: ScreenUtil().setHeight(1100 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
                                     child: Text(
@@ -351,7 +351,6 @@ class _TeamDetailState extends State<TeamDetail> {
                       Offstage(
                         offstage: !this.showQRCode,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
                             RepaintBoundary(
                               key: repaintWidgetKey,

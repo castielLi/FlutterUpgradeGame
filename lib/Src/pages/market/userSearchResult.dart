@@ -13,7 +13,7 @@ import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 class UserSearchResult extends StatefulWidget {
   User user;
   String noUserHintText;
-  bool showUserSearchResult = true;
+//  bool showSearchResult = true;
 
   UserSearchResult({Key key, this.user, this.noUserHintText = ''}) : super(key: key);
 
@@ -22,18 +22,18 @@ class UserSearchResult extends StatefulWidget {
 }
 
 class _UserSearchResult extends State<UserSearchResult> {
-  final amountController = TextEditingController();
-  final passwordController = TextEditingController();
-  int ticket = 0;
+  final amountController = TextEditingController(text: "");
+  final passwordController = TextEditingController(text: "");
+  bool showSearchResult = true;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
-        return Stack(
+        return Column(
           children: [
             Offstage(
-              offstage: !this.widget.showUserSearchResult,
+              offstage: !showSearchResult,
               child: null == this.widget.user
                   ? Text(
                       this.widget.noUserHintText,
@@ -81,7 +81,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                     ),
             ),
             Offstage(
-              offstage: this.widget.showUserSearchResult,
+              offstage: showSearchResult,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -94,9 +94,9 @@ class _UserSearchResult extends State<UserSearchResult> {
                         amount = amountController.text;
                         if (!RegExp(r"^\d*$").hasMatch(amount)) {
                           CommonUtils.showErrorMessage(msg: "请输入正整数");
-                          this.ticket = 0;
+//                          this.ticket = 0;
                         }
-                        this.ticket = int.parse(amount);
+//                        this.ticket = int.parse(amount);
                       });
                     },
                   ),
@@ -145,18 +145,18 @@ class _UserSearchResult extends State<UserSearchResult> {
                             CommonUtils.showErrorMessage(msg: '输入不能为空');
                             return;
                           }
-                          if(baseUserInfo.voucher >= int.parse(amountController.text)){
+                          if (baseUserInfo.voucher >= int.parse(amountController.text)) {
                             MarketService.sendCoin(this.widget.user.id, int.parse(amountController.text), passwordController.text, (data) {
                               if (data) {
                                 CommonUtils.showSuccessMessage(msg: "发送成功");
-                                baseUserInfo.sendCoin(int.parse(amountController.text),int.parse(amountController.text));
+                                baseUserInfo.sendCoin(int.parse(amountController.text), int.parse(amountController.text));
                                 switchBetweenTwoPages();
                                 amountController.clear();
                                 passwordController.clear();
                               }
                             });
                             FocusScope.of(context).requestFocus(FocusNode());
-                          }else{
+                          } else {
                             CommonUtils.showErrorMessage(msg: "您的赠送券不足,请在商城购买赠送券");
                           }
                         },
@@ -174,7 +174,7 @@ class _UserSearchResult extends State<UserSearchResult> {
 
   void switchBetweenTwoPages() {
     setState(() {
-      this.widget.showUserSearchResult = !this.widget.showUserSearchResult;
+      showSearchResult = !showSearchResult;
     });
   }
 }
