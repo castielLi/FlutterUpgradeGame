@@ -97,7 +97,7 @@ class _FarmDetailState extends State<FarmDetail> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('LV $levelFrom > LV $level', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
+                  Text('当前等级 LV $levelFrom', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
                   Text('升级条件', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -124,7 +124,7 @@ class _FarmDetailState extends State<FarmDetail> {
                       ),
                     ],
                   ),
-                  Text('观看广告以随机获取资源,可能会获取到T币哟!!', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
+                  Text('观看广告以随机获取材料', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                 ],
               ),
             ),

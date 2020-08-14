@@ -126,7 +126,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                     textSize: ScreenUtil().setSp(SystemButtonSize.smallButtonFontSize),
                     buttons: [
                       ImageTextButton(
-                        buttonName: '贡献值',
+                        buttonName: '兑换贡献值',
                         callback: () {
                           setState(() {
                             this.hideExchangeCoinForContribution = false;
@@ -135,7 +135,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                         },
                       ),
                       ImageTextButton(
-                        buttonName: 'T币',
+                        buttonName: '兑换T币',
                         callback: () {
                           setState(() {
                             this.hideExchangeCoinForContribution = true;
@@ -165,10 +165,10 @@ class _ContributionDetailState extends State<ContributionDetail> {
                         MyTextField(
                           height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                           controller: amountController,
-                          hintText: '兑换数量',
+                          hintText: '输入T币数量',
                           icon: Icon(Icons.attach_money),
                           inputType: TextInputType.number,
-                          warningText: '兑换' + this.contributionRate.toString() + '贡献值需要1T币',
+                          warningText: '每个T币可以兑换' + this.contributionRate.toString() + '贡献值',
                           warningTextFontSize: SystemFontSize.moreMoreLargerTextSize,
                           onChanged: () {
                             setState(() {
@@ -225,6 +225,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                   ContributionService.exchangeContribution(productId, (BaseResourceModel model) {
                                     this.widget.HUD();
                                     if (model != null) {
+                                      CommonUtils.showSuccessMessage(msg: "贡献值兑换T币成功");
                                       var array = exchangeContributionModel;
                                       for (int i = 0; i < array.datalist.length; i++) {
                                         if (array.datalist[i].productid == productId) {
