@@ -77,6 +77,8 @@ class SystemButtonSize {
   static const smallButtonHeight = 120.0;
   static const smallButtonFontSize = 60.0;
 
+  static const exchangeContributionButtonFontSize = 38.0;
+
   static const mediumButtonWidth = 300.0;
   static const mediumButtonHeight = 120.0;
 

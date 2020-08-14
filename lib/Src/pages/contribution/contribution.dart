@@ -123,7 +123,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                     buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
                     buttonHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
                     buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
-                    textSize: ScreenUtil().setSp(SystemButtonSize.smallButtonFontSize),
+                    textSize: ScreenUtil().setSp(SystemButtonSize.exchangeContributionButtonFontSize),
                     buttons: [
                       ImageTextButton(
                         buttonName: '兑换贡献值',

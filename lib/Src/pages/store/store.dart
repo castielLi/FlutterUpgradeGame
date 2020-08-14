@@ -85,13 +85,13 @@ class _StoreDetailState extends State<StoreDetail> {
   Widget build(BuildContext context) {
     return new Container(
       margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
-          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
+          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom + 120)),
       child: Provide<BaseUserInfoProvider>(
         builder: (context, child, baseUserInfo) {
           return new Center(
             child: ListView.builder(
                 itemCount: storeList.length,
-                physics: NeverScrollableScrollPhysics(),
+//                physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
                   return new ProductItem(
                     volumeAmount: storeList == null ? "" : storeList[index].amount.toString(),
