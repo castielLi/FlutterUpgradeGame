@@ -48,7 +48,16 @@ class _WithdrawState extends State<Withdraw> {
       ),
       child: Provide<BaseUserCashProvider>(builder: (context, child, cashInfo) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(left: ScreenUtil().setWidth(45)),
+              child: Text(
+                "可提现金额: ¥"+(cashInfo.cashAmount == null ? "0" : cashInfo.cashAmount.toString()),
+                textAlign: TextAlign.left,
+                style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize), color: Colors.white, decoration: TextDecoration.none),
+              ),
+            ),
             TextField(
               decoration: InputDecoration(labelText: "支付宝账号", prefixIcon: Icon(Icons.email)),
               controller: accountController,

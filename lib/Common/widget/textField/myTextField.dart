@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:upgradegame/Common/app/config.dart';
 
 class MyTextField extends StatefulWidget {
   double height;
@@ -11,8 +12,9 @@ class MyTextField extends StatefulWidget {
   VoidCallback onSubmittedCallback;
   VoidCallback onChanged;
   String warningText;
+  double warningTextFontSize;
 
-  MyTextField({this.warningText = "", this.height, this.controller, this.hintText, this.icon, this.inputType, this.obscureText, this.onChanged, this.onSubmittedCallback});
+  MyTextField({this.warningTextFontSize,this.warningText = "", this.height, this.controller, this.hintText, this.icon, this.inputType, this.obscureText, this.onChanged, this.onSubmittedCallback});
 
   _MyTextFieldState createState() => new _MyTextFieldState();
 }
@@ -25,6 +27,9 @@ class _MyTextFieldState extends State<MyTextField> {
     }
     if (null == this.widget.inputType) {
       this.widget.inputType = TextInputType.text;
+    }
+    if(null == this.widget.warningTextFontSize){
+      this.widget.warningTextFontSize = SystemFontSize.normalTextSize;
     }
     return new Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,11 +72,11 @@ class _MyTextFieldState extends State<MyTextField> {
           )),
         ),
         new Container(
-          padding: EdgeInsets.only(left: ScreenUtil().setWidth(55)),
+          padding: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
           child: new Text(
             this.widget.warningText,
             textAlign: TextAlign.left,
-            style: TextStyle(fontSize: ScreenUtil().setSp(28), color: Colors.white, decoration: TextDecoration.none),
+            style: TextStyle(fontSize: ScreenUtil().setSp(this.widget.warningTextFontSize), color: Colors.white, decoration: TextDecoration.none),
           ),
         ),
       ],

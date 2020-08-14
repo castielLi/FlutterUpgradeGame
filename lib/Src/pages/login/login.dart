@@ -175,7 +175,6 @@ class _LoginPageState extends State<LoginPage> {
                                   fit: BoxFit.fill,
                                 ),
                                 onTap: () {
-                                  //TODO delete
 //                                  setState(() {
 //                                    this.userVerified = false;
 //                                  });
@@ -195,7 +194,6 @@ class _LoginPageState extends State<LoginPage> {
                       new Offstage(
                         offstage: this.userVerified,
                         child: new Container(
-//                          color: Colors.red,
                           margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(400), ScreenUtil().setWidth(100), ScreenUtil().setHeight(0)),
                           child: Column(
                             children: [
@@ -240,7 +238,6 @@ class _LoginPageState extends State<LoginPage> {
                                 inputType: TextInputType.number,
                               ),
                               new Container(
-//                                color:Colors.red,
                                 height: ScreenUtil().setHeight(60),
                                 child: new Row(
                                   children: <Widget>[

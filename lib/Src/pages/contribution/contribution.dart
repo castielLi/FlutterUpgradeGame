@@ -29,7 +29,6 @@ class _ContributionDetailState extends State<ContributionDetail> {
   final amountController = TextEditingController();
   String tabName = "showContribution";
 
-//  int coin = 0;
   MyContributionModel currentContributionModel;
   GetChangeContributionModel exchangeContributionModel;
   Color highlight = Colors.red;
@@ -148,6 +147,17 @@ class _ContributionDetailState extends State<ContributionDetail> {
                       ),
                     ],
                   ),
+                  Container(
+                    padding: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
+                    width: ScreenUtil().setWidth(850),
+                    child: Text(
+                      this.hideExchangeCoinForContribution
+                          ? "当前拥有: " + (this.currentContributionModel == null ? "0" : (this.currentContributionModel.amount - this.currentContributionModel.exchange).toString()) + "贡献值"
+                          : "当前拥有: " + baseUserInfo.tcoinamount.toString() + "T币",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize), color: Colors.white, decoration: TextDecoration.none),
+                    ),
+                  ),
                   Offstage(
                     offstage: this.hideExchangeCoinForContribution,
                     child: Column(
@@ -158,6 +168,8 @@ class _ContributionDetailState extends State<ContributionDetail> {
                           hintText: '兑换数量',
                           icon: Icon(Icons.attach_money),
                           inputType: TextInputType.number,
+                          warningText: '兑换' + this.contributionRate.toString() + '贡献值需要1T币',
+                          warningTextFontSize: SystemFontSize.moreMoreLargerTextSize,
                           onChanged: () {
                             setState(() {
                               String amount = amountController.text;
@@ -167,7 +179,6 @@ class _ContributionDetailState extends State<ContributionDetail> {
                             });
                           },
                         ),
-                        Text('兑换' + this.contributionRate.toString() + '贡献值需要1T币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
                         ImageTextButton(
                           imageUrl: "resource/images/upgradeButton.png",
                           imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
@@ -189,6 +200,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                   Offstage(
                     offstage: this.hideExchangeContributionForCoin,
                     child: Container(
+//                      color:Colors.blue,
                       height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemButtonSize.smallButtonHeight),
                       child: new Center(
                         child: ListView.builder(
@@ -214,8 +226,8 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                     this.widget.HUD();
                                     if (model != null) {
                                       var array = exchangeContributionModel;
-                                      for(int i = 0; i<array.datalist.length;i++){
-                                        if(array.datalist[i].productid == productId){
+                                      for (int i = 0; i < array.datalist.length; i++) {
+                                        if (array.datalist[i].productid == productId) {
                                           array.datalist.removeAt(i);
                                           setState(() {
                                             exchangeContributionModel = array;
@@ -255,20 +267,19 @@ class _ContributionDetailState extends State<ContributionDetail> {
                             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                           ),
                           Text(
-                            this.currentContributionModel == null ? "0(-0)" : this.currentContributionModel.amount.toString()+"("+ this.currentContributionModel.exchange.toString() +")",
+                            this.currentContributionModel == null ? "0(-0)" : this.currentContributionModel.amount.toString() + "(" + this.currentContributionModel.exchange.toString() + ")",
                             style: TextStyle(fontSize: ScreenUtil().setSp(70), color: highlight),
                           ),
                           Divider(
                             height: 1.0,
                             color: Colors.white,
                           ),
-
                           Text(
                             "每日中午12点进行分红结算",
                             style: CustomFontSize.defaultTextStyle(30),
                           ),
                           Text(
-                            this.currentContributionModel == null ?"昨日累计贡献值(0)":"昨日累计贡献值("+ this.currentContributionModel.yesterdayamount.toString() +")",
+                            this.currentContributionModel == null ? "昨日累计贡献值(0)" : "昨日累计贡献值(" + this.currentContributionModel.yesterdayamount.toString() + ")",
                             style: CustomFontSize.defaultTextStyle(45),
                           ),
                           Row(

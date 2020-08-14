@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/setting/event/settingEventBus.dart';
-import 'package:upgradegame/Src/pages/setting/protocol/service/protocolService.dart';
-import 'package:flutter/services.dart' show rootBundle;
-
-import 'model/protocol.dart';
 
 class ProtocolDetail extends StatefulWidget {
   @override
@@ -42,7 +39,7 @@ class _ProtocolDetailState extends State<ProtocolDetail> {
 //      }
 //    });
 //    this.widget.HUD();
-    this.loadAsset((String content){
+    this.loadAsset((String content) {
       setState(() {
         this.content = content;
       });
@@ -59,7 +56,7 @@ class _ProtocolDetailState extends State<ProtocolDetail> {
             child: SingleChildScrollView(
               child: Text(
                 this.content,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
               ),
             ),

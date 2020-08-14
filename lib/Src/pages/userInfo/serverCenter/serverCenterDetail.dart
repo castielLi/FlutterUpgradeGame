@@ -50,22 +50,25 @@ class _ServerCenterState extends State<ServerCenter> {
     return new Column(
       children: [
         new Container(
-          margin: EdgeInsets.only(top: 50),
+          margin: EdgeInsets.only(top: ScreenUtil().setHeight(100)),
           height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
+          width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              new Row(
-                children: <Widget>[
-                  Image(image: new AssetImage('resource/images/qq.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
-                  Text(
-                    this.qq,
-                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                  ),
-                ],
+              new Container(
+                padding: EdgeInsets.only(left: ScreenUtil().setWidth(200)),
+                child: new Row(
+                  children: <Widget>[
+                    Image(image: new AssetImage('resource/images/qq.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                    Text(
+                      this.qq,
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                    ),
+                  ],
+                ),
               ),
               new Padding(
-                padding: new EdgeInsets.only(top: 15),
+                padding: new EdgeInsets.fromLTRB(ScreenUtil().setWidth(200), ScreenUtil().setWidth(50), ScreenUtil().setWidth(0), ScreenUtil().setWidth(0)),
                 child: new Row(
                   children: <Widget>[
                     Image(image: new AssetImage('resource/images/wechat.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),

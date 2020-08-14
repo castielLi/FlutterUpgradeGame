@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/setting/event/settingEventBus.dart';
-import 'package:upgradegame/Src/pages/setting/private/service/privacyService.dart';
-import 'package:flutter/services.dart' show rootBundle;
-
-import 'model/privacyModel.dart';
 
 class PrivateDetail extends StatefulWidget {
   @override
@@ -42,11 +39,11 @@ class _PrivateDetailState extends State<PrivateDetail> {
 //      }
 //    });
 //    this.widget.HUD();
-  this.loadAsset((String content){
-    setState(() {
-      privacy = content;
+    this.loadAsset((String content) {
+      setState(() {
+        privacy = content;
+      });
     });
-  });
   }
 
   @override
@@ -59,7 +56,7 @@ class _PrivateDetailState extends State<PrivateDetail> {
             child: SingleChildScrollView(
               child: Text(
                 this.privacy,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
               ),
             ),
