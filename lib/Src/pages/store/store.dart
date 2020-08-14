@@ -33,6 +33,7 @@ class _StoreDetailState extends State<StoreDetail> {
     fluwx.weChatResponseEventHandler.listen((response) async {
       print("WeChatPaymentResponse" + response.errCode.toString());
       if (response.errCode == 0 && response is WeChatPaymentResponse) {
+        this.widget.HUD();
         StoreService.ConfirmOrder(this.orderId, (VoucherModel model) {
           this.widget.HUD();
           if (model != null) {
@@ -63,6 +64,7 @@ class _StoreDetailState extends State<StoreDetail> {
   void buyVoucher(String productId, BaseUserInfoProvider baseUserInfo) {
     this.widget.HUD();
     StoreService.buyVoucher(productId, (BuyVoucherWeChatResponseModel model) {
+      this.widget.HUD();
       if (model != null) {
         this.orderId = model.orderid;
         fluwx

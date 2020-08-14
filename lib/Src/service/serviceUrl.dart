@@ -4,7 +4,7 @@ class ServiceUrl {
 //      "https://www.fastmock.site/mock/095e3520b3833640934d29559631cc16/";
   ///server
   "https://test.buluo888.com/";
-//  "http://192.168.0.107:8080/";
+//  "http://192.168.31.46:8080/";
   static const String downloadUrl = '';
 
   /// rule
