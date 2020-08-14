@@ -368,6 +368,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                         buttonCallback: () {
                                           MarketService.marketBuy(tradeItemModel.productid, (bool success) {
                                             if (success) {
+                                              CommonUtils.showSuccessMessage(msg: "购买成功");
                                               ///wood = 1 stone = 2
                                               baseUserInfo.buyResource(2, tradeItemModel.amount, tradeItemModel.price);
                                               setState(() {

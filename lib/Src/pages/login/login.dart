@@ -146,27 +146,16 @@ class _LoginPageState extends State<LoginPage> {
                                 hintText: '密码:',
                                 icon: Icon(Icons.lock),
                                 obscureText: true,
+                                onSubmittedCallback: () {
+                                  this.login();
+                                },
                               ),
                               new RaisedButton(
                                   child: Text("登 录"),
                                   color: Colors.blue,
                                   textColor: Colors.white,
                                   onPressed: () {
-                                    String username = usernameController.text.trim();
-                                    String password = passwordController.text;
-                                    if ("" == username || "" == password) {
-                                      CommonUtils.showErrorMessage(msg: "输入不能为空");
-                                      return;
-                                    }
-                                    this.showOrDismissProgressHUD();
-                                    LoginService.loginWithAccount(username, password, (LoginReponseModel model) {
-                                      this.showOrDismissProgressHUD();
-                                      if (model != null) {
-                                        ///初始化用户
-                                        Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
-                                        Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
-                                      }
-                                    });
+                                    this.login();
                                   }),
                               new GestureDetector(
                                 child: new Image(
@@ -337,5 +326,23 @@ class _LoginPageState extends State<LoginPage> {
     usernameController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  void login() {
+    String username = usernameController.text.trim();
+    String password = passwordController.text;
+    if ("" == username || "" == password) {
+      CommonUtils.showErrorMessage(msg: "输入不能为空");
+      return;
+    }
+    this.showOrDismissProgressHUD();
+    LoginService.loginWithAccount(username, password, (LoginReponseModel model) {
+      this.showOrDismissProgressHUD();
+      if (model != null) {
+        ///初始化用户
+        Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+        Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
+      }
+    });
   }
 }
