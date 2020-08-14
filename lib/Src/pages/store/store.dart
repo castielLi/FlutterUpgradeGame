@@ -91,7 +91,6 @@ class _StoreDetailState extends State<StoreDetail> {
           return new Center(
             child: ListView.builder(
                 itemCount: storeList.length,
-//                physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
                   return new ProductItem(
                     volumeAmount: storeList == null ? "" : storeList[index].amount.toString(),

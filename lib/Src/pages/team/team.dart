@@ -120,7 +120,7 @@ class _TeamDetailState extends State<TeamDetail> {
   Widget build(BuildContext context) {
     return new Container(
       margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
-          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
+          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(0)),
       child: Column(
         children: [
           ButtonsList(
@@ -152,7 +152,7 @@ class _TeamDetailState extends State<TeamDetail> {
             ],
           ),
           Container(
-            height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
+            height: ScreenUtil().setHeight(1100),
             child: Stack(
               children: [
                 Offstage(
@@ -211,8 +211,9 @@ class _TeamDetailState extends State<TeamDetail> {
                             ),
                             second.length == 0 && first.length == 0
                                 ? Container(
+                              color:Colors.red,
                                     //内容高度减去两列按钮高度
-                                    height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
+                                    height: ScreenUtil().setHeight(1100 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
                                     child: Text(
                                       noMembersHintText,
                                       textAlign: TextAlign.center,
@@ -220,7 +221,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                     ),
                                   )
                                 : Container(
-                                    height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
+                                    height: ScreenUtil().setHeight(1100 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
                                     child: Column(
                                       children: [
                                         Container(
@@ -242,7 +243,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                         ),
                                         Container(
                                           //内容高度减去两列按钮加标题栏高度
-                                          height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight - 50),
+                                          height: ScreenUtil().setHeight(1100 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight - 50),
                                           child: Stack(
                                             children: [
                                               Offstage(
