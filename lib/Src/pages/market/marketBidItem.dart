@@ -38,64 +38,66 @@ class _MarketBidItem extends State<MarketBidItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().setHeight(320),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: new AssetImage('resource/images/marketItemBackground.png'),
           fit: BoxFit.fill,
         ),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            this.widget.name + ' 出售:',
-            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: <Widget>[
-                  Image(
-                    image: new AssetImage('resource/images/' + this.widget.bidType + '.png'),
-                    height: ScreenUtil().setHeight(100),
-                  ),
-                  Text(
-                    '数量:' + this.widget.amount.toString(),
-                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                  ),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Image(
-                    image: new AssetImage('resource/images/coin.png'),
-                    height: ScreenUtil().setHeight(100),
-                  ),
-                  Text(
-                    '数量:' + this.widget.needCoin.toString(),
-                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                  ),
-                ],
-              ),
-              Visibility(
-                visible: !this.widget.myTrade,
-                child: ImageTextButton(
-                  imageUrl: "resource/images/upgradeButton.png",
-                  imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
-                  imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
-                  buttonName: this.widget.buttonName,
-                  callback: () {
-                    this.widget.buttonCallback();
-                  },
-                  textSize: ScreenUtil().setSp(SystemFontSize.settingTextFontSize),
+      child: Container(
+        margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(35),ScreenUtil().setHeight(35),ScreenUtil().setWidth(40),ScreenUtil().setHeight(60)),
+        child:  Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              this.widget.name + ' 出售:',
+              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: <Widget>[
+                    Image(
+                      image: new AssetImage('resource/images/' + this.widget.bidType + '.png'),
+                      height: ScreenUtil().setHeight(100),
+                    ),
+                    Text(
+                      '数量:' + this.widget.amount.toString(),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                    ),
+                  ],
                 ),
-              )
-            ],
-          ),
-        ],
+                Row(
+                  children: <Widget>[
+                    Image(
+                      image: new AssetImage('resource/images/coin.png'),
+                      height: ScreenUtil().setHeight(100),
+                    ),
+                    Text(
+                      '数量:' + this.widget.needCoin.toString(),
+                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                    ),
+                  ],
+                ),
+                Visibility(
+                  visible: !this.widget.myTrade,
+                  child: ImageTextButton(
+                    imageUrl: "resource/images/upgradeButton.png",
+                    imageWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+                    imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+                    buttonName: this.widget.buttonName,
+                    callback: () {
+                      this.widget.buttonCallback();
+                    },
+                    textSize: ScreenUtil().setSp(SystemFontSize.settingTextFontSize),
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
