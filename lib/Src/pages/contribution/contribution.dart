@@ -83,7 +83,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
   @override
   Widget build(BuildContext context) {
     this.contributionRate = Global.getCoinBuyContribution();
-    int rateContentHeight = 350;
+    int rateContentHeight = 360;
     int rowWidth = 250;
     return new Container(
       margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
@@ -149,11 +149,11 @@ class _ContributionDetailState extends State<ContributionDetail> {
                   ),
                   Container(
                     padding: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
-                    width: ScreenUtil().setWidth(850),
+                    width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
                     child: Text(
                       this.hideExchangeCoinForContribution
-                          ? "当前拥有: " + (this.currentContributionModel == null ? "0" : (this.currentContributionModel.amount - this.currentContributionModel.exchange).toString()) + "贡献值"
-                          : "当前拥有: " + baseUserInfo.tcoinamount.toString() + "T币",
+                          ? "当前拥有: " + (this.currentContributionModel == null ? "0" : (this.currentContributionModel.amount - this.currentContributionModel.exchange).toString()) + " 贡献值"
+                          : "当前拥有: " + baseUserInfo.tcoinamount.toString() + " T币",
                       textAlign: TextAlign.left,
                       style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize), color: Colors.white, decoration: TextDecoration.none),
                     ),
@@ -251,7 +251,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
               child: Container(
                 height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
                       height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - rateContentHeight),
