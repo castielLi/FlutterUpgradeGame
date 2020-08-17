@@ -28,8 +28,24 @@ class _UserSearchResult extends State<UserSearchResult> {
   int ticket = 0;
   UserSearch currentuser;
 
+  void sendCoin(){
+    this.widget.HUD();
+    MarketService.sendCoin(this.widget.user.userid, int.parse(amountController.text), passwordController.text, (data) {
+      this.widget.HUD();
+      if (data) {
+        CommonUtils.showSuccessMessage(msg: "发送成功");
+        Provide.value<BaseUserInfoProvider>(context).sendCoin(int.parse(amountController.text), int.parse(amountController.text));
+        switchBetweenTwoPages();
+        amountController.clear();
+        passwordController.clear();
+      }
+    });
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
+
   @override
   Widget build(BuildContext context) {
+
     if (this.widget.user == null) {
       this.showUserSearchResult = true;
     } else {
@@ -165,6 +181,12 @@ class _UserSearchResult extends State<UserSearchResult> {
                             CommonUtils.showErrorMessage(msg: "请输入正整数");
                             return;
                           }
+
+                          if (baseUserInfo.voucher < int.parse(amountController.text)) {
+                            CommonUtils.showErrorMessage(msg: "您的赠送券不足,请在商城购买赠送券");
+                            return;
+                          }
+
                           showDialog<Null>(
                             context: context,
                             barrierDismissible: false,
@@ -181,23 +203,8 @@ class _UserSearchResult extends State<UserSearchResult> {
                                   new FlatButton(
                                     child: new Text('确认'),
                                     onPressed: () {
+                                      this.sendCoin();
                                       Navigator.of(context).pop();
-                                      if (baseUserInfo.voucher >= int.parse(amountController.text)) {
-                                        this.widget.HUD();
-                                        MarketService.sendCoin(this.widget.user.userid, int.parse(amountController.text), passwordController.text, (data) {
-                                          this.widget.HUD();
-                                          if (data) {
-                                            CommonUtils.showSuccessMessage(msg: "发送成功");
-                                            baseUserInfo.sendCoin(int.parse(amountController.text), int.parse(amountController.text));
-                                            switchBetweenTwoPages();
-                                            amountController.clear();
-                                            passwordController.clear();
-                                          }
-                                        });
-                                        FocusScope.of(context).requestFocus(FocusNode());
-                                      } else {
-                                        CommonUtils.showErrorMessage(msg: "您的赠送券不足,请在商城购买赠送券");
-                                      }
                                     },
                                   ),
                                 ],

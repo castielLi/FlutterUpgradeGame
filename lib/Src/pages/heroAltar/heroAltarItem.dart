@@ -49,84 +49,117 @@ class _HeroAltarItem extends State<HeroAltarItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
-          height: ScreenUtil().setHeight(SystemScreenSize.displayItemHeight),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: new AssetImage('resource/images/woodButton.png'),
-              fit: BoxFit.fill,
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Image(
-                image: new AssetImage(this.widget.heroImageUrl),
-                height: ScreenUtil().setHeight(SystemIconSize.mediumIconSize),
-                width: ScreenUtil().setWidth(SystemIconSize.mediumIconSize),
+    return Container(
+      child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
+        return Column(
+          children: <Widget>[
+            Container(
+              width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
+              height: ScreenUtil().setHeight(SystemScreenSize.displayItemHeight),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: new AssetImage('resource/images/woodButton.png'),
+                  fit: BoxFit.fill,
+                ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    this.widget.description,
-                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                  Image(
+                    image: new AssetImage(this.widget.heroImageUrl),
+                    height: ScreenUtil().setHeight(SystemIconSize.mediumIconSize),
+                    width: ScreenUtil().setWidth(SystemIconSize.mediumIconSize),
                   ),
-                  Text(
-                    '价格:' + this.widget.price.toString() + 'T币',
-                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                  ),
-                  Text(
-                    '期限:' + this.widget.period,
-                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        this.widget.description,
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                      ),
+                      Text(
+                        '价格:' + this.widget.price.toString() + 'T币',
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                      ),
+                      Text(
+                        '期限:' + this.widget.period,
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
-        ),
-        Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                width: ScreenUtil().setWidth(600),
-                child: HeroAltarClock(
-                  imageUrl: 'resource/images/clock.png',
-                  adIconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
-                  remainDays: this.widget.remainDays,
-                ),
-              ),
-              GestureDetector(
-                child: Container(
-                  width: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
-                  height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: new AssetImage('resource/images/upgradeButton.png'),
-                      fit: BoxFit.fill,
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    width: ScreenUtil().setWidth(600),
+                    child: HeroAltarClock(
+                      imageUrl: 'resource/images/clock.png',
+                      adIconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
+                      remainDays: this.widget.remainDays,
                     ),
                   ),
-                  child: Center(
-                    child: Text(
-                      '购 买',
-                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                  GestureDetector(
+                    child: Container(
+                      width: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+                      height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: new AssetImage('resource/images/upgradeButton.png'),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          '购 买',
+                          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                        ),
+                      ),
                     ),
+                    onTap: () {
+                      if(baseUserInfo.TCoinAmount >= this.widget.price){
+                        showDialog<Null>(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return new AlertDialog(
+                              title: new Text('您确认通过T币兑换贡献值么?'),
+                              actions: <Widget>[
+                                new FlatButton(
+                                  child: new Text('取消'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                new FlatButton(
+                                  child: new Text('确认'),
+                                  onPressed: () {
+                                    this.buyHero(this.widget.heroType);
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        ).then((val) {
+                          print(val);
+                        });
+                      }else{
+                        CommonUtils.showErrorMessage(msg: "您当前的T币不足以购买英雄");
+                      }
+                    },
                   ),
-                ),
-                onTap: () {
-                  this.buyHero(this.widget.heroType);
-                },
+                ],
               ),
-            ],
-          ),
-        ),
-      ],
+            ),
+          ],
+        );
+      }),
     );
   }
 }

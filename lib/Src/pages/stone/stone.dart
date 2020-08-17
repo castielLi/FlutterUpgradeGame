@@ -22,6 +22,18 @@ class StoneDetail extends StatefulWidget {
 }
 
 class _StoneDetailState extends State<StoneDetail> {
+
+  void upgradeBuilding(){
+    this.widget.HUD();
+    BaseService.upgradeBuilding(BuildingEnum.stone.index, (model) {
+      this.widget.HUD();
+      if (model != null) {
+        CommonUtils.showSuccessMessage(msg: "升级成功");
+        Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Container(child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
@@ -163,15 +175,8 @@ class _StoneDetailState extends State<StoneDetail> {
                           new FlatButton(
                             child: new Text('确认'),
                             onPressed: () {
+                              this.upgradeBuilding();
                               Navigator.of(context).pop();
-                              this.widget.HUD();
-                              BaseService.upgradeBuilding(BuildingEnum.stone.index, (model) {
-                                this.widget.HUD();
-                                if (model != null) {
-                                  CommonUtils.showSuccessMessage(msg: "升级成功");
-                                  Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
-                                }
-                              });
                             },
                           ),
                         ],

@@ -22,6 +22,19 @@ class SawmillDetail extends StatefulWidget {
 }
 
 class _SawmillDetailState extends State<SawmillDetail> {
+
+
+  void upgradeBuilding(){
+    this.widget.HUD();
+    BaseService.upgradeBuilding(BuildingEnum.sawmill.index, (model) {
+      this.widget.HUD();
+      if (model != null) {
+        CommonUtils.showSuccessMessage(msg: "升级成功");
+        Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Container(child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
@@ -163,15 +176,8 @@ class _SawmillDetailState extends State<SawmillDetail> {
                           new FlatButton(
                             child: new Text('确认'),
                             onPressed: () {
+                              this.upgradeBuilding();
                               Navigator.of(context).pop();
-                              this.widget.HUD();
-                              BaseService.upgradeBuilding(BuildingEnum.sawmill.index, (model) {
-                                this.widget.HUD();
-                                if (model != null) {
-                                  CommonUtils.showSuccessMessage(msg: "升级成功");
-                                  Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
-                                }
-                              });
                             },
                           ),
                         ],

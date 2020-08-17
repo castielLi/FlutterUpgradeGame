@@ -83,6 +83,29 @@ class _ContributionDetailState extends State<ContributionDetail> {
     });
   }
 
+
+  void exchangeContributionForCoin(String productId){
+    this.widget.HUD();
+    ContributionService.exchangeContributionForCoin(productId, (BaseResourceModel model) {
+      this.widget.HUD();
+      if (model != null) {
+        CommonUtils.showSuccessMessage(msg: "贡献值兑换T币成功");
+        var array = exchangeContributionModel;
+        int contribution = 0;
+        for (int i = 0; i < array.datalist.length; i++) {
+          if (array.datalist[i].productid == productId) {
+            contribution = array.datalist[i].contributionamount;
+            array.datalist.removeAt(i);
+            setState(() {
+              exchangeContributionModel = array;
+            });
+          }
+        }
+        Provide.value<BaseUserInfoProvider>(context).exchangeContribution(model, contribution);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     this.contributionRate = Global.getCoinBuyContribution();
@@ -192,8 +215,35 @@ class _ContributionDetailState extends State<ContributionDetail> {
                             if (!RegExp(r"^\d*$").hasMatch(amount)) {
                               CommonUtils.showErrorMessage(msg: "请输入正整数");
                             } else {
-                              this.buyContribution(int.parse(amountController.text));
-                              amountController.clear();
+
+                              showDialog<Null>(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return new AlertDialog(
+                                    title: new Text('您确认通过T币兑换贡献值么?'),
+                                    actions: <Widget>[
+                                      new FlatButton(
+                                        child: new Text('取消'),
+                                        onPressed: () {
+                                          amountController.clear();
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                      new FlatButton(
+                                        child: new Text('确认'),
+                                        onPressed: () {
+                                          this.buyContribution(int.parse(amountController.text));
+                                          amountController.clear();
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ).then((val) {
+                                print(val);
+                              });
                             }
                           },
                           textSize: ScreenUtil().setSp(SystemFontSize.settingTextFontSize),
@@ -229,24 +279,32 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                     CommonUtils.showErrorMessage(msg: '贡献值不足');
                                     return;
                                   }
-                                  this.widget.HUD();
-                                  ContributionService.exchangeContributionForCoin(productId, (BaseResourceModel model) {
-                                    this.widget.HUD();
-                                    if (model != null) {
-                                      CommonUtils.showSuccessMessage(msg: "贡献值兑换T币成功");
-                                      var array = exchangeContributionModel;
-                                      int contribution = 0;
-                                      for (int i = 0; i < array.datalist.length; i++) {
-                                        if (array.datalist[i].productid == productId) {
-                                          contribution = array.datalist[i].contributionamount;
-                                          array.datalist.removeAt(i);
-                                          setState(() {
-                                            exchangeContributionModel = array;
-                                          });
-                                        }
-                                      }
-                                      Provide.value<BaseUserInfoProvider>(context).exchangeContribution(model, contribution);
-                                    }
+
+                                  showDialog<Null>(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (BuildContext context) {
+                                      return new AlertDialog(
+                                        title: new Text('您确认通过贡献值兑换T币么?'),
+                                        actions: <Widget>[
+                                          new FlatButton(
+                                            child: new Text('取消'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          new FlatButton(
+                                            child: new Text('确认'),
+                                            onPressed: () {
+                                              this.exchangeContributionForCoin(productId);
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ).then((val) {
+                                    print(val);
                                   });
                                 },
                               );

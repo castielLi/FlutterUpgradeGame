@@ -305,7 +305,6 @@ class _MarketDetailState extends State<MarketDetail> {
                                                   new FlatButton(
                                                     child: new Text('确认'),
                                                     onPressed: () {
-                                                      Navigator.of(context).pop();
                                                       this.widget.HUD();
                                                       MarketService.marketBuy(tradeItemModel.productid, (bool success) {
                                                         this.widget.HUD();
@@ -323,6 +322,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                                           });
                                                         }
                                                       });
+                                                      Navigator.of(context).pop();
                                                     },
                                                   ),
                                                 ],
@@ -410,7 +410,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                                   new FlatButton(
                                                     child: new Text('确认'),
                                                     onPressed: () {
-                                                      Navigator.of(context).pop();
+
                                                       this.widget.HUD();
                                                       MarketService.marketBuy(tradeItemModel.productid, (bool success) {
                                                         this.widget.HUD();
@@ -429,6 +429,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                                           });
                                                         }
                                                       });
+                                                      Navigator.of(context).pop();
                                                     },
                                                   ),
                                                 ],
@@ -478,7 +479,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                                 new FlatButton(
                                                   child: new Text('确定'),
                                                   onPressed: () {
-                                                    Navigator.of(context).pop();
+
                                                     this.widget.HUD();
                                                     MarketService.cancelMyMarketTrade(tradeItemModel.productid, tradeItemModel.type, (data) {
                                                       this.widget.HUD();
@@ -488,6 +489,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                                         getMyTradeList();
                                                       }
                                                     });
+                                                    Navigator.of(context).pop();
                                                   },
                                                 ),
                                               ],

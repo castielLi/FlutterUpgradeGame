@@ -96,9 +96,34 @@ class _WithdrawState extends State<Withdraw> {
                     }
                     if (!cashInfo.hasWithdraw) {
                       if(double.parse(amountController.text)<withdrawLimitAmount){
-                        CommonUtils.showWarningMessage(msg: "您的资产不足" + withdrawLimitAmount.toString() +"还需努力哟!");
+                        CommonUtils.showWarningMessage(msg: "您的提现金额不足" + withdrawLimitAmount.toString() +"还需努力哟!");
                       }else{
-                        this.withdraw(accountController.text, passwordController.text, amountController.text);
+                        showDialog<Null>(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return new AlertDialog(
+                              title: new Text('您确认要发起提现操作么?'),
+                              actions: <Widget>[
+                                new FlatButton(
+                                  child: new Text('取消'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                new FlatButton(
+                                  child: new Text('确认'),
+                                  onPressed: () {
+                                    this.withdraw(accountController.text, passwordController.text, amountController.text);
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        ).then((val) {
+                          print(val);
+                        });
                       }
                     }else {
                       CommonUtils.showWarningMessage(msg: "你已经发起了提现操作,若要取消操作请在客服中心联系管理员");
