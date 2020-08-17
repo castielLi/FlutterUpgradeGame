@@ -10,7 +10,7 @@ import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/const/resource.dart';
-import 'package:upgradegame/Src/common/model/user.dart';
+import 'package:upgradegame/Src/common/model/userSearch.dart';
 import 'package:upgradegame/Src/pages/market/event/marketEventBus.dart';
 import 'package:upgradegame/Src/pages/market/marketAsk.dart';
 import 'package:upgradegame/Src/pages/market/marketBidItem.dart';
@@ -31,7 +31,7 @@ class MarketDetail extends StatefulWidget {
 }
 
 class _MarketDetailState extends State<MarketDetail> {
-  User searchedUser;
+  UserSearch searchedUser;
   String noResultHintText = '';
   String noOrderHintText = '';
   final phoneController = TextEditingController();
@@ -214,7 +214,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                   this.noResultHintText = '没有搜索到用户';
                                   this.searchedUser = null;
                                   if (null != data) {
-                                    this.searchedUser = User.fromSearchJson(data);
+                                    this.searchedUser = UserSearch.fromJson(data);
                                     this.searchedUser.phone = phone;
                                   }
                                 });

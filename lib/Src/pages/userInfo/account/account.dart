@@ -90,15 +90,15 @@ class _AccountDetailState extends State<AccountDetail> {
                   buttonName: '确定',
                   callback: () {
                     if (isPasswordValid()) {
-                      AccountService.changePassword(repeatPasswordController.text, (data) {
-                        if (ConfigSetting.SUCCESS == data) {
-                          CommonUtils.showSuccessMessage(msg: "密码修改成功");
-                          this.widget.viewCallback();
-                          originalPasswordController.clear();
-                          newPasswordController.clear();
-                          repeatPasswordController.clear();
-                        }
-                      });
+//                      AccountService.changePassword(repeatPasswordController.text, (data) {
+//                        if (ConfigSetting.SUCCESS == data) {
+//                          CommonUtils.showSuccessMessage(msg: "密码修改成功");
+//                          this.widget.viewCallback();
+//                          originalPasswordController.clear();
+//                          newPasswordController.clear();
+//                          repeatPasswordController.clear();
+//                        }
+//                      });
                     }
                     FocusScope.of(context).requestFocus(FocusNode());
                   },

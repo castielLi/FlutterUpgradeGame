@@ -11,19 +11,12 @@ class User {
   // phone
   String phone;
 
-  String password;
-
-  User({this.avatarUrl, this.name, this.id, this.phone, this.password});
+  User({this.avatarUrl, this.name, this.id, this.phone});
 
   User.fromJson(Map<String, dynamic> json) {
     avatarUrl = json['avatarUrl'];
     name = json['name'];
     id = json['id'];
-  }
-
-  User.fromSearchJson(Map<String, dynamic> json) {
-    name = json['displayname'];
-    id = json['userid'];
   }
 
   Map<String, dynamic> toJson() {
