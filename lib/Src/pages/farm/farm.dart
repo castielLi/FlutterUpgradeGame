@@ -164,13 +164,39 @@ class _FarmDetailState extends State<FarmDetail> {
               imageUrl: "resource/images/upgradeButton.png",
               callback: () {
                 if (canUpdate()) {
-                  this.widget.HUD();
-                  BaseService.upgradeBuilding(BuildingEnum.farm.index, (model) {
-                    this.widget.HUD();
-                    if (model != null) {
-                      CommonUtils.showSuccessMessage(msg: "升级成功");
-                      Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
-                    }
+
+                  showDialog<Null>(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (BuildContext context) {
+                      return new AlertDialog(
+                        title: new Text('您确认要升级农场么?'),
+                        actions: <Widget>[
+                          new FlatButton(
+                            child: new Text('取消'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          new FlatButton(
+                            child: new Text('确认'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              this.widget.HUD();
+                              BaseService.upgradeBuilding(BuildingEnum.farm.index, (model) {
+                                this.widget.HUD();
+                                if (model != null) {
+                                  CommonUtils.showSuccessMessage(msg: "升级成功");
+                                  Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
+                                }
+                              });
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  ).then((val) {
+                    print(val);
                   });
                 }
               },

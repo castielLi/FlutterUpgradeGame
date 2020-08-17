@@ -27,6 +27,17 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
     super.didChangeDependencies();
   }
 
+  void upgradeBuilding(){
+    this.widget.HUD();
+    BaseService.upgradeBuilding(BuildingEnum.mainBuilding.index, (model){
+      this.widget.HUD();
+      if(model != null){
+        CommonUtils.showSuccessMessage(msg: "升级成功");
+        Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -98,13 +109,32 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
                     if (baseUserInfo.stoneamount < neededStone || baseUserInfo.woodamount < neededWood) {
                       CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
                     } else {
-                      this.widget.HUD();
-                      BaseService.upgradeBuilding(BuildingEnum.mainBuilding.index, (model){
-                        this.widget.HUD();
-                        if(model != null){
-                          CommonUtils.showSuccessMessage(msg: "升级成功");
-                          Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
-                        }
+
+                      showDialog<Null>(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return new AlertDialog(
+                            title: new Text('您确认要升级主城么?'),
+                            actions: <Widget>[
+                              new FlatButton(
+                                child: new Text('取消'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              new FlatButton(
+                                child: new Text('确认'),
+                                onPressed: () {
+                                  this.upgradeBuilding();
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      ).then((val) {
+                        print(val);
                       });
                     }
                   },
