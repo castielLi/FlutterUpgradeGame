@@ -1,5 +1,9 @@
+import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
@@ -8,11 +12,7 @@ import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/team/model/qrCodeModel.dart';
 import 'package:upgradegame/Src/pages/team/model/teamContributionModel.dart';
-import 'dart:async';
 import 'package:upgradegame/Src/service/serviceUrl.dart';
-import 'dart:ui' as ui;
-import 'dart:typed_data';
-import 'package:flutter/material.dart';
 
 class TeamService {
   static Future<ResultData> getTeamList(callback) async {
@@ -26,10 +26,9 @@ class TeamService {
     return response;
   }
 
-  static Future<ByteData> shareImageToWeChat(GlobalKey repaintWidgetKey,callback) async {
+  static Future<ByteData> shareImageToWeChat(GlobalKey repaintWidgetKey, callback) async {
     try {
-      RenderRepaintBoundary boundary = repaintWidgetKey.currentContext
-          .findRenderObject();
+      RenderRepaintBoundary boundary = repaintWidgetKey.currentContext.findRenderObject();
       double dpr = ui.window.devicePixelRatio; // 获取当前设备的像素比
       ui.Image image = await boundary.toImage(pixelRatio: dpr);
       ByteData _byteData = await image.toByteData(format: ui.ImageByteFormat.png);
@@ -42,19 +41,17 @@ class TeamService {
 
       if (!file.existsSync()) {
         file.createSync();
-      }else{
+      } else {
         file.delete();
       }
       file.writeAsBytesSync(sourceBytes);
 
-      callback(file,"二维码截图");
-
+      callback(file, "二维码截图");
     } catch (e) {
       print(e);
     }
     return null;
   }
-
 
   static Future<ResultData> getQRCode(callback) async {
     var response = await httpManager.request(ServiceUrl.getQRCode(), {}, null, null);

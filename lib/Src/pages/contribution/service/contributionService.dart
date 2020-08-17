@@ -25,7 +25,7 @@ class ContributionService {
     }
   }
 
-  static Future<ResultData> buyContribution(int tcoinamount, callback) async {
+  static Future<ResultData> exchangeCoinForContribution(int tcoinamount, callback) async {
     BuyContributionRequestModel requestModel = BuyContributionRequestModel(tcoinamount: tcoinamount);
     String params = convert.jsonEncode(requestModel);
     var response = await httpManager.request(ServiceUrl.buyContribution(), params, null, Options(method: "post"));
@@ -33,7 +33,7 @@ class ContributionService {
       BaseResourceModel model = BaseResourceModel.fromJson(response.data);
       callback(model);
     } else {
-      CommonUtils.showErrorMessage(msg: '购买贡献值出错');
+      CommonUtils.showErrorMessage(msg: '兑换贡献值出错');
       callback(null);
     }
   }
@@ -49,7 +49,7 @@ class ContributionService {
     }
   }
 
-  static Future<ResultData> exchangeContribution(String productId, callback) async {
+  static Future<ResultData> exchangeContributionForCoin(String productId, callback) async {
     ExchangeContributionRequestModel requestModel = ExchangeContributionRequestModel(productid: productId);
     String params = convert.jsonEncode(requestModel);
     var response = await httpManager.request(ServiceUrl.exchangeContribution(), params, null, Options(method: "post"));
@@ -57,7 +57,7 @@ class ContributionService {
       BaseResourceModel model = BaseResourceModel.fromJson(response.data);
       callback(model);
     } else {
-      CommonUtils.showErrorMessage(msg: '兑换贡献值出错');
+      CommonUtils.showErrorMessage(msg: '兑换T币出错');
       callback(null);
     }
   }
