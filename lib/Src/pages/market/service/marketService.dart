@@ -100,7 +100,7 @@ class MarketService {
     if (response.code == 200) {
       callback(true);
     } else {
-      CommonUtils.showErrorMessage(msg: "赠送T币出错");
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(false);
     }
   }

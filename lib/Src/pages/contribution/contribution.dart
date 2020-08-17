@@ -51,6 +51,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
     ContributionService.getContribution((MyContributionModel model) {
       this.widget.HUD();
       if (model != null) {
+        Provide.value<BaseUserInfoProvider>(context).setContribution(model.amount);
         setState(() {
           this.currentContributionModel = model;
         });
@@ -75,7 +76,8 @@ class _ContributionDetailState extends State<ContributionDetail> {
     ContributionService.buyContribution(tcoinamount, (BaseResourceModel model) {
       this.widget.HUD();
       if (model != null) {
-        Provide.value<BaseUserInfoProvider>(context).buyContribution(model);
+        int contribution = tcoinamount * Global.getCoinBuyContribution();
+        Provide.value<BaseUserInfoProvider>(context).buyContribution(model,contribution);
       }
     });
   }
@@ -152,7 +154,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                     width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
                     child: Text(
                       this.hideExchangeCoinForContribution
-                          ? "当前拥有: " + (this.currentContributionModel == null ? "0" : (this.currentContributionModel.amount - this.currentContributionModel.exchange).toString()) + " 贡献值"
+                          ? "当前拥有: " + (this.currentContributionModel == null ? "0" : baseUserInfo.Contribution.toString()) + " 贡献值"
                           : "当前拥有: " + baseUserInfo.tcoinamount.toString() + " T币",
                       textAlign: TextAlign.left,
                       style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize), color: Colors.white, decoration: TextDecoration.none),
@@ -227,15 +229,17 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                     if (model != null) {
                                       CommonUtils.showSuccessMessage(msg: "贡献值兑换T币成功");
                                       var array = exchangeContributionModel;
+                                      int contribution = 0;
                                       for (int i = 0; i < array.datalist.length; i++) {
                                         if (array.datalist[i].productid == productId) {
+                                          contribution = array.datalist[i].contributionamount;
                                           array.datalist.removeAt(i);
                                           setState(() {
                                             exchangeContributionModel = array;
                                           });
                                         }
                                       }
-                                      Provide.value<BaseUserInfoProvider>(context).exchangeContribution(model);
+                                      Provide.value<BaseUserInfoProvider>(context).exchangeContribution(model,contribution);
                                     }
                                   });
                                 },

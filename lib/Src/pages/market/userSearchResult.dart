@@ -13,7 +13,6 @@ import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 class UserSearchResult extends StatefulWidget {
   User user;
   String noUserHintText;
-//  bool showSearchResult = true;
 
   UserSearchResult({Key key, this.user, this.noUserHintText = ''}) : super(key: key);
 
@@ -22,18 +21,35 @@ class UserSearchResult extends StatefulWidget {
 }
 
 class _UserSearchResult extends State<UserSearchResult> {
-  final amountController = TextEditingController(text: "");
-  final passwordController = TextEditingController(text: "");
-  bool showSearchResult = true;
+  final amountController = TextEditingController();
+  final passwordController = TextEditingController();
+  bool showUserSearchResult = true;
+  int ticket = 0;
+  User currentuser;
 
   @override
   Widget build(BuildContext context) {
+
+    if(this.widget.user == null){
+      this.showUserSearchResult = true;
+    }else{
+      if(this.currentuser != null){
+        if(this.currentuser.id != this.widget.user.id){
+          this.showUserSearchResult = true;
+        }
+      }else{
+        this.showUserSearchResult = true;
+      }
+      this.currentuser = this.widget.user;
+    }
+
+
     return Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
         return Column(
           children: [
             Offstage(
-              offstage: !showSearchResult,
+              offstage: !this.showUserSearchResult,
               child: null == this.widget.user
                   ? Text(
                       this.widget.noUserHintText,
@@ -81,7 +97,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                     ),
             ),
             Offstage(
-              offstage: showSearchResult,
+              offstage: this.showUserSearchResult,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -174,7 +190,7 @@ class _UserSearchResult extends State<UserSearchResult> {
 
   void switchBetweenTwoPages() {
     setState(() {
-      showSearchResult = !showSearchResult;
+      this.showUserSearchResult = !this.showUserSearchResult;
     });
   }
 }

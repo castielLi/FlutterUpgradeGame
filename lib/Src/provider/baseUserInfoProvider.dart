@@ -23,8 +23,11 @@ class BaseUserInfoProvider with ChangeNotifier {
   int voucher;
   Ad ad;
   int tobecollectedcoin;
+  int contribution;
 
   int get TCoinAmount => tcoinamount;
+
+  int get Contribution => contribution;
 
   int get WoodAmount => woodamount;
 
@@ -74,6 +77,10 @@ class BaseUserInfoProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  setContribution(int contribution){
+    this.contribution = contribution;
+  }
+
   ///获取t币
   takeCoin(int tconamount, int woodamount, int stoneamount) {
     this.tcoinamount = tconamount;
@@ -110,8 +117,9 @@ class BaseUserInfoProvider with ChangeNotifier {
   }
 
   ///购买贡献值
-  buyContribution(BaseResourceModel model) {
+  buyContribution(BaseResourceModel model,int contribution) {
     this.tcoinamount = model.tcoinamount;
+    this.contribution += contribution;
     notifyListeners();
   }
 
@@ -168,8 +176,9 @@ class BaseUserInfoProvider with ChangeNotifier {
   }
 
   ///兑换贡献值
-  exchangeContribution(BaseResourceModel model){
+  exchangeContribution(BaseResourceModel model,int contribution){
     this.tcoinamount = model.tcoinamount;
+    this.contribution -= contribution;
     notifyListeners();
   }
 }
