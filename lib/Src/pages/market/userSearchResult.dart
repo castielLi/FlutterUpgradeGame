@@ -15,7 +15,7 @@ class UserSearchResult extends StatefulWidget {
   String noUserHintText;
   VoidCallback HUD;
 
-  UserSearchResult({Key key, this.user, this.noUserHintText = '',this.HUD}) : super(key: key);
+  UserSearchResult({Key key, this.user, this.noUserHintText = '', this.HUD}) : super(key: key);
 
   @override
   _UserSearchResult createState() => _UserSearchResult();
@@ -156,7 +156,15 @@ class _UserSearchResult extends State<UserSearchResult> {
                       ImageTextButton(
                         buttonName: '确 定',
                         callback: () {
-
+                          if (amountController.text == '' || passwordController.text == '') {
+                            CommonUtils.showErrorMessage(msg: '输入不能为空');
+                            return;
+                          }
+                          String amount = amountController.text;
+                          if (!RegExp(r"^\d*$").hasMatch(amount)) {
+                            CommonUtils.showErrorMessage(msg: "请输入正整数");
+                            return;
+                          }
                           showDialog<Null>(
                             context: context,
                             barrierDismissible: false,
@@ -174,10 +182,6 @@ class _UserSearchResult extends State<UserSearchResult> {
                                     child: new Text('确认'),
                                     onPressed: () {
                                       Navigator.of(context).pop();
-                                      if (amountController.text == '' || passwordController.text == '') {
-                                        CommonUtils.showErrorMessage(msg: '输入不能为空');
-                                        return;
-                                      }
                                       if (baseUserInfo.voucher >= int.parse(amountController.text)) {
                                         this.widget.HUD();
                                         MarketService.sendCoin(this.widget.user.userid, int.parse(amountController.text), passwordController.text, (data) {

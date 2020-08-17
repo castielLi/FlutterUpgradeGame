@@ -18,9 +18,6 @@ import 'package:upgradegame/Src/pages/market/model/tradeListModel.dart';
 import 'package:upgradegame/Src/pages/market/service/marketService.dart';
 import 'package:upgradegame/Src/pages/market/userSearchResult.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
-import 'package:upgradegame/Src/route/application.dart';
-import 'package:upgradegame/Src/route/upgradegame_route.dart';
-import 'package:upgradegame/main.dart';
 
 import 'model/tradeItemModel.dart';
 
@@ -144,7 +141,6 @@ class _MarketDetailState extends State<MarketDetail> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
         return Container(
@@ -420,6 +416,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                                         this.widget.HUD();
                                                         if (success) {
                                                           CommonUtils.showSuccessMessage(msg: "购买成功");
+
                                                           ///wood = 1 stone = 2
                                                           baseUserInfo.buyResource(2, tradeItemModel.amount, tradeItemModel.price);
                                                           setState(() {
@@ -465,12 +462,39 @@ class _MarketDetailState extends State<MarketDetail> {
                                       needCoin: tradeItemModel.price,
                                       buttonName: "取 消",
                                       buttonCallback: () {
-                                        MarketService.cancelMyMarketTrade(tradeItemModel.productid, tradeItemModel.type, (data) {
-                                          if (data) {
-                                            CommonUtils.showSuccessMessage(msg: "取消订单成功");
-                                            baseUserInfo.cancelBid(tradeItemModel.type, tradeItemModel.amount);
-                                            getMyTradeList();
-                                          }
+                                        showDialog<Null>(
+                                          context: context,
+                                          barrierDismissible: false,
+                                          builder: (BuildContext context) {
+                                            return new AlertDialog(
+                                              title: new Text('您确定取消订单么?'),
+                                              actions: <Widget>[
+                                                new FlatButton(
+                                                  child: new Text('返回'),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                                new FlatButton(
+                                                  child: new Text('确定'),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                    this.widget.HUD();
+                                                    MarketService.cancelMyMarketTrade(tradeItemModel.productid, tradeItemModel.type, (data) {
+                                                      this.widget.HUD();
+                                                      if (data) {
+                                                        CommonUtils.showSuccessMessage(msg: "取消订单成功");
+                                                        baseUserInfo.cancelBid(tradeItemModel.type, tradeItemModel.amount);
+                                                        getMyTradeList();
+                                                      }
+                                                    });
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        ).then((val) {
+                                          print(val);
                                         });
                                       },
                                     );
