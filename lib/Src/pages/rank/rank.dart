@@ -42,7 +42,7 @@ class _RankDetailState extends State<RankDetail> {
   Widget build(BuildContext context) {
     return new Container(
       margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
-          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
+          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(250)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -71,11 +71,12 @@ class _RankDetailState extends State<RankDetail> {
             ],
           ),
           Container(
+//            color:Colors.blue,
             height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
             child: tabName == 'coin'
                 ? ListView.builder(
                     itemCount: coinList.length,
-                    itemExtent: ScreenUtil().setHeight(SystemScreenSize.displayItemHeight),
+                    itemExtent: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                     padding: EdgeInsets.only(top: 0),
                     itemBuilder: (BuildContext context, int index) {
                       int count = index + 1;
@@ -93,7 +94,7 @@ class _RankDetailState extends State<RankDetail> {
                   )
                 : ListView.builder(
                     itemCount: incomeList.length,
-                    itemExtent: ScreenUtil().setHeight(SystemScreenSize.displayItemHeight),
+                    itemExtent: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                     padding: EdgeInsets.only(top: 0),
                     itemBuilder: (BuildContext context, int index) {
                       int count = index + 1;
