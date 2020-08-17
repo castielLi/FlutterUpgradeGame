@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/userInfo/event/userInfoEventBus.dart';
 import 'package:upgradegame/Src/pages/userInfo/model/serverCenterModel.dart';
 import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
@@ -22,7 +24,6 @@ class _ServerCenterState extends State<ServerCenter> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     UserInfoHttpRequestEvent().on("serverCenter", this.getServerCenter);
   }
@@ -56,27 +57,60 @@ class _ServerCenterState extends State<ServerCenter> {
           child: Column(
             children: <Widget>[
               new Container(
-                padding: EdgeInsets.only(left: ScreenUtil().setWidth(200)),
+                width: ScreenUtil().setWidth(500),
                 child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Image(image: new AssetImage('resource/images/qq.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
-                    Text(
-                      this.qq,
-                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                    new Row(
+                      children: <Widget>[
+                        Image(image: new AssetImage('resource/images/qq.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                        Text(
+                          this.qq,
+                          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                        ),
+                      ],
+                    ),
+                    GestureDetector(
+                      child: Icon(
+                        Icons.content_copy,
+                        color: Colors.white,
+                      ),
+                      onTap: () {
+                        Clipboard.setData(ClipboardData(text: this.qq));
+                        CommonUtils.showSuccessMessage(msg: 'QQ号复制成功');
+                      },
                     ),
                   ],
                 ),
               ),
               new Padding(
-                padding: new EdgeInsets.fromLTRB(ScreenUtil().setWidth(200), ScreenUtil().setWidth(50), ScreenUtil().setWidth(0), ScreenUtil().setWidth(0)),
-                child: new Row(
-                  children: <Widget>[
-                    Image(image: new AssetImage('resource/images/wechat.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
-                    Text(
-                      this.wechat,
-                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                    ),
-                  ],
+                padding: new EdgeInsets.only(top: ScreenUtil().setWidth(50)),
+                child: new Container(
+                  width: ScreenUtil().setWidth(500),
+                  child: new Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      new Row(
+                        children: <Widget>[
+                          Image(image: new AssetImage('resource/images/wechat.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                          Text(
+                            this.wechat,
+                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                          ),
+                        ],
+                      ),
+                      GestureDetector(
+                        child: Icon(
+                          Icons.content_copy,
+                          color: Colors.white,
+                        ),
+                        onTap: () {
+                          Clipboard.setData(ClipboardData(text: this.wechat));
+                          CommonUtils.showSuccessMessage(msg: '微信号复制成功');
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],
