@@ -42,7 +42,6 @@ class _StoreDetailState extends State<StoreDetail> {
 //          fluwx.weChatResponseEventHandler.skip(1);
         });
       } else if (response.errCode == -2 && response is WeChatPaymentResponse) {
-        this.widget.HUD();
         CommonUtils.showErrorMessage(msg: "已经取消购买");
       }
       // eventBus.fire(new RefreshMineInfo(true));
