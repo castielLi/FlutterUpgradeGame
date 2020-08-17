@@ -83,7 +83,7 @@ class _MarketAskState extends State<MarketAsk> {
                     }
                     MarketService.sellResource(this.widget.sellType, int.parse(this.amountController.text), int.parse(this.coinController.text), (data) {
                       if (data) {
-                        CommonUtils.showSuccessMessage(msg: "订单发布成功");
+                        CommonUtils.showSuccessMessage(msg: "发布订单成功");
                         baseUserInfo.publishBid(this.widget.sellType == "wood" ? 1 : 2, int.parse(this.amountController.text));
                         this.widget.viewCallback();
                         MarketHttpRequestEvent().emit("getMyTradeList");

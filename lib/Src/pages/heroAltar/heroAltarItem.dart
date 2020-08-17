@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/buyHeroModel.dart';
 import 'package:upgradegame/Src/pages/heroAltar/service/heroService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
@@ -38,6 +39,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
     HeroService.buyHero(type, (BuyHeroModel model) {
       this.widget.HUD();
       if (model != null) {
+        CommonUtils.showSuccessMessage(msg: '英雄购买成功');
         setState(() {
           Provide.value<BaseUserInfoProvider>(context).buyHero(model.tcoinamount, model.datalist);
         });

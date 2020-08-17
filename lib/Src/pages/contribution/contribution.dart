@@ -73,11 +73,12 @@ class _ContributionDetailState extends State<ContributionDetail> {
 
   void buyContribution(int tcoinamount) {
     this.widget.HUD();
-    ContributionService.buyContribution(tcoinamount, (BaseResourceModel model) {
+    ContributionService.exchangeCoinForContribution(tcoinamount, (BaseResourceModel model) {
       this.widget.HUD();
       if (model != null) {
         int contribution = tcoinamount * Global.getCoinBuyContribution();
-        Provide.value<BaseUserInfoProvider>(context).buyContribution(model,contribution);
+        Provide.value<BaseUserInfoProvider>(context).buyContribution(model, contribution);
+        CommonUtils.showSuccessMessage(msg: '兑换贡献值成功');
       }
     });
   }
@@ -187,11 +188,12 @@ class _ContributionDetailState extends State<ContributionDetail> {
                           imageHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
                           buttonName: '确 定',
                           callback: () {
-                            if (amountController.text != "") {
+                            String amount = amountController.text;
+                            if (!RegExp(r"^\d*$").hasMatch(amount)) {
+                              CommonUtils.showErrorMessage(msg: "请输入正整数");
+                            } else {
                               this.buyContribution(int.parse(amountController.text));
                               amountController.clear();
-                            } else {
-                              CommonUtils.showErrorMessage(msg: "输入有误,请重新输入");
                             }
                           },
                           textSize: ScreenUtil().setSp(SystemFontSize.settingTextFontSize),
@@ -223,8 +225,12 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                 coinAmount: coin,
                                 isBuy: isBuy,
                                 callback: () {
+                                  if(baseUserInfo.Contribution<contribution){
+                                    CommonUtils.showErrorMessage(msg: '贡献值不足');
+                                    return;
+                                  }
                                   this.widget.HUD();
-                                  ContributionService.exchangeContribution(productId, (BaseResourceModel model) {
+                                  ContributionService.exchangeContributionForCoin(productId, (BaseResourceModel model) {
                                     this.widget.HUD();
                                     if (model != null) {
                                       CommonUtils.showSuccessMessage(msg: "贡献值兑换T币成功");
@@ -239,7 +245,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                           });
                                         }
                                       }
-                                      Provide.value<BaseUserInfoProvider>(context).exchangeContribution(model,contribution);
+                                      Provide.value<BaseUserInfoProvider>(context).exchangeContribution(model, contribution);
                                     }
                                   });
                                 },

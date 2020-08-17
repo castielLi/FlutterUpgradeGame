@@ -46,7 +46,7 @@ class MarketService {
     if (response.code == 200) {
       callback(true);
     } else {
-      CommonUtils.showErrorMessage(msg: "请求市场订单出错");
+      CommonUtils.showErrorMessage(msg: "购买市场订单出错");
       callback(false);
     }
   }
@@ -69,7 +69,6 @@ class MarketService {
     ///wood = 1 stone = 2
     CancelTradeRequestModel requestModel = CancelTradeRequestModel(productid: productId, type: type);
     String params = convert.jsonEncode(requestModel);
-
     var response = await httpManager.request(ServiceUrl.cancelMyMarketTrade(), params, null, Options(method: "post"));
     if (response.code == 200) {
       callback(true);
@@ -81,7 +80,6 @@ class MarketService {
 
   static Future<ResultData> sellResource(type, amount, price, callback) async {
     ///wood = 1 stone = 2
-
     SellResourceModel sellResourceModel = new SellResourceModel(type: type == "wood" ? 1 : 2, amount: amount, price: price);
     String params = convert.jsonEncode(sellResourceModel);
     var response = await httpManager.request(ServiceUrl.sellResource(), params, null, Options(method: "post"));

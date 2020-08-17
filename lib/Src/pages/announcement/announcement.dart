@@ -34,8 +34,6 @@ class _AnnouncementDetailState extends State<AnnouncementDetail> {
 
   @override
   Widget build(BuildContext context) {
-//    print("StatusBarHeight:" + ScreenUtil.statusBarHeight.toString() + ", ratio:" + ScreenUtil.pixelRatio.toString());
-//    print("Width:" + ScreenUtil().scaleWidth.toString() + ",height:" + ScreenUtil().scaleHeight.toString());
     return new Center(
       child: new Container(
         height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
