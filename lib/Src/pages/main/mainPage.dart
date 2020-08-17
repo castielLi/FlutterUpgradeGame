@@ -92,8 +92,8 @@ class _MainPageState extends State<MainPage> {
 
     ///收到通知的监听
     notification = NotificationEvent().eventBus.on<RecieveNotificationEvent>().listen((message) {
-      Map<String, dynamic> model = convert.jsonDecode(message.message['extras']['cn.jpush.android.EXTRA']);
-      print(model);
+//      Map<String, dynamic> model = convert.jsonDecode(message.message['extras']['cn.jpush.android.EXTRA']);
+//      print(model);
     });
 
     ///后台绑定用户和极光的registerid

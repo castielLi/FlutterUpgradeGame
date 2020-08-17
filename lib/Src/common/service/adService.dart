@@ -21,7 +21,7 @@ class AdService {
       WatchAdModel model = WatchAdModel.fromJson(response.data);
       callback(model);
     } else {
-      CommonUtils.showErrorMessage(msg: "观看广告请求出错");
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(null);
     }
   }

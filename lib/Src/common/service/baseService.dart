@@ -33,7 +33,7 @@ class BaseService {
       BaseResourceModel model = BaseResourceModel.fromJson(response.data);
       callback(model);
     } else {
-      CommonUtils.showErrorMessage(msg: "升级操作出错");
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(null);
     }
   }

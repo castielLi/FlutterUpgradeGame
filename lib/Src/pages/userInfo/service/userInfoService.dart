@@ -40,7 +40,7 @@ class UserInfoService{
     if (response.code == 200) {
       callback(true);
     } else {
-      CommonUtils.showErrorMessage(msg: "提现操作失败");
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(false);
     }
   }

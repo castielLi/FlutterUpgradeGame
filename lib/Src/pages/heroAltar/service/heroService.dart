@@ -16,10 +16,11 @@ class HeroService {
 
     var response = await httpManager.request(ServiceUrl.buyHero(), params, null, Options(method: "post"));
     if (response.code == 200) {
+      CommonUtils.showSuccessMessage(msg: "购买英雄成功");
       BuyHeroModel model = BuyHeroModel.fromJson(response.data);
       callback(model);
     } else {
-      CommonUtils.showErrorMessage(msg: "购买英雄出错");
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(null);
     }
   }
@@ -31,7 +32,7 @@ class HeroService {
       HeroBaseInfoListModel model = HeroBaseInfoListModel.fromJson(response.data);
       callback(model);
     } else {
-      CommonUtils.showErrorMessage(msg: "购买英雄出错");
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(null);
     }
   }

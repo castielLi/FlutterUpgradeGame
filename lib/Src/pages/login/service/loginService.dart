@@ -29,7 +29,7 @@ class LoginService {
       FileStorage.saveContent(responseModel.verified.toString(), "verified");
       callback(responseModel);
     } else {
-      CommonUtils.showErrorMessage(msg: '登录出错');
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(null);
     }
   }
@@ -62,7 +62,7 @@ class LoginService {
       FileStorage.saveContent("true", "verified");
       callback(responseModel);
     } else {
-      CommonUtils.showErrorMessage(msg: '登录出错');
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(null);
     }
   }

@@ -150,6 +150,7 @@ class _SawmillDetailState extends State<SawmillDetail> {
                   BaseService.upgradeBuilding(BuildingEnum.sawmill.index, (model) {
                     this.widget.HUD();
                     if (model != null) {
+                      CommonUtils.showSuccessMessage(msg: "升级成功");
                       Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
                     }
                   });

@@ -20,7 +20,7 @@ class TeamService {
     if (ConfigSetting.SUCCESS == response.code) {
       callback(response.data);
     } else {
-      CommonUtils.showErrorMessage(msg: '网络请求失败，请重试');
+      CommonUtils.showErrorMessage(msg: '请求失败请重试');
       callback(null);
     }
     return response;
@@ -62,7 +62,7 @@ class TeamService {
       QRCodeModel model = QRCodeModel.fromJson(response.data);
       callback(model);
     } else {
-      CommonUtils.showErrorMessage(msg: '网络请求失败，请重试');
+      CommonUtils.showErrorMessage(msg: '请求失败请重试');
       callback(null);
     }
     return response;
@@ -74,7 +74,7 @@ class TeamService {
       TeamContributionModel model = TeamContributionModel.fromJson(response.data);
       callback(model);
     } else {
-      CommonUtils.showErrorMessage(msg: '网络请求失败，请重试');
+      CommonUtils.showErrorMessage(msg: '请求失败请重试');
       callback(null);
     }
     return response;

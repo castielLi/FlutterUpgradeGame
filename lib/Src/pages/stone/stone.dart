@@ -151,6 +151,7 @@ class _StoneDetailState extends State<StoneDetail> {
                   BaseService.upgradeBuilding(BuildingEnum.stone.index, (model) {
                     this.widget.HUD();
                     if (model != null) {
+                      CommonUtils.showSuccessMessage(msg: "升级成功");
                       Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
                     }
                   });

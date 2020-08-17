@@ -18,7 +18,7 @@ class StoreService {
     if (ConfigSetting.SUCCESS == response.code) {
       callback(response.data);
     } else {
-      CommonUtils.showErrorMessage(msg: '网络请求失败，请重试');
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(null);
     }
     return response;
@@ -34,7 +34,7 @@ class StoreService {
       BuyVoucherWeChatResponseModel model = BuyVoucherWeChatResponseModel.fromJson(response.data);
       callback(model);
     } else {
-      CommonUtils.showErrorMessage(msg: "购买出错");
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(null);
     }
   }
@@ -49,7 +49,7 @@ class StoreService {
       VoucherModel model = VoucherModel.fromJson(response.data);
       callback(model);
     } else {
-      CommonUtils.showErrorMessage(msg: "购买出错,请联系管理员");
+      CommonUtils.showErrorMessage(msg: response.message + "!!请联系管理员!!");
       callback(null);
     }
   }

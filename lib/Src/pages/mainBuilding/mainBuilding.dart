@@ -102,6 +102,7 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
                       BaseService.upgradeBuilding(BuildingEnum.mainBuilding.index, (model){
                         this.widget.HUD();
                         if(model != null){
+                          CommonUtils.showSuccessMessage(msg: "升级成功");
                           Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
                         }
                       });

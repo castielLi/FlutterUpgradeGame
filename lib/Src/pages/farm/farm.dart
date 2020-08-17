@@ -168,6 +168,7 @@ class _FarmDetailState extends State<FarmDetail> {
                   BaseService.upgradeBuilding(BuildingEnum.farm.index, (model) {
                     this.widget.HUD();
                     if (model != null) {
+                      CommonUtils.showSuccessMessage(msg: "升级成功");
                       Provide.value<BaseUserInfoProvider>(context).upgradeBuilding(model);
                     }
                   });

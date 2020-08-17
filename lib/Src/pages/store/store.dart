@@ -37,6 +37,7 @@ class _StoreDetailState extends State<StoreDetail> {
         StoreService.ConfirmOrder(this.orderId, (VoucherModel model) {
           this.widget.HUD();
           if (model != null) {
+            CommonUtils.showSuccessMessage(msg: "购买赠送券成功");
             Provide.value<BaseUserInfoProvider>(context).buyVoucher(model.amount);
           }
 //          fluwx.weChatResponseEventHandler.skip(1);

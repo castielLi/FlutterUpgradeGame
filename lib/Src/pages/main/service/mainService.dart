@@ -45,8 +45,15 @@ class MainService{
   static Future<ResultData> takeCoin(callback) async{
     var response = await httpManager.request(
         ServiceUrl.takeCoin(), {}, null, Options(method: "post"));
-    TakeCoinModel model = TakeCoinModel.fromJson(response.data);
-    callback(model);
+    if(response.code == 200) {
+      TakeCoinModel model = TakeCoinModel.fromJson(response.data);
+      callback(model);
+      CommonUtils.showSuccessMessage(msg: "获取T币成功");
+    }else{
+      callback(null);
+      CommonUtils.showErrorMessage(msg: response.message);
+    }
+
   }
 
   static Future<ResultData> localLogout(callback) async{
