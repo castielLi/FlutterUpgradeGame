@@ -13,8 +13,9 @@ import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 class UserSearchResult extends StatefulWidget {
   UserSearch user;
   String noUserHintText;
+  VoidCallback HUD;
 
-  UserSearchResult({Key key, this.user, this.noUserHintText = ''}) : super(key: key);
+  UserSearchResult({Key key, this.user, this.noUserHintText = '',this.HUD}) : super(key: key);
 
   @override
   _UserSearchResult createState() => _UserSearchResult();
@@ -155,24 +156,52 @@ class _UserSearchResult extends State<UserSearchResult> {
                       ImageTextButton(
                         buttonName: '确 定',
                         callback: () {
-                          if (amountController.text == '' || passwordController.text == '') {
-                            CommonUtils.showErrorMessage(msg: '输入不能为空');
-                            return;
-                          }
-                          if (baseUserInfo.voucher >= int.parse(amountController.text)) {
-                            MarketService.sendCoin(this.widget.user.userid, int.parse(amountController.text), passwordController.text, (data) {
-                              if (data) {
-                                CommonUtils.showSuccessMessage(msg: "发送成功");
-                                baseUserInfo.sendCoin(int.parse(amountController.text), int.parse(amountController.text));
-                                switchBetweenTwoPages();
-                                amountController.clear();
-                                passwordController.clear();
-                              }
-                            });
-                            FocusScope.of(context).requestFocus(FocusNode());
-                          } else {
-                            CommonUtils.showErrorMessage(msg: "您的赠送券不足,请在商城购买赠送券");
-                          }
+
+                          showDialog<Null>(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return new AlertDialog(
+                                title: new Text('您确认要赠送T币么?'),
+                                actions: <Widget>[
+                                  new FlatButton(
+                                    child: new Text('取消'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  new FlatButton(
+                                    child: new Text('确认'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      if (amountController.text == '' || passwordController.text == '') {
+                                        CommonUtils.showErrorMessage(msg: '输入不能为空');
+                                        return;
+                                      }
+                                      if (baseUserInfo.voucher >= int.parse(amountController.text)) {
+                                        this.widget.HUD();
+                                        MarketService.sendCoin(this.widget.user.userid, int.parse(amountController.text), passwordController.text, (data) {
+                                          this.widget.HUD();
+                                          if (data) {
+                                            CommonUtils.showSuccessMessage(msg: "发送成功");
+                                            baseUserInfo.sendCoin(int.parse(amountController.text), int.parse(amountController.text));
+                                            switchBetweenTwoPages();
+                                            amountController.clear();
+                                            passwordController.clear();
+                                          }
+                                        });
+                                        FocusScope.of(context).requestFocus(FocusNode());
+                                      } else {
+                                        CommonUtils.showErrorMessage(msg: "您的赠送券不足,请在商城购买赠送券");
+                                      }
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          ).then((val) {
+                            print(val);
+                          });
                         },
                       ),
                     ],

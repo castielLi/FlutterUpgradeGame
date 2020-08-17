@@ -6,6 +6,7 @@ import 'package:upgradegame/Src/pages/login/login.dart';
 import 'package:upgradegame/Src/pages/main/mainPage.dart';
 import 'package:upgradegame/Src/pages/privacyTerms/privacyTerms.dart';
 import 'package:upgradegame/Src/pages/welcome/welcomePage.dart';
+import 'package:upgradegame/Src/common/widget/confirmDialog/confirmDialog.dart';
 
 //config
 Handler welcomePageHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -41,4 +42,8 @@ Handler resourceDialogHandler = Handler(handlerFunc: (BuildContext context, Map<
 
 Handler privacyTermsHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return PrivacyTermsPage();
+});
+
+Handler confirmDialogHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return ConfirmDialog();
 });

@@ -18,6 +18,9 @@ import 'package:upgradegame/Src/pages/market/model/tradeListModel.dart';
 import 'package:upgradegame/Src/pages/market/service/marketService.dart';
 import 'package:upgradegame/Src/pages/market/userSearchResult.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
+import 'package:upgradegame/Src/route/application.dart';
+import 'package:upgradegame/Src/route/upgradegame_route.dart';
+import 'package:upgradegame/main.dart';
 
 import 'model/tradeItemModel.dart';
 
@@ -141,6 +144,7 @@ class _MarketDetailState extends State<MarketDetail> {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
         return Container(
@@ -226,6 +230,7 @@ class _MarketDetailState extends State<MarketDetail> {
                             child: UserSearchResult(
                               user: this.searchedUser,
                               noUserHintText: this.noResultHintText,
+                              HUD: this.widget.HUD,
                             ),
                           ),
                         ],
@@ -288,20 +293,47 @@ class _MarketDetailState extends State<MarketDetail> {
                                         amount: tradeItemModel.amount,
                                         needCoin: tradeItemModel.price,
                                         buttonCallback: () {
-                                          MarketService.marketBuy(tradeItemModel.productid, (bool success) {
-                                            if (success) {
-                                              ///wood = 1 stone = 2
-                                              CommonUtils.showSuccessMessage(msg: "购买成功");
-                                              baseUserInfo.buyResource(1, tradeItemModel.amount, tradeItemModel.price);
-                                              setState(() {
-                                                for (int i = 0; i < this.woodList.datalist.length; i++) {
-                                                  if (tradeItemModel.productid == this.woodList.datalist[i].productid) {
-                                                    this.woodList.datalist.removeAt(i);
-                                                    return;
-                                                  }
-                                                }
-                                              });
-                                            }
+                                          showDialog<Null>(
+                                            context: context,
+                                            barrierDismissible: false,
+                                            builder: (BuildContext context) {
+                                              return new AlertDialog(
+                                                title: new Text('您确认购买木材么?'),
+                                                actions: <Widget>[
+                                                  new FlatButton(
+                                                    child: new Text('取消'),
+                                                    onPressed: () {
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                  ),
+                                                  new FlatButton(
+                                                    child: new Text('确认'),
+                                                    onPressed: () {
+                                                      Navigator.of(context).pop();
+                                                      this.widget.HUD();
+                                                      MarketService.marketBuy(tradeItemModel.productid, (bool success) {
+                                                        this.widget.HUD();
+                                                        if (success) {
+                                                          ///wood = 1 stone = 2
+                                                          CommonUtils.showSuccessMessage(msg: "购买成功");
+                                                          baseUserInfo.buyResource(1, tradeItemModel.amount, tradeItemModel.price);
+                                                          setState(() {
+                                                            for (int i = 0; i < this.woodList.datalist.length; i++) {
+                                                              if (tradeItemModel.productid == this.woodList.datalist[i].productid) {
+                                                                this.woodList.datalist.removeAt(i);
+                                                                return;
+                                                              }
+                                                            }
+                                                          });
+                                                        }
+                                                      });
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ).then((val) {
+                                            print(val);
                                           });
                                         },
                                       );
@@ -366,21 +398,47 @@ class _MarketDetailState extends State<MarketDetail> {
                                         amount: tradeItemModel.amount,
                                         needCoin: tradeItemModel.price,
                                         buttonCallback: () {
-                                          MarketService.marketBuy(tradeItemModel.productid, (bool success) {
-                                            if (success) {
-                                              CommonUtils.showSuccessMessage(msg: "购买成功");
-
-                                              ///wood = 1 stone = 2
-                                              baseUserInfo.buyResource(2, tradeItemModel.amount, tradeItemModel.price);
-                                              setState(() {
-                                                for (int i = 0; i < this.stoneList.datalist.length; i++) {
-                                                  if (tradeItemModel.productid == this.stoneList.datalist[i].productid) {
-                                                    this.stoneList.datalist.removeAt(i);
-                                                    return;
-                                                  }
-                                                }
-                                              });
-                                            }
+                                          showDialog<Null>(
+                                            context: context,
+                                            barrierDismissible: false,
+                                            builder: (BuildContext context) {
+                                              return new AlertDialog(
+                                                title: new Text('您确认购买石材么?'),
+                                                actions: <Widget>[
+                                                  new FlatButton(
+                                                    child: new Text('取消'),
+                                                    onPressed: () {
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                  ),
+                                                  new FlatButton(
+                                                    child: new Text('确认'),
+                                                    onPressed: () {
+                                                      Navigator.of(context).pop();
+                                                      this.widget.HUD();
+                                                      MarketService.marketBuy(tradeItemModel.productid, (bool success) {
+                                                        this.widget.HUD();
+                                                        if (success) {
+                                                          CommonUtils.showSuccessMessage(msg: "购买成功");
+                                                          ///wood = 1 stone = 2
+                                                          baseUserInfo.buyResource(2, tradeItemModel.amount, tradeItemModel.price);
+                                                          setState(() {
+                                                            for (int i = 0; i < this.stoneList.datalist.length; i++) {
+                                                              if (tradeItemModel.productid == this.stoneList.datalist[i].productid) {
+                                                                this.stoneList.datalist.removeAt(i);
+                                                                return;
+                                                              }
+                                                            }
+                                                          });
+                                                        }
+                                                      });
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ).then((val) {
+                                            print(val);
                                           });
                                         },
                                       );
