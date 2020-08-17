@@ -6,14 +6,13 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
-import 'package:upgradegame/Src/common/model/user.dart';
+import 'package:upgradegame/Src/common/model/userSearch.dart';
 import 'package:upgradegame/Src/pages/market/service/marketService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
 class UserSearchResult extends StatefulWidget {
-  User user;
+  UserSearch user;
   String noUserHintText;
-
 
   UserSearchResult({Key key, this.user, this.noUserHintText = ''}) : super(key: key);
 
@@ -26,28 +25,26 @@ class _UserSearchResult extends State<UserSearchResult> {
   final passwordController = TextEditingController();
   bool showUserSearchResult = true;
   int ticket = 0;
-  User currentuser;
+  UserSearch currentuser;
 
   @override
   Widget build(BuildContext context) {
-
-    if(this.widget.user == null){
+    if (this.widget.user == null) {
       this.showUserSearchResult = true;
-    }else{
-      if(this.currentuser != null){
-        if(this.currentuser.id != this.widget.user.id){
+    } else {
+      if (this.currentuser != null) {
+        if (this.currentuser.userid != this.widget.user.userid) {
           this.showUserSearchResult = true;
         }
-      }else{
+      } else {
         this.showUserSearchResult = true;
       }
       this.currentuser = this.widget.user;
     }
 
-
     return Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
-        return Stack(
+        return Column(
           children: [
             Offstage(
               offstage: !this.showUserSearchResult,
@@ -86,7 +83,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Text(
-                                    this.widget.user.name,
+                                    this.widget.user.displayname,
                                     style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                   ),
                                 ],
@@ -111,9 +108,9 @@ class _UserSearchResult extends State<UserSearchResult> {
                         amount = amountController.text;
                         if (!RegExp(r"^\d*$").hasMatch(amount)) {
                           CommonUtils.showErrorMessage(msg: "请输入正整数");
-                          this.ticket = 0;
+//                          this.ticket = 0;
                         }
-                        this.ticket = int.parse(amount);
+//                        this.ticket = int.parse(amount);
                       });
                     },
                   ),
@@ -162,18 +159,18 @@ class _UserSearchResult extends State<UserSearchResult> {
                             CommonUtils.showErrorMessage(msg: '输入不能为空');
                             return;
                           }
-                          if(baseUserInfo.voucher >= int.parse(amountController.text)){
-                            MarketService.sendCoin(this.widget.user.id, int.parse(amountController.text), passwordController.text, (data) {
+                          if (baseUserInfo.voucher >= int.parse(amountController.text)) {
+                            MarketService.sendCoin(this.widget.user.userid, int.parse(amountController.text), passwordController.text, (data) {
                               if (data) {
                                 CommonUtils.showSuccessMessage(msg: "发送成功");
-                                baseUserInfo.sendCoin(int.parse(amountController.text),int.parse(amountController.text));
+                                baseUserInfo.sendCoin(int.parse(amountController.text), int.parse(amountController.text));
                                 switchBetweenTwoPages();
                                 amountController.clear();
                                 passwordController.clear();
                               }
                             });
                             FocusScope.of(context).requestFocus(FocusNode());
-                          }else{
+                          } else {
                             CommonUtils.showErrorMessage(msg: "您的赠送券不足,请在商城购买赠送券");
                           }
                         },

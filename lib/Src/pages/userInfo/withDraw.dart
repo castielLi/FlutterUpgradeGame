@@ -20,9 +20,9 @@ class Withdraw extends StatefulWidget {
 }
 
 class _WithdrawState extends State<Withdraw> {
-  final accountController = TextEditingController();
-  final amountController = TextEditingController();
-  final passwordController = TextEditingController();
+  final accountController = TextEditingController(text: "");
+  final amountController = TextEditingController(text: "");
+  final passwordController = TextEditingController(text: "");
 
   withdraw(String account, String password, String amount) {
     this.widget.HUD();

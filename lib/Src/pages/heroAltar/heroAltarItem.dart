@@ -50,7 +50,6 @@ class _HeroAltarItem extends State<HeroAltarItem> {
     return Column(
       children: <Widget>[
         Container(
-          //TODO
           width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
           height: ScreenUtil().setHeight(SystemScreenSize.displayItemHeight),
           decoration: BoxDecoration(

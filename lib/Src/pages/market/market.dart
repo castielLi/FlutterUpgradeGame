@@ -10,7 +10,7 @@ import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/const/resource.dart';
-import 'package:upgradegame/Src/common/model/user.dart';
+import 'package:upgradegame/Src/common/model/userSearch.dart';
 import 'package:upgradegame/Src/pages/market/event/marketEventBus.dart';
 import 'package:upgradegame/Src/pages/market/marketAsk.dart';
 import 'package:upgradegame/Src/pages/market/marketBidItem.dart';
@@ -31,7 +31,7 @@ class MarketDetail extends StatefulWidget {
 }
 
 class _MarketDetailState extends State<MarketDetail> {
-  User searchedUser;
+  UserSearch searchedUser;
   String noResultHintText = '';
   String noOrderHintText = '';
   final phoneController = TextEditingController();
@@ -214,7 +214,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                   this.noResultHintText = '没有搜索到用户';
                                   this.searchedUser = null;
                                   if (null != data) {
-                                    this.searchedUser = User.fromSearchJson(data);
+                                    this.searchedUser = UserSearch.fromJson(data);
                                     this.searchedUser.phone = phone;
                                   }
                                 });
@@ -282,7 +282,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                       TradeItemModel tradeItemModel = this.woodList.datalist[index];
                                       return MarketBidItem(
                                         buttonName: "购 买",
-                                        name: tradeItemModel.displayname,
+                                        name: tradeItemModel.mytrade ? "我" : tradeItemModel.displayname,
                                         bidType: "wood",
                                         myTrade: tradeItemModel.mytrade,
                                         amount: tradeItemModel.amount,
@@ -360,7 +360,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                       TradeItemModel tradeItemModel = this.stoneList.datalist[index];
                                       return MarketBidItem(
                                         buttonName: "购 买",
-                                        name: tradeItemModel.displayname,
+                                        name: tradeItemModel.mytrade ? "我" : tradeItemModel.displayname,
                                         bidType: "stone",
                                         myTrade: tradeItemModel.mytrade,
                                         amount: tradeItemModel.amount,
@@ -369,6 +369,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                           MarketService.marketBuy(tradeItemModel.productid, (bool success) {
                                             if (success) {
                                               CommonUtils.showSuccessMessage(msg: "购买成功");
+
                                               ///wood = 1 stone = 2
                                               baseUserInfo.buyResource(2, tradeItemModel.amount, tradeItemModel.price);
                                               setState(() {

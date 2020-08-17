@@ -55,14 +55,12 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     UserInfoHttpRequestEvent().off();
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     UserInfoHttpRequestEvent();
     WidgetsBinding.instance.addPostFrameCallback((_) {
