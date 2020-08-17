@@ -63,7 +63,7 @@ class _WithdrawState extends State<Withdraw> {
               controller: accountController,
             ),
             TextField(
-              decoration: InputDecoration(labelText: "金额", prefixIcon: Icon(Icons.attach_money)),
+              decoration: InputDecoration(labelText: "金额(最小提现金额为:$withdrawLimitAmount)", prefixIcon: Icon(Icons.attach_money)),
               controller: amountController,
             ),
             TextField(
