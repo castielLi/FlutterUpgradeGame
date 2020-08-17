@@ -38,3 +38,5 @@ lib/generated_plugin_registrant.dart
 lib/Src/service/serviceUrl.dart
 pubspec.lock
 android/app/release/app-release.apk
+android/app/release/app-release.apk
+*.apk
