@@ -89,7 +89,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
     ContributionService.exchangeContributionForCoin(productId, (BaseResourceModel model) {
       this.widget.HUD();
       if (model != null) {
-        CommonUtils.showSuccessMessage(msg: "贡献值兑换T币成功");
+        CommonUtils.showSuccessMessage(msg: "贡献值兑换金币成功");
         var array = exchangeContributionModel;
         int contribution = 0;
         for (int i = 0; i < array.datalist.length; i++) {
@@ -161,7 +161,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                         },
                       ),
                       ImageTextButton(
-                        buttonName: '兑换T币',
+                        buttonName: '兑换金币',
                         callback: () {
                           setState(() {
                             this.hideExchangeCoinForContribution = true;
@@ -179,7 +179,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                     child: Text(
                       this.hideExchangeCoinForContribution
                           ? "当前拥有: " + (this.currentContributionModel == null ? "0" : baseUserInfo.Contribution.toString()) + " 贡献值"
-                          : "当前拥有: " + baseUserInfo.tcoinamount.toString() + " T币",
+                          : "当前拥有: " + baseUserInfo.tcoinamount.toString() + " 金币",
                       textAlign: TextAlign.left,
                       style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize), color: Colors.white, decoration: TextDecoration.none),
                     ),
@@ -191,10 +191,10 @@ class _ContributionDetailState extends State<ContributionDetail> {
                         MyTextField(
                           height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                           controller: amountController,
-                          hintText: '输入T币数量',
+                          hintText: '输入金币数量',
                           icon: Icon(Icons.attach_money),
                           inputType: TextInputType.number,
-                          warningText: '每个T币可以兑换' + this.contributionRate.toString() + '贡献值',
+                          warningText: '每个金币可以兑换' + this.contributionRate.toString() + '贡献值',
                           warningTextFontSize: SystemFontSize.moreMoreLargerTextSize,
                           onChanged: () {
                             setState(() {
@@ -217,7 +217,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                               return;
                             }
                             if(int.parse(amount)>baseUserInfo.tcoinamount){
-                              CommonUtils.showErrorMessage(msg: "T币不足，请重新输入");
+                              CommonUtils.showErrorMessage(msg: "金币不足，请重新输入");
                               return;
                             }
                             showDialog<Null>(
@@ -225,7 +225,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                               barrierDismissible: false,
                               builder: (BuildContext context) {
                                 return new AlertDialog(
-                                  title: new Text('您确认通过T币兑换贡献值么?'),
+                                  title: new Text('您确认通过金币兑换贡献值么?'),
                                   actions: <Widget>[
                                     new FlatButton(
                                       child: new Text('取消'),
@@ -288,7 +288,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                                     barrierDismissible: false,
                                     builder: (BuildContext context) {
                                       return new AlertDialog(
-                                        title: new Text('您确认通过贡献值兑换T币么?'),
+                                        title: new Text('您确认通过贡献值兑换金币么?'),
                                         actions: <Widget>[
                                           new FlatButton(
                                             child: new Text('取消'),

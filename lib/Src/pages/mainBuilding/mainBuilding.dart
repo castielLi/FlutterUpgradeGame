@@ -80,7 +80,7 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text('当前等级 LV $levelFrom', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
-              Text('产出:1小时生产' +'$coinPerHour'+'T币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+              Text('产出:1小时生产' +'$coinPerHour'+'金币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
               Text('升级所需材料', style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,

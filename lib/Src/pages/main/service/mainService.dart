@@ -48,7 +48,7 @@ class MainService{
     if(response.code == 200) {
       TakeCoinModel model = TakeCoinModel.fromJson(response.data);
       callback(model);
-      CommonUtils.showSuccessMessage(msg: "获取T币成功");
+      CommonUtils.showSuccessMessage(msg: "获取金币成功");
     }else{
       callback(null);
       CommonUtils.showErrorMessage(msg: response.message);

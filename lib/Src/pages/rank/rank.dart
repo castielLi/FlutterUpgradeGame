@@ -55,7 +55,7 @@ class _RankDetailState extends State<RankDetail> {
             textSize: ScreenUtil().setSp(SystemButtonSize.largeButtonFontSize),
             buttons: [
               ImageTextButton(
-                buttonName: 'T币',
+                buttonName: '金币',
                 iconUrl: 'resource/images/coin.png',
                 callback: () {
                   changeTabs('coin');

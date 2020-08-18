@@ -177,7 +177,7 @@ class _MarketDetailState extends State<MarketDetail> {
                 textSize: ScreenUtil().setSp(SystemButtonSize.smallButtonFontSize),
                 buttons: [
                   ImageTextButton(
-                    buttonName: 'T币',
+                    buttonName: '金币',
                     iconUrl: 'resource/images/coin.png',
                     callback: () {
                       changeDisplayContent(Resource.COIN);

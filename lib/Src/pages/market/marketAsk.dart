@@ -45,7 +45,7 @@ class _MarketAskState extends State<MarketAsk> {
               inputType: TextInputType.number,
             ),
             Text(
-              '需要的T币数量:',
+              '需要的金币数量:',
               style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
             ),
             MyTextField(

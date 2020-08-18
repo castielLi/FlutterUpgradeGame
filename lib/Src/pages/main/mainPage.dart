@@ -454,7 +454,7 @@ class _MainPageState extends State<MainPage> {
                             children: <Widget>[
                               new UserImageButton(
                                 size: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
-                                buttonName: "设置",
+                                buttonName: "必读",
                                 textSize: SystemFontSize.operationTextFontSize,
                                 imageUrl: "resource/images/setting.png",
                                 callback: () {
@@ -462,7 +462,7 @@ class _MainPageState extends State<MainPage> {
                                     'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
                                     'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
                                     'childName': 'settingDetail',
-                                    "title": "设 置"
+                                    "title": "必 读"
                                   });
                                 },
                               ),

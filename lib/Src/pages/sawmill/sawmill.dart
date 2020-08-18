@@ -66,7 +66,7 @@ class _SawmillDetailState extends State<SawmillDetail> {
       }
       bool canUpdate() {
         if (baseUserInfo.tcoinamount < woodBuildingRule.tcoinamount) {
-          CommonUtils.showErrorMessage(msg: "T币不足");
+          CommonUtils.showErrorMessage(msg: "金币不足");
           return false;
         }
         if (baseUserInfo.farmlevel < woodBuildingRule.farmlevel) {
