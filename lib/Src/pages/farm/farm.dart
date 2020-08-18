@@ -22,8 +22,8 @@ class FarmDetail extends StatefulWidget {
 }
 
 class _FarmDetailState extends State<FarmDetail> {
-
-  void upgradeBuilding(){
+  bool showStrategyPage = false;
+  void upgradeBuilding() {
     this.widget.HUD();
     BaseService.upgradeBuilding(BuildingEnum.farm.index, (model) {
       this.widget.HUD();
@@ -101,6 +101,7 @@ class _FarmDetailState extends State<FarmDetail> {
             ScreenUtil().setHeight(350), // 上
             ScreenUtil().setWidth(80), // 右
             ScreenUtil().setHeight(100)), // 下
+        color:Colors.blue,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -176,7 +177,6 @@ class _FarmDetailState extends State<FarmDetail> {
               imageUrl: "resource/images/upgradeButton.png",
               callback: () {
                 if (canUpdate()) {
-
                   showDialog<Null>(
                     context: context,
                     barrierDismissible: false,
