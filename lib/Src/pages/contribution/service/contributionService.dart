@@ -57,7 +57,7 @@ class ContributionService {
       BaseResourceModel model = BaseResourceModel.fromJson(response.data);
       callback(model);
     } else {
-      CommonUtils.showErrorMessage(msg: '兑换T币出错');
+      CommonUtils.showErrorMessage(msg: '兑换金币出错');
       callback(null);
     }
   }

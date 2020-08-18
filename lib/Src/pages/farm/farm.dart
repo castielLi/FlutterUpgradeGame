@@ -81,7 +81,7 @@ class _FarmDetailState extends State<FarmDetail> {
       }
       bool canUpdate() {
         if (baseUserInfo.tcoinamount < farmBuildingRule.tcoinamount) {
-          CommonUtils.showErrorMessage(msg: "T币不足");
+          CommonUtils.showErrorMessage(msg: "金币不足");
           return false;
         }
         if (baseUserInfo.stonelevel < farmBuildingRule.stonelevel) {

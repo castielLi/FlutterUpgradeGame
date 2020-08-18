@@ -1,8 +1,11 @@
 package com.wodebuluoge.mm;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
+import android.webkit.WebView;
 
 import com.bun.miitmdid.core.IIdentifierListener;
 import com.bun.miitmdid.core.JLibrary;
@@ -16,14 +19,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+
 import io.flutter.app.FlutterApplication;
 
 public class App extends FlutterApplication {
     @SuppressLint("StaticFieldLeak")
+    private static final String PROCESS = "com.wodebuluoge.mm";
+
     private static Context mContext;
     @Override
     public void onCreate() {
         super.onCreate();
+        this.initPieWebView();
         mContext = this;
         // adView 初始化
         InitSDKManager.getInstance().init(getApplicationContext());
@@ -52,6 +59,40 @@ public class App extends FlutterApplication {
         GlobalSetting.setChannel(1);
         GlobalSetting.setEnableMediationTool(true);
     }
+
+
+    private void initPieWebView() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            String processName = getProcessName(this);
+            if (!PROCESS.equals(processName)) {
+                WebView.setDataDirectorySuffix(getString(processName, "buluoge"));
+            }
+        }
+    }
+
+
+        public String getProcessName(Context context) {
+        if (context == null) return null;
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningAppProcessInfo processInfo : manager.getRunningAppProcesses()) {
+            if (processInfo.pid == android.os.Process.myPid()) {
+                return processInfo.processName;
+            }
+        }
+        return null;
+    }
+
+    public String getString(String s, String defValue) {
+        return isEmpty(s) ? defValue : s;
+    }
+
+    public boolean isEmpty(String s) {
+        return s == null || s.trim().length() == 0;
+    }
+
+
+
+
     public static Context getContext() {
         return mContext;
     }

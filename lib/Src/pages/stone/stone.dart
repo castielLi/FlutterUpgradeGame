@@ -66,7 +66,7 @@ class _StoneDetailState extends State<StoneDetail> {
 
       bool canUpdate() {
         if (baseUserInfo.tcoinamount < stoneBuildingRule.tcoinamount) {
-          CommonUtils.showErrorMessage(msg: "T币不足");
+          CommonUtils.showErrorMessage(msg: "金币不足");
           return false;
         }
         if (baseUserInfo.farmlevel < stoneBuildingRule.farmlevel) {

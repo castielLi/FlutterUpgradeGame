@@ -52,14 +52,13 @@ class _MarketDetailState extends State<MarketDetail> {
     // TODO: implement initState
     super.initState();
     MarketHttpRequestEvent().on("getMyTradeList", this.getMyTradeList);
-    MarketHttpRequestEvent().on("getWoodTradeList", this.getWoodTradeList);
+    MarketHttpRequestEvent().on("getWoodTradeList", this.getWoodList);
     MarketHttpRequestEvent().on("getStoneTradeList", this.getStoneTradeList);
 
     ///默认会显示木材的市场，所以第一次进界面的时候需要请求石材和我的发布订单两个http
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      getWoodTradeList();
       this.widget.HUD();
-      Future.wait([this.getMyTradeList(), this.getStoneTradeList()]).then((List array) {
+      Future.wait([this.getMyTradeList(), this.getWoodTradeList()]).then((List array) {
         this.widget.HUD();
         if (this.judgeAllRequestSuccess(array)) {
           CommonUtils.showErrorMessage(msg: "请求市场数据出错，请关闭界面重新获取");
@@ -81,20 +80,23 @@ class _MarketDetailState extends State<MarketDetail> {
   /// 获取我所发布的市场订单
   Future<bool> getMyTradeList() async {
     bool flag = false;
-    MarketService.getMyMarketTrade((model) {
+    await MarketService.getMyMarketTrade((model) {
       if (model != null) {
         setState(() {
           myTrades = model.datalist;
         });
         flag = true;
+      }else{
+        flag = false;
       }
+      return flag;
     });
-    return flag;
   }
 
-  void getWoodTradeList() {
+  void getWoodList(){
     this.widget.HUD();
     MarketService.getMarketTradeByType(this.woodPage, this.RequestHttpWood, (TradeListModel model) {
+      this.widget.HUD();
       if (model != null) {
         woodList.total = model.total;
         woodList.page = model.page;
@@ -107,13 +109,33 @@ class _MarketDetailState extends State<MarketDetail> {
         woodList.datalist += model.datalist;
       }
       this.noOrderHintText = '目前没有订单';
-      this.widget.HUD();
+    });
+  }
+
+  Future<bool> getWoodTradeList() async{
+    bool flag = false;
+    await MarketService.getMarketTradeByType(this.woodPage, this.RequestHttpWood, (TradeListModel model) {
+      if (model != null) {
+        woodList.total = model.total;
+        woodList.page = model.page;
+        if (model.page == 0) {
+          woodList.datalist = [];
+        }
+        if (model.datalist.length == 0 && this.woodPage != 0) {
+          CommonUtils.showErrorMessage(msg: "没有更多了");
+        }
+        woodList.datalist += model.datalist;
+        flag = true;
+      }else{
+        flag = false;
+      }
+      this.noOrderHintText = '目前没有订单';
+      return flag;
     });
   }
 
   ///获取石材的市场订单情况
-  Future<bool> getStoneTradeList() async {
-    bool flag = false;
+  void getStoneTradeList(){
     this.widget.HUD();
     MarketService.getMarketTradeByType(this.stonePage, this.RequestHttpStone, (TradeListModel model) {
       this.widget.HUD();
@@ -127,10 +149,8 @@ class _MarketDetailState extends State<MarketDetail> {
           CommonUtils.showErrorMessage(msg: "没有更多了");
         }
         stoneList.datalist += model.datalist;
-        flag = true;
       }
     });
-    return flag;
   }
 
   void changeDisplayContent(String tab) {
@@ -157,7 +177,7 @@ class _MarketDetailState extends State<MarketDetail> {
                 textSize: ScreenUtil().setSp(SystemButtonSize.smallButtonFontSize),
                 buttons: [
                   ImageTextButton(
-                    buttonName: 'T币',
+                    buttonName: '金币',
                     iconUrl: 'resource/images/coin.png',
                     callback: () {
                       changeDisplayContent(Resource.COIN);

@@ -64,7 +64,7 @@ class UserInfoService{
       TCoinDetailModel model = TCoinDetailModel.fromJson(response.data);
       callback(model);
     } else {
-      CommonUtils.showErrorMessage(msg: "获取T币明细失败");
+      CommonUtils.showErrorMessage(msg: "获取金币明细失败");
       callback(null);
     }
   }

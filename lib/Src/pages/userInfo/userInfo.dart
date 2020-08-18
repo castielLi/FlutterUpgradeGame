@@ -105,10 +105,10 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                               isColumn: true,
                               buttons: [
                                 ImageTextButton(
-                                  buttonName: 'T币明细',
+                                  buttonName: '金币明细',
                                   callback: () {
-                                    switchPageBetweenFatherAndSon(sonPageName: "T币明细");
-                                    this.widget.changeTitleCallback("T币明细");
+                                    switchPageBetweenFatherAndSon(sonPageName: "金币明细");
+                                    this.widget.changeTitleCallback("金币明细");
                                     UserInfoHttpRequestEvent().emit("tcoinDetail");
                                   },
                                 ),
@@ -159,7 +159,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
 
                     ///T币明细
                     new Offstage(
-                      offstage: "T币明细" != buttonName,
+                      offstage: "金币明细" != buttonName,
                       child: new TradeDetail(
                         HUD: this.widget.HUD,
                         viewCallback: () {

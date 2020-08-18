@@ -79,7 +79,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                         style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                       ),
                       Text(
-                        '价格:' + this.widget.price.toString() + 'T币',
+                        '价格:' + this.widget.price.toString() + '金币',
                         style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                       ),
                       Text(
@@ -128,7 +128,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                           barrierDismissible: false,
                           builder: (BuildContext context) {
                             return new AlertDialog(
-                              title: new Text('您确认通过T币兑换贡献值么?'),
+                              title: new Text('您确认通过金币兑换贡献值么?'),
                               actions: <Widget>[
                                 new FlatButton(
                                   child: new Text('取消'),
@@ -150,7 +150,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                           print(val);
                         });
                       }else{
-                        CommonUtils.showErrorMessage(msg: "您当前的T币不足以购买英雄");
+                        CommonUtils.showErrorMessage(msg: "您当前的金币不足以购买英雄");
                       }
                     },
                   ),

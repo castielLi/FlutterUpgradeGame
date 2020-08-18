@@ -153,7 +153,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                           ),
                         ],
                       ),
-                      Text('赠送1T币需要1张赠送券', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+                      Text('赠送1金币需要1张赠送券', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
                     ],
                   ),
                   ButtonsList(
@@ -192,7 +192,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                             barrierDismissible: false,
                             builder: (BuildContext context) {
                               return new AlertDialog(
-                                title: new Text('您确认要赠送T币么?'),
+                                title: new Text('您确认要赠送金币么?'),
                                 actions: <Widget>[
                                   new FlatButton(
                                     child: new Text('取消'),
