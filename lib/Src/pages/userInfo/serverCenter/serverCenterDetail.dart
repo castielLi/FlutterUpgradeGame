@@ -57,7 +57,7 @@ class _ServerCenterState extends State<ServerCenter> {
           child: Column(
             children: <Widget>[
               new Container(
-                width: ScreenUtil().setWidth(500),
+                width: ScreenUtil().setWidth(600),
                 child: new Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -86,7 +86,7 @@ class _ServerCenterState extends State<ServerCenter> {
               new Padding(
                 padding: new EdgeInsets.only(top: ScreenUtil().setWidth(50)),
                 child: new Container(
-                  width: ScreenUtil().setWidth(500),
+                  width: ScreenUtil().setWidth(600),
                   child: new Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[

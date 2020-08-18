@@ -4,10 +4,11 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
+import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
 import 'package:upgradegame/Src/provider/baseUserCashProvider.dart';
-import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 
 class Withdraw extends StatefulWidget {
   @override
@@ -51,25 +52,32 @@ class _WithdrawState extends State<Withdraw> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(left: ScreenUtil().setWidth(45)),
+              padding: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
               child: Text(
-                "可提现金额: ¥"+(cashInfo.cashAmount == null ? "0" : cashInfo.cashAmount.toString()),
+                "可提现金额: ¥" + (cashInfo.cashAmount == null ? "0" : cashInfo.cashAmount.toString()),
                 textAlign: TextAlign.left,
                 style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize), color: Colors.white, decoration: TextDecoration.none),
               ),
             ),
-            TextField(
-              decoration: InputDecoration(labelText: "支付宝账号", prefixIcon: Icon(Icons.email)),
+            new MyTextField(
+              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
               controller: accountController,
+              hintText: '支付宝账号:',
+              icon: Icon(Icons.email),
             ),
-            TextField(
-              decoration: InputDecoration(labelText: "金额(最小提现金额为:$withdrawLimitAmount)", prefixIcon: Icon(Icons.attach_money)),
+            new MyTextField(
+              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
               controller: amountController,
+              hintText: "金额(最小提现金额为:$withdrawLimitAmount)",
+              icon: Icon(Icons.attach_money),
+              warningText: "提现收取5%的手续费",
             ),
-            TextField(
-              decoration: InputDecoration(labelText: "密码", prefixIcon: Icon(Icons.lock)),
-              obscureText: true,
+            new MyTextField(
+              height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
               controller: passwordController,
+              hintText: '密码:',
+              icon: Icon(Icons.lock),
+              obscureText: true,
             ),
             ButtonsList(
               buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
@@ -95,9 +103,9 @@ class _WithdrawState extends State<Withdraw> {
                       return;
                     }
                     if (!cashInfo.hasWithdraw) {
-                      if(double.parse(amountController.text)<withdrawLimitAmount){
-                        CommonUtils.showWarningMessage(msg: "您的提现金额不足" + withdrawLimitAmount.toString() +"还需努力哟!");
-                      }else{
+                      if (double.parse(amountController.text) < withdrawLimitAmount) {
+                        CommonUtils.showWarningMessage(msg: "您的提现金额不足" + withdrawLimitAmount.toString() + "还需努力哟!");
+                      } else {
                         showDialog<Null>(
                           context: context,
                           barrierDismissible: false,
@@ -125,7 +133,7 @@ class _WithdrawState extends State<Withdraw> {
                           print(val);
                         });
                       }
-                    }else {
+                    } else {
                       CommonUtils.showWarningMessage(msg: "你已经发起了提现操作,若要取消操作请在客服中心联系管理员");
                     }
                     FocusScope.of(context).requestFocus(FocusNode());
