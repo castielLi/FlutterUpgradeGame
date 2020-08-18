@@ -175,6 +175,14 @@ class _LoginPageState extends State<LoginPage> {
                                   });
                                 },
                               ),
+                              new Container(
+                                padding: EdgeInsets.only(top: ScreenUtil().setHeight(15)),
+                                child: new Text(
+                                  "新用户请点击微信图标注册",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.normalTextSize), color: Colors.white, decoration: TextDecoration.none),
+                                ),
+                              ),
                             ],
                           ),
                         ),
