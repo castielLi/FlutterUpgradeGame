@@ -71,6 +71,7 @@ class _LoginPageState extends State<LoginPage> {
           });
         }
       } else {
+        this.showOrDismissProgressHUD();
         CommonUtils.showErrorMessage(msg: "微信登录失败");
       }
     });
