@@ -213,12 +213,12 @@ class _LoginPageState extends State<LoginPage> {
                                 icon: Icon(Icons.person),
                                 warningText: "请输入真实姓名，否则将导致无法提现",
                               ),
-                              new MyTextField(
-                                height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
-                                controller: iDController,
-                                hintText: '身份证件:',
-                                icon: Icon(Icons.account_box),
-                              ),
+//                              new MyTextField(
+//                                height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+//                                controller: iDController,
+//                                hintText: '身份证件:',
+//                                icon: Icon(Icons.account_box),
+//                              ),
                               new MyTextField(
                                 height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                                 controller: phoneController,
@@ -287,10 +287,10 @@ class _LoginPageState extends State<LoginPage> {
                                       CommonUtils.showErrorMessage(msg: "请输入正确的手机号码");
                                       return;
                                     }
-                                    if (!RegExp(r"^(\d{6})(18|19|20)?(\d{2})([01]\d)([0123]\d)(\d{3})(\d|X|x)?$").hasMatch(iD)) {
-                                      CommonUtils.showErrorMessage(msg: "请输入正确的身份证号码");
-                                      return;
-                                    }
+//                                    if (!RegExp(r"^(\d{6})(18|19|20)?(\d{2})([01]\d)([0123]\d)(\d{3})(\d|X|x)?$").hasMatch(iD)) {
+//                                      CommonUtils.showErrorMessage(msg: "请输入正确的身份证号码");
+//                                      return;
+//                                    }
                                     if (registerPassword != repeatPassword) {
                                       CommonUtils.showErrorMessage(msg: "两次输入密码不一致");
                                       return;
@@ -300,7 +300,7 @@ class _LoginPageState extends State<LoginPage> {
                                       return;
                                     }
                                     this.showOrDismissProgressHUD();
-                                    LoginService.setUserInfo(name, iD, phone, account, registerPassword, (bool success) {
+                                    LoginService.setUserInfo(name, "", phone, account, registerPassword, (bool success) {
                                       if (success) {
                                         Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
                                       }
