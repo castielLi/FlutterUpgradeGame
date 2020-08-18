@@ -39,7 +39,6 @@ class _WithdrawState extends State<Withdraw> {
 
   @override
   Widget build(BuildContext context) {
-    int withdrawLimitAmount = Global.getWithdrawLimit();
     return new Container(
       margin: EdgeInsets.fromLTRB(
         ScreenUtil().setWidth(0), // 左
@@ -48,13 +47,15 @@ class _WithdrawState extends State<Withdraw> {
         ScreenUtil().setHeight(150),
       ),
       child: Provide<BaseUserCashProvider>(builder: (context, child, cashInfo) {
+        int withdrawLimitAmount = Global.getWithdrawLimit();
+        double cashAmount = cashInfo.cashAmount == null ? 0 : cashInfo.cashAmount;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
               padding: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
               child: Text(
-                "可提现金额: ¥" + (cashInfo.cashAmount == null ? "0" : cashInfo.cashAmount.toString()),
+                "可提现金额: ¥" + cashAmount.toString(),
                 textAlign: TextAlign.left,
                 style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize), color: Colors.white, decoration: TextDecoration.none),
               ),
@@ -99,7 +100,11 @@ class _WithdrawState extends State<Withdraw> {
                     String password = passwordController.text;
                     String amount = amountController.text;
                     if (aliPayAccount == "" || password == "" || amount == "") {
-                      CommonUtils.showErrorMessage(msg: "输入不能为空");
+                      CommonUtils.showWarningMessage(msg: "输入不能为空");
+                      return;
+                    }
+                    if (double.parse(amountController.text) > cashAmount) {
+                      CommonUtils.showWarningMessage(msg: '可提现金额不足，请重新输入');
                       return;
                     }
                     if (!cashInfo.hasWithdraw) {

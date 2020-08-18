@@ -214,37 +214,40 @@ class _ContributionDetailState extends State<ContributionDetail> {
                             String amount = amountController.text;
                             if (!RegExp(r"^\d*$").hasMatch(amount)) {
                               CommonUtils.showErrorMessage(msg: "请输入正整数");
-                            } else {
-
-                              showDialog<Null>(
-                                context: context,
-                                barrierDismissible: false,
-                                builder: (BuildContext context) {
-                                  return new AlertDialog(
-                                    title: new Text('您确认通过T币兑换贡献值么?'),
-                                    actions: <Widget>[
-                                      new FlatButton(
-                                        child: new Text('取消'),
-                                        onPressed: () {
-                                          amountController.clear();
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                      new FlatButton(
-                                        child: new Text('确认'),
-                                        onPressed: () {
-                                          this.buyContribution(int.parse(amountController.text));
-                                          amountController.clear();
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ).then((val) {
-                                print(val);
-                              });
+                              return;
                             }
+                            if(int.parse(amount)>baseUserInfo.tcoinamount){
+                              CommonUtils.showErrorMessage(msg: "T币不足，请重新输入");
+                              return;
+                            }
+                            showDialog<Null>(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) {
+                                return new AlertDialog(
+                                  title: new Text('您确认通过T币兑换贡献值么?'),
+                                  actions: <Widget>[
+                                    new FlatButton(
+                                      child: new Text('取消'),
+                                      onPressed: () {
+                                        amountController.clear();
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    new FlatButton(
+                                      child: new Text('确认'),
+                                      onPressed: () {
+                                        this.buyContribution(int.parse(amountController.text));
+                                        amountController.clear();
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            ).then((val) {
+                              print(val);
+                            });
                           },
                           textSize: ScreenUtil().setSp(SystemFontSize.settingTextFontSize),
                         ),
