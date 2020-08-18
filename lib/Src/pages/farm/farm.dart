@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
@@ -22,8 +23,9 @@ class FarmDetail extends StatefulWidget {
 }
 
 class _FarmDetailState extends State<FarmDetail> {
+  bool showStrategyPage = false;
 
-  void upgradeBuilding(){
+  void upgradeBuilding() {
     this.widget.HUD();
     BaseService.upgradeBuilding(BuildingEnum.farm.index, (model) {
       this.widget.HUD();
@@ -101,114 +103,166 @@ class _FarmDetailState extends State<FarmDetail> {
             ScreenUtil().setHeight(350), // 上
             ScreenUtil().setWidth(80), // 右
             ScreenUtil().setHeight(100)), // 下
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Container(
-              margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text('当前等级 LV $levelFrom', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
-                  Text('升级条件', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
-                      Text(
-                        '$neededCoin  ',
-                        style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: tocinamount >= neededCoin ? Colors.lightGreenAccent : Colors.grey),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Image(image: new AssetImage('resource/images/fellingBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
-                      Text(
-                        'lv' + '$needWoodLevel ',
-                        style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: woodLevel >= needWoodLevel ? Colors.lightGreenAccent : Colors.grey),
-                      ),
-                      Image(image: new AssetImage('resource/images/stoneBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
-                      Text(
-                        'lv' + '$needStoneLevel ',
-                        style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: stoneLevel >= needStoneLevel ? Colors.lightGreenAccent : Colors.grey),
-                      ),
-                    ],
-                  ),
-                  Text('观看广告以随机获取材料', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
-                ],
-              ),
-            ),
-            AdIconRow(
-              countInOneRow: maxWatchableAd,
-              adIconHeight: ScreenUtil().setHeight(SystemIconSize.adIconSize),
-              imageUrlWatched: 'resource/images/adWatched.png',
-              imageUrlUnwatch: "resource/images/adUnwatch.png",
-              imageUrlWaiting: "resource/images/adWaiting.png",
-              alreadyWatched: watchedAd,
-              HUD: this.widget.HUD,
-              type: AdTypeEnum.farm,
-            ),
-            new Container(
-              margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
+        child: Stack(
+          children: [
+            Offstage(
+              offstage: this.showStrategyPage,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '每日0:00/12:00/18:00更新',
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
-                      ),
-                    ],
+                  new Container(
+                    margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('当前等级 LV $levelFrom', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
+                            new GestureDetector(
+                              child: new Container(
+                                child: Image(image: new AssetImage('resource/images/howToPlay.png'), height: ScreenUtil().setHeight(100)),
+                              ),
+                              onTap: () {
+                                changePage();
+                              },
+                            ),
+                          ],
+                        ),
+                        Text('升级条件', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                            Text(
+                              '$neededCoin  ',
+                              style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: tocinamount >= neededCoin ? Colors.lightGreenAccent : Colors.grey),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Image(image: new AssetImage('resource/images/fellingBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                            Text(
+                              'lv' + '$needWoodLevel ',
+                              style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: woodLevel >= needWoodLevel ? Colors.lightGreenAccent : Colors.grey),
+                            ),
+                            Image(image: new AssetImage('resource/images/stoneBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                            Text(
+                              'lv' + '$needStoneLevel ',
+                              style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: stoneLevel >= needStoneLevel ? Colors.lightGreenAccent : Colors.grey),
+                            ),
+                          ],
+                        ),
+                        Text('观看广告以随机获取材料', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
+                      ],
+                    ),
                   ),
-                  Text('本时段观看次数 $watchedAd/$maxWatchableAd', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
+                  AdIconRow(
+                    countInOneRow: maxWatchableAd,
+                    adIconHeight: ScreenUtil().setHeight(SystemIconSize.adIconSize),
+                    imageUrlWatched: 'resource/images/adWatched.png',
+                    imageUrlUnwatch: "resource/images/adUnwatch.png",
+                    imageUrlWaiting: "resource/images/adWaiting.png",
+                    alreadyWatched: watchedAd,
+                    HUD: this.widget.HUD,
+                    type: AdTypeEnum.farm,
+                  ),
+                  new Container(
+                    margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              '每日0:00/12:00/18:00更新',
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
+                            ),
+                          ],
+                        ),
+                        Text('本时段观看次数 $watchedAd/$maxWatchableAd', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
+                      ],
+                    ),
+                  ),
+                  new ImageButton(
+                    height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+                    width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+                    buttonName: "升 级",
+                    imageUrl: "resource/images/upgradeButton.png",
+                    callback: () {
+                      if (canUpdate()) {
+                        showDialog<Null>(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return new AlertDialog(
+                              title: new Text('您确认要升级农场么?'),
+                              actions: <Widget>[
+                                new FlatButton(
+                                  child: new Text('取消'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                new FlatButton(
+                                  child: new Text('确认'),
+                                  onPressed: () {
+                                    this.upgradeBuilding();
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        ).then((val) {
+                          print(val);
+                        });
+                      }
+                    },
+                  ),
                 ],
               ),
             ),
-            new ImageButton(
-              height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
-              width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
-              buttonName: "升 级",
-              imageUrl: "resource/images/upgradeButton.png",
-              callback: () {
-                if (canUpdate()) {
-
-                  showDialog<Null>(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (BuildContext context) {
-                      return new AlertDialog(
-                        title: new Text('您确认要升级农场么?'),
-                        actions: <Widget>[
-                          new FlatButton(
-                            child: new Text('取消'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          new FlatButton(
-                            child: new Text('确认'),
-                            onPressed: () {
-                              this.upgradeBuilding();
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
+            Offstage(
+              offstage: !this.showStrategyPage,
+              child: new Column(
+                children: [
+                  new Container(
+                    padding: EdgeInsets.only(top: ScreenUtil().setHeight(100)),
+                    height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
+                    width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
+                    child: SingleChildScrollView(
+                      child: Text(
+                        "农场玩法介绍",
+                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                      ),
+                    ),
+                  ),
+                  new ImageButton(
+                    height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+                    width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+                    buttonName: "返回",
+                    imageUrl: "resource/images/upgradeButton.png",
+                    callback: () {
+                      changePage();
                     },
-                  ).then((val) {
-                    print(val);
-                  });
-                }
-              },
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       );
     }));
+  }
+
+  void changePage() {
+    setState(() {
+      this.showStrategyPage = !this.showStrategyPage;
+    });
   }
 }
