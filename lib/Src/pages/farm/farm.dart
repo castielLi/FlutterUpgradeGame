@@ -243,6 +243,7 @@ class _FarmDetailState extends State<FarmDetail> {
                   new Container(
                     height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
                     width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
+                    padding: EdgeInsets.only(top: ScreenUtil().setHeight(50)),
                     child: SingleChildScrollView(
                       child: Text(
                         "农场玩法介绍",
