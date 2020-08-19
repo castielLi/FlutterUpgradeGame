@@ -168,9 +168,25 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
                       height: ScreenUtil().setHeight(750),
                       width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
                       child: SingleChildScrollView(
-                        child: Text(
-                          "主城玩法介绍",
-                          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              "主城玩法介绍:",
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                            ),
+                            Text(
+                              "生产'金币'（每小时产出，等级越高产出越高)",
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                            ),
+                            Text(
+                              "消耗:每个小时会消耗当前等级的石材和木材才能生产出'金币',请保证有足够的资源生产",
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                            ),
+                            Text(
+                              "升级:通过石材和木材来对主城进行升级",
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                            ),
+                          ],
                         ),
                       ),
                     ),

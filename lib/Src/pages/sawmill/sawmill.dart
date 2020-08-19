@@ -217,9 +217,25 @@ class _SawmillDetailState extends State<SawmillDetail> {
                     height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
                     width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
                     child: SingleChildScrollView(
-                      child: Text(
-                        "伐木场玩法介绍",
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            "伐木场玩法介绍:",
+                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                          ),
+                          Text(
+                            "生产“木材”（点击建筑观看广告,成功观看后产出，等级越高产出越高)",
+                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                          ),
+                          Text(
+                            "观看广告:产生当前等级对应的资源,并获取广告贡献值",
+                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                          ),
+                          Text(
+                            "升级:通过金币进行升级,升级有农场等级限制",
+                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                          ),
+                        ],
                       ),
                     ),
                   ),

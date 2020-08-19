@@ -244,9 +244,25 @@ class _FarmDetailState extends State<FarmDetail> {
                     height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
                     width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
                     child: SingleChildScrollView(
-                      child: Text(
-                        "农场玩法介绍",
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            "农场玩法介绍:",
+                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                          ),
+                          Text(
+                            "观看广告:产出贡献值的同时还会随机获得石材,木材或者额外的贡献值",
+                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                          ),
+                          Text(
+                            "升级:通过金币进行升级,升级有采石场,伐木场等级限制",
+                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                          ),
+                          Text(
+                            "刷新:每天0:00/12:00/18:00会刷新农场广告条数",
+                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                          ),
+                        ],
                       ),
                     ),
                   ),

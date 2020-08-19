@@ -26,7 +26,7 @@
         <!-- f1fa4f6f 正式  e866cfb0 测试-->
         <meta-data
             android:name="BaiduMobAd_APP_ID"
-            android:value="e866cfb0" />
+            android:value="f1fa4f6f" />
 
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
         <activity
