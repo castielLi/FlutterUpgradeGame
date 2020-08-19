@@ -124,21 +124,21 @@ class _AdIconRow extends State<AdIconRow> {
                 ///如果adview的开屏广告初始化成功,那么就展示adview的广告，否则展示腾讯广告
                 if (AdDialog().initAdViewSuccess) {
 //                  AdDialog().showAd(1, 2);
-//                AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
-                  this.adFinishedCallback();
+                AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
+//                  this.adFinishedCallback();
                 } else {
 //                  AdDialog().showAd(3, 2);
-//                AdDialog().showAd(3, 2,"6031610694170610");
-                  this.adFinishedCallback();
+                AdDialog().showAd(3, 2,"6031610694170610");
+//                  this.adFinishedCallback();
                 }
               } else if (this.widget.type == AdTypeEnum.stone) {
 //                AdDialog().showAd(2, 2);
-//              AdDialog().showAd(2, 2,"7111030");
-                this.adFinishedCallback();
+              AdDialog().showAd(2, 2,"7111030");
+//                this.adFinishedCallback();
               } else {
 //                AdDialog().showAd(3, 2);
-//              AdDialog().showAd(3, 2,"6031610694170610");
-                this.adFinishedCallback();
+              AdDialog().showAd(3, 2,"6031610694170610");
+//                this.adFinishedCallback();
               }
             },
           ),
@@ -181,21 +181,21 @@ class _AdIconRow extends State<AdIconRow> {
                   ///如果adview的开屏广告初始化成功,那么就展示adview的广告，否则展示腾讯广告
                   if (AdDialog().initAdViewSuccess) {
 //                    AdDialog().showAd(1, 2);
-//                AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
-                    this.adFinishedCallback();
+                AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
+//                    this.adFinishedCallback();
                   } else {
 //                    AdDialog().showAd(3, 2);
-//                AdDialog().showAd(3, 2,"6031610694170610");
-                    this.adFinishedCallback();
+                AdDialog().showAd(3, 2,"6031610694170610");
+//                    this.adFinishedCallback();
                   }
                 } else if (this.widget.type == AdTypeEnum.stone) {
 //                  AdDialog().showAd(2, 2);
-//              AdDialog().showAd(2, 2,"7111030");
-                  this.adFinishedCallback();
+              AdDialog().showAd(2, 2,"7111030");
+//                  this.adFinishedCallback();
                 } else {
 //                  AdDialog().showAd(3, 2);
-//              AdDialog().showAd(3, 2,"6031610694170610");
-                  this.adFinishedCallback();
+              AdDialog().showAd(3, 2,"6031610694170610");
+//                  this.adFinishedCallback();
                 }
               },
             ),
@@ -224,21 +224,21 @@ class _AdIconRow extends State<AdIconRow> {
                   ///如果adview的开屏广告初始化成功,那么就展示adview的广告，否则展示腾讯广告
                   if (AdDialog().initAdViewSuccess) {
 //                    AdDialog().showAd(1, 2);
-//                AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
-                    this.adFinishedCallback();
+                AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
+//                    this.adFinishedCallback();
                   } else {
 //                    AdDialog().showAd(3, 2);
-//                AdDialog().showAd(3, 2,"6031610694170610");
-                    this.adFinishedCallback();
+                AdDialog().showAd(3, 2,"6031610694170610");
+//                    this.adFinishedCallback();
                   }
                 } else if (this.widget.type == AdTypeEnum.stone) {
 //                  AdDialog().showAd(2, 2);
-//              AdDialog().showAd(2, 2,"7111030");
-                  this.adFinishedCallback();
+              AdDialog().showAd(2, 2,"7111030");
+//                  this.adFinishedCallback();
                 } else {
 //                  AdDialog().showAd(3, 2);
-//              AdDialog().showAd(3, 2,"6031610694170610");
-                  this.adFinishedCallback();
+              AdDialog().showAd(3, 2,"6031610694170610");
+//                  this.adFinishedCallback();
                 }
               },
             ),
@@ -290,21 +290,21 @@ class _AdIconRow extends State<AdIconRow> {
                   ///如果adview的开屏广告初始化成功,那么就展示adview的广告，否则展示腾讯广告
                   if (AdDialog().initAdViewSuccess) {
 //                    AdDialog().showAd(1, 2);
-//                AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
-                    this.adFinishedCallback();
+                AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
+//                    this.adFinishedCallback();
                   } else {
 //                    AdDialog().showAd(3, 2);
-//                AdDialog().showAd(3, 2,"6031610694170610");
-                    this.adFinishedCallback();
+                AdDialog().showAd(3, 2,"6031610694170610");
+//                    this.adFinishedCallback();
                   }
                 } else if (this.widget.type == AdTypeEnum.stone) {
 //                  AdDialog().showAd(2, 2);
-//              AdDialog().showAd(2, 2,"7111030");
-                  this.adFinishedCallback();
+              AdDialog().showAd(2, 2,"7111030");
+//                  this.adFinishedCallback();
                 } else {
 //                  AdDialog().showAd(3, 2);
-//              AdDialog().showAd(3, 2,"6031610694170610");
-                  this.adFinishedCallback();
+              AdDialog().showAd(3, 2,"6031610694170610");
+//                  this.adFinishedCallback();
                 }
               },
             ),
