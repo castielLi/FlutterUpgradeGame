@@ -1,12 +1,12 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:upgradegame/Src/common/widget/confirmDialog/confirmDialog.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
 import 'package:upgradegame/Src/common/widget/resourceDialog/resourceDialog.dart';
 import 'package:upgradegame/Src/pages/login/login.dart';
 import 'package:upgradegame/Src/pages/main/mainPage.dart';
 import 'package:upgradegame/Src/pages/privacyTerms/privacyTerms.dart';
 import 'package:upgradegame/Src/pages/welcome/welcomePage.dart';
-import 'package:upgradegame/Src/common/widget/confirmDialog/confirmDialog.dart';
 
 //config
 Handler welcomePageHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -41,7 +41,10 @@ Handler resourceDialogHandler = Handler(handlerFunc: (BuildContext context, Map<
 });
 
 Handler privacyTermsHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return PrivacyTermsPage();
+  String termName = params['termName']?.first;
+  return PrivacyTermsPage(
+    termName: termName,
+  );
 });
 
 Handler confirmDialogHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {

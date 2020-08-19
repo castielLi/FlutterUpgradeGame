@@ -151,6 +151,52 @@ class _LoginPageState extends State<LoginPage> {
                                   this.login();
                                 },
                               ),
+                              new Container(
+                                height: ScreenUtil().setHeight(60),
+                                child: new Row(
+                                  children: <Widget>[
+                                    Checkbox(
+                                      value: this.agreeTerms,
+                                      activeColor: Colors.blue,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          this.agreeTerms = !this.agreeTerms;
+                                        });
+                                      },
+                                    ),
+                                    new Text(
+                                      "我同意我的部落格",
+                                      style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.lagerTextSize), color: Colors.white, decoration: TextDecoration.none),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Application.showDetailDialog(context, UpgradeGameRoute.privacyTerms, params: {
+                                          'termName': 'service',
+                                        });
+                                      },
+                                      child: new Text(
+                                        "《服务协议》",
+                                        style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.lagerTextSize), color: Colors.blue, decoration: TextDecoration.none),
+                                      ),
+                                    ),
+                                    new Text(
+                                      "和",
+                                      style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.lagerTextSize), color: Colors.white, decoration: TextDecoration.none),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Application.showDetailDialog(context, UpgradeGameRoute.privacyTerms, params: {
+                                          'termName': 'privacy',
+                                        });
+                                      },
+                                      child: new Text(
+                                        "《隐私协议》",
+                                        style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.lagerTextSize), color: Colors.blue, decoration: TextDecoration.none),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               new RaisedButton(
                                   child: Text("登 录"),
                                   color: Colors.blue,
@@ -165,6 +211,10 @@ class _LoginPageState extends State<LoginPage> {
                                   fit: BoxFit.fill,
                                 ),
                                 onTap: () {
+                                  if (!this.agreeTerms) {
+                                    CommonUtils.showErrorMessage(msg: "请先勾选同意协议");
+                                    return;
+                                  }
 //                                  setState(() {
 //                                    this.userVerified = false;
 //                                  });
@@ -235,40 +285,6 @@ class _LoginPageState extends State<LoginPage> {
                                 icon: Icon(Icons.phone),
                                 inputType: TextInputType.number,
                               ),
-                              new Container(
-                                height: ScreenUtil().setHeight(60),
-                                child: new Row(
-                                  children: <Widget>[
-                                    Checkbox(
-                                      value: this.agreeTerms,
-                                      activeColor: Colors.blue,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          this.agreeTerms = !this.agreeTerms;
-                                        });
-                                      },
-                                    ),
-                                    new Text(
-                                      "我同意我的部落格",
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Colors.white, decoration: TextDecoration.none),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Application.router.navigateTo(
-                                          context,
-                                          UpgradeGameRoute.privacyTerms,
-                                        );
-                                      },
-                                      child: new Text(
-                                        "《隐私协议》",
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(fontSize: ScreenUtil().setSp(32), color: Colors.blue, decoration: TextDecoration.none),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                               new RaisedButton(
                                   child: Text("注 册"),
                                   color: Colors.blue,
@@ -302,10 +318,6 @@ class _LoginPageState extends State<LoginPage> {
 //                                    }
                                     if (registerPassword != repeatPassword) {
                                       CommonUtils.showErrorMessage(msg: "两次输入密码不一致");
-                                      return;
-                                    }
-                                    if (!this.agreeTerms) {
-                                      CommonUtils.showErrorMessage(msg: "请先同意隐私协议");
                                       return;
                                     }
                                     this.showOrDismissProgressHUD();
@@ -342,6 +354,10 @@ class _LoginPageState extends State<LoginPage> {
     String password = passwordController.text;
     if ("" == username || "" == password) {
       CommonUtils.showErrorMessage(msg: "输入不能为空");
+      return;
+    }
+    if (!this.agreeTerms) {
+      CommonUtils.showErrorMessage(msg: "请先勾选同意协议");
       return;
     }
     this.showOrDismissProgressHUD();
