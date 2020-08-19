@@ -309,6 +309,12 @@ class _MarketDetailState extends State<MarketDetail> {
                                         amount: tradeItemModel.amount,
                                         needCoin: tradeItemModel.price,
                                         buttonCallback: () {
+
+                                          if(tradeItemModel.price > baseUserInfo.tcoinamount){
+                                            CommonUtils.showErrorMessage(msg: "您当前的金币数量不足");
+                                            return;
+                                          }
+
                                           showDialog<Null>(
                                             context: context,
                                             barrierDismissible: false,
@@ -414,6 +420,12 @@ class _MarketDetailState extends State<MarketDetail> {
                                         amount: tradeItemModel.amount,
                                         needCoin: tradeItemModel.price,
                                         buttonCallback: () {
+
+                                          if(tradeItemModel.price > baseUserInfo.tcoinamount){
+                                            CommonUtils.showErrorMessage(msg: "您当前的金币数量不足");
+                                            return;
+                                          }
+
                                           showDialog<Null>(
                                             context: context,
                                             barrierDismissible: false,
