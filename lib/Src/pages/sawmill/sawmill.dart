@@ -90,82 +90,90 @@ class _SawmillDetailState extends State<SawmillDetail> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   new Container(
-                    margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('当前等级 LV $level', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
-                            new GestureDetector(
-                              child: new Container(
-                                child: Image(image: new AssetImage('resource/images/howToPlay.png'), height: ScreenUtil().setHeight(100)),
+                    height: ScreenUtil().setHeight(1050),
+                    width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
+                    child: new Column(
+                      children: [
+                        new Container(
+                          margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('当前等级 LV $level', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
+                                  new GestureDetector(
+                                    child: new Container(
+                                      child: Image(image: new AssetImage('resource/images/howToPlay.png'), height: ScreenUtil().setHeight(100)),
+                                    ),
+                                    onTap: () {
+                                      changePage();
+                                    },
+                                  ),
+                                ],
                               ),
-                              onTap: () {
-                                changePage();
-                              },
-                            ),
-                          ],
+                              Text('升级条件', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  new Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                                  Text(
+                                    '$needTCoin ',
+                                    style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: tCoinAmount >= needTCoin ? Colors.lightGreenAccent : Colors.grey),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Image(image: new AssetImage('resource/images/farmBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+                                  Text(
+                                    'lv' + '$needFarmLevel ',
+                                    style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: farmLevel >= needFarmLevel ? Colors.lightGreenAccent : Colors.grey),
+                                  ),
+                                ],
+                              ),
+                              Text('观看广告获取升级材料', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
+                            ],
+                          ),
                         ),
-                        Text('升级条件', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            new Image(image: new AssetImage('resource/images/coin.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
-                            Text(
-                              '$needTCoin ',
-                              style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: tCoinAmount >= needTCoin ? Colors.lightGreenAccent : Colors.grey),
-                            ),
-                          ],
+                        new AdIconRow(
+                          countInOneRow: maxWatchableAd,
+                          adIconHeight: ScreenUtil().setHeight(SystemIconSize.adIconSize),
+                          imageUrlWatched: 'resource/images/adWatched.png',
+                          imageUrlUnwatch: "resource/images/adUnwatch.png",
+                          imageUrlWaiting: "resource/images/adWaiting.png",
+                          HUD: this.widget.HUD,
+                          type: AdTypeEnum.sawmill,
+                          alreadyWatched: watchedAd,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Image(image: new AssetImage('resource/images/farmBuilding.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
-                            Text(
-                              'lv' + '$needFarmLevel ',
-                              style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: farmLevel >= needFarmLevel ? Colors.lightGreenAccent : Colors.grey),
-                            ),
-                          ],
+                        new Container(
+                          margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    '每次获取 ',
+                                    style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
+                                  ),
+                                  Image(
+                                    image: new AssetImage('resource/images/wood.png'),
+                                    height: ScreenUtil().setHeight(SystemIconSize.adIconSize),
+                                  ),
+                                  Text(
+                                    '$woodPerAd',
+                                    style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
+                                  ),
+                                ],
+                              ),
+                              Text('今日观看次数 $watchedAd/$maxWatchableAd', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
+                            ],
+                          ),
                         ),
-                        Text('观看广告获取升级材料', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
-                      ],
-                    ),
-                  ),
-                  AdIconRow(
-                    countInOneRow: maxWatchableAd,
-                    adIconHeight: ScreenUtil().setHeight(SystemIconSize.adIconSize),
-                    imageUrlWatched: 'resource/images/adWatched.png',
-                    imageUrlUnwatch: "resource/images/adUnwatch.png",
-                    imageUrlWaiting: "resource/images/adWaiting.png",
-                    HUD: this.widget.HUD,
-                    type: AdTypeEnum.sawmill,
-                    alreadyWatched: watchedAd,
-                  ),
-                  new Container(
-                    margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              '每次获取 ',
-                              style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
-                            ),
-                            Image(
-                              image: new AssetImage('resource/images/wood.png'),
-                              height: ScreenUtil().setHeight(SystemIconSize.adIconSize),
-                            ),
-                            Text(
-                              '$woodPerAd',
-                              style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
-                            ),
-                          ],
-                        ),
-                        Text('今日观看次数 $watchedAd/$maxWatchableAd', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                       ],
                     ),
                   ),
@@ -211,11 +219,12 @@ class _SawmillDetailState extends State<SawmillDetail> {
             Offstage(
               offstage: !this.showStrategyPage,
               child: new Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   new Container(
-                    padding: EdgeInsets.only(top: ScreenUtil().setHeight(100)),
-                    height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
+                    height: ScreenUtil().setHeight(1050),
                     width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
+                    padding: EdgeInsets.only(top: ScreenUtil().setHeight(100)),
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[

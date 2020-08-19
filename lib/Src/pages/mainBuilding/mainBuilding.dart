@@ -74,87 +74,93 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
               ScreenUtil().setWidth(150), // 左
               ScreenUtil().setHeight(500), // 上
               ScreenUtil().setWidth(150), // 右
-              ScreenUtil().setHeight(250)), // 下
+              ScreenUtil().setHeight(100)), // 下
           child: Stack(
             children: [
               Offstage(
                 offstage: this.showStrategyPage,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        new Text('当前等级 LV $levelFrom', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
-                        new GestureDetector(
-                          child: new Container(
-                            child: Image(image: new AssetImage('resource/images/howToPlay.png'), height: ScreenUtil().setHeight(100)),
-                          ),
-                          onTap: () {
-                            changePage();
-                          },
-                        ),
-                      ],
-                    ),
-                    Text('产出:1小时生产' + '$coinPerHour' + '金币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
-                    Text('升级所需材料', style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Image(image: new AssetImage('resource/images/wood.png'), height: ScreenUtil().setHeight(100)),
-                        Text(
-                          '$neededWood ',
-                          style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: wood >= neededWood ? Colors.lightGreenAccent : Colors.grey),
-                        ),
-                        Image(image: new AssetImage('resource/images/stone.png'), height: ScreenUtil().setHeight(100)),
-                        Text(
-                          '$neededStone',
-                          style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: stone >= neededStone ? Colors.lightGreenAccent : Colors.grey),
-                        )
-                      ],
-                    ),
-                    Text('每次生产需要消耗' + productCoinNeedPerWood.toString() + '木头和' + productCoinNeedPerStone.toString() + '石头', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize)),
                     Container(
-                      padding: EdgeInsets.only(left: ScreenUtil().setWidth(100)),
-                      child: ImageButton(
-                        height: ScreenUtil().setHeight(200),
-                        width: ScreenUtil().setWidth(400),
-                        buttonName: "升 级",
-                        imageUrl: "resource/images/upgradeButton.png",
-                        callback: () {
-                          if (baseUserInfo.stoneamount < neededStone || baseUserInfo.woodamount < neededWood) {
-                            CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
-                          } else {
-                            showDialog<Null>(
-                              context: context,
-                              barrierDismissible: false,
-                              builder: (BuildContext context) {
-                                return new AlertDialog(
-                                  title: new Text('您确认要升级主城么?'),
-                                  actions: <Widget>[
-                                    new FlatButton(
-                                      child: new Text('取消'),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                    new FlatButton(
-                                      child: new Text('确认'),
-                                      onPressed: () {
-                                        this.upgradeBuilding();
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            ).then((val) {
-                              print(val);
-                            });
-                          }
-                        },
+                      height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
+                      width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              new Text('当前等级 LV $levelFrom', textAlign: TextAlign.left, style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
+                              new GestureDetector(
+                                child: new Container(
+                                  child: Image(image: new AssetImage('resource/images/howToPlay.png'), height: ScreenUtil().setHeight(100)),
+                                ),
+                                onTap: () {
+                                  changePage();
+                                },
+                              ),
+                            ],
+                          ),
+                          Text('产出:1小时生产' + '$coinPerHour' + '金币', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+                          Text('升级所需材料', style: CustomFontSize.defaultTextStyle(SystemFontSize.mainBuildingTextFontSize)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Image(image: new AssetImage('resource/images/wood.png'), height: ScreenUtil().setHeight(100)),
+                              Text(
+                                '$neededWood ',
+                                style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: wood >= neededWood ? Colors.lightGreenAccent : Colors.grey),
+                              ),
+                              Image(image: new AssetImage('resource/images/stone.png'), height: ScreenUtil().setHeight(100)),
+                              Text(
+                                '$neededStone',
+                                style: TextStyle(fontSize: SystemFontSize.buildingConditionTextFontSize, color: stone >= neededStone ? Colors.lightGreenAccent : Colors.grey),
+                              )
+                            ],
+                          ),
+                          Text('每次生产需要消耗' + productCoinNeedPerWood.toString() + '木头和' + productCoinNeedPerStone.toString() + '石头',
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize)),
+                        ],
                       ),
+                    ),
+                    ImageButton(
+                      height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+                      width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+                      buttonName: "升 级",
+                      imageUrl: "resource/images/upgradeButton.png",
+                      callback: () {
+                        if (baseUserInfo.stoneamount < neededStone || baseUserInfo.woodamount < neededWood) {
+                          CommonUtils.showErrorMessage(msg: "没有足够的资源升级");
+                        } else {
+                          showDialog<Null>(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return new AlertDialog(
+                                title: new Text('您确认要升级主城么?'),
+                                actions: <Widget>[
+                                  new FlatButton(
+                                    child: new Text('取消'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  new FlatButton(
+                                    child: new Text('确认'),
+                                    onPressed: () {
+                                      this.upgradeBuilding();
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          ).then((val) {
+                            print(val);
+                          });
+                        }
+                      },
                     ),
                   ],
                 ),
@@ -164,9 +170,9 @@ class _MainBuildingDetailState extends State<MainBuildingDetail> {
                 child: new Column(
                   children: [
                     new Container(
-//                      padding: EdgeInsets.only(top: ScreenUtil().setHeight(100)),
-                      height: ScreenUtil().setHeight(750),
+                      height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
                       width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
+                      padding: EdgeInsets.only(top: ScreenUtil().setHeight(50)),
                       child: SingleChildScrollView(
                         child: Column(
                           children: <Widget>[
