@@ -93,8 +93,8 @@ class _MarketDetailState extends State<MarketDetail> {
       } else {
         flag = false;
       }
-      return flag;
     });
+    return flag;
   }
 
   void getWoodList() {
@@ -105,22 +105,31 @@ class _MarketDetailState extends State<MarketDetail> {
         woodList.total = model.total;
         woodList.page = model.page;
         if (model.page == 0) {
-          woodList.datalist = [];
-          this.woodListOffset = 0;
-        }
-        if (model.datalist.length == 0 && this.woodPage != 0) {
-          CommonUtils.showErrorMessage(msg: "没有更多了");
-          this.woodPage -= 1;
-        }
-        if(woodList.total != 0){
-          setState(() {
-            woodList.datalist += model.datalist;
-            this.woodController.jumpTo(this.woodListOffset);
-          });
-
+          if(model.datalist.length > 0){
+            setState(() {
+              woodList.datalist = model.datalist;
+            });
+            this.woodListOffset = 0;
+          }else{
+            this.noOrderHintText = '目前没有订单';
+          }
+        }else{
+          if(model.datalist.length > 0){
+            setState(() {
+              woodList.datalist += model.datalist;
+            });
+            WidgetsBinding.instance.addPostFrameCallback((mag) {
+              this.woodController.jumpTo(this.woodListOffset);
+            });
+          }else{
+            CommonUtils.showErrorMessage(msg: "没有更多了");
+            this.woodPage -= 1;
+            WidgetsBinding.instance.addPostFrameCallback((mag) {
+              this.woodController.jumpTo(this.woodListOffset);
+            });
+          }
         }
       }
-      this.noOrderHintText = '目前没有订单';
     });
   }
 
@@ -131,28 +140,35 @@ class _MarketDetailState extends State<MarketDetail> {
         woodList.total = model.total;
         woodList.page = model.page;
         if (model.page == 0) {
-          woodList.datalist = [];
-        }
-        if (model.datalist.length == 0 && this.woodPage != 0) {
-          CommonUtils.showErrorMessage(msg: "没有更多了");
-        }
-        if(woodList.total != 0){
-          setState(() {
-            woodList.datalist += model.datalist;
-          });
+          if(model.datalist.length > 0){
+            setState(() {
+              woodList.datalist = model.datalist;
+            });
+            this.woodListOffset = 0;
+          }else{
+            this.noOrderHintText = '目前没有订单';
+          }
+        }else{
+          if(model.datalist.length > 0){
+            setState(() {
+              woodList.datalist += model.datalist;
+            });
+          }else{
+            CommonUtils.showErrorMessage(msg: "没有更多了");
+          }
         }
         flag = true;
       }
       else {
         flag = false;
       }
-      return flag;
-      this.noOrderHintText = '目前没有订单';
+
     });
+    return flag;
   }
 
   ///获取石材的市场订单情况
-  void getStoneTradeList()  {
+  void getStoneTradeList(){
     this.widget.HUD();
     MarketService.getMarketTradeByType(this.stonePage, this.RequestHttpStone, (TradeListModel model) {
       this.widget.HUD();
@@ -160,21 +176,31 @@ class _MarketDetailState extends State<MarketDetail> {
         stoneList.total = model.total;
         stoneList.page = model.page;
         if (model.page == 0) {
-          stoneList.datalist = [];
+          if(model.datalist.length > 0){
+            setState(() {
+              stoneList.datalist = model.datalist;
+            });
+          }else{
+            this.noOrderHintText = '目前没有订单';
+          }
           this.stoneListOffset = 0;
-        }
-        if (model.datalist.length == 0 && this.stonePage != 0) {
-          CommonUtils.showErrorMessage(msg: "没有更多了");
-          this.stonePage -=1;
-        }
-        if(stoneList.total != 0){
-          setState(() {
-            stoneList.datalist += model.datalist;
-            this.stoneController.jumpTo(this.stoneListOffset);
-          });
+        }else{
+          if(model.datalist.length == 0){
+            CommonUtils.showErrorMessage(msg: "没有更多了");
+            this.stonePage -=1;
+            WidgetsBinding.instance.addPostFrameCallback((mag) {
+              this.stoneController.jumpTo(this.stoneListOffset);
+            });
+          }else{
+            setState(() {
+              stoneList.datalist += model.datalist;
+            });
+            WidgetsBinding.instance.addPostFrameCallback((mag) {
+              this.stoneController.jumpTo(this.stoneListOffset);
+            });
+          }
         }
       }
-      this.noOrderHintText = '目前没有订单';
     });
   }
 
