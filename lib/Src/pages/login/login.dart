@@ -215,9 +215,7 @@ class _LoginPageState extends State<LoginPage> {
                                     CommonUtils.showErrorMessage(msg: "请先勾选同意协议");
                                     return;
                                   }
-//                                  setState(() {
-//                                    this.userVerified = false;
-//                                  });
+//                                  switchPage();
                                   fluwx.sendWeChatAuth(scope: "snsapi_userinfo", state: "wechat_sdk_demo_test").then((data) {
                                     print(data);
                                   }).catchError((e) {
@@ -286,7 +284,7 @@ class _LoginPageState extends State<LoginPage> {
                                 inputType: TextInputType.number,
                               ),
                               new RaisedButton(
-                                  child: Text("注 册"),
+                                  child: Text("注册账号"),
                                   color: Colors.blue,
                                   textColor: Colors.white,
                                   onPressed: () {
@@ -326,6 +324,13 @@ class _LoginPageState extends State<LoginPage> {
                                         Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
                                       }
                                     });
+                                  }),
+                              new RaisedButton(
+                                  child: Text("返回登录"),
+                                  color: Colors.blue,
+                                  textColor: Colors.white,
+                                  onPressed: () {
+                                    switchPage();
                                   }),
                             ],
                           ),
@@ -368,6 +373,11 @@ class _LoginPageState extends State<LoginPage> {
         Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
         Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
       }
+    });
+  }
+  void switchPage(){
+    setState(() {
+      this.userVerified = !this.userVerified;
     });
   }
 }

@@ -46,6 +46,10 @@ class _MarketDetailState extends State<MarketDetail> {
   int woodPage = 0;
   int stonePage = 0;
   String sellType = "wood";
+  double woodListOffset = 0;
+  double stoneListOffset = 0;
+  ScrollController woodController = new ScrollController();
+  ScrollController stoneController = new ScrollController();
 
   @override
   void initState() {
@@ -60,7 +64,7 @@ class _MarketDetailState extends State<MarketDetail> {
       this.widget.HUD();
       Future.wait([this.getMyTradeList(), this.getWoodTradeList()]).then((List array) {
         this.widget.HUD();
-        if (this.judgeAllRequestSuccess(array)) {
+        if (!this.judgeAllRequestSuccess(array)) {
           CommonUtils.showErrorMessage(msg: "请求市场数据出错，请关闭界面重新获取");
         }
       });
@@ -86,14 +90,14 @@ class _MarketDetailState extends State<MarketDetail> {
           myTrades = model.datalist;
         });
         flag = true;
-      }else{
+      } else {
         flag = false;
       }
       return flag;
     });
   }
 
-  void getWoodList(){
+  void getWoodList() {
     this.widget.HUD();
     MarketService.getMarketTradeByType(this.woodPage, this.RequestHttpWood, (TradeListModel model) {
       this.widget.HUD();
@@ -102,17 +106,25 @@ class _MarketDetailState extends State<MarketDetail> {
         woodList.page = model.page;
         if (model.page == 0) {
           woodList.datalist = [];
+          this.woodListOffset = 0;
         }
         if (model.datalist.length == 0 && this.woodPage != 0) {
           CommonUtils.showErrorMessage(msg: "没有更多了");
+          this.woodPage -= 1;
         }
-        woodList.datalist += model.datalist;
+        if(woodList.total != 0){
+          setState(() {
+            woodList.datalist += model.datalist;
+            this.woodController.jumpTo(this.woodListOffset);
+          });
+
+        }
       }
       this.noOrderHintText = '目前没有订单';
     });
   }
 
-  Future<bool> getWoodTradeList() async{
+  Future<bool> getWoodTradeList() async {
     bool flag = false;
     await MarketService.getMarketTradeByType(this.woodPage, this.RequestHttpWood, (TradeListModel model) {
       if (model != null) {
@@ -124,18 +136,23 @@ class _MarketDetailState extends State<MarketDetail> {
         if (model.datalist.length == 0 && this.woodPage != 0) {
           CommonUtils.showErrorMessage(msg: "没有更多了");
         }
-        woodList.datalist += model.datalist;
+        if(woodList.total != 0){
+          setState(() {
+            woodList.datalist += model.datalist;
+          });
+        }
         flag = true;
-      }else{
+      }
+      else {
         flag = false;
       }
-      this.noOrderHintText = '目前没有订单';
       return flag;
+      this.noOrderHintText = '目前没有订单';
     });
   }
 
   ///获取石材的市场订单情况
-  void getStoneTradeList(){
+  void getStoneTradeList()  {
     this.widget.HUD();
     MarketService.getMarketTradeByType(this.stonePage, this.RequestHttpStone, (TradeListModel model) {
       this.widget.HUD();
@@ -144,12 +161,20 @@ class _MarketDetailState extends State<MarketDetail> {
         stoneList.page = model.page;
         if (model.page == 0) {
           stoneList.datalist = [];
+          this.stoneListOffset = 0;
         }
         if (model.datalist.length == 0 && this.stonePage != 0) {
           CommonUtils.showErrorMessage(msg: "没有更多了");
+          this.stonePage -=1;
         }
-        stoneList.datalist += model.datalist;
+        if(stoneList.total != 0){
+          setState(() {
+            stoneList.datalist += model.datalist;
+            this.stoneController.jumpTo(this.stoneListOffset);
+          });
+        }
       }
+      this.noOrderHintText = '目前没有订单';
     });
   }
 
@@ -284,21 +309,19 @@ class _MarketDetailState extends State<MarketDetail> {
                                 ),
                                 // ignore: missing_return
                                 loadMore: () {
-                                  setState(() {
-                                    this.woodPage++;
-                                    getWoodTradeList();
-                                  });
+                                  this.woodPage +=1;
+                                  this.woodListOffset = this.woodController.offset;
+                                  getWoodList();
                                 },
                                 // ignore: missing_return
                                 onRefresh: () {
-                                  setState(() {
-                                    this.woodPage = 0;
-                                    getWoodTradeList();
-                                  });
+                                  this.woodPage = 0;
+                                  getWoodList();
                                 },
                                 child: ListView.builder(
                                     padding: EdgeInsets.only(top: 0),
                                     itemCount: this.woodList.datalist.length,
+                                    controller: this.woodController,
                                     itemBuilder: (BuildContext context, int index) {
                                       TradeItemModel tradeItemModel = this.woodList.datalist[index];
                                       return MarketBidItem(
@@ -309,12 +332,10 @@ class _MarketDetailState extends State<MarketDetail> {
                                         amount: tradeItemModel.amount,
                                         needCoin: tradeItemModel.price,
                                         buttonCallback: () {
-
-                                          if(tradeItemModel.price > baseUserInfo.tcoinamount){
+                                          if (tradeItemModel.price > baseUserInfo.tcoinamount) {
                                             CommonUtils.showErrorMessage(msg: "您当前的金币数量不足");
                                             return;
                                           }
-
                                           showDialog<Null>(
                                             context: context,
                                             barrierDismissible: false,
@@ -395,21 +416,32 @@ class _MarketDetailState extends State<MarketDetail> {
                                 ),
                                 // ignore: missing_return
                                 loadMore: () {
-                                  setState(() {
-                                    this.stonePage++;
-                                    getStoneTradeList();
-                                  });
+                                  this.stonePage += 1;
+                                  this.stoneListOffset = this.stoneController.offset;
+                                  getStoneTradeList();
+//                                  double offset = this.stoneController.offset;
+//                                  print(offset);
+//                                  var getData = ()async{
+//                                    this.stonePage++;
+//                                    await getStoneTradeList();
+//                                    this.stoneController.jumpTo(offset);
+//                                    print(this.stoneController.offset);
+//                                  };
+//                                  setState(() {
+//                                    getData();
+//                                  });
                                 },
                                 // ignore: missing_return
                                 onRefresh: () {
                                   setState(() {
-                                    this.woodPage = 0;
+                                    this.stonePage = 0;
                                     getStoneTradeList();
                                   });
                                 },
                                 child: ListView.builder(
                                     padding: EdgeInsets.only(top: 0),
                                     itemCount: this.stoneList.datalist.length,
+                                    controller: this.stoneController,
                                     itemBuilder: (BuildContext context, int index) {
                                       TradeItemModel tradeItemModel = this.stoneList.datalist[index];
                                       return MarketBidItem(
@@ -420,8 +452,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                         amount: tradeItemModel.amount,
                                         needCoin: tradeItemModel.price,
                                         buttonCallback: () {
-
-                                          if(tradeItemModel.price > baseUserInfo.tcoinamount){
+                                          if (tradeItemModel.price > baseUserInfo.tcoinamount) {
                                             CommonUtils.showErrorMessage(msg: "您当前的金币数量不足");
                                             return;
                                           }
@@ -442,7 +473,6 @@ class _MarketDetailState extends State<MarketDetail> {
                                                   new FlatButton(
                                                     child: new Text('确认'),
                                                     onPressed: () {
-
                                                       this.widget.HUD();
                                                       MarketService.marketBuy(tradeItemModel.productid, (bool success) {
                                                         this.widget.HUD();
@@ -511,7 +541,6 @@ class _MarketDetailState extends State<MarketDetail> {
                                                 new FlatButton(
                                                   child: new Text('确定'),
                                                   onPressed: () {
-
                                                     this.widget.HUD();
                                                     MarketService.cancelMyMarketTrade(tradeItemModel.productid, tradeItemModel.type, (data) {
                                                       this.widget.HUD();
