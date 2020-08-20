@@ -54,6 +54,7 @@ public class AdViewManager {
         @Override
         public void onFailedReceivedVideo(String error) {
             Log.i(TAG, "onFailedRecievedVideo:" + error);
+            EventBus.getDefault().post(Constant.STATUS_FAIL);
         }
 
         @Override

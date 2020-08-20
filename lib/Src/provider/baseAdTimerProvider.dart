@@ -34,7 +34,10 @@ class BaseAdTimerProvider with ChangeNotifier {
   }
 
   setWatchAdWaitingByType(AdTypeEnum type){
-    Timer timer = Timer.periodic(Duration(seconds: 10), (timer) {
+    ///测试
+    Timer timer = Timer.periodic(Duration(seconds: 20), (timer) {
+      ///正式
+//    Timer timer = Timer.periodic(Duration(seconds: 120), (timer) {
       if(type == AdTypeEnum.farm){
         farm = false;
       }else if(type == AdTypeEnum.sawmill){

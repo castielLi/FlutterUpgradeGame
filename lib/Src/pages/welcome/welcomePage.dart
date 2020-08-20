@@ -58,7 +58,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
     ///显示开屏广告
     AdDialog().showAd(1, 1,"POSIDtvy0gsf7zfm1");
-    AdDialog().setCallback(this.adCallback, this.adFailedCallback, true);
+    AdDialog().setCallback(this.adCallback, this.adFailedCallback,null, true);
   }
 
   @override

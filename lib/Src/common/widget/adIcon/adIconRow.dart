@@ -25,11 +25,36 @@ class AdIconRow extends StatefulWidget {
 }
 
 class _AdIconRow extends State<AdIconRow> {
+
+  int times = 0;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    AdDialog().setCallback(this.adFinishedCallback, this.adFailedCallback, false);
+    AdDialog().setCallback(this.adFinishedCallback, this.adFailedCallback,this.adOperateFailedCallback, false);
+  }
+
+  void adOperateFailedCallback(int type){
+    if(this.times == 2){
+      this.widget.HUD();
+      this.times = 0;
+      CommonUtils.showErrorMessage(msg: "广告观看失败,请稍后再试");
+      return;
+    }
+    ///尝试次数加1
+    this.times += 1;
+    switch(type){
+      case 1:
+        AdDialog().showAd(3, 2,"6031610694170610");
+        break;
+      case 2:
+        AdDialog().showAd(3, 2,"6031610694170610");
+        break;
+      case 3:
+        AdDialog().showAd(2, 2,"7111030");
+        break;
+    }
   }
 
   void adFailedCallback() {

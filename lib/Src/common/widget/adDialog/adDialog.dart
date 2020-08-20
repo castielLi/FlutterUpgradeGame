@@ -13,6 +13,7 @@ class AdDialog {
   static const EventChannel _eventChannel = const EventChannel('samples.flutter.ad.event');
   VoidCallback adWatchSuccessCallback;
   VoidCallback adWatchFailedCallback;
+  Function(int) adOperateFailedCallback;
 
   factory AdDialog() =>_getInstance();
   static AdDialog get instance => _getInstance();
@@ -22,6 +23,8 @@ class AdDialog {
   bool initAdViewSuccess;
   int adStatus = -100;
   bool dialogState = false;
+  ///广告类型
+  int type;
 
   AdDialog._internal() {
     // 初始化
@@ -37,10 +40,11 @@ class AdDialog {
     return _instance;
   }
 
-  void setCallback(VoidCallback adWatchSuccessCallback,VoidCallback adWatchFailedCallback,bool openApp){
+  void setCallback(VoidCallback adWatchSuccessCallback,VoidCallback adWatchFailedCallback,Function(int) adOperateFailedCallback,bool openApp){
     this.openApp = openApp;
     this.adWatchSuccessCallback = adWatchSuccessCallback;
     this.adWatchFailedCallback = adWatchFailedCallback;
+    this.adOperateFailedCallback = adOperateFailedCallback;
   }
 
   ///type选择平台  1：adview 2：baidu 3：腾讯
@@ -48,10 +52,21 @@ class AdDialog {
   ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
   void showAd(int type, int showType, [String posId]) async {
     this.dialogState = true;
+    this.type = type;
     try {
       await platform.invokeMethod('showAd', <String, dynamic>{'type': type, "showType": showType, "posId": posId});
     } on PlatformException catch (e) {
       this.dialogState = false;
+      if(type == 1 && showType == 1){
+        if(this.adWatchFailedCallback != null){
+          this.adWatchFailedCallback();
+        }
+      }else{
+        if(this.adOperateFailedCallback != null){
+          this.adOperateFailedCallback(this.type);
+        }
+      }
+
       print(e);
     }
   }
@@ -75,8 +90,8 @@ class AdDialog {
       ///广告出错回调
       if("-1"==event.toString()){
         this.initAdViewSuccess = false;
-        if(this.adWatchFailedCallback != null){
-          this.adWatchFailedCallback();
+        if(this.adOperateFailedCallback != null){
+          this.adOperateFailedCallback(this.type);
           this.dialogState = false;
         }
       }
