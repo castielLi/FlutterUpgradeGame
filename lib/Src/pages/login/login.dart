@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   //注册页面
   final trueNameController = TextEditingController();
   final phoneController = TextEditingController();
-  final iDController = TextEditingController();
+//  final iDController = TextEditingController();
   final accountController = TextEditingController();
   final registerPasswordController = TextEditingController();
   final repeatPasswordController = TextEditingController();
@@ -292,12 +292,12 @@ class _LoginPageState extends State<LoginPage> {
                                   onPressed: () {
                                     String name = trueNameController.text;
                                     String phone = phoneController.text;
-                                    String iD = iDController.text;
+//                                    String iD = iDController.text;
                                     String account = accountController.text;
                                     String registerPassword = registerPasswordController.text;
                                     String repeatPassword = repeatPasswordController.text;
                                     bool isInputsEmpty = false;
-                                    var inputs = [name, phone, iD, account, registerPassword, repeatPassword];
+                                    var inputs = [name, phone,account, registerPassword, repeatPassword];
                                     inputs.forEach((input) {
                                       if ("" == input) {
                                         isInputsEmpty = true;
