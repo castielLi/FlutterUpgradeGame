@@ -25,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   //注册页面
   final trueNameController = TextEditingController();
   final phoneController = TextEditingController();
+
 //  final iDController = TextEditingController();
   final accountController = TextEditingController();
   final registerPasswordController = TextEditingController();
@@ -295,7 +296,7 @@ class _LoginPageState extends State<LoginPage> {
                                     String registerPassword = registerPasswordController.text;
                                     String repeatPassword = repeatPasswordController.text;
                                     bool isInputsEmpty = false;
-                                    var inputs = [name, phone,account, registerPassword, repeatPassword];
+                                    var inputs = [name, phone, account, registerPassword, repeatPassword];
                                     inputs.forEach((input) {
                                       if ("" == input) {
                                         isInputsEmpty = true;
@@ -375,7 +376,8 @@ class _LoginPageState extends State<LoginPage> {
       }
     });
   }
-  void switchPage(){
+
+  void switchPage() {
     setState(() {
       this.userVerified = !this.userVerified;
     });
