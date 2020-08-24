@@ -227,14 +227,14 @@ class _MarketDetailState extends State<MarketDetail> {
                 buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
                 textSize: ScreenUtil().setSp(SystemButtonSize.smallButtonFontSize),
                 buttons: [
-                  ImageTextButton(
-                    buttonName: '金币',
-                    iconUrl: 'resource/images/coin.png',
-                    callback: () {
-                      changeDisplayContent(Resource.COIN);
-                      FocusScope.of(context).requestFocus(FocusNode());
-                    },
-                  ),
+//                  ImageTextButton(
+//                    buttonName: '金币',
+//                    iconUrl: 'resource/images/coin.png',
+//                    callback: () {
+//                      changeDisplayContent(Resource.COIN);
+//                      FocusScope.of(context).requestFocus(FocusNode());
+//                    },
+//                  ),
                   ImageTextButton(
                     buttonName: '木头',
                     iconUrl: 'resource/images/wood.png',

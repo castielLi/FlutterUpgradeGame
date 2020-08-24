@@ -160,7 +160,7 @@ class _FarmDetailState extends State<FarmDetail> {
                                   ),
                                 ],
                               ),
-                              Text('观看广告以随机获取材料', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
+                              Text('观看广告以随机获取石材,木材,额外的贡献值', style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize)),
                             ],
                           ),
                         ),
