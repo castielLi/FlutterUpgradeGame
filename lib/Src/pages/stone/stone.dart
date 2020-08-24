@@ -93,7 +93,7 @@ class _StoneDetailState extends State<StoneDetail> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   new Container(
-//                    height: ScreenUtil().setHeight(1050),
+                    height: ScreenUtil().setHeight(1055),
                     width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
                     child: new Column(
                       children: [
@@ -242,7 +242,7 @@ class _StoneDetailState extends State<StoneDetail> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   new Container(
-                    height: ScreenUtil().setHeight(1050),
+                    height: ScreenUtil().setHeight(1055),
                     width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
                     padding: EdgeInsets.only(top: ScreenUtil().setHeight(100)),
                     child: SingleChildScrollView(
