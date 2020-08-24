@@ -39,12 +39,13 @@ class _SawmillDetailState extends State<SawmillDetail> {
   Widget build(BuildContext context) {
     return new Container(child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
       int level = 0;
-      int nextLevel = 0;
       Wood woodBuildingRule;
       Wood currentWoodBuildingRule;
+      Wood nextWoodBuildingRule;
       Adsetting adSetting;
       int needTCoin = 0;
       int woodPerAd = 0;
+      int woodPerAdNextLevel = 0;
       int watchedAd = 0;
       int maxWatchableAd = 0;
       int needFarmLevel = 0;
@@ -52,13 +53,14 @@ class _SawmillDetailState extends State<SawmillDetail> {
       int tCoinAmount = baseUserInfo.TCoinAmount;
       if (null != baseUserInfo) {
         level = baseUserInfo.Woodlevel;
-        nextLevel = baseUserInfo.Woodlevel + 1;
-        woodBuildingRule = null == Global.getWoodBuildingRule() ? null : Global.getWoodBuildingRule()[nextLevel - 1];
+        woodBuildingRule = null == Global.getWoodBuildingRule() ? null : Global.getWoodBuildingRule()[level];
         currentWoodBuildingRule = null == Global.getWoodBuildingRule() ? null : Global.getWoodBuildingRule()[level - 1];
+        nextWoodBuildingRule = null == Global.getWoodBuildingRule() ? null : Global.getWoodBuildingRule()[level];
         adSetting = Global.getAdSettingRule();
         if (null != woodBuildingRule) {
           needTCoin = woodBuildingRule.tcoinamount;
           woodPerAd = currentWoodBuildingRule.product;
+          woodPerAdNextLevel = nextWoodBuildingRule.product;
           needFarmLevel = woodBuildingRule.farmlevel;
         }
         watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.wood;
@@ -90,7 +92,7 @@ class _SawmillDetailState extends State<SawmillDetail> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   new Container(
-                    height: ScreenUtil().setHeight(1050),
+//                    height: ScreenUtil().setHeight(1050),
                     width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
                     child: new Column(
                       children: [
@@ -162,10 +164,27 @@ class _SawmillDetailState extends State<SawmillDetail> {
                                   ),
                                   Image(
                                     image: new AssetImage('resource/images/wood.png'),
-                                    height: ScreenUtil().setHeight(SystemIconSize.adIconSize),
+                                    height: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
                                   ),
                                   Text(
                                     '$woodPerAd',
+                                    style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    '下一级每次获取 ',
+                                    style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
+                                  ),
+                                  Image(
+                                    image: new AssetImage('resource/images/wood.png'),
+                                    height: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
+                                  ),
+                                  Text(
+                                    '$woodPerAdNextLevel',
                                     style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
                                   ),
                                 ],

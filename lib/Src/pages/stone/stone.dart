@@ -39,12 +39,13 @@ class _StoneDetailState extends State<StoneDetail> {
   Widget build(BuildContext context) {
     return new Container(child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
       int level = 0;
-      int nextLevel = 0;
       Stone stoneBuildingRule;
       Stone currentStoneBuildingRule;
+      Stone nextStoneBuildingRule;
       Adsetting adSetting;
       int needTCoin = 0;
       int woodPerAd = 0;
+      int woodPerAdNextLevel = 0;
       int watchedAd = 0;
       int maxWatchableAd = 0;
       int needFarmLevel = 0;
@@ -52,13 +53,14 @@ class _StoneDetailState extends State<StoneDetail> {
       int farmLevel = baseUserInfo.Farmlevel;
       if (null != baseUserInfo) {
         level = baseUserInfo.Stonelevel;
-        nextLevel = baseUserInfo.Stonelevel + 1;
-        stoneBuildingRule = null == Global.getStoneBuildingRule() ? null : Global.getStoneBuildingRule()[nextLevel - 1];
+        stoneBuildingRule = null == Global.getStoneBuildingRule() ? null : Global.getStoneBuildingRule()[level];
         currentStoneBuildingRule = null == Global.getStoneBuildingRule() ? null : Global.getStoneBuildingRule()[level - 1];
+        nextStoneBuildingRule = null == Global.getStoneBuildingRule() ? null : Global.getStoneBuildingRule()[level];
         adSetting = Global.getAdSettingRule();
         if (null != stoneBuildingRule) {
           needTCoin = stoneBuildingRule.tcoinamount;
           woodPerAd = currentStoneBuildingRule.product;
+          woodPerAdNextLevel = nextStoneBuildingRule.product;
           needFarmLevel = stoneBuildingRule.farmlevel;
         }
         watchedAd = null == baseUserInfo.ad ? 0 : baseUserInfo.ad.stone;
@@ -91,7 +93,7 @@ class _StoneDetailState extends State<StoneDetail> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   new Container(
-                    height: ScreenUtil().setHeight(1050),
+//                    height: ScreenUtil().setHeight(1050),
                     width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
                     child: new Column(
                       children: [
@@ -163,10 +165,27 @@ class _StoneDetailState extends State<StoneDetail> {
                                   ),
                                   Image(
                                     image: new AssetImage('resource/images/stone.png'),
-                                    height: ScreenUtil().setHeight(SystemIconSize.adIconSize),
+                                    height: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
                                   ),
                                   Text(
                                     ' $woodPerAd',
+                                    style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    '下一级每次获取 ',
+                                    style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
+                                  ),
+                                  Image(
+                                    image: new AssetImage('resource/images/stone.png'),
+                                    height: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
+                                  ),
+                                  Text(
+                                    ' $woodPerAdNextLevel',
                                     style: CustomFontSize.defaultTextStyle(SystemFontSize.otherBuildingTextFontSize),
                                   ),
                                 ],
