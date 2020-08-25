@@ -111,7 +111,7 @@ class _FarmDetailState extends State<FarmDetail> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   new Container(
-                    height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
+                    height: ScreenUtil().setHeight(925),
                     width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
                     child: Column(
                       children: [
@@ -241,7 +241,7 @@ class _FarmDetailState extends State<FarmDetail> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   new Container(
-                    height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
+                    height: ScreenUtil().setHeight(925),
                     width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
                     padding: EdgeInsets.only(top: ScreenUtil().setHeight(50)),
                     child: SingleChildScrollView(
