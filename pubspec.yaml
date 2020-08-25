@@ -33,7 +33,8 @@ dependencies:
   event_bus: ^1.1.1 #全局事件总线，用于处理网络错误
   progress_hud: ^1.1.0 #hud
   path_provider: ^1.6.10 #本地文件储存
-  fluwx: ^2.2.0
+#  fluwx: ^2.2.0
+  fluwx_no_pay: ^2.2.0
   jpush_flutter: ^0.5.5
 
 

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluwx/fluwx.dart' as fluwx;
+import 'package:fluwx_no_pay/fluwx_no_pay.dart' as fluwx;
 import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:upgradegame/Common/app/notificationEvent.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';

@@ -477,28 +477,28 @@ class _MainPageState extends State<MainPage> {
                     new Container(
                       child: new Column(
                         children: [
-                          new Container(
-                            // 设置加公告的宽度
-                            width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarSmallIconSize * 2),
-                            decoration: new BoxDecoration(
-                              color: Color.fromRGBO(0, 0, 0, 0.7),
-                              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                            ),
-                            child: new Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                new Image(
-                                  image: new AssetImage("resource/images/volume.png"),
-                                  width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarSmallIconSize),
-                                  height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
-                                ),
-                                new Text(
-                                  baseUserInfo.voucher.toString(),
-                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                                ),
-                              ],
-                            ),
-                          ),
+//                          new Container(
+//                            // 设置加公告的宽度
+//                            width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarSmallIconSize * 2),
+//                            decoration: new BoxDecoration(
+//                              color: Color.fromRGBO(0, 0, 0, 0.7),
+//                              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+//                            ),
+//                            child: new Row(
+//                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                              children: [
+//                                new Image(
+//                                  image: new AssetImage("resource/images/volume.png"),
+//                                  width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarSmallIconSize),
+//                                  height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
+//                                ),
+//                                new Text(
+//                                  baseUserInfo.voucher.toString(),
+//                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+//                                ),
+//                              ],
+//                            ),
+//                          ),
                           new Row(
                             children: <Widget>[
                               new UserImageButton(
