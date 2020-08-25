@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class Application{
   static Router router;
-
   static Future navigationWithParams(BuildContext context, String path ,{Map<String, dynamic> params}){
     String query =  "";
     if (params != null) {
@@ -63,4 +62,31 @@ class Application{
     path = path + query;
     return router.navigateTo(context,path,transitionDuration:const Duration(milliseconds:500),transition: TransitionType.materialFullScreenDialog);
   }
+}
+class PopWindow extends PopupRoute{
+  final Duration _duration = Duration(milliseconds: 300);
+  Widget child;
+
+  PopWindow({@required this.child});
+  @override
+  // TODO: implement barrierColor
+  Color get barrierColor => null;
+
+  @override
+  // TODO: implement barrierDismissible
+  bool get barrierDismissible => true;
+
+  @override
+  // TODO: implement barrierLabel
+  String get barrierLabel => null;
+
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+    return child;
+  }
+
+  @override
+  // TODO: implement transitionDuration
+  Duration get transitionDuration => _duration;
+  
 }

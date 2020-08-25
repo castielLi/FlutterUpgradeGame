@@ -19,22 +19,24 @@ import 'package:upgradegame/Src/pages/store/store.dart';
 import 'package:upgradegame/Src/pages/market/market.dart';
 import 'package:progress_hud/progress_hud.dart';
 
-class DetailDialog extends StatefulWidget {
+class TestDialog extends StatefulWidget {
   double height;
   double width;
   String childWidgetName;
   String title;
 
-  DetailDialog({Key key, this.height, this.width, this.childWidgetName, this.title = ""}) : super(key: key);
+  TestDialog({Key key, this.height, this.width, this.childWidgetName = "sawmillDetail", this.title = "Test"}) : super(key: key);
 
   @override
-  _DetailDialogState createState() => new _DetailDialogState();
+  _TestDialogState createState() => new _TestDialogState();
 }
 
-class _DetailDialogState extends State<DetailDialog> {
+class _TestDialogState extends State<TestDialog> {
+
   ProgressHUD _progressHUD;
   bool _loading = false;
   String currentDisplayTitle = "";
+
 
   void initState() {
     super.initState();
@@ -56,6 +58,8 @@ class _DetailDialogState extends State<DetailDialog> {
 
   @override
   Widget build(BuildContext context) {
+    this.widget.width = ScreenUtil().setWidth(1020);
+    this.widget.height = ScreenUtil().setWidth(1900);
     void showOrDismissProgressHUD() {
       setState(() {
         if (_loading) {
@@ -82,7 +86,7 @@ class _DetailDialogState extends State<DetailDialog> {
 
     Widget currentWidget;
     switch (this.widget.childWidgetName) {
-      // 主城
+    // 主城
       case 'mainBuildingDetail':
         {
           currentWidget = new MainBuildingDetail(
@@ -90,7 +94,7 @@ class _DetailDialogState extends State<DetailDialog> {
           );
           break;
         }
-      // 伐木场
+    // 伐木场
       case 'sawmillDetail':
         {
           currentWidget = new SawmillDetail(
@@ -98,7 +102,7 @@ class _DetailDialogState extends State<DetailDialog> {
           );
           break;
         }
-      // 采石场
+    // 采石场
       case 'stoneDetail':
         {
           currentWidget = new StoneDetail(
@@ -106,7 +110,7 @@ class _DetailDialogState extends State<DetailDialog> {
           );
           break;
         }
-      // 英雄祭坛
+    // 英雄祭坛
       case 'heroAltar':
         {
           currentWidget = new HeroAltar(
@@ -114,7 +118,7 @@ class _DetailDialogState extends State<DetailDialog> {
           );
           break;
         }
-      // 农场
+    // 农场
       case 'farmDetail':
         {
           currentWidget = new FarmDetail(
@@ -122,7 +126,7 @@ class _DetailDialogState extends State<DetailDialog> {
           );
           break;
         }
-      // 排行榜
+    // 排行榜
       case 'rankDetail':
         {
           currentWidget = new RankDetail(
@@ -139,7 +143,7 @@ class _DetailDialogState extends State<DetailDialog> {
           );
           break;
         }
-      // 团队
+    // 团队
       case 'teamDetail':
         {
           currentWidget = new TeamDetail(
@@ -163,7 +167,7 @@ class _DetailDialogState extends State<DetailDialog> {
           );
           break;
         }
-      // 分红
+    // 分红
       case 'adDividendDetail':
         {
           currentWidget = new AdDividendDetail(
@@ -178,7 +182,7 @@ class _DetailDialogState extends State<DetailDialog> {
           );
           break;
         }
-      // 公告
+    // 公告
       case 'announcementDetail':
         {
           currentWidget = new AnnouncementDetail(
@@ -186,7 +190,7 @@ class _DetailDialogState extends State<DetailDialog> {
           );
           break;
         }
-      // 贡献值
+    // 贡献值
       case 'contributionDetail':
         {
           currentWidget = new ContributionDetail(

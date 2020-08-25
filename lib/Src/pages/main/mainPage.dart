@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert' as convert;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +10,7 @@ import 'package:upgradegame/Common/event/errorEvent.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
 import 'package:upgradegame/Src/pages/main/common/dividendPart.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
@@ -299,12 +299,15 @@ class _MainPageState extends State<MainPage> {
                                 netWorkImageUrl: baseUserInfo.avatar,
                                 netWorkImage: true,
                                 callback: () {
-                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                                    'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                    'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                    'childName': 'userInfoDetail',
-                                    "title": "个人信息"
-                                  });
+                                  Navigator.push(
+                                      context,
+                                      PopWindow(
+                                          child: DetailDialog(
+                                        height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                        width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                        childWidgetName: 'sawmillDetail',
+                                        title: "伐木场",
+                                      )));
                                 },
                               ),
                             )
@@ -340,12 +343,21 @@ class _MainPageState extends State<MainPage> {
                             imageUrl: "resource/images/rank.png",
                             textSize: SystemFontSize.operationTextFontSize,
                             callback: () {
-                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                                'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                'childName': 'rankDetail',
-                                "title": "排行榜",
-                              });
+                              Navigator.push(
+                                  context,
+                                  PopWindow(
+                                      child: DetailDialog(
+                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                    childWidgetName: 'rankDetail',
+                                    title: "排行榜",
+                                  )));
+//                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+//                                'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+//                                'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+//                                'childName': 'rankDetail',
+//                                "title": "排行榜",
+//                              });
                             },
                           ),
                           new UserImageButton(
@@ -354,12 +366,21 @@ class _MainPageState extends State<MainPage> {
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/team.png",
                             callback: () {
-                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                                'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                'childName': 'teamDetail',
-                                "title": "团 队"
-                              });
+                              Navigator.push(
+                                  context,
+                                  PopWindow(
+                                      child: DetailDialog(
+                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                    childWidgetName: 'teamDetail',
+                                    title: "团 队",
+                                  )));
+//                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+//                                'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+//                                'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+//                                'childName': 'teamDetail',
+//                                "title": "团 队"
+//                              });
                             },
                           ),
                           new UserImageButton(
@@ -368,12 +389,21 @@ class _MainPageState extends State<MainPage> {
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/marketStores.png",
                             callback: () {
-                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                                'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                'childName': 'storeDetail',
-                                "title": "商 城"
-                              });
+                              Navigator.push(
+                                  context,
+                                  PopWindow(
+                                      child: DetailDialog(
+                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                    childWidgetName: 'storeDetail',
+                                    title: "商 城",
+                                  )));
+//                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+//                                'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+//                                'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+//                                'childName': 'storeDetail',
+//                                "title": "商 城"
+//                              });
                             },
                           ),
                           new UserImageButton(
@@ -382,12 +412,22 @@ class _MainPageState extends State<MainPage> {
                             imageUrl: "resource/images/contribution.png",
                             textSize: SystemFontSize.operationTextFontSize,
                             callback: () {
-                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                                'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                'childName': 'contributionDetail',
-                                "title": "贡献值",
-                              });
+                              Navigator.push(
+                                  context,
+                                  PopWindow(
+                                      child: DetailDialog(
+                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                    childWidgetName: 'contributionDetail',
+                                    title: "贡献值",
+                                  )));
+
+//                              Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+//                                'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+//                                'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+//                                'childName': 'contributionDetail',
+//                                "title": "贡献值",
+//                              });
                             },
                           ),
                           new UserImageButton(
@@ -416,12 +456,21 @@ class _MainPageState extends State<MainPage> {
                         title: "今日分红",
                         amount: "¥" + (autoProfitSharing == 0.00 ? this.displayInitProfitSharing() : autoProfitSharing.toStringAsFixed(2)),
                         callback: () {
-                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                            'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                            'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                            'childName': 'adDividendDetail',
-                            "title": "广告分红"
-                          });
+                          Navigator.push(
+                              context,
+                              PopWindow(
+                                  child: DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'adDividendDetail',
+                                title: "广告分红",
+                              )));
+//                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+//                            'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+//                            'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+//                            'childName': 'adDividendDetail',
+//                            "title": "广告分红"
+//                          });
                         },
                       ),
                     ),
@@ -458,12 +507,21 @@ class _MainPageState extends State<MainPage> {
                                 textSize: SystemFontSize.operationTextFontSize,
                                 imageUrl: "resource/images/setting.png",
                                 callback: () {
-                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                                    'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                    'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                    'childName': 'settingDetail',
-                                    "title": "必 读"
-                                  });
+                                  Navigator.push(
+                                      context,
+                                      PopWindow(
+                                          child: DetailDialog(
+                                        height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                        width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                        childWidgetName: 'settingDetail',
+                                        title: "必 读",
+                                      )));
+//                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+//                                    'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+//                                    'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+//                                    'childName': 'settingDetail',
+//                                    "title": "必 读"
+//                                  });
                                 },
                               ),
                               new UserImageButton(
@@ -472,12 +530,21 @@ class _MainPageState extends State<MainPage> {
                                 textSize: SystemFontSize.operationTextFontSize,
                                 imageUrl: "resource/images/announcement.png",
                                 callback: () {
-                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                                    'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                    'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                    'childName': 'announcementDetail',
-                                    "title": "公 告"
-                                  });
+                                  Navigator.push(
+                                      context,
+                                      PopWindow(
+                                          child: DetailDialog(
+                                        height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                        width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                        childWidgetName: 'announcementDetail',
+                                        title: "公 告",
+                                      )));
+//                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+//                                    'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+//                                    'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+//                                    'childName': 'announcementDetail',
+//                                    "title": "公 告"
+//                                  });
                                 },
                               ),
                             ],
@@ -501,12 +568,21 @@ class _MainPageState extends State<MainPage> {
                           width: ScreenUtil().setWidth(600),
                           imageUrl: "resource/images/mainBuilding.png",
                           callback: () {
-                            Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                              'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                              'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                              'childName': 'mainBuildingDetail',
-                              "title": "主 城"
-                            });
+                            Navigator.push(
+                                context,
+                                PopWindow(
+                                    child: DetailDialog(
+                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                  childWidgetName: 'mainBuildingDetail',
+                                  title: "主 城",
+                                )));
+//                            Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+//                              'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+//                              'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+//                              'childName': 'mainBuildingDetail',
+//                              "title": "主 城"
+//                            });
                           },
                         ),
                         Container(
@@ -564,12 +640,21 @@ class _MainPageState extends State<MainPage> {
                         width: ScreenUtil().setHeight(SystemIconSize.mainPageIconSize),
                         imageUrl: "resource/images/herosBuilding.png",
                         callback: () {
-                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                            'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                            'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                            'childName': 'heroAltar',
-                            "title": "英雄祭坛"
-                          });
+                          Navigator.push(
+                              context,
+                              PopWindow(
+                                  child: DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'heroAltar',
+                                title: "英雄祭坛",
+                              )));
+//                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+//                            'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+//                            'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+//                            'childName': 'heroAltar',
+//                            "title": "英雄祭坛"
+//                          });
                         },
                       ),
                       Container(
@@ -594,12 +679,21 @@ class _MainPageState extends State<MainPage> {
                         width: ScreenUtil().setWidth(SystemIconSize.mainPageIconSize),
                         imageUrl: "resource/images/stoneBuilding.png",
                         callback: () {
-                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                            'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                            'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                            'childName': 'stoneDetail',
-                            "title": "采石场",
-                          });
+                          Navigator.push(
+                              context,
+                              PopWindow(
+                                  child: DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'stoneDetail',
+                                title: "采石场",
+                              )));
+//                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+//                            'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+//                            'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+//                            'childName': 'stoneDetail',
+//                            "title": "采石场",
+//                          });
                         },
                       ),
                       Container(
@@ -624,12 +718,21 @@ class _MainPageState extends State<MainPage> {
                         width: ScreenUtil().setWidth(SystemIconSize.mainPageIconSize),
                         imageUrl: "resource/images/fellingBuilding.png",
                         callback: () {
-                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                            'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                            'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                            'childName': 'sawmillDetail',
-                            "title": "伐木场",
-                          });
+                          Navigator.push(
+                              context,
+                              PopWindow(
+                                  child: DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'sawmillDetail',
+                                title: "伐木场",
+                              )));
+//                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+//                            'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+//                            'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+//                            'childName': 'sawmillDetail',
+//                            "title": "伐木场",
+//                          });
                         },
                       ),
 //                ImageButton(height:ScreenUtil().setHeight(340),width: ScreenUtil().setWidth(380),imageUrl: "resource/images/fellingBuilding.png",callback: (){
@@ -658,12 +761,21 @@ class _MainPageState extends State<MainPage> {
                         width: ScreenUtil().setWidth(SystemIconSize.mainPageIconSize),
                         imageUrl: "resource/images/farmBuilding.png",
                         callback: () {
-                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                            'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                            'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                            'childName': 'farmDetail',
-                            "title": "农 场"
-                          });
+                          Navigator.push(
+                              context,
+                              PopWindow(
+                                  child: DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'farmDetail',
+                                title: "农 场",
+                              )));
+//                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+//                            'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+//                            'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+//                            'childName': 'farmDetail',
+//                            "title": "农 场"
+//          });
                         },
                       ),
                       Container(
@@ -688,12 +800,21 @@ class _MainPageState extends State<MainPage> {
                         width: ScreenUtil().setWidth(SystemIconSize.mainPageIconSize),
                         imageUrl: "resource/images/marketBuilding.png",
                         callback: () {
-                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
-                            'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                            'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                            'childName': 'marketDetail',
-                            "title": "市 场"
-                          });
+                          Navigator.push(
+                              context,
+                              PopWindow(
+                                  child: DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'marketDetail',
+                                title: "市 场",
+                              )));
+//                          Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
+//                            'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+//                            'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+//                            'childName': 'marketDetail',
+//                            "title": "市 场"
+//                          });
                         },
                       ),
                       Container(
