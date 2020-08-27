@@ -301,12 +301,13 @@ class _MainPageState extends State<MainPage> {
                                 callback: () {
                                   Navigator.push(
                                       context,
-                                      PopWindow(
-                                          child: DetailDialog(
-                                              height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                              width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                              childWidgetName: 'userInfoDetail',
-                                              title: "个人信息")));
+                                      PopWindow(pageBuilder: (context){
+                                        return DetailDialog(
+                                            height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                            width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                            childWidgetName: 'userInfoDetail',
+                                            title: "个人信息");
+                                      }));
                                 },
                               ),
                             )
@@ -344,13 +345,14 @@ class _MainPageState extends State<MainPage> {
                             callback: () {
                               Navigator.push(
                                   context,
-                                  PopWindow(
-                                      child: DetailDialog(
-                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                    childWidgetName: 'rankDetail',
-                                    title: "排行榜",
-                                  )));
+                                  PopWindow(pageBuilder: (context){
+                                    return DetailDialog(
+                                      height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                      width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                      childWidgetName: 'rankDetail',
+                                      title: "排行榜",
+                                    );
+                                  }));
                             },
                           ),
                           new UserImageButton(
@@ -361,32 +363,33 @@ class _MainPageState extends State<MainPage> {
                             callback: () {
                               Navigator.push(
                                   context,
-                                  PopWindow(
-                                      child: DetailDialog(
-                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                    childWidgetName: 'teamDetail',
-                                    title: "团 队",
-                                  )));
+                                  PopWindow(pageBuilder: (context){
+                                    return DetailDialog(
+                                      height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                      width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                      childWidgetName: 'teamDetail',
+                                      title: "团 队",
+                                    );
+                                  }));
                             },
                           ),
-                          new UserImageButton(
-                            size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
-                            buttonName: "商城",
-                            textSize: SystemFontSize.operationTextFontSize,
-                            imageUrl: "resource/images/marketStores.png",
-                            callback: () {
-                              Navigator.push(
-                                  context,
-                                  PopWindow(
-                                      child: DetailDialog(
-                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                    childWidgetName: 'storeDetail',
-                                    title: "商 城",
-                                  )));
-                            },
-                          ),
+//                          new UserImageButton(
+//                            size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+//                            buttonName: "商城",
+//                            textSize: SystemFontSize.operationTextFontSize,
+//                            imageUrl: "resource/images/marketStores.png",
+//                            callback: () {
+//                              Navigator.push(
+//                                  context,
+//                                  PopWindow(
+//                                      child: DetailDialog(
+//                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+//                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+//                                    childWidgetName: 'storeDetail',
+//                                    title: "商 城",
+//                                  )));
+//                            },
+//                          ),
                           new UserImageButton(
                             size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
                             buttonName: "贡献值",
@@ -395,13 +398,14 @@ class _MainPageState extends State<MainPage> {
                             callback: () {
                               Navigator.push(
                                   context,
-                                  PopWindow(
-                                      child: DetailDialog(
-                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                    childWidgetName: 'contributionDetail',
-                                    title: "贡献值",
-                                  )));
+                                  PopWindow(pageBuilder: (context){
+                                    return DetailDialog(
+                                      height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                      width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                      childWidgetName: 'contributionDetail',
+                                      title: "贡献值",
+                                    );
+                                  }));
                             },
                           ),
                           new UserImageButton(
@@ -432,13 +436,14 @@ class _MainPageState extends State<MainPage> {
                         callback: () {
                           Navigator.push(
                               context,
-                              PopWindow(
-                                  child: DetailDialog(
-                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                childWidgetName: 'adDividendDetail',
-                                title: "广告分红",
-                              )));
+                              PopWindow(pageBuilder: (context){
+                                return DetailDialog(
+                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                  childWidgetName: 'adDividendDetail',
+                                  title: "广告分红",
+                                );
+                              }));
                         },
                       ),
                     ),
@@ -477,13 +482,14 @@ class _MainPageState extends State<MainPage> {
                                 callback: () {
                                   Navigator.push(
                                       context,
-                                      PopWindow(
-                                          child: DetailDialog(
-                                        height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                        width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                        childWidgetName: 'settingDetail',
-                                        title: "必 读",
-                                      )));
+                                      PopWindow(pageBuilder: (context){
+                                        return DetailDialog(
+                                          height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                          width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                          childWidgetName: 'settingDetail',
+                                          title: "必 读",
+                                        );
+                                      }));
 //                                  Application.showDetailDialog(context, UpgradeGameRoute.detailDialogPage, params: {
 //                                    'height': ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
 //                                    'width': ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
@@ -500,13 +506,14 @@ class _MainPageState extends State<MainPage> {
                                 callback: () {
                                   Navigator.push(
                                       context,
-                                      PopWindow(
-                                          child: DetailDialog(
-                                        height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                        width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                        childWidgetName: 'announcementDetail',
-                                        title: "公 告",
-                                      )));
+                                      PopWindow(pageBuilder: (context){
+                                        return DetailDialog(
+                                          height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                          width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                          childWidgetName: 'announcementDetail',
+                                          title: "公 告",
+                                        );
+                                      }));
                                 },
                               ),
                             ],
@@ -532,13 +539,14 @@ class _MainPageState extends State<MainPage> {
                           callback: () {
                             Navigator.push(
                                 context,
-                                PopWindow(
-                                    child: DetailDialog(
-                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                  childWidgetName: 'mainBuildingDetail',
-                                  title: "主 城",
-                                )));
+                                PopWindow(pageBuilder: (context){
+                                  return DetailDialog(
+                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                    childWidgetName: 'mainBuildingDetail',
+                                    title: "主 城",
+                                  );
+                                }));
                           },
                         ),
                         Container(
@@ -598,13 +606,14 @@ class _MainPageState extends State<MainPage> {
                         callback: () {
                           Navigator.push(
                               context,
-                              PopWindow(
-                                  child: DetailDialog(
-                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                childWidgetName: 'heroAltar',
-                                title: "英雄祭坛",
-                              )));
+                              PopWindow(pageBuilder: (context){
+                                return DetailDialog(
+                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                  childWidgetName: 'heroAltar',
+                                  title: "英雄祭坛",
+                                );
+                              }));
                         },
                       ),
                       Container(
@@ -631,13 +640,14 @@ class _MainPageState extends State<MainPage> {
                         callback: () {
                           Navigator.push(
                               context,
-                              PopWindow(
-                                  child: DetailDialog(
-                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                childWidgetName: 'stoneDetail',
-                                title: "采石场",
-                              )));
+                              PopWindow(pageBuilder: (context){
+                                return  DetailDialog(
+                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                  childWidgetName: 'stoneDetail',
+                                  title: "采石场",
+                                );
+                              }));
                         },
                       ),
                       Container(
@@ -664,13 +674,14 @@ class _MainPageState extends State<MainPage> {
                         callback: () {
                           Navigator.push(
                               context,
-                              PopWindow(
-                                  child: DetailDialog(
-                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                childWidgetName: 'sawmillDetail',
-                                title: "伐木场",
-                              )));
+                              PopWindow(pageBuilder: (context){
+                                return DetailDialog(
+                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                  childWidgetName: 'sawmillDetail',
+                                  title: "伐木场",
+                                );
+                              }));
                         },
                       ),
 //                ImageButton(height:ScreenUtil().setHeight(340),width: ScreenUtil().setWidth(380),imageUrl: "resource/images/fellingBuilding.png",callback: (){
@@ -701,13 +712,14 @@ class _MainPageState extends State<MainPage> {
                         callback: () {
                           Navigator.push(
                               context,
-                              PopWindow(
-                                  child: DetailDialog(
-                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                childWidgetName: 'farmDetail',
-                                title: "农 场",
-                              )));
+                              PopWindow(pageBuilder: (context){
+                                return DetailDialog(
+                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                  childWidgetName: 'farmDetail',
+                                  title: "农 场",
+                                );
+                              }));
                         },
                       ),
                       Container(
@@ -734,13 +746,14 @@ class _MainPageState extends State<MainPage> {
                         callback: () {
                           Navigator.push(
                               context,
-                              PopWindow(
-                                  child: DetailDialog(
-                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                childWidgetName: 'marketDetail',
-                                title: "市 场",
-                              )));
+                              PopWindow(pageBuilder: (context){
+                                return DetailDialog(
+                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                  childWidgetName: 'marketDetail',
+                                  title: "市 场",
+                                );
+                              }));
                         },
                       ),
                       Container(

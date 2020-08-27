@@ -67,7 +67,10 @@ class PopWindow extends PopupRoute{
   final Duration _duration = Duration(milliseconds: 300);
   Widget child;
 
-  PopWindow({@required this.child});
+  final WidgetBuilder pageBuilder;
+
+
+  PopWindow({@required this.pageBuilder, this.child});
   @override
   // TODO: implement barrierColor
   Color get barrierColor => null;
@@ -80,10 +83,22 @@ class PopWindow extends PopupRoute{
   // TODO: implement barrierLabel
   String get barrierLabel => null;
 
+
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
-    return child;
+  Widget buildPage(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation) => pageBuilder(context);
+
+
+
+  @override
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
+    return FadeTransition(
+      opacity: animation,
+      child: pageBuilder(context),
+    );
   }
+
 
   @override
   // TODO: implement transitionDuration
