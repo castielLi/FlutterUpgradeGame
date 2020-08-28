@@ -91,8 +91,8 @@ class AdDialog {
       if("-1"==event.toString()){
         this.initAdViewSuccess = false;
         if(this.adOperateFailedCallback != null){
-          this.adOperateFailedCallback(this.type);
           this.dialogState = false;
+          this.adOperateFailedCallback(this.type);
         }
       }
 

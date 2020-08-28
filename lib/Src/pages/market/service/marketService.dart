@@ -22,7 +22,7 @@ class MarketService {
     if (response.code == 200) {
       callback(response.data);
     } else {
-      CommonUtils.showErrorMessage(msg: "搜索用户出错");
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(null);
     }
   }
@@ -33,7 +33,7 @@ class MarketService {
       MyTradeListModel model = MyTradeListModel.fromJson(response.data);
       callback(model);
     } else {
-      CommonUtils.showErrorMessage(msg: "请求我发布的订单出错");
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(null);
     }
   }
@@ -46,7 +46,7 @@ class MarketService {
     if (response.code == 200) {
       callback(true);
     } else {
-      CommonUtils.showErrorMessage(msg: "购买市场订单出错");
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(false);
     }
   }
@@ -60,7 +60,7 @@ class MarketService {
       TradeListModel model = TradeListModel.fromJson(response.data);
       callback(model);
     } else {
-      CommonUtils.showErrorMessage(msg: "请求市场订单出错");
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(null);
     }
   }
@@ -73,7 +73,7 @@ class MarketService {
     if (response.code == 200) {
       callback(true);
     } else {
-      CommonUtils.showErrorMessage(msg: "取消订单出错");
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(false);
     }
   }
@@ -86,7 +86,7 @@ class MarketService {
     if (response.code == 200) {
       callback(true);
     } else {
-      CommonUtils.showErrorMessage(msg: "发布订单出错");
+      CommonUtils.showErrorMessage(msg: response.message);
       callback(false);
     }
   }
