@@ -112,6 +112,9 @@ class _MarketDetailState extends State<MarketDetail> {
             this.woodListOffset = 0;
           }else{
             this.noOrderHintText = '目前没有订单';
+            setState(() {
+              woodList.datalist = [];
+            });
           }
         }else{
           if(model.datalist.length > 0){
@@ -147,6 +150,9 @@ class _MarketDetailState extends State<MarketDetail> {
             this.woodListOffset = 0;
           }else{
             this.noOrderHintText = '目前没有订单';
+            setState(() {
+              woodList.datalist = [];
+            });
           }
         }else{
           if(model.datalist.length > 0){
@@ -182,6 +188,9 @@ class _MarketDetailState extends State<MarketDetail> {
             });
           }else{
             this.noOrderHintText = '目前没有订单';
+            setState(() {
+              stoneList.datalist = [];
+            });
           }
           this.stoneListOffset = 0;
         }else{
@@ -227,14 +236,14 @@ class _MarketDetailState extends State<MarketDetail> {
                 buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
                 textSize: ScreenUtil().setSp(SystemButtonSize.smallButtonFontSize),
                 buttons: [
-//                  ImageTextButton(
-//                    buttonName: '金币',
-//                    iconUrl: 'resource/images/coin.png',
-//                    callback: () {
-//                      changeDisplayContent(Resource.COIN);
-//                      FocusScope.of(context).requestFocus(FocusNode());
-//                    },
-//                  ),
+                  ImageTextButton(
+                    buttonName: '金币',
+                    iconUrl: 'resource/images/coin.png',
+                    callback: () {
+                      changeDisplayContent(Resource.COIN);
+                      FocusScope.of(context).requestFocus(FocusNode());
+                    },
+                  ),
                   ImageTextButton(
                     buttonName: '木头',
                     iconUrl: 'resource/images/wood.png',
@@ -393,6 +402,15 @@ class _MarketDetailState extends State<MarketDetail> {
                                                               }
                                                             }
                                                           });
+                                                        }else{
+                                                          setState(() {
+                                                            for (int i = 0; i < this.woodList.datalist.length; i++) {
+                                                              if (tradeItemModel.productid == this.woodList.datalist[i].productid) {
+                                                                this.woodList.datalist.removeAt(i);
+                                                                return;
+                                                              }
+                                                            }
+                                                          });
                                                         }
                                                       });
                                                       Navigator.of(context).pop();
@@ -507,6 +525,15 @@ class _MarketDetailState extends State<MarketDetail> {
 
                                                           ///wood = 1 stone = 2
                                                           baseUserInfo.buyResource(2, tradeItemModel.amount, tradeItemModel.price);
+                                                          setState(() {
+                                                            for (int i = 0; i < this.stoneList.datalist.length; i++) {
+                                                              if (tradeItemModel.productid == this.stoneList.datalist[i].productid) {
+                                                                this.stoneList.datalist.removeAt(i);
+                                                                return;
+                                                              }
+                                                            }
+                                                          });
+                                                        }else{
                                                           setState(() {
                                                             for (int i = 0; i < this.stoneList.datalist.length; i++) {
                                                               if (tradeItemModel.productid == this.stoneList.datalist[i].productid) {

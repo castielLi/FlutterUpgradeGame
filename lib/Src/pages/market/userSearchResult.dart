@@ -136,26 +136,26 @@ class _UserSearchResult extends State<UserSearchResult> {
                     obscureText: true,
                     controller: passwordController,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          new Image(
-                            image: new AssetImage("resource/images/volume.png"),
-                            width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarSmallIconSize),
-                            height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
-                          ),
-                          new Text(
-                            baseUserInfo.voucher.toString(),
-                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                          ),
-                        ],
-                      ),
-                      Text('赠送1金币需要1张赠送券', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
-                    ],
-                  ),
+//                  Row(
+//                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                    children: [
+//                      Row(
+//                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                        children: [
+//                          new Image(
+//                            image: new AssetImage("resource/images/volume.png"),
+//                            width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarSmallIconSize),
+//                            height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
+//                          ),
+//                          new Text(
+//                            baseUserInfo.voucher.toString(),
+//                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+//                          ),
+//                        ],
+//                      ),
+//                      Text('赠送1金币需要1张赠送券', style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize)),
+//                    ],
+//                  ),
                   ButtonsList(
                     buttonWidth: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
                     buttonHeight: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
@@ -182,10 +182,10 @@ class _UserSearchResult extends State<UserSearchResult> {
                             return;
                           }
 
-                          if (baseUserInfo.voucher < int.parse(amountController.text)) {
-                            CommonUtils.showErrorMessage(msg: "您的赠送券不足,请在商城购买赠送券");
-                            return;
-                          }
+//                          if (baseUserInfo.voucher < int.parse(amountController.text)) {
+//                            CommonUtils.showErrorMessage(msg: "您的赠送券不足,请在商城购买赠送券");
+//                            return;
+//                          }
 
                           showDialog<Null>(
                             context: context,
