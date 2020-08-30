@@ -281,6 +281,7 @@ class _LoginPageState extends State<LoginPage> {
                                 height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                                 controller: phoneController,
                                 hintText: '电话:',
+                                warningText: "请输入真实电话，否则将导致无法提现",
                                 icon: Icon(Icons.phone),
                                 inputType: TextInputType.number,
                               ),

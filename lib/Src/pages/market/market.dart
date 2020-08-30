@@ -277,11 +277,16 @@ class _MarketDetailState extends State<MarketDetail> {
                       offstage: contentName != Resource.COIN,
                       child: Column(
                         children: [
+                          new Text(
+                            "按电话号码搜索用户来赠送金币",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.normalTextSize), color: Colors.white, decoration: TextDecoration.none),
+                          ),
                           MyTextField(
                             height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                             controller: phoneController,
                             inputType: TextInputType.number,
-                            hintText: '输入用户手机号搜索',
+                            hintText: '用户手机号码',
                             icon: Icon(Icons.search),
                             onSubmittedCallback: () {
                               String phone = phoneController.text;
@@ -302,7 +307,7 @@ class _MarketDetailState extends State<MarketDetail> {
                             },
                           ),
                           Container(
-                            height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemScreenSize.inputDecorationHeight - 50),
+                            height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemScreenSize.inputDecorationHeight - 50 - 30),
                             child: UserSearchResult(
                               user: this.searchedUser,
                               noUserHintText: this.noResultHintText,
