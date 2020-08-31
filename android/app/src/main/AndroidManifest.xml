@@ -60,6 +60,16 @@
         <activity android:name="com.kyview.AdActivity" />
 
         <provider
+            android:name="com.baidu.mobads.openad.BdFileProvider"
+            android:authorities="com.wodebuluoge.mm.bd.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/bd_file_paths" />
+        </provider>
+
+        <provider
             android:name="com.bytedance.sdk.openadsdk.TTFileProvider"
             android:authorities="${applicationId}.TTFileProvider"
             android:exported="false"

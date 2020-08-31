@@ -14,6 +14,7 @@ public class BaiduManager {
 
     public RewardVideoAd mRewardVideoAd;
     private Activity activity;
+    private  int times = 0;
 
     private static BaiduManager instance;
 
@@ -88,8 +89,16 @@ public class BaiduManager {
         public void onAdFailed(String arg0) {
             // 广告失败回调 原因：广告内容填充为空；网络原因请求广告超时
             // 建议：收到该回调之后，可以重新load下一条广告，最好限制load次数（4-5次即可）
-            Log.i(TAG, "onAdFailed");
-            EventBus.getDefault().post(Constant.STATUS_FAIL);
+            if(times <=7){
+                times += 1;
+                mRewardVideoAd.load();
+                mRewardVideoAd.show();
+            }else{
+                times = 0;
+                Log.i(TAG, "onAdFailed");
+                EventBus.getDefault().post(Constant.STATUS_FAIL);
+            }
+
         }
     };
 }
