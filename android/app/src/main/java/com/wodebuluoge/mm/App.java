@@ -11,6 +11,9 @@ import com.bun.miitmdid.core.IIdentifierListener;
 import com.bun.miitmdid.core.JLibrary;
 import com.bun.miitmdid.core.MdidSdkHelper;
 import com.bun.miitmdid.supplier.IdSupplier;
+import com.bytedance.sdk.openadsdk.TTAdConfig;
+import com.bytedance.sdk.openadsdk.TTAdConstant;
+import com.bytedance.sdk.openadsdk.TTAdSdk;
 import com.kuaiyou.open.InitSDKManager;
 import com.qq.e.comm.managers.GDTADManager;
 import com.qq.e.comm.managers.setting.GlobalSetting;
@@ -55,6 +58,21 @@ public class App extends FlutterApplication {
         }
         // 腾讯广告 通过调用此方法初始化 SDK。如果需要在多个进程拉取广告，每个进程都需要初始化 SDK。
         GDTADManager.getInstance().initWith(this, Constant.TENCENT_APPID);
+        // 穿山甲广告 通过此方法初始化 SDK
+        TTAdSdk.init(this,
+                new TTAdConfig.Builder()
+                        .appId("5102021")
+                        .useTextureView(false) //使用TextureView控件播放视频,默认为SurfaceView,当有SurfaceView冲突的场景，可以使用TextureView
+                        .appName("我的部落格")
+                        .titleBarTheme(TTAdConstant.TITLE_BAR_THEME_DARK)
+                        .allowShowNotify(true) //是否允许sdk展示通知栏提示
+                        .allowShowPageWhenScreenLock(true) //是否在锁屏场景支持展示广告落地页
+                        .debug(true) //测试阶段打开，可以通过日志排查问题，上线时去除该调用
+                        .directDownloadNetworkType(TTAdConstant.NETWORK_STATE_WIFI, TTAdConstant.NETWORK_STATE_3G) //允许直接下载的网络状态集合
+                        .supportMultiProcess(false) //是否支持多进程，true支持
+                        //.httpStack(new MyOkStack3())//自定义网络库，demo中给出了okhttp3版本的样例，其余请自行开发或者咨询工作人员。
+                        .build());
+
 
         GlobalSetting.setChannel(1);
         GlobalSetting.setEnableMediationTool(true);

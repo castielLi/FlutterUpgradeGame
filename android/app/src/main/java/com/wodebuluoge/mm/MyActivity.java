@@ -18,6 +18,7 @@ import com.wodebuluoge.mm.adview.AdViewManager;
 import com.wodebuluoge.mm.adview.PermissionListener;
 import com.wodebuluoge.mm.baidu.BaiduManager;
 import com.wodebuluoge.mm.baidu.SplashActivity;
+import com.wodebuluoge.mm.chuanshanjia.CSJManager;
 import com.wodebuluoge.mm.tencent.TencentManager;
 import com.wodebuluoge.mm.tencent.TentcentSplashActivity;
 import com.kuaiyou.open.InitSDKManager;
@@ -88,6 +89,8 @@ public class MyActivity extends FlutterActivity {
                                     } else  if(showType == 2){
                                         TencentManager.getInstance(MyActivity.this).showVideo(posId);
                                     }
+                                }else if(type == 4){
+                                    CSJManager.getInstance(MyActivity.this).showVideo(posId);
                                 }
 
                             }

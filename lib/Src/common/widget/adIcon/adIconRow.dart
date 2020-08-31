@@ -46,13 +46,27 @@ class _AdIconRow extends State<AdIconRow> {
     this.times += 1;
     switch(type){
       case 1:
-        AdDialog().showAd(3, 2,"6031610694170610");
+        int timeSecend = DateTime.now().second;
+        if(timeSecend % 3 == 0){
+          AdDialog().showAd(3, 2,"6031610694170610");
+        }else{
+          AdDialog().showAd(4, 1,"945445227");
+        }
         break;
       case 2:
-        AdDialog().showAd(3, 2,"6031610694170610");
+        int timeSecend = DateTime.now().second;
+        if(timeSecend % 3 == 0){
+          AdDialog().showAd(3, 2,"6031610694170610");
+        }else{
+          AdDialog().showAd(4, 1,"945445227");
+        }
         break;
       case 3:
-        AdDialog().showAd(2, 2,"7111030");
+//        AdDialog().showAd(2, 2,"7111030");
+        AdDialog().showAd(4, 1,"945445227");
+        break;
+      case 4:
+        AdDialog().showAd(3, 2,"6031610694170610");
         break;
     }
   }
@@ -159,6 +173,7 @@ class _AdIconRow extends State<AdIconRow> {
               } else if (this.widget.type == AdTypeEnum.stone) {
 //                AdDialog().showAd(2, 2);
               AdDialog().showAd(2, 2,"7111030");
+//              AdDialog().showAd(4, 1,"945445227");
 //                this.adFinishedCallback();
               } else {
 //                AdDialog().showAd(3, 2);
@@ -216,6 +231,7 @@ class _AdIconRow extends State<AdIconRow> {
                 } else if (this.widget.type == AdTypeEnum.stone) {
 //                  AdDialog().showAd(2, 2);
               AdDialog().showAd(2, 2,"7111030");
+//                  AdDialog().showAd(4, 1,"945445227");
 //                  this.adFinishedCallback();
                 } else {
 //                  AdDialog().showAd(3, 2);
@@ -259,6 +275,7 @@ class _AdIconRow extends State<AdIconRow> {
                 } else if (this.widget.type == AdTypeEnum.stone) {
 //                  AdDialog().showAd(2, 2);
               AdDialog().showAd(2, 2,"7111030");
+//                  AdDialog().showAd(4, 1,"945445227");
 //                  this.adFinishedCallback();
                 } else {
 //                  AdDialog().showAd(3, 2);
@@ -325,6 +342,7 @@ class _AdIconRow extends State<AdIconRow> {
                 } else if (this.widget.type == AdTypeEnum.stone) {
 //                  AdDialog().showAd(2, 2);
               AdDialog().showAd(2, 2,"7111030");
+//                  AdDialog().showAd(4, 1,"945445227");
 //                  this.adFinishedCallback();
                 } else {
 //                  AdDialog().showAd(3, 2);
