@@ -90,7 +90,7 @@ public class BaiduManager {
         public void onAdFailed(String arg0) {
             // 广告失败回调 原因：广告内容填充为空；网络原因请求广告超时
             // 建议：收到该回调之后，可以重新load下一条广告，最好限制load次数（4-5次即可）
-            if(times <=5){
+            if(times <=7){
                 times += 1;
                 mRewardVideoAd.load();
                 mRewardVideoAd.show();

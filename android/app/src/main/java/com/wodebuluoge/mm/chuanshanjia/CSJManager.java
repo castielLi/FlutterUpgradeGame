@@ -58,7 +58,8 @@ public class CSJManager {
         mTTAdNative.loadRewardVideoAd(adSlot, new TTAdNative.RewardVideoAdListener() {
             @Override
             public void onError(int code, String message) {
-
+                Log.i(TAG, "onAdFailed");
+                EventBus.getDefault().post(Constant.STATUS_FAIL);
             }
             //视频广告加载后的视频文件资源缓存到本地的回调
             @Override
