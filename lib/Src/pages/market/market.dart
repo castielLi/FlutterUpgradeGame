@@ -7,7 +7,6 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
-import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/const/resource.dart';
 import 'package:upgradegame/Src/common/model/userSearch.dart';
@@ -105,26 +104,26 @@ class _MarketDetailState extends State<MarketDetail> {
         woodList.total = model.total;
         woodList.page = model.page;
         if (model.page == 0) {
-          if(model.datalist.length > 0){
+          if (model.datalist.length > 0) {
             setState(() {
               woodList.datalist = model.datalist;
             });
             this.woodListOffset = 0;
-          }else{
+          } else {
             this.noOrderHintText = '目前没有订单';
             setState(() {
               woodList.datalist = [];
             });
           }
-        }else{
-          if(model.datalist.length > 0){
+        } else {
+          if (model.datalist.length > 0) {
             setState(() {
               woodList.datalist += model.datalist;
             });
             WidgetsBinding.instance.addPostFrameCallback((mag) {
               this.woodController.jumpTo(this.woodListOffset);
             });
-          }else{
+          } else {
             CommonUtils.showErrorMessage(msg: "没有更多了");
             this.woodPage -= 1;
             WidgetsBinding.instance.addPostFrameCallback((mag) {
@@ -143,38 +142,36 @@ class _MarketDetailState extends State<MarketDetail> {
         woodList.total = model.total;
         woodList.page = model.page;
         if (model.page == 0) {
-          if(model.datalist.length > 0){
+          if (model.datalist.length > 0) {
             setState(() {
               woodList.datalist = model.datalist;
             });
             this.woodListOffset = 0;
-          }else{
+          } else {
             this.noOrderHintText = '目前没有订单';
             setState(() {
               woodList.datalist = [];
             });
           }
-        }else{
-          if(model.datalist.length > 0){
+        } else {
+          if (model.datalist.length > 0) {
             setState(() {
               woodList.datalist += model.datalist;
             });
-          }else{
+          } else {
             CommonUtils.showErrorMessage(msg: "没有更多了");
           }
         }
         flag = true;
-      }
-      else {
+      } else {
         flag = false;
       }
-
     });
     return flag;
   }
 
   ///获取石材的市场订单情况
-  void getStoneTradeList(){
+  void getStoneTradeList() {
     this.widget.HUD();
     MarketService.getMarketTradeByType(this.stonePage, this.RequestHttpStone, (TradeListModel model) {
       this.widget.HUD();
@@ -182,25 +179,25 @@ class _MarketDetailState extends State<MarketDetail> {
         stoneList.total = model.total;
         stoneList.page = model.page;
         if (model.page == 0) {
-          if(model.datalist.length > 0){
+          if (model.datalist.length > 0) {
             setState(() {
               stoneList.datalist = model.datalist;
             });
-          }else{
+          } else {
             this.noOrderHintText = '目前没有订单';
             setState(() {
               stoneList.datalist = [];
             });
           }
           this.stoneListOffset = 0;
-        }else{
-          if(model.datalist.length == 0){
+        } else {
+          if (model.datalist.length == 0) {
             CommonUtils.showErrorMessage(msg: "没有更多了");
-            this.stonePage -=1;
+            this.stonePage -= 1;
             WidgetsBinding.instance.addPostFrameCallback((mag) {
               this.stoneController.jumpTo(this.stoneListOffset);
             });
-          }else{
+          } else {
             setState(() {
               stoneList.datalist += model.datalist;
             });
@@ -270,51 +267,69 @@ class _MarketDetailState extends State<MarketDetail> {
               ),
               Container(
                 margin: EdgeInsets.only(top: 10),
-                height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
                 child: Stack(
                   children: <Widget>[
                     Offstage(
                       offstage: contentName != Resource.COIN,
-                      child: Column(
-                        children: [
-                          new Text(
-                            "按电话号码搜索用户来赠送金币",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.normalTextSize), color: Colors.white, decoration: TextDecoration.none),
-                          ),
-                          MyTextField(
-                            height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
-                            controller: phoneController,
-                            inputType: TextInputType.number,
-                            hintText: '用户手机号码',
-                            icon: Icon(Icons.search),
-                            onSubmittedCallback: () {
-                              String phone = phoneController.text;
-                              if (!RegExp(r"^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$").hasMatch(phone)) {
-                                CommonUtils.showErrorMessage(msg: "请输入正确的手机号码");
-                                return;
-                              }
-                              MarketService.searchUser(phone, (data) {
-                                setState(() {
-                                  this.noResultHintText = '没有搜索到用户';
-                                  this.searchedUser = null;
-                                  if (null != data) {
-                                    this.searchedUser = UserSearch.fromJson(data);
-                                    this.searchedUser.phone = phone;
-                                  }
-                                });
-                              });
-                            },
-                          ),
-                          Container(
-                            height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemScreenSize.inputDecorationHeight - 50 - 30),
-                            child: UserSearchResult(
-                              user: this.searchedUser,
-                              noUserHintText: this.noResultHintText,
-                              HUD: this.widget.HUD,
+                      child: Container(
+                        height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
+                        child: Column(
+                          children: [
+                            new Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                  height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+                                  child: new Card(
+                                      child: new Container(
+                                    child: new Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            child: TextField(
+                                              controller: phoneController,
+                                              keyboardType: TextInputType.number,
+                                              decoration: new InputDecoration(hintText: '用户手机号码', border: InputBorder.none, prefixIcon: Icon(Icons.phone_android)),
+                                              onSubmitted: (input) {
+                                                this.searchUser();
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                        new IconButton(
+                                          icon: new Icon(Icons.search),
+                                          color: Colors.grey,
+                                          iconSize: 26.0,
+                                          onPressed: () {
+                                            this.searchUser();
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  )),
+                                ),
+                                new Container(
+                                  padding: EdgeInsets.only(left: ScreenUtil().setWidth(10)),
+                                  child: new Text(
+                                    "按电话号码搜索用户来赠送金币",
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.normalTextSize), color: Colors.white, decoration: TextDecoration.none),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
+                            Container(
+                              height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight - SystemScreenSize.inputDecorationHeight - 50),
+                              child: UserSearchResult(
+                                user: this.searchedUser,
+                                noUserHintText: this.noResultHintText,
+                                HUD: this.widget.HUD,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ), // coin
                     Offstage(
@@ -349,7 +364,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                 ),
                                 // ignore: missing_return
                                 loadMore: () {
-                                  this.woodPage +=1;
+                                  this.woodPage += 1;
                                   this.woodListOffset = this.woodController.offset;
                                   getWoodList();
                                 },
@@ -407,7 +422,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                                               }
                                                             }
                                                           });
-                                                        }else{
+                                                        } else {
                                                           setState(() {
                                                             for (int i = 0; i < this.woodList.datalist.length; i++) {
                                                               if (tradeItemModel.productid == this.woodList.datalist[i].productid) {
@@ -468,17 +483,6 @@ class _MarketDetailState extends State<MarketDetail> {
                                   this.stonePage += 1;
                                   this.stoneListOffset = this.stoneController.offset;
                                   getStoneTradeList();
-//                                  double offset = this.stoneController.offset;
-//                                  print(offset);
-//                                  var getData = ()async{
-//                                    this.stonePage++;
-//                                    await getStoneTradeList();
-//                                    this.stoneController.jumpTo(offset);
-//                                    print(this.stoneController.offset);
-//                                  };
-//                                  setState(() {
-//                                    getData();
-//                                  });
                                 },
                                 // ignore: missing_return
                                 onRefresh: () {
@@ -538,7 +542,7 @@ class _MarketDetailState extends State<MarketDetail> {
                                                               }
                                                             }
                                                           });
-                                                        }else{
+                                                        } else {
                                                           setState(() {
                                                             for (int i = 0; i < this.stoneList.datalist.length; i++) {
                                                               if (tradeItemModel.productid == this.stoneList.datalist[i].productid) {
@@ -691,5 +695,23 @@ class _MarketDetailState extends State<MarketDetail> {
   void dispose() {
     phoneController.dispose();
     super.dispose();
+  }
+
+  void searchUser() {
+    String phone = phoneController.text;
+    if (!RegExp(r"^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$").hasMatch(phone)) {
+      CommonUtils.showErrorMessage(msg: "请输入正确的手机号码");
+      return;
+    }
+    MarketService.searchUser(phone, (data) {
+      setState(() {
+        this.noResultHintText = '没有搜索到用户';
+        this.searchedUser = null;
+        if (null != data) {
+          this.searchedUser = UserSearch.fromJson(data);
+          this.searchedUser.phone = phone;
+        }
+      });
+    });
   }
 }
