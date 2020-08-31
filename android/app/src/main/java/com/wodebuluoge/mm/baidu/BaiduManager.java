@@ -61,6 +61,7 @@ public class BaiduManager {
         @Override
         public void onAdShow() {
             // 视频开始播放时候的回调
+            times = 0;
             Log.i(TAG, "onAdShow");
             EventBus.getDefault().post(Constant.STATUS_RECEIVE);
         }
@@ -89,7 +90,7 @@ public class BaiduManager {
         public void onAdFailed(String arg0) {
             // 广告失败回调 原因：广告内容填充为空；网络原因请求广告超时
             // 建议：收到该回调之后，可以重新load下一条广告，最好限制load次数（4-5次即可）
-            if(times <=7){
+            if(times <=15){
                 times += 1;
                 mRewardVideoAd.load();
                 mRewardVideoAd.show();
