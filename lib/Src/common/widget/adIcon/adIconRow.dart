@@ -62,7 +62,6 @@ class _AdIconRow extends State<AdIconRow> {
         }
         break;
       case 3:
-//        AdDialog().showAd(2, 2,"7111030");
         AdDialog().showAd(4, 1,"945445227");
         break;
       case 4:
@@ -162,29 +161,24 @@ class _AdIconRow extends State<AdIconRow> {
               if (this.widget.type == AdTypeEnum.farm) {
                 ///如果adview的开屏广告初始化成功,那么就展示adview的广告，否则展示腾讯广告
                 if (AdDialog().initAdViewSuccess) {
-//                  AdDialog().showAd(1, 2);
-
                   int timeHour = DateTime.now().hour;
                   if (timeHour >= 12 && timeHour < 18) {
                     AdDialog().showAd(4, 1,"945445227");
                   } else {
                     AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
                   }
-//                  this.adFinishedCallback();
                 } else {
-//                  AdDialog().showAd(3, 2);
-                AdDialog().showAd(3, 2,"6031610694170610");
-//                  this.adFinishedCallback();
+                  int timeSecend = DateTime.now().second;
+                  if(timeSecend % 2 == 0){
+                    AdDialog().showAd(3, 2,"6031610694170610");
+                  }else{
+                    AdDialog().showAd(4, 1,"945445227");
+                  }
                 }
               } else if (this.widget.type == AdTypeEnum.stone) {
-//                AdDialog().showAd(2, 2);
               AdDialog().showAd(2, 2,"7111030");
-//              AdDialog().showAd(4, 1,"945445227");
-//                this.adFinishedCallback();
               } else {
-//                AdDialog().showAd(3, 2);
               AdDialog().showAd(3, 2,"6031610694170610");
-//                this.adFinishedCallback();
               }
             },
           ),
@@ -224,14 +218,9 @@ class _AdIconRow extends State<AdIconRow> {
                 ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
                 this.widget.HUD();
                 if (this.widget.type == AdTypeEnum.stone) {
-//                  AdDialog().showAd(2, 2);
-              AdDialog().showAd(2, 2,"7111030");
-//                  AdDialog().showAd(4, 1,"945445227");
-//                  this.adFinishedCallback();
+                  AdDialog().showAd(2, 2,"7111030");
                 } else {
-//                  AdDialog().showAd(3, 2);
-              AdDialog().showAd(3, 2,"6031610694170610");
-//                  this.adFinishedCallback();
+                  AdDialog().showAd(3, 2,"6031610694170610");
                 }
               },
             ),
@@ -257,14 +246,9 @@ class _AdIconRow extends State<AdIconRow> {
                 ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
                 this.widget.HUD();
                 if (this.widget.type == AdTypeEnum.stone) {
-//                  AdDialog().showAd(2, 2);
-              AdDialog().showAd(2, 2,"7111030");
-//                  AdDialog().showAd(4, 1,"945445227");
-//                  this.adFinishedCallback();
+                  AdDialog().showAd(2, 2,"7111030");
                 } else {
-//                  AdDialog().showAd(3, 2);
-              AdDialog().showAd(3, 2,"6031610694170610");
-//                  this.adFinishedCallback();
+                  AdDialog().showAd(3, 2,"6031610694170610");
                 }
               },
             ),
@@ -313,14 +297,9 @@ class _AdIconRow extends State<AdIconRow> {
                 ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
                 this.widget.HUD();
                 if (this.widget.type == AdTypeEnum.stone) {
-//                  AdDialog().showAd(2, 2);
-              AdDialog().showAd(2, 2,"7111030");
-//                  AdDialog().showAd(4, 1,"945445227");
-//                  this.adFinishedCallback();
+                  AdDialog().showAd(2, 2,"7111030");
                 } else {
-//                  AdDialog().showAd(3, 2);
-              AdDialog().showAd(3, 2,"6031610694170610");
-//                  this.adFinishedCallback();
+                  AdDialog().showAd(3, 2,"6031610694170610");
                 }
               },
             ),
