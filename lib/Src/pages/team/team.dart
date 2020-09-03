@@ -119,7 +119,6 @@ class _TeamDetailState extends State<TeamDetail> {
 
   @override
   Widget build(BuildContext context) {
-
     bool cashback = Global.getCashBackSetting();
 
     return new Container(
@@ -216,49 +215,48 @@ class _TeamDetailState extends State<TeamDetail> {
                                 ),
                               ],
                             ),
-                            second.length == 0 && first.length == 0
-                                ? Container(
-                                    //内容高度减去两列按钮高度
-                                    height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
-                                    child: Text(
-                                      noMembersHintText,
-                                      textAlign: TextAlign.center,
-                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                                    ),
-                                  )
-                                : Container(
-                                    height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          'first' == this.tabName ? '当前徒弟团队成员共有' + first.length.toString() + '名' : '当前徒孙团队成员共有' + second.length.toString() + '名',
-                                          textAlign: TextAlign.center,
-                                          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                                        ),
-                                        Container(
-                                          // height: ScreenUtil().setHeight(100),
-                                          margin: EdgeInsets.only(left: ScreenUtil().setWidth(70)),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: <Widget>[
-                                              Text(
-                                                '用户',
-                                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                                              ),
-                                              Text(
-                                                cashback?'现金 贡献值':"贡献值",
-                                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                                              ),
-                                            ],
+                            Stack(
+                              children: [
+                                Offstage(
+                                  offstage: tabName != 'first',
+                                  child: 0 == first.length
+                                      ? Container(
+                                          //内容高度减去两列按钮高度
+                                          height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
+                                          child: Text(
+                                            noMembersHintText,
+                                            textAlign: TextAlign.center,
+                                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                                           ),
-                                        ),
-                                        Container(
-                                          //内容高度减去两列按钮加标题栏高度
-                                          height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight - 150),
-                                          child: Stack(
+                                        )
+                                      : Container(
+                                          height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
+                                          child: Column(
                                             children: [
-                                              Offstage(
-                                                offstage: tabName != 'first',
+                                              Text(
+                                                '当前徒弟团队成员共有' + first.length.toString() + '名',
+                                                textAlign: TextAlign.center,
+                                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(left: ScreenUtil().setWidth(70)),
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: <Widget>[
+                                                    Text(
+                                                      '用户',
+                                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                                                    ),
+                                                    Text(
+                                                      cashback ? '现金 贡献值' : "贡献值",
+                                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                //内容高度减去两列按钮加标题栏高度
+                                                height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight - 150),
                                                 child: EasyRefresh(
                                                   refreshFooter: ClassicsFooter(
                                                     bgColor: Colors.transparent,
@@ -296,56 +294,93 @@ class _TeamDetailState extends State<TeamDetail> {
                                                   ),
                                                 ),
                                               ),
-                                              Offstage(
-                                                  offstage: tabName != 'second',
-                                                  child: EasyRefresh(
-                                                    refreshFooter: ClassicsFooter(
-                                                      bgColor: Colors.transparent,
-                                                      loadText: "上滑加载",
-                                                      loadReadyText: "松开加载",
-                                                      loadingText: "正在加载",
-                                                      loadedText: "加载完成",
-                                                      noMoreText: "没有更多了",
-                                                      loadHeight: 35,
-                                                      key: new GlobalKey<RefreshFooterState>(),
-                                                    ),
-                                                    refreshHeader: ClassicsHeader(
-                                                      bgColor: Colors.transparent,
-                                                      refreshText: "下拉刷新",
-                                                      refreshReadyText: "松开刷新",
-                                                      refreshingText: "正在刷新",
-                                                      refreshedText: "刷新完成",
-                                                      refreshHeight: 35,
-                                                      key: new GlobalKey<RefreshHeaderState>(),
-                                                    ),
-                                                    // ignore: missing_return
-                                                    loadMore: () {
-                                                      setState(() {
-                                                        initSecondLength += 20;
-                                                      });
-                                                    },
-                                                    child: second.length == 0
-                                                        ? Text(
-                                                            '还没有团队成员',
-                                                            textAlign: TextAlign.center,
-                                                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                                                          )
-                                                        : ListView.builder(
-                                                            itemCount: second.length > initSecondLength ? initSecondLength : second.length,
-                                                            padding: EdgeInsets.all(1.0),
-                                                            itemBuilder: (BuildContext context, int index) {
-                                                              return TeamItem(
-                                                                invite: second[index],
-                                                              );
-                                                            },
-                                                          ),
-                                                  )),
                                             ],
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
+                                ),
+                                Offstage(
+                                  offstage: tabName != 'second',
+                                  child: 0 == second.length
+                                      ? Container(
+                                          //内容高度减去两列按钮高度
+                                          height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
+                                          child: Text(
+                                            noMembersHintText,
+                                            textAlign: TextAlign.center,
+                                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                                          ),
+                                        )
+                                      : Container(
+                                          height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                '当前徒孙团队成员共有' + second.length.toString() + '名',
+                                                textAlign: TextAlign.center,
+                                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(left: ScreenUtil().setWidth(70)),
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: <Widget>[
+                                                    Text(
+                                                      '用户',
+                                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                                                    ),
+                                                    Text(
+                                                      cashback ? '现金 贡献值' : "贡献值",
+                                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                //内容高度减去两列按钮加标题栏高度
+                                                height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight - 150),
+                                                child: EasyRefresh(
+                                                  refreshFooter: ClassicsFooter(
+                                                    bgColor: Colors.transparent,
+                                                    loadText: "上滑加载",
+                                                    loadReadyText: "松开加载",
+                                                    loadingText: "正在加载",
+                                                    loadedText: "加载完成",
+                                                    noMoreText: "没有更多了",
+                                                    loadHeight: 35,
+                                                    key: new GlobalKey<RefreshFooterState>(),
+                                                  ),
+                                                  refreshHeader: ClassicsHeader(
+                                                    bgColor: Colors.transparent,
+                                                    refreshText: "下拉刷新",
+                                                    refreshReadyText: "松开刷新",
+                                                    refreshingText: "正在刷新",
+                                                    refreshedText: "刷新完成",
+                                                    refreshHeight: 35,
+                                                    key: new GlobalKey<RefreshHeaderState>(),
+                                                  ),
+                                                  // ignore: missing_return
+                                                  loadMore: () {
+                                                    setState(() {
+                                                      initSecondLength += 20;
+                                                    });
+                                                  },
+                                                  child: ListView.builder(
+                                                    itemCount: second.length > initSecondLength ? initSecondLength : second.length,
+                                                    padding: EdgeInsets.all(1.0),
+                                                    itemBuilder: (BuildContext context, int index) {
+                                                      return TeamItem(
+                                                        invite: second[index],
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                ),
+                              ],
+                            ),
                             new ImageButton(
                               height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
                               width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
