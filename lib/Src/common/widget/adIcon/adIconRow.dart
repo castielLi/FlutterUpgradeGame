@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/enum/adTypeEnum.dart';
+import 'package:upgradegame/Src/common/model/extraRuleModel.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/common/model/watchAdModel.dart';
 import 'package:upgradegame/Src/common/service/adService.dart';
 import 'package:upgradegame/Src/common/widget/adDialog/adDialog.dart';
@@ -27,11 +29,31 @@ class AdIconRow extends StatefulWidget {
 class _AdIconRow extends State<AdIconRow> {
 
   int times = 0;
+  ExtraRuleModel settingRule;
+
+  void displayDefautAd(int adType){
+    switch(adType){
+      case 1:
+        AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
+        break;
+      case 2:
+        AdDialog().showAd(2, 2,"7111030");
+        break;
+      case 3:
+        AdDialog().showAd(3, 2,"6031610694170610");
+        break;
+      case 4:
+        AdDialog().showAd(4, 1,"945445227");
+        break;
+    }
+  }
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    settingRule = Global.getAdSettingValue();
     AdDialog().setCallback(this.adFinishedCallback, this.adFailedCallback,this.adOperateFailedCallback, false);
   }
 
@@ -83,29 +105,6 @@ class _AdIconRow extends State<AdIconRow> {
         CommonUtils.showSuccessMessage(msg: model.content);
         Provide.value<BaseAdTimerProvider>(context).watchAd(this.widget.type);
         Provide.value<BaseUserInfoProvider>(context).watchedAnAd(model);
-//
-
-        ///以后版本再说显示一个弹窗显示资源获取情况
-//        ResourceDialogModel contribution = ResourceDialogModel(ResourceDialogEnum.contribution,"5");
-//        List<ResourceDialogModel> list = new List<ResourceDialogModel>();
-//        list.add(contribution);
-//        switch(this.widget.type){
-//          case AdTypeEnum.stone:
-//            ResourceDialogModel stone = ResourceDialogModel(ResourceDialogEnum.contribution,"100");
-//            list.add(stone);
-//            break;
-//          case AdTypeEnum.sawmill:
-//            ResourceDialogModel wood = ResourceDialogModel(ResourceDialogEnum.contribution,"200");
-//            list.add(wood);
-//            break;
-//          case AdTypeEnum.farm:
-//            break;
-//        }
-//        BaseResourceChangeDialogDataModel.setNeedDisplay(list);
-//        Application.showResourceDialog(context, UpgradeGameRoute.resourceDialogPage,
-//            params: {'height':
-//            ScreenUtil().setHeight(830), 'width': ScreenUtil().setWidth(510)});
-
       }
     });
   }
@@ -159,15 +158,16 @@ class _AdIconRow extends State<AdIconRow> {
               ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
               this.widget.HUD();
               if (this.widget.type == AdTypeEnum.farm) {
-                ///如果adview的开屏广告初始化成功,那么就展示adview的广告，否则展示腾讯广告
-                if (AdDialog().initAdViewSuccess) {
+                if(settingRule != null){
                   int timeHour = DateTime.now().hour;
-                  if (timeHour >= 12 && timeHour < 18) {
-                    AdDialog().showAd(4, 1,"945445227");
-                  } else {
-                    AdDialog().showAd(1, 2,"POSID8rbrja0ih10i");
+                  if (timeHour >= 0 && timeHour <12) {
+                    displayDefautAd(settingRule.farmone);
+                  }else if(timeHour >= 12 && timeHour < 18){
+                    displayDefautAd(settingRule.farmtwo);
+                  }else{
+                    displayDefautAd(settingRule.farmthree);
                   }
-                } else {
+                }else{
                   int timeSecend = DateTime.now().second;
                   if(timeSecend % 3 == 0){
                     AdDialog().showAd(3, 2,"6031610694170610");
@@ -175,10 +175,6 @@ class _AdIconRow extends State<AdIconRow> {
                     AdDialog().showAd(4, 1,"945445227");
                   }
                 }
-              } else if (this.widget.type == AdTypeEnum.stone) {
-              AdDialog().showAd(2, 2,"7111030");
-              } else {
-              AdDialog().showAd(3, 2,"6031610694170610");
               }
             },
           ),
@@ -218,9 +214,17 @@ class _AdIconRow extends State<AdIconRow> {
                 ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
                 this.widget.HUD();
                 if (this.widget.type == AdTypeEnum.stone) {
-                  AdDialog().showAd(2, 2,"7111030");
+                  if(settingRule!= null){
+                    displayDefautAd(settingRule.stone);
+                  }else{
+                    AdDialog().showAd(4, 1,"945445227");
+                  }
                 } else {
-                  AdDialog().showAd(3, 2,"6031610694170610");
+                  if(settingRule != null){
+                    displayDefautAd(settingRule.wood);
+                  }else{
+                    AdDialog().showAd(3, 2,"6031610694170610");
+                  }
                 }
               },
             ),
@@ -245,10 +249,19 @@ class _AdIconRow extends State<AdIconRow> {
                 ///showType 选择展示 方式 1：开屏广告 2：视频广告
                 ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
                 this.widget.HUD();
+                this.widget.HUD();
                 if (this.widget.type == AdTypeEnum.stone) {
-                  AdDialog().showAd(2, 2,"7111030");
+                  if(settingRule!= null){
+                    displayDefautAd(settingRule.stone);
+                  }else{
+                    AdDialog().showAd(4, 1,"945445227");
+                  }
                 } else {
-                  AdDialog().showAd(3, 2,"6031610694170610");
+                  if(settingRule != null){
+                    displayDefautAd(settingRule.wood);
+                  }else{
+                    AdDialog().showAd(3, 2,"6031610694170610");
+                  }
                 }
               },
             ),
@@ -297,9 +310,17 @@ class _AdIconRow extends State<AdIconRow> {
                 ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
                 this.widget.HUD();
                 if (this.widget.type == AdTypeEnum.stone) {
-                  AdDialog().showAd(2, 2,"7111030");
+                  if(settingRule!= null){
+                    displayDefautAd(settingRule.stone);
+                  }else{
+                    AdDialog().showAd(4, 1,"945445227");
+                  }
                 } else {
-                  AdDialog().showAd(3, 2,"6031610694170610");
+                  if(settingRule != null){
+                    displayDefautAd(settingRule.wood);
+                  }else{
+                    AdDialog().showAd(3, 2,"6031610694170610");
+                  }
                 }
               },
             ),

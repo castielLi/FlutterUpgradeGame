@@ -25,6 +25,12 @@ class Global {
     return rule.contributionbuyrate;
   }
 
+  ///获取广告配置比例
+  static getAdSettingValue(){
+    return extraRule;
+  }
+
+
   ///获取是否显示返上级分红配置
   static getCashBackSetting(){
 //    return extraRule.cashback;

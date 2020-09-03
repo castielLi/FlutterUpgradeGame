@@ -99,7 +99,7 @@ class _InitAppSetting extends State<InitAppSetting> {
   void initState() {
     super.initState();
     _initFluwx();
-    initPlatformState();
+//    initPlatformState();
   }
 
   @override
