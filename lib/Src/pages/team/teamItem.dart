@@ -23,24 +23,22 @@ class TeamItem extends StatefulWidget {
 class _TeamItem extends State<TeamItem> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
+    return Column(
+      children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-//            Image(
-//              image: new AssetImage(this.widget.invite.avatar == ""
-//                  ? 'resource/images/avatar.png'
-//                  : this.widget.invite.avatar),
-//              height: ScreenUtil().setHeight(100),
-//            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  this.widget.invite.displayname,
-                  style: CustomFontSize.defaultTextStyle(55),
+                Container(
+                  width: ScreenUtil().setWidth(600),
+                  child: Text(
+                    this.widget.invite.displayname,
+                    style: CustomFontSize.defaultTextStyle(55),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 Text(
                   this.widget.invite.registertime,
@@ -48,18 +46,25 @@ class _TeamItem extends State<TeamItem> {
                 ),
               ],
             ),
+            Container(
+              margin: EdgeInsets.only(right: ScreenUtil().setWidth(0)),
+              width: ScreenUtil().setWidth(200),
+              child: Text(
+                '¥' +
+                    this.widget.invite.voucherincome.toString() +
+                    "(" +
+                    this.widget.invite.contribution.toString() +
+                    ')',
+                style: CustomFontSize.defaultTextStyle(45),
+                overflow: TextOverflow.clip,
+              ),
+            ),
+
           ],
         ),
-        Container(
-          margin: EdgeInsets.only(right: ScreenUtil().setWidth(20)),
-          child: Text(
-            '¥' +
-                this.widget.invite.voucherincome.toString() +
-                "(" +
-                this.widget.invite.contribution.toString() +
-                ')',
-            style: CustomFontSize.defaultTextStyle(45),
-          ),
+        Divider(
+          height: 1.0,
+          color: Colors.white,
         ),
       ],
     );

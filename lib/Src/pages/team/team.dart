@@ -152,7 +152,7 @@ class _TeamDetailState extends State<TeamDetail> {
             ],
           ),
           Container(
-            height: ScreenUtil().setHeight(1100),
+            height: ScreenUtil().setHeight(1020),
             child: Stack(
               children: [
                 ///贡献
@@ -182,6 +182,7 @@ class _TeamDetailState extends State<TeamDetail> {
                     ),
                   ),
                 ),
+
                 /// 成员
                 Offstage(
                   offstage: !showTeamMembers,
@@ -214,7 +215,7 @@ class _TeamDetailState extends State<TeamDetail> {
                             second.length == 0 && first.length == 0
                                 ? Container(
                                     //内容高度减去两列按钮高度
-                                    height: ScreenUtil().setHeight(1100 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
+                                    height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
                                     child: Text(
                                       noMembersHintText,
                                       textAlign: TextAlign.center,
@@ -222,11 +223,16 @@ class _TeamDetailState extends State<TeamDetail> {
                                     ),
                                   )
                                 : Container(
-                                    height: ScreenUtil().setHeight(1100 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
+                                    height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
                                     child: Column(
                                       children: [
+                                        Text(
+                                          'first' == this.tabName ? '当前徒弟团队成员共有' + first.length.toString() + '名' : '当前徒孙团队成员共有' + second.length.toString() + '名',
+                                          textAlign: TextAlign.center,
+                                          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                                        ),
                                         Container(
-                                          height: ScreenUtil().setHeight(50),
+                                          // height: ScreenUtil().setHeight(100),
                                           margin: EdgeInsets.only(left: ScreenUtil().setWidth(70)),
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -244,7 +250,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                         ),
                                         Container(
                                           //内容高度减去两列按钮加标题栏高度
-                                          height: ScreenUtil().setHeight(1100 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight - 50),
+                                          height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight - 150),
                                           child: Stack(
                                             children: [
                                               Offstage(
@@ -324,6 +330,10 @@ class _TeamDetailState extends State<TeamDetail> {
                                                             itemCount: second.length > initSecondLength ? initSecondLength : second.length,
                                                             padding: EdgeInsets.all(1.0),
                                                             itemBuilder: (BuildContext context, int index) {
+                                                              // if(2==index){
+                                                              //   print(second[index].displayname);
+                                                              // }
+                                                              print(second.length);
                                                               return TeamItem(
                                                                 invite: second[index],
                                                               );
