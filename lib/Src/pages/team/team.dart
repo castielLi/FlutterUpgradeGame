@@ -330,10 +330,6 @@ class _TeamDetailState extends State<TeamDetail> {
                                                             itemCount: second.length > initSecondLength ? initSecondLength : second.length,
                                                             padding: EdgeInsets.all(1.0),
                                                             itemBuilder: (BuildContext context, int index) {
-                                                              // if(2==index){
-                                                              //   print(second[index].displayname);
-                                                              // }
-                                                              print(second.length);
                                                               return TeamItem(
                                                                 invite: second[index],
                                                               );
@@ -352,7 +348,6 @@ class _TeamDetailState extends State<TeamDetail> {
                               buttonName: "邀 请",
                               imageUrl: "resource/images/upgradeButton.png",
                               callback: () {
-                                print('点击邀请');
                                 this.showQRCodeDetail();
                               },
                             ),
@@ -391,7 +386,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                       fluwx.WeChatImage image = fluwx.WeChatImage.file(file);
                                       fluwx.shareToWeChat(fluwx.WeChatShareImageModel(image, description: desc, scene: fluwx.WeChatScene.SESSION));
                                     });
-                                    print('点击分享微信');
+                                    // print('点击分享微信');
                                   },
                                 ),
                               ],
