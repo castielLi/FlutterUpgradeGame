@@ -48,7 +48,7 @@ class _AccountDetailState extends State<AccountDetail> {
           children: <Widget>[
             TextField(
               obscureText: true,
-              decoration: InputDecoration(labelText: "原密码", prefixIcon: Icon(Icons.lock)),
+              decoration: InputDecoration(labelText: "手机号码", prefixIcon: Icon(Icons.phone)),
               controller: originalPasswordController,
               onSubmitted: (original) {
                 original = originalPasswordController.text;
@@ -56,7 +56,7 @@ class _AccountDetailState extends State<AccountDetail> {
               },
             ),
             TextField(
-              decoration: InputDecoration(labelText: "新密码", prefixIcon: Icon(Icons.lock)),
+              decoration: InputDecoration(labelText: "重置密码", prefixIcon: Icon(Icons.lock)),
               obscureText: true,
               controller: newPasswordController,
               onSubmitted: (newPassword) {
@@ -65,7 +65,7 @@ class _AccountDetailState extends State<AccountDetail> {
               },
             ),
             TextField(
-              decoration: InputDecoration(labelText: "重复密码", prefixIcon: Icon(Icons.lock)),
+              decoration: InputDecoration(labelText: "确认密码", prefixIcon: Icon(Icons.lock)),
               obscureText: true,
               controller: repeatPasswordController,
               onSubmitted: (repeat) {
@@ -89,18 +89,24 @@ class _AccountDetailState extends State<AccountDetail> {
                 ImageTextButton(
                   buttonName: '确定',
                   callback: () {
-                    if (isPasswordValid()) {
-//                      AccountService.changePassword(repeatPasswordController.text, (data) {
-//                        if (ConfigSetting.SUCCESS == data) {
-//                          CommonUtils.showSuccessMessage(msg: "密码修改成功");
-//                          this.widget.viewCallback();
-//                          originalPasswordController.clear();
-//                          newPasswordController.clear();
-//                          repeatPasswordController.clear();
-//                        }
-//                      });
-                    }
                     FocusScope.of(context).requestFocus(FocusNode());
+                    if (!RegExp(r"^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$").hasMatch(originalPasswordController.text)) {
+                      CommonUtils.showErrorMessage(msg: "请输入正确的手机号码");
+                      return;
+                    }
+                    if (isPasswordValid()) {
+                      AccountService.changePassword(repeatPasswordController.text, originalPasswordController.text,(data) {
+                        if (ConfigSetting.SUCCESS == data) {
+                          CommonUtils.showSuccessMessage(msg: "密码修改成功");
+                          this.widget.viewCallback();
+                          originalPasswordController.clear();
+                          newPasswordController.clear();
+                          repeatPasswordController.clear();
+                        }
+                      });
+                    }else{
+                      CommonUtils.showErrorMessage(msg: "两次密码输入不一致");
+                    }
                   },
                 ),
               ],

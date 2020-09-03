@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/storge/fileStore.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
@@ -20,25 +21,24 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   void getRules() async {
-    dynamic content = await FileStorage.getContent("rule");
-    if (content == "") {
-      BaseService.getRule((model) {
+     BaseService.getRule((model) {
         if (model != null) {
           Global();
           Global.setBaseRule(model);
+        }else{
+          ///强制关闭程序
+          SystemNavigator.pop();
         }
       });
-    } else {
-//      BaseRuleModel model = BaseRuleModel.fromJson(convert.jsonDecode(content));
-//      Global();
-//      Global.setBaseRule(model);
-      BaseService.getRule((model) {
+     BaseService.getRule2((model){
         if (model != null) {
           Global();
-          Global.setBaseRule(model);
+          Global.setExtraRule(model);
+        }else{
+          ///强制关闭程序
+          SystemNavigator.pop();
         }
       });
-    }
   }
 
   adCallback() {

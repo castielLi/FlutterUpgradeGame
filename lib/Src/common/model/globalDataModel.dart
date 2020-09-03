@@ -1,4 +1,5 @@
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
+import 'package:upgradegame/Src/common/model/extraRuleModel.dart';
 
 class Global {
   // 工厂模式
@@ -10,13 +11,23 @@ class Global {
   }
 
   static BaseRuleModel rule;
+  static ExtraRuleModel extraRule;
 
   static setBaseRule(BaseRuleModel ruleModel){
     Global.rule = ruleModel;
   }
 
+  static setExtraRule(ExtraRuleModel extraRuleModel){
+    Global.extraRule = extraRuleModel;
+  }
+
   static getCoinBuyContribution(){
     return rule.contributionbuyrate;
+  }
+
+  ///获取是否显示返上级分红配置
+  static getCashBackSetting(){
+    return extraRule.cashback;
   }
 
   ///获取最低提现金额

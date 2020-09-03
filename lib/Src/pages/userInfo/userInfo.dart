@@ -99,7 +99,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                               },
                             ),
                             ButtonsList(
-                              buttonHeight: ScreenUtil().setHeight(SystemButtonSize.settingButtonHeight),
+                              buttonHeight: ScreenUtil().setHeight(SystemButtonSize.settingButtonHeight - 35),
                               buttonBackgroundImageUrl: 'resource/images/settingButtonBackground.png',
                               textSize: ScreenUtil().setSp(SystemFontSize.settingTextFontSize),
                               isColumn: true,
@@ -118,6 +118,13 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                                     switchPageBetweenFatherAndSon(sonPageName: "现金记录");
                                     this.widget.changeTitleCallback("现金记录");
                                     UserInfoHttpRequestEvent().emit("withdrawDetail");
+                                  },
+                                ),
+                                ImageTextButton(
+                                  buttonName: '重置密码',
+                                  callback: () {
+                                    switchPageBetweenFatherAndSon(sonPageName: "重置密码");
+                                    this.widget.changeTitleCallback("重置密码");
                                   },
                                 ),
                                 ImageTextButton(
@@ -173,6 +180,18 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                     new Offstage(
                       offstage: "现金记录" != buttonName,
                       child: new WithDrawDetail(
+                        HUD: this.widget.HUD,
+                        viewCallback: () {
+                          switchPageBetweenFatherAndSon();
+                          this.widget.displayOriginalTitleCallback();
+                        },
+                      ),
+                    ),
+
+                    ///重置密码
+                    new Offstage(
+                      offstage: "重置密码" != buttonName,
+                      child: new AccountDetail(
                         HUD: this.widget.HUD,
                         viewCallback: () {
                           switchPageBetweenFatherAndSon();

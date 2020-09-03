@@ -12,6 +12,10 @@ class ServiceUrl {
     return "${host}api/v1/rule";
   }
 
+  static getRule2() {
+    return "${host}api/v1/rule2";
+  }
+
   /// login
   static login() {
     return "${host}api/v1/login";

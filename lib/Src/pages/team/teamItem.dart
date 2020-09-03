@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/pages/team/model/invitation.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 
 class TeamItem extends StatefulWidget {
   // 等级
@@ -23,6 +24,9 @@ class TeamItem extends StatefulWidget {
 class _TeamItem extends State<TeamItem> {
   @override
   Widget build(BuildContext context) {
+
+    bool cashback = Global.getCashBackSetting();
+
     return Column(
       children: [
         Row(
@@ -50,11 +54,12 @@ class _TeamItem extends State<TeamItem> {
               margin: EdgeInsets.only(right: ScreenUtil().setWidth(0)),
               width: ScreenUtil().setWidth(200),
               child: Text(
+                cashback?
                 '¥' +
                     this.widget.invite.voucherincome.toString() +
                     "(" +
                     this.widget.invite.contribution.toString() +
-                    ')',
+                    ')':this.widget.invite.contribution.toString(),
                 style: CustomFontSize.defaultTextStyle(45),
                 overflow: TextOverflow.clip,
               ),

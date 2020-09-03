@@ -8,6 +8,7 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/pages/team/event/teamEventBus.dart';
 import 'package:upgradegame/Src/pages/team/model/invitation.dart';
 import 'package:upgradegame/Src/pages/team/model/qrCodeModel.dart';
@@ -118,6 +119,9 @@ class _TeamDetailState extends State<TeamDetail> {
 
   @override
   Widget build(BuildContext context) {
+
+    bool cashback = Global.getCashBackSetting();
+
     return new Container(
       margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
           ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(0)),
@@ -242,7 +246,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                                               ),
                                               Text(
-                                                '现金 贡献值',
+                                                cashback?'现金 贡献值':"贡献值",
                                                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                                               ),
                                             ],
