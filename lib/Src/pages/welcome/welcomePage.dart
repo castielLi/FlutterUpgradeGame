@@ -30,15 +30,15 @@ class _WelcomePageState extends State<WelcomePage> {
           SystemNavigator.pop();
         }
       });
-     BaseService.getRule2((model){
-        if (model != null) {
-          Global();
-          Global.setExtraRule(model);
-        }else{
-          ///强制关闭程序
-          SystemNavigator.pop();
-        }
-      });
+//     BaseService.getRule2((model){
+//        if (model != null) {
+//          Global();
+//          Global.setExtraRule(model);
+//        }else{
+//          ///强制关闭程序
+//          SystemNavigator.pop();
+//        }
+//      });
   }
 
   adCallback() {

@@ -26,7 +26,7 @@ class BaseService {
   }
 
   static Future<ResultData> getRule2(callback) async {
-    var response = await httpManager.request(ServiceUrl.getRule(), {}, null, null);
+    var response = await httpManager.request(ServiceUrl.getRule2(), {}, null, null);
     if (response.code == 200) {
       ExtraRuleModel model = ExtraRuleModel.fromJson(response.data);
       FileStorage.saveContent(convert.jsonEncode(model), "rule2");

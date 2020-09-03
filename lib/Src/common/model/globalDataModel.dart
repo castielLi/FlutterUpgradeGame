@@ -27,8 +27,10 @@ class Global {
 
   ///获取是否显示返上级分红配置
   static getCashBackSetting(){
-    return extraRule.cashback;
+//    return extraRule.cashback;
+  return true;
   }
+
 
   ///获取最低提现金额
   static getWithdrawLimit(){

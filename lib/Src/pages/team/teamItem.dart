@@ -62,6 +62,7 @@ class _TeamItem extends State<TeamItem> {
                     ')':this.widget.invite.contribution.toString(),
                 style: CustomFontSize.defaultTextStyle(45),
                 overflow: TextOverflow.clip,
+                textAlign: TextAlign.right,
               ),
             ),
 
