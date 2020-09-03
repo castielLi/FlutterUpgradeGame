@@ -45,14 +45,26 @@ class _MarketBidItem extends State<MarketBidItem> {
         ),
       ),
       child: Container(
-        margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(35),ScreenUtil().setHeight(35),ScreenUtil().setWidth(40),ScreenUtil().setHeight(60)),
-        child:  Row(
+        margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(35), ScreenUtil().setHeight(35), ScreenUtil().setWidth(40), ScreenUtil().setHeight(60)),
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              this.widget.name + ' 出售:',
-              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+            Row(
+              children: [
+                Container(
+                  width: ScreenUtil().setWidth(250),
+                  child: Text(
+                    this.widget.name,
+                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Text(
+                  '出售:',
+                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                ),
+              ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
