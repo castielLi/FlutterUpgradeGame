@@ -31,7 +31,7 @@ class _TeamContribution extends State<TeamContribution> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
-            this.widget.title,
+            this.widget.title+'贡献',
             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
           ),
           Row(
@@ -44,7 +44,7 @@ class _TeamContribution extends State<TeamContribution> {
                     style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                   ),
                   Text(
-                    '今日总贡献',
+                    this.widget.title+'总贡献',
                     style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                   ),
                 ],

@@ -155,6 +155,7 @@ class _TeamDetailState extends State<TeamDetail> {
             height: ScreenUtil().setHeight(1100),
             child: Stack(
               children: [
+                ///贡献
                 Offstage(
                   offstage: !showContribution,
                   child: Container(
@@ -162,7 +163,7 @@ class _TeamDetailState extends State<TeamDetail> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         TeamContribution(
-                          title: '今日贡献',
+                          title: '今日',
                           total: this.currentContribution == null ? 0 : this.currentContribution.today.total,
                           my: this.currentContribution == null ? 0 : this.currentContribution.today.my,
                           exchange: this.currentContribution == null ? 0 : this.currentContribution.today.exchange,
@@ -170,7 +171,7 @@ class _TeamDetailState extends State<TeamDetail> {
                           thirdGrade: this.currentContribution == null ? 0 : this.currentContribution.today.second,
                         ),
                         TeamContribution(
-                          title: '昨日贡献',
+                          title: '昨日',
                           total: this.currentContribution == null ? 0 : this.currentContribution.yesterday.total,
                           my: this.currentContribution == null ? 0 : this.currentContribution.yesterday.my,
                           exchange: this.currentContribution == null ? 0 : this.currentContribution.yesterday.exchange,
@@ -181,6 +182,7 @@ class _TeamDetailState extends State<TeamDetail> {
                     ),
                   ),
                 ),
+                /// 成员
                 Offstage(
                   offstage: !showTeamMembers,
                   child: Stack(
@@ -211,7 +213,6 @@ class _TeamDetailState extends State<TeamDetail> {
                             ),
                             second.length == 0 && first.length == 0
                                 ? Container(
-//                              color:Colors.red,
                                     //内容高度减去两列按钮高度
                                     height: ScreenUtil().setHeight(1100 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
                                     child: Text(
