@@ -169,7 +169,7 @@ class _AdIconRow extends State<AdIconRow> {
                   }
                 } else {
                   int timeSecend = DateTime.now().second;
-                  if(timeSecend % 2 == 0){
+                  if(timeSecend % 3 == 0){
                     AdDialog().showAd(3, 2,"6031610694170610");
                   }else{
                     AdDialog().showAd(4, 1,"945445227");

@@ -65,7 +65,7 @@ class _ServerCenterState extends State<ServerCenter> {
                       children: <Widget>[
                         Image(image: new AssetImage('resource/images/qq.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
                         Text(
-                          this.qq,
+                          "群号:"+this.qq,
                           style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                         ),
                       ],
@@ -77,42 +77,42 @@ class _ServerCenterState extends State<ServerCenter> {
                       ),
                       onTap: () {
                         Clipboard.setData(ClipboardData(text: this.qq));
-                        CommonUtils.showSuccessMessage(msg: 'QQ号复制成功');
+                        CommonUtils.showSuccessMessage(msg: 'QQ群号复制成功');
                       },
                     ),
                   ],
                 ),
               ),
-              new Padding(
-                padding: new EdgeInsets.only(top: ScreenUtil().setWidth(50)),
-                child: new Container(
-                  width: ScreenUtil().setWidth(600),
-                  child: new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      new Row(
-                        children: <Widget>[
-                          Image(image: new AssetImage('resource/images/wechat.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
-                          Text(
-                            this.wechat,
-                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                          ),
-                        ],
-                      ),
-                      GestureDetector(
-                        child: Icon(
-                          Icons.content_copy,
-                          color: Colors.white,
-                        ),
-                        onTap: () {
-                          Clipboard.setData(ClipboardData(text: this.wechat));
-                          CommonUtils.showSuccessMessage(msg: '微信号复制成功');
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              )
+//              new Padding(
+//                padding: new EdgeInsets.only(top: ScreenUtil().setWidth(50)),
+//                child: new Container(
+//                  width: ScreenUtil().setWidth(600),
+//                  child: new Row(
+//                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                    children: <Widget>[
+//                      new Row(
+//                        children: <Widget>[
+//                          Image(image: new AssetImage('resource/images/wechat.png'), height: ScreenUtil().setHeight(SystemIconSize.adIconSize)),
+//                          Text(
+//                            this.wechat,
+//                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+//                          ),
+//                        ],
+//                      ),
+//                      GestureDetector(
+//                        child: Icon(
+//                          Icons.content_copy,
+//                          color: Colors.white,
+//                        ),
+//                        onTap: () {
+//                          Clipboard.setData(ClipboardData(text: this.wechat));
+//                          CommonUtils.showSuccessMessage(msg: '微信号复制成功');
+//                        },
+//                      ),
+//                    ],
+//                  ),
+//                ),
+//              )
             ],
           ),
         ),

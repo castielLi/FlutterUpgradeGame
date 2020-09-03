@@ -14,6 +14,11 @@ import com.wodebuluoge.mm.Constant;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import okhttp3.internal.concurrent.Task;
+
 public class CSJManager {
     private static final String TAG = "zhoux";
 
@@ -22,6 +27,9 @@ public class CSJManager {
     public AdSlot adSlot;
     public TTRewardVideoAd mttRewardVideoAd;
     public boolean mIsLoaded;
+    public int times = 0;
+    public Timer timer;
+    public TimerTask task;
     private static CSJManager instance;
 
     public static CSJManager getInstance(Activity activity){
@@ -52,6 +60,7 @@ public class CSJManager {
                 .build();
         setListener();
         mttRewardVideoAd.showRewardVideoAd(activity);
+
     }
 
     private void setListener(){
@@ -65,6 +74,21 @@ public class CSJManager {
             @Override
             public void onRewardVideoCached() {
 
+                timer = new Timer();
+                task = new TimerTask(){
+                    @Override
+                    public void run() {
+                        Log.i(TAG,"timer开始执行了");
+                        if(times == 0){
+                            EventBus.getDefault().post(Constant.STATUS_FAIL);
+                            timer.cancel();
+                            task = null;
+                        }
+                    }
+                };
+                timer.schedule(task,4000,4000);
+
+                Log.i(TAG, "onRewardVideoCached");
             }
             //视频广告素材加载到，如title,视频url等，不包括视频文件
             @Override
@@ -75,6 +99,9 @@ public class CSJManager {
 
                     @Override
                     public void onAdShow() {
+                        times += 1;
+                        timer.cancel();
+                        task = null;
                         Log.i(TAG, "onAdShow");
                         EventBus.getDefault().post(Constant.STATUS_RECEIVE);
                     }
@@ -87,16 +114,17 @@ public class CSJManager {
 
                     @Override
                     public void onSkippedVideo(){
-
+                        Log.i(TAG, "onSkippedVideo");
                     }
 
                     @Override
                     public void onAdVideoBarClick() {
-
+                        Log.i(TAG, "onAdVideoBarClick");
                     }
 
                     @Override
                     public void onAdClose() {
+                        times = 0;
                         EventBus.getDefault().post(Constant.STATUS_CLOSE);
                     }
 
@@ -116,32 +144,32 @@ public class CSJManager {
                 mttRewardVideoAd.setDownloadListener(new TTAppDownloadListener() {
                     @Override
                     public void onIdle() {
-
+                        Log.i(TAG, "onIdle");
                     }
 
                     @Override
                     public void onDownloadActive(long totalBytes, long currBytes, String fileName, String appName) {
-
+                        Log.i(TAG, "onDownloadActive");
                     }
 
                     @Override
                     public void onDownloadPaused(long totalBytes, long currBytes, String fileName, String appName) {
-
+                        Log.i(TAG, "onDownloadPaused");
                     }
 
                     @Override
                     public void onDownloadFailed(long totalBytes, long currBytes, String fileName, String appName) {
-
+                        Log.i(TAG, "onDownloadFailed");
                     }
 
                     @Override
                     public void onDownloadFinished(long totalBytes, String fileName, String appName) {
-
+                        Log.i(TAG, "onDownloadFinished");
                     }
 
                     @Override
                     public void onInstalled(String fileName, String appName) {
-
+                        Log.i(TAG, "onInstalled");
                     }
                 });
             }
