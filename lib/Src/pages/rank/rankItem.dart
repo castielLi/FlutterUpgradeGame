@@ -34,25 +34,25 @@ class _RankItem extends State<RankItem> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Image(
                 image: new AssetImage(this.widget.imageUrl),
-                //TODO 修改大小
                 height: ScreenUtil().setHeight(120),
               ),
-//            Image(
-//              image: new AssetImage(this.widget.avatarUrl),
-//              height: ScreenUtil().setHeight(120),
-//            ),
-              Text(
-                this.widget.rankName,
-                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+              Container(
+                width: ScreenUtil().setWidth(480),
+                child: Text(
+                  this.widget.rankName,
+                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
           Text(
             this.widget.value.toString(),
+            textAlign: TextAlign.right,
             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
           ),
         ],
