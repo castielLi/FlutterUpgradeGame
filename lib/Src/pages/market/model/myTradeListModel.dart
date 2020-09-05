@@ -2,6 +2,7 @@ import 'package:upgradegame/Src/pages/market/model/tradeItemModel.dart';
 
 class MyTradeListModel {
   List<TradeItemModel> datalist;
+  String limit;
 
   MyTradeListModel({this.datalist});
 
@@ -12,6 +13,11 @@ class MyTradeListModel {
         datalist.add(new TradeItemModel.fromJson(v));
       });
     }
+    if(json['limit'] != null) {
+      limit = json['limit'];
+    }else{
+      limit = "0";
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -19,6 +25,7 @@ class MyTradeListModel {
     if (this.datalist != null) {
       data['datalist'] = this.datalist.map((v) => v.toJson()).toList();
     }
+    data['limit'] = this.limit;
     return data;
   }
 }

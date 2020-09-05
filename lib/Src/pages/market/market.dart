@@ -42,6 +42,7 @@ class _MarketDetailState extends State<MarketDetail> {
   TradeListModel stoneList = new TradeListModel(datalist: []);
   List<TradeItemModel> myTrades = [];
   String contentName = Resource.WOOD;
+  String limit = "";
   int woodPage = 0;
   int stonePage = 0;
   String sellType = "wood";
@@ -87,6 +88,7 @@ class _MarketDetailState extends State<MarketDetail> {
       if (model != null) {
         setState(() {
           myTrades = model.datalist;
+          limit = model.limit;
         });
         flag = true;
       } else {
@@ -265,8 +267,13 @@ class _MarketDetailState extends State<MarketDetail> {
                   ),
                 ],
               ),
+              Text(
+                '您当天通过市场获取的金币为:' + this.limit,
+                textAlign: TextAlign.center,
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+              ),
               Container(
-                margin: EdgeInsets.only(top: 10),
+                margin: EdgeInsets.only(top: 5),
                 child: Stack(
                   children: <Widget>[
                     Offstage(

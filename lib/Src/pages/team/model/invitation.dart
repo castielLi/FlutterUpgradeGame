@@ -1,6 +1,8 @@
 class InvitationListModel {
   List<InvitationModel> first;
   List<InvitationModel> second;
+  String displayname;
+  String avatar;
 
   InvitationListModel({this.first, this.second});
 
@@ -17,6 +19,9 @@ class InvitationListModel {
         second.add(new InvitationModel.fromJson(v));
       });
     }
+
+    this.displayname =json['displayname'];
+    this.avatar = json['avatar'];
   }
 
   Map<String, dynamic> toJson() {
@@ -27,6 +32,8 @@ class InvitationListModel {
     if (this.second != null) {
       data['secondinvitations'] = this.second.map((v) => v.toJson()).toList();
     }
+    data['displayname'] = displayname;
+    data['avatar'] = avatar;
     return data;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
+import 'package:upgradegame/Src/activity/activity.dart';
 import 'package:upgradegame/Src/pages/adDividend/adDividendDetail.dart';
 import 'package:upgradegame/Src/pages/announcement/announcement.dart';
 import 'package:upgradegame/Src/pages/contribution/contribution.dart';
@@ -192,6 +193,14 @@ class _DetailDialogState extends State<DetailDialog> {
       case 'contributionDetail':
         {
           currentWidget = new ContributionDetail(
+            HUD: showOrDismissProgressHUD,
+          );
+          break;
+        }
+
+      case 'activityDetail':
+        {
+          currentWidget = new ActivityDetail(
             HUD: showOrDismissProgressHUD,
           );
           break;

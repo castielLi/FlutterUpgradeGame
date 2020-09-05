@@ -84,28 +84,41 @@ class _UserSearchResult extends State<UserSearchResult> {
                             fit: BoxFit.fill,
                           ),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(left: 20),
-                              child: Text(
-                                '用户:',
-                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(right: 30),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    this.widget.user.displayname,
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.only(left: 20),
+                                  child: Text(
+                                    '用户:',
                                     style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                   ),
-                                ],
-                              ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(right: 30),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text(
+                                        this.widget.user.displayname,
+                                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
+                            ///todo:黄河，修改下样式
+                            Row(
+                              children: <Widget>[
+                                Text(
+                                  "注册时间:"+this.widget.user.registertime,
+                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       ),

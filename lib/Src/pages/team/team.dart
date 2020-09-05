@@ -34,6 +34,8 @@ class _TeamDetailState extends State<TeamDetail> {
   List<InvitationModel> second = [];
   String tabName = 'first';
   String noMembersHintText = '';
+  String fatherDisplayName = '';
+  String fatherAvatar = '';
   int initFirstLength = 20;
   int initSecondLength = 20;
   bool showQRCode = false;
@@ -91,13 +93,17 @@ class _TeamDetailState extends State<TeamDetail> {
     this.widget.HUD();
 
     TeamService.getTeamList((data) {
+      this.widget.HUD();
+      ///todo:黄河 这里加判断 并且 判断如果上级头像和名称有内容就要显示上级
       setState(() {
         first = InvitationListModel.fromJson(data).first;
         second = InvitationListModel.fromJson(data).second;
+        fatherAvatar = InvitationListModel.fromJson(data).avatar;
+        fatherDisplayName = InvitationListModel.fromJson(data).displayname;
         this.noMembersHintText = '还没有团队成员';
       });
     });
-    this.widget.HUD();
+
   }
 
   @override

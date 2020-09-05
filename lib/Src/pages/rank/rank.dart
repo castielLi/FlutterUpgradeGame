@@ -19,6 +19,7 @@ class RankDetail extends StatefulWidget {
 class _RankDetailState extends State<RankDetail> {
   List<RankCoinModel> coinList = [];
   List<RankCashModel> incomeList = [];
+  List<RankMainBuildModel> mainBuildList = [];
   String tabName = 'coin';
 
   @override
@@ -31,6 +32,7 @@ class _RankDetailState extends State<RankDetail> {
           setState(() {
             coinList = RankListModel.fromJson(data).coinList;
             incomeList = RankListModel.fromJson(data).incomeList;
+            mainBuildList = RankListModel.fromJson(data).mainbuildList;
           });
         }
       });
@@ -53,6 +55,7 @@ class _RankDetailState extends State<RankDetail> {
             iconHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonIconSize),
             buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
             textSize: ScreenUtil().setSp(SystemButtonSize.largeButtonFontSize),
+            ///todo:黄河 改下样式，并且把mainbuild list 这个列表显示下
             buttons: [
               ImageTextButton(
                 buttonName: '金币',
@@ -66,6 +69,13 @@ class _RankDetailState extends State<RankDetail> {
                 iconUrl: 'resource/images/withdraw.png',
                 callback: () {
                   changeTabs('income');
+                },
+              ),
+              ImageTextButton(
+                buttonName: '建筑',
+                iconUrl: 'resource/images/withdraw.png',
+                callback: () {
+                  changeTabs('mainbuild');
                 },
               ),
             ],

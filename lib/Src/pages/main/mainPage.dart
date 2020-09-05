@@ -480,6 +480,28 @@ class _MainPageState extends State<MainPage> {
                     new Container(
                       child: new Column(
                         children: [
+                          ///todo:黄河,改下样式
+                          new UserImageButton(
+                            size: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
+                            buttonName: "活动",
+                            textSize: SystemFontSize.operationTextFontSize,
+                            imageUrl: "resource/images/setting.png",
+                            callback: () {
+                              if(!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                                Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+                                Navigator.push(
+                                    context,
+                                    PopWindow(pageBuilder: (context){
+                                      return DetailDialog(
+                                        height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                        width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                        childWidgetName: 'activityDetail',
+                                        title: "活 动",
+                                      );
+                                    }));
+                              }
+                            },
+                          ),
 //                          new Container(
 //                            // 设置加公告的宽度
 //                            width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarSmallIconSize * 2),
@@ -525,6 +547,7 @@ class _MainPageState extends State<MainPage> {
                                   }
                                 },
                               ),
+
                               new UserImageButton(
                                 size: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
                                 buttonName: "公告",

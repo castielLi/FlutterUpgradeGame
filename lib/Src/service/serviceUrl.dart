@@ -106,6 +106,13 @@ class ServiceUrl {
   static getAnnouncementList() {
     return "${host}api/v1/announcement";
   }
+
+  /// 活动
+  static getActivityList() {
+    return "${host}api/v1/activity";
+  }
+
+
   /// 攻略
   static getRaidersList(){
     return "${host}api/v1/strategy";
