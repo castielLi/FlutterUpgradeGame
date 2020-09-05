@@ -36,6 +36,7 @@ dependencies:
 #  fluwx: ^2.2.0
   fluwx_no_pay: ^2.2.0
   jpush_flutter: ^0.5.5
+  sqflite: ^1.3.1+1
 
 
   flutter:

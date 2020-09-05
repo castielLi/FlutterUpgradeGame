@@ -1,7 +1,7 @@
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Src/provider/baseAdTimerProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserCashProvider.dart';
-
+import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
 class AppProvider{
@@ -11,9 +11,11 @@ class AppProvider{
     var baseUserInfoProvider = BaseUserInfoProvider();
     var baseAdTimerInfoProvider = BaseAdTimerProvider();
     var baseUserCashProvider = BaseUserCashProvider();
+    var baseDialogClickProvider = BaseDialogClickProvider();
     providers
     ..provide(Provider<BaseUserInfoProvider>.value(baseUserInfoProvider))
       ..provide(Provider<BaseUserCashProvider>.value(baseUserCashProvider))
+      ..provide(Provider<BaseDialogClickProvider>.value(baseDialogClickProvider))
     ..provide(Provider<BaseAdTimerProvider>.value(baseAdTimerInfoProvider));
 
     return providers;

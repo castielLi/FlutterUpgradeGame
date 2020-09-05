@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/storge/fileStore.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/common/service/baseService.dart';
 import 'package:upgradegame/Src/common/widget/adDialog/adDialog.dart';
+import 'package:upgradegame/Src/common/widget/adDialog/adTimer.dart';
+import 'package:upgradegame/Src/provider/baseAdTimerProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
 
@@ -18,6 +21,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
   void initBaseWidget() {
     AdDialog();
+    AdTimer();
   }
 
   void getRules() async {
@@ -30,15 +34,15 @@ class _WelcomePageState extends State<WelcomePage> {
           SystemNavigator.pop();
         }
       });
-     BaseService.getRule2((model){
-        if (model != null) {
-          Global();
-          Global.setExtraRule(model);
-        }else{
-          ///强制关闭程序
-          SystemNavigator.pop();
-        }
-      });
+//     BaseService.getRule2((model){
+//        if (model != null) {
+//          Global();
+//          Global.setExtraRule(model);
+//        }else{
+//          ///强制关闭程序
+//          SystemNavigator.pop();
+//        }
+//      });
   }
 
   adCallback() {
@@ -59,6 +63,7 @@ class _WelcomePageState extends State<WelcomePage> {
     ///显示开屏广告
     AdDialog().showAd(1, 1,"POSIDtvy0gsf7zfm1");
     AdDialog().setCallback(this.adCallback, this.adFailedCallback,null, true);
+
   }
 
   @override

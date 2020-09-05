@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provide/provide.dart';
 import 'package:upgradegame/Src/pages/adDividend/adDividendDetail.dart';
 import 'package:upgradegame/Src/pages/announcement/announcement.dart';
 import 'package:upgradegame/Src/pages/contribution/contribution.dart';
@@ -13,6 +14,7 @@ import 'package:upgradegame/Src/pages/sawmill/sawmill.dart';
 import 'package:upgradegame/Src/pages/stone/stone.dart';
 import 'package:upgradegame/Src/pages/setting/setting.dart';
 import 'package:upgradegame/Src/pages/team/team.dart';
+import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/pages/userInfo/userInfo.dart';
 import 'package:upgradegame/Src/pages/store/store.dart';
@@ -230,14 +232,15 @@ class _DetailDialogState extends State<DetailDialog> {
                         ),
                       )),
                   Container(
-                    height: ScreenUtil().setHeight(200),
+                    height: ScreenUtil().setHeight(210),
                     width: this.widget.height,
                     padding: EdgeInsets.only(left: ScreenUtil().setWidth(820)),
                     child: ImageButton(
-                        height: ScreenUtil().setHeight(140),
-                        width: ScreenUtil().setWidth(140),
+                        height: ScreenUtil().setHeight(130),
+                        width: ScreenUtil().setWidth(130),
                         imageUrl: "resource/images/cancelDialog.png",
                         callback: () {
+                          Provide.value<BaseDialogClickProvider>(context).setDialogHide();
                           Application.router.pop(context);
                         }),
                   ),

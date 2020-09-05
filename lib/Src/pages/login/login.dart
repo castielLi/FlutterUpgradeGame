@@ -7,6 +7,7 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/login/service/loginService.dart';
+import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
@@ -59,11 +60,15 @@ class _LoginPageState extends State<LoginPage> {
               if (model.verified) {
                 ///初始化用户
                 Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+                ///初始化弹窗控制
+                Provide.value<BaseDialogClickProvider>(context).initBaseDialogClick();
                 Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
                 fluwx.weChatResponseEventHandler.skip(1);
               } else {
                 ///初始化用户
                 Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+                ///初始化弹窗控制
+                Provide.value<BaseDialogClickProvider>(context).initBaseDialogClick();
                 setState(() {
                   this.userVerified = false;
                 });
@@ -87,6 +92,8 @@ class _LoginPageState extends State<LoginPage> {
         this.showOrDismissProgressHUD();
         if (model != null) {
           Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model);
+          ///初始化弹窗控制
+          Provide.value<BaseDialogClickProvider>(context).initBaseDialogClick();
           Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
         }
       });
@@ -373,6 +380,8 @@ class _LoginPageState extends State<LoginPage> {
       if (model != null) {
         ///初始化用户
         Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
+        ///初始化弹窗控制
+        Provide.value<BaseDialogClickProvider>(context).initBaseDialogClick();
         Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
       }
     });

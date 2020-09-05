@@ -345,6 +345,7 @@ class _AdIconRow extends State<AdIconRow> {
       child: ProvideMulti(
         builder: (context, child, model) {
           BaseAdTimerProvider baseAdTimerInfo = model.get<BaseAdTimerProvider>();
+          baseAdTimerInfo.initLastWatchTime();
           return buildList(baseAdTimerInfo);
         },
         requestedValues: [BaseUserInfoProvider, BaseAdTimerProvider],
