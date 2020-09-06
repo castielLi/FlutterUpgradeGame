@@ -71,6 +71,7 @@ class _MarketAskState extends State<MarketAsk> {
                 ImageTextButton(
                   buttonName: '确定',
                   callback: () {
+                    ///todo:黄河 加个确认出售
                     String amount = amountController.text;
                     String coin = coinController.text;
                     if ("" == amount || "" == coin) {
@@ -81,7 +82,9 @@ class _MarketAskState extends State<MarketAsk> {
                       CommonUtils.showErrorMessage(msg: "请输入正整数");
                       return;
                     }
+                    this.widget.HUD();
                     MarketService.sellResource(this.widget.sellType, int.parse(this.amountController.text), int.parse(this.coinController.text), (data) {
+                      this.widget.HUD();
                       if (data) {
                         CommonUtils.showSuccessMessage(msg: "发布订单成功");
                         baseUserInfo.publishBid(this.widget.sellType == "wood" ? 1 : 2, int.parse(this.amountController.text));
