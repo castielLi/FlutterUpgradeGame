@@ -139,8 +139,9 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                                 ImageTextButton(
                                   buttonName: '退出登录',
                                   callback: () {
-                                    //TODO hud
+                                    this.widget.HUD();
                                     UserInfoService.logout((bool success) {
+                                      this.widget.HUD();
                                       if (success) {
                                         Provide.value<BaseAdTimerProvider>(context).logout();
                                         Application.router.navigateTo(context, UpgradeGameRoute.loginPage, clearStack: true);
