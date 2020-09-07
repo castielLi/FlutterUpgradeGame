@@ -47,7 +47,7 @@ class _AccountDetailState extends State<AccountDetail> {
         child: Column(
           children: <Widget>[
             TextField(
-              obscureText: true,
+              // obscureText: true,
               decoration: InputDecoration(labelText: "手机号码", prefixIcon: Icon(Icons.phone)),
               controller: phoneController,
               onSubmitted: (original) {

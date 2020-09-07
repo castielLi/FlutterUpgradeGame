@@ -163,7 +163,7 @@ class _TeamDetailState extends State<TeamDetail> {
                 Offstage(
                   offstage: !showContribution,
                   child: Container(
-                    height: ScreenUtil().setHeight(1000),
+                    height: ScreenUtil().setHeight(900),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -199,33 +199,37 @@ class _TeamDetailState extends State<TeamDetail> {
                           children: <Widget>[
                             Offstage(
                               offstage: '' == this.fatherDisplayName && '' == this.fatherAvatar,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    '上级:  ',
-                                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                                  ),
-                                  Container(
-                                    width: ScreenUtil().setWidth(350),
-                                    child: Row(
-                                      children: <Widget>[
-                                        CircleAvatar(
-                                          radius: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight / 2),
-                                          backgroundImage: NetworkImage(this.fatherAvatar),
-                                        ),
-                                        Container(
-                                          width: ScreenUtil().setWidth(350 - SystemButtonSize.smallButtonHeight),
-                                          child: Text(
-                                            this.fatherDisplayName,
-                                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                      ],
+                              child: Container(
+                                width: ScreenUtil().setWidth(600),
+                                padding: EdgeInsets.only(left: ScreenUtil().setWidth(50)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      '上级:  ',
+                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                                     ),
-                                  ),
-                                ],
+                                    Container(
+                                      width: ScreenUtil().setWidth(350),
+                                      child: Row(
+                                        children: <Widget>[
+                                          CircleAvatar(
+                                            radius: ScreenUtil().setWidth(SystemButtonSize.smallButtonHeight / 2),
+                                            backgroundImage: NetworkImage(this.fatherAvatar),
+                                          ),
+                                          Container(
+                                            width: ScreenUtil().setWidth(350 - SystemButtonSize.smallButtonHeight),
+                                            child: Text(
+                                              this.fatherDisplayName,
+                                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             ButtonsList(

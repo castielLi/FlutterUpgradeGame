@@ -103,6 +103,10 @@ class _WithdrawState extends State<Withdraw> {
                       CommonUtils.showWarningMessage(msg: "输入不能为空");
                       return;
                     }
+                    if (!RegExp(r"^\d*$").hasMatch(amountController.text)) {
+                      CommonUtils.showWarningMessage(msg: "请输入正整数");
+                      return;
+                    }
                     if (double.parse(amountController.text) > cashAmount) {
                       CommonUtils.showWarningMessage(msg: '可提现金额不足，请重新输入');
                       return;
