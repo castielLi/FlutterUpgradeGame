@@ -42,7 +42,7 @@ class _MarketDetailState extends State<MarketDetail> {
   TradeListModel stoneList = new TradeListModel(datalist: []);
   List<TradeItemModel> myTrades = [];
   String contentName = Resource.WOOD;
-  String limit = "";
+  String limit = "0";
   int woodPage = 0;
   int stonePage = 0;
   String sellType = "wood";
