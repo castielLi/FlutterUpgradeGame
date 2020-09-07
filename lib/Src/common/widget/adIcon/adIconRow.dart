@@ -30,6 +30,7 @@ class _AdIconRow extends State<AdIconRow> {
 
   int times = 0;
   ExtraRuleModel settingRule;
+  int clicktime = 0;
 
   void displayDefautAd(int adType){
     switch(adType){
@@ -128,7 +129,7 @@ class _AdIconRow extends State<AdIconRow> {
     }
     Widget content;
 
-    ///伐木场 采石场显示6 - 10个广告的显示逻辑
+    ///农场逻辑
     if (this.widget.type == AdTypeEnum.farm) {
       for (int i = 0; i < this.widget.alreadyWatched; i++) {
         firstAdIconList.add(
@@ -148,6 +149,14 @@ class _AdIconRow extends State<AdIconRow> {
               if (waiting) {
                 CommonUtils.showErrorMessage(msg: '您需要等待一段时间才能继续操作,去看看其他资源吧');
                 return;
+              }
+
+              int time = DateTime.now().millisecondsSinceEpoch;
+              if(time - this.clicktime < 1000){
+                CommonUtils.showErrorMessage(msg:"你点击的太快了,休息会儿吧");
+                return;
+              }else{
+                this.clicktime = time;
               }
 
 //            adview = "POSID8rbrja0ih10i";
@@ -206,6 +215,14 @@ class _AdIconRow extends State<AdIconRow> {
                   return;
                 }
 
+                int time = DateTime.now().millisecondsSinceEpoch;
+                if(time - this.clicktime < 1000){
+                  CommonUtils.showErrorMessage(msg:"你点击的太快了,休息会儿吧");
+                  return;
+                }else{
+                  this.clicktime = time;
+                }
+
 //            adview = "POSID8rbrja0ih10i";
 //            baidu = "7111030";
 //            tencent = "6031610694170610";
@@ -242,13 +259,20 @@ class _AdIconRow extends State<AdIconRow> {
                   return;
                 }
 
+                int time = DateTime.now().millisecondsSinceEpoch;
+                if(time - this.clicktime < 1000){
+                  CommonUtils.showErrorMessage(msg:"你点击的太快了,休息会儿吧");
+                  return;
+                }else{
+                  this.clicktime = time;
+                }
+
 //            adview = "POSID8rbrja0ih10i";
 //            baidu = "7111030";
 //            tencent = "6031610694170610";
                 ///type选择平台  1：adview 2：baidu 3：腾讯
                 ///showType 选择展示 方式 1：开屏广告 2：视频广告
                 ///posid 为可选则参数如果有第三个posid参数则用传过来的 否则为andorid模块内默认参数， posid为广告位id
-                this.widget.HUD();
                 this.widget.HUD();
                 if (this.widget.type == AdTypeEnum.stone) {
                   if(settingRule!= null){
@@ -300,6 +324,14 @@ class _AdIconRow extends State<AdIconRow> {
                 if (waiting) {
                   CommonUtils.showErrorMessage(msg: '您需要等待一段时间才能继续操作,去看看其他资源吧');
                   return;
+                }
+
+                int time = DateTime.now().millisecondsSinceEpoch;
+                if(time - this.clicktime < 1000){
+                  CommonUtils.showErrorMessage(msg:"你点击的太快了,休息会儿吧");
+                  return;
+                }else{
+                  this.clicktime = time;
                 }
 
 //            adview = "POSID8rbrja0ih10i";
