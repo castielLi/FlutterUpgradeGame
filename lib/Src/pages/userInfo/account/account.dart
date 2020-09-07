@@ -23,7 +23,6 @@ class _AccountDetailState extends State<AccountDetail> {
   final repeatPasswordController = TextEditingController();
 
   bool isPasswordValid() {
-    // String originalPassword = phoneController.text;
     String newPassword = newPasswordController.text;
     String repeatPassword = repeatPasswordController.text;
 
@@ -91,21 +90,45 @@ class _AccountDetailState extends State<AccountDetail> {
                       CommonUtils.showErrorMessage(msg: "请输入正确的手机号码");
                       return;
                     }
-                    if (isPasswordValid()) {
-                      this.widget.HUD();
-                      AccountService.changePassword(repeatPasswordController.text, phoneController.text, (data) {
-                        if (ConfigSetting.SUCCESS == data) {
-                          CommonUtils.showSuccessMessage(msg: "密码修改成功");
-                          this.widget.viewCallback();
-                          phoneController.clear();
-                          newPasswordController.clear();
-                          repeatPasswordController.clear();
-                        }
-                      });
-                      this.widget.HUD();
-                    } else {
-                      CommonUtils.showErrorMessage(msg: "两次密码输入不一致");
+                    if (!isPasswordValid()) {
+                      return;
                     }
+                    showDialog<Null>(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return new AlertDialog(
+                          title: new Text('您确认修改密码么?'),
+                          actions: <Widget>[
+                            new FlatButton(
+                              child: new Text('取消'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            new FlatButton(
+                              child: new Text('确认'),
+                              onPressed: () {
+                                this.widget.HUD();
+                                AccountService.changePassword(repeatPasswordController.text, phoneController.text, (data) {
+                                  if (ConfigSetting.SUCCESS == data) {
+                                    CommonUtils.showSuccessMessage(msg: "密码修改成功");
+                                    this.widget.viewCallback();
+                                    phoneController.clear();
+                                    newPasswordController.clear();
+                                    repeatPasswordController.clear();
+                                  }
+                                });
+                                this.widget.HUD();
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    ).then((val) {
+                      print(val);
+                    });
                   },
                 ),
               ],

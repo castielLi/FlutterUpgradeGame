@@ -20,25 +20,31 @@ class TradeItem extends StatefulWidget {
 class _TradeItem extends State<TradeItem> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Text(
-          this.widget.tDate,
-          style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
-        ),
-        Expanded(
-          child: Text(
-            this.widget.detail,
-            textAlign: TextAlign.center,
+    return Column(children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            this.widget.tDate,
             style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
           ),
-        ),
-        Text(
-          this.widget.tCoin,
-          style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
-        ),
-      ],
-    );
+          Expanded(
+            child: Text(
+              this.widget.detail,
+              textAlign: TextAlign.center,
+              style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+            ),
+          ),
+          Text(
+            this.widget.tCoin,
+            style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+          ),
+        ],
+      ),
+      Divider(
+        height: 1.0,
+        color: Colors.white,
+      ),
+    ],);
   }
 }

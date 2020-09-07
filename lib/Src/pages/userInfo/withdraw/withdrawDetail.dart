@@ -26,7 +26,6 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     UserInfoHttpRequestEvent().on("withdrawDetail", this.getWithdrawDetail);
   }

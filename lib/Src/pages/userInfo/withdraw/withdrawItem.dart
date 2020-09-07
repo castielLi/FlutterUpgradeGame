@@ -20,23 +20,31 @@ class WithdrawItem extends StatefulWidget {
 class _WithdrawItem extends State<WithdrawItem> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Text(
-          this.widget.date,
-          style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(
+              this.widget.date,
+              style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+            ),
+            Expanded(
+              child: Text(
+                this.widget.detail,
+                textAlign: TextAlign.center,
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+              ),
+            ),
+            Text(
+              this.widget.change.toString(),
+              style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+            ),
+          ],
         ),
-        Expanded(
-          child: Text(
-            this.widget.detail,
-            textAlign: TextAlign.center,
-            style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
-          ),
-        ),
-        Text(
-          this.widget.change.toString(),
-          style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+        Divider(
+          height: 1.0,
+          color: Colors.white,
         ),
       ],
     );
