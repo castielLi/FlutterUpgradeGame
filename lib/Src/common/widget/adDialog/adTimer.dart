@@ -22,6 +22,14 @@ class AdTimer{
     return _instance;
   }
 
+  static initCurrentDatabase(String displayName){
+    SqliteHelper.setDatabase(displayName);
+  }
+
+  static logoutAdTime(){
+    SqliteHelper.closeDatabase();
+    _instance = null;
+  }
 
   static Future<bool> UpdateAdTime(AdTypeEnum type , String time) async{
     String sqlstring = "";

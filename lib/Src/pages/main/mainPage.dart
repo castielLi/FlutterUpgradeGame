@@ -12,6 +12,8 @@ import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
+import 'package:upgradegame/Src/common/model/globalSystemStatuesControl.dart';
+import 'package:upgradegame/Src/common/widget/adDialog/adTimer.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
 import 'package:upgradegame/Src/pages/main/common/dividendPart.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
@@ -40,6 +42,7 @@ class _MainPageState extends State<MainPage> {
   Timer deviceIdTimer;
   StreamSubscription stream;
   StreamSubscription notification;
+  StreamSubscription systemStatus;
 
   ProgressHUD _progressHUD;
   bool _loading = false;
@@ -75,9 +78,15 @@ class _MainPageState extends State<MainPage> {
     ///初始化在0-5分钟的时候前台自动去生成t币，并且请求后台进行计算
     RequestGetCoinModel();
     RequestGetCoinModel.setIfNeedCoin(true);
+    AdTimer();
+    GlobalSystemStatuesControl();
 
-    ///初始化要获取资源时候的弹窗显示 以后版本再做
-//    BaseResourceChangeDialogDataModel();
+
+    ///初始化广告数据库
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AdTimer.initCurrentDatabase(Provide.value<BaseUserInfoProvider>(context).displayname);
+    });
+
 
     _progressHUD = new ProgressHUD(
       backgroundColor: Colors.transparent,
@@ -93,11 +102,14 @@ class _MainPageState extends State<MainPage> {
       this.errorHandleFunction(event.code, event.message);
     });
 
-    ///收到通知的监听
-    notification = NotificationEvent().eventBus.on<RecieveNotificationEvent>().listen((message) {
-//      Map<String, dynamic> model = convert.jsonDecode(message.message['extras']['cn.jpush.android.EXTRA']);
-//      print(model);
+    systemStatus = GlobalSystemStatuesControl.instance.eventBus.on<SystemStatus>().listen((status){
+      if(status.active){
+        CommonUtils.showSuccessMessage(msg: "前台了");
+      }else{
+        CommonUtils.showSuccessMessage(msg: "后台了");
+      }
     });
+
 
     ///后台绑定用户和极光的registerid
     this.deviceIdTimer = Timer.periodic(Duration(seconds: 20), (timer) {

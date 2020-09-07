@@ -10,7 +10,6 @@ class SqliteHelper{
 
   SqliteHelper._internal() {
     // 初始化
-    this.initDatabase();
   }
 
   static SqliteHelper _getInstance() {
@@ -20,9 +19,18 @@ class SqliteHelper{
     return _instance;
   }
 
-  void initDatabase() async{
+  static setDatabase(String displayName){
+    instance.initDatabase(displayName);
+  }
+
+  static closeDatabase(){
+    instance.database.close();
+  }
+
+
+  void initDatabase(String displayName) async{
     var databasesPath = await getDatabasesPath();
-    String path =join(databasesPath, 'buluoge.db');
+    String path =join(databasesPath + "/" + displayName, 'buluoge.db');
     database = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
           await db.execute("CREATE TABLE IF NOT EXISTS Timer(farm text, stone text, wood text)");

@@ -6,6 +6,7 @@ import 'package:fluwx_no_pay/fluwx_no_pay.dart' as fluwx;
 import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:upgradegame/Common/app/notificationEvent.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/model/globalSystemStatuesControl.dart';
 
 ///配置app基础组件 例如:错误信息弹窗
 class InitAppSetting extends StatefulWidget {
@@ -17,10 +18,41 @@ class InitAppSetting extends StatefulWidget {
   _InitAppSetting createState() => new _InitAppSetting();
 }
 
-class _InitAppSetting extends State<InitAppSetting> {
+class _InitAppSetting extends State<InitAppSetting> with WidgetsBindingObserver{
   String debugLable = 'Unknown';
   final JPush jpush = new JPush();
   final eventBus = new NotificationEvent();
+  Timer closeTimer;
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print("--" + state.toString());
+    switch (state) {
+      case AppLifecycleState.inactive: // 处于这种状态的应用程序应该假设它们可能在任何时候暂停。
+
+        break;
+      case AppLifecycleState.resumed:// 应用程序可见，前台
+        GlobalSystemStatuesControl.setSystemForegournd();
+        if(closeTimer != null){
+          closeTimer.cancel();
+        }
+        break;
+      case AppLifecycleState.paused: // 应用程序不可见，后台
+        GlobalSystemStatuesControl.setSystemBackground();
+        closeTimer = Timer.periodic(Duration(seconds: 20), (timer) {
+          closeTimer.cancel();
+          closeTimer = null;
+          SystemNavigator.pop();
+        });
+        break;
+      case AppLifecycleState.detached: // 申请将暂时暂停
+
+        break;
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -99,11 +131,14 @@ class _InitAppSetting extends State<InitAppSetting> {
   void initState() {
     super.initState();
     _initFluwx();
+    WidgetsBinding.instance.addObserver(this);
+    GlobalSystemStatuesControl();
 //    initPlatformState();
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 }

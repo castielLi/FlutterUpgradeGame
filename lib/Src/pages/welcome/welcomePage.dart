@@ -21,7 +21,6 @@ class _WelcomePageState extends State<WelcomePage> {
 
   void initBaseWidget() {
     AdDialog();
-    AdTimer();
   }
 
   void getRules() async {

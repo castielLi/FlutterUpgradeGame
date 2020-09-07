@@ -17,6 +17,13 @@ class BaseAdTimerProvider with ChangeNotifier {
   String farmLastWatchTime;
   String stoneLastWatchTime;
   String sawmillListWatchTime;
+  Timer farmTimer;
+  Timer woodTimer;
+  Timer stoneTimer;
+
+  Timer sqlFarmTimer;
+  Timer sqlWoodTimer;
+  Timer sqlStoneTime;
 
 
   bool get Farm => farm;
@@ -27,6 +34,28 @@ class BaseAdTimerProvider with ChangeNotifier {
     this.farm = false;
     this.stone = false;
     this.sawmill = false;
+  }
+
+  logout(){
+    if(this.woodTimer != null){
+      this.woodTimer.cancel();
+    }
+    if(this.farmTimer != null){
+      this.farmTimer.cancel();
+    }
+    if(this.stoneTimer != null){
+      this.stoneTimer.cancel();
+    }
+    if(this.sqlFarmTimer != null){
+      this.sqlFarmTimer.cancel();
+    }
+    if(this.sqlStoneTime != null){
+      this.sqlStoneTime.cancel();
+    }
+    if(this.sqlWoodTimer != null){
+      this.sqlWoodTimer.cancel();
+    }
+    this.initFinished = false;
   }
 
   initLastWatchTime() async{
@@ -45,13 +74,14 @@ class BaseAdTimerProvider with ChangeNotifier {
           this.farm = false;
         }else{
           this.farm = true;
-          Timer timer = Timer.periodic(Duration(seconds: 2), (timer) {
+          sqlFarmTimer = Timer.periodic(Duration(seconds: 2), (timer) {
             int time = int.parse(this.farmLastWatchTime);
             int currentTIme = DateTime.now().millisecondsSinceEpoch;
             if(currentTIme  - time > 120000){
               this.farm = false;
               notifyListeners();
-              timer.cancel();
+              sqlFarmTimer.cancel();
+              sqlFarmTimer = null;
             }
           });
         }
@@ -68,15 +98,16 @@ class BaseAdTimerProvider with ChangeNotifier {
           this.sawmill = false;
         } else {
           this.sawmill = true;
-          Timer timer = Timer.periodic(Duration(seconds: 2), (timer) {
-            int time = int.parse(this.farmLastWatchTime);
+          sqlWoodTimer = Timer.periodic(Duration(seconds: 2), (timer) {
+            int time = int.parse(this.sawmillListWatchTime);
             int currentTIme = DateTime
                 .now()
                 .millisecondsSinceEpoch;
             if (currentTIme - time > 120000) {
               this.sawmill = false;
               notifyListeners();
-              timer.cancel();
+              sqlWoodTimer.cancel();
+              sqlFarmTimer = null;
             }
           });
         }
@@ -93,15 +124,16 @@ class BaseAdTimerProvider with ChangeNotifier {
             this.stone = false;
           } else {
             this.stone = true;
-            Timer timer = Timer.periodic(Duration(seconds: 2), (timer) {
-              int time = int.parse(this.farmLastWatchTime);
+            sqlStoneTime = Timer.periodic(Duration(seconds: 2), (timer) {
+              int time = int.parse(this.stoneLastWatchTime);
               int currentTIme = DateTime
                   .now()
                   .millisecondsSinceEpoch;
               if (currentTIme - time > 120000) {
                 this.stone = false;
                 notifyListeners();
-                timer.cancel();
+                sqlStoneTime.cancel();
+                sqlStoneTime = null;
               }
             });
           }
@@ -130,17 +162,27 @@ class BaseAdTimerProvider with ChangeNotifier {
   }
 
   setWatchAdWaitingByType(AdTypeEnum type){
-      ///正式
-    Timer timer = Timer.periodic(Duration(seconds: 120), (timer) {
-      if(type == AdTypeEnum.farm){
+    if(type == AdTypeEnum.farm){
+      farmTimer = Timer.periodic(Duration(seconds: 120), (timer) {
         farm = false;
-      }else if(type == AdTypeEnum.sawmill){
+        notifyListeners();
+        farmTimer.cancel();
+        farmTimer = null;
+      });
+    }else if(type == AdTypeEnum.sawmill){
+      woodTimer = Timer.periodic(Duration(seconds: 120), (timer) {
         sawmill = false;
-      }else{
+        notifyListeners();
+        woodTimer.cancel();
+        woodTimer = null;
+      });
+    }else{
+      stoneTimer = Timer.periodic(Duration(seconds: 120), (timer) {
         stone = false;
-      }
-      notifyListeners();
-      timer.cancel();
-    });
+        notifyListeners();
+        stoneTimer.cancel();
+        stoneTimer = null;
+      });
+    }
   }
 }

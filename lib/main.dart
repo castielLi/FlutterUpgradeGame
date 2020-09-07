@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provide/provide.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:fluro/fluro.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
@@ -7,6 +8,7 @@ import 'package:upgradegame/Src/pages/welcome/welcomePage.dart';
 import 'package:upgradegame/Common/app/initAppBaseSetting.dart';
 import 'dart:async';
 import 'package:upgradegame/Src/provider/provider.dart';
+
 
 
 
@@ -23,6 +25,8 @@ void main() {
 }
 
 class UpgradeGameApp extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     //全局路由注入

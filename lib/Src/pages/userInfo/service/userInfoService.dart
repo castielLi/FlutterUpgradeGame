@@ -5,6 +5,7 @@ import 'package:upgradegame/Common/http/httpManager.dart';
 import 'package:dio/dio.dart';
 import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/widget/adDialog/adTimer.dart';
 import 'package:upgradegame/Src/pages/userInfo/model/cashDetailModel.dart';
 import 'package:upgradegame/Src/pages/userInfo/model/cashInfoModel.dart';
 import 'package:upgradegame/Src/pages/userInfo/model/requestModel/getUserTCoinRequestModel.dart';
@@ -26,6 +27,7 @@ class UserInfoService{
       await FileStorage.removeContent("token");
       await FileStorage.removeContent("verified");
       clearAll();
+      AdTimer.logoutAdTime();
       callback(true);
     }else{
       CommonUtils.showErrorMessage(msg: "登出失败");

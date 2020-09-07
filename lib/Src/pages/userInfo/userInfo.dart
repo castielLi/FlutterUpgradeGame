@@ -14,6 +14,7 @@ import 'package:upgradegame/Src/pages/userInfo/tradeDetail/tradeDetail.dart';
 import 'package:upgradegame/Src/pages/userInfo/userResourceDetail.dart';
 import 'package:upgradegame/Src/pages/userInfo/withDraw.dart';
 import 'package:upgradegame/Src/pages/userInfo/withdraw/withdrawDetail.dart';
+import 'package:upgradegame/Src/provider/baseAdTimerProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserCashProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
@@ -140,6 +141,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                                   callback: () {
                                     UserInfoService.logout((bool success) {
                                       if (success) {
+                                        Provide.value<BaseAdTimerProvider>(context).logout();
                                         Application.router.navigateTo(context, UpgradeGameRoute.loginPage, clearStack: true);
                                       }
                                     });
