@@ -36,7 +36,7 @@ class _TeamItem extends State<TeamItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  width: ScreenUtil().setWidth(580),
+                  width: ScreenUtil().setWidth(450),
                   child: Text(
                     this.widget.invite.displayname,
                     style: CustomFontSize.defaultTextStyle(55),
@@ -51,7 +51,7 @@ class _TeamItem extends State<TeamItem> {
             ),
             Container(
               margin: EdgeInsets.only(right: ScreenUtil().setWidth(0)),
-              width: ScreenUtil().setWidth(230),
+              width: ScreenUtil().setWidth(350),
               child: Text(
                 cashback ? '¥' + this.widget.invite.voucherincome.toString() + "(" + this.widget.invite.contribution.toString() + ')' : this.widget.invite.contribution.toString(),
                 style: CustomFontSize.defaultTextStyle(45),
