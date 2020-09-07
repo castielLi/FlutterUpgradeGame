@@ -53,7 +53,6 @@ class _MarketDetailState extends State<MarketDetail> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     MarketHttpRequestEvent().on("getMyTradeList", this.getMyTradeList);
     MarketHttpRequestEvent().on("getWoodTradeList", this.getWoodList);
@@ -273,7 +272,7 @@ class _MarketDetailState extends State<MarketDetail> {
                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
               ),
               Container(
-                margin: EdgeInsets.only(top: 5),
+                margin: EdgeInsets.only(top: 3),
                 child: Stack(
                   children: <Widget>[
                     Offstage(
@@ -649,6 +648,7 @@ class _MarketDetailState extends State<MarketDetail> {
                     Offstage(
                       offstage: contentName != "sellResource",
                       child: MarketAsk(
+                        HUD: this.widget.HUD,
                         sellType: this.sellType,
                         viewCallback: () {
                           changeDisplayContent(this.sellType);

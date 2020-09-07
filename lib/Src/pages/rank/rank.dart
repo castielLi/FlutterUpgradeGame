@@ -49,13 +49,12 @@ class _RankDetailState extends State<RankDetail> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           ButtonsList(
-            buttonWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
-            buttonHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
-            iconWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonIconSize),
-            iconHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonIconSize),
+            buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+            buttonHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+            iconWidth: ScreenUtil().setWidth(SystemIconSize.smallIconSize),
+            iconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
             buttonBackgroundImageUrl: 'resource/images/yellowButton.png',
-            textSize: ScreenUtil().setSp(SystemButtonSize.largeButtonFontSize),
-            ///todo:黄河 改下样式，并且把mainbuild list 这个列表显示下
+            textSize: ScreenUtil().setSp(SystemButtonSize.smallButtonFontSize),
             buttons: [
               ImageTextButton(
                 buttonName: '金币',
@@ -72,19 +71,21 @@ class _RankDetailState extends State<RankDetail> {
                 },
               ),
               ImageTextButton(
-                buttonName: '建筑',
-                iconUrl: 'resource/images/withdraw.png',
+                buttonName: '主城',
+                iconUrl: 'resource/images/mainBuildingSmallIcon.png',
                 callback: () {
-                  changeTabs('mainbuild');
+                  changeTabs('mainBuild');
                 },
               ),
             ],
           ),
           Container(
-//            color:Colors.blue,
             height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
-            child: tabName == 'coin'
-                ? ListView.builder(
+            child: Stack(
+              children: [
+                Offstage(
+                  offstage: tabName != 'coin',
+                  child: ListView.builder(
                     itemCount: coinList.length,
                     itemExtent: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                     padding: EdgeInsets.only(top: 0),
@@ -101,8 +102,11 @@ class _RankDetailState extends State<RankDetail> {
                         value: coinList[index].amount,
                       );
                     },
-                  )
-                : ListView.builder(
+                  ),
+                ),
+                Offstage(
+                  offstage: tabName != 'income',
+                  child: ListView.builder(
                     itemCount: incomeList.length,
                     itemExtent: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                     padding: EdgeInsets.only(top: 0),
@@ -120,6 +124,30 @@ class _RankDetailState extends State<RankDetail> {
                       );
                     },
                   ),
+                ),
+                Offstage(
+                  offstage: tabName != 'mainBuild',
+                  child: ListView.builder(
+                    itemCount: mainBuildList.length,
+                    itemExtent: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
+                    padding: EdgeInsets.only(top: 0),
+                    itemBuilder: (BuildContext context, int index) {
+                      int count = index + 1;
+                      if (count > 5) {
+                        count = 5;
+                      }
+                      String imageUrl = 'resource/images/rank$count.png';
+                      return RankItem(
+                        imageUrl: imageUrl,
+                        avatarUrl: 'resource/images/avatar.png',
+                        rankName: mainBuildList[index].displayname,
+                        value: mainBuildList[index].amount,
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

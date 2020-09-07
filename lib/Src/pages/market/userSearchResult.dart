@@ -28,7 +28,7 @@ class _UserSearchResult extends State<UserSearchResult> {
   int ticket = 0;
   UserSearch currentuser;
 
-  void sendCoin(){
+  void sendCoin() {
     this.widget.HUD();
     MarketService.sendCoin(this.widget.user.userid, int.parse(amountController.text), passwordController.text, (data) {
       this.widget.HUD();
@@ -45,7 +45,6 @@ class _UserSearchResult extends State<UserSearchResult> {
 
   @override
   Widget build(BuildContext context) {
-
     if (this.widget.user == null) {
       this.showUserSearchResult = true;
     } else {
@@ -76,7 +75,7 @@ class _UserSearchResult extends State<UserSearchResult> {
                         switchBetweenTwoPages();
                       },
                       child: Container(
-                        margin: EdgeInsets.only(top: 30),
+                        margin: EdgeInsets.only(top: ScreenUtil().setHeight(90)),
                         height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
                         decoration: BoxDecoration(
                           image: DecorationImage(
@@ -84,42 +83,37 @@ class _UserSearchResult extends State<UserSearchResult> {
                             fit: BoxFit.fill,
                           ),
                         ),
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.only(left: 20),
-                                  child: Text(
-                                    '用户:',
-                                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                                  ),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.only(right: 30),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Text(
-                                        this.widget.user.displayname,
-                                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            ///todo:黄河，修改下样式
-                            Row(
-                              children: <Widget>[
-                                Text(
-                                  "注册时间:"+this.widget.user.registertime,
+                        child: Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(left: 20),
+                                child: Text(
+                                  '用户:',
                                   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                 ),
-                              ],
-                            )
-                          ],
+                              ),
+                              Container(
+                                width: ScreenUtil().setWidth(400),
+                                margin: EdgeInsets.only(right: 15),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      this.widget.user.displayname,
+                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      "注册时间:" + this.widget.user.registertime,
+                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

@@ -90,9 +90,9 @@ class _MarketAskState extends State<MarketAsk> {
                         baseUserInfo.publishBid(this.widget.sellType == "wood" ? 1 : 2, int.parse(this.amountController.text));
                         this.widget.viewCallback();
                         MarketHttpRequestEvent().emit("getMyTradeList");
-                        if(this.widget.sellType == "wood"){
+                        if (this.widget.sellType == "wood") {
                           MarketHttpRequestEvent().emit("getWoodTradeList");
-                        }else{
+                        } else {
                           MarketHttpRequestEvent().emit("getStoneTradeList");
                         }
                         amountController.clear();

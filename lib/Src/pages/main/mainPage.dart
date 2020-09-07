@@ -10,6 +10,7 @@ import 'package:upgradegame/Common/event/errorEvent.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
 import 'package:upgradegame/Src/pages/main/common/dividendPart.dart';
@@ -22,7 +23,6 @@ import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
-import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -125,7 +125,6 @@ class _MainPageState extends State<MainPage> {
 
       /// 前九分钟  userinfo请求 获取用户最新的资源动态
       if (timeMinute >= 0 && timeMinute <= 5 && RequestGetCoinModel().ifNeedGetCoin) {
-
         int level = Provide.value<BaseUserInfoProvider>(context).Mainbuildlevel;
 
         int currentStoneAmount = Provide.value<BaseUserInfoProvider>(context).stoneamount;
@@ -134,7 +133,7 @@ class _MainPageState extends State<MainPage> {
         ///升级建筑规则
         Mainbuild mainBuildRule = Global.getMainBuildingRule()[level - 1];
 
-        if(currentStoneAmount > mainBuildRule.consumestone && currentWoodAmount > mainBuildRule.woodamount ){
+        if (currentStoneAmount > mainBuildRule.consumestone && currentWoodAmount > mainBuildRule.woodamount) {
           MainService.requestBackendProductCoin((model) {
             Provide.value<BaseUserInfoProvider>(context).backendProductTCoin(model);
             RequestGetCoinModel.setIfNeedCoin(false);
@@ -313,17 +312,15 @@ class _MainPageState extends State<MainPage> {
                                 netWorkImageUrl: baseUserInfo.avatar,
                                 netWorkImage: true,
                                 callback: () {
-                                  if(!Provide.value<BaseDialogClickProvider>(context).hasClickDialog){
+                                  if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
                                     Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                                    Navigator.push(
-                                        context,
-                                        PopWindow(pageBuilder: (context){
-                                          return DetailDialog(
-                                              height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                              width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                              childWidgetName: 'userInfoDetail',
-                                              title: "个人信息");
-                                        }));
+                                    Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                      return DetailDialog(
+                                          height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                          width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                          childWidgetName: 'userInfoDetail',
+                                          title: "个人信息");
+                                    }));
                                   }
                                 },
                               ),
@@ -360,19 +357,16 @@ class _MainPageState extends State<MainPage> {
                             imageUrl: "resource/images/rank.png",
                             textSize: SystemFontSize.operationTextFontSize,
                             callback: () {
-                              if(!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                              if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
                                 Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                                Navigator.push(
-                                    context,
-                                    PopWindow(pageBuilder: (context) {
-                                      return DetailDialog(
-                                        height: ScreenUtil().setHeight(
-                                            SystemScreenSize.detailDialogHeight),
-                                        width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                        childWidgetName: 'rankDetail',
-                                        title: "排行榜",
-                                      );
-                                    }));
+                                Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                  return DetailDialog(
+                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                    childWidgetName: 'rankDetail',
+                                    title: "排行榜",
+                                  );
+                                }));
                               }
                             },
                           ),
@@ -382,18 +376,16 @@ class _MainPageState extends State<MainPage> {
                             textSize: SystemFontSize.operationTextFontSize,
                             imageUrl: "resource/images/team.png",
                             callback: () {
-                              if(!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                              if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
                                 Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                                Navigator.push(
-                                    context,
-                                    PopWindow(pageBuilder: (context){
-                                      return DetailDialog(
-                                        height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                        width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                        childWidgetName: 'teamDetail',
-                                        title: "团 队",
-                                      );
-                                    }));
+                                Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                  return DetailDialog(
+                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                    childWidgetName: 'teamDetail',
+                                    title: "团 队",
+                                  );
+                                }));
                               }
                             },
                           ),
@@ -420,18 +412,16 @@ class _MainPageState extends State<MainPage> {
                             imageUrl: "resource/images/contribution.png",
                             textSize: SystemFontSize.operationTextFontSize,
                             callback: () {
-                              if(!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                              if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
                                 Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                                Navigator.push(
-                                    context,
-                                    PopWindow(pageBuilder: (context){
-                                      return DetailDialog(
-                                        height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                        width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                        childWidgetName: 'contributionDetail',
-                                        title: "贡献值",
-                                      );
-                                    }));
+                                Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                  return DetailDialog(
+                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                    childWidgetName: 'contributionDetail',
+                                    title: "贡献值",
+                                  );
+                                }));
                               }
                             },
                           ),
@@ -461,69 +451,24 @@ class _MainPageState extends State<MainPage> {
                         title: "今日分红",
                         amount: "¥" + (autoProfitSharing == 0.00 ? this.displayInitProfitSharing() : autoProfitSharing.toStringAsFixed(2)),
                         callback: () {
-                          if(!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                          if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
                             Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                            Navigator.push(
-                                context,
-                                PopWindow(pageBuilder: (context){
-                                  return DetailDialog(
-                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                    childWidgetName: 'adDividendDetail',
-                                    title: "广告分红",
-                                  );
-                                }));
+                            Navigator.push(context, PopWindow(pageBuilder: (context) {
+                              return DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'adDividendDetail',
+                                title: "广告分红",
+                              );
+                            }));
                           }
                         },
                       ),
                     ),
                     new Container(
                       child: new Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          ///todo:黄河,改下样式
-                          new UserImageButton(
-                            size: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
-                            buttonName: "活动",
-                            textSize: SystemFontSize.operationTextFontSize,
-                            imageUrl: "resource/images/setting.png",
-                            callback: () {
-                              if(!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                                Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                                Navigator.push(
-                                    context,
-                                    PopWindow(pageBuilder: (context){
-                                      return DetailDialog(
-                                        height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                        width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                        childWidgetName: 'activityDetail',
-                                        title: "活 动",
-                                      );
-                                    }));
-                              }
-                            },
-                          ),
-//                          new Container(
-//                            // 设置加公告的宽度
-//                            width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarSmallIconSize * 2),
-//                            decoration: new BoxDecoration(
-//                              color: Color.fromRGBO(0, 0, 0, 0.7),
-//                              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-//                            ),
-//                            child: new Row(
-//                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                              children: [
-//                                new Image(
-//                                  image: new AssetImage("resource/images/volume.png"),
-//                                  width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarSmallIconSize),
-//                                  height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
-//                                ),
-//                                new Text(
-//                                  baseUserInfo.voucher.toString(),
-//                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-//                                ),
-//                              ],
-//                            ),
-//                          ),
                           new Row(
                             children: <Widget>[
                               new UserImageButton(
@@ -532,44 +477,58 @@ class _MainPageState extends State<MainPage> {
                                 textSize: SystemFontSize.operationTextFontSize,
                                 imageUrl: "resource/images/setting.png",
                                 callback: () {
-                                  if(!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                                  if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
                                     Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                                    Navigator.push(
-                                        context,
-                                        PopWindow(pageBuilder: (context){
-                                          return DetailDialog(
-                                            height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                            width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                            childWidgetName: 'settingDetail',
-                                            title: "必 读",
-                                          );
-                                        }));
+                                    Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                      return DetailDialog(
+                                        height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                        width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                        childWidgetName: 'settingDetail',
+                                        title: "必 读",
+                                      );
+                                    }));
                                   }
                                 },
                               ),
-
                               new UserImageButton(
                                 size: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
                                 buttonName: "公告",
                                 textSize: SystemFontSize.operationTextFontSize,
                                 imageUrl: "resource/images/announcement.png",
                                 callback: () {
-                                  if(!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                                  if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
                                     Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                                    Navigator.push(
-                                        context,
-                                        PopWindow(pageBuilder: (context){
-                                          return DetailDialog(
-                                            height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                            width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                            childWidgetName: 'announcementDetail',
-                                            title: "公 告",
-                                          );
-                                        }));
+                                    Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                      return DetailDialog(
+                                        height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                        width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                        childWidgetName: 'announcementDetail',
+                                        title: "公 告",
+                                      );
+                                    }));
                                   }
                                 },
                               ),
                             ],
+                          ),
+                          new UserImageButton(
+                            size: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
+                            buttonName: "活动",
+                            textSize: SystemFontSize.operationTextFontSize,
+                            imageUrl: "resource/images/activity.png",
+                            callback: () {
+                              if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                                Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+                                Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                  return DetailDialog(
+                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                    childWidgetName: 'activityDetail',
+                                    title: "活 动",
+                                  );
+                                }));
+                              }
+                            },
                           ),
                         ],
                       ),
@@ -590,18 +549,16 @@ class _MainPageState extends State<MainPage> {
                           width: ScreenUtil().setWidth(600),
                           imageUrl: "resource/images/mainBuilding.png",
                           callback: () {
-                            if(!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                            if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
                               Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                              Navigator.push(
-                                  context,
-                                  PopWindow(pageBuilder: (context){
-                                    return DetailDialog(
-                                      height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                      width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                      childWidgetName: 'mainBuildingDetail',
-                                      title: "主 城",
-                                    );
-                                  }));
+                              Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                return DetailDialog(
+                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                  childWidgetName: 'mainBuildingDetail',
+                                  title: "主 城",
+                                );
+                              }));
                             }
                           },
                         ),
@@ -660,18 +617,16 @@ class _MainPageState extends State<MainPage> {
                         width: ScreenUtil().setHeight(SystemIconSize.mainPageIconSize),
                         imageUrl: "resource/images/herosBuilding.png",
                         callback: () {
-                          if(!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                          if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
                             Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                            Navigator.push(
-                                context,
-                                PopWindow(pageBuilder: (context){
-                                  return DetailDialog(
-                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                    childWidgetName: 'heroAltar',
-                                    title: "英雄祭坛",
-                                  );
-                                }));
+                            Navigator.push(context, PopWindow(pageBuilder: (context) {
+                              return DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'heroAltar',
+                                title: "英雄祭坛",
+                              );
+                            }));
                           }
                         },
                       ),
@@ -697,18 +652,16 @@ class _MainPageState extends State<MainPage> {
                         width: ScreenUtil().setWidth(SystemIconSize.mainPageIconSize),
                         imageUrl: "resource/images/stoneBuilding.png",
                         callback: () {
-                          if(!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                          if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
                             Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                            Navigator.push(
-                                context,
-                                PopWindow(pageBuilder: (context){
-                                  return  DetailDialog(
-                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                    childWidgetName: 'stoneDetail',
-                                    title: "采石场",
-                                  );
-                                }));
+                            Navigator.push(context, PopWindow(pageBuilder: (context) {
+                              return DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'stoneDetail',
+                                title: "采石场",
+                              );
+                            }));
                           }
                         },
                       ),
@@ -734,18 +687,16 @@ class _MainPageState extends State<MainPage> {
                         width: ScreenUtil().setWidth(SystemIconSize.mainPageIconSize),
                         imageUrl: "resource/images/fellingBuilding.png",
                         callback: () {
-                          if(!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                          if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
                             Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                            Navigator.push(
-                                context,
-                                PopWindow(pageBuilder: (context){
-                                  return DetailDialog(
-                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                    childWidgetName: 'sawmillDetail',
-                                    title: "伐木场",
-                                  );
-                                }));
+                            Navigator.push(context, PopWindow(pageBuilder: (context) {
+                              return DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'sawmillDetail',
+                                title: "伐木场",
+                              );
+                            }));
                           }
                         },
                       ),
@@ -775,18 +726,16 @@ class _MainPageState extends State<MainPage> {
                         width: ScreenUtil().setWidth(SystemIconSize.mainPageIconSize),
                         imageUrl: "resource/images/farmBuilding.png",
                         callback: () {
-                          if(!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                          if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
                             Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                            Navigator.push(
-                                context,
-                                PopWindow(pageBuilder: (context){
-                                  return DetailDialog(
-                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                    childWidgetName: 'farmDetail',
-                                    title: "农 场",
-                                  );
-                                }));
+                            Navigator.push(context, PopWindow(pageBuilder: (context) {
+                              return DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'farmDetail',
+                                title: "农 场",
+                              );
+                            }));
                           }
                         },
                       ),
@@ -812,18 +761,16 @@ class _MainPageState extends State<MainPage> {
                         width: ScreenUtil().setWidth(SystemIconSize.mainPageIconSize),
                         imageUrl: "resource/images/marketBuilding.png",
                         callback: () {
-                          if(!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                          if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
                             Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                            Navigator.push(
-                                context,
-                                PopWindow(pageBuilder: (context){
-                                  return DetailDialog(
-                                    height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                    childWidgetName: 'marketDetail',
-                                    title: "市 场",
-                                  );
-                                }));
+                            Navigator.push(context, PopWindow(pageBuilder: (context) {
+                              return DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'marketDetail',
+                                title: "市 场",
+                              );
+                            }));
                           }
                         },
                       ),
