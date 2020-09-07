@@ -91,10 +91,8 @@ class _TeamDetailState extends State<TeamDetail> {
 
   void getTeamList() {
     this.widget.HUD();
-
     TeamService.getTeamList((data) {
       this.widget.HUD();
-      ///todo:黄河 这里加判断 并且 判断如果上级头像和名称有内容就要显示上级
       setState(() {
         first = InvitationListModel.fromJson(data).first;
         second = InvitationListModel.fromJson(data).second;
@@ -103,7 +101,6 @@ class _TeamDetailState extends State<TeamDetail> {
         this.noMembersHintText = '还没有团队成员';
       });
     });
-
   }
 
   @override
@@ -118,7 +115,6 @@ class _TeamDetailState extends State<TeamDetail> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     TeamHttpRequestEvent().off();
   }
@@ -161,13 +157,13 @@ class _TeamDetailState extends State<TeamDetail> {
             ],
           ),
           Container(
-            height: ScreenUtil().setHeight(1020),
             child: Stack(
               children: [
                 ///贡献
                 Offstage(
                   offstage: !showContribution,
                   child: Container(
+                    height: ScreenUtil().setHeight(1000),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -201,6 +197,37 @@ class _TeamDetailState extends State<TeamDetail> {
                         offstage: !this.showTeamDetail,
                         child: Column(
                           children: <Widget>[
+                            Offstage(
+                              offstage: '' == this.fatherDisplayName && '' == this.fatherAvatar,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    '上级:  ',
+                                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                                  ),
+                                  Container(
+                                    width: ScreenUtil().setWidth(350),
+                                    child: Row(
+                                      children: <Widget>[
+                                        CircleAvatar(
+                                          radius: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight / 2),
+                                          backgroundImage: NetworkImage(this.fatherAvatar),
+                                        ),
+                                        Container(
+                                          width: ScreenUtil().setWidth(350 - SystemButtonSize.smallButtonHeight),
+                                          child: Text(
+                                            this.fatherDisplayName,
+                                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                             ButtonsList(
                               buttonWidth: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
                               buttonHeight: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
@@ -225,19 +252,16 @@ class _TeamDetailState extends State<TeamDetail> {
                               children: [
                                 Offstage(
                                   offstage: tabName != 'first',
-                                  child: 0 == first.length
-                                      ? Container(
-                                          //内容高度减去两列按钮高度
-                                          height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
-                                          child: Text(
+                                  child: Container(
+                                    height: ScreenUtil().setHeight(640),
+                                    child: 0 == first.length
+                                        ? Text(
                                             noMembersHintText,
                                             textAlign: TextAlign.center,
                                             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                                          ),
-                                        )
-                                      : Container(
-                                          height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
-                                          child: Column(
+                                          )
+                                        : Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Text(
                                                 '当前徒弟团队成员共有' + first.length.toString() + '名',
@@ -261,8 +285,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                                 ),
                                               ),
                                               Container(
-                                                //内容高度减去两列按钮加标题栏高度
-                                                height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight - 150),
+                                                height: ScreenUtil().setHeight(490),
                                                 child: EasyRefresh(
                                                   refreshFooter: ClassicsFooter(
                                                     bgColor: Colors.transparent,
@@ -302,23 +325,19 @@ class _TeamDetailState extends State<TeamDetail> {
                                               ),
                                             ],
                                           ),
-                                        ),
+                                  ),
                                 ),
                                 Offstage(
                                   offstage: tabName != 'second',
-                                  child: 0 == second.length
-                                      ? Container(
-                                          //内容高度减去两列按钮高度
-                                          height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
-                                          child: Text(
+                                  child: Container(
+                                    height: ScreenUtil().setHeight(640),
+                                    child: 0 == second.length
+                                        ? Text(
                                             noMembersHintText,
                                             textAlign: TextAlign.center,
                                             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                                          ),
-                                        )
-                                      : Container(
-                                          height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight),
-                                          child: Column(
+                                          )
+                                        : Column(
                                             children: [
                                               Text(
                                                 '当前徒孙团队成员共有' + second.length.toString() + '名',
@@ -342,8 +361,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                                 ),
                                               ),
                                               Container(
-                                                //内容高度减去两列按钮加标题栏高度
-                                                height: ScreenUtil().setHeight(1020 - SystemButtonSize.smallButtonHeight - SystemButtonSize.largeButtonHeight - 150),
+                                                height: ScreenUtil().setHeight(490),
                                                 child: EasyRefresh(
                                                   refreshFooter: ClassicsFooter(
                                                     bgColor: Colors.transparent,
@@ -383,7 +401,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                               ),
                                             ],
                                           ),
-                                        ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -405,7 +423,12 @@ class _TeamDetailState extends State<TeamDetail> {
                           children: <Widget>[
                             RepaintBoundary(
                               key: repaintWidgetKey,
-                              child: FadeInImage.assetNetwork(placeholder: "", image: this.qrCodeUrl),
+                              child: FadeInImage.assetNetwork(
+                                placeholder: "",
+                                image: this.qrCodeUrl,
+                                height: ScreenUtil().setHeight(750),
+                                width: ScreenUtil().setWidth(750),
+                              ),
                             ),
                             new Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Src/pages/team/model/invitation.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
+import 'package:upgradegame/Src/pages/team/model/invitation.dart';
 
 class TeamItem extends StatefulWidget {
   // 等级
@@ -24,7 +24,6 @@ class TeamItem extends StatefulWidget {
 class _TeamItem extends State<TeamItem> {
   @override
   Widget build(BuildContext context) {
-
     bool cashback = Global.getCashBackSetting();
 
     return Column(
@@ -37,7 +36,7 @@ class _TeamItem extends State<TeamItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  width: ScreenUtil().setWidth(600),
+                  width: ScreenUtil().setWidth(580),
                   child: Text(
                     this.widget.invite.displayname,
                     style: CustomFontSize.defaultTextStyle(55),
@@ -52,20 +51,14 @@ class _TeamItem extends State<TeamItem> {
             ),
             Container(
               margin: EdgeInsets.only(right: ScreenUtil().setWidth(0)),
-              width: ScreenUtil().setWidth(200),
+              width: ScreenUtil().setWidth(230),
               child: Text(
-                cashback?
-                '¥' +
-                    this.widget.invite.voucherincome.toString() +
-                    "(" +
-                    this.widget.invite.contribution.toString() +
-                    ')':this.widget.invite.contribution.toString(),
+                cashback ? '¥' + this.widget.invite.voucherincome.toString() + "(" + this.widget.invite.contribution.toString() + ')' : this.widget.invite.contribution.toString(),
                 style: CustomFontSize.defaultTextStyle(45),
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.right,
               ),
             ),
-
           ],
         ),
         Divider(

@@ -515,7 +515,6 @@ class _MarketDetailState extends State<MarketDetail> {
                                             CommonUtils.showErrorMessage(msg: "您当前的金币数量不足");
                                             return;
                                           }
-
                                           showDialog<Null>(
                                             context: context,
                                             barrierDismissible: false,

@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:progress_hud/progress_hud.dart';
 import 'package:provide/provide.dart';
+import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/activity/activity.dart';
 import 'package:upgradegame/Src/pages/adDividend/adDividendDetail.dart';
 import 'package:upgradegame/Src/pages/announcement/announcement.dart';
 import 'package:upgradegame/Src/pages/contribution/contribution.dart';
 import 'package:upgradegame/Src/pages/farm/farm.dart';
-import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/heroAltar/heroAltar.dart';
 import 'package:upgradegame/Src/pages/mainBuilding/mainBuilding.dart';
+import 'package:upgradegame/Src/pages/market/market.dart';
 import 'package:upgradegame/Src/pages/rank/rank.dart';
 import 'package:upgradegame/Src/pages/sawmill/sawmill.dart';
-import 'package:upgradegame/Src/pages/stone/stone.dart';
 import 'package:upgradegame/Src/pages/setting/setting.dart';
+import 'package:upgradegame/Src/pages/stone/stone.dart';
+import 'package:upgradegame/Src/pages/store/store.dart';
 import 'package:upgradegame/Src/pages/team/team.dart';
+import 'package:upgradegame/Src/pages/userInfo/userInfo.dart';
 import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
-import 'package:upgradegame/Src/pages/userInfo/userInfo.dart';
-import 'package:upgradegame/Src/pages/store/store.dart';
-import 'package:upgradegame/Src/pages/market/market.dart';
-import 'package:progress_hud/progress_hud.dart';
 
 class DetailDialog extends StatefulWidget {
   double height;
@@ -213,10 +213,7 @@ class _DetailDialogState extends State<DetailDialog> {
         child: Container(
           width: ScreenUtil().setWidth(1080),
           height: ScreenUtil().setHeight(1920),
-          color:Colors.transparent,
-//          decoration: new BoxDecoration(
-//            image: new DecorationImage(image: new AssetImage('resource/images/dialogBackgroundImage.png'), fit: BoxFit.cover),
-//          ),
+          color: Colors.transparent,
           child: new Container(
               color: Colors.transparent,
               margin: EdgeInsets.fromLTRB((ScreenUtil().setWidth(1080) - this.widget.width) / 2, (ScreenUtil().setHeight(1920) - this.widget.height) / 2,
