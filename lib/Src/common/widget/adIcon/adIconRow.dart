@@ -98,7 +98,8 @@ class _AdIconRow extends State<AdIconRow> {
   }
 
   void adFinishedCallback() {
-    print("广告已经看完了要执行代码了");
+    // print("广告已经看完了要执行代码了");
+    //TODO hud
     AdService.watchAd(this.widget.type.index, (WatchAdModel model) {
       this.widget.HUD();
       if (model != null) {

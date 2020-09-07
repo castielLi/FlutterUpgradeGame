@@ -18,12 +18,12 @@ class AccountDetail extends StatefulWidget {
 }
 
 class _AccountDetailState extends State<AccountDetail> {
-  final originalPasswordController = TextEditingController();
+  final phoneController = TextEditingController();
   final newPasswordController = TextEditingController();
   final repeatPasswordController = TextEditingController();
 
   bool isPasswordValid() {
-    String originalPassword = originalPasswordController.text;
+    // String originalPassword = phoneController.text;
     String newPassword = newPasswordController.text;
     String repeatPassword = repeatPasswordController.text;
 
@@ -49,10 +49,9 @@ class _AccountDetailState extends State<AccountDetail> {
             TextField(
               obscureText: true,
               decoration: InputDecoration(labelText: "手机号码", prefixIcon: Icon(Icons.phone)),
-              controller: originalPasswordController,
+              controller: phoneController,
               onSubmitted: (original) {
-                original = originalPasswordController.text;
-                print(original);
+                original = phoneController.text;
               },
             ),
             TextField(
@@ -61,7 +60,6 @@ class _AccountDetailState extends State<AccountDetail> {
               controller: newPasswordController,
               onSubmitted: (newPassword) {
                 newPassword = newPasswordController.text;
-                print(newPassword);
               },
             ),
             TextField(
@@ -70,7 +68,6 @@ class _AccountDetailState extends State<AccountDetail> {
               controller: repeatPasswordController,
               onSubmitted: (repeat) {
                 repeat = repeatPasswordController.text;
-                print(repeat);
               },
             ),
             ButtonsList(
@@ -90,21 +87,23 @@ class _AccountDetailState extends State<AccountDetail> {
                   buttonName: '确定',
                   callback: () {
                     FocusScope.of(context).requestFocus(FocusNode());
-                    if (!RegExp(r"^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$").hasMatch(originalPasswordController.text)) {
+                    if (!RegExp(r"^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$").hasMatch(phoneController.text)) {
                       CommonUtils.showErrorMessage(msg: "请输入正确的手机号码");
                       return;
                     }
                     if (isPasswordValid()) {
-                      AccountService.changePassword(repeatPasswordController.text, originalPasswordController.text,(data) {
+                      this.widget.HUD();
+                      AccountService.changePassword(repeatPasswordController.text, phoneController.text, (data) {
                         if (ConfigSetting.SUCCESS == data) {
                           CommonUtils.showSuccessMessage(msg: "密码修改成功");
                           this.widget.viewCallback();
-                          originalPasswordController.clear();
+                          phoneController.clear();
                           newPasswordController.clear();
                           repeatPasswordController.clear();
                         }
                       });
-                    }else{
+                      this.widget.HUD();
+                    } else {
                       CommonUtils.showErrorMessage(msg: "两次密码输入不一致");
                     }
                   },
@@ -119,7 +118,7 @@ class _AccountDetailState extends State<AccountDetail> {
 
   @override
   void dispose() {
-    originalPasswordController.dispose();
+    phoneController.dispose();
     newPasswordController.dispose();
     repeatPasswordController.dispose();
     super.dispose();

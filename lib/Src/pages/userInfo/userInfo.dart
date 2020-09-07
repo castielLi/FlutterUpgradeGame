@@ -139,6 +139,7 @@ class _UserInfoDetailState extends State<UserInfoDetail> {
                                 ImageTextButton(
                                   buttonName: '退出登录',
                                   callback: () {
+                                    //TODO hud
                                     UserInfoService.logout((bool success) {
                                       if (success) {
                                         Provide.value<BaseAdTimerProvider>(context).logout();
