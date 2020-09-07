@@ -138,8 +138,9 @@ class _MarketDetailState extends State<MarketDetail> {
 
   Future<bool> getWoodTradeList() async {
     bool flag = false;
-    ///TODO hud
+    this.widget.HUD();
     await MarketService.getMarketTradeByType(this.woodPage, this.RequestHttpWood, (TradeListModel model) {
+      this.widget.HUD();
       if (model != null) {
         woodList.total = model.total;
         woodList.page = model.page;
@@ -710,8 +711,9 @@ class _MarketDetailState extends State<MarketDetail> {
       CommonUtils.showErrorMessage(msg: "请输入正确的手机号码");
       return;
     }
-    ///TODO hud
+    this.widget.HUD();
     MarketService.searchUser(phone, (data) {
+      this.widget.HUD();
       setState(() {
         this.noResultHintText = '没有搜索到用户';
         this.searchedUser = null;
