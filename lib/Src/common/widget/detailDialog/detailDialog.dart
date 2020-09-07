@@ -38,6 +38,7 @@ class _DetailDialogState extends State<DetailDialog> {
   ProgressHUD _progressHUD;
   bool _loading = false;
   String currentDisplayTitle = "";
+  int lastClickTime;
 
   void initState() {
     super.initState();
@@ -246,8 +247,12 @@ class _DetailDialogState extends State<DetailDialog> {
                         width: ScreenUtil().setWidth(130),
                         imageUrl: "resource/images/cancelDialog.png",
                         callback: () {
-                          Provide.value<BaseDialogClickProvider>(context).setDialogHide();
-                          Application.router.pop(context);
+                          /// 防止重复点击
+                          if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
+                            Provide.value<BaseDialogClickProvider>(context).setDialogHide();
+                            Application.router.pop(context);
+                            this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
+                          }
                         }),
                   ),
                   currentWidget,
