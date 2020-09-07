@@ -347,7 +347,7 @@ class _ContributionDetailState extends State<ContributionDetail> {
                             color: Colors.white,
                           ),
                           Text(
-                            "每日中午12点进行分红结算",
+                            "每日中午12点进行分红结算(拥有英雄才能参与分红)",
                             style: CustomFontSize.defaultTextStyle(30),
                           ),
                           Text(

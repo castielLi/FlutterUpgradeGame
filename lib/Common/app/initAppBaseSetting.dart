@@ -40,7 +40,7 @@ class _InitAppSetting extends State<InitAppSetting> with WidgetsBindingObserver{
         break;
       case AppLifecycleState.paused: // 应用程序不可见，后台
         GlobalSystemStatuesControl.setSystemBackground();
-        closeTimer = Timer.periodic(Duration(seconds: 120), (timer) {
+        closeTimer = Timer.periodic(Duration(seconds: 180), (timer) {
           closeTimer.cancel();
           closeTimer = null;
           SystemNavigator.pop();
