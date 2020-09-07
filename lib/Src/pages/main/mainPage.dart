@@ -102,11 +102,18 @@ class _MainPageState extends State<MainPage> {
       this.errorHandleFunction(event.code, event.message);
     });
 
+    ///收到通知的监听
+    notification = NotificationEvent().eventBus.on<RecieveNotificationEvent>().listen((message) {
+//      Map<String, dynamic> model = convert.jsonDecode(message.message['extras']['cn.jpush.android.EXTRA']);
+//      print(model);
+    });
+
     systemStatus = GlobalSystemStatuesControl.instance.eventBus.on<SystemStatus>().listen((status){
       if(status.active){
-        CommonUtils.showSuccessMessage(msg: "前台了");
+        displayInitProfitSharing();
+        this.startTimerProcess();
       }else{
-        CommonUtils.showSuccessMessage(msg: "后台了");
+        this.killAllTimer();
       }
     });
 
@@ -123,6 +130,11 @@ class _MainPageState extends State<MainPage> {
       }
     });
 
+    this.startTimerProcess();
+
+  }
+
+  void startTimerProcess(){
     ///每5秒更改一次广告分红  要将分红分成17280份
     this.adShareTimer = Timer.periodic(Duration(seconds: 5), (timer) {
       ///当前时间戳
@@ -185,10 +197,7 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
+  void killAllTimer(){
     if (this.adShareTimer != null) {
       this.adShareTimer.cancel();
     }
@@ -203,8 +212,19 @@ class _MainPageState extends State<MainPage> {
     if (this.deviceIdTimer != null) {
       this.deviceIdTimer.cancel();
     }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    this.killAllTimer();
     stream.cancel();
     stream = null;
+    systemStatus.cancel();
+    systemStatus = null;
+    notification.cancel();
+    notification = null;
   }
 
   void setMainBuildingNormal() {
