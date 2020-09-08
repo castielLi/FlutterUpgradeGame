@@ -58,6 +58,7 @@ class BaseAdTimerProvider with ChangeNotifier {
     this.initFinished = false;
   }
 
+
   initLastWatchTime() async{
     if(!initFinished) {
       List<dynamic> list = await AdTimer.GetAdTime();
@@ -149,11 +150,14 @@ class BaseAdTimerProvider with ChangeNotifier {
         .millisecondsSinceEpoch;
     if(type == AdTypeEnum.farm){
       farm = true;
+      this.farmLastWatchTime = currentTIme.toString();
       AdTimer.UpdateAdTime(AdTypeEnum.farm, currentTIme.toString());
     }else if(type == AdTypeEnum.sawmill){
+      this.sawmillListWatchTime = currentTIme.toString();
       sawmill = true;
       AdTimer.UpdateAdTime(AdTypeEnum.sawmill, currentTIme.toString());
     }else{
+      this.stoneLastWatchTime = currentTIme.toString();
       stone = true;
       AdTimer.UpdateAdTime(AdTypeEnum.stone, currentTIme.toString());
     }
@@ -163,25 +167,40 @@ class BaseAdTimerProvider with ChangeNotifier {
 
   setWatchAdWaitingByType(AdTypeEnum type){
     if(type == AdTypeEnum.farm){
-      farmTimer = Timer.periodic(Duration(seconds: 120), (timer) {
-        farm = false;
-        notifyListeners();
-        farmTimer.cancel();
-        farmTimer = null;
+      farmTimer = Timer.periodic(Duration(seconds: 8), (timer) {
+        int currentTIme = DateTime
+            .now()
+            .millisecondsSinceEpoch;
+        if(currentTIme - int.parse(this.farmLastWatchTime) > 120000){
+          farm = false;
+          notifyListeners();
+          farmTimer.cancel();
+          farmTimer = null;
+        }
       });
     }else if(type == AdTypeEnum.sawmill){
-      woodTimer = Timer.periodic(Duration(seconds: 120), (timer) {
-        sawmill = false;
-        notifyListeners();
-        woodTimer.cancel();
-        woodTimer = null;
+      woodTimer = Timer.periodic(Duration(seconds: 8), (timer) {
+        int currentTIme = DateTime
+            .now()
+            .millisecondsSinceEpoch;
+        if(currentTIme - int.parse(this.sawmillListWatchTime) > 120000) {
+          sawmill = false;
+          notifyListeners();
+          woodTimer.cancel();
+          woodTimer = null;
+        }
       });
     }else{
-      stoneTimer = Timer.periodic(Duration(seconds: 120), (timer) {
-        stone = false;
-        notifyListeners();
-        stoneTimer.cancel();
-        stoneTimer = null;
+      stoneTimer = Timer.periodic(Duration(seconds: 8), (timer) {
+        int currentTIme = DateTime
+            .now()
+            .millisecondsSinceEpoch;
+        if(currentTIme - int.parse(this.sawmillListWatchTime) > 120000) {
+          stone = false;
+          notifyListeners();
+          stoneTimer.cancel();
+          stoneTimer = null;
+        }
       });
     }
   }
