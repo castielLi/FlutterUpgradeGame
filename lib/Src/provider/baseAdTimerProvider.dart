@@ -167,7 +167,7 @@ class BaseAdTimerProvider with ChangeNotifier {
 
   setWatchAdWaitingByType(AdTypeEnum type){
     if(type == AdTypeEnum.farm){
-      farmTimer = Timer.periodic(Duration(seconds: 8), (timer) {
+      farmTimer = Timer.periodic(Duration(seconds: 12), (timer) {
         int currentTIme = DateTime
             .now()
             .millisecondsSinceEpoch;
@@ -179,7 +179,7 @@ class BaseAdTimerProvider with ChangeNotifier {
         }
       });
     }else if(type == AdTypeEnum.sawmill){
-      woodTimer = Timer.periodic(Duration(seconds: 8), (timer) {
+      woodTimer = Timer.periodic(Duration(seconds: 12), (timer) {
         int currentTIme = DateTime
             .now()
             .millisecondsSinceEpoch;
@@ -191,11 +191,11 @@ class BaseAdTimerProvider with ChangeNotifier {
         }
       });
     }else{
-      stoneTimer = Timer.periodic(Duration(seconds: 8), (timer) {
+      stoneTimer = Timer.periodic(Duration(seconds: 12), (timer) {
         int currentTIme = DateTime
             .now()
             .millisecondsSinceEpoch;
-        if(currentTIme - int.parse(this.sawmillListWatchTime) > 120000) {
+        if(currentTIme - int.parse(this.stoneLastWatchTime) > 120000) {
           stone = false;
           notifyListeners();
           stoneTimer.cancel();

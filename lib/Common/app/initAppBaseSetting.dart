@@ -137,7 +137,7 @@ class _InitAppSetting extends State<InitAppSetting> with WidgetsBindingObserver{
     _initFluwx();
     WidgetsBinding.instance.addObserver(this);
     GlobalSystemStatuesControl();
-//    initPlatformState();
+    initPlatformState();
   }
 
   @override
