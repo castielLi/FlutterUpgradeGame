@@ -776,7 +776,7 @@ class _MainPageState extends State<MainPage> {
 
                         ///出征
                         new Container(
-                          margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(590), ScreenUtil().setHeight(1250), ScreenUtil().setWidth(170), ScreenUtil().setHeight(360)),
+                          margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(590), ScreenUtil().setHeight(980), ScreenUtil().setWidth(170), ScreenUtil().setHeight(630)),
                           child: BuildingButton(
                             height: ScreenUtil().setHeight(SystemIconSize.mainPageIconSize),
                             width: ScreenUtil().setWidth(SystemIconSize.mainPageIconSize),
