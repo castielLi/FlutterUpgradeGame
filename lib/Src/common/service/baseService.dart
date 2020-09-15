@@ -37,6 +37,10 @@ class BaseService {
     }
   }
 
+  static Future downloadNewApk(String storagePath,String url) async{
+    var response = await httpManager.downloadAndroid(storagePath, url);
+  }
+
 
   static Future<ResultData> upgradeBuilding(int type, callback) async {
     UpgradeBuildingRequestModel requestModel = UpgradeBuildingRequestModel(type: type);

@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/storge/fileStore.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
@@ -10,6 +14,7 @@ import 'package:upgradegame/Src/common/widget/adDialog/adTimer.dart';
 import 'package:upgradegame/Src/provider/baseAdTimerProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
+import 'package:package_info/package_info.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -21,6 +26,23 @@ class _WelcomePageState extends State<WelcomePage> {
 
   void initBaseWidget() {
     AdDialog();
+  }
+
+  void judgementNewVersion() async{
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    String appName = packageInfo.appName;
+    String packageName = packageInfo.packageName;
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+
+//    if(true){
+//      Directory storageDir = await getExternalStorageDirectory();
+//      String storagePath = storageDir.path;
+//      File _apkFile = await BaseService.downloadNewApk(storagePath, "https://imtt.dd.qq.com/16891/apk/7C4D51A8EDF4290DED6C52F5102FDBF3.apk?fsname=com.wodebuluoge.mm_1.1.0_1.apk&csr=1bbd");
+//      OpenFile.open("${storagePath}/app-release.apk");
+//    }
+
   }
 
   void getRules() async {
@@ -37,6 +59,10 @@ class _WelcomePageState extends State<WelcomePage> {
         if (model != null) {
           Global();
           Global.setExtraRule(model);
+
+          this.judgementNewVersion();
+
+
         }else{
           ///强制关闭程序
           SystemNavigator.pop();
@@ -58,6 +84,7 @@ class _WelcomePageState extends State<WelcomePage> {
     super.initState();
     this.getRules();
     this.initBaseWidget();
+
 
     ///显示开屏广告
     AdDialog().showAd(1, 1,"POSIDtvy0gsf7zfm1");

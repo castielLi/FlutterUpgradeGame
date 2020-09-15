@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:dio/dio.dart';
+import 'dart:io';
 import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/http/intercepts/error_interceptor.dart';
 import 'package:upgradegame/Common/http/intercepts/header_interceptor.dart';
@@ -67,6 +68,34 @@ class HttpManager {
       return ResultData.fromJson(response.data);
     }
   }
+
+  /// 下载安卓更新包
+  Future<File> downloadAndroid(String storagePath,String url) async {
+    File file = new File('$storagePath/app-release.apk');
+    if (!file.existsSync()) {
+      file.createSync();
+    }
+    try {
+
+      /// 发起下载请求
+      Response response = await _dio.get(url,
+          onReceiveProgress: (int count,int total){
+//            tr([count,total]);
+            double radio = count/total;
+            print(radio);
+          },
+          options: Options(
+            responseType: ResponseType.bytes,
+            followRedirects: false,
+          ));
+      file.writeAsBytesSync(response.data);
+      return file;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+
 
   ///清除授权
   clearAuthorization() {
