@@ -48,7 +48,6 @@ class _MainPageState extends State<MainPage> {
   bool _loading = false;
 
   bool isFightPage = false;
-  String fightPageButtonName = '战 斗';
 
   displayInitProfitSharing() {
     ///当前时间戳
@@ -778,16 +777,19 @@ class _MainPageState extends State<MainPage> {
                     offstage: !this.isFightPage,
                     child: Stack(
                       children: [
-                        ///战 斗
+                        ///兵营
                         new Container(
-                          margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(0), ScreenUtil().setHeight(980), ScreenUtil().setWidth(680), ScreenUtil().setHeight(630)),
+                          height: ScreenUtil().setHeight(650),
+                          width: ScreenUtil().setWidth(650),
+                          // color:Colors.red,
+                          margin: EdgeInsets.only(top: ScreenUtil().setHeight(535)), //(1920-650)/2
                           child: BuildingButton(
-                            height: ScreenUtil().setHeight(SystemIconSize.mainPageIconSize),
-                            width: ScreenUtil().setWidth(SystemIconSize.mainPageIconSize),
-                            imageUrl: "resource/images/farmBuilding.png",
+                            height: ScreenUtil().setHeight(650),
+                            width: ScreenUtil().setWidth(650),
+                            imageUrl: "resource/images/armyCamp.png",
                             name: '兵 营',
-                            namePadding: 190,
-                            fontSize: SystemFontSize.otherBuildingTextFontSize,
+                            namePadding: 450,
+                            fontSize: SystemFontSize.mainBuildingTextFontSize,
                             callback: () {
                               if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
                                 Provide.value<BaseDialogClickProvider>(context).setDialogShow();
@@ -795,7 +797,7 @@ class _MainPageState extends State<MainPage> {
                                   return DetailDialog(
                                     height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
                                     width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                    childWidgetName: 'farmDetail',
+                                    childWidgetName: 'armyCampDetail',
                                     title: "兵 营",
                                   );
                                 }));
@@ -804,16 +806,19 @@ class _MainPageState extends State<MainPage> {
                           ),
                         ),
 
-                        ///出征
+                        ///训练场
                         new Container(
-                          margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(590), ScreenUtil().setHeight(980), ScreenUtil().setWidth(170), ScreenUtil().setHeight(630)),
+                          // color:Colors.yellow,
+                          height: ScreenUtil().setHeight(660),
+                          width: ScreenUtil().setWidth(660),
+                          margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(410), ScreenUtil().setHeight(1150), ScreenUtil().setWidth(0), ScreenUtil().setHeight(0)),
                           child: BuildingButton(
-                            height: ScreenUtil().setHeight(SystemIconSize.mainPageIconSize),
-                            width: ScreenUtil().setWidth(SystemIconSize.mainPageIconSize),
-                            imageUrl: "resource/images/heroesBuilding.png",
-                            name: '出 征',
-                            namePadding: 200,
-                            fontSize: SystemFontSize.otherBuildingTextFontSize,
+                            height: ScreenUtil().setHeight(660),
+                            width: ScreenUtil().setWidth(660),
+                            imageUrl: "resource/images/trainArmy.png",
+                            name: '训练场',
+                            namePadding: 450,
+                            fontSize: SystemFontSize.mainBuildingTextFontSize,
                             callback: () {
                               if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
                                 Provide.value<BaseDialogClickProvider>(context).setDialogShow();
@@ -821,8 +826,8 @@ class _MainPageState extends State<MainPage> {
                                   return DetailDialog(
                                     height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
                                     width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                    childWidgetName: 'heroAltar',
-                                    title: "出 征",
+                                    childWidgetName: 'trainArmyDetail',
+                                    title: "训练场",
                                   );
                                 }));
                               }
@@ -848,7 +853,6 @@ class _MainPageState extends State<MainPage> {
                   callback: () {
                     setState(() {
                       this.isFightPage = !this.isFightPage;
-                      this.fightPageButtonName = this.isFightPage ? '返 回' : '战 斗';
                     });
                   },
                 ),
