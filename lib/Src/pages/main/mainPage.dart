@@ -8,7 +8,6 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/app/notificationEvent.dart';
 import 'package:upgradegame/Common/event/errorEvent.dart';
 import 'package:upgradegame/Common/http/configSetting.dart';
-import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/baseRuleModel.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
@@ -49,7 +48,7 @@ class _MainPageState extends State<MainPage> {
   bool _loading = false;
 
   bool isFightPage = false;
-  String fightPageButtonName;
+  String fightPageButtonName = '战 斗';
 
   displayInitProfitSharing() {
     ///当前时间戳
@@ -334,33 +333,64 @@ class _MainPageState extends State<MainPage> {
                                 fit: BoxFit.fill,
                               ),
                             ),
-                            new Center(
-                              child: new UserImageButton(
-                                size: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize),
-                                buttonName: "",
-                                textSize: SystemFontSize.operationTextFontSize,
-                                imageUrl: "",
-                                netWorkImageUrl: baseUserInfo.avatar,
-                                netWorkImage: true,
-                                callback: () {
-                                  if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                                    Navigator.push(context, PopWindow(pageBuilder: (context) {
-                                      return DetailDialog(
-                                          height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                          width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                          childWidgetName: 'userInfoDetail',
-                                          title: "个人信息");
-                                    }));
-                                  }
-                                },
-                              ),
-                            )
+                            new Stack(
+                              children: [
+                                Offstage(
+                                  offstage: this.isFightPage,
+                                  child: new Center(
+                                    child: new UserImageButton(
+                                      size: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize),
+                                      buttonName: "",
+                                      textSize: SystemFontSize.operationTextFontSize,
+                                      imageUrl: "",
+                                      netWorkImageUrl: baseUserInfo.avatar,
+                                      netWorkImage: true,
+                                      callback: () {
+                                        if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+                                          Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                            return DetailDialog(
+                                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                                childWidgetName: 'userInfoDetail',
+                                                title: "个人信息");
+                                          }));
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                Offstage(
+                                  offstage: !this.isFightPage,
+                                  child: new Center(
+                                    child: new UserImageButton(
+                                      size: ScreenUtil().setWidth(SystemIconSize.mainPageResourceBarIconSize),
+                                      buttonName: "排行榜",
+                                      imageUrl: "resource/images/rank.png",
+                                      textSize: SystemFontSize.operationTextFontSize,
+                                      callback: () {
+                                        if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+                                          Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                            return DetailDialog(
+                                              height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                              width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                              childWidgetName: 'rankDetail',
+                                              title: "排行榜",
+                                            );
+                                          }));
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
                       flex: 2,
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -743,12 +773,12 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
 
-                  /// 兵营页
+                  /// 战斗页
                   Offstage(
                     offstage: !this.isFightPage,
                     child: Stack(
                       children: [
-                        ///兵营
+                        ///战 斗
                         new Container(
                           margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(0), ScreenUtil().setHeight(980), ScreenUtil().setWidth(680), ScreenUtil().setHeight(630)),
                           child: BuildingButton(
@@ -805,18 +835,20 @@ class _MainPageState extends State<MainPage> {
                 ],
               ),
 
-              ///兵营
+              ///战 斗
               Container(
-                margin: EdgeInsets.only(top: ScreenUtil().setHeight(1920 - 200)),
-                child: ImageButton(
-                  height: 400,
-                  width: 200,
-                  buttonName: this.fightPageButtonName,
-                  imageUrl: "resource/images/upgradeButton.png",
+                margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(0), ScreenUtil().setHeight(1670), ScreenUtil().setWidth(770), ScreenUtil().setHeight(0)),
+                child: BuildingButton(
+                  height: ScreenUtil().setHeight(250),
+                  width: ScreenUtil().setWidth(250),
+                  imageUrl: "resource/images/fightButton" + (this.isFightPage ? "Back" : "").toString() + ".png",
+                  name: this.isFightPage ? "返 回" : "战 斗",
+                  fontSize: SystemFontSize.otherBuildingTextFontSize,
+                  namePadding: 100,
                   callback: () {
                     setState(() {
                       this.isFightPage = !this.isFightPage;
-                      this.fightPageButtonName = this.isFightPage ? '返回' : '兵营';
+                      this.fightPageButtonName = this.isFightPage ? '返 回' : '战 斗';
                     });
                   },
                 ),
