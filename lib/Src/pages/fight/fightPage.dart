@@ -301,12 +301,12 @@ class _FightPageState extends State<FightPage> {
                           namePadding: 350,
                           fontSize: SystemFontSize.mainBuildingTextFontSize,
                           callback: () {
-                            if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                              Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+//                            if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+//                              Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                               Navigator.push(context, PopWindow(pageBuilder: (context) {
                                 return TrainArmyDetail();
                               }));
-                            }
+//                            }
                           },
                         ),
                       ),
