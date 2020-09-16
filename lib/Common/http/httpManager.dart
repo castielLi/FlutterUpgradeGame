@@ -70,7 +70,7 @@ class HttpManager {
   }
 
   /// 下载安卓更新包
-  Future<File> downloadAndroid(String storagePath,String url) async {
+  Future<File> downloadAndroid(String storagePath,String url,progressCallback,successCallback) async {
     File file = new File('$storagePath/app-release.apk');
     if (!file.existsSync()) {
       file.createSync();
@@ -80,16 +80,15 @@ class HttpManager {
       /// 发起下载请求
       Response response = await _dio.get(url,
           onReceiveProgress: (int count,int total){
-//            tr([count,total]);
             double radio = count/total;
-            print(radio);
+            progressCallback(radio);
           },
           options: Options(
             responseType: ResponseType.bytes,
             followRedirects: false,
           ));
       file.writeAsBytesSync(response.data);
-      return file;
+      successCallback();
     } catch (e) {
       print(e);
     }
