@@ -23,11 +23,13 @@ class _ArmyCampDetailState extends State<ArmyCampDetail> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight + SystemIconSize.armyCampIconSize),
+      // color: Colors.yellow,
+      height: ScreenUtil().setHeight(1200),
       margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
           ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
       child: Column(
         children: [
+          // new Offstage(),
           new Container(
             width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
             child: new Row(
