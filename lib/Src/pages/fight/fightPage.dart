@@ -58,13 +58,7 @@ class _FightPageState extends State<FightPage> {
       child: ProvideMulti(
         builder: (context, child, model) {
           BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
-          if (baseUserInfo.tobecollectedcoin > 0) {
-            this.mainBuildingCoin = false;
-            this.mainBuilding = true;
-          } else {
-            this.mainBuildingCoin = true;
-            this.mainBuilding = false;
-          }
+
           return Stack(
             children: <Widget>[
               new Image(
@@ -153,12 +147,12 @@ class _FightPageState extends State<FightPage> {
                   new Container(
                     margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + SystemScreenSize.mainPageSignalBarHeight)),
                     height: ScreenUtil().setHeight(SystemIconSize.mainPageFunctionBarIconSize),
-                    width: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize * 2),
+                    width: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize * 3),
                     child: new GridView.count(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       padding: EdgeInsets.zero,
-                      crossAxisCount: 2,
+                      crossAxisCount: 3,
                       childAspectRatio: 1,
                       children: [
                         new UserImageButton(
@@ -199,6 +193,47 @@ class _FightPageState extends State<FightPage> {
                             }
                           },
                         ),
+                        new UserImageButton(
+                          size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                          buttonName: "商城",
+                          imageUrl: "resource/images/rank.png",
+                          textSize: SystemFontSize.operationTextFontSize,
+                          callback: () {
+                            if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                              Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+                              Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                return DetailDialog(
+                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                  childWidgetName: 'storeDetail',
+                                  title: "商城",
+                                );
+                              }));
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  new Container(
+                    margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(810), ScreenUtil().setHeight(210), ScreenUtil().setWidth(0), ScreenUtil().setHeight(0)),
+                    width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarSmallIconSize * 3),
+                    decoration: new BoxDecoration(
+                      color: Color.fromRGBO(0, 0, 0, 0.7),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    ),
+                    child: new Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        new Image(
+                          image: new AssetImage("resource/images/volume.png"),
+                          width: ScreenUtil().setWidth(SystemIconSize.mainPageStatusBarSmallIconSize),
+                          height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
+                        ),
+                        new Text(
+                          baseUserInfo.voucher.toString(),
+                          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                        ),
                       ],
                     ),
                   ),
@@ -206,16 +241,16 @@ class _FightPageState extends State<FightPage> {
                     children: [
                       ///兵营
                       new Container(
-                        height: ScreenUtil().setHeight(650),
-                        width: ScreenUtil().setWidth(650),
+                        height: ScreenUtil().setHeight(550),
+                        width: ScreenUtil().setWidth(550),
                         // color:Colors.red,
-                        margin: EdgeInsets.only(top: ScreenUtil().setHeight(535)), //(1920-650)/2
+                        margin: EdgeInsets.only(top: ScreenUtil().setHeight(550)), //(1920-650)/2
                         child: BuildingButton(
-                          height: ScreenUtil().setHeight(650),
-                          width: ScreenUtil().setWidth(650),
+                          height: ScreenUtil().setHeight(450),
+                          width: ScreenUtil().setWidth(450),
                           imageUrl: "resource/images/armyCamp.png",
                           name: '兵 营',
-                          namePadding: 450,
+                          namePadding: 320,
                           fontSize: SystemFontSize.mainBuildingTextFontSize,
                           callback: () {
                             if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
@@ -235,15 +270,15 @@ class _FightPageState extends State<FightPage> {
 
                       ///训练场
                       new Container(
-                        height: ScreenUtil().setHeight(660),
-                        width: ScreenUtil().setWidth(660),
-                        margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(410), ScreenUtil().setHeight(1150), ScreenUtil().setWidth(0), ScreenUtil().setHeight(0)),
+                        height: ScreenUtil().setHeight(500),
+                        width: ScreenUtil().setWidth(560),
+                        margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(410), ScreenUtil().setHeight(940), ScreenUtil().setWidth(0), ScreenUtil().setHeight(0)),
                         child: BuildingButton(
-                          height: ScreenUtil().setHeight(660),
-                          width: ScreenUtil().setWidth(660),
+                          height: ScreenUtil().setHeight(400),
+                          width: ScreenUtil().setWidth(460),
                           imageUrl: "resource/images/trainArmy.png",
                           name: '训练场',
-                          namePadding: 450,
+                          namePadding: 350,
                           fontSize: SystemFontSize.mainBuildingTextFontSize,
                           callback: () {
                             if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
