@@ -55,11 +55,9 @@ class _FightPageState extends State<FightPage> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      color: Colors.white,
       child: ProvideMulti(
         builder: (context, child, model) {
           BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
-
           return Stack(
             children: <Widget>[
               new Image(
@@ -263,7 +261,6 @@ class _FightPageState extends State<FightPage> {
                       new Container(
                         height: ScreenUtil().setHeight(550),
                         width: ScreenUtil().setWidth(550),
-                        // color:Colors.red,
                         margin: EdgeInsets.only(top: ScreenUtil().setHeight(550)), //(1920-650)/2
                         child: BuildingButton(
                           height: ScreenUtil().setHeight(450),
@@ -315,7 +312,7 @@ class _FightPageState extends State<FightPage> {
                 ],
               ),
 
-              ///战 斗
+              ///返 回
               Container(
                 margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(0), ScreenUtil().setHeight(1670), ScreenUtil().setWidth(770), ScreenUtil().setHeight(0)),
                 child: BuildingButton(

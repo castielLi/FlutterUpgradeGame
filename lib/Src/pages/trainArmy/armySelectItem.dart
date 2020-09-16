@@ -15,6 +15,7 @@ class ArmySelectItem extends StatefulWidget {
 class _ArmySelectItem extends State<ArmySelectItem> {
   @override
   Widget build(BuildContext context) {
+    bool hideArmy = ("" == this.widget.armyIconImageUrl || null == this.widget.armyIconImageUrl);
     return GestureDetector(
       child: Stack(
         alignment: Alignment.center,
@@ -25,18 +26,20 @@ class _ArmySelectItem extends State<ArmySelectItem> {
             width: ScreenUtil().setWidth(this.widget.size),
           ),
           Offstage(
-            offstage: ""==this.widget.armyIconImageUrl || null==this.widget.armyIconImageUrl,
+            offstage: hideArmy,
             child: Stack(
               children: [
                 Image(
                   image: AssetImage("resource/images/armyBlueBackground.png"),
-                  height: ScreenUtil().setHeight(this.widget.size-30),
-                  width: ScreenUtil().setWidth(this.widget.size-30),
+                  height: ScreenUtil().setHeight(this.widget.size - 30),
+                  width: ScreenUtil().setWidth(this.widget.size - 30),
                 ),
                 Image(
-                  image: AssetImage("resource/images/" + (this.widget.armyIconImageUrl) + "Icon.png",),
-                  height: ScreenUtil().setHeight(this.widget.size-30),
-                  width: ScreenUtil().setWidth(this.widget.size-30),
+                  image: AssetImage(
+                    "resource/images/" + (hideArmy ? "rangeAttack" : this.widget.armyIconImageUrl) + "Icon.png",
+                  ),
+                  height: ScreenUtil().setHeight(this.widget.size - 30),
+                  width: ScreenUtil().setWidth(this.widget.size - 30),
                 ),
               ],
             ),

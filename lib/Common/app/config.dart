@@ -57,6 +57,7 @@ class SystemIconSize {
 
   static const adIconSize = 135.0;
   static const armyCampIconSize = 175.0;
+  static const trainArmyIconSize = 225.0;
 }
 
 class SystemScreenSize {

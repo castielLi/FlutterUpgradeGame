@@ -33,45 +33,53 @@ class _ArmyCampDetailState extends State<ArmyCampDetail> {
           new Offstage(
             offstage: !this.hideDetailPage,
             child: Container(
-              width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
-              child: Stack(
-                children: <Widget>[
-                  new Text('兵种介绍'),
-                  new GridView.count(
-                    crossAxisCount: 3,
-                    shrinkWrap: true,
-                    padding: EdgeInsets.zero,
-                    childAspectRatio: 1,
-                    children: [
-                      ArmyIconButton(
-                        isChosen: 'rangeAttack' == this.chosenArmy,
-                        size: SystemIconSize.armyCampIconSize,
-                        armyIconImageUrl: "resource/images/rangeAttackIcon.png",
-                        callback: () {
-                          switchBetweenPages('rangeAttack');
-                        },
-                      ),
-                      ArmyIconButton(
-                        isChosen: 'fighter' == this.chosenArmy,
-                        size: SystemIconSize.armyCampIconSize,
-                        armyIconImageUrl: "resource/images/fighterIcon.png",
-                        callback: () {
-                          switchBetweenPages('fighter');
-                        },
-                      ),
-                      ArmyIconButton(
-                        isChosen: 'rider' == this.chosenArmy,
-                        size: SystemIconSize.armyCampIconSize,
-                        armyIconImageUrl: "resource/images/riderIcon.png",
-                        callback: () {
-                          switchBetweenPages('rider');
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              )
-            ),
+                width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
+                child: Stack(
+                  children: <Widget>[
+                    new Column(
+                      children: [
+                        new Text(
+                          '兵种介绍',
+                          style: TextStyle(
+                            fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize),
+                          ),
+                        ),
+                        new GridView.count(
+                          crossAxisCount: 3,
+                          shrinkWrap: true,
+                          padding: EdgeInsets.zero,
+                          childAspectRatio: 1,
+                          children: [
+                            ArmyIconButton(
+                              isChosen: 'rangeAttack' == this.chosenArmy,
+                              size: SystemIconSize.armyCampIconSize,
+                              armyIconImageUrl: "resource/images/rangeAttackIcon.png",
+                              callback: () {
+                                switchBetweenPages('rangeAttack');
+                              },
+                            ),
+                            ArmyIconButton(
+                              isChosen: 'fighter' == this.chosenArmy,
+                              size: SystemIconSize.armyCampIconSize,
+                              armyIconImageUrl: "resource/images/fighterIcon.png",
+                              callback: () {
+                                switchBetweenPages('fighter');
+                              },
+                            ),
+                            ArmyIconButton(
+                              isChosen: 'rider' == this.chosenArmy,
+                              size: SystemIconSize.armyCampIconSize,
+                              armyIconImageUrl: "resource/images/riderIcon.png",
+                              callback: () {
+                                switchBetweenPages('rider');
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                )),
           ),
 
           /// 详情界面

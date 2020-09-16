@@ -4,8 +4,9 @@ import 'package:upgradegame/Src/pages/trainArmy/armySelectItem.dart';
 class ArmySelectMatrix extends StatefulWidget {
   VoidCallback HUD;
   List armyBaseMatrix;
+  double itemSize;
 
-  ArmySelectMatrix({Key key, this.HUD}) : super(key: key);
+  ArmySelectMatrix({Key key, this.HUD, this.itemSize, this.armyBaseMatrix}) : super(key: key);
 
   _ArmySelectMatrixState createState() => new _ArmySelectMatrixState();
 }
@@ -13,13 +14,6 @@ class ArmySelectMatrix extends StatefulWidget {
 class _ArmySelectMatrixState extends State<ArmySelectMatrix> {
   @override
   Widget build(BuildContext context) {
-    this.widget.armyBaseMatrix = [
-      ["", "rider", "rangeAttack"],
-      ["", "fighter", ""],
-      ["", "", "fighter"],
-      ["", "", ""],
-      ["rider", "", ""]
-    ];
     return buildContent();
   }
 
@@ -41,8 +35,8 @@ class _ArmySelectMatrixState extends State<ArmySelectMatrix> {
     for (int i = 0; i < rowArmy.length; i++) {
       content.add(
         ArmySelectItem(
-          size: 225,
-          armyIconImageUrl:rowArmy[i],
+          size: this.widget.itemSize,
+          armyIconImageUrl: rowArmy[i],
           callback: () {
             print(rowArmy[i].toString());
           },

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_screenutil/screenutil.dart';
@@ -22,26 +20,11 @@ class TrainArmyDetail extends StatefulWidget {
 }
 
 class _TrainArmyDetailState extends State<TrainArmyDetail> {
-  bool mainBuilding = true;
-  bool mainBuildingCoin = false;
-  double autoProfitSharing = 0.00;
-  double perFiveSecondProfit = 0.00;
-  Timer adShareTimer;
-  Timer productTCoin10;
-  Timer productTCoin60;
-  Timer deviceIdTimer;
-  StreamSubscription stream;
-  StreamSubscription notification;
-  StreamSubscription systemStatus;
-
   ProgressHUD _progressHUD;
-  bool _loading = false;
   int lastClickTime;
 
-  // bool isFightPage = false;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _progressHUD = new ProgressHUD(
       backgroundColor: Colors.transparent,
@@ -60,13 +43,6 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
       child: ProvideMulti(
         builder: (context, child, model) {
           BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
-          if (baseUserInfo.tobecollectedcoin > 0) {
-            this.mainBuildingCoin = false;
-            this.mainBuilding = true;
-          } else {
-            this.mainBuildingCoin = true;
-            this.mainBuilding = false;
-          }
           return Stack(
             children: <Widget>[
               new Image(
@@ -151,23 +127,28 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
               ),
 
               Container(
-                // color: Colors.red,
-                // height:ScreenUtil().setHeight(850+350),
                 margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(0), ScreenUtil().setHeight(300), ScreenUtil().setWidth(0), ScreenUtil().setHeight(0)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      // color: Colors.yellow,
-                      height: ScreenUtil().setHeight(225 * 5 + 10),
-                      child: ArmySelectMatrix(),
+                      height: ScreenUtil().setHeight(SystemIconSize.trainArmyIconSize * 5 + 10), //大于等于5个高度
+                      child: ArmySelectMatrix(
+                        itemSize: SystemIconSize.trainArmyIconSize,
+                        armyBaseMatrix: [
+                          ["", "", "rangeAttack"],
+                          ["", "fighter", ""],
+                          ["", "", "fighter"],
+                          ["", "", "rider"],
+                          ["rider", "", ""]
+                        ],
+                      ),
                     ),
                     Text(
                       '当前阵容消耗10金币',
                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                     ),
                     Container(
-                      // height: ScreenUtil().setHeight(350),
                       child: Column(
                         children: [
                           ImageButton(
@@ -206,7 +187,6 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                   ],
                 ),
               ),
-
               _progressHUD
             ],
           );
