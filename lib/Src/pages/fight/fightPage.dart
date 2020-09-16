@@ -147,12 +147,12 @@ class _FightPageState extends State<FightPage> {
                   new Container(
                     margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + SystemScreenSize.mainPageSignalBarHeight)),
                     height: ScreenUtil().setHeight(SystemIconSize.mainPageFunctionBarIconSize),
-                    width: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize * 3),
+                    width: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize * 4),
                     child: new GridView.count(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       padding: EdgeInsets.zero,
-                      crossAxisCount: 3,
+                      crossAxisCount: 4,
                       childAspectRatio: 1,
                       children: [
                         new UserImageButton(
@@ -207,6 +207,25 @@ class _FightPageState extends State<FightPage> {
                                   width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
                                   childWidgetName: 'storeDetail',
                                   title: "商城",
+                                );
+                              }));
+                            }
+                          },
+                        ),
+                        new UserImageButton(
+                          size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                          buttonName: "回收",
+                          textSize: SystemFontSize.operationTextFontSize,
+                          imageUrl: "resource/images/team.png",
+                          callback: () {
+                            if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                              Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+                              Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                return DetailDialog(
+                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                  childWidgetName: 'marketDetail',
+                                  title: "回 收",
                                 );
                               }));
                             }
