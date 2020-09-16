@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provide/provide.dart';
+import 'package:upgradegame/Common/logic/battleLogic.dart';
 import 'package:upgradegame/Common/storge/fileStore.dart';
 import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/common/service/baseService.dart';
@@ -84,8 +85,7 @@ class _WelcomePageState extends State<WelcomePage> {
     super.initState();
     this.getRules();
     this.initBaseWidget();
-
-
+    
     ///显示开屏广告
     AdDialog().showAd(1, 1,"POSIDtvy0gsf7zfm1");
     AdDialog().setCallback(this.adCallback, this.adFailedCallback,null, true);
