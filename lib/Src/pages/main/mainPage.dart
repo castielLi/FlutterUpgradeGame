@@ -851,9 +851,10 @@ class _MainPageState extends State<MainPage> {
                   fontSize: SystemFontSize.otherBuildingTextFontSize,
                   namePadding: 100,
                   callback: () {
-                    setState(() {
-                      this.isFightPage = !this.isFightPage;
-                    });
+                    Application.router.navigateTo(context, UpgradeGameRoute.fightPage);
+                    // setState(() {
+                    //   this.isFightPage = !this.isFightPage;
+                    // });
                   },
                 ),
               ),

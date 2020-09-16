@@ -8,7 +8,7 @@ class ArmyCampItem extends StatefulWidget {
   String armyPrice;
   VoidCallback callback;
 
-  ArmyCampItem({Key key, this.armyImageUrl, this.armyDescription, this.armyPrice,this.callback}) : super(key: key);
+  ArmyCampItem({Key key, this.armyImageUrl, this.armyDescription, this.armyPrice, this.callback}) : super(key: key);
 
   _ArmyCampItemState createState() => new _ArmyCampItemState();
 }

@@ -30,7 +30,6 @@ class _ArmyCampDetailState extends State<ArmyCampDetail> {
           ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
       child: Stack(
         children: [
-          // new Offstage(),
           new Offstage(
             offstage: !this.isArmyPage,
             child: new Container(
@@ -74,7 +73,7 @@ class _ArmyCampDetailState extends State<ArmyCampDetail> {
                 armyImageUrl: "resource/images/" + this.currentArmy + ".png",
                 armyDescription: '远程攻击',
                 armyPrice: Random().nextInt(100).toString(),
-                callback: (){
+                callback: () {
                   showArmyDetail(this.currentArmy);
                 },
               ),

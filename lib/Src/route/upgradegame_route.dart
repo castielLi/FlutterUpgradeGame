@@ -11,6 +11,7 @@ class UpgradeGameRoute {
   static String resourceDialogPage = "/resourceDialogPage";
   static String privacyTerms = "/privacyTermsPage";
   static String confirmDialog = "/confirmDialog";
+  static String fightPage = '/fightPage';
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -24,5 +25,6 @@ class UpgradeGameRoute {
     router.define(resourceDialogPage, handler: resourceDialogHandler);
     router.define(privacyTerms, handler: privacyTermsHandler);
     router.define(confirmDialog, handler: confirmDialogHandler);
+    router.define(fightPage, handler: fightPageHandler);
   }
 }

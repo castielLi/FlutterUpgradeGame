@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:upgradegame/Src/common/widget/confirmDialog/confirmDialog.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
 import 'package:upgradegame/Src/common/widget/resourceDialog/resourceDialog.dart';
+import 'package:upgradegame/Src/pages/fight/fightPage.dart';
 import 'package:upgradegame/Src/pages/login/login.dart';
 import 'package:upgradegame/Src/pages/main/mainPage.dart';
 import 'package:upgradegame/Src/pages/privacyTerms/privacyTerms.dart';
@@ -49,4 +50,7 @@ Handler privacyTermsHandler = Handler(handlerFunc: (BuildContext context, Map<St
 
 Handler confirmDialogHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return ConfirmDialog();
+});
+Handler fightPageHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return FightPage();
 });
