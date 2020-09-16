@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/pages/armyCamp/armyIconButton.dart';
 
-import 'armyCampItem.dart';
+import 'armyCampDetailItem.dart';
 
 // ignore: must_be_immutable
 class ArmyCampDetail extends StatefulWidget {
@@ -18,63 +18,67 @@ class ArmyCampDetail extends StatefulWidget {
 }
 
 class _ArmyCampDetailState extends State<ArmyCampDetail> {
-  bool isArmyPage = true;
-  String currentArmy = "rangeAttack";
+  bool hideDetailPage = true;
+  String chosenArmy = "shaman";
 
   @override
   Widget build(BuildContext context) {
     return new Container(
-      // color: Colors.yellow,
       height: ScreenUtil().setHeight(1000),
       margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
           ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
       child: Stack(
         children: [
+          /// 兵种界面
           new Offstage(
-            offstage: !this.isArmyPage,
-            child: new Container(
+            offstage: !this.hideDetailPage,
+            child: Container(
               width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
-              child: new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              child: new GridView.count(
+                crossAxisCount: 3,
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                childAspectRatio: 1,
                 children: [
                   ArmyIconButton(
-                    isChosen: 'rangeAttack' == this.currentArmy,
+                    isChosen: 'rangeAttack' == this.chosenArmy,
                     size: SystemIconSize.armyCampIconSize,
                     armyIconImageUrl: "resource/images/rangeAttackIcon.png",
                     callback: () {
-                      showArmyDetail('rangeAttack');
+                      switchBetweenPages('rangeAttack');
                     },
                   ),
                   ArmyIconButton(
-                    isChosen: 'fighter' == this.currentArmy,
+                    isChosen: 'fighter' == this.chosenArmy,
                     size: SystemIconSize.armyCampIconSize,
                     armyIconImageUrl: "resource/images/fighterIcon.png",
                     callback: () {
-                      showArmyDetail('fighter');
+                      switchBetweenPages('fighter');
                     },
                   ),
                   ArmyIconButton(
-                    isChosen: 'rider' == this.currentArmy,
+                    isChosen: 'rider' == this.chosenArmy,
                     size: SystemIconSize.armyCampIconSize,
                     armyIconImageUrl: "resource/images/riderIcon.png",
                     callback: () {
-                      showArmyDetail('rider');
+                      switchBetweenPages('rider');
                     },
                   ),
                 ],
               ),
             ),
           ),
+
+          /// 详情界面
           new Offstage(
-            offstage: this.isArmyPage,
+            offstage: this.hideDetailPage,
             child: Container(
               height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
-              child: ArmyCampItem(
-                armyImageUrl: "resource/images/" + this.currentArmy + ".png",
-                armyDescription: '远程攻击',
-                armyPrice: Random().nextInt(100).toString(),
+              child: ArmyCampDetailItem(
+                armyImageUrl: "resource/images/" + this.chosenArmy + ".png",
+                armyDescription: '远程攻击' + Random().nextInt(10).toString(),
                 callback: () {
-                  showArmyDetail(this.currentArmy);
+                  switchBetweenPages(this.chosenArmy);
                 },
               ),
             ),
@@ -84,10 +88,10 @@ class _ArmyCampDetailState extends State<ArmyCampDetail> {
     );
   }
 
-  void showArmyDetail(String name) {
+  void switchBetweenPages(String name) {
     setState(() {
-      this.isArmyPage = !this.isArmyPage;
-      this.currentArmy = name;
+      this.hideDetailPage = !this.hideDetailPage;
+      this.chosenArmy = name;
     });
   }
 }

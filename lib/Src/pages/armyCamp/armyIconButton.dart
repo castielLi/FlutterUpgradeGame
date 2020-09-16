@@ -5,7 +5,6 @@ class ArmyIconButton extends StatefulWidget {
   bool isChosen;
   String armyIconImageUrl;
   double size;
-  int amount;
   VoidCallback callback;
 
   ArmyIconButton({Key key, this.isChosen, this.armyIconImageUrl, this.size, this.callback}) : super(key: key);
