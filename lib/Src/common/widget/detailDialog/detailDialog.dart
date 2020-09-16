@@ -7,6 +7,7 @@ import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/activity/activity.dart';
 import 'package:upgradegame/Src/pages/adDividend/adDividendDetail.dart';
 import 'package:upgradegame/Src/pages/announcement/announcement.dart';
+import 'package:upgradegame/Src/pages/armyCamp/armyCamp.dart';
 import 'package:upgradegame/Src/pages/contribution/contribution.dart';
 import 'package:upgradegame/Src/pages/farm/farm.dart';
 import 'package:upgradegame/Src/pages/heroAltar/heroAltar.dart';
@@ -18,6 +19,7 @@ import 'package:upgradegame/Src/pages/setting/setting.dart';
 import 'package:upgradegame/Src/pages/stone/stone.dart';
 import 'package:upgradegame/Src/pages/store/store.dart';
 import 'package:upgradegame/Src/pages/team/team.dart';
+import 'package:upgradegame/Src/pages/trainArmy/trainArmy.dart';
 import 'package:upgradegame/Src/pages/userInfo/userInfo.dart';
 import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
@@ -198,10 +200,26 @@ class _DetailDialogState extends State<DetailDialog> {
           );
           break;
         }
-
+      // 活动
       case 'activityDetail':
         {
           currentWidget = new ActivityDetail(
+            HUD: showOrDismissProgressHUD,
+          );
+          break;
+        }
+      //兵营
+      case 'armyCampDetail':
+        {
+          currentWidget = new ArmyCampDetail(
+            HUD: showOrDismissProgressHUD,
+          );
+          break;
+        }
+      //训练场
+      case 'trainArmyDetail':
+        {
+          currentWidget = new TrainArmyDetail(
             HUD: showOrDismissProgressHUD,
           );
           break;

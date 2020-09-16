@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-//import 'package:fluwx/fluwx.dart';
-//import 'package:fluwx/fluwx.dart' as fluwx;
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/store/model/storeModel.dart';
-import 'package:upgradegame/Src/pages/store/model/voucherModel.dart';
 import 'package:upgradegame/Src/pages/store/productItem.dart';
 import 'package:upgradegame/Src/pages/store/storeService/storeService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
-
-import 'model/buyVoucherWeChatResponseModel.dart';
 
 class StoreDetail extends StatefulWidget {
   @override
@@ -45,8 +39,8 @@ class _StoreDetailState extends State<StoreDetail> {
 //      } else if (response.errCode == -2 && response is WeChatPaymentResponse) {
 //        CommonUtils.showErrorMessage(msg: "已经取消购买");
 //      }
-      // eventBus.fire(new RefreshMineInfo(true));
-      // Navigator.of(context).pop();
+    // eventBus.fire(new RefreshMineInfo(true));
+    // Navigator.of(context).pop();
 //    });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
