@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 
-class ArmyCampItem extends StatefulWidget {
+class ArmyCampDetailItem extends StatefulWidget {
   String armyImageUrl;
   String armyDescription;
-  String armyPrice;
   VoidCallback callback;
 
-  ArmyCampItem({Key key, this.armyImageUrl, this.armyDescription, this.armyPrice, this.callback}) : super(key: key);
+  ArmyCampDetailItem({Key key, this.armyImageUrl, this.armyDescription, this.callback}) : super(key: key);
 
-  _ArmyCampItemState createState() => new _ArmyCampItemState();
+  _ArmyCampDetailItemState createState() => new _ArmyCampDetailItemState();
 }
 
-class _ArmyCampItemState extends State<ArmyCampItem> {
+class _ArmyCampDetailItemState extends State<ArmyCampDetailItem> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,31 +42,10 @@ class _ArmyCampItemState extends State<ArmyCampItem> {
             ],
           ),
         ),
-        // Container(
-        //   height: ScreenUtil().setHeight(150),
-        //   width: ScreenUtil().setHeight(700),
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //     children: [
-        //       Text('所需金币'),
-        //       Row(
-        //         children: [
-        //           Image(
-        //             image: new AssetImage("resource/images/coin.png"),
-        //             width: ScreenUtil().setWidth(SystemIconSize.mainPageResourceBarIconSize),
-        //             height: ScreenUtil().setWidth(SystemIconSize.mainPageResourceBarIconSize),
-        //             fit: BoxFit.fill,
-        //           ),
-        //           Text(this.widget.armyPrice),
-        //         ],
-        //       ),
-        //     ],
-        //   ),
-        // ),
         GestureDetector(
           child: Container(
-            width: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
-            height: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+            width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+            height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: new AssetImage('resource/images/upgradeButton.png'),
@@ -77,7 +55,7 @@ class _ArmyCampItemState extends State<ArmyCampItem> {
             child: Center(
               child: Text(
                 '返 回',
-                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.buttonTextFontSize),
               ),
             ),
           ),

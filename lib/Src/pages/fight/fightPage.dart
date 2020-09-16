@@ -136,18 +136,7 @@ class _FightPageState extends State<FightPage> {
                                 imageUrl: "",
                                 netWorkImageUrl: baseUserInfo.avatar,
                                 netWorkImage: true,
-                                callback: () {
-                                  // if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                                  //   Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                                  //   Navigator.push(context, PopWindow(pageBuilder: (context) {
-                                  //     return DetailDialog(
-                                  //         height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                  //         width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                  //         childWidgetName: 'userInfoDetail',
-                                  //         title: "个人信息");
-                                  //   }));
-                                  // }
-                                },
+                                callback: () {},
                               ),
                             ),
                           ],
@@ -162,63 +151,53 @@ class _FightPageState extends State<FightPage> {
               Stack(
                 children: [
                   new Container(
-                    // color:Colors.yellow,
                     margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + SystemScreenSize.mainPageSignalBarHeight)),
-                    height: ScreenUtil().setHeight(SystemIconSize.mainPageFunctionBarIconSize * 3),
-                    child: new Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        new Container(
-                          // color:Colors.red,
-                          width: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize * 3),
-                          child: new GridView.count(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            padding: EdgeInsets.zero,
-                            crossAxisCount: 3,
-                            childAspectRatio: 1,
-                            children: [
-                              new UserImageButton(
-                                size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
-                                buttonName: "排行榜",
-                                imageUrl: "resource/images/rank.png",
-                                textSize: SystemFontSize.operationTextFontSize,
-                                callback: () {
-                                  if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                                    Navigator.push(context, PopWindow(pageBuilder: (context) {
-                                      return DetailDialog(
-                                        height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                        width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                        childWidgetName: 'rankDetail',
-                                        title: "排行榜",
-                                      );
-                                    }));
-                                  }
-                                },
-                              ),
-                              new UserImageButton(
-                                size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
-                                buttonName: "消息",
-                                textSize: SystemFontSize.operationTextFontSize,
-                                imageUrl: "resource/images/team.png",
-                                callback: () {
-                                  if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
-                                    Navigator.push(context, PopWindow(pageBuilder: (context) {
-                                      return DetailDialog(
-                                        height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                        width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                        childWidgetName: 'teamDetail',
-                                        title: "团 队",
-                                      );
-                                    }));
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
+                    height: ScreenUtil().setHeight(SystemIconSize.mainPageFunctionBarIconSize),
+                    width: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize * 2),
+                    child: new GridView.count(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      crossAxisCount: 2,
+                      childAspectRatio: 1,
+                      children: [
+                        new UserImageButton(
+                          size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                          buttonName: "排行榜",
+                          imageUrl: "resource/images/rank.png",
+                          textSize: SystemFontSize.operationTextFontSize,
+                          callback: () {
+                            if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                              Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+                              Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                return DetailDialog(
+                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                  childWidgetName: 'rankDetail',
+                                  title: "排行榜",
+                                );
+                              }));
+                            }
+                          },
+                        ),
+                        new UserImageButton(
+                          size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                          buttonName: "消息",
+                          textSize: SystemFontSize.operationTextFontSize,
+                          imageUrl: "resource/images/team.png",
+                          callback: () {
+                            if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+                              Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+                              Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                return DetailDialog(
+                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                  childWidgetName: 'marketDetail',
+                                  title: "消 息",
+                                );
+                              }));
+                            }
+                          },
                         ),
                       ],
                     ),
@@ -256,7 +235,6 @@ class _FightPageState extends State<FightPage> {
 
                       ///训练场
                       new Container(
-                        // color:Colors.yellow,
                         height: ScreenUtil().setHeight(660),
                         width: ScreenUtil().setWidth(660),
                         margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(410), ScreenUtil().setHeight(1150), ScreenUtil().setWidth(0), ScreenUtil().setHeight(0)),
