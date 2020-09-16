@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluwx_no_pay/fluwx_no_pay.dart' as fluwx;
 import 'package:progress_hud/progress_hud.dart';
@@ -6,11 +9,16 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
+import 'package:upgradegame/Src/common/service/baseService.dart';
 import 'package:upgradegame/Src/pages/login/service/loginService.dart';
 import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
+import 'package:package_info/package_info.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'model/LoginResponseModel.dart';
 
@@ -39,6 +47,46 @@ class _LoginPageState extends State<LoginPage> {
   var currentVerfied = false;
   bool userVerified = true;
 
+
+  void judgementNewVersion() async{
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    String appName = packageInfo.appName;
+    String packageName = packageInfo.packageName;
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+
+    if(false){
+      Directory storageDir = await getExternalStorageDirectory();
+      String storagePath = storageDir.path;
+      File _apkFile = await BaseService.downloadNewApk(storagePath, "https://imtt.dd.qq.com/16891/apk/7C4D51A8EDF4290DED6C52F5102FDBF3.apk?fsname=com.wodebuluoge.mm_1.1.0_1.apk&csr=1bbd",
+        (progress){
+        print(progress);
+      },(){
+        OpenFile.open("${storagePath}/app-release.apk");
+      });
+    }else{
+      this.initParams();
+    }
+
+  }
+
+  void getVersionSetting(){
+    this.showOrDismissProgressHUD();
+    BaseService.getRule2((model){
+      this.showOrDismissProgressHUD();
+      if (model != null) {
+        Global();
+        Global.setExtraRule(model);
+        this.judgementNewVersion();
+      }else{
+        ///强制关闭程序
+        SystemNavigator.pop();
+      }
+    });
+  }
+
+
   void initState() {
     super.initState();
     _progressHUD = new ProgressHUD(
@@ -49,7 +97,12 @@ class _LoginPageState extends State<LoginPage> {
       text: '',
       loading: false,
     );
-    this.initParams();
+
+    ///当界面出来的时候去判断当前版本是否需要更新
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      this.getVersionSetting();
+    });
+
     fluwx.weChatResponseEventHandler.listen((response) {
       this.showOrDismissProgressHUD();
       if (response.errCode.toString() == "0") {

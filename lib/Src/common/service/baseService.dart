@@ -37,8 +37,8 @@ class BaseService {
     }
   }
 
-  static Future downloadNewApk(String storagePath,String url) async{
-    var response = await httpManager.downloadAndroid(storagePath, url);
+  static Future downloadNewApk(String storagePath,String url,progressCallback,successCallback) async{
+    var response = await httpManager.downloadAndroid(storagePath, url,progressCallback,successCallback);
   }
 
 
