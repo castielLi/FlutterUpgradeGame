@@ -6,8 +6,9 @@ class ArmyCampItem extends StatefulWidget {
   String armyImageUrl;
   String armyDescription;
   String armyPrice;
+  VoidCallback callback;
 
-  ArmyCampItem({Key key, this.armyImageUrl, this.armyDescription, this.armyPrice}) : super(key: key);
+  ArmyCampItem({Key key, this.armyImageUrl, this.armyDescription, this.armyPrice,this.callback}) : super(key: key);
 
   _ArmyCampItemState createState() => new _ArmyCampItemState();
 }
@@ -42,27 +43,27 @@ class _ArmyCampItemState extends State<ArmyCampItem> {
             ],
           ),
         ),
-        Container(
-          height: ScreenUtil().setHeight(150),
-          width: ScreenUtil().setHeight(700),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text('所需金币'),
-              Row(
-                children: [
-                  Image(
-                    image: new AssetImage("resource/images/coin.png"),
-                    width: ScreenUtil().setWidth(SystemIconSize.mainPageResourceBarIconSize),
-                    height: ScreenUtil().setWidth(SystemIconSize.mainPageResourceBarIconSize),
-                    fit: BoxFit.fill,
-                  ),
-                  Text(this.widget.armyPrice),
-                ],
-              ),
-            ],
-          ),
-        ),
+        // Container(
+        //   height: ScreenUtil().setHeight(150),
+        //   width: ScreenUtil().setHeight(700),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //     children: [
+        //       Text('所需金币'),
+        //       Row(
+        //         children: [
+        //           Image(
+        //             image: new AssetImage("resource/images/coin.png"),
+        //             width: ScreenUtil().setWidth(SystemIconSize.mainPageResourceBarIconSize),
+        //             height: ScreenUtil().setWidth(SystemIconSize.mainPageResourceBarIconSize),
+        //             fit: BoxFit.fill,
+        //           ),
+        //           Text(this.widget.armyPrice),
+        //         ],
+        //       ),
+        //     ],
+        //   ),
+        // ),
         GestureDetector(
           child: Container(
             width: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
@@ -75,12 +76,12 @@ class _ArmyCampItemState extends State<ArmyCampItem> {
             ),
             child: Center(
               child: Text(
-                '购 买',
+                '返 回',
                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
               ),
             ),
           ),
-          onTap: () {},
+          onTap: this.widget.callback,
         ),
       ],
     );
