@@ -261,6 +261,7 @@ class _MainPageState extends State<MainPage> {
       child: ProvideMulti(
         builder: (context, child, model) {
           BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
+
           if (baseUserInfo.tobecollectedcoin > 0) {
             this.mainBuildingCoin = false;
             this.mainBuilding = true;

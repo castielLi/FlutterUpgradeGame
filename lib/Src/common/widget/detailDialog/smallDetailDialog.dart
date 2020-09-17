@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:progress_hud/progress_hud.dart';
-import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/trainArmy/armySelect.dart';
 import 'package:upgradegame/Src/route/application.dart';
@@ -14,7 +13,7 @@ class SmallDetailDialog extends StatefulWidget {
   int row;
   int column;
 
-  SmallDetailDialog({Key key, this.height, this.width, this.childWidgetName, this.title = "",this.row,this.column}) : super(key: key);
+  SmallDetailDialog({Key key, this.height, this.width, this.childWidgetName, this.title = "", this.row, this.column}) : super(key: key);
 
   @override
   _SmallDetailDialogState createState() => new _SmallDetailDialogState();
@@ -76,6 +75,8 @@ class _SmallDetailDialogState extends State<SmallDetailDialog> {
         {
           currentWidget = new ArmySelectDetail(
             HUD: showOrDismissProgressHUD,
+            row: this.widget.row,
+            column: this.widget.column,
           );
           break;
         }

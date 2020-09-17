@@ -22,4 +22,19 @@ class BaseFightLineupProvider with ChangeNotifier {
   initAttactLineup(List<List<int>> attacklineup){
     attack = attacklineup;
   }
+  changeAttackLineUp(int column,int row,int num){
+
+    for(int i=0;i<attack.length;i++){
+      if(i==column){
+        for(int n=0;n<attack[i].length;n++){
+          if(n==row){
+            attack[i][n] = num;
+            print(attack[i][n].toString()+"!!!!!!!");
+            return;
+          }
+        }
+      }
+    }
+
+  }
 }
