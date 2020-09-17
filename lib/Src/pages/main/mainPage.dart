@@ -341,7 +341,7 @@ class _MainPageState extends State<MainPage> {
                                 netWorkImage: true,
                                 callback: () {
                                   if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+//                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                                     Navigator.push(context, PopWindow(pageBuilder: (context) {
                                       return DetailDialog(
                                           height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -388,7 +388,7 @@ class _MainPageState extends State<MainPage> {
                                 textSize: SystemFontSize.operationTextFontSize,
                                 callback: () {
                                   if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+//                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                                     Navigator.push(context, PopWindow(pageBuilder: (context) {
                                       return DetailDialog(
                                         height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -407,7 +407,7 @@ class _MainPageState extends State<MainPage> {
                                 imageUrl: "resource/images/team.png",
                                 callback: () {
                                   if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+//                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                                     Navigator.push(context, PopWindow(pageBuilder: (context) {
                                       return DetailDialog(
                                         height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -426,7 +426,7 @@ class _MainPageState extends State<MainPage> {
                                 textSize: SystemFontSize.operationTextFontSize,
                                 callback: () {
                                   if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+//                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                                     Navigator.push(context, PopWindow(pageBuilder: (context) {
                                       return DetailDialog(
                                         height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -465,7 +465,7 @@ class _MainPageState extends State<MainPage> {
                             amount: "¥" + (autoProfitSharing == 0.00 ? this.displayInitProfitSharing() : autoProfitSharing.toStringAsFixed(2)),
                             callback: () {
                               if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                                Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+//                                Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                                 Navigator.push(context, PopWindow(pageBuilder: (context) {
                                   return DetailDialog(
                                     height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -491,7 +491,7 @@ class _MainPageState extends State<MainPage> {
                                     imageUrl: "resource/images/setting.png",
                                     callback: () {
                                       if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                                        Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+//                                        Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                                         Navigator.push(context, PopWindow(pageBuilder: (context) {
                                           return DetailDialog(
                                             height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -510,7 +510,7 @@ class _MainPageState extends State<MainPage> {
                                     imageUrl: "resource/images/announcement.png",
                                     callback: () {
                                       if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                                        Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+//                                        Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                                         Navigator.push(context, PopWindow(pageBuilder: (context) {
                                           return DetailDialog(
                                             height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -531,7 +531,7 @@ class _MainPageState extends State<MainPage> {
                                 imageUrl: "resource/images/activity.png",
                                 callback: () {
                                   if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+//                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                                     Navigator.push(context, PopWindow(pageBuilder: (context) {
                                       return DetailDialog(
                                         height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -564,7 +564,7 @@ class _MainPageState extends State<MainPage> {
                         fontSize: SystemFontSize.mainBuildingTextFontSize,
                         callback: () {
                           if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                            Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+//                            Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                             Navigator.push(context, PopWindow(pageBuilder: (context) {
                               return DetailDialog(
                                 height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -614,7 +614,7 @@ class _MainPageState extends State<MainPage> {
                       fontSize: SystemFontSize.otherBuildingTextFontSize,
                       callback: () {
                         if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+//                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                           Navigator.push(context, PopWindow(pageBuilder: (context) {
                             return DetailDialog(
                               height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -640,7 +640,7 @@ class _MainPageState extends State<MainPage> {
                       fontSize: SystemFontSize.otherBuildingTextFontSize,
                       callback: () {
                         if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+//                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                           Navigator.push(context, PopWindow(pageBuilder: (context) {
                             return DetailDialog(
                               height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -666,7 +666,7 @@ class _MainPageState extends State<MainPage> {
                       fontSize: SystemFontSize.otherBuildingTextFontSize,
                       callback: () {
                         if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+//                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                           Navigator.push(context, PopWindow(pageBuilder: (context) {
                             return DetailDialog(
                               height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -692,7 +692,7 @@ class _MainPageState extends State<MainPage> {
                       fontSize: SystemFontSize.otherBuildingTextFontSize,
                       callback: () {
                         if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+//                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                           Navigator.push(context, PopWindow(pageBuilder: (context) {
                             return DetailDialog(
                               height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -718,7 +718,7 @@ class _MainPageState extends State<MainPage> {
                       namePadding: 170,
                       callback: () {
                         if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+//                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                           Navigator.push(context, PopWindow(pageBuilder: (context) {
                             return DetailDialog(
                               height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
