@@ -267,7 +267,7 @@ class _DetailDialogState extends State<DetailDialog> {
                         callback: () {
                           /// 防止重复点击
                           if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
-                            Provide.value<BaseDialogClickProvider>(context).setDialogHide();
+//                            Provide.value<BaseDialogClickProvider>(context).setDialogHide();
                             Application.router.pop(context);
                             this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
                           }
