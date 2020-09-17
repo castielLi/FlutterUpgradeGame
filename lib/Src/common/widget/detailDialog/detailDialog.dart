@@ -16,11 +16,13 @@ import 'package:upgradegame/Src/pages/mainBuilding/mainBuilding.dart';
 import 'package:upgradegame/Src/pages/market/market.dart';
 import 'package:upgradegame/Src/pages/message/message.dart';
 import 'package:upgradegame/Src/pages/rank/rank.dart';
+import 'package:upgradegame/Src/pages/recycle/recycle.dart';
 import 'package:upgradegame/Src/pages/sawmill/sawmill.dart';
 import 'package:upgradegame/Src/pages/setting/setting.dart';
 import 'package:upgradegame/Src/pages/stone/stone.dart';
 import 'package:upgradegame/Src/pages/store/store.dart';
 import 'package:upgradegame/Src/pages/team/team.dart';
+import 'package:upgradegame/Src/pages/trainArmy/armySelect.dart';
 import 'package:upgradegame/Src/pages/trainArmy/trainArmy.dart';
 import 'package:upgradegame/Src/pages/userInfo/userInfo.dart';
 import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
@@ -238,6 +240,22 @@ class _DetailDialogState extends State<DetailDialog> {
       case 'messageDetail':
         {
           currentWidget = new MessageDetail(
+            HUD: showOrDismissProgressHUD,
+          );
+          break;
+        }
+      // 回收
+      case 'recycleDetail':
+        {
+          currentWidget = new RecycleDetail(
+            HUD: showOrDismissProgressHUD,
+          );
+          break;
+        }
+    // 选择兵种
+      case 'armySelectDetail':
+        {
+          currentWidget = new ArmySelectDetail(
             HUD: showOrDismissProgressHUD,
           );
           break;

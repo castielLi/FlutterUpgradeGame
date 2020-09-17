@@ -224,7 +224,7 @@ class _FightPageState extends State<FightPage> {
                                 return DetailDialog(
                                   height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
                                   width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                  childWidgetName: 'marketDetail',
+                                  childWidgetName: 'recycleDetail',
                                   title: "回 收",
                                 );
                               }));

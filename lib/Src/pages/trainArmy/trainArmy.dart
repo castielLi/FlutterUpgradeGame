@@ -135,12 +135,13 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                       height: ScreenUtil().setHeight(SystemIconSize.trainArmyIconSize * 5 + 10), //大于等于5个高度
                       child: ArmySelectMatrix(
                         itemSize: SystemIconSize.trainArmyIconSize,
+                        // TODO 获取阵容
                         armyBaseMatrix: [
-                          ["", "", "rangeAttack"],
-                          ["", "fighter", ""],
-                          ["", "", "fighter"],
-                          ["", "", "rider"],
-                          ["rider", "", ""]
+                          [0, 0, 3],
+                          [0, 1, 0],
+                          [0, 0, 2],
+                          [3, 0, 1],
+                          [0, 0, 0]
                         ],
                       ),
                     ),
@@ -152,7 +153,8 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                       child: Column(
                         children: [
                           ImageButton(
-                            imageUrl: 'resource/images/startMatch.png',
+                            buttonName:'开始匹配',
+                            imageUrl: 'resource/images/upgradeButton.png',
                             height: ScreenUtil().setHeight(230),
                             width: ScreenUtil().setWidth(515),
                             callback: () {
@@ -163,17 +165,19 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               ImageButton(
-                                imageUrl: 'resource/images/armyAttack.png',
+                                imageUrl: "resource/images/upgradeButton.png",
                                 height: ScreenUtil().setHeight(180),
                                 width: ScreenUtil().setWidth(410),
+                                buttonName:'进 攻',
                                 callback: () {
                                   print('attack');
                                 },
                               ),
                               ImageButton(
-                                imageUrl: 'resource/images/armyDefence.png',
+                                imageUrl: "resource/images/upgradeButton.png",
                                 height: ScreenUtil().setHeight(180),
                                 width: ScreenUtil().setWidth(410),
+                                buttonName:'防 守',
                                 callback: () {
                                   print('defence');
                                   Application.router.pop(context);

@@ -38,7 +38,6 @@ class _MessageDetailState extends State<MessageDetail> {
 
   void getTCoinDetail() {
     UserInfoService.getUserTCoinDetail(this.page, (TCoinDetailModel model) {
-      // model.datalist = [];
       if (null == model) {
         return;
       }
