@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Src/common/model/const/resource.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
 import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
@@ -46,7 +47,7 @@ class _ArmySelectItem extends State<ArmySelectItem> {
                 ),
                 Image(
                   image: AssetImage(
-                    "resource/images/" + (hideArmy ? "rangeAttack" : "") + "Icon.png",
+                    "resource/images/" + (hideArmy ? "rangeAttack" : ArmyType.getName(this.widget.armyCode)) + "Icon.png",
                   ),
                   height: ScreenUtil().setHeight(this.widget.size - 30),
                   width: ScreenUtil().setWidth(this.widget.size - 30),

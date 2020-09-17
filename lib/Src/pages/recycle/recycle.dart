@@ -8,16 +8,16 @@ import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
-class Recycle extends StatefulWidget {
+class RecycleDetail extends StatefulWidget {
   @override
   VoidCallback HUD;
   VoidCallback viewCallback;
 
   RecycleDetail({Key key, this.HUD, this.viewCallback}) : super(key: key);
-
   _RecycleDetailState createState() => new _RecycleDetailState();
-}
 
+}
+class _RecycleDetailState extends State<RecycleDetail>{
   final amountController = TextEditingController(text: "");
   final passwordController = TextEditingController(text: "");
 

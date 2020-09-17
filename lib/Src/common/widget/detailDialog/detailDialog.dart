@@ -263,7 +263,7 @@ class _DetailDialogState extends State<DetailDialog> {
         }
       case 'recycleDetail':
         {
-          currentWidget = new Recycle(
+          currentWidget = new RecycleDetail(
 
             HUD: showOrDismissProgressHUD,
           );
