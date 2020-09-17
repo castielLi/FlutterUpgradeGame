@@ -8,6 +8,7 @@ import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/trainArmy/armySelectMatrix.dart';
+import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
@@ -43,6 +44,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
       child: ProvideMulti(
         builder: (context, child, model) {
           BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
+          BaseFightLineupProvider baseFightInfo = model.get<BaseFightLineupProvider>();
           return Stack(
             children: <Widget>[
               new Image(
@@ -153,7 +155,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                       child: Column(
                         children: [
                           ImageButton(
-                            buttonName:'开始匹配',
+                            buttonName: '开始匹配',
                             imageUrl: 'resource/images/upgradeButton.png',
                             height: ScreenUtil().setHeight(230),
                             width: ScreenUtil().setWidth(515),
@@ -168,7 +170,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                 imageUrl: "resource/images/upgradeButton.png",
                                 height: ScreenUtil().setHeight(180),
                                 width: ScreenUtil().setWidth(410),
-                                buttonName:'进 攻',
+                                buttonName: '进 攻',
                                 callback: () {
                                   print('attack');
                                 },
@@ -177,7 +179,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                 imageUrl: "resource/images/upgradeButton.png",
                                 height: ScreenUtil().setHeight(180),
                                 width: ScreenUtil().setWidth(410),
-                                buttonName:'防 守',
+                                buttonName: '防 守',
                                 callback: () {
                                   print('defence');
                                   Application.router.pop(context);
