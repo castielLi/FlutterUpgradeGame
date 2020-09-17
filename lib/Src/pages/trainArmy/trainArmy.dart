@@ -8,7 +8,6 @@ import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/trainArmy/armySelectMatrix.dart';
-import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
@@ -23,7 +22,7 @@ class TrainArmyDetail extends StatefulWidget {
 class _TrainArmyDetailState extends State<TrainArmyDetail> {
   ProgressHUD _progressHUD;
   int lastClickTime;
-  bool attackDefencePageFlagSwitch = false;
+  bool attackDefencePageSwitch = false;
 
   @override
   void initState() {
@@ -45,9 +44,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
       child: ProvideMulti(
         builder: (context, child, model) {
           BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
-          BaseFightLineupProvider baseFightInfo = model.get<BaseFightLineupProvider>();
           return Stack(
-            // alignment: Alignment.bottomCenter,
             children: <Widget>[
               new Image(
                 image: new AssetImage('resource/images/mainBackground.png'),
@@ -140,12 +137,14 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
               ),
 
               Container(
+                height:ScreenUtil().setHeight(1500),
                 margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(0), ScreenUtil().setHeight(300), ScreenUtil().setWidth(0), ScreenUtil().setHeight(0)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      height: ScreenUtil().setHeight(SystemIconSize.trainArmyIconSize * 5 + 10), //大于等于5个高度
+                      width: ScreenUtil().setWidth(900),
+                      height: ScreenUtil().setHeight(SystemIconSize.trainArmyIconSize * 5), //大于等于5个高度
                       child: ArmySelectMatrix(
                         itemSize: SystemIconSize.trainArmyIconSize,
                         // TODO 获取阵容
@@ -158,23 +157,27 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                         ],
                       ),
                     ),
-                    Text(
-                      '当前阵容消耗10金币',
-                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                    ),
                     Container(
                       child: Column(
                         children: [
                           Offstage(
-                            offstage: this.attackDefencePageFlagSwitch,
-                            child: ImageButton(
-                              buttonName: '开始匹配',
-                              imageUrl: 'resource/images/upgradeButton.png',
-                              height: ScreenUtil().setHeight(230),
-                              width: ScreenUtil().setWidth(515),
-                              callback: () {
-                                print('match');
-                              },
+                            offstage: this.attackDefencePageSwitch,
+                            child: Column(
+                              children: [
+                                Text(
+                                  '当前阵容消耗10金币',
+                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                ),
+                                ImageButton(
+                                  buttonName: '开始匹配',
+                                  imageUrl: 'resource/images/upgradeButton.png',
+                                  height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+                                  width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+                                  callback: () {
+                                    print('match');
+                                  },
+                                ),
+                              ],
                             ),
                           ),
                           Row(
@@ -182,8 +185,8 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             children: [
                               ImageButton(
                                 imageUrl: "resource/images/upgradeButton.png",
-                                height: ScreenUtil().setHeight(180),
-                                width: ScreenUtil().setWidth(410),
+                                height: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+                                width: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
                                 buttonName: '返 回',
                                 callback: () {
                                   Application.router.pop(context);
@@ -191,9 +194,9 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                               ),
                               ImageButton(
                                 imageUrl: "resource/images/upgradeButton.png",
-                                height: ScreenUtil().setHeight(180),
-                                width: ScreenUtil().setWidth(410),
-                                buttonName: this.attackDefencePageFlagSwitch ? '攻 击' : '防 守',
+                                height: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+                                width: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+                                buttonName: this.attackDefencePageSwitch ? '攻 击' : '防 守',
                                 callback: () {
                                   changePages();
                                 },
@@ -217,7 +220,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
 
   void changePages() {
     setState(() {
-      this.attackDefencePageFlagSwitch = !this.attackDefencePageFlagSwitch;
+      this.attackDefencePageSwitch = !this.attackDefencePageSwitch;
     });
   }
 }
