@@ -81,6 +81,7 @@ class _RecycleDetailState extends State<RecycleDetail> {
               height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
               controller: passwordController,
               hintText: '密码:',
+              icon: Icon(Icons.lock),
               obscureText: true,
             ),
             ButtonsList(
@@ -89,13 +90,6 @@ class _RecycleDetailState extends State<RecycleDetail> {
               buttonBackgroundImageUrl: "resource/images/upgradeButton.png",
               textSize: ScreenUtil().setSp(SystemFontSize.buttonTextFontSize),
               buttons: [
-                ImageTextButton(
-                  buttonName: '返 回',
-                  callback: () {
-                    this.widget.viewCallback();
-                    FocusScope.of(context).requestFocus(FocusNode());
-                  },
-                ),
                 ImageTextButton(
                   buttonName: '确 定',
                   callback: () {

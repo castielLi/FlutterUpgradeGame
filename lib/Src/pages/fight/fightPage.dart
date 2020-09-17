@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
@@ -23,26 +21,24 @@ class FightPage extends StatefulWidget {
 }
 
 class _FightPageState extends State<FightPage> {
-  bool mainBuilding = true;
-  bool mainBuildingCoin = false;
-  double autoProfitSharing = 0.00;
-  double perFiveSecondProfit = 0.00;
-  Timer adShareTimer;
-  Timer productTCoin10;
-  Timer productTCoin60;
-  Timer deviceIdTimer;
-  StreamSubscription stream;
-  StreamSubscription notification;
-  StreamSubscription systemStatus;
+  // bool mainBuilding = true;
+  // bool mainBuildingCoin = false;
+  // double autoProfitSharing = 0.00;
+  // double perFiveSecondProfit = 0.00;
+  // Timer adShareTimer;
+  // Timer productTCoin10;
+  // Timer productTCoin60;
+  // Timer deviceIdTimer;
+  // StreamSubscription stream;
+  // StreamSubscription notification;
+  // StreamSubscription systemStatus;
 
   ProgressHUD _progressHUD;
   bool _loading = false;
   int lastClickTime;
 
-  // bool isFightPage = false;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _progressHUD = new ProgressHUD(
       backgroundColor: Colors.transparent,
@@ -58,9 +54,9 @@ class _FightPageState extends State<FightPage> {
     });
   }
 
-  void initFightInfo(){
+  void initFightInfo() {
     this.showOrDismissProgressHUD();
-    FightService.getFightInfo((model){
+    FightService.getFightInfo((model) {
       this.showOrDismissProgressHUD();
       Provide.value<BaseUserInfoProvider>(context).initSupplies(model);
       Provide.value<BaseFightLineupProvider>(context).initLiuneupProvider(model.protectlineup);
@@ -188,7 +184,6 @@ class _FightPageState extends State<FightPage> {
                           textSize: SystemFontSize.operationTextFontSize,
                           callback: () {
                             if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                              Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                               Navigator.push(context, PopWindow(pageBuilder: (context) {
                                 return DetailDialog(
                                   height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -207,7 +202,6 @@ class _FightPageState extends State<FightPage> {
                           imageUrl: "resource/images/team.png",
                           callback: () {
                             if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                              Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                               Navigator.push(context, PopWindow(pageBuilder: (context) {
                                 return DetailDialog(
                                   height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -226,7 +220,6 @@ class _FightPageState extends State<FightPage> {
                           textSize: SystemFontSize.operationTextFontSize,
                           callback: () {
                             if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                              Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                               Navigator.push(context, PopWindow(pageBuilder: (context) {
                                 return DetailDialog(
                                   height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -238,7 +231,6 @@ class _FightPageState extends State<FightPage> {
                             }
                           },
                         ),
-                        ///TODO 提现
                         new UserImageButton(
                           size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
                           buttonName: "回收",
@@ -246,7 +238,6 @@ class _FightPageState extends State<FightPage> {
                           imageUrl: "resource/images/team.png",
                           callback: () {
                             if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                              Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                               Navigator.push(context, PopWindow(pageBuilder: (context) {
                                 return DetailDialog(
                                   height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -299,7 +290,6 @@ class _FightPageState extends State<FightPage> {
                           fontSize: SystemFontSize.mainBuildingTextFontSize,
                           callback: () {
                             if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                              Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                               Navigator.push(context, PopWindow(pageBuilder: (context) {
                                 return DetailDialog(
                                   height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -326,9 +316,9 @@ class _FightPageState extends State<FightPage> {
                           namePadding: 350,
                           fontSize: SystemFontSize.mainBuildingTextFontSize,
                           callback: () {
-                              Navigator.push(context, PopWindow(pageBuilder: (context) {
-                                return TrainArmyDetail();
-                              }));
+                            Navigator.push(context, PopWindow(pageBuilder: (context) {
+                              return TrainArmyDetail();
+                            }));
                           },
                         ),
                       ),
@@ -350,7 +340,6 @@ class _FightPageState extends State<FightPage> {
                   callback: () {
                     /// 防止重复点击
                     if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
-//                      Provide.value<BaseDialogClickProvider>(context).setDialogHide();
                       Application.router.pop(context);
                       this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
                     }
