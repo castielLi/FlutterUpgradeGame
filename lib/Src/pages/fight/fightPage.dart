@@ -7,11 +7,13 @@ import 'package:progress_hud/progress_hud.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
+import 'package:upgradegame/Src/pages/fight/service/fightService.dart';
 import 'package:upgradegame/Src/pages/main/common/buildingButton.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/trainArmy/trainArmy.dart';
 import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
+import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
@@ -50,6 +52,31 @@ class _FightPageState extends State<FightPage> {
       text: '',
       loading: false,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      this.initFightInfo();
+    });
+  }
+
+  void initFightInfo(){
+    this.showOrDismissProgressHUD();
+    FightService.getFightInfo((model){
+      this.showOrDismissProgressHUD();
+      Provide.value<BaseUserInfoProvider>(context).initSupplies(model);
+      Provide.value<BaseFightLineupProvider>(context).initLiuneupProvider(model.protectlineup);
+    });
+  }
+
+  void showOrDismissProgressHUD() {
+    setState(() {
+      if (_loading) {
+        _progressHUD.state.dismiss();
+      } else {
+        _progressHUD.state.show();
+      }
+
+      _loading = !_loading;
+    });
   }
 
   @override
@@ -205,7 +232,7 @@ class _FightPageState extends State<FightPage> {
                                   height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
                                   width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
                                   childWidgetName: 'storeDetail',
-                                  title: "商城",
+                                  title: "商 城",
                                 );
                               }));
                             }
@@ -250,7 +277,7 @@ class _FightPageState extends State<FightPage> {
                           height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
                         ),
                         new Text(
-                          baseUserInfo.voucher.toString(),
+                          baseUserInfo.supplies.toString(),
                           style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                         ),
                       ],

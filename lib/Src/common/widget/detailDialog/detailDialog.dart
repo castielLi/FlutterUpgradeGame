@@ -256,6 +256,15 @@ class _DetailDialogState extends State<DetailDialog> {
       case 'armySelectDetail':
         {
           currentWidget = new ArmySelectDetail(
+
+            HUD: showOrDismissProgressHUD,
+          );
+          break;
+        }
+      case 'recycleDetail':
+        {
+          currentWidget = new Recycle(
+
             HUD: showOrDismissProgressHUD,
           );
           break;

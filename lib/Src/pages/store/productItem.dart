@@ -35,13 +35,13 @@ class _ProductItemState extends State<ProductItem> {
                   new Container(
                     margin: EdgeInsets.only(left: ScreenUtil().setWidth(35)),
                     width: ScreenUtil().setWidth(180),
-                    child: new Text("¥" + this.widget.cashAmount,
+                    child: new Text(this.widget.cashAmount,
                         textAlign: TextAlign.center, style: TextStyle(color: Colors.white, decoration: TextDecoration.none, fontSize: ScreenUtil().setSp(SystemFontSize.storeCashGoldTextFontSize))),
                   ),
                   new Container(
                     margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
                     child: Image(
-                      image: new AssetImage("resource/images/cashGold.png"),
+                      image: new AssetImage("resource/images/coin.png"),
                       width: ScreenUtil().setWidth(120),
                       height: ScreenUtil().setHeight(120),
                       fit: BoxFit.fill,

@@ -6,9 +6,9 @@ import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
-import 'package:upgradegame/Src/provider/baseUserCashProvider.dart';
+import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
-class RecycleDetail extends StatefulWidget {
+class Recycle extends StatefulWidget {
   @override
   VoidCallback HUD;
   VoidCallback viewCallback;
@@ -18,33 +18,63 @@ class RecycleDetail extends StatefulWidget {
   _RecycleDetailState createState() => new _RecycleDetailState();
 }
 
-class _RecycleDetailState extends State<RecycleDetail> {
   final amountController = TextEditingController(text: "");
   final passwordController = TextEditingController(text: "");
+
+  void recycleSupplies(String password,String amount){
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return new Container(
-      height: ScreenUtil().setHeight(1000),
-      width: ScreenUtil().setWidth(850),
       margin: EdgeInsets.fromLTRB(
-          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(600), ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(250)),
-      child: Provide<BaseUserCashProvider>(builder: (context, child, cashInfo) {
+        ScreenUtil().setWidth(80), // 左
+        ScreenUtil().setHeight(425), // 上
+        ScreenUtil().setWidth(80), // 右
+        ScreenUtil().setHeight(150),
+      ),
+      child: Provide<BaseUserInfoProvider>(builder: (context, child, model) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
+              child: new Row(
+                children: <Widget>[
+                  Image(
+                    image: new AssetImage("resource/images/coin.png"),
+                    width: ScreenUtil().setWidth(120),
+                    height: ScreenUtil().setHeight(120),
+                    fit: BoxFit.fill,
+                  ),
+                  Text(
+                    "今日物资回收价格为:"+ model.suppliesprice.toString(),
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize), color: Colors.white, decoration: TextDecoration.none),
+                  ),
+                ],
+              )
+            ),
+            Container(
+              padding: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
+              child: Text(
+                "可兑换物资:" + model.supplies.toString(),
+                textAlign: TextAlign.left,
+                style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize), color: Colors.white, decoration: TextDecoration.none),
+              ),
+            ),
             new MyTextField(
               height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
               controller: amountController,
-              hintText: "回收数量",
+              hintText: "数量(最小兑换额为:"+ model.limitsuppliesrecycle.toString() +")",
               icon: Icon(Icons.attach_money),
-              // warningText: "提现收取5%的手续费",
             ),
             new MyTextField(
               height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
               controller: passwordController,
               hintText: '密码:',
-              icon: Icon(Icons.lock),
               obscureText: true,
             ),
             ButtonsList(
@@ -54,19 +84,54 @@ class _RecycleDetailState extends State<RecycleDetail> {
               textSize: ScreenUtil().setSp(SystemFontSize.buttonTextFontSize),
               buttons: [
                 ImageTextButton(
+                  buttonName: '返 回',
+                  callback: () {
+                    this.widget.viewCallback();
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  },
+                ),
+                ImageTextButton(
                   buttonName: '确 定',
                   callback: () {
-                    // String aliPayAccount = accountController.text;
-                    String password = passwordController.text;
-                    String amount = amountController.text;
-                    if (password == "" || amount == "") {
-                      CommonUtils.showWarningMessage(msg: "输入不能为空");
-                      return;
-                    }
                     if (!RegExp(r"^\d*$").hasMatch(amountController.text)) {
                       CommonUtils.showWarningMessage(msg: "请输入正整数");
                       return;
                     }
+                    if (double.parse(amountController.text) > model.supplies) {
+                      CommonUtils.showWarningMessage(msg: '可兑换余额不足，请重新输入');
+                      return;
+                    }
+                    if (double.parse(amountController.text) < model.limitsuppliesrecycle) {
+                      CommonUtils.showWarningMessage(msg: "您的兑换金额不足" +  model.limitsuppliesrecycle.toString() + "还需努力哟!");
+                    } else {
+                      showDialog<Null>(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return new AlertDialog(
+                            title: new Text('您确认要发起提现操作么?'),
+                            actions: <Widget>[
+                              new FlatButton(
+                                child: new Text('取消'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              new FlatButton(
+                                child: new Text('确认'),
+                                onPressed: () {
+                                  this.recycleSupplies(passwordController.text, amountController.text);
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      ).then((val) {
+                        print(val);
+                      });
+                    }
+
                     FocusScope.of(context).requestFocus(FocusNode());
                   },
                 ),

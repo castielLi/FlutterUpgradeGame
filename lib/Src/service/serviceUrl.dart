@@ -67,9 +67,19 @@ class ServiceUrl {
     return "${host}api/v2/voucher/list";
   }
 
+  ///回收物资
+  static recycleSupplies(){
+    return "${host}api/v2/exchangesupplies";
+  }
+
   ///购买英雄
   static buyHero() {
     return "${host}api/v2/hero/buy";
+  }
+
+  ///获取战斗界面基础信息
+  static getFightInfo(){
+    return "${host}api/v2/fightinfo";
   }
 
   ///获取英雄列表

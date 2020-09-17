@@ -5,6 +5,7 @@ import 'package:upgradegame/Src/common/model/baseUserInfoModel.dart';
 import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/common/model/userInfoAd.dart';
 import 'package:upgradegame/Src/common/model/watchAdModel.dart';
+import 'package:upgradegame/Src/pages/fight/model/fightInfoModel.dart';
 import 'package:upgradegame/Src/pages/main/model/productCoinModel.dart';
 
 //混入
@@ -24,6 +25,14 @@ class BaseUserInfoProvider with ChangeNotifier {
   Ad ad;
   int tobecollectedcoin;
   int contribution;
+
+  int supplies;
+  int limitsuppliesrecycle;
+  double suppliesprice;
+
+  double get SuppliesPrice => suppliesprice;
+  int get LimitSuppliesRecycle => limitsuppliesrecycle;
+  int get Supplies => supplies;
 
   int get TCoinAmount => tcoinamount;
 
@@ -61,6 +70,14 @@ class BaseUserInfoProvider with ChangeNotifier {
     todayprofitsharing = model.todayprofitsharing;
     voucher = model.voucher;
     tobecollectedcoin = model.tobecollectedcoin;
+    notifyListeners();
+  }
+
+  ///初始化物资讯息
+  initSupplies(FightInfoModel model){
+    supplies = model.supplies;
+    limitsuppliesrecycle = model.limitsuppliesrecycle;
+    suppliesprice = model.suppliesprice;
     notifyListeners();
   }
 
