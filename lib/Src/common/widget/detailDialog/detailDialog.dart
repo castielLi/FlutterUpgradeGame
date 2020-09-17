@@ -10,9 +10,11 @@ import 'package:upgradegame/Src/pages/announcement/announcement.dart';
 import 'package:upgradegame/Src/pages/armyCamp/armyCamp.dart';
 import 'package:upgradegame/Src/pages/contribution/contribution.dart';
 import 'package:upgradegame/Src/pages/farm/farm.dart';
+import 'package:upgradegame/Src/pages/fightRank/fightRank.dart';
 import 'package:upgradegame/Src/pages/heroAltar/heroAltar.dart';
 import 'package:upgradegame/Src/pages/mainBuilding/mainBuilding.dart';
 import 'package:upgradegame/Src/pages/market/market.dart';
+import 'package:upgradegame/Src/pages/message/message.dart';
 import 'package:upgradegame/Src/pages/rank/rank.dart';
 import 'package:upgradegame/Src/pages/sawmill/sawmill.dart';
 import 'package:upgradegame/Src/pages/setting/setting.dart';
@@ -220,6 +222,22 @@ class _DetailDialogState extends State<DetailDialog> {
       case 'trainArmyDetail':
         {
           currentWidget = new TrainArmyDetail(
+            HUD: showOrDismissProgressHUD,
+          );
+          break;
+        }
+      // 战斗排行榜
+      case 'fightRankDetail':
+        {
+          currentWidget = new FightRankDetail(
+            HUD: showOrDismissProgressHUD,
+          );
+          break;
+        }
+      // 战斗消息
+      case 'messageDetail':
+        {
+          currentWidget = new MessageDetail(
             HUD: showOrDismissProgressHUD,
           );
           break;
