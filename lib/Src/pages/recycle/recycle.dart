@@ -15,10 +15,11 @@ class RecycleDetail extends StatefulWidget {
   VoidCallback viewCallback;
 
   RecycleDetail({Key key, this.HUD, this.viewCallback}) : super(key: key);
-  _RecycleDetailState createState() => new _RecycleDetailState();
 
+  _RecycleDetailState createState() => new _RecycleDetailState();
 }
-class _RecycleDetailState extends State<RecycleDetail>{
+
+class _RecycleDetailState extends State<RecycleDetail> {
   final amountController = TextEditingController(text: "");
   final passwordController = TextEditingController(text: "");
 
@@ -31,6 +32,7 @@ class _RecycleDetailState extends State<RecycleDetail>{
     });
   }
 
+  void recycleSupplies(String password, String amount) {}
 
   @override
   Widget build(BuildContext context) {
@@ -46,23 +48,22 @@ class _RecycleDetailState extends State<RecycleDetail>{
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
-              child: new Row(
-                children: <Widget>[
-                  Image(
-                    image: new AssetImage("resource/images/coin.png"),
-                    width: ScreenUtil().setWidth(120),
-                    height: ScreenUtil().setHeight(120),
-                    fit: BoxFit.fill,
-                  ),
-                  Text(
-                    "今日物资回收价格为:"+ model.suppliesprice.toString(),
-                    textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize), color: Colors.white, decoration: TextDecoration.none),
-                  ),
-                ],
-              )
-            ),
+                padding: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
+                child: new Row(
+                  children: <Widget>[
+                    Image(
+                      image: new AssetImage("resource/images/coin.png"),
+                      width: ScreenUtil().setWidth(120),
+                      height: ScreenUtil().setHeight(120),
+                      fit: BoxFit.fill,
+                    ),
+                    Text(
+                      "今日物资回收价格为:" + model.suppliesprice.toString(),
+                      textAlign: TextAlign.left,
+                      style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize), color: Colors.white, decoration: TextDecoration.none),
+                    ),
+                  ],
+                )),
             Container(
               padding: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
               child: Text(
@@ -74,7 +75,7 @@ class _RecycleDetailState extends State<RecycleDetail>{
             new MyTextField(
               height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
               controller: amountController,
-              hintText: "数量(最小兑换额为:"+ model.limitsuppliesrecycle.toString() +")",
+              hintText: "数量(最小兑换额为:" + model.limitsuppliesrecycle.toString() + ")",
               icon: Icon(Icons.attach_money),
             ),
             new MyTextField(
@@ -108,7 +109,7 @@ class _RecycleDetailState extends State<RecycleDetail>{
                       return;
                     }
                     if (double.parse(amountController.text) < model.limitsuppliesrecycle) {
-                      CommonUtils.showWarningMessage(msg: "您的兑换金额不足" +  model.limitsuppliesrecycle.toString() + "还需努力哟!");
+                      CommonUtils.showWarningMessage(msg: "您的兑换金额不足" + model.limitsuppliesrecycle.toString() + "还需努力哟!");
                     } else {
                       showDialog<Null>(
                         context: context,
