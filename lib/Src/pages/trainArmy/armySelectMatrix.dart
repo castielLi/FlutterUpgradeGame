@@ -30,13 +30,13 @@ class _ArmySelectMatrixState extends State<ArmySelectMatrix> {
     );
   }
 
-  Widget buildRow(List<String> rowArmy) {
+  Widget buildRow(List rowArmy) {
     List<Widget> content = [];
     for (int i = 0; i < rowArmy.length; i++) {
       content.add(
         ArmySelectItem(
           size: this.widget.itemSize,
-          armyIconImageUrl: rowArmy[i],
+          armyCode: rowArmy[i],
           callback: () {
             print(rowArmy[i].toString());
           },

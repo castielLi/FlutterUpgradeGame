@@ -9,17 +9,16 @@ import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/pages/recycle/service/recycleService.dart';
 
-class Recycle extends StatefulWidget {
+class RecycleDetail extends StatefulWidget {
   @override
   VoidCallback HUD;
   VoidCallback viewCallback;
 
-  Recycle({Key key, this.HUD, this.viewCallback}) : super(key: key);
+  RecycleDetail({Key key, this.HUD, this.viewCallback}) : super(key: key);
+  _RecycleDetailState createState() => new _RecycleDetailState();
 
-  _RecycleState createState() => new _RecycleState();
 }
-
-class _RecycleState extends State<Recycle> {
+class _RecycleDetailState extends State<RecycleDetail>{
   final amountController = TextEditingController(text: "");
   final passwordController = TextEditingController(text: "");
 
@@ -82,7 +81,6 @@ class _RecycleState extends State<Recycle> {
               height: ScreenUtil().setHeight(SystemScreenSize.inputDecorationHeight),
               controller: passwordController,
               hintText: '密码:',
-              icon: Icon(Icons.lock),
               obscureText: true,
             ),
             ButtonsList(

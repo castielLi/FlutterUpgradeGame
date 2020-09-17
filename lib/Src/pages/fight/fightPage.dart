@@ -193,7 +193,7 @@ class _FightPageState extends State<FightPage> {
                                 return DetailDialog(
                                   height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
                                   width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                  childWidgetName: 'rankDetail',
+                                  childWidgetName: 'fightRankDetail',
                                   title: "排行榜",
                                 );
                               }));
@@ -212,7 +212,7 @@ class _FightPageState extends State<FightPage> {
                                 return DetailDialog(
                                   height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
                                   width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                  childWidgetName: 'marketDetail',
+                                  childWidgetName: 'messageDetail',
                                   title: "消 息",
                                 );
                               }));
@@ -238,6 +238,7 @@ class _FightPageState extends State<FightPage> {
                             }
                           },
                         ),
+                        ///TODO 提现
                         new UserImageButton(
                           size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
                           buttonName: "回收",
@@ -325,12 +326,9 @@ class _FightPageState extends State<FightPage> {
                           namePadding: 350,
                           fontSize: SystemFontSize.mainBuildingTextFontSize,
                           callback: () {
-//                            if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                              Provide.value<BaseDialogClickProvider>(context).setDialogShow();
                               Navigator.push(context, PopWindow(pageBuilder: (context) {
                                 return TrainArmyDetail();
                               }));
-//                            }
                           },
                         ),
                       ),
