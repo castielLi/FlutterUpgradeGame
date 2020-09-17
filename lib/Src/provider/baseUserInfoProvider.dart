@@ -98,6 +98,12 @@ class BaseUserInfoProvider with ChangeNotifier {
     this.contribution = contribution;
   }
 
+  ///兑换物资到现金账户
+  exchangeSupplies(int suppliesamount){
+    this.supplies = suppliesamount;
+    notifyListeners();
+  }
+
   ///获取t币
   takeCoin(int tconamount, int woodamount, int stoneamount) {
     this.tcoinamount = tconamount;

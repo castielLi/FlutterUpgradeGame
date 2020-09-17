@@ -7,6 +7,7 @@ import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
+import 'package:upgradegame/Src/pages/recycle/service/recycleService.dart';
 
 class Recycle extends StatefulWidget {
   @override
@@ -23,7 +24,12 @@ class _RecycleState extends State<Recycle> {
   final passwordController = TextEditingController(text: "");
 
   void recycleSupplies(String password,String amount){
-
+    this.widget.HUD();
+    RecycleService.recycleSupplies(password, amount, (model){
+      this.widget.HUD();
+      CommonUtils.showSuccessMessage(msg: "兑换成功,金额已经打入您的现金账户,请查看");
+      Provide.value<BaseUserInfoProvider>(context).exchangeSupplies(model.supplies);
+    });
   }
 
 
