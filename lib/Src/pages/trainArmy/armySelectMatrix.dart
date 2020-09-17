@@ -21,7 +21,7 @@ class _ArmySelectMatrixState extends State<ArmySelectMatrix> {
     List<Widget> content = [];
     for (int i = 0; i < this.widget.armyBaseMatrix.length; i++) {
       content.add(
-        buildRow(this.widget.armyBaseMatrix[i]),
+        buildRow(i, this.widget.armyBaseMatrix[i]),
       );
     }
     return Column(
@@ -30,16 +30,15 @@ class _ArmySelectMatrixState extends State<ArmySelectMatrix> {
     );
   }
 
-  Widget buildRow(List rowArmy) {
+  Widget buildRow(int column, List rowArmy) {
     List<Widget> content = [];
     for (int i = 0; i < rowArmy.length; i++) {
       content.add(
         ArmySelectItem(
           size: this.widget.itemSize,
           armyCode: rowArmy[i],
-          callback: () {
-            print(rowArmy[i].toString());
-          },
+          position: [column, i], //[行，列]
+          callback: () {},
         ),
       );
     }

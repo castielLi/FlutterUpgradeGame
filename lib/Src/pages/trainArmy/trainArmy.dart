@@ -8,6 +8,7 @@ import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/trainArmy/armySelectMatrix.dart';
+import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
@@ -22,6 +23,7 @@ class TrainArmyDetail extends StatefulWidget {
 class _TrainArmyDetailState extends State<TrainArmyDetail> {
   ProgressHUD _progressHUD;
   int lastClickTime;
+  bool attackDefencePageFlagSwitch = false;
 
   @override
   void initState() {
@@ -43,13 +45,24 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
       child: ProvideMulti(
         builder: (context, child, model) {
           BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
+          BaseFightLineupProvider baseFightInfo = model.get<BaseFightLineupProvider>();
           return Stack(
+            // alignment: Alignment.bottomCenter,
             children: <Widget>[
               new Image(
                 image: new AssetImage('resource/images/mainBackground.png'),
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
                 fit: BoxFit.fill,
+              ),
+              new Container(
+                margin: EdgeInsets.only(top: 70),
+                child: new Image(
+                  image: new AssetImage('resource/images/trainArmyBackground.png'),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  fit: BoxFit.fill,
+                ),
               ),
 
               ///资源栏
@@ -152,14 +165,17 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                     Container(
                       child: Column(
                         children: [
-                          ImageButton(
-                            buttonName:'开始匹配',
-                            imageUrl: 'resource/images/upgradeButton.png',
-                            height: ScreenUtil().setHeight(230),
-                            width: ScreenUtil().setWidth(515),
-                            callback: () {
-                              print('match');
-                            },
+                          Offstage(
+                            offstage: this.attackDefencePageFlagSwitch,
+                            child: ImageButton(
+                              buttonName: '开始匹配',
+                              imageUrl: 'resource/images/upgradeButton.png',
+                              height: ScreenUtil().setHeight(230),
+                              width: ScreenUtil().setWidth(515),
+                              callback: () {
+                                print('match');
+                              },
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -168,19 +184,18 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                 imageUrl: "resource/images/upgradeButton.png",
                                 height: ScreenUtil().setHeight(180),
                                 width: ScreenUtil().setWidth(410),
-                                buttonName:'进 攻',
+                                buttonName: '返 回',
                                 callback: () {
-                                  print('attack');
+                                  Application.router.pop(context);
                                 },
                               ),
                               ImageButton(
                                 imageUrl: "resource/images/upgradeButton.png",
                                 height: ScreenUtil().setHeight(180),
                                 width: ScreenUtil().setWidth(410),
-                                buttonName:'防 守',
+                                buttonName: this.attackDefencePageFlagSwitch ? '攻 击' : '防 守',
                                 callback: () {
-                                  print('defence');
-                                  Application.router.pop(context);
+                                  changePages();
                                 },
                               ),
                             ],
@@ -198,5 +213,11 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
         requestedValues: [BaseUserInfoProvider],
       ),
     );
+  }
+
+  void changePages() {
+    setState(() {
+      this.attackDefencePageFlagSwitch = !this.attackDefencePageFlagSwitch;
+    });
   }
 }

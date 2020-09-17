@@ -71,7 +71,6 @@ class _ArmySelectDetailState extends State<ArmySelectDetail> {
                   ],
                 )),
           ),
-
         ],
       ),
     );
