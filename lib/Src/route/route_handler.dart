@@ -8,6 +8,7 @@ import 'package:upgradegame/Src/pages/login/login.dart';
 import 'package:upgradegame/Src/pages/main/mainPage.dart';
 import 'package:upgradegame/Src/pages/privacyTerms/privacyTerms.dart';
 import 'package:upgradegame/Src/pages/welcome/welcomePage.dart';
+import 'package:upgradegame/Src/common/widget/detailDialog/smallDetailDialog.dart';
 
 //config
 Handler welcomePageHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -53,4 +54,21 @@ Handler confirmDialogHandler = Handler(handlerFunc: (BuildContext context, Map<S
 });
 Handler fightPageHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return FightPage();
+});
+
+Handler smallDetailDialogPageHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  double height = double.parse(params['height']?.first);
+  double width = double.parse(params['width']?.first);
+  String childName = params['childName']?.first;
+  String title = params['title']?.first;
+  int row = int.parse(params['row']?.first);
+  int column = int.parse(params['width']?.first);
+  return SmallDetailDialog(
+    height: height,
+    width: width,
+    childWidgetName: childName,
+    title: title,
+    row:row,
+    column: column,
+  );
 });

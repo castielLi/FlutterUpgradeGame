@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/store/model/storeModel.dart';
 import 'package:upgradegame/Src/pages/store/productItem.dart';
 import 'package:upgradegame/Src/pages/store/storeService/storeService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
+
+import 'model/buySuppliesModel.dart';
 
 class StoreDetail extends StatefulWidget {
   @override
@@ -24,27 +27,9 @@ class _StoreDetailState extends State<StoreDetail> {
   @override
   void initState() {
     super.initState();
-//    fluwx.weChatResponseEventHandler.listen((response) async {
-//      print("WeChatPaymentResponse" + response.errCode.toString());
-//      if (response.errCode == 0 && response is WeChatPaymentResponse) {
-//        this.widget.HUD();
-//        StoreService.ConfirmOrder(this.orderId, (VoucherModel model) {
-//          this.widget.HUD();
-//          if (model != null) {
-//            CommonUtils.showSuccessMessage(msg: "购买赠送券成功");
-//            Provide.value<BaseUserInfoProvider>(context).buyVoucher(model.amount);
-//          }
-////          fluwx.weChatResponseEventHandler.skip(1);
-//        });
-//      } else if (response.errCode == -2 && response is WeChatPaymentResponse) {
-//        CommonUtils.showErrorMessage(msg: "已经取消购买");
-//      }
-    // eventBus.fire(new RefreshMineInfo(true));
-    // Navigator.of(context).pop();
-//    });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.widget.HUD();
-      StoreService.getStoreList((data) {
+      StoreService.getSuppliesStoreList((data) {
         if (null != data) {
           setState(() {
             storeList = StoreListModel.fromJson(data).datalist;
@@ -55,26 +40,15 @@ class _StoreDetailState extends State<StoreDetail> {
     });
   }
 
-  void buyVoucher(String productId, BaseUserInfoProvider baseUserInfo) {
-//    this.widget.HUD();
-//    StoreService.buyVoucher(productId, (BuyVoucherWeChatResponseModel model) {
-//      this.widget.HUD();
-//      if (model != null) {
-//        this.orderId = model.orderid;
-//        fluwx
-//            .payWithWeChat(
-//                appId: model.appid,
-//                partnerId: model.partnerid,
-//                prepayId: model.prepayid,
-//                packageValue: model.package,
-//                nonceStr: model.noncestr,
-//                timeStamp: int.parse(model.timestamp),
-//                sign: model.sign)
-//            .then((data) {
-//          print(data);
-//        });
-//      }
-//    });
+  void buySupplies(String productId, BaseUserInfoProvider baseUserInfo) {
+    this.widget.HUD();
+    StoreService.buySupplies(productId, (BuySuppliesModel model) {
+      this.widget.HUD();
+      if (model != null) {
+        CommonUtils.showSuccessMessage(msg: "购买物资成功");
+        Provide.value<BaseUserInfoProvider>(context).buySupplies(model.supplies);
+      }
+    });
   }
 
   @override
@@ -91,7 +65,7 @@ class _StoreDetailState extends State<StoreDetail> {
                   return new ProductItem(
                     volumeAmount: storeList == null ? "" : storeList[index].amount.toString(),
                     callback: () {
-                      this.buyVoucher(storeList[index].productid, baseUserInfo);
+                      this.buySupplies(storeList[index].productid, baseUserInfo);
                     },
                     cashAmount: storeList == null ? "" : storeList[index].price,
                   );

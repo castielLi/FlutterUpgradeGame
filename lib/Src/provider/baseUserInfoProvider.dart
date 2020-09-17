@@ -104,6 +104,13 @@ class BaseUserInfoProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  ///购买物资
+  buySupplies(int suppliesamount){
+    this.supplies = suppliesamount;
+    notifyListeners();
+  }
+
+
   ///获取t币
   takeCoin(int tconamount, int woodamount, int stoneamount) {
     this.tcoinamount = tconamount;

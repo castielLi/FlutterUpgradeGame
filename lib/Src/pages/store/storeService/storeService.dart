@@ -6,7 +6,9 @@ import 'package:upgradegame/Common/http/configSetting.dart';
 import 'package:upgradegame/Common/http/httpManager.dart';
 import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/pages/store/model/buySuppliesModel.dart';
 import 'package:upgradegame/Src/pages/store/model/buyVoucherWeChatResponseModel.dart';
+import 'package:upgradegame/Src/pages/store/model/requestModel/buySuppliesRequestModel.dart';
 import 'package:upgradegame/Src/pages/store/model/requestModel/buyVoucherRequestModel.dart';
 import 'package:upgradegame/Src/pages/store/model/requestModel/weChatConfirmOrderRequestModel.dart';
 import 'package:upgradegame/Src/pages/store/model/voucherModel.dart';
@@ -24,6 +26,17 @@ class StoreService {
     return response;
   }
 
+  static Future<ResultData> getSuppliesStoreList(callback) async {
+    var response = await httpManager.request(ServiceUrl.getSuppliesStoreList(), {}, null, null);
+    if (ConfigSetting.SUCCESS == response.code) {
+      callback(response.data);
+    } else {
+      CommonUtils.showErrorMessage(msg: response.message);
+      callback(null);
+    }
+    return response;
+  }
+
   static Future<ResultData> buyVoucher(String productId, callback) async {
     BuyVoucherRequestModel requestModel = BuyVoucherRequestModel(productid: productId);
     String params = convert.jsonEncode(requestModel);
@@ -32,6 +45,21 @@ class StoreService {
 
     if (response.code == 200) {
       BuyVoucherWeChatResponseModel model = BuyVoucherWeChatResponseModel.fromJson(response.data);
+      callback(model);
+    } else {
+      CommonUtils.showErrorMessage(msg: response.message);
+      callback(null);
+    }
+  }
+
+  static Future<ResultData> buySupplies(String productId, callback) async {
+    BuySuppliesRequestModel requestModel = BuySuppliesRequestModel(productid: productId);
+    String params = convert.jsonEncode(requestModel);
+
+    var response = await httpManager.request(ServiceUrl.buySupplies(), params, null, Options(method: "post"));
+
+    if (response.code == 200) {
+      BuySuppliesModel model = BuySuppliesModel.fromJson(response.data);
       callback(model);
     } else {
       CommonUtils.showErrorMessage(msg: response.message);

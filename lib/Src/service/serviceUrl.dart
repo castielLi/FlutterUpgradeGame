@@ -67,9 +67,24 @@ class ServiceUrl {
     return "${host}api/v2/voucher/list";
   }
 
+  ///获取购买物资列表
+  static getSuppliesStoreList(){
+    return "${host}api/v2/getsupplieslist";
+  }
+
   ///回收物资
   static recycleSupplies(){
     return "${host}api/v2/exchangesupplies";
+  }
+
+  ///获取战场排行榜
+  static getFightRankList(){
+    return "${host}api/v2/getfightranklist";
+  }
+
+  ///获取被攻打的消息
+  static getFightMessageList(){
+    return "${host}api/v2/getprotectfaillist";
   }
 
   ///购买英雄
@@ -90,6 +105,11 @@ class ServiceUrl {
   ///购买赠送券
   static buyVocher() {
     return "${host}api/v2/voucher/buy";
+  }
+
+  ///购买物资
+  static buySupplies(){
+    return "${host}api/v2/buysupplies";
   }
 
   ///微信确认订单情况

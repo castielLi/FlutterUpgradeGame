@@ -6,9 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/message/messageItem.dart';
-import 'package:upgradegame/Src/pages/userInfo/model/tCoinDetailModel.dart';
-import 'package:upgradegame/Src/pages/userInfo/service/userInfoService.dart';
-import 'package:upgradegame/Src/pages/userInfo/tradeDetail/tradeItem.dart';
+import 'package:upgradegame/Src/pages/message/model/fightMessageModel.dart';
+import 'package:upgradegame/Src/pages/message/service/fightMessageService.dart';
 
 class MessageDetail extends StatefulWidget {
   @override
@@ -21,29 +20,28 @@ class MessageDetail extends StatefulWidget {
 }
 
 class _MessageDetailState extends State<MessageDetail> {
-  TCoinDetailModel tCoinDetail = new TCoinDetailModel(total: 0, page: 0, datalist: []);
+  FightMessageModel messageDetail = new FightMessageModel(total: 0, page: 0, datalist: []);
   int page = 0;
   String noTxText = '';
 
   @override
   void initState() {
     super.initState();
-    this.getTCoinDetail();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      this.widget.HUD();
-      this.getTCoinDetail();
-      this.widget.HUD();
+      this.getFightMessageList();
     });
   }
 
-  void getTCoinDetail() {
-    UserInfoService.getUserTCoinDetail(this.page, (TCoinDetailModel model) {
+  void getFightMessageList() {
+    this.widget.HUD();
+    FightMessageService.getFightMessage(this.page, (FightMessageModel model) {
+      this.widget.HUD();
       if (null == model) {
         return;
       }
-      this.tCoinDetail.page = model.page;
+      this.messageDetail.page = model.page;
       if (this.page == 0) {
-        this.tCoinDetail.datalist = [];
+        this.messageDetail.datalist = [];
       }
       if (model.datalist.length == 0) {
         this.noTxText = '目前没有记录';
@@ -52,7 +50,7 @@ class _MessageDetailState extends State<MessageDetail> {
         }
       }
       setState(() {
-        this.tCoinDetail.datalist += model.datalist;
+        this.messageDetail.datalist += model.datalist;
       });
     });
   }
@@ -67,7 +65,7 @@ class _MessageDetailState extends State<MessageDetail> {
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          this.tCoinDetail.datalist.length == 0
+          this.messageDetail.datalist.length == 0
               ? Text(
                   this.noTxText,
                   style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
@@ -118,23 +116,24 @@ class _MessageDetailState extends State<MessageDetail> {
               loadMore: () {
                 // setState(() {
                   this.page++;
-                  getTCoinDetail();
+                  getFightMessageList();
                 // });
               },
               // ignore: missing_return
               onRefresh: () {
                 // setState(() {
                   this.page = 0;
-                  getTCoinDetail();
+                  getFightMessageList();
                 // });
               },
               child: ListView.builder(
-                  itemCount: this.tCoinDetail == null ? 0 : this.tCoinDetail.datalist.length,
+                  itemCount: this.messageDetail == null ? 0 : this.messageDetail.datalist.length,
                   itemBuilder: (content, index) {
-                    Datalist tCoinTx = this.tCoinDetail.datalist[index];
+                    Datalist item = this.messageDetail.datalist[index];
                     return MessageItem(
-                      tDate: tCoinTx.datetime,
-                      result: Random().nextBool()?'胜利':'失败',
+                      tDate: item.time,
+                      displayname: item.displayname,
+                      lineup: item.lineup,
                     );
                   }),
             ),

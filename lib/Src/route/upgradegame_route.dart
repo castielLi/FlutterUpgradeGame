@@ -12,6 +12,7 @@ class UpgradeGameRoute {
   static String privacyTerms = "/privacyTermsPage";
   static String confirmDialog = "/confirmDialog";
   static String fightPage = '/fightPage';
+  static String smallDetailDialog = '/smallDetailDialog';
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {

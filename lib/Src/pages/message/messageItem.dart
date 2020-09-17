@@ -6,14 +6,15 @@ import 'package:upgradegame/Src/pages/trainArmy/trainArmy.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
 class MessageItem extends StatefulWidget {
-  // 交易日期
+  // 攻打日期
   String tDate;
 
-  // 备注
-  String result;
+  // 攻打人名称
+  String displayname;
 
+  String lineup;
 
-  MessageItem({Key key, this.tDate, this.result, }) : super(key: key);
+  MessageItem({Key key, this.tDate, this.displayname, this.lineup}) : super(key: key);
 
   @override
   _MessageItem createState() => _MessageItem();
@@ -32,7 +33,7 @@ class _MessageItem extends State<MessageItem> {
           ),
           Expanded(
             child: Text(
-              this.widget.result,
+              this.widget.displayname,
               textAlign: TextAlign.center,
               style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
             ),
