@@ -32,7 +32,6 @@ class _RecycleDetailState extends State<RecycleDetail> {
     });
   }
 
-  void recycleSupplies(String password, String amount) {}
 
   @override
   Widget build(BuildContext context) {

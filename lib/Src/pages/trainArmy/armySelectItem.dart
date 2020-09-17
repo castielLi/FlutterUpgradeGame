@@ -5,6 +5,7 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/common/model/const/resource.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
+import 'package:upgradegame/Src/common/widget/detailDialog/smallDetailDialog.dart';
 import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
@@ -78,11 +79,13 @@ class _ArmySelectItem extends State<ArmySelectItem> {
 
           if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
             Navigator.push(context, PopWindow(pageBuilder: (context) {
-              return DetailDialog(
-                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+              return SmallDetailDialog(
+                height: ScreenUtil().setHeight(650),
                 width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
                 childWidgetName: 'armySelectDetail',
                 title: "选择兵种",
+                row: 1,
+                column: 1,
               );
             }));
           }

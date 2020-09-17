@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:progress_hud/progress_hud.dart';
-import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
-import 'package:upgradegame/Src/pages/mainBuilding/mainBuilding.dart';
+import 'package:upgradegame/Src/pages/trainArmy/armySelect.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
 class SmallDetailDialog extends StatefulWidget {
@@ -73,10 +72,9 @@ class _SmallDetailDialogState extends State<SmallDetailDialog> {
 
     Widget currentWidget;
     switch (this.widget.childWidgetName) {
-    // 主城
-      case 'mainBuildingDetail':
+      case 'armySelectDetail':
         {
-          currentWidget = new MainBuildingDetail(
+          currentWidget = new ArmySelectDetail(
             HUD: showOrDismissProgressHUD,
           );
           break;
@@ -98,28 +96,20 @@ class _SmallDetailDialogState extends State<SmallDetailDialog> {
                 children: <Widget>[
                   Center(
                     child: new Image(
-                      image: new AssetImage('resource/images/detailDialogbackgroundImage.png'),
+                      image: new AssetImage('resource/images/smallDetailDialogBackground.png'),
                       fit: BoxFit.fill,
                       height: widget.height,
                       width: widget.width,
                     ),
                   ),
                   Container(
-                      height: ScreenUtil().setHeight(380),
-                      child: Center(
-                        child: Text(
-                          this.currentDisplayTitle == "" ? this.widget.title : this.currentDisplayTitle,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, decoration: TextDecoration.none, fontSize: ScreenUtil().setSp(SystemFontSize.detailDialogTitleTextFontSize)),
-                        ),
-                      )),
-                  Container(
+//                    color: Colors.red,
                     height: ScreenUtil().setHeight(210),
-                    width: this.widget.height,
+                    width: this.widget.width,
                     padding: EdgeInsets.only(left: ScreenUtil().setWidth(820)),
                     child: ImageButton(
-                        height: ScreenUtil().setHeight(130),
-                        width: ScreenUtil().setWidth(130),
+                        height: ScreenUtil().setHeight(150),
+                        width: ScreenUtil().setWidth(150),
                         imageUrl: "resource/images/cancelDialog.png",
                         callback: () {
                           /// 防止重复点击
