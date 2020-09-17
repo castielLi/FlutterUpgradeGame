@@ -14,6 +14,7 @@ import 'package:upgradegame/Src/pages/heroAltar/heroAltar.dart';
 import 'package:upgradegame/Src/pages/mainBuilding/mainBuilding.dart';
 import 'package:upgradegame/Src/pages/market/market.dart';
 import 'package:upgradegame/Src/pages/rank/rank.dart';
+import 'package:upgradegame/Src/pages/recycle/recycle.dart';
 import 'package:upgradegame/Src/pages/sawmill/sawmill.dart';
 import 'package:upgradegame/Src/pages/setting/setting.dart';
 import 'package:upgradegame/Src/pages/stone/stone.dart';
@@ -220,6 +221,13 @@ class _DetailDialogState extends State<DetailDialog> {
       case 'trainArmyDetail':
         {
           currentWidget = new TrainArmyDetail(
+            HUD: showOrDismissProgressHUD,
+          );
+          break;
+        }
+      case 'recycleDetail':
+        {
+          currentWidget = new Recycle(
             HUD: showOrDismissProgressHUD,
           );
           break;
