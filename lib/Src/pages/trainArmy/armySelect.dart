@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Src/common/model/const/resource.dart';
 import 'package:upgradegame/Src/pages/armyCamp/armyIconButton.dart';
 import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 
@@ -24,7 +25,7 @@ class _ArmySelectDetailState extends State<ArmySelectDetail> {
   @override
   Widget build(BuildContext context) {
     return ProvideMulti(
-      builder: (context, child, model){
+      builder: (context, child, model) {
         BaseFightLineupProvider baseFightLineUpProvider = model.get<BaseFightLineupProvider>();
         return new Container(
           margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(100), ScreenUtil().setHeight(200), ScreenUtil().setWidth(0), ScreenUtil().setHeight(0)),
@@ -50,8 +51,10 @@ class _ArmySelectDetailState extends State<ArmySelectDetail> {
                                   size: SystemIconSize.armyCampIconSize,
                                   armyIconImageUrl: "resource/images/rangeAttackIcon.png",
                                   callback: () {
-                                    baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, 3);
-                                    // switchBetweenPages('rangeAttack');
+                                    setState(() {
+                                      baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, ArmyType.RANGE_ATTACK);
+                                      Navigator.pop(context);
+                                    });
                                   },
                                 ),
                                 ArmyIconButton(
@@ -59,7 +62,10 @@ class _ArmySelectDetailState extends State<ArmySelectDetail> {
                                   size: SystemIconSize.armyCampIconSize,
                                   armyIconImageUrl: "resource/images/fighterIcon.png",
                                   callback: () {
-                                    baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, 2);
+                                    setState(() {
+                                      baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, ArmyType.FIGHTER);
+                                      Navigator.pop(context);
+                                    });
                                   },
                                 ),
                                 ArmyIconButton(
@@ -67,7 +73,10 @@ class _ArmySelectDetailState extends State<ArmySelectDetail> {
                                   size: SystemIconSize.armyCampIconSize,
                                   armyIconImageUrl: "resource/images/riderIcon.png",
                                   callback: () {
-                                    baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, 1);
+                                    setState(() {
+                                      baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, ArmyType.RIDER);
+                                      Navigator.pop(context);
+                                    });
                                   },
                                 ),
                               ],
@@ -83,12 +92,5 @@ class _ArmySelectDetailState extends State<ArmySelectDetail> {
       },
       requestedValues: [BaseFightLineupProvider],
     );
-  }
-
-  void switchBetweenPages(String name) {
-    setState(() {
-      this.hideDetailPage = !this.hideDetailPage;
-      this.chosenArmy = name;
-    });
   }
 }

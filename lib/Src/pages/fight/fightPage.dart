@@ -58,6 +58,11 @@ class _FightPageState extends State<FightPage> {
     this.showOrDismissProgressHUD();
     FightService.getFightInfo((model) {
       this.showOrDismissProgressHUD();
+      ///测试数据
+      // Provide.value<BaseFightLineupProvider>(context).initLiuneupProvider('test');
+      if(null==model){
+        return;
+      }
       Provide.value<BaseUserInfoProvider>(context).initSupplies(model);
       Provide.value<BaseFightLineupProvider>(context).initLiuneupProvider(model.protectlineup);
     });
