@@ -1,9 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:upgradegame/Src/pages/userInfo/model/cashInfoModel.dart';
+import 'dart:convert' as convert;
+
+import 'package:upgradegame/Src/pages/fight/model/fightInfoModel.dart';
 
 //混入
 class BaseFightLineupProvider with ChangeNotifier {
+
+  int woodproportion;
+  int stoneproportion;
+
   List<List<int>> protect;
   List<List<int>> attack;
 
@@ -11,12 +17,11 @@ class BaseFightLineupProvider with ChangeNotifier {
 
   List<List<int>> get Attack => this.attack;
 
-  initProtectLineup(List<List<int>> protectlineup){
-    protect = protectlineup;
-  }
-
-  initLiuneupProvider(String protectJsonString){
-
+  initLiuneupProvider(FightInfoModel model){
+    this.protect = (convert.jsonDecode(model.protectlineup) as List<dynamic>).cast<List<int>>();
+    this.woodproportion = model.woodproportion;
+    this.stoneproportion = model.stoneproportion;
+    notifyListeners();
   }
 
   initAttactLineup(List<List<int>> attacklineup){
