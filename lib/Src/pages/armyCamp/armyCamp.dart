@@ -74,6 +74,14 @@ class _ArmyCampDetailState extends State<ArmyCampDetail> {
                                 switchBetweenPages('rider');
                               },
                             ),
+                            ArmyIconButton(
+                              isChosen: 'rider' == this.chosenArmy,
+                              size: SystemIconSize.armyCampIconSize,
+                              armyIconImageUrl: "resource/images/mysteriousArmy.png",
+                              callback: () {
+                                // switchBetweenPages('rider');
+                              },
+                            ),
                           ],
                         ),
                       ],
