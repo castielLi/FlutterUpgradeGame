@@ -77,6 +77,18 @@ class ServiceUrl {
     return "${host}api/v2/exchangesupplies";
   }
 
+
+  ///设置防守阵容
+  static setProtectLine(){
+    return "${host}api/v2/setprotectlineup";
+  }
+
+  ///匹配进攻
+  static attack(){
+    return "${host}api/v2/attack";
+  }
+
+
   ///获取战场排行榜
   static getFightRankList(){
     return "${host}api/v2/getfightranklist";
