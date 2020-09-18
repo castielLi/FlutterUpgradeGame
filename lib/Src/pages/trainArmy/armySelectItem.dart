@@ -6,6 +6,7 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/common/model/const/resource.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/smallDetailDialog.dart';
 import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
+import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
 class ArmySelectItem extends StatefulWidget {
@@ -24,82 +25,88 @@ class _ArmySelectItem extends State<ArmySelectItem> {
   @override
   Widget build(BuildContext context) {
     bool hideArmy = (this.widget.armyCode == 0);
-    return GestureDetector(
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Image(
-            image: AssetImage("resource/images/armyBaseBackground.png"),
-            height: ScreenUtil().setHeight(this.widget.size),
-            width: ScreenUtil().setWidth(this.widget.size),
-          ),
-          Offstage(
-            offstage: hideArmy,
-            child: Stack(
-              children: [
-                Image(
-                  image: AssetImage("resource/images/armyBlueBackground.png"),
-                  height: ScreenUtil().setHeight(this.widget.size - 30),
-                  width: ScreenUtil().setWidth(this.widget.size - 30),
+    return ProvideMulti(
+      builder: (context, child, model) {
+        BaseFightLineupProvider baseFightLineUpProvider = model.get<BaseFightLineupProvider>();
+        return GestureDetector(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Image(
+                image: AssetImage("resource/images/armyBaseBackground.png"),
+                height: ScreenUtil().setHeight(this.widget.size),
+                width: ScreenUtil().setWidth(this.widget.size),
+              ),
+              Offstage(
+                offstage: hideArmy,
+                child: Stack(
+                  children: [
+                    Image(
+                      image: AssetImage("resource/images/armyBlueBackground.png"),
+                      height: ScreenUtil().setHeight(this.widget.size - 30),
+                      width: ScreenUtil().setWidth(this.widget.size - 30),
+                    ),
+                    Image(
+                      image: AssetImage(
+                        "resource/images/" + (hideArmy ? "rangeAttack" : ArmyType.getName(this.widget.armyCode)) + "Icon.png",
+                      ),
+                      height: ScreenUtil().setHeight(this.widget.size - 30),
+                      width: ScreenUtil().setWidth(this.widget.size - 30),
+                    ),
+                  ],
                 ),
-                Image(
-                  image: AssetImage(
-                    "resource/images/" + (hideArmy ? "rangeAttack" : ArmyType.getName(this.widget.armyCode)) + "Icon.png",
-                  ),
-                  height: ScreenUtil().setHeight(this.widget.size - 30),
-                  width: ScreenUtil().setWidth(this.widget.size - 30),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
-      onTap: () {
-        print(this.widget.position[0].toString() + this.widget.position[1].toString());
-        if (this.widget.armyCode > 0) {
-          setState(() {
-            this.widget.armyCode = 0;
-          });
-          return;
-        }
+          onTap: () {
+            // print(this.widget.position[0].toString() + this.widget.position[1].toString());
+            if (this.widget.armyCode > 0) {
+              setState(() {
+                baseFightLineUpProvider.changeAttackLineUp(this.widget.position[0], this.widget.position[1], 0);
+                this.widget.armyCode = 0;
+              });
+              return;
+            }
 
-
-        if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-          Navigator.push(context, PopWindow(pageBuilder: (context) {
-            return SmallDetailDialog(
-              height: ScreenUtil().setHeight(650),
-              width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-              childWidgetName: 'armySelectDetail',
-              title: "选择兵种",
-              column: this.widget.position[0],
-              row: this.widget.position[1],
-            );
-          }));
-        }
-
-        // showDialog(
-        //     context: context,
-        //     barrierDismissible: true,
-        //     builder: (army) {
-        //       return SimpleDialog(
-        //         title: Text(
-        //           '选择兵种',
-        //           textAlign: TextAlign.center,
-        //         ),
-        //         titlePadding: EdgeInsets.all(10),
-        //         elevation: 5,
-        //         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(6))),
-        //         children: [
-        //           Container(
-        //             height: ScreenUtil().setHeight(500),
-        //             child: buildContent(this.armySelection),
-        //           ),
-        //         ],
-        //       );
-        //     });
+            if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+              Navigator.push(context, PopWindow(pageBuilder: (context) {
+                return SmallDetailDialog(
+                  height: ScreenUtil().setHeight(650),
+                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                  childWidgetName: 'armySelectDetail',
+                  title: "选择兵种",
+                  column: this.widget.position[0],
+                  row: this.widget.position[1],
+                );
+              }));
+            }
+          },
+        );
       },
+      requestedValues: [BaseFightLineupProvider],
     );
   }
+}
+// showDialog(
+//     context: context,
+//     barrierDismissible: true,
+//     builder: (army) {
+//       return SimpleDialog(
+//         title: Text(
+//           '选择兵种',
+//           textAlign: TextAlign.center,
+//         ),
+//         titlePadding: EdgeInsets.all(10),
+//         elevation: 5,
+//         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(6))),
+//         children: [
+//           Container(
+//             height: ScreenUtil().setHeight(500),
+//             child: buildContent(this.armySelection),
+//           ),
+//         ],
+//       );
+//     });
 
 // Widget buildContent(List armySelection) {
 //   armySelection = ['rangeAttack', 'fighter', 'rider'];
@@ -153,4 +160,3 @@ class _ArmySelectItem extends State<ArmySelectItem> {
 //     children: content,
 //   );
 // }
-}

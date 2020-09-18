@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:upgradegame/Src/pages/userInfo/model/cashInfoModel.dart';
 
 //混入
 class BaseFightLineupProvider with ChangeNotifier {
@@ -11,30 +10,35 @@ class BaseFightLineupProvider with ChangeNotifier {
 
   List<List<int>> get Attack => this.attack;
 
-  initProtectLineup(List<List<int>> protectlineup){
+  initProtectLineup(List<List<int>> protectlineup) {
     protect = protectlineup;
   }
 
-  initLiuneupProvider(String protectJsonString){
-
+  initLiuneupProvider(String protectJsonString) {
+    ///测试数据
+    // attack = [
+    //   [0, 0, 3],
+    //   [0, 1, 0],
+    //   [0, 0, 2],
+    //   [3, 0, 1],
+    //   [0, 0, 0]
+    // ];
   }
 
-  initAttactLineup(List<List<int>> attacklineup){
+  initAttactLineup(List<List<int>> attacklineup) {
     attack = attacklineup;
   }
-  changeAttackLineUp(int column,int row,int num){
 
-    for(int i=0;i<attack.length;i++){
-      if(i==column){
-        for(int n=0;n<attack[i].length;n++){
-          if(n==row){
+  changeAttackLineUp(int column, int row, int num) {
+    for (int i = 0; i < attack.length; i++) {
+      if (i == column) {
+        for (int n = 0; n < attack[i].length; n++) {
+          if (n == row) {
             attack[i][n] = num;
-            print(attack[i][n].toString()+"!!!!!!!");
             return;
           }
         }
       }
     }
-
   }
 }

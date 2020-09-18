@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
     ///TODO 判断是否有新版本
     setState(() {
       // CommonUtils.showSuccessMessage(msg: '检测到新版本，将自动更新应用');
-      this.hasNewVersion = version != '1.1.1';
+      this.hasNewVersion = version != '1.1.0';
     });
 
     if (this.hasNewVersion) {
