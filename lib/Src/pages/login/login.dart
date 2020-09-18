@@ -57,7 +57,12 @@ class _LoginPageState extends State<LoginPage> {
     print(version);
     print(buildNumber);
 
-    if (false) {
+    setState(() {
+      // CommonUtils.showSuccessMessage(msg: '检测到新版本，将自动更新应用');
+      this.hasNewVersion = version != '1.1.1';
+    });
+
+    if (this.hasNewVersion) {
       Directory storageDir = await getExternalStorageDirectory();
       String storagePath = storageDir.path;
       File _apkFile = await BaseService.downloadNewApk(storagePath, "https://imtt.dd.qq.com/16891/apk/7C4D51A8EDF4290DED6C52F5102FDBF3.apk?fsname=com.wodebuluoge.mm_1.1.0_1.apk&csr=1bbd", (progress) {
@@ -424,7 +429,7 @@ class _LoginPageState extends State<LoginPage> {
                                   value: this.progressIndicator,
                                 ),
                                 Text(
-                                  '正在更新应用:' + (this.progressIndicator * 100).floor().toString() + "%",
+                                    this.progressIndicator >= 1 ?"正在处理安装文件,请稍等":'正在更新应用:' + (this.progressIndicator * 100).floor().toString() + "%",
                                   style: TextStyle(color: Colors.blue),
                                 ),
                               ],
