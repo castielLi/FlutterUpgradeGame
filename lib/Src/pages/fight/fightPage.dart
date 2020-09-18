@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/screenutil.dart';
 import 'package:progress_hud/progress_hud.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
 import 'package:upgradegame/Src/pages/fight/service/fightService.dart';
 import 'package:upgradegame/Src/pages/main/common/buildingButton.dart';
@@ -58,14 +59,13 @@ class _FightPageState extends State<FightPage> {
     this.showOrDismissProgressHUD();
     FightService.getFightInfo((model) {
       this.showOrDismissProgressHUD();
-
-      ///测试数据
-      // Provide.value<BaseFightLineupProvider>(context).initLiuneupProvider('test');
-      if (null == model) {
-        return;
+      if(model != null){
+        Provide.value<BaseUserInfoProvider>(context).initSupplies(model);
+        Provide.value<BaseFightLineupProvider>(context).initLiuneupProvider(model);
+        if(model.protectlineup == ""){
+          CommonUtils.showWarningMessage(msg: "您还没设置防守阵容,为了不造成不必要的损失,请设置防守整容");
+        }
       }
-      Provide.value<BaseUserInfoProvider>(context).initSupplies(model);
-      Provide.value<BaseFightLineupProvider>(context).initLiuneupProvider(model.protectlineup);
     });
   }
 
