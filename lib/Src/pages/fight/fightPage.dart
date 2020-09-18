@@ -63,7 +63,7 @@ class _FightPageState extends State<FightPage> {
         Provide.value<BaseUserInfoProvider>(context).initSupplies(model);
         Provide.value<BaseFightLineupProvider>(context).initLiuneupProvider(model);
         if(model.protectlineup == ""){
-          CommonUtils.showWarningMessage(msg: "您还没设置防守阵容,为了防止");
+          CommonUtils.showWarningMessage(msg: "您还没设置防守阵容,为了不造成不必要的损失,请设置防守整容");
         }
       }
     });

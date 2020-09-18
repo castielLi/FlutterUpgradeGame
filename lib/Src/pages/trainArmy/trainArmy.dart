@@ -8,6 +8,7 @@ import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/trainArmy/armySelectMatrix.dart';
+import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
@@ -44,6 +45,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
       child: ProvideMulti(
         builder: (context, child, model) {
           BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
+          BaseFightLineupProvider baseFightLineUpInfo = model.get<BaseFightLineupProvider>();
           return Stack(
             children: <Widget>[
               new Image(
@@ -137,7 +139,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
               ),
 
               Container(
-                height:ScreenUtil().setHeight(1500),
+                height: ScreenUtil().setHeight(1500),
                 margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(0), ScreenUtil().setHeight(300), ScreenUtil().setWidth(0), ScreenUtil().setHeight(0)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -147,14 +149,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                       height: ScreenUtil().setHeight(SystemIconSize.trainArmyIconSize * 5), //大于等于5个高度
                       child: ArmySelectMatrix(
                         itemSize: SystemIconSize.trainArmyIconSize,
-                        // TODO 获取阵容
-                        armyBaseMatrix: [
-                          [0, 0, 3],
-                          [0, 1, 0],
-                          [0, 0, 2],
-                          [3, 0, 1],
-                          [0, 0, 0]
-                        ],
+                        armyBaseMatrix: baseFightLineUpInfo.attack,
                       ),
                     ),
                     Container(
@@ -213,7 +208,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
             ],
           );
         },
-        requestedValues: [BaseUserInfoProvider],
+        requestedValues: [BaseUserInfoProvider, BaseFightLineupProvider],
       ),
     );
   }

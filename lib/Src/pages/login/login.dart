@@ -57,12 +57,6 @@ class _LoginPageState extends State<LoginPage> {
     print(version);
     print(buildNumber);
 
-    ///TODO 判断是否有新版本
-//    setState(() {
-//      // CommonUtils.showSuccessMessage(msg: '检测到新版本，将自动更新应用');
-//      this.hasNewVersion = version != '1.1.1';
-//    });
-
     if (false) {
       Directory storageDir = await getExternalStorageDirectory();
       String storagePath = storageDir.path;
