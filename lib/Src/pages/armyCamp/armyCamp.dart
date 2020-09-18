@@ -75,7 +75,7 @@ class _ArmyCampDetailState extends State<ArmyCampDetail> {
                               },
                             ),
                             ArmyIconButton(
-                              isChosen: 'rider' == this.chosenArmy,
+                              isChosen: false,
                               size: SystemIconSize.armyCampIconSize,
                               armyIconImageUrl: "resource/images/mysteriousArmy.png",
                               callback: () {

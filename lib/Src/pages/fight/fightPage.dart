@@ -58,10 +58,10 @@ class _FightPageState extends State<FightPage> {
     this.showOrDismissProgressHUD();
     FightService.getFightInfo((model) {
       this.showOrDismissProgressHUD();
-      if(model != null){
+      if (model != null) {
         Provide.value<BaseUserInfoProvider>(context).initSupplies(model);
         Provide.value<BaseFightLineupProvider>(context).initLiuneupProvider(model);
-        if(model.protectlineup == ""){
+        if (model.protectlineup == "") {
           CommonUtils.showWarningMessage(msg: "您还没设置防守阵容,为了不造成不必要的损失,请设置防守整容");
         }
       }
@@ -188,16 +188,14 @@ class _FightPageState extends State<FightPage> {
                           imageUrl: "resource/images/rank.png",
                           textSize: SystemFontSize.operationTextFontSize,
                           callback: () {
-
-                              Navigator.push(context, PopWindow(pageBuilder: (context) {
-                                return DetailDialog(
-                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                  childWidgetName: 'fightRankDetail',
-                                  title: "排行榜",
-                                );
-                              }));
-
+                            Navigator.push(context, PopWindow(pageBuilder: (context) {
+                              return DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'fightRankDetail',
+                                title: "排行榜",
+                              );
+                            }));
                           },
                         ),
                         new UserImageButton(
@@ -206,16 +204,14 @@ class _FightPageState extends State<FightPage> {
                           textSize: SystemFontSize.operationTextFontSize,
                           imageUrl: "resource/images/team.png",
                           callback: () {
-
-                              Navigator.push(context, PopWindow(pageBuilder: (context) {
-                                return DetailDialog(
-                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                  childWidgetName: 'messageDetail',
-                                  title: "消 息",
-                                );
-                              }));
-
+                            Navigator.push(context, PopWindow(pageBuilder: (context) {
+                              return DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'messageDetail',
+                                title: "消 息",
+                              );
+                            }));
                           },
                         ),
                         new UserImageButton(
@@ -224,16 +220,14 @@ class _FightPageState extends State<FightPage> {
                           imageUrl: "resource/images/rank.png",
                           textSize: SystemFontSize.operationTextFontSize,
                           callback: () {
-
-                              Navigator.push(context, PopWindow(pageBuilder: (context) {
-                                return DetailDialog(
-                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                  childWidgetName: 'storeDetail',
-                                  title: "商 城",
-                                );
-                              }));
-
+                            Navigator.push(context, PopWindow(pageBuilder: (context) {
+                              return DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'storeDetail',
+                                title: "商 城",
+                              );
+                            }));
                           },
                         ),
                         new UserImageButton(
@@ -242,16 +236,14 @@ class _FightPageState extends State<FightPage> {
                           textSize: SystemFontSize.operationTextFontSize,
                           imageUrl: "resource/images/team.png",
                           callback: () {
-
-                              Navigator.push(context, PopWindow(pageBuilder: (context) {
-                                return DetailDialog(
-                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                  childWidgetName: 'recycleDetail',
-                                  title: "回 收",
-                                );
-                              }));
-
+                            Navigator.push(context, PopWindow(pageBuilder: (context) {
+                              return DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'recycleDetail',
+                                title: "回 收",
+                              );
+                            }));
                           },
                         ),
                       ],
@@ -294,16 +286,14 @@ class _FightPageState extends State<FightPage> {
                           namePadding: 320,
                           fontSize: SystemFontSize.mainBuildingTextFontSize,
                           callback: () {
-
-                              Navigator.push(context, PopWindow(pageBuilder: (context) {
-                                return DetailDialog(
-                                  height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                  childWidgetName: 'armyCampDetail',
-                                  title: "兵 营",
-                                );
-                              }));
-
+                            Navigator.push(context, PopWindow(pageBuilder: (context) {
+                              return DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'armyCampDetail',
+                                title: "兵 营",
+                              );
+                            }));
                           },
                         ),
                       ),
