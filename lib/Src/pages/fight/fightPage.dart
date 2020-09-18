@@ -11,7 +11,6 @@ import 'package:upgradegame/Src/pages/main/common/buildingButton.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/trainArmy/trainArmy.dart';
-import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
 import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
@@ -189,7 +188,7 @@ class _FightPageState extends State<FightPage> {
                           imageUrl: "resource/images/rank.png",
                           textSize: SystemFontSize.operationTextFontSize,
                           callback: () {
-                            if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+
                               Navigator.push(context, PopWindow(pageBuilder: (context) {
                                 return DetailDialog(
                                   height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -198,7 +197,7 @@ class _FightPageState extends State<FightPage> {
                                   title: "排行榜",
                                 );
                               }));
-                            }
+
                           },
                         ),
                         new UserImageButton(
@@ -207,7 +206,7 @@ class _FightPageState extends State<FightPage> {
                           textSize: SystemFontSize.operationTextFontSize,
                           imageUrl: "resource/images/team.png",
                           callback: () {
-                            if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+
                               Navigator.push(context, PopWindow(pageBuilder: (context) {
                                 return DetailDialog(
                                   height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -216,7 +215,7 @@ class _FightPageState extends State<FightPage> {
                                   title: "消 息",
                                 );
                               }));
-                            }
+
                           },
                         ),
                         new UserImageButton(
@@ -225,7 +224,7 @@ class _FightPageState extends State<FightPage> {
                           imageUrl: "resource/images/rank.png",
                           textSize: SystemFontSize.operationTextFontSize,
                           callback: () {
-                            if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+
                               Navigator.push(context, PopWindow(pageBuilder: (context) {
                                 return DetailDialog(
                                   height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -234,7 +233,7 @@ class _FightPageState extends State<FightPage> {
                                   title: "商 城",
                                 );
                               }));
-                            }
+
                           },
                         ),
                         new UserImageButton(
@@ -243,7 +242,7 @@ class _FightPageState extends State<FightPage> {
                           textSize: SystemFontSize.operationTextFontSize,
                           imageUrl: "resource/images/team.png",
                           callback: () {
-                            if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+
                               Navigator.push(context, PopWindow(pageBuilder: (context) {
                                 return DetailDialog(
                                   height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -252,7 +251,7 @@ class _FightPageState extends State<FightPage> {
                                   title: "回 收",
                                 );
                               }));
-                            }
+
                           },
                         ),
                       ],
@@ -295,7 +294,7 @@ class _FightPageState extends State<FightPage> {
                           namePadding: 320,
                           fontSize: SystemFontSize.mainBuildingTextFontSize,
                           callback: () {
-                            if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+
                               Navigator.push(context, PopWindow(pageBuilder: (context) {
                                 return DetailDialog(
                                   height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -304,7 +303,7 @@ class _FightPageState extends State<FightPage> {
                                   title: "兵 营",
                                 );
                               }));
-                            }
+
                           },
                         ),
                       ),

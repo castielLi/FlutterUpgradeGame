@@ -5,7 +5,6 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Src/common/model/const/resource.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/smallDetailDialog.dart';
-import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
 import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
@@ -68,7 +67,7 @@ class _ArmySelectItem extends State<ArmySelectItem> {
               return;
             }
 
-            if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
+
               Navigator.push(context, PopWindow(pageBuilder: (context) {
                 return SmallDetailDialog(
                   height: ScreenUtil().setHeight(650),
@@ -79,7 +78,7 @@ class _ArmySelectItem extends State<ArmySelectItem> {
                   row: this.widget.position[1],
                 );
               }));
-            }
+
           },
         );
       },

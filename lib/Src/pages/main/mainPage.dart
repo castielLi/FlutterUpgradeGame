@@ -22,7 +22,6 @@ import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/main/model/requestGetCoinModel.dart';
 import 'package:upgradegame/Src/pages/main/model/takeCoinModel.dart';
 import 'package:upgradegame/Src/pages/main/service/mainService.dart';
-import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 import 'package:upgradegame/Src/route/upgradegame_route.dart';
@@ -341,8 +340,7 @@ class _MainPageState extends State<MainPage> {
                                 netWorkImageUrl: baseUserInfo.avatar,
                                 netWorkImage: true,
                                 callback: () {
-                                  if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+
                                     Navigator.push(context, PopWindow(pageBuilder: (context) {
                                       return DetailDialog(
                                           height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -350,7 +348,7 @@ class _MainPageState extends State<MainPage> {
                                           childWidgetName: 'userInfoDetail',
                                           title: "个人信息");
                                     }));
-                                  }
+
                                 },
                               ),
                             ),
@@ -388,8 +386,7 @@ class _MainPageState extends State<MainPage> {
                                 imageUrl: "resource/images/rank.png",
                                 textSize: SystemFontSize.operationTextFontSize,
                                 callback: () {
-                                  if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+
                                     Navigator.push(context, PopWindow(pageBuilder: (context) {
                                       return DetailDialog(
                                         height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -398,7 +395,7 @@ class _MainPageState extends State<MainPage> {
                                         title: "排行榜",
                                       );
                                     }));
-                                  }
+
                                 },
                               ),
                               new UserImageButton(
@@ -407,8 +404,7 @@ class _MainPageState extends State<MainPage> {
                                 textSize: SystemFontSize.operationTextFontSize,
                                 imageUrl: "resource/images/team.png",
                                 callback: () {
-                                  if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+
                                     Navigator.push(context, PopWindow(pageBuilder: (context) {
                                       return DetailDialog(
                                         height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -417,7 +413,7 @@ class _MainPageState extends State<MainPage> {
                                         title: "团 队",
                                       );
                                     }));
-                                  }
+
                                 },
                               ),
                               new UserImageButton(
@@ -426,8 +422,7 @@ class _MainPageState extends State<MainPage> {
                                 imageUrl: "resource/images/contribution.png",
                                 textSize: SystemFontSize.operationTextFontSize,
                                 callback: () {
-                                  if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+
                                     Navigator.push(context, PopWindow(pageBuilder: (context) {
                                       return DetailDialog(
                                         height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -436,7 +431,7 @@ class _MainPageState extends State<MainPage> {
                                         title: "贡献值",
                                       );
                                     }));
-                                  }
+
                                 },
                               ),
                               new UserImageButton(
@@ -465,8 +460,7 @@ class _MainPageState extends State<MainPage> {
                             title: "今日分红",
                             amount: "¥" + (autoProfitSharing == 0.00 ? this.displayInitProfitSharing() : autoProfitSharing.toStringAsFixed(2)),
                             callback: () {
-                              if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                                Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+
                                 Navigator.push(context, PopWindow(pageBuilder: (context) {
                                   return DetailDialog(
                                     height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -475,7 +469,7 @@ class _MainPageState extends State<MainPage> {
                                     title: "广告分红",
                                   );
                                 }));
-                              }
+
                             },
                           ),
                         ),
@@ -491,8 +485,7 @@ class _MainPageState extends State<MainPage> {
                                     textSize: SystemFontSize.operationTextFontSize,
                                     imageUrl: "resource/images/setting.png",
                                     callback: () {
-                                      if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                                        Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+
                                         Navigator.push(context, PopWindow(pageBuilder: (context) {
                                           return DetailDialog(
                                             height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -501,7 +494,7 @@ class _MainPageState extends State<MainPage> {
                                             title: "必 读",
                                           );
                                         }));
-                                      }
+
                                     },
                                   ),
                                   new UserImageButton(
@@ -510,8 +503,7 @@ class _MainPageState extends State<MainPage> {
                                     textSize: SystemFontSize.operationTextFontSize,
                                     imageUrl: "resource/images/announcement.png",
                                     callback: () {
-                                      if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                                        Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+
                                         Navigator.push(context, PopWindow(pageBuilder: (context) {
                                           return DetailDialog(
                                             height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -520,7 +512,7 @@ class _MainPageState extends State<MainPage> {
                                             title: "公 告",
                                           );
                                         }));
-                                      }
+
                                     },
                                   ),
                                 ],
@@ -531,8 +523,7 @@ class _MainPageState extends State<MainPage> {
                                 textSize: SystemFontSize.operationTextFontSize,
                                 imageUrl: "resource/images/activity.png",
                                 callback: () {
-                                  if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                                    Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+
                                     Navigator.push(context, PopWindow(pageBuilder: (context) {
                                       return DetailDialog(
                                         height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -541,7 +532,7 @@ class _MainPageState extends State<MainPage> {
                                         title: "活 动",
                                       );
                                     }));
-                                  }
+
                                 },
                               ),
                             ],
@@ -564,8 +555,7 @@ class _MainPageState extends State<MainPage> {
                         namePadding: 420,
                         fontSize: SystemFontSize.mainBuildingTextFontSize,
                         callback: () {
-                          if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                            Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+
                             Navigator.push(context, PopWindow(pageBuilder: (context) {
                               return DetailDialog(
                                 height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -574,7 +564,7 @@ class _MainPageState extends State<MainPage> {
                                 title: "主 城",
                               );
                             }));
-                          }
+
                         },
                       ),
                     ),
@@ -614,8 +604,7 @@ class _MainPageState extends State<MainPage> {
                       namePadding: 200,
                       fontSize: SystemFontSize.otherBuildingTextFontSize,
                       callback: () {
-                        if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+
                           Navigator.push(context, PopWindow(pageBuilder: (context) {
                             return DetailDialog(
                               height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -624,7 +613,7 @@ class _MainPageState extends State<MainPage> {
                               title: "英雄祭坛",
                             );
                           }));
-                        }
+
                       },
                     ),
                   ),
@@ -640,8 +629,7 @@ class _MainPageState extends State<MainPage> {
                       namePadding: 200,
                       fontSize: SystemFontSize.otherBuildingTextFontSize,
                       callback: () {
-                        if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+
                           Navigator.push(context, PopWindow(pageBuilder: (context) {
                             return DetailDialog(
                               height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -650,7 +638,7 @@ class _MainPageState extends State<MainPage> {
                               title: "采石场",
                             );
                           }));
-                        }
+
                       },
                     ),
                   ),
@@ -666,8 +654,7 @@ class _MainPageState extends State<MainPage> {
                       namePadding: 190,
                       fontSize: SystemFontSize.otherBuildingTextFontSize,
                       callback: () {
-                        if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+
                           Navigator.push(context, PopWindow(pageBuilder: (context) {
                             return DetailDialog(
                               height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -676,7 +663,7 @@ class _MainPageState extends State<MainPage> {
                               title: "伐木场",
                             );
                           }));
-                        }
+
                       },
                     ),
                   ),
@@ -692,8 +679,7 @@ class _MainPageState extends State<MainPage> {
                       namePadding: 190,
                       fontSize: SystemFontSize.otherBuildingTextFontSize,
                       callback: () {
-                        if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+
                           Navigator.push(context, PopWindow(pageBuilder: (context) {
                             return DetailDialog(
                               height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -702,7 +688,7 @@ class _MainPageState extends State<MainPage> {
                               title: "农 场",
                             );
                           }));
-                        }
+
                       },
                     ),
                   ),
@@ -718,8 +704,7 @@ class _MainPageState extends State<MainPage> {
                       fontSize: SystemFontSize.otherBuildingTextFontSize,
                       namePadding: 170,
                       callback: () {
-                        if (!Provide.value<BaseDialogClickProvider>(context).hasClickDialog) {
-//                          Provide.value<BaseDialogClickProvider>(context).setDialogShow();
+
                           Navigator.push(context, PopWindow(pageBuilder: (context) {
                             return DetailDialog(
                               height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
@@ -728,7 +713,7 @@ class _MainPageState extends State<MainPage> {
                               title: "市 场",
                             );
                           }));
-                        }
+
                       },
                     ),
                   ),

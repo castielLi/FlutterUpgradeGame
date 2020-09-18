@@ -25,7 +25,6 @@ import 'package:upgradegame/Src/pages/team/team.dart';
 import 'package:upgradegame/Src/pages/trainArmy/armySelect.dart';
 import 'package:upgradegame/Src/pages/trainArmy/trainArmy.dart';
 import 'package:upgradegame/Src/pages/userInfo/userInfo.dart';
-import 'package:upgradegame/Src/provider/baseDialogClickProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
 class DetailDialog extends StatefulWidget {
