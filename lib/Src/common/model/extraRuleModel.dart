@@ -9,6 +9,8 @@ class ExtraRuleModel {
   int farmtwo;
   int farmthree;
   int wood;
+  String appversion;
+  String downloadurl;
 
   ExtraRuleModel(
       {this.adview,
@@ -20,10 +22,14 @@ class ExtraRuleModel {
         this.farmone,
         this.farmtwo,
         this.farmthree,
-        this.wood});
+        this.wood,
+      this.appversion,
+      this.downloadurl});
 
   ExtraRuleModel.fromJson(Map<String, dynamic> json) {
     adview = json['adview'];
+    appversion = json['appversion'];
+    downloadurl = json['downloadurl'];
     baidu = json['baidu'];
     tengxun = json['tengxun'];
     chuanshanjia = json['chuanshanjia'];
@@ -38,6 +44,8 @@ class ExtraRuleModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['adview'] = this.adview;
+    data['appversion'] = this.appversion;
+    data['downloadurl'] = this.downloadurl;
     data['baidu'] = this.baidu;
     data['tengxun'] = this.tengxun;
     data['chuanshanjia'] = this.chuanshanjia;

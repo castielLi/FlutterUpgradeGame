@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
   bool hasNewVersion = false;
   double progressIndicator = 0;
 
-  void judgementNewVersion() async {
+  void judgementNewVersion(String version,String downloadUrl) async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
     String appName = packageInfo.appName;
@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
 
     setState(() {
       // CommonUtils.showSuccessMessage(msg: '检测到新版本，将自动更新应用');
-      this.hasNewVersion = version != '1.1.1';
+      this.hasNewVersion = version != '1.1.0';
     });
 
     if (this.hasNewVersion) {
@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
       if (model != null) {
         Global();
         Global.setExtraRule(model);
-        this.judgementNewVersion();
+        this.judgementNewVersion(model.appversion,model.downloadurl);
       } else {
         ///强制关闭程序
         SystemNavigator.pop();
@@ -465,7 +465,7 @@ class _LoginPageState extends State<LoginPage> {
       if (model != null) {
         ///初始化用户
         Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(model.userinfo);
-        
+
         Application.router.navigateTo(context, UpgradeGameRoute.mainPage, clearStack: true);
       }
     });

@@ -106,7 +106,7 @@ class ServiceUrl {
 
   ///获取战斗界面基础信息
   static getFightInfo(){
-    return "${host}api/v2/fightinfo";
+    return "${host}api/v2/fight/info";
   }
 
   ///获取英雄列表
