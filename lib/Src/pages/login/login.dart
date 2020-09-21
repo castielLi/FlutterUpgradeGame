@@ -53,8 +53,8 @@ class _LoginPageState extends State<LoginPage> {
     String packageName = packageInfo.packageName;
     String version = packageInfo.version;
     String buildNumber = packageInfo.buildNumber;
-    print(version);
-    print(buildNumber);
+    // print(version);
+    // print(buildNumber);
 
     setState(() {
       // CommonUtils.showSuccessMessage(msg: '检测到新版本，将自动更新应用');

@@ -6,7 +6,12 @@ class ArmySelectMatrix extends StatefulWidget {
   List armyBaseMatrix;
   double itemSize;
 
-  ArmySelectMatrix({Key key, this.HUD, this.itemSize, this.armyBaseMatrix}) : super(key: key);
+  ArmySelectMatrix(
+      {Key key,
+      this.HUD,
+      this.itemSize,
+      this.armyBaseMatrix})
+      : super(key: key);
 
   _ArmySelectMatrixState createState() => new _ArmySelectMatrixState();
 }
@@ -14,6 +19,15 @@ class ArmySelectMatrix extends StatefulWidget {
 class _ArmySelectMatrixState extends State<ArmySelectMatrix> {
   @override
   Widget build(BuildContext context) {
+    if(null==this.widget.armyBaseMatrix){
+      this.widget.armyBaseMatrix = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+      ];
+    }
     return buildContent();
   }
 
