@@ -7,12 +7,18 @@ import 'package:upgradegame/Common/http/httpManager.dart';
 import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/trainArmy/model/attackModel.dart';
+import 'package:upgradegame/Src/pages/trainArmy/model/requestModel/SetAttackRequsetModel.dart';
+import 'package:upgradegame/Src/pages/trainArmy/model/requestModel/SetProtectRequestModel.dart';
 import 'package:upgradegame/Src/service/serviceUrl.dart';
 
-class RecycleService {
+class ArmyService {
   static Future<ResultData> setProtectLineup(List<List<int>> protectLineup,callback) async {
 
-    var params = convert.jsonEncode(protectLineup);
+    List<List<int>> a = [[0,1,0],[2,0,0],[0,0,1],[1,0,0],[3,0,0]];
+
+    SetProtectRequestModel requestModel = SetProtectRequestModel(jsonstring: convert.jsonEncode(a));
+
+    var params = convert.jsonEncode(requestModel);
     var response = await httpManager.request(ServiceUrl.setProtectLine(), params, null, Options(method: "post"));
     if (ConfigSetting.SUCCESS == response.code) {
       callback(true);
@@ -25,7 +31,11 @@ class RecycleService {
 
   static Future<ResultData> attack(List<List<int>> attacLineup,callback) async {
 
-    var params = convert.jsonEncode(attacLineup);
+    List<List<int>> a = [[0,1,0],[0,1,0],[1,0,0],[2,0,0],[0,0,1]];
+
+    SetAttackRequestModel requestModel = SetAttackRequestModel(jsonstring: convert.jsonEncode(a));
+
+    var params = convert.jsonEncode(requestModel);
     var response = await httpManager.request(ServiceUrl.attack(), params, null, Options(method: "post"));
     if (ConfigSetting.SUCCESS == response.code) {
       AttackModel model = AttackModel.fromJson(response.data);

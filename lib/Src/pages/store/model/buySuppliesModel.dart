@@ -1,15 +1,18 @@
 class BuySuppliesModel {
-  int supplies;
+  int suppliesamount;
+  int tcoinamount;
 
-  BuySuppliesModel({this.supplies});
+  BuySuppliesModel({this.suppliesamount,this.tcoinamount});
 
   BuySuppliesModel.fromJson(Map<String, dynamic> json) {
-    supplies = json['supplies'];
+    suppliesamount = json['suppliesamount'];
+    tcoinamount = json['tcoinamount'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['supplies'] = this.supplies;
+    data['suppliesamount'] = this.suppliesamount;
+    data['tcoinamount'] = this.tcoinamount;
     return data;
   }
 }

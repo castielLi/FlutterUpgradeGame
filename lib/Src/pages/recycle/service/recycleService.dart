@@ -13,7 +13,7 @@ import 'package:upgradegame/Src/service/serviceUrl.dart';
 class RecycleService {
   static Future<ResultData> recycleSupplies(String password, String amount ,callback) async {
 
-    RecycleSuppliesRequestModel requestModel = RecycleSuppliesRequestModel(password: password,amount: amount);
+    RecycleSuppliesRequestModel requestModel = RecycleSuppliesRequestModel(password: password,suppliesamount: int.parse(amount));
     var param = convert.jsonEncode(requestModel);
     var response = await httpManager.request(ServiceUrl.recycleSupplies(), param, null, Options(method: "post"));
     if (ConfigSetting.SUCCESS == response.code) {

@@ -16,7 +16,7 @@ class FightRankDetail extends StatefulWidget {
 }
 
 class _FightRankDetailState extends State<FightRankDetail> {
-  List<RankCoinModel> fightList = [];
+  List<dynamic> fightList = [];
   String tabName = 'coin';
 
   @override

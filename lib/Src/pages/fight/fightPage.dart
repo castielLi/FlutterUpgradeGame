@@ -312,7 +312,9 @@ class _FightPageState extends State<FightPage> {
                           fontSize: SystemFontSize.mainBuildingTextFontSize,
                           callback: () {
                             Navigator.push(context, PopWindow(pageBuilder: (context) {
-                              return TrainArmyDetail();
+                              return TrainArmyDetail(
+                                HUD: this.showOrDismissProgressHUD,
+                              );
                             }));
                           },
                         ),

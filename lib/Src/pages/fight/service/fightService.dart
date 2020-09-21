@@ -11,7 +11,7 @@ import 'package:upgradegame/Src/service/serviceUrl.dart';
 class FightService {
   static Future<ResultData> getFightInfo(callback) async {
 
-    var response = await httpManager.request(ServiceUrl.getFightInfo(), {}, null, Options(method: "post"));
+    var response = await httpManager.request(ServiceUrl.getFightInfo(), {}, null, null);
     if (response.code == 200) {
       FightInfoModel model = FightInfoModel.fromJson(response.data);
       callback(model);

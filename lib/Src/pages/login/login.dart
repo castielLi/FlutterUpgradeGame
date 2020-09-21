@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
   bool hasNewVersion = false;
   double progressIndicator = 0;
 
-  void judgementNewVersion(String version,String downloadUrl) async {
+  void judgementNewVersion(String appVersion,String downloadUrl) async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
     String appName = packageInfo.appName;
@@ -56,12 +56,13 @@ class _LoginPageState extends State<LoginPage> {
     // print(version);
     // print(buildNumber);
 
-    setState(() {
-      // CommonUtils.showSuccessMessage(msg: '检测到新版本，将自动更新应用');
-      this.hasNewVersion = version != '1.1.0';
-    });
+//    setState(() {
+//      // CommonUtils.showSuccessMessage(msg: '检测到新版本，将自动更新应用');
+//      this.hasNewVersion = version != appVersion;
+//    });
 
-    if (this.hasNewVersion) {
+//    if (this.hasNewVersion) {
+    if(false){
       Directory storageDir = await getExternalStorageDirectory();
       String storagePath = storageDir.path;
       File _apkFile = await BaseService.downloadNewApk(storagePath, "https://imtt.dd.qq.com/16891/apk/7C4D51A8EDF4290DED6C52F5102FDBF3.apk?fsname=com.wodebuluoge.mm_1.1.0_1.apk&csr=1bbd", (progress) {

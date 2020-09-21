@@ -5,12 +5,14 @@ import 'package:progress_hud/progress_hud.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/trainArmy/armySelectMatrix.dart';
 import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
+import 'package:upgradegame/Src/pages/trainArmy/service/armyService.dart';
 
 class TrainArmyDetail extends StatefulWidget {
   VoidCallback HUD;
@@ -156,7 +158,9 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                       child: Column(
                         children: [
                           Offstage(
-                            offstage: this.attackDefencePageSwitch,
+                            ///todo:黄河 没有判断是进攻阵容还是防守阵容
+//                            offstage: this.attackDefencePageSwitch,
+                            offstage: false,
                             child: Column(
                               children: [
                                 Text(
@@ -170,6 +174,14 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                   width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
                                   callback: () {
                                     print('match');
+                                    this.widget.HUD();
+//                                    ArmyService.setProtectLineup(baseFightLineUpInfo.protect, (success){
+                                      ArmyService.attack(baseFightLineUpInfo.attack,(success){
+                                      this.widget.HUD();
+                                      if(success){
+                                        CommonUtils.showSuccessMessage(msg: "设置防守阵容成功");
+                                      }
+                                    });
                                   },
                                 ),
                               ],

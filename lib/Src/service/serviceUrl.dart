@@ -3,9 +3,9 @@ class ServiceUrl {
   ///fastmock
 //      "https://www.fastmock.site/mock/095e3520b3833640934d29559631cc16/";
   ///server
-  "https://test.buluo888.com/";
+//  "https://test.buluo888.com/";
 //    "https://gufeng.buluo888.com/";
-//  "http://192.168.31.46:8080/";
+  "http://192.168.31.46:8080/";
   static const String downloadUrl = '';
 
   /// rule
@@ -69,34 +69,34 @@ class ServiceUrl {
 
   ///获取购买物资列表
   static getSuppliesStoreList(){
-    return "${host}api/v2/getsupplieslist";
+    return "${host}api/v2/fight/getsupplieslist";
   }
 
   ///回收物资
   static recycleSupplies(){
-    return "${host}api/v2/exchangesupplies";
+    return "${host}api/v2/fight/exchangesupplies";
   }
 
 
   ///设置防守阵容
   static setProtectLine(){
-    return "${host}api/v2/setprotectlineup";
+    return "${host}api/v2/fight/setprotectlineup";
   }
 
   ///匹配进攻
   static attack(){
-    return "${host}api/v2/attack";
+    return "${host}api/v2/fight/attack";
   }
 
 
   ///获取战场排行榜
   static getFightRankList(){
-    return "${host}api/v2/getfightranklist";
+    return "${host}api/v2/fight/getfightranklist";
   }
 
   ///获取被攻打的消息
   static getFightMessageList(){
-    return "${host}api/v2/getprotectfaillist";
+    return "${host}api/v2/fight/getprotectfaillist";
   }
 
   ///购买英雄
@@ -121,7 +121,7 @@ class ServiceUrl {
 
   ///购买物资
   static buySupplies(){
-    return "${host}api/v2/buysupplies";
+    return "${host}api/v2/fight/buysupplies";
   }
 
   ///微信确认订单情况

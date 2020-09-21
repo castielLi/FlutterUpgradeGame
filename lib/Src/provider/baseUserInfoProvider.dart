@@ -28,9 +28,9 @@ class BaseUserInfoProvider with ChangeNotifier {
 
   int supplies;
   int limitsuppliesrecycle;
-  double suppliesprice;
+  String suppliesprice;
 
-  double get SuppliesPrice => suppliesprice;
+  String get SuppliesPrice => suppliesprice;
   int get LimitSuppliesRecycle => limitsuppliesrecycle;
   int get Supplies => supplies;
 
@@ -105,8 +105,9 @@ class BaseUserInfoProvider with ChangeNotifier {
   }
 
   ///购买物资
-  buySupplies(int suppliesamount){
+  buySupplies(int suppliesamount,int tcoinamount){
     this.supplies = suppliesamount;
+    this.tcoinamount = tcoinamount;
     notifyListeners();
   }
 

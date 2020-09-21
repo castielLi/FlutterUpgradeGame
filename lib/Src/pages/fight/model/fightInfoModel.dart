@@ -3,7 +3,7 @@ class FightInfoModel {
   bool hasbuy;
   int woodproportion;
   int stoneproportion;
-  double suppliesprice;
+  String suppliesprice;
   int limitsuppliesrecycle;
   String protectlineup;
 

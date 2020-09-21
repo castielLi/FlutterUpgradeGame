@@ -18,7 +18,12 @@ class BaseFightLineupProvider with ChangeNotifier {
 
 
   initLiuneupProvider(FightInfoModel model){
-    this.protect = (convert.jsonDecode(model.protectlineup) as List<dynamic>).cast<List<int>>();
+    if(model.protectlineup != "") {
+      this.protect =
+          (convert.jsonDecode(model.protectlineup) as List<dynamic>).cast<
+              List<int>>();
+    }
+    this.attack = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]];
     this.woodproportion = model.woodproportion;
     this.stoneproportion = model.stoneproportion;
     notifyListeners();
@@ -40,5 +45,6 @@ class BaseFightLineupProvider with ChangeNotifier {
         }
       }
     }
+//    protect = attack;
   }
 }

@@ -46,7 +46,7 @@ class _StoreDetailState extends State<StoreDetail> {
       this.widget.HUD();
       if (model != null) {
         CommonUtils.showSuccessMessage(msg: "购买物资成功");
-        Provide.value<BaseUserInfoProvider>(context).buySupplies(model.supplies);
+        Provide.value<BaseUserInfoProvider>(context).buySupplies(model.suppliesamount,model.tcoinamount);
       }
     });
   }
@@ -67,7 +67,7 @@ class _StoreDetailState extends State<StoreDetail> {
                     callback: () {
                       this.buySupplies(storeList[index].productid, baseUserInfo);
                     },
-                    cashAmount: storeList == null ? "" : storeList[index].price,
+                    cashAmount: storeList == null ? "" : storeList[index].price.toString(),
                   );
                 }),
           );

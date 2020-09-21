@@ -1,18 +1,18 @@
 class RecycleSuppliesRequestModel {
   String password;
-  String amount;
+  int suppliesamount;
 
-  RecycleSuppliesRequestModel({this.password, this.amount});
+  RecycleSuppliesRequestModel({this.password, this.suppliesamount});
 
   RecycleSuppliesRequestModel.fromJson(Map<String, dynamic> json) {
     password = json['password'];
-    amount = json['amount'];
+    suppliesamount = json['suppliesamount'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['password'] = this.password;
-    data['amount'] = this.amount;
+    data['suppliesamount'] = this.suppliesamount;
     return data;
   }
 }

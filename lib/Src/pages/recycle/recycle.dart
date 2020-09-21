@@ -27,8 +27,11 @@ class _RecycleDetailState extends State<RecycleDetail> {
     this.widget.HUD();
     RecycleService.recycleSupplies(password, amount, (model){
       this.widget.HUD();
-      CommonUtils.showSuccessMessage(msg: "兑换成功,金额已经打入您的现金账户,请查看");
-      Provide.value<BaseUserInfoProvider>(context).exchangeSupplies(model.supplies);
+      if(model!=null) {
+        CommonUtils.showSuccessMessage(msg: "兑换成功,金额已经打入您的现金账户,请查看");
+        Provide.value<BaseUserInfoProvider>(context).exchangeSupplies(
+            model.supplies);
+      }
     });
   }
 
@@ -109,7 +112,7 @@ class _RecycleDetailState extends State<RecycleDetail> {
                         barrierDismissible: false,
                         builder: (BuildContext context) {
                           return new AlertDialog(
-                            title: new Text('您确认要发起提现操作么?'),
+                            title: new Text('您确认要发起兑换操作么?'),
                             actions: <Widget>[
                               new FlatButton(
                                 child: new Text('取消'),

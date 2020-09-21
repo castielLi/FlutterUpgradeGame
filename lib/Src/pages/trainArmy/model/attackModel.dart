@@ -4,13 +4,15 @@ class AttackModel {
   int stoneamount;
   int supplies;
   String lineup;
+  bool displayad;
 
   AttackModel(
       {this.win,
         this.woodamount,
         this.stoneamount,
         this.supplies,
-        this.lineup});
+        this.lineup,
+      this.displayad});
 
   AttackModel.fromJson(Map<String, dynamic> json) {
     win = json['win'];
@@ -18,6 +20,7 @@ class AttackModel {
     stoneamount = json['stoneamount'];
     supplies = json['supplies'];
     lineup = json['lineup'];
+    displayad = json['displayad'];
   }
 
   Map<String, dynamic> toJson() {
@@ -27,6 +30,7 @@ class AttackModel {
     data['stoneamount'] = this.stoneamount;
     data['supplies'] = this.supplies;
     data['lineup'] = this.lineup;
+    data['displayad'] = this.displayad;
     return data;
   }
 }
