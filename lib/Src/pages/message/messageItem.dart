@@ -1,3 +1,5 @@
+import 'dart:convert' as convert;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
@@ -47,16 +49,21 @@ class _MessageItem extends State<MessageItem> {
               height: ScreenUtil().setHeight(120),
               callback: () {
                 Navigator.push(context, PopWindow(pageBuilder: (context) {
+                  List<List<int>> content = List<List<int>>();
+                  if (null != this.widget.lineup && '' != this.widget.lineup) {
+                    var list = convert.jsonDecode(this.widget.lineup);
+                    for (int i = 0; i < list.length; i++) {
+                      var row = List<int>();
+                      for (int j = 0; j < list[i].length; j++) {
+                        row.add(list[i][j]);
+                      }
+                      content.add(row);
+                    }
+                  }
                   return TrainArmyDetail(
                     contentName: 'reWatch',
                     // content: convert.json.decode(this.widget.lineup),
-                    content: [
-                      [1, 0, 0],
-                      [0, 0, 0],
-                      [0, 0, 0],
-                      [0, 0, 0],
-                      [0, 0, 0]
-                    ],
+                    content: content,
                     isFightWin: true,
                   );
                 }));

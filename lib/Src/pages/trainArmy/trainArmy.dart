@@ -305,6 +305,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                   '获得物资+1，木材+2，石头+3',
                                   style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.otherBuildingTextFontSize), decoration: TextDecoration.none, color: Colors.white),
                                 ),
+                                
                               ),
                             ],
                           ),
