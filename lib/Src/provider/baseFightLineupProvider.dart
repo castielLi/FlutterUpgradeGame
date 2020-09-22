@@ -19,6 +19,7 @@ class BaseFightLineupProvider with ChangeNotifier {
 
   initLiuneupProvider(FightInfoModel model){
     if(model.protectlineup != "") {
+      print(model.protectlineup);
       this.protect =
           (convert.jsonDecode(model.protectlineup) as List<dynamic>).cast<
               List<int>>();

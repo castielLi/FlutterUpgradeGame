@@ -23,39 +23,52 @@ class MessageItem extends StatefulWidget {
 class _MessageItem extends State<MessageItem> {
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(
-            this.widget.tDate,
-            style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
-          ),
-          Expanded(
-            child: Text(
-              this.widget.displayname,
-              textAlign: TextAlign.center,
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text(
+              this.widget.tDate,
               style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
             ),
-          ),
-          ImageButton(
-            buttonName: '回看',
-            imageUrl: 'resource/images/upgradeButton.png',
-            textSize: SystemFontSize.bigTextSize,
-            width: ScreenUtil().setWidth(180),
-            height: ScreenUtil().setHeight(120),
-            callback: (){
-              Navigator.push(context, PopWindow(pageBuilder: (context) {
-                return TrainArmyDetail();
-              }));
-            },
-          ),
-        ],
-      ),
-      Divider(
-        height: 1.0,
-        color: Colors.white,
-      ),
-    ],);
+            Expanded(
+              child: Text(
+                this.widget.displayname,
+                textAlign: TextAlign.center,
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+              ),
+            ),
+            ImageButton(
+              buttonName: '回看',
+              imageUrl: 'resource/images/upgradeButton.png',
+              textSize: SystemFontSize.bigTextSize,
+              width: ScreenUtil().setWidth(180),
+              height: ScreenUtil().setHeight(120),
+              callback: () {
+                Navigator.push(context, PopWindow(pageBuilder: (context) {
+                  return TrainArmyDetail(
+                    contentName: 'reWatch',
+                    // content: convert.json.decode(this.widget.lineup),
+                    content: [
+                      [1, 0, 0],
+                      [0, 0, 0],
+                      [0, 0, 0],
+                      [0, 0, 0],
+                      [0, 0, 0]
+                    ],
+                    isFightWin: true,
+                  );
+                }));
+              },
+            ),
+          ],
+        ),
+        Divider(
+          height: 1.0,
+          color: Colors.white,
+        ),
+      ],
+    );
   }
 }
