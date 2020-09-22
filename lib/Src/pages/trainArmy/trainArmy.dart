@@ -75,7 +75,6 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
           if (null == this.widget.contentName || 'attack' == baseFightLineUpInfo.trainArmyContentName || 'defence' == baseFightLineUpInfo.trainArmyContentName) {
             this.widget.contentName = (null == baseFightLineUpInfo.trainArmyContentName || '' == baseFightLineUpInfo.trainArmyContentName) ? 'attack' : baseFightLineUpInfo.trainArmyContentName;
           }
-
           return Stack(
             children: <Widget>[
               new Image(
@@ -237,6 +236,10 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                 CommonUtils.showWarningMessage(msg: "您当前的进攻阵容英雄不足5个,请继续排兵布阵");
                                 return;
                               }
+                              if (baseFightLineUpInfo.attackHeroCount > 5) {
+                                CommonUtils.showWarningMessage(msg: "最多只能排列5名士兵,请重新排兵布阵");
+                                return;
+                              }
                               if (baseUserInfo.woodamount >= baseFightLineUpInfo.woodproportion && baseUserInfo.stoneamount >= baseFightLineUpInfo.stoneproportion) {
                                 showDialog<Null>(
                                   context: context,
@@ -360,6 +363,10 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
 
                               if(baseFightLineUpInfo.protectHeroCount<5){
                                 CommonUtils.showWarningMessage(msg: "您当前的防守阵容英雄数量不足5个,请继续添加");
+                                return;
+                              }
+                              if(baseFightLineUpInfo.protectHeroCount>5){
+                                CommonUtils.showWarningMessage(msg: "最多只能排列5名士兵,请重新排兵布阵");
                                 return;
                               }
 

@@ -54,7 +54,6 @@ class _ArmySelectMatrixState extends State<ArmySelectMatrix> {
           size: this.widget.itemSize,
           armyCode: rowArmy[i],
           position: [column, i], //[行，列]
-          callback: () {},
           attack: this.widget.attack,
           reWatch: this.widget.reWatch,
         ),
