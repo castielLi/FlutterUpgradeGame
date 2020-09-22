@@ -86,6 +86,7 @@ class BaseFightLineupProvider with ChangeNotifier {
           if (n == row) {
             attack[i][n] = num;
             attackHeroCount += (0 == num ? -1 : 1);
+            print(attackHeroCount);
             return;
           }
         }
@@ -100,6 +101,7 @@ class BaseFightLineupProvider with ChangeNotifier {
           if (n == row) {
             protect[i][n] = num;
             protectHeroCount += (0 == num ? -1 : 1);
+            print(protectHeroCount);
             return;
           }
         }
