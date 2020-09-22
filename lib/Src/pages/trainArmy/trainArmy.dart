@@ -6,6 +6,7 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/widget/adDialog/adDialog.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/trainArmy/armySelectMatrix.dart';
@@ -13,6 +14,8 @@ import 'package:upgradegame/Src/pages/trainArmy/service/armyService.dart';
 import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
+import 'dart:convert' as convert;
+import 'model/attackModel.dart';
 
 class TrainArmyDetail extends StatefulWidget {
   VoidCallback HUD;
@@ -215,13 +218,76 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
                             width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
                             callback: () {
-                              this.widget.HUD();
-                              ArmyService.attack(baseFightLineUpInfo.attack, (success) {
-                                this.widget.HUD();
-                                if (success) {
-                                  CommonUtils.showSuccessMessage(msg: "设置防守阵容成功");
-                                }
-                              });
+
+                              if(baseFightLineUpInfo.attackHeroCount<5){
+                                CommonUtils.showWarningMessage(msg:"您当前的进攻阵容英雄不足5个,请继续排兵布阵");
+                                return;
+                              }
+
+                              if(baseUserInfo.woodamount >= baseUserInfo.woodproportion && baseUserInfo.stoneamount >= baseUserInfo.stoneproportion){
+                                showDialog<Null>(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (BuildContext context) {
+                                    return new AlertDialog(
+                                      title: new Text('您确认要匹配战斗么?'),
+                                      actions: <Widget>[
+                                        new FlatButton(
+                                          child: new Text('取消'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        new FlatButton(
+                                          child: new Text('确认'),
+                                          onPressed: () {
+
+                                            this.widget.HUD();
+                                            ArmyService.attack(baseFightLineUpInfo.attack, (AttackModel model) {
+                                              this.widget.HUD();
+                                              if (model!=null) {
+                                                ///匹配获胜可能会显示广告
+                                                if(model.displayad){
+//                                                  int timeSecend = DateTime.now().second;
+//                                                  if(timeSecend % 2 == 0){
+//                                                    AdDialog().showAd(3, 2,"6031610694170610");
+//                                                  }else{
+//                                                    AdDialog().showAd(4, 1,"945445227");
+//                                                  }
+                                                }
+                                              }
+                                              Navigator.of(context).pop();
+
+                                              var lineup = List<List<int>>();
+                                              var list = convert.jsonDecode(model.lineup);
+                                              for(int i = 0;i<list.length;i++){
+                                                var row = List<int>();
+                                                for(int j = 0;j<list[i].length;j++){
+                                                  row.add(list[i][j]);
+                                                }
+                                                lineup.add(row);
+                                              }
+
+                                              Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                                return TrainArmyDetail(
+                                                  contentName: 'reWatch',
+                                                  content: lineup,
+                                                  isFightWin: model.win,
+                                                );
+                                              }));
+                                            });
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ).then((val) {
+                                  print(val);
+                                });
+                              }else{
+                                CommonUtils.showErrorMessage(msg: "您当前的资源不足,不能进行战斗匹配");
+                              }
+
                             },
                           ),
                           Row(
