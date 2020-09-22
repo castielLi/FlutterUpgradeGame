@@ -24,11 +24,15 @@ class TrainArmyDetail extends StatefulWidget {
   // attack, defence, reWatch
   String contentName;
 
+  int winsupplies;
+  int winwood;
+  int winstone;
+
   List<List<int>> content;
 
   bool isFightWin;
 
-  TrainArmyDetail({Key key, this.HUD, this.content, this.contentName,this.isFightWin = false}) : super(key: key);
+  TrainArmyDetail({Key key, this.HUD, this.content, this.contentName,this.isFightWin = false,this.winstone,this.winwood,this.winsupplies}) : super(key: key);
 
   _TrainArmyDetailState createState() => new _TrainArmyDetailState();
 }
@@ -281,6 +285,9 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                                   // contentName: 'reWatch',
                                                   content: lineup,
                                                   isFightWin: model.win,
+                                                  winstone: model.winstone,
+                                                  winsupplies: model.winsupplies,
+                                                  winwood: model.winwood,
                                                 );
                                               }));
                                             });
@@ -417,17 +424,17 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                     ),
                                     Image(image: new AssetImage('resource/images/volume.png'), width: ScreenUtil().setWidth(100)),
                                     Text(
-                                      baseUserInfo.supplies.toString() + " ",
+                                      this.widget.winsupplies.toString() + " ",
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                     Image(image: new AssetImage('resource/images/wood.png'), width: ScreenUtil().setWidth(100)),
                                     Text(
-                                      "0" + " ",
+                                      this.widget.winwood.toString() + " ",
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                     Image(image: new AssetImage('resource/images/stone.png'), width: ScreenUtil().setWidth(100)),
                                     Text(
-                                      "0",
+                                      this.widget.winstone.toString(),
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                   ],
