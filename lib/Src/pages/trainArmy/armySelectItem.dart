@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/const/resource.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/smallDetailDialog.dart';
 import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
@@ -71,6 +72,10 @@ class _ArmySelectItem extends State<ArmySelectItem> {
                 return;
               }
             } else {
+              // if(baseFightLineUpProvider.protectHeroCount>=5){
+              //   CommonUtils.showWarningMessage(msg: '最多只能添加5名士兵');
+              //   return;
+              // }
               if (this.widget.armyCode > 0) {
                 setState(() {
                   baseFightLineUpProvider.changeProtectLineUp(this.widget.position[0], this.widget.position[1], 0);
