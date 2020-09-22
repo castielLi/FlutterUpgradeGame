@@ -19,7 +19,7 @@ class _ArmyCampDetailItemState extends State<ArmyCampDetailItem> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Container(
-          height: ScreenUtil().setHeight(350),
+          height: ScreenUtil().setHeight(550),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -29,13 +29,11 @@ class _ArmyCampDetailItemState extends State<ArmyCampDetailItem> {
                 width: ScreenUtil().setWidth(350),
               ),
               Container(
-                // color:Colors.red,
-                height: ScreenUtil().setHeight(350),
-                width: ScreenUtil().setWidth(350),
+                width: ScreenUtil().setWidth(460),
                 child: SingleChildScrollView(
                   child: Text(
                     this.widget.armyDescription,
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
                   ),
                 ),
               ),
