@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_screenutil/screenutil.dart';
@@ -20,6 +18,7 @@ class ArmyCampDetail extends StatefulWidget {
 class _ArmyCampDetailState extends State<ArmyCampDetail> {
   bool hideDetailPage = true;
   String chosenArmy = "shaman";
+  String description = '';
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +94,7 @@ class _ArmyCampDetailState extends State<ArmyCampDetail> {
               height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
               child: ArmyCampDetailItem(
                 armyImageUrl: "resource/images/" + this.chosenArmy + ".png",
-                armyDescription: '远程攻击' + Random().nextInt(10).toString(),
+                armyDescription: this.description,
                 callback: () {
                   switchBetweenPages(this.chosenArmy);
                 },
@@ -111,6 +110,24 @@ class _ArmyCampDetailState extends State<ArmyCampDetail> {
     setState(() {
       this.hideDetailPage = !this.hideDetailPage;
       this.chosenArmy = name;
+      switch (chosenArmy) {
+        case 'rider':
+          {
+            this.description = '骑士：拥有较快的行动力，在战场上可以快速靠近攻击敌方前排士兵，容易被远程兵种优先打击。\n血量：2\n攻击力：1\n攻击距离：1\n行动力：2';
+            break;
+          }
+        case 'fighter':
+          {
+            this.description = '战士：部落最常见的兵种，拥有较强的身体素质，对远程攻击有一定抵抗力，容易被骑兵兵种克制。\n血量：3\n攻击力：1\n攻击距离：1\n行动力：1';
+            break;
+          }
+        case 'rangeAttack':
+          {
+            this.description = '猎手：在野外拥有极强生存能力的远程兵种，可以远距离有效打击敌人，近战能力弱，要小心被敌人近身。\n血量：2\n攻击力：1\n攻击距离：2\n行动力：1';
+            break;
+          }
+          break;
+      }
     });
   }
 }
