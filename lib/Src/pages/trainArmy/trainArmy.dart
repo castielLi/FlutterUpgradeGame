@@ -9,10 +9,10 @@ import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/trainArmy/armySelectMatrix.dart';
+import 'package:upgradegame/Src/pages/trainArmy/service/armyService.dart';
 import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
-import 'package:upgradegame/Src/pages/trainArmy/service/armyService.dart';
 
 class TrainArmyDetail extends StatefulWidget {
   VoidCallback HUD;
@@ -25,7 +25,7 @@ class TrainArmyDetail extends StatefulWidget {
 class _TrainArmyDetailState extends State<TrainArmyDetail> {
   ProgressHUD _progressHUD;
   int lastClickTime;
-  bool attackDefencePageSwitch = false;
+  bool hideDefencePage = false;
 
   @override
   void initState() {
@@ -146,72 +146,81 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      width: ScreenUtil().setWidth(900),
-                      height: ScreenUtil().setHeight(SystemIconSize.trainArmyIconSize * 5), //大于等于5个高度
-                      child: ArmySelectMatrix(
-                        itemSize: SystemIconSize.trainArmyIconSize,
-                        armyBaseMatrix: baseFightLineUpInfo.attack,
-                      ),
-                    ),
-                    Container(
-                      child: Column(
-                        children: [
-                          Offstage(
-                            ///todo:黄河 没有判断是进攻阵容还是防守阵容
-//                            offstage: this.attackDefencePageSwitch,
-                            offstage: false,
-                            child: Column(
-                              children: [
-                                Text(
-                                  '当前阵容消耗10金币',
-                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                                ),
-                                ImageButton(
-                                  buttonName: '开始匹配',
-                                  imageUrl: 'resource/images/upgradeButton.png',
-                                  height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
-                                  width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
-                                  callback: () {
-                                    print('match');
-                                    this.widget.HUD();
-//                                    ArmyService.setProtectLineup(baseFightLineUpInfo.protect, (success){
-                                      ArmyService.attack(baseFightLineUpInfo.attack,(success){
-                                      this.widget.HUD();
-                                      if(success){
-                                        CommonUtils.showSuccessMessage(msg: "设置防守阵容成功");
-                                      }
-                                    });
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    Stack(
+                      children: [
+                        /// 进攻
+                        Offstage(
+                          offstage: this.hideDefencePage,
+                          child: Column(
                             children: [
-                              ImageButton(
-                                imageUrl: "resource/images/upgradeButton.png",
-                                height: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
-                                width: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
-                                buttonName: '返 回',
-                                callback: () {
-                                  Application.router.pop(context);
-                                },
+                              Container(
+                                width: ScreenUtil().setWidth(900),
+                                height: ScreenUtil().setHeight(SystemIconSize.trainArmyIconSize * 5), //大于等于5个高度
+                                child: ArmySelectMatrix(
+                                  itemSize: SystemIconSize.trainArmyIconSize,
+                                  armyBaseMatrix: baseFightLineUpInfo.attack,
+                                ),
+                              ),
+                              Text(
+                                '当前阵容消耗10金币',
+                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                               ),
                               ImageButton(
-                                imageUrl: "resource/images/upgradeButton.png",
-                                height: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
-                                width: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
-                                buttonName: this.attackDefencePageSwitch ? '攻 击' : '防 守',
+                                buttonName: '开始匹配',
+                                imageUrl: 'resource/images/upgradeButton.png',
+                                height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+                                width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
                                 callback: () {
-                                  changePages();
+                                  this.widget.HUD();
+//                                    ArmyService.setProtectLineup(baseFightLineUpInfo.protect, (success){
+                                  ArmyService.attack(baseFightLineUpInfo.attack, (success) {
+                                    this.widget.HUD();
+                                    if (success) {
+                                      CommonUtils.showSuccessMessage(msg: "设置防守阵容成功");
+                                    }
+                                  });
                                 },
                               ),
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+
+                        /// 防守
+                        Offstage(
+                          offstage: !this.hideDefencePage,
+                          child: Container(
+                            width: ScreenUtil().setWidth(900),
+                            height: ScreenUtil().setHeight(SystemIconSize.trainArmyIconSize * 5), //大于等于5个高度
+                            child: ArmySelectMatrix(
+                              itemSize: SystemIconSize.trainArmyIconSize,
+                              armyBaseMatrix: baseFightLineUpInfo.Attack,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ImageButton(
+                          imageUrl: "resource/images/upgradeButton.png",
+                          height: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+                          width: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+                          buttonName: '返 回',
+                          callback: () {
+                            Application.router.pop(context);
+                          },
+                        ),
+                        ImageButton(
+                          imageUrl: "resource/images/upgradeButton.png",
+                          height: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
+                          width: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
+                          buttonName: this.hideDefencePage ? '攻 击' : '防 守',
+                          callback: () {
+                            changePages();
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -227,7 +236,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
 
   void changePages() {
     setState(() {
-      this.attackDefencePageSwitch = !this.attackDefencePageSwitch;
+      this.hideDefencePage = !this.hideDefencePage;
     });
   }
 }
