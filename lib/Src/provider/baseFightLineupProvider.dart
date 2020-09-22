@@ -10,6 +10,7 @@ class BaseFightLineupProvider with ChangeNotifier {
   int stoneproportion;
   int attackHeroCount = 0;
   int protectHeroCount = 0;
+  String trainArmyContentName;
 
   List<List<int>> protect;
   List<List<int>> attack;
@@ -43,7 +44,6 @@ class BaseFightLineupProvider with ChangeNotifier {
   }
 
   changeAttackLineUp(int column, int row, int num) {
-
     for (int i = 0; i < attack.length; i++) {
       if (i == column) {
         for (int n = 0; n < attack[i].length; n++) {
