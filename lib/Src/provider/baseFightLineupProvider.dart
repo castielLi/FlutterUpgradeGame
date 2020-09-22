@@ -10,6 +10,7 @@ class BaseFightLineupProvider with ChangeNotifier {
   int stoneproportion;
   int attackHeroCount = 0;
   int protectHeroCount = 0;
+  String trainArmyContentName;
 
   List<List<int>> protect;
   List<List<int>> attack;
