@@ -7,6 +7,7 @@ import 'package:upgradegame/Src/pages/store/model/storeModel.dart';
 import 'package:upgradegame/Src/pages/store/productItem.dart';
 import 'package:upgradegame/Src/pages/store/storeService/storeService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
+import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 
 import 'model/buySuppliesModel.dart';
 
@@ -46,7 +47,8 @@ class _StoreDetailState extends State<StoreDetail> {
       this.widget.HUD();
       if (model != null) {
         CommonUtils.showSuccessMessage(msg: "购买物资成功");
-        Provide.value<BaseUserInfoProvider>(context).buySupplies(model.suppliesamount,model.tcoinamount);
+        Provide.value<BaseUserInfoProvider>(context).buySupplies(model.tcoinamount);
+        Provide.value<BaseFightLineupProvider>(context).buySupplies(model.suppliesamount);
       }
     });
   }

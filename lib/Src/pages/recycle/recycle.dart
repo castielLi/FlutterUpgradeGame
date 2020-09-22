@@ -6,6 +6,7 @@ import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/pages/recycle/service/recycleService.dart';
 
@@ -29,7 +30,7 @@ class _RecycleDetailState extends State<RecycleDetail> {
       this.widget.HUD();
       if(model!=null) {
         CommonUtils.showSuccessMessage(msg: "兑换成功,金额已经打入您的现金账户,请查看");
-        Provide.value<BaseUserInfoProvider>(context).exchangeSupplies(
+        Provide.value<BaseFightLineupProvider>(context).exchangeSupplies(
             model.supplies);
       }
     });
@@ -45,7 +46,7 @@ class _RecycleDetailState extends State<RecycleDetail> {
         ScreenUtil().setWidth(80), // 右
         ScreenUtil().setHeight(150),
       ),
-      child: Provide<BaseUserInfoProvider>(builder: (context, child, model) {
+      child: Provide<BaseFightLineupProvider>(builder: (context, child, model) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
