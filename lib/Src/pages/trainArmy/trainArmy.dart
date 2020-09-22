@@ -191,7 +191,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             ),
                           ),
                           Text(
-                            '当前阵容消耗10金币',
+                            '当前消耗木材:' + baseUserInfo.woodproportion.toString() + "石材:" + baseUserInfo.stoneproportion.toString(),
                             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                           ),
                           ImageButton(

@@ -29,7 +29,11 @@ class BaseUserInfoProvider with ChangeNotifier {
   int supplies;
   int limitsuppliesrecycle;
   String suppliesprice;
+  int woodproportion;
+  int stoneproportion;
 
+  int get Stoneproportion => stoneproportion;
+  int get Woodproportion => woodproportion;
   String get SuppliesPrice => suppliesprice;
   int get LimitSuppliesRecycle => limitsuppliesrecycle;
   int get Supplies => supplies;
@@ -78,6 +82,8 @@ class BaseUserInfoProvider with ChangeNotifier {
     supplies = model.supplies;
     limitsuppliesrecycle = model.limitsuppliesrecycle;
     suppliesprice = model.suppliesprice;
+    stoneproportion = model.stoneproportion;
+    woodproportion = model.woodproportion;
     notifyListeners();
   }
 

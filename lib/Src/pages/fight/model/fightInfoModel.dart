@@ -20,7 +20,13 @@ class FightInfoModel {
     supplies = json['supplies'];
     hasbuy = json['hasbuy'];
     woodproportion = json['woodproportion'];
+    if(woodproportion == null){
+      woodproportion = 0;
+    }
     stoneproportion = json['stoneproportion'];
+    if(stoneproportion == null){
+      stoneproportion = 0;
+    }
     suppliesprice = json['suppliesprice'];
     limitsuppliesrecycle = json['limitsuppliesrecycle'];
     protectlineup = json['protectlineup'];
