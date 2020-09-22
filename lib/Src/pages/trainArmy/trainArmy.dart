@@ -356,7 +356,15 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             imageUrl: 'resource/images/upgradeButton.png',
                             height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
                             width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
-                            callback: () {},
+                            callback: () {
+                              this.widget.HUD();
+                              ArmyService.setProtectLineup(baseFightLineUpInfo.protect, (bool success){
+                                this.widget.HUD();
+                                if(success){
+                                  CommonUtils.showSuccessMessage(msg: "设置防守阵容成功");
+                                }
+                              });
+                            },
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

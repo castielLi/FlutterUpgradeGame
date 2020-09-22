@@ -14,9 +14,7 @@ import 'package:upgradegame/Src/service/serviceUrl.dart';
 class ArmyService {
   static Future<ResultData> setProtectLineup(List<List<int>> protectLineup,callback) async {
 
-    List<List<int>> a = [[0,1,0],[2,0,0],[0,0,1],[1,0,0],[3,0,0]];
-
-    SetProtectRequestModel requestModel = SetProtectRequestModel(jsonstring: convert.jsonEncode(a));
+    SetProtectRequestModel requestModel = SetProtectRequestModel(jsonstring: convert.jsonEncode(protectLineup));
 
     var params = convert.jsonEncode(requestModel);
     var response = await httpManager.request(ServiceUrl.setProtectLine(), params, null, Options(method: "post"));
@@ -31,9 +29,7 @@ class ArmyService {
 
   static Future<ResultData> attack(List<List<int>> attacLineup,callback) async {
 
-    List<List<int>> a = [[0,1,0],[0,1,0],[1,0,0],[2,0,0],[0,0,1]];
-
-    SetAttackRequestModel requestModel = SetAttackRequestModel(jsonstring: convert.jsonEncode(a));
+    SetAttackRequestModel requestModel = SetAttackRequestModel(jsonstring: convert.jsonEncode(attacLineup));
 
     var params = convert.jsonEncode(requestModel);
     var response = await httpManager.request(ServiceUrl.attack(), params, null, Options(method: "post"));
