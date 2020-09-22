@@ -67,9 +67,6 @@ class _ArmySelectItem extends State<ArmySelectItem> {
               if (this.widget.armyCode > 0) {
                 setState(() {
                   baseFightLineUpProvider.changeAttackLineUp(this.widget.position[0], this.widget.position[1], 0);
-                  print(baseFightLineUpProvider.attackHeroCount);
-                  baseFightLineUpProvider.attackHeroCount--;
-                  print(baseFightLineUpProvider.attackHeroCount);
                   this.widget.armyCode = 0;
                 });
                 return;
@@ -78,7 +75,6 @@ class _ArmySelectItem extends State<ArmySelectItem> {
               if (this.widget.armyCode > 0) {
                 setState(() {
                   baseFightLineUpProvider.changeProtectLineUp(this.widget.position[0], this.widget.position[1], 0);
-                  baseFightLineUpProvider.protectHeroCount--;
                   this.widget.armyCode = 0;
                 });
                 return;

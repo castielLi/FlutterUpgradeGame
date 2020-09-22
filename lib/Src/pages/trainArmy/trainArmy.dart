@@ -32,7 +32,7 @@ class TrainArmyDetail extends StatefulWidget {
 
   bool isFightWin;
 
-  TrainArmyDetail({Key key, this.HUD, this.content, this.contentName,this.isFightWin = false,this.winstone,this.winwood,this.winsupplies}) : super(key: key);
+  TrainArmyDetail({Key key, this.HUD, this.content, this.contentName, this.isFightWin = false, this.winstone = 0, this.winwood = 0, this.winsupplies = 0}) : super(key: key);
 
   _TrainArmyDetailState createState() => new _TrainArmyDetailState();
 }
@@ -216,7 +216,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                               ),
                               Image(image: new AssetImage('resource/images/wood.png'), width: ScreenUtil().setWidth(100)),
                               Text(
-                                baseFightLineUpInfo.woodproportion.toString()+" ",
+                                baseFightLineUpInfo.woodproportion.toString() + " ",
                                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                               ),
                               Image(image: new AssetImage('resource/images/stone.png'), width: ScreenUtil().setWidth(100)),
@@ -412,34 +412,33 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                               height: ScreenUtil().setHeight(250),
                               width: ScreenUtil().setWidth(650),
                             ),
-                            Container(
-                              child: Offstage(
-                                offstage: false,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                      this.widget.isFightWin ? '获得 ' : '损失 ',
-                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                                    ),
-                                    Image(image: new AssetImage('resource/images/volume.png'), width: ScreenUtil().setWidth(100)),
-                                    Text(
-                                      this.widget.winsupplies.toString() + " ",
-                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                                    ),
-                                    Image(image: new AssetImage('resource/images/wood.png'), width: ScreenUtil().setWidth(100)),
-                                    Text(
-                                      this.widget.winwood.toString() + " ",
-                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                                    ),
-                                    Image(image: new AssetImage('resource/images/stone.png'), width: ScreenUtil().setWidth(100)),
-                                    Text(
-                                      this.widget.winstone.toString(),
-                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
-                                    ),
-                                  ],
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image(image: new AssetImage('resource/images/volume.png'), width: ScreenUtil().setWidth(100)),
+                                Text(
+                                  this.widget.winsupplies.toString() + " ",
+                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                 ),
-                              ),
+                                Offstage(
+                                  offstage: !this.widget.isFightWin,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image(image: new AssetImage('resource/images/wood.png'), width: ScreenUtil().setWidth(100)),
+                                      Text(
+                                        this.widget.winwood.toString() + " ",
+                                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                      ),
+                                      Image(image: new AssetImage('resource/images/stone.png'), width: ScreenUtil().setWidth(100)),
+                                      Text(
+                                        this.widget.winstone.toString(),
+                                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),

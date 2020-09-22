@@ -82,6 +82,7 @@ class _MessageItem extends State<MessageItem> {
                         contentName: 'reWatch',
                         content: lineup,
                         isFightWin: false,
+                        winsupplies: -1,
                       );
                     }));
                   },

@@ -1,11 +1,11 @@
+import 'dart:convert' as convert;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert' as convert;
 import 'package:upgradegame/Src/pages/fight/model/fightInfoModel.dart';
 
 //混入
 class BaseFightLineupProvider with ChangeNotifier {
-
   int woodproportion;
   int stoneproportion;
   int attackHeroCount = 0;
@@ -19,25 +19,29 @@ class BaseFightLineupProvider with ChangeNotifier {
 
   List<List<int>> get Attack => this.attack;
 
-
-  initLiuneupProvider(FightInfoModel model){
-    if(model.protectlineup != "") {
+  initLiuneupProvider(FightInfoModel model) {
+    if (model.protectlineup != "") {
       this.protect = List<List<int>>();
       var list = convert.jsonDecode(model.protectlineup);
-      for(int i = 0;i<list.length;i++){
+      for (int i = 0; i < list.length; i++) {
         var row = List<int>();
-        for(int j = 0;j<list[i].length;j++){
+        for (int j = 0; j < list[i].length; j++) {
           row.add(list[i][j]);
         }
         this.protect.add(row);
       }
     }
-    this.attack = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]];
+    this.attack = [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0]
+    ];
     this.woodproportion = model.wood;
     this.stoneproportion = model.stone;
     notifyListeners();
   }
-
 
   initAttactLineup(List<List<int>> attacklineup) {
     attack = attacklineup;
@@ -49,7 +53,7 @@ class BaseFightLineupProvider with ChangeNotifier {
         for (int n = 0; n < attack[i].length; n++) {
           if (n == row) {
             attack[i][n] = num;
-            attackHeroCount += 1;
+            attackHeroCount += 0 == num ? -1 : 1;
             return;
           }
         }
@@ -57,13 +61,13 @@ class BaseFightLineupProvider with ChangeNotifier {
     }
   }
 
-  changeProtectLineUp(int column,int row, int num){
+  changeProtectLineUp(int column, int row, int num) {
     for (int i = 0; i < attack.length; i++) {
       if (i == column) {
         for (int n = 0; n < attack[i].length; n++) {
           if (n == row) {
             protect[i][n] = num;
-            protectHeroCount += 1;
+            protectHeroCount += 0 == num ? -1 : 1;
             return;
           }
         }
