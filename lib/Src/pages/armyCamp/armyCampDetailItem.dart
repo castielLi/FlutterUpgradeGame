@@ -19,7 +19,7 @@ class _ArmyCampDetailItemState extends State<ArmyCampDetailItem> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Container(
-          height: ScreenUtil().setHeight(550),
+          height: ScreenUtil().setHeight(600),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -34,6 +34,7 @@ class _ArmyCampDetailItemState extends State<ArmyCampDetailItem> {
                   child: Text(
                     this.widget.armyDescription,
                     textAlign: TextAlign.left,
+                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                   ),
                 ),
               ),
