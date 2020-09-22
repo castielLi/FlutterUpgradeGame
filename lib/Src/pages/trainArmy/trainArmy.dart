@@ -1,3 +1,5 @@
+import 'dart:convert' as convert;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_screenutil/screenutil.dart';
@@ -6,7 +8,6 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
-import 'package:upgradegame/Src/common/widget/adDialog/adDialog.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/trainArmy/armySelectMatrix.dart';
@@ -14,7 +15,7 @@ import 'package:upgradegame/Src/pages/trainArmy/service/armyService.dart';
 import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
-import 'dart:convert' as convert;
+
 import 'model/attackModel.dart';
 
 class TrainArmyDetail extends StatefulWidget {
@@ -27,7 +28,7 @@ class TrainArmyDetail extends StatefulWidget {
 
   bool isFightWin;
 
-  TrainArmyDetail({Key key, this.HUD, this.contentName, this.content, this.isFightWin = false}) : super(key: key);
+  TrainArmyDetail({Key key, this.HUD, this.contentName='attack', this.content, this.isFightWin = false}) : super(key: key);
 
   _TrainArmyDetailState createState() => new _TrainArmyDetailState();
 }
@@ -195,9 +196,24 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                               reWatch: false,
                             ),
                           ),
-                          Text(
-                            '当前消耗木材:' + baseUserInfo.woodproportion.toString() + "石材:" + baseUserInfo.stoneproportion.toString(),
-                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                '当前消耗 ',
+                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                              ),
+                              Image(image: new AssetImage('resource/images/wood.png'), width: ScreenUtil().setWidth(100)),
+                              Text(
+                                baseUserInfo.woodproportion.toString()+" ",
+                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                              ),
+                              Image(image: new AssetImage('resource/images/stone.png'), width: ScreenUtil().setWidth(100)),
+                              Text(
+                                baseUserInfo.stoneproportion.toString(),
+                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                              ),
+                            ],
                           ),
                           ImageButton(
                             buttonName: '开始匹配',
@@ -205,13 +221,11 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
                             width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
                             callback: () {
-
-                              if(baseFightLineUpInfo.attackHeroCount<5){
-                                CommonUtils.showWarningMessage(msg:"您当前的进攻阵容英雄不足5个,请继续排兵布阵");
+                              if (baseFightLineUpInfo.attackHeroCount < 5) {
+                                CommonUtils.showWarningMessage(msg: "您当前的进攻阵容英雄不足5个,请继续排兵布阵");
                                 return;
                               }
-
-                              if(baseUserInfo.woodamount >= baseUserInfo.woodproportion && baseUserInfo.stoneamount >= baseUserInfo.stoneproportion){
+                              if (baseUserInfo.woodamount >= baseUserInfo.woodproportion && baseUserInfo.stoneamount >= baseUserInfo.stoneproportion) {
                                 showDialog<Null>(
                                   context: context,
                                   barrierDismissible: false,
@@ -228,13 +242,12 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                         new FlatButton(
                                           child: new Text('确认'),
                                           onPressed: () {
-
                                             this.widget.HUD();
                                             ArmyService.attack(baseFightLineUpInfo.attack, (AttackModel model) {
                                               this.widget.HUD();
-                                              if (model!=null) {
+                                              if (model != null) {
                                                 ///匹配获胜可能会显示广告
-                                                if(model.displayad){
+                                                if (model.displayad) {
 //                                                  int timeSecend = DateTime.now().second;
 //                                                  if(timeSecend % 2 == 0){
 //                                                    AdDialog().showAd(3, 2,"6031610694170610");
@@ -247,9 +260,9 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
 
                                               var lineup = List<List<int>>();
                                               var list = convert.jsonDecode(model.lineup);
-                                              for(int i = 0;i<list.length;i++){
+                                              for (int i = 0; i < list.length; i++) {
                                                 var row = List<int>();
-                                                for(int j = 0;j<list[i].length;j++){
+                                                for (int j = 0; j < list[i].length; j++) {
                                                   row.add(list[i][j]);
                                                 }
                                                 lineup.add(row);
@@ -271,10 +284,9 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                 ).then((val) {
                                   print(val);
                                 });
-                              }else{
+                              } else {
                                 CommonUtils.showErrorMessage(msg: "您当前的资源不足,不能进行战斗匹配");
                               }
-
                             },
                           ),
                           Row(
@@ -320,6 +332,13 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                               reWatch: false,
                             ),
                           ),
+                          ImageButton(
+                            buttonName: '保存阵容',
+                            imageUrl: 'resource/images/upgradeButton.png',
+                            height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+                            width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+                            callback: () {},
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -350,37 +369,58 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                     /// 回看
                     Offstage(
                       offstage: 'reWatch' != this.widget.contentName,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: ScreenUtil().setWidth(900),
-                            height: ScreenUtil().setHeight(SystemIconSize.trainArmyIconSize * 5), //大于等于5个高度
-                            child: ArmySelectMatrix(
-                              itemSize: SystemIconSize.trainArmyIconSize,
-                              armyBaseMatrix: this.widget.content,
-                              attack: false,
-                              reWatch: true,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: ScreenUtil().setWidth(900),
+                              height: ScreenUtil().setHeight(SystemIconSize.trainArmyIconSize * 5), //大于等于5个高度
+                              child: ArmySelectMatrix(
+                                itemSize: SystemIconSize.trainArmyIconSize,
+                                armyBaseMatrix: this.widget.content,
+                                attack: false,
+                                reWatch: true,
+                              ),
+
                             ),
-                          ),
-                          Image(
-                            image: AssetImage('resource/images/' + (this.widget.isFightWin ? 'win' : 'lose').toString() + '.png'),
-                            height: ScreenUtil().setHeight(250),
-                            width: ScreenUtil().setWidth(650),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Offstage(
+                            Image(
+                              image: AssetImage('resource/images/' + (this.widget.isFightWin ? 'win' : 'lose').toString() + '.png'),
+                              height: ScreenUtil().setHeight(250),
+                              width: ScreenUtil().setWidth(650),
+                            ),
+                            Container(
+                              child: Offstage(
                                 offstage: !this.widget.isFightWin,
-                                child: Text(
-                                  '获得物资+1，木材+2，石头+3',
-                                  style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.otherBuildingTextFontSize), decoration: TextDecoration.none, color: Colors.white),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(
+                                      '获得 ',
+                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                    ),
+                                    Image(image: new AssetImage('resource/images/volume.png'), width: ScreenUtil().setWidth(100)),
+                                    Text(
+                                      baseUserInfo.supplies.toString() + " ",
+                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                    ),
+                                    Image(image: new AssetImage('resource/images/wood.png'), width: ScreenUtil().setWidth(100)),
+                                    Text(
+                                      baseUserInfo.woodproportion.toString() + " ",
+                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                    ),
+                                    Image(image: new AssetImage('resource/images/stone.png'), width: ScreenUtil().setWidth(100)),
+                                    Text(
+                                      baseUserInfo.stoneproportion.toString(),
+                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
