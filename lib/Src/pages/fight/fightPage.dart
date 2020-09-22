@@ -265,7 +265,7 @@ class _FightPageState extends State<FightPage> {
                           height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
                         ),
                         new Text(
-                          baseUserInfo.supplies.toString(),
+                          (null==baseUserInfo.supplies?'':baseUserInfo.supplies).toString(),
                           style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                         ),
                       ],
@@ -314,6 +314,7 @@ class _FightPageState extends State<FightPage> {
                             Navigator.push(context, PopWindow(pageBuilder: (context) {
                               return TrainArmyDetail(
                                 HUD: this.showOrDismissProgressHUD,
+                                contentName: 'attack',
                               );
                             }));
                           },
