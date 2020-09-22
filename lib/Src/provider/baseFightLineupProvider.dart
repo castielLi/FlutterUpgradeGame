@@ -19,9 +19,15 @@ class BaseFightLineupProvider with ChangeNotifier {
 
   initLiuneupProvider(FightInfoModel model){
     if(model.protectlineup != "") {
-      this.protect =
-          (convert.jsonDecode(model.protectlineup) as List<dynamic>).cast<
-              List<int>>();
+      this.protect = List<List<int>>();
+      var list = convert.jsonDecode(model.protectlineup);
+      for(int i = 0;i<list.length;i++){
+        var row = List<int>();
+        for(int j = 0;j<list[i].length;j++){
+          row.add(list[i][j]);
+        }
+        this.protect.add(row);
+      }
     }
     this.attack = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]];
     this.woodproportion = model.woodproportion;

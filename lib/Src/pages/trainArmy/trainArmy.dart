@@ -193,7 +193,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             height: ScreenUtil().setHeight(SystemIconSize.trainArmyIconSize * 5), //大于等于5个高度
                             child: ArmySelectMatrix(
                               itemSize: SystemIconSize.trainArmyIconSize,
-                              armyBaseMatrix: baseFightLineUpInfo.Attack,
+                              armyBaseMatrix: baseFightLineUpInfo.protect,
                             ),
                           ),
                         ),
