@@ -28,7 +28,7 @@ class TrainArmyDetail extends StatefulWidget {
 
   bool isFightWin;
 
-  TrainArmyDetail({Key key, this.HUD, this.content, this.contentName,this.isFightWin = false}) : super(key: key);
+  TrainArmyDetail({Key key, this.HUD, this.content, this.contentName, this.isFightWin = false}) : super(key: key);
 
   _TrainArmyDetailState createState() => new _TrainArmyDetailState();
 }
@@ -68,7 +68,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
         builder: (context, child, model) {
           BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
           BaseFightLineupProvider baseFightLineUpInfo = model.get<BaseFightLineupProvider>();
-          if(null==this.widget.contentName ||'attack'==baseFightLineUpInfo.trainArmyContentName||'defence'==baseFightLineUpInfo.trainArmyContentName){
+          if (null == this.widget.contentName || 'attack' == baseFightLineUpInfo.trainArmyContentName || 'defence' == baseFightLineUpInfo.trainArmyContentName) {
             this.widget.contentName = (null == baseFightLineUpInfo.trainArmyContentName || '' == baseFightLineUpInfo.trainArmyContentName) ? 'attack' : baseFightLineUpInfo.trainArmyContentName;
           }
 
@@ -228,7 +228,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
                             width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
                             callback: () {
-                              print(baseFightLineUpInfo.attackHeroCount);
+                              // print(baseFightLineUpInfo.attackHeroCount);
                               if (baseFightLineUpInfo.attackHeroCount < 5) {
                                 CommonUtils.showWarningMessage(msg: "您当前的进攻阵容英雄不足5个,请继续排兵布阵");
                                 return;

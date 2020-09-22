@@ -16,8 +16,7 @@ class ArmySelectItem extends StatefulWidget {
   bool reWatch;
   bool attack;
 
-  ArmySelectItem({Key key, this.size, this.callback, this.armyCode = 0, this.position,this.reWatch,this.attack}) : super(key: key);
-
+  ArmySelectItem({Key key, this.size, this.callback, this.armyCode = 0, this.position, this.reWatch, this.attack}) : super(key: key);
 
   @override
   _ArmySelectItem createState() => new _ArmySelectItem();
@@ -61,25 +60,25 @@ class _ArmySelectItem extends State<ArmySelectItem> {
             ],
           ),
           onTap: () {
-
-            if(this.widget.reWatch){
+            if (this.widget.reWatch) {
               return;
             }
-
-            if(this.widget.attack) {
+            if (this.widget.attack) {
               if (this.widget.armyCode > 0) {
                 setState(() {
-                  baseFightLineUpProvider.changeAttackLineUp(
-                      this.widget.position[0], this.widget.position[1], 0);
+                  baseFightLineUpProvider.changeAttackLineUp(this.widget.position[0], this.widget.position[1], 0);
+                  print(baseFightLineUpProvider.attackHeroCount);
+                  baseFightLineUpProvider.attackHeroCount--;
+                  print(baseFightLineUpProvider.attackHeroCount);
                   this.widget.armyCode = 0;
                 });
                 return;
               }
-            }else {
+            } else {
               if (this.widget.armyCode > 0) {
                 setState(() {
-                  baseFightLineUpProvider.changeProtectLineUp(
-                      this.widget.position[0], this.widget.position[1], 0);
+                  baseFightLineUpProvider.changeProtectLineUp(this.widget.position[0], this.widget.position[1], 0);
+                  baseFightLineUpProvider.protectHeroCount--;
                   this.widget.armyCode = 0;
                 });
                 return;
@@ -96,7 +95,6 @@ class _ArmySelectItem extends State<ArmySelectItem> {
                 attack: this.widget.attack,
               );
             }));
-
           },
         );
       },
