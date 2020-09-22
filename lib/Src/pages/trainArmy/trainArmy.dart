@@ -190,9 +190,24 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                               armyBaseMatrix: baseFightLineUpInfo.attack,
                             ),
                           ),
-                          Text(
-                            '当前消耗木材:' + baseUserInfo.woodproportion.toString() + "石材:" + baseUserInfo.stoneproportion.toString(),
-                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                '当前消耗木材:',
+                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                              ),
+                              Image(image: new AssetImage('resource/images/wood.png'), width: ScreenUtil().setWidth(100)),
+                              Text(
+                                baseUserInfo.woodproportion.toString() + " 石材:",
+                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                              ),
+                              Image(image: new AssetImage('resource/images/stone.png'), width: ScreenUtil().setWidth(100)),
+                              Text(
+                                baseUserInfo.stoneproportion.toString(),
+                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                              ),
+                            ],
                           ),
                           ImageButton(
                             buttonName: '开始匹配',
@@ -280,36 +295,56 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                     /// 回看
                     Offstage(
                       offstage: 'reWatch' != this.widget.contentName,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: ScreenUtil().setWidth(900),
-                            height: ScreenUtil().setHeight(SystemIconSize.trainArmyIconSize * 5), //大于等于5个高度
-                            child: ArmySelectMatrix(
-                              itemSize: SystemIconSize.trainArmyIconSize,
-                              armyBaseMatrix: this.widget.content,
-                            ),
-                          ),
-                          Image(
-                            image: AssetImage('resource/images/' + (this.widget.isFightWin ? 'win' : 'lose').toString() + '.png'),
-                            height: ScreenUtil().setHeight(250),
-                            width: ScreenUtil().setWidth(650),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Offstage(
-                                offstage: !this.widget.isFightWin,
-                                child: Text(
-                                  '获得物资+1，木材+2，石头+3',
-                                  style: TextStyle(fontSize: ScreenUtil().setSp(SystemFontSize.otherBuildingTextFontSize), decoration: TextDecoration.none, color: Colors.white),
-                                ),
-                                
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: ScreenUtil().setWidth(900),
+                              height: ScreenUtil().setHeight(SystemIconSize.trainArmyIconSize * 5), //大于等于5个高度
+                              child: ArmySelectMatrix(
+                                itemSize: SystemIconSize.trainArmyIconSize,
+                                armyBaseMatrix: this.widget.content,
                               ),
-                            ],
-                          ),
-                        ],
+                            ),
+                            Image(
+                              image: AssetImage('resource/images/' + (this.widget.isFightWin ? 'win' : 'lose').toString() + '.png'),
+                              height: ScreenUtil().setHeight(250),
+                              width: ScreenUtil().setWidth(650),
+                            ),
+                            Container(
+                              child: Offstage(
+                                offstage: !this.widget.isFightWin,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(
+                                      '获得物资:',
+                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                    ),
+                                    Image(image: new AssetImage('resource/images/volume.png'), width: ScreenUtil().setWidth(100)),
+                                    Text(
+                                      baseUserInfo.supplies.toString() + " 木材:",
+                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                    ),
+                                    Image(image: new AssetImage('resource/images/wood.png'), width: ScreenUtil().setWidth(100)),
+                                    Text(
+                                      baseUserInfo.woodproportion.toString() + " 石材:",
+                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                    ),
+                                    Image(image: new AssetImage('resource/images/stone.png'), width: ScreenUtil().setWidth(100)),
+                                    Text(
+                                      baseUserInfo.stoneproportion.toString(),
+                                      style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                          ],
+                        ),
                       ),
                     ),
                   ],

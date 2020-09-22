@@ -51,6 +51,17 @@ class BaseFightLineupProvider with ChangeNotifier {
         }
       }
     }
-//    protect = attack;
+  }
+  changeProtectLineUp(int column, int row, int num) {
+    for (int i = 0; i < protect.length; i++) {
+      if (i == column) {
+        for (int n = 0; n < protect[i].length; n++) {
+          if (n == row) {
+            protect[i][n] = num;
+            return;
+          }
+        }
+      }
+    }
   }
 }
