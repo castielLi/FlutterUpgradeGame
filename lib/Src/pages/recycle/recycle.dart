@@ -6,9 +6,8 @@ import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Common/widget/textField/myTextField.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
-import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
-import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/pages/recycle/service/recycleService.dart';
+import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 
 class RecycleDetail extends StatefulWidget {
   @override
@@ -24,18 +23,16 @@ class _RecycleDetailState extends State<RecycleDetail> {
   final amountController = TextEditingController(text: "");
   final passwordController = TextEditingController(text: "");
 
-  void recycleSupplies(String password,String amount){
+  void recycleSupplies(String password, String amount) {
     this.widget.HUD();
-    RecycleService.recycleSupplies(password, amount, (model){
+    RecycleService.recycleSupplies(password, amount, (model) {
       this.widget.HUD();
-      if(model!=null) {
+      if (model != null) {
         CommonUtils.showSuccessMessage(msg: "兑换成功,金额已经打入您的现金账户,请查看");
-        Provide.value<BaseFightLineupProvider>(context).exchangeSupplies(
-            model.supplies);
+        Provide.value<BaseFightLineupProvider>(context).exchangeSupplies(model.supplies);
       }
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +94,10 @@ class _RecycleDetailState extends State<RecycleDetail> {
                 ImageTextButton(
                   buttonName: '确 定',
                   callback: () {
+                    if ('' == amountController.text || '' == passwordController.text) {
+                      CommonUtils.showWarningMessage(msg: "输入不能为空");
+                      return;
+                    }
                     if (!RegExp(r"^\d*$").hasMatch(amountController.text)) {
                       CommonUtils.showWarningMessage(msg: "请输入正整数");
                       return;
@@ -126,6 +127,8 @@ class _RecycleDetailState extends State<RecycleDetail> {
                                 onPressed: () {
                                   this.recycleSupplies(passwordController.text, amountController.text);
                                   Navigator.of(context).pop();
+                                  amountController.clear();
+                                  passwordController.clear();
                                 },
                               ),
                             ],

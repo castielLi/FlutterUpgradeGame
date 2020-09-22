@@ -75,7 +75,6 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
           if (null == this.widget.contentName || 'attack' == baseFightLineUpInfo.trainArmyContentName || 'defence' == baseFightLineUpInfo.trainArmyContentName) {
             this.widget.contentName = (null == baseFightLineUpInfo.trainArmyContentName || '' == baseFightLineUpInfo.trainArmyContentName) ? 'attack' : baseFightLineUpInfo.trainArmyContentName;
           }
-
           return Stack(
             children: <Widget>[
               new Image(
