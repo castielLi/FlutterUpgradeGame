@@ -13,8 +13,10 @@ class ArmySelectItem extends StatefulWidget {
   VoidCallback callback;
   int armyCode;
   List position; // 在矩阵中的位置
+  bool reWatch;
+  bool attack;
 
-  ArmySelectItem({Key key, this.size, this.callback, this.armyCode = 0, this.position}) : super(key: key);
+  ArmySelectItem({Key key, this.size, this.callback, this.armyCode = 0, this.position,this.reWatch,this.attack}) : super(key: key);
 
   @override
   _ArmySelectItem createState() => new _ArmySelectItem();
@@ -59,25 +61,43 @@ class _ArmySelectItem extends State<ArmySelectItem> {
           ),
           onTap: () {
             // print(this.widget.position[0].toString() + this.widget.position[1].toString());
-            if (this.widget.armyCode > 0) {
-              setState(() {
-                baseFightLineUpProvider.changeAttackLineUp(this.widget.position[0], this.widget.position[1], 0);
-                this.widget.armyCode = 0;
-              });
+
+            if(this.widget.reWatch){
               return;
             }
 
+            if(this.widget.attack) {
+              if (this.widget.armyCode > 0) {
+                setState(() {
+                  baseFightLineUpProvider.changeAttackLineUp(
+                      this.widget.position[0], this.widget.position[1], 0);
+                  this.widget.armyCode = 0;
+                });
+                return;
+              }
+            }else {
+              if (this.widget.armyCode > 0) {
+                setState(() {
+                  baseFightLineUpProvider.changeProtectLineUp(
+                      this.widget.position[0], this.widget.position[1], 0);
+                  this.widget.armyCode = 0;
+                });
+                return;
+              }
+            }
+            Navigator.push(context, PopWindow(pageBuilder: (context) {
+              return SmallDetailDialog(
+                height: ScreenUtil().setHeight(650),
+                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                childWidgetName: 'armySelectDetail',
+                title: "选择兵种",
+                column: this.widget.position[0],
+                row: this.widget.position[1],
+                attack: this.widget.attack,
+              );
+            }));
 
-              Navigator.push(context, PopWindow(pageBuilder: (context) {
-                return SmallDetailDialog(
-                  height: ScreenUtil().setHeight(650),
-                  width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                  childWidgetName: 'armySelectDetail',
-                  title: "选择兵种",
-                  column: this.widget.position[0],
-                  row: this.widget.position[1],
-                );
-              }));
+
 
           },
         );

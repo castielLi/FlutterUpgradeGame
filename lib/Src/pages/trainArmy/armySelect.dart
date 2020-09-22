@@ -12,8 +12,9 @@ class ArmySelectDetail extends StatefulWidget {
   VoidCallback HUD;
   int column;
   int row;
+  bool attack;
 
-  ArmySelectDetail({Key key, this.HUD, this.column, this.row}) : super(key: key);
+  ArmySelectDetail({Key key, this.HUD, this.column, this.row,this.attack}) : super(key: key);
 
   _ArmySelectDetailState createState() => new _ArmySelectDetailState();
 }
@@ -52,7 +53,11 @@ class _ArmySelectDetailState extends State<ArmySelectDetail> {
                                   armyIconImageUrl: "resource/images/rangeAttackIcon.png",
                                   callback: () {
                                     setState(() {
-                                      baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, ArmyType.RANGE_ATTACK);
+                                      if(this.widget.attack){
+                                        baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, ArmyType.RANGE_ATTACK);
+                                      }else{
+                                        baseFightLineUpProvider.changeProtectLineUp(this.widget.column, this.widget.row, ArmyType.RANGE_ATTACK);
+                                      }
                                       Navigator.pop(context);
                                     });
                                   },
@@ -63,7 +68,11 @@ class _ArmySelectDetailState extends State<ArmySelectDetail> {
                                   armyIconImageUrl: "resource/images/fighterIcon.png",
                                   callback: () {
                                     setState(() {
-                                      baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, ArmyType.FIGHTER);
+                                      if(this.widget.attack){
+                                        baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, ArmyType.FIGHTER);
+                                      }else{
+                                        baseFightLineUpProvider.changeProtectLineUp(this.widget.column, this.widget.row, ArmyType.FIGHTER);
+                                      }
                                       Navigator.pop(context);
                                     });
                                   },
@@ -74,7 +83,11 @@ class _ArmySelectDetailState extends State<ArmySelectDetail> {
                                   armyIconImageUrl: "resource/images/riderIcon.png",
                                   callback: () {
                                     setState(() {
-                                      baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, ArmyType.RIDER);
+                                      if(this.widget.attack){
+                                        baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, ArmyType.RIDER);
+                                      }else{
+                                        baseFightLineUpProvider.changeProtectLineUp(this.widget.column, this.widget.row, ArmyType.RIDER);
+                                      }
                                       Navigator.pop(context);
                                     });
                                   },

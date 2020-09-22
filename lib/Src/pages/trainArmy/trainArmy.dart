@@ -191,6 +191,8 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             child: ArmySelectMatrix(
                               itemSize: SystemIconSize.trainArmyIconSize,
                               armyBaseMatrix: baseFightLineUpInfo.attack,
+                              attack: true,
+                              reWatch: false,
                             ),
                           ),
                           Text(
@@ -314,6 +316,8 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             child: ArmySelectMatrix(
                               itemSize: SystemIconSize.trainArmyIconSize,
                               armyBaseMatrix: baseFightLineUpInfo.protect,
+                              attack: false,
+                              reWatch: false,
                             ),
                           ),
                           Row(
@@ -355,6 +359,8 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             child: ArmySelectMatrix(
                               itemSize: SystemIconSize.trainArmyIconSize,
                               armyBaseMatrix: this.widget.content,
+                              attack: false,
+                              reWatch: true,
                             ),
                           ),
                           Image(

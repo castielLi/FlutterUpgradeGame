@@ -9,6 +9,7 @@ class BaseFightLineupProvider with ChangeNotifier {
   int woodproportion;
   int stoneproportion;
   int attackHeroCount = 0;
+  int protectHeroCount = 0;
 
   List<List<int>> protect;
   List<List<int>> attack;
@@ -54,6 +55,19 @@ class BaseFightLineupProvider with ChangeNotifier {
         }
       }
     }
-//    protect = attack;
+  }
+
+  changeProtectLineUp(int column,int row, int num){
+    for (int i = 0; i < attack.length; i++) {
+      if (i == column) {
+        for (int n = 0; n < attack[i].length; n++) {
+          if (n == row) {
+            protect[i][n] = num;
+            protectHeroCount += 1;
+            return;
+          }
+        }
+      }
+    }
   }
 }
