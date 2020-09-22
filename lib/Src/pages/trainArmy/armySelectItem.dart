@@ -13,8 +13,13 @@ class ArmySelectItem extends StatefulWidget {
   VoidCallback callback;
   int armyCode;
   List position; // 在矩阵中的位置
-
-  ArmySelectItem({Key key, this.size, this.callback, this.armyCode = 0, this.position}) : super(key: key);
+  ArmySelectItem({
+    Key key,
+    this.size,
+    this.callback,
+    this.armyCode = 0,
+    this.position,
+  }) : super(key: key);
 
   @override
   _ArmySelectItem createState() => new _ArmySelectItem();

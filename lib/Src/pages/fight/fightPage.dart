@@ -314,7 +314,7 @@ class _FightPageState extends State<FightPage> {
                             Navigator.push(context, PopWindow(pageBuilder: (context) {
                               return TrainArmyDetail(
                                 HUD: this.showOrDismissProgressHUD,
-                                contentName: 'attack',
+                                // contentName: 'defence',
                               );
                             }));
                           },
