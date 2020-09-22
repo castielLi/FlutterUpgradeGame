@@ -8,7 +8,6 @@ import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Src/pages/trainArmy/trainArmy.dart';
 import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
-import 'dart:convert' as convert;
 
 class MessageItem extends StatefulWidget {
   // 攻打日期
@@ -29,7 +28,7 @@ class _MessageItem extends State<MessageItem> {
   @override
   Widget build(BuildContext context) {
     return ProvideMulti(
-      builder: (context,child,model){
+      builder: (context, child, model) {
         BaseFightLineupProvider baseFightLineUpInfo = model.get<BaseFightLineupProvider>();
         return Column(
           children: [
@@ -54,12 +53,11 @@ class _MessageItem extends State<MessageItem> {
                   width: ScreenUtil().setWidth(180),
                   height: ScreenUtil().setHeight(120),
                   callback: () {
-
                     var lineup = List<List<int>>();
                     var list = convert.jsonDecode(this.widget.lineup);
-                    for(int i = 0;i<list.length;i++){
+                    for (int i = 0; i < list.length; i++) {
                       var row = List<int>();
-                      for(int j = 0;j<list[i].length;j++){
+                      for (int j = 0; j < list[i].length; j++) {
                         row.add(list[i][j]);
                       }
                       lineup.add(row);
@@ -78,6 +76,7 @@ class _MessageItem extends State<MessageItem> {
                         }
                       }
                       // baseFightLineUpInfo.trainArmyContentName = 'reWatch';
+                      //TODO 战败数据
                       return TrainArmyDetail(
                         contentName: 'reWatch',
                         content: lineup,

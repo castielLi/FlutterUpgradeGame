@@ -10,13 +10,12 @@ import 'package:upgradegame/Src/route/application.dart';
 
 class ArmySelectItem extends StatefulWidget {
   double size;
-  VoidCallback callback;
   int armyCode;
   List position; // 在矩阵中的位置
   bool reWatch;
   bool attack;
 
-  ArmySelectItem({Key key, this.size, this.callback, this.armyCode = 0, this.position, this.reWatch, this.attack}) : super(key: key);
+  ArmySelectItem({Key key, this.size, this.armyCode = 0, this.position, this.reWatch, this.attack}) : super(key: key);
 
   @override
   _ArmySelectItem createState() => new _ArmySelectItem();
