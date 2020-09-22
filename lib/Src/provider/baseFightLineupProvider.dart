@@ -56,6 +56,9 @@ class BaseFightLineupProvider with ChangeNotifier {
         var row = List<int>();
         for (int j = 0; j < list[i].length; j++) {
           row.add(list[i][j]);
+          if(list[i][j] != 0) {
+            protectHeroCount += 1;
+          }
         }
         this.protect.add(row);
       }
@@ -82,7 +85,7 @@ class BaseFightLineupProvider with ChangeNotifier {
         for (int n = 0; n < attack[i].length; n++) {
           if (n == row) {
             attack[i][n] = num;
-            attackHeroCount += 0 == num ? -1 : 1;
+            attackHeroCount += (0 == num ? -1 : 1);
             return;
           }
         }
@@ -96,7 +99,7 @@ class BaseFightLineupProvider with ChangeNotifier {
         for (int n = 0; n < attack[i].length; n++) {
           if (n == row) {
             protect[i][n] = num;
-            protectHeroCount += 0 == num ? -1 : 1;
+            protectHeroCount += (0 == num ? -1 : 1);
             return;
           }
         }

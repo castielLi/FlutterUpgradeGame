@@ -355,7 +355,21 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             imageUrl: 'resource/images/upgradeButton.png',
                             height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
                             width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
-                            callback: () {},
+                            callback: () {
+
+                              if(baseFightLineUpInfo.protectHeroCount<5){
+                                CommonUtils.showWarningMessage(msg: "您当前的防守阵容英雄数量不足5个,请继续添加");
+                                return;
+                              }
+
+                              this.widget.HUD();
+                              ArmyService.setProtectLineup(baseFightLineUpInfo.protect, (bool success){
+                                this.widget.HUD();
+                                if(success){
+                                  CommonUtils.showSuccessMessage(msg: "设置防守阵容成功");
+                                }
+                              });
+                            },
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

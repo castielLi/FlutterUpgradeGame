@@ -79,7 +79,7 @@ class _MessageDetailState extends State<MessageDetail> {
                         style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
                       ),
                       Text(
-                        '结果',
+                        '玩家',
                         style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
                       ),
                       Text(
