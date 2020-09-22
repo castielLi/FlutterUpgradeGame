@@ -5,6 +5,9 @@ class AttackModel {
   int supplies;
   String lineup;
   bool displayad;
+  int winwood;
+  int winstone;
+  int winsupplies;
 
   AttackModel(
       {this.win,
@@ -12,7 +15,7 @@ class AttackModel {
         this.stoneamount,
         this.supplies,
         this.lineup,
-      this.displayad});
+      this.displayad,this.winstone,this.winsupplies,this.winwood});
 
   AttackModel.fromJson(Map<String, dynamic> json) {
     win = json['win'];
@@ -21,6 +24,9 @@ class AttackModel {
     supplies = json['supplies'];
     lineup = json['lineup'];
     displayad = json['displayad'];
+    winwood = json['winwood'];
+    winstone = json['winstone'];
+    winsupplies = json['winsupplies'];
   }
 
   Map<String, dynamic> toJson() {
@@ -31,6 +37,9 @@ class AttackModel {
     data['supplies'] = this.supplies;
     data['lineup'] = this.lineup;
     data['displayad'] = this.displayad;
+    data['winsupplies'] = this.winsupplies;
+    data['winstone'] = this.winstone;
+    data['winwood'] = this.winwood;
     return data;
   }
 }

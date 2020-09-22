@@ -32,8 +32,8 @@ class BaseFightLineupProvider with ChangeNotifier {
       }
     }
     this.attack = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]];
-    this.woodproportion = model.woodproportion;
-    this.stoneproportion = model.stoneproportion;
+    this.woodproportion = model.wood;
+    this.stoneproportion = model.stone;
     notifyListeners();
   }
 

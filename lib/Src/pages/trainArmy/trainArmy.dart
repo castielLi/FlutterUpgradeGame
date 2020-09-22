@@ -205,12 +205,12 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                               ),
                               Image(image: new AssetImage('resource/images/wood.png'), width: ScreenUtil().setWidth(100)),
                               Text(
-                                baseUserInfo.woodproportion.toString()+" ",
+                                baseFightLineUpInfo.woodproportion.toString()+" ",
                                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                               ),
                               Image(image: new AssetImage('resource/images/stone.png'), width: ScreenUtil().setWidth(100)),
                               Text(
-                                baseUserInfo.stoneproportion.toString(),
+                                baseFightLineUpInfo.stoneproportion.toString(),
                                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                               ),
                             ],
@@ -225,7 +225,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                 CommonUtils.showWarningMessage(msg: "您当前的进攻阵容英雄不足5个,请继续排兵布阵");
                                 return;
                               }
-                              if (baseUserInfo.woodamount >= baseUserInfo.woodproportion && baseUserInfo.stoneamount >= baseUserInfo.stoneproportion) {
+                              if (baseUserInfo.woodamount >= baseFightLineUpInfo.woodproportion && baseUserInfo.stoneamount >= baseFightLineUpInfo.stoneproportion) {
                                 showDialog<Null>(
                                   context: context,
                                   barrierDismissible: false,
@@ -407,12 +407,12 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                     ),
                                     Image(image: new AssetImage('resource/images/wood.png'), width: ScreenUtil().setWidth(100)),
                                     Text(
-                                      baseUserInfo.woodproportion.toString() + " ",
+                                      "0" + " ",
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                     Image(image: new AssetImage('resource/images/stone.png'), width: ScreenUtil().setWidth(100)),
                                     Text(
-                                      baseUserInfo.stoneproportion.toString(),
+                                      "0",
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                   ],
