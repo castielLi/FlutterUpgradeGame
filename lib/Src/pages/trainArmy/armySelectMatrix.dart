@@ -5,12 +5,14 @@ class ArmySelectMatrix extends StatefulWidget {
   VoidCallback HUD;
   List armyBaseMatrix;
   double itemSize;
+  bool attack;
+  bool reWatch;
 
   ArmySelectMatrix(
       {Key key,
       this.HUD,
       this.itemSize,
-      this.armyBaseMatrix})
+      this.armyBaseMatrix,this.attack,this.reWatch})
       : super(key: key);
 
   _ArmySelectMatrixState createState() => new _ArmySelectMatrixState();
@@ -53,6 +55,8 @@ class _ArmySelectMatrixState extends State<ArmySelectMatrix> {
           armyCode: rowArmy[i],
           position: [column, i], //[行，列]
           callback: () {},
+          attack: this.widget.attack,
+          reWatch: this.widget.reWatch,
         ),
       );
     }

@@ -193,19 +193,21 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             height: ScreenUtil().setHeight(SystemIconSize.trainArmyIconSize * 5), //大于等于5个高度
                             child: ArmySelectMatrix(
                               itemSize: SystemIconSize.trainArmyIconSize,
-                              armyBaseMatrix: baseFightLineUpInfo.Attack,
+                              armyBaseMatrix: baseFightLineUpInfo.attack,
+                              attack: true,
+                              reWatch: false,
                             ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                '当前消耗木材:',
+                                '当前消耗 ',
                                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                               ),
                               Image(image: new AssetImage('resource/images/wood.png'), width: ScreenUtil().setWidth(100)),
                               Text(
-                                baseUserInfo.woodproportion.toString() + " 石材:",
+                                baseUserInfo.woodproportion.toString()+" ",
                                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                               ),
                               Image(image: new AssetImage('resource/images/stone.png'), width: ScreenUtil().setWidth(100)),
@@ -335,6 +337,8 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             child: ArmySelectMatrix(
                               itemSize: SystemIconSize.trainArmyIconSize,
                               armyBaseMatrix: baseFightLineUpInfo.protect,
+                              attack: false,
+                              reWatch: false,
                             ),
                           ),
                           ImageButton(
@@ -393,7 +397,10 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                               child: ArmySelectMatrix(
                                 itemSize: SystemIconSize.trainArmyIconSize,
                                 armyBaseMatrix: this.widget.content,
+                                attack: false,
+                                reWatch: true,
                               ),
+
                             ),
                             Image(
                               image: AssetImage('resource/images/' + (this.widget.isFightWin ? 'win' : 'lose').toString() + '.png'),
@@ -407,17 +414,17 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     Text(
-                                      '获得物资:',
+                                      '获得 ',
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                     Image(image: new AssetImage('resource/images/volume.png'), width: ScreenUtil().setWidth(100)),
                                     Text(
-                                      baseUserInfo.supplies.toString() + " 木材:",
+                                      baseUserInfo.supplies.toString() + " ",
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                     Image(image: new AssetImage('resource/images/wood.png'), width: ScreenUtil().setWidth(100)),
                                     Text(
-                                      baseUserInfo.woodproportion.toString() + " 石材:",
+                                      baseUserInfo.woodproportion.toString() + " ",
                                       style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                     ),
                                     Image(image: new AssetImage('resource/images/stone.png'), width: ScreenUtil().setWidth(100)),

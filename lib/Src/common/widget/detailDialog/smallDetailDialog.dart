@@ -12,8 +12,9 @@ class SmallDetailDialog extends StatefulWidget {
   String title;
   int row;
   int column;
+  bool attack;
 
-  SmallDetailDialog({Key key, this.height, this.width, this.childWidgetName, this.title = "", this.row, this.column}) : super(key: key);
+  SmallDetailDialog({Key key, this.height, this.width, this.childWidgetName, this.title = "", this.row, this.column,this.attack}) : super(key: key);
 
   @override
   _SmallDetailDialogState createState() => new _SmallDetailDialogState();
@@ -77,6 +78,7 @@ class _SmallDetailDialogState extends State<SmallDetailDialog> {
             HUD: showOrDismissProgressHUD,
             row: this.widget.row,
             column: this.widget.column,
+            attack: this.widget.attack,
           );
           break;
         }
