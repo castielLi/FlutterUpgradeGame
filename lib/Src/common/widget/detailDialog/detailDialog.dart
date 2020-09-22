@@ -10,6 +10,7 @@ import 'package:upgradegame/Src/pages/announcement/announcement.dart';
 import 'package:upgradegame/Src/pages/armyCamp/armyCamp.dart';
 import 'package:upgradegame/Src/pages/contribution/contribution.dart';
 import 'package:upgradegame/Src/pages/farm/farm.dart';
+import 'package:upgradegame/Src/pages/fightRaiders/fightRaiders.dart';
 import 'package:upgradegame/Src/pages/fightRank/fightRank.dart';
 import 'package:upgradegame/Src/pages/heroAltar/heroAltar.dart';
 import 'package:upgradegame/Src/pages/mainBuilding/mainBuilding.dart';
@@ -263,6 +264,14 @@ class _DetailDialogState extends State<DetailDialog> {
       case 'recycleDetail':
         {
           currentWidget = new RecycleDetail(
+
+            HUD: showOrDismissProgressHUD,
+          );
+          break;
+        }
+      case 'fightRaidersDetail':
+        {
+          currentWidget = new FightRaiderDetail(
 
             HUD: showOrDismissProgressHUD,
           );

@@ -175,12 +175,12 @@ class _FightPageState extends State<FightPage> {
                   new Container(
                     margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + SystemScreenSize.mainPageSignalBarHeight)),
                     height: ScreenUtil().setHeight(SystemIconSize.mainPageFunctionBarIconSize),
-                    width: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize * 4),
+                    width: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize * 5),
                     child: new GridView.count(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       padding: EdgeInsets.zero,
-                      crossAxisCount: 4,
+                      crossAxisCount: 5,
                       childAspectRatio: 1,
                       children: [
                         new UserImageButton(
@@ -243,6 +243,22 @@ class _FightPageState extends State<FightPage> {
                                 width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
                                 childWidgetName: 'recycleDetail',
                                 title: "回 收",
+                              );
+                            }));
+                          },
+                        ),
+                        new UserImageButton(
+                          size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                          buttonName: "必读",
+                          textSize: SystemFontSize.operationTextFontSize,
+                          imageUrl: "resource/images/setting.png",
+                          callback: () {
+                            Navigator.push(context, PopWindow(pageBuilder: (context) {
+                              return DetailDialog(
+                                height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                childWidgetName: 'fightRaidersDetail',
+                                title: "必 读",
                               );
                             }));
                           },
