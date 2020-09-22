@@ -52,7 +52,7 @@ class _RecycleDetailState extends State<RecycleDetail> {
                 child: new Row(
                   children: <Widget>[
                     Image(
-                      image: new AssetImage("resource/images/coin.png"),
+                      image: new AssetImage("resource/images/volume.png"),
                       width: ScreenUtil().setWidth(120),
                       height: ScreenUtil().setHeight(120),
                       fit: BoxFit.fill,
