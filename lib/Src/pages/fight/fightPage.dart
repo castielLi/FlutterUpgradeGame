@@ -59,7 +59,7 @@ class _FightPageState extends State<FightPage> {
     FightService.getFightInfo((model) {
       this.showOrDismissProgressHUD();
       if (model != null) {
-        Provide.value<BaseUserInfoProvider>(context).initSupplies(model);
+        Provide.value<BaseFightLineupProvider>(context).initSupplies(model);
         Provide.value<BaseFightLineupProvider>(context).initLiuneupProvider(model);
         if (model.protectlineup == "") {
           CommonUtils.showWarningMessage(msg: "您还没设置防守阵容,为了不造成不必要的损失,请设置防守整容");
@@ -86,6 +86,7 @@ class _FightPageState extends State<FightPage> {
       child: ProvideMulti(
         builder: (context, child, model) {
           BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
+          BaseFightLineupProvider baseFightInfo = model.get<BaseFightLineupProvider>();
           return Stack(
             children: <Widget>[
               new Image(
@@ -265,7 +266,7 @@ class _FightPageState extends State<FightPage> {
                           height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
                         ),
                         new Text(
-                          (null==baseUserInfo.supplies?'':baseUserInfo.supplies).toString(),
+                          (null==baseFightInfo.supplies?'':baseFightInfo.supplies).toString(),
                           style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                         ),
                       ],
@@ -348,7 +349,7 @@ class _FightPageState extends State<FightPage> {
             ],
           );
         },
-        requestedValues: [BaseUserInfoProvider],
+        requestedValues: [BaseUserInfoProvider,BaseFightLineupProvider],
       ),
     );
   }

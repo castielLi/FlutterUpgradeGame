@@ -26,13 +26,7 @@ class BaseUserInfoProvider with ChangeNotifier {
   int tobecollectedcoin;
   int contribution;
 
-  int supplies;
-  int limitsuppliesrecycle;
-  String suppliesprice;
 
-  String get SuppliesPrice => suppliesprice;
-  int get LimitSuppliesRecycle => limitsuppliesrecycle;
-  int get Supplies => supplies;
 
   int get TCoinAmount => tcoinamount;
 
@@ -73,13 +67,7 @@ class BaseUserInfoProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  ///初始化物资讯息
-  initSupplies(FightInfoModel model){
-    supplies = model.supplies;
-    limitsuppliesrecycle = model.limitsuppliesrecycle;
-    suppliesprice = model.suppliesprice;
-    notifyListeners();
-  }
+
 
   ///生产t币数据绑定
   backendProductTCoin(ProductCoinModel model) {
@@ -98,15 +86,8 @@ class BaseUserInfoProvider with ChangeNotifier {
     this.contribution = contribution;
   }
 
-  ///兑换物资到现金账户
-  exchangeSupplies(int suppliesamount){
-    this.supplies = suppliesamount;
-    notifyListeners();
-  }
-
   ///购买物资
-  buySupplies(int suppliesamount,int tcoinamount){
-    this.supplies = suppliesamount;
+  buySupplies(int tcoinamount){
     this.tcoinamount = tcoinamount;
     notifyListeners();
   }
