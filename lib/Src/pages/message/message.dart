@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +38,7 @@ class _MessageDetailState extends State<MessageDetail> {
         return;
       }
       this.messageDetail.page = model.page;
-      if (this.page == 0) {
+      if (model.page == 0) {
         this.messageDetail.datalist = [];
       }
       if (model.datalist.length == 0) {
@@ -115,15 +113,15 @@ class _MessageDetailState extends State<MessageDetail> {
               // ignore: missing_return
               loadMore: () {
                 // setState(() {
-                  this.page++;
-                  getFightMessageList();
+                this.page++;
+                getFightMessageList();
                 // });
               },
               // ignore: missing_return
               onRefresh: () {
                 // setState(() {
-                  this.page = 0;
-                  getFightMessageList();
+                this.page = 0;
+                getFightMessageList();
                 // });
               },
               child: ListView.builder(

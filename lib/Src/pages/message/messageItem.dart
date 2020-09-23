@@ -75,8 +75,6 @@ class _MessageItem extends State<MessageItem> {
                           content.add(row);
                         }
                       }
-                      // baseFightLineUpInfo.trainArmyContentName = 'reWatch';
-                      //TODO 战败数据
                       return TrainArmyDetail(
                         contentName: 'reWatch',
                         content: lineup,

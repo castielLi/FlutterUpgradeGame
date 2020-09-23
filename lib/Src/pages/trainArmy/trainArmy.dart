@@ -273,7 +273,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
 //                                                  }
                                                 }
                                                 baseFightLineUpInfo.attackReslut(model);
-                                                baseUserInfo.attactResult(model.stoneamount,model.woodamount);
+                                                baseUserInfo.attactResult(model.stoneamount, model.woodamount);
                                                 Navigator.of(context).pop();
                                                 var lineup = List<List<int>>();
                                                 var list = convert.jsonDecode(model.lineup);
@@ -295,7 +295,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                                     winwood: model.winwood,
                                                   );
                                                 }));
-                                              }else{
+                                              } else {
                                                 Navigator.of(context).pop();
                                               }
                                             });

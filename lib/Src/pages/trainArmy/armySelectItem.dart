@@ -23,6 +23,8 @@ class ArmySelectItem extends StatefulWidget {
 }
 
 class _ArmySelectItem extends State<ArmySelectItem> {
+  int lastClickTime;
+
   @override
   Widget build(BuildContext context) {
     bool hideArmy = (this.widget.armyCode == 0);
@@ -30,79 +32,83 @@ class _ArmySelectItem extends State<ArmySelectItem> {
       builder: (context, child, model) {
         BaseFightLineupProvider baseFightLineUpProvider = model.get<BaseFightLineupProvider>();
         return GestureDetector(
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Image(
-                image: AssetImage("resource/images/armyBaseBackground.png"),
-                height: ScreenUtil().setHeight(this.widget.size),
-                width: ScreenUtil().setWidth(this.widget.size),
-              ),
-              Offstage(
-                offstage: hideArmy,
-                child: Stack(
-                  children: [
-                    Image(
-                      image: AssetImage("resource/images/armyBlueBackground.png"),
-                      height: ScreenUtil().setHeight(this.widget.size - 30),
-                      width: ScreenUtil().setWidth(this.widget.size - 30),
-                    ),
-                    Image(
-                      image: AssetImage(
-                        "resource/images/" + (hideArmy ? "rangeAttack" : ArmyType.getName(this.widget.armyCode)) + "Icon.png",
-                      ),
-                      height: ScreenUtil().setHeight(this.widget.size - 30),
-                      width: ScreenUtil().setWidth(this.widget.size - 30),
-                    ),
-                  ],
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Image(
+                  image: AssetImage("resource/images/armyBaseBackground.png"),
+                  height: ScreenUtil().setHeight(this.widget.size),
+                  width: ScreenUtil().setWidth(this.widget.size),
                 ),
-              ),
-            ],
-          ),
-          onTap: () {
-            if (this.widget.reWatch) {
-              return;
-            }
-            if (this.widget.attack) {
-              if (this.widget.armyCode > 0) {
-                setState(() {
-                  baseFightLineUpProvider.changeAttackLineUp(this.widget.position[0], this.widget.position[1], 0);
-                  this.widget.armyCode = 0;
-                });
-                return;
-              }
-              if (baseFightLineUpProvider.attackHeroCount >= 5) {
-                CommonUtils.showWarningMessage(msg: "最多只能排列5名士兵");
-                return;
-              }
-            } else {
-              if (this.widget.armyCode > 0) {
-                setState(() {
-                  baseFightLineUpProvider.changeProtectLineUp(this.widget.position[0], this.widget.position[1], 0);
-                  this.widget.armyCode = 0;
-                });
-                return;
-              }
-              print(baseFightLineUpProvider.protectHeroCount);
-              if (baseFightLineUpProvider.protectHeroCount >= 5) {
-                CommonUtils.showWarningMessage(msg: '最多只能添加5名士兵');
-                return;
-              }
-            }
+                Offstage(
+                  offstage: hideArmy,
+                  child: Stack(
+                    children: [
+                      Image(
+                        image: AssetImage("resource/images/armyBlueBackground.png"),
+                        height: ScreenUtil().setHeight(this.widget.size - 30),
+                        width: ScreenUtil().setWidth(this.widget.size - 30),
+                      ),
+                      Image(
+                        image: AssetImage(
+                          "resource/images/" + (hideArmy ? "rangeAttack" : ArmyType.getName(this.widget.armyCode)) + "Icon.png",
+                        ),
+                        height: ScreenUtil().setHeight(this.widget.size - 30),
+                        width: ScreenUtil().setWidth(this.widget.size - 30),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            onTap: () {
+              if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
+                if (this.widget.reWatch) {
+                  return;
+                }
+                if (this.widget.attack) {
+                  if (this.widget.armyCode > 0) {
+                    setState(() {
+                      baseFightLineUpProvider.changeAttackLineUp(this.widget.position[0], this.widget.position[1], 0);
+                      this.widget.armyCode = 0;
+                    });
+                    return;
+                  }
 
-            Navigator.push(context, PopWindow(pageBuilder: (context) {
-              return SmallDetailDialog(
-                height: ScreenUtil().setHeight(650),
-                width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                childWidgetName: 'armySelectDetail',
-                title: "选择兵种",
-                column: this.widget.position[0],
-                row: this.widget.position[1],
-                attack: this.widget.attack,
-              );
-            }));
-          },
-        );
+                  if (baseFightLineUpProvider.attackHeroCount >= 5) {
+                    CommonUtils.showWarningMessage(msg: "最多只能排列5名士兵");
+                    return;
+                  }
+                } else {
+                  if (this.widget.armyCode > 0) {
+                    setState(() {
+                      baseFightLineUpProvider.changeProtectLineUp(this.widget.position[0], this.widget.position[1], 0);
+                      this.widget.armyCode = 0;
+                    });
+                    return;
+                  }
+                  if (baseFightLineUpProvider.protectHeroCount >= 5) {
+                    CommonUtils.showWarningMessage(msg: '最多只能添加5名士兵');
+                    return;
+                  }
+                }
+
+                Navigator.push(context, PopWindow(pageBuilder: (context) {
+                  return SmallDetailDialog(
+                    height: ScreenUtil().setHeight(650),
+                    width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                    childWidgetName: 'armySelectDetail',
+                    title: "选择兵种",
+                    column: this.widget.position[0],
+                    row: this.widget.position[1],
+                    attack: this.widget.attack,
+                  );
+                }));
+              }
+
+              this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
+              // this.widget.contentName = null;
+            });
       },
       requestedValues: [BaseFightLineupProvider],
     );
