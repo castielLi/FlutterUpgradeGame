@@ -174,7 +174,7 @@ class _FightPageState extends State<FightPage> {
                 children: [
                   new Container(
                     margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + SystemScreenSize.mainPageSignalBarHeight)),
-                    height: ScreenUtil().setHeight(SystemIconSize.mainPageFunctionBarIconSize),
+                    height: ScreenUtil().setHeight(SystemIconSize.mainPageFunctionBarIconSize * 2),
                     width: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize * 5),
                     child: new GridView.count(
                       shrinkWrap: true,
@@ -261,6 +261,15 @@ class _FightPageState extends State<FightPage> {
                                 title: "必 读",
                               );
                             }));
+                          },
+                        ),
+                        new UserImageButton(
+                          size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                          buttonName: "刷新",
+                          textSize: SystemFontSize.operationTextFontSize,
+                          imageUrl: "resource/images/refresh.png",
+                          callback: () {
+                            this.initFightInfo();
                           },
                         ),
                       ],
