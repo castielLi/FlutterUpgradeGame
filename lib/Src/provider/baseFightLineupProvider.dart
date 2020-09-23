@@ -7,6 +7,8 @@ import 'package:upgradegame/Src/pages/trainArmy/model/attackModel.dart';
 
 //混入
 class BaseFightLineupProvider with ChangeNotifier {
+  /// 骑士:1  战士:2  猎手:3
+
   int woodproportion;
   int stoneproportion;
   int attackHeroCount = 0;
@@ -14,9 +16,9 @@ class BaseFightLineupProvider with ChangeNotifier {
   String trainArmyContentName;
   int supplies;
   int limitsuppliesrecycle;
-  String suppliesprice;
+  String coinprice;
 
-  String get SuppliesPrice => suppliesprice;
+  String get Coinprice => coinprice;
 
   int get LimitSuppliesRecycle => limitsuppliesrecycle;
 
@@ -51,7 +53,7 @@ class BaseFightLineupProvider with ChangeNotifier {
   initSupplies(FightInfoModel model) {
     supplies = model.supplies;
     limitsuppliesrecycle = model.limitsuppliesrecycle;
-    suppliesprice = model.suppliesprice;
+    coinprice = model.coinprice;
     notifyListeners();
   }
 

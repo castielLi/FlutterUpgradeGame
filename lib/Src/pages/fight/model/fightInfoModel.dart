@@ -3,7 +3,7 @@ class FightInfoModel {
   bool hasbuy;
   int wood;
   int stone;
-  String suppliesprice;
+  String coinprice;
   int limitsuppliesrecycle;
   String protectlineup;
 
@@ -12,7 +12,7 @@ class FightInfoModel {
         this.hasbuy,
         this.wood,
         this.stone,
-        this.suppliesprice,
+        this.coinprice,
         this.limitsuppliesrecycle,
         this.protectlineup});
 
@@ -21,7 +21,10 @@ class FightInfoModel {
     hasbuy = json['hasbuy'];
     wood = json['wood'];
     stone = json['stone'];
-    suppliesprice = json['suppliesprice'];
+    coinprice = json['coinprice'];
+    if(coinprice == null){
+      coinprice = "0.05";
+    }
     limitsuppliesrecycle = json['limitsuppliesrecycle'];
     protectlineup = json['protectlineup'];
   }
@@ -32,7 +35,7 @@ class FightInfoModel {
     data['hasbuy'] = this.hasbuy;
     data['wood'] = this.wood;
     data['stone'] = this.stone;
-    data['suppliesprice'] = this.suppliesprice;
+    data['coinprice'] = this.coinprice;
     data['limitsuppliesrecycle'] = this.limitsuppliesrecycle;
     data['protectlineup'] = this.protectlineup;
     return data;
