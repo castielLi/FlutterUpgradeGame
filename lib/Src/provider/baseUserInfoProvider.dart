@@ -67,6 +67,12 @@ class BaseUserInfoProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  ///战斗进攻消耗石材木材后的数值
+  attactResult(int stoneamount,int woodamount){
+    this.stoneamount = stoneamount;
+    this.woodamount = woodamount;
+    notifyListeners();
+  }
 
 
   ///生产t币数据绑定

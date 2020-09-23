@@ -237,6 +237,11 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                 return;
                               }
 
+                              if (baseFightLineUpInfo.supplies < 10) {
+                                CommonUtils.showWarningMessage(msg: "您当前的物资不足10,无法进行匹配战斗");
+                                return;
+                              }
+
                               if (baseUserInfo.woodamount >= baseFightLineUpInfo.woodproportion && baseUserInfo.stoneamount >= baseFightLineUpInfo.stoneproportion) {
                                 showDialog<Null>(
                                   context: context,
@@ -267,29 +272,32 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
 //                                                    AdDialog().showAd(4, 1,"945445227");
 //                                                  }
                                                 }
-                                              }
-                                              Navigator.of(context).pop();
-
-                                              var lineup = List<List<int>>();
-                                              var list = convert.jsonDecode(model.lineup);
-                                              for (int i = 0; i < list.length; i++) {
-                                                var row = List<int>();
-                                                for (int j = 0; j < list[i].length; j++) {
-                                                  row.add(list[i][j]);
+                                                baseFightLineUpInfo.attackReslut(model);
+                                                baseUserInfo.attactResult(model.stoneamount,model.woodamount);
+                                                Navigator.of(context).pop();
+                                                var lineup = List<List<int>>();
+                                                var list = convert.jsonDecode(model.lineup);
+                                                for (int i = 0; i < list.length; i++) {
+                                                  var row = List<int>();
+                                                  for (int j = 0; j < list[i].length; j++) {
+                                                    row.add(list[i][j]);
+                                                  }
+                                                  lineup.add(row);
                                                 }
-                                                lineup.add(row);
+                                                baseFightLineUpInfo.trainArmyContentName = 'reWatch';
+                                                Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                                  return TrainArmyDetail(
+                                                    // contentName: 'reWatch',
+                                                    content: lineup,
+                                                    isFightWin: model.win,
+                                                    winstone: model.winstone,
+                                                    winsupplies: model.winsupplies,
+                                                    winwood: model.winwood,
+                                                  );
+                                                }));
+                                              }else{
+                                                Navigator.of(context).pop();
                                               }
-                                              baseFightLineUpInfo.trainArmyContentName = 'reWatch';
-                                              Navigator.push(context, PopWindow(pageBuilder: (context) {
-                                                return TrainArmyDetail(
-                                                  // contentName: 'reWatch',
-                                                  content: lineup,
-                                                  isFightWin: model.win,
-                                                  winstone: model.winstone,
-                                                  winsupplies: model.winsupplies,
-                                                  winwood: model.winwood,
-                                                );
-                                              }));
                                             });
                                           },
                                         ),

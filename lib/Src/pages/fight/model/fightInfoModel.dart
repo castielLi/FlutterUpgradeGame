@@ -19,14 +19,8 @@ class FightInfoModel {
   FightInfoModel.fromJson(Map<String, dynamic> json) {
     supplies = json['supplies'];
     hasbuy = json['hasbuy'];
-    wood = json['woodproportion'];
-    if(wood == null){
-      wood = 0;
-    }
-    stone = json['stoneproportion'];
-    if(stone == null){
-      stone = 0;
-    }
+    wood = json['wood'];
+    stone = json['stone'];
     suppliesprice = json['suppliesprice'];
     limitsuppliesrecycle = json['limitsuppliesrecycle'];
     protectlineup = json['protectlineup'];
@@ -36,8 +30,8 @@ class FightInfoModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['supplies'] = this.supplies;
     data['hasbuy'] = this.hasbuy;
-    data['woodproportion'] = this.wood;
-    data['stoneproportion'] = this.stone;
+    data['wood'] = this.wood;
+    data['stone'] = this.stone;
     data['suppliesprice'] = this.suppliesprice;
     data['limitsuppliesrecycle'] = this.limitsuppliesrecycle;
     data['protectlineup'] = this.protectlineup;

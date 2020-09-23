@@ -3,6 +3,7 @@ import 'dart:convert' as convert;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:upgradegame/Src/pages/fight/model/fightInfoModel.dart';
+import 'package:upgradegame/Src/pages/trainArmy/model/attackModel.dart';
 
 //混入
 class BaseFightLineupProvider with ChangeNotifier {
@@ -40,13 +41,17 @@ class BaseFightLineupProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  ///进攻结果
+  attackReslut(AttackModel model){
+    this.supplies = model.supplies;
+    notifyListeners();
+  }
+
   ///初始化物资讯息
   initSupplies(FightInfoModel model) {
     supplies = model.supplies;
     limitsuppliesrecycle = model.limitsuppliesrecycle;
     suppliesprice = model.suppliesprice;
-    woodproportion = model.wood;
-    stoneproportion = model.stone;
     notifyListeners();
   }
 
