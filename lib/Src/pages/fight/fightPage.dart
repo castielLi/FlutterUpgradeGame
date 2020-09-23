@@ -203,7 +203,7 @@ class _FightPageState extends State<FightPage> {
                           size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
                           buttonName: "消息",
                           textSize: SystemFontSize.operationTextFontSize,
-                          imageUrl: "resource/images/team.png",
+                          imageUrl: "resource/images/message.png",
                           callback: () {
                             Navigator.push(context, PopWindow(pageBuilder: (context) {
                               return DetailDialog(
@@ -235,7 +235,7 @@ class _FightPageState extends State<FightPage> {
                           size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
                           buttonName: "回收",
                           textSize: SystemFontSize.operationTextFontSize,
-                          imageUrl: "resource/images/team.png",
+                          imageUrl: "resource/images/recycle.png",
                           callback: () {
                             Navigator.push(context, PopWindow(pageBuilder: (context) {
                               return DetailDialog(
@@ -251,7 +251,7 @@ class _FightPageState extends State<FightPage> {
                           size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
                           buttonName: "必读",
                           textSize: SystemFontSize.operationTextFontSize,
-                          imageUrl: "resource/images/setting.png",
+                          imageUrl: "resource/images/mustReadFightPage.png",
                           callback: () {
                             Navigator.push(context, PopWindow(pageBuilder: (context) {
                               return DetailDialog(

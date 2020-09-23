@@ -316,9 +316,9 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                 width: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
                                 buttonName: '进 攻',
                                 callback: () {
-                                  setState(() {
-                                    baseFightLineUpInfo.trainArmyContentName = 'attack';
-                                  });
+                                  // setState(() {
+                                  //   baseFightLineUpInfo.trainArmyContentName = 'attack';
+                                  // });
                                 },
                               ),
                               ImageButton(
@@ -360,20 +360,18 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
                             width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
                             callback: () {
-
-                              if(baseFightLineUpInfo.protectHeroCount<5){
+                              if (baseFightLineUpInfo.protectHeroCount < 5) {
                                 CommonUtils.showWarningMessage(msg: "您当前的防守阵容英雄数量不足5个,请继续添加");
                                 return;
                               }
-                              if(baseFightLineUpInfo.protectHeroCount>5){
+                              if (baseFightLineUpInfo.protectHeroCount > 5) {
                                 CommonUtils.showWarningMessage(msg: "最多只能排列5名士兵,请重新排兵布阵");
                                 return;
                               }
-
                               this.widget.HUD();
-                              ArmyService.setProtectLineup(baseFightLineUpInfo.protect, (bool success){
+                              ArmyService.setProtectLineup(baseFightLineUpInfo.protect, (bool success) {
                                 this.widget.HUD();
-                                if(success){
+                                if (success) {
                                   CommonUtils.showSuccessMessage(msg: "设置防守阵容成功");
                                 }
                               });
@@ -399,9 +397,9 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                 width: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
                                 buttonName: '防 守',
                                 callback: () {
-                                  setState(() {
-                                    baseFightLineUpInfo.trainArmyContentName = 'defence';
-                                  });
+                                  // setState(() {
+                                  //   baseFightLineUpInfo.trainArmyContentName = 'defence';
+                                  // });
                                 },
                               ),
                             ],
