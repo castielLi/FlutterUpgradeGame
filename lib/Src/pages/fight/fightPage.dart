@@ -186,7 +186,6 @@ class _FightPageState extends State<FightPage> {
                         new UserImageButton(
                           size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
                           buttonName: "排行榜",
-                          // textColor: Colors.red,
                           imageUrl: "resource/images/rank.png",
                           textSize: SystemFontSize.operationTextFontSize,
                           callback: () {
@@ -221,7 +220,6 @@ class _FightPageState extends State<FightPage> {
                           buttonName: "商城",
                           imageUrl: "resource/images/rank.png",
                           textSize: SystemFontSize.operationTextFontSize,
-                          // textColor: Colors.grey,
                           callback: () {
                             Navigator.push(context, PopWindow(pageBuilder: (context) {
                               return DetailDialog(
@@ -333,7 +331,6 @@ class _FightPageState extends State<FightPage> {
                             Navigator.push(context, PopWindow(pageBuilder: (context) {
                               return TrainArmyDetail(
                                 HUD: this.showOrDismissProgressHUD,
-                                // contentName: 'defence',
                               );
                             }));
                           },

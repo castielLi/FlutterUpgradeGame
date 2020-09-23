@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
-import 'package:upgradegame/Src/pages/announcement/model/announcementModel.dart';
-import 'package:upgradegame/Src/pages/announcement/service/announcementService.dart';
 
 class FightRaiderDetail extends StatefulWidget {
   @override
@@ -14,11 +12,8 @@ class FightRaiderDetail extends StatefulWidget {
 }
 
 class _FightRaiderDetailState extends State<FightRaiderDetail> {
-  String announcement = "战场必读攻略: 所有玩家都可以无差别进入战场,首次进入战场的玩家需要"+
-  "在商城里面购买物资,物资是您在战场中最重要的资源,当你购买物资之后请先配置好您的防守阵容,因为一旦"
-  +"你有足够的物资,您的部落信息将会进入匹配列表中,其他玩家可以随时进行匹配对战。如果您当前没有防守阵容"
-  +"可能会造成一定不必要的损失。玩家有足够的物资,木材和石材即可进行进攻阵容的编排并且攻打其他玩家,胜利者"
-  "会获得丰厚的奖励。当您的物资达到足够多的数量时,可以将物资兑换成现金,并且直接发放到现金账户中";
+  String announcement =
+      "对战模式是一个绝对公平的竞技玩法，与用户当前等级无关，胜负仅由进攻用户和防守用户当前阵型决定。用户进入对战模式需先布置己方防守阵容，否则进攻方匹配到该用户将直接判定进攻方胜利。防守方只要物资足够，随时可能被其他用户进攻，请谨慎安排防守阵容。发起对战需要至少拥有10物资（仅会匹配物资大于或等于10的用户），每个用户当天仅可在物资小于10时用金币购买一次物资，且仅能购买50物资（5金币=50物资）。当天物资大于10则无法购买物资。每次发起对战需消耗一定木材和石材资源（消耗比例与当前资源等级有关），资源不足则无法发起对战。只要物资和资源充足，当天发起对战次数没有限制。对战匹配仅会匹配物资大于或等于10的用户，胜方将夺取败方部分物资。对战排行榜将每天更新前日胜场，排名前20用户将获得物资奖励。物资为平台金币回收凭证，可消耗物资在平台进行金币回收。";
 
   @override
   void initState() {
