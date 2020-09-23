@@ -48,7 +48,7 @@ class _MyTextFieldState extends State<MyTextField> {
                       controller: this.widget.controller,
                       keyboardType: this.widget.inputType,
                       obscureText: this.widget.obscureText,
-                      decoration: new InputDecoration(hintText: this.widget.hintText, border: InputBorder.none, prefixIcon: this.widget.icon),
+                      decoration: new InputDecoration(hintText: this.widget.hintText,hintStyle: TextStyle(fontSize: ScreenUtil().setSp(40)), border: InputBorder.none, prefixIcon: this.widget.icon),
                       onSubmitted: (input) {
                         this.widget.onSubmittedCallback();
                       },

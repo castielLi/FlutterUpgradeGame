@@ -51,6 +51,7 @@ class BaseFightLineupProvider with ChangeNotifier {
   }
 
   initLiuneupProvider(FightInfoModel model) {
+    this.protectHeroCount = 0;
     if (model.protectlineup != "") {
       this.protect = List<List<int>>();
       var list = convert.jsonDecode(model.protectlineup);
@@ -80,6 +81,7 @@ class BaseFightLineupProvider with ChangeNotifier {
       [0, 0, 0],
       [0, 0, 0]
     ];
+    this.attackHeroCount = 0;
     this.woodproportion = model.wood;
     this.stoneproportion = model.stone;
     notifyListeners();
@@ -96,7 +98,7 @@ class BaseFightLineupProvider with ChangeNotifier {
           if (n == row) {
             attack[i][n] = num;
             attackHeroCount += (0 == num ? -1 : 1);
-            print(attackHeroCount);
+            // print(attackHeroCount);
             return;
           }
         }
@@ -118,7 +120,7 @@ class BaseFightLineupProvider with ChangeNotifier {
           if (n == row) {
             protect[i][n] = num;
             protectHeroCount += (0 == num ? -1 : 1);
-            print(protectHeroCount);
+            // print(protectHeroCount);
             return;
           }
         }

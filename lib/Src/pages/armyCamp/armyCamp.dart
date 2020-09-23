@@ -39,7 +39,7 @@ class _ArmyCampDetailState extends State<ArmyCampDetail> {
                       children: [
                         new Text(
                           '兵种介绍',
-                          style:CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize + 10),
+                          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize + 10),
                         ),
                         new GridView.count(
                           crossAxisCount: 3,

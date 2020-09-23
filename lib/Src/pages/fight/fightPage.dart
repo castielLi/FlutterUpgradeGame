@@ -282,7 +282,7 @@ class _FightPageState extends State<FightPage> {
                           height: ScreenUtil().setHeight(SystemIconSize.mainPageStatusBarSmallIconSize),
                         ),
                         new Text(
-                          (null==baseFightInfo.supplies?'':baseFightInfo.supplies).toString(),
+                          (null == baseFightInfo.supplies ? '' : baseFightInfo.supplies).toString(),
                           style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                         ),
                       ],
@@ -331,7 +331,6 @@ class _FightPageState extends State<FightPage> {
                             Navigator.push(context, PopWindow(pageBuilder: (context) {
                               return TrainArmyDetail(
                                 HUD: this.showOrDismissProgressHUD,
-                                // contentName: 'defence',
                               );
                             }));
                           },
@@ -366,7 +365,7 @@ class _FightPageState extends State<FightPage> {
             ],
           );
         },
-        requestedValues: [BaseUserInfoProvider,BaseFightLineupProvider],
+        requestedValues: [BaseUserInfoProvider, BaseFightLineupProvider],
       ),
     );
   }
