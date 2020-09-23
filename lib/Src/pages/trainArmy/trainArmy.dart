@@ -1,5 +1,4 @@
 import 'dart:convert' as convert;
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,7 +47,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
   @override
   void initState() {
     super.initState();
-    AdDialog().setCallback(this.adFinishedCallback, this.adFailedCallback,this.adOperateFailedCallback, false);
+    AdDialog().setCallback(this.adFinishedCallback, this.adFailedCallback, this.adOperateFailedCallback, false);
     _progressHUD = new ProgressHUD(
       backgroundColor: Colors.transparent,
       color: Colors.white,
@@ -71,20 +70,21 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
     });
   }
 
-  void adOperateFailedCallback(int type){
-    if(this.times == 2){
+  void adOperateFailedCallback(int type) {
+    if (this.times == 2) {
       this.times = 0;
       CommonUtils.showErrorMessage(msg: "广告观看失败,请稍后再试");
       return;
     }
+
     ///尝试次数加1
     this.times += 1;
-    switch(type){
+    switch (type) {
       case 3:
-        AdDialog().showAd(4, 1,"945445227");
+        AdDialog().showAd(4, 1, "945445227");
         break;
       case 4:
-        AdDialog().showAd(3, 2,"6031610694170610");
+        AdDialog().showAd(3, 2, "6031610694170610");
         break;
     }
   }
@@ -97,19 +97,20 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
     CommonUtils.showSuccessMessage(msg: "谢谢您对部落格的支持");
   }
 
-  void attack(BaseFightLineupProvider baseFightLineUpInfo,BaseUserInfoProvider baseUserInfo){
+  void attack(BaseFightLineupProvider baseFightLineUpInfo, BaseUserInfoProvider baseUserInfo) {
     this.showOrDismissProgressHUD();
     ArmyService.attack(baseFightLineUpInfo.attack, (AttackModel model) {
       if (model != null) {
         this.showOrDismissProgressHUD();
+
         ///匹配获胜可能会显示广告
         if (model.displayad && model.win) {
           CommonUtils.showSuccessMessage(msg: "您战斗胜利了,看条广告休息下吧");
           int timeSecend = DateTime.now().second;
-          if(timeSecend % 2 == 0){
-            AdDialog().showAd(3, 2,"6031610694170610");
-          }else{
-            AdDialog().showAd(4, 1,"945445227");
+          if (timeSecend % 2 == 0) {
+            AdDialog().showAd(3, 2, "6031610694170610");
+          } else {
+            AdDialog().showAd(4, 1, "945445227");
           }
         }
         baseFightLineUpInfo.attackReslut(model);
@@ -270,7 +271,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
               ),
 
               Container(
-                height: ScreenUtil().setHeight(1500),
+                height: ScreenUtil().setHeight(1520),
                 margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(0), ScreenUtil().setHeight(300), ScreenUtil().setWidth(0), ScreenUtil().setHeight(0)),
                 child: Stack(
                   children: [
@@ -344,7 +345,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                           child: new Text('确认'),
                                           onPressed: () {
                                             Navigator.of(context).pop();
-                                            this.attack(baseFightLineUpInfo,baseUserInfo);
+                                            this.attack(baseFightLineUpInfo, baseUserInfo);
                                           },
                                         ),
                                       ],
@@ -419,13 +420,18 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                 CommonUtils.showWarningMessage(msg: "最多只能排列5名士兵,请重新排兵布阵");
                                 return;
                               }
-                              this.showOrDismissProgressHUD();
-                              ArmyService.setProtectLineup(baseFightLineUpInfo.protect, (bool success) {
+                              if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 10000)) {
                                 this.showOrDismissProgressHUD();
-                                if (success) {
-                                  CommonUtils.showSuccessMessage(msg: "设置防守阵容成功");
-                                }
-                              });
+                                ArmyService.setProtectLineup(baseFightLineUpInfo.protect, (bool success) {
+                                  this.showOrDismissProgressHUD();
+                                  if (success) {
+                                    CommonUtils.showSuccessMessage(msg: "设置防守阵容成功");
+                                  }
+                                });
+                              } else {
+                                CommonUtils.showWarningMessage(msg: '您操作的太快了，请隔十秒钟再操作');
+                              }
+                              this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
                             },
                           ),
                           Row(
