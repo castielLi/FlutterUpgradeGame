@@ -10,8 +10,10 @@ class UserImageButton extends StatefulWidget {
   double textSize;
   bool netWorkImage;
   String netWorkImageUrl;
+  Color textColor;
 
-  UserImageButton({Key key, this.buttonName = "", this.imageUrl, this.callback, this.size, this.textSize = 0, this.netWorkImage = false, this.netWorkImageUrl = ""}) : super(key: key);
+  UserImageButton({Key key, this.textColor = Colors.white, this.buttonName = "", this.imageUrl, this.callback, this.size, this.textSize = 0, this.netWorkImage = false, this.netWorkImageUrl = ""})
+      : super(key: key);
 
   _UserImageButtonState createState() => new _UserImageButtonState();
 }
@@ -37,7 +39,7 @@ class _UserImageButtonState extends State<UserImageButton> {
             new Offstage(
               offstage: this.widget.netWorkImage,
               child: Container(
-                margin: EdgeInsets.all(ScreenUtil().setWidth(10)),
+                margin: EdgeInsets.all(ScreenUtil().setWidth(2)),
                 decoration: BoxDecoration(
                   image: DecorationImage(image: new AssetImage(this.widget.imageUrl), fit: BoxFit.fill),
                 ),
@@ -48,7 +50,7 @@ class _UserImageButtonState extends State<UserImageButton> {
                     new Text(
                       this.widget.buttonName,
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, decoration: TextDecoration.none, fontSize: ScreenUtil().setSp(this.widget.textSize)),
+                      style: TextStyle(color: this.widget.textColor, decoration: TextDecoration.none, fontSize: ScreenUtil().setSp(this.widget.textSize)),
                     ),
                   ],
                 )),
