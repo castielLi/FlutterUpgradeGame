@@ -9,6 +9,7 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/widget/adDialog/adDialog.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/trainArmy/armySelectMatrix.dart';
@@ -75,12 +76,13 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
       if (model != null) {
         ///匹配获胜可能会显示广告
         if (model.displayad) {
-//                                                  int timeSecend = DateTime.now().second;
-//                                                  if(timeSecend % 2 == 0){
-//                                                    AdDialog().showAd(3, 2,"6031610694170610");
-//                                                  }else{
-//                                                    AdDialog().showAd(4, 1,"945445227");
-//                                                  }
+//          CommonUtils.showSuccessMessage(msg: "您战斗胜利了,看条广告休息下吧");
+//          int timeSecend = DateTime.now().second;
+//          if(timeSecend % 2 == 0){
+//            AdDialog().showAd(3, 2,"6031610694170610");
+//          }else{
+//            AdDialog().showAd(4, 1,"945445227");
+//          }
         }
         baseFightLineUpInfo.attackReslut(model);
         baseUserInfo.attactResult(model.stoneamount, model.woodamount);
