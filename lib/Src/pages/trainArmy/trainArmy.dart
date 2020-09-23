@@ -236,10 +236,10 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                       /// 防止重复点击
                       if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
                         Application.router.pop(context);
+                        this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
                         baseFightLineUpInfo.trainArmyContentName = null;
                         // this.widget.contentName = null;
                       }
-                      this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
                     }),
               ),
 
@@ -393,17 +393,19 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                 CommonUtils.showWarningMessage(msg: "最多只能排列5名士兵,请重新排兵布阵");
                                 return;
                               }
+                              this.showOrDismissProgressHUD();
+                              ArmyService.setProtectLineup(baseFightLineUpInfo.protect, (bool success) {
+                                this.showOrDismissProgressHUD();
+                                if (success) {
+                                  CommonUtils.showSuccessMessage(msg: "设置防守阵容成功");
                                 }
                               });
-                              } else {
-                                CommonUtils.showWarningMessage(msg: "您操作的太快了，请隔十秒钟再次操作");
-                              }
-                              this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
                             },
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
+                              ImageButton(
                                 imageUrl: "resource/images/upgradeButton.png",
                                 height: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
                                 width: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),

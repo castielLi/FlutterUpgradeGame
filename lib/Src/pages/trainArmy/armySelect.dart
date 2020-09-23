@@ -98,8 +98,8 @@ class _ArmySelectDetailState extends State<ArmySelectDetail> {
                                         }
                                         Navigator.pop(context);
                                       });
+                                      this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
                                     }
-                                    this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
                                   },
                                 ),
                               ],
