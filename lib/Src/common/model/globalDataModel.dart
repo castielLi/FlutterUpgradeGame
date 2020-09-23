@@ -6,12 +6,18 @@ class Global {
   factory Global() =>_getInstance();
   static Global get instance => _getInstance();
   static Global _instance;
+  String key;
   Global._internal() {
     // 初始化
+    this.key = "H!Zls.123QEQWdfe_=-qJDqetrh";
   }
 
   static BaseRuleModel rule;
   static ExtraRuleModel extraRule;
+
+  static getKey(){
+    return Global.instance.key;
+  }
 
   static setBaseRule(BaseRuleModel ruleModel){
     Global.rule = ruleModel;

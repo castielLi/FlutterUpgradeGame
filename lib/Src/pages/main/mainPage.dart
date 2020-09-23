@@ -731,6 +731,10 @@ class _MainPageState extends State<MainPage> {
                   fontSize: SystemFontSize.otherBuildingTextFontSize,
                   namePadding: 100,
                   callback: () {
+                    if(baseUserInfo.mainbuildlevel < 3){
+                      CommonUtils.showWarningMessage(msg: "您当前的主城等级未达到3级,还不能参与对战");
+                      return;
+                    }
                     Navigator.push(context, PopWindow(pageBuilder: (context) {
                       return FightPage();
                     }));

@@ -45,6 +45,8 @@ class BaseFightLineupProvider with ChangeNotifier {
     supplies = model.supplies;
     limitsuppliesrecycle = model.limitsuppliesrecycle;
     suppliesprice = model.suppliesprice;
+    woodproportion = model.wood;
+    stoneproportion = model.stone;
     notifyListeners();
   }
 
@@ -62,6 +64,14 @@ class BaseFightLineupProvider with ChangeNotifier {
         }
         this.protect.add(row);
       }
+    }else{
+      this.protect = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+      ];
     }
     this.attack = [
       [0, 0, 0],
@@ -92,6 +102,13 @@ class BaseFightLineupProvider with ChangeNotifier {
         }
       }
     }
+  }
+
+  clearData(){
+    this.protect = [];
+    this.attack = [];
+    this.protectHeroCount = 0;
+    this.attackHeroCount = 0;
   }
 
   changeProtectLineUp(int column, int row, int num) {

@@ -357,6 +357,7 @@ class _FightPageState extends State<FightPage> {
                     if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
                       Application.router.pop(context);
                       this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
+                      baseFightInfo.clearData();
                     }
                   },
                 ),

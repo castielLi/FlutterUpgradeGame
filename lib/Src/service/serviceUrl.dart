@@ -5,7 +5,7 @@ class ServiceUrl {
   ///server
 //  "https://test.buluo888.com/";
     "https://gufeng.buluo888.com/";
-//  "http://192.168.31.46:8080/";
+//  "http://192.168.0.104:8080/";
   static const String downloadUrl = '';
 
   /// rule
@@ -55,7 +55,7 @@ class ServiceUrl {
 
   ///观看广告
   static watchAd(){
-    return "${host}api/v2/ad/watch";
+    return "${host}api/v2/ad/watch2";
   }
 
   static getUserInfo(){
