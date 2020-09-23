@@ -14,7 +14,7 @@ class ArmySelectDetail extends StatefulWidget {
   int row;
   bool attack;
 
-  ArmySelectDetail({Key key, this.HUD, this.column, this.row,this.attack}) : super(key: key);
+  ArmySelectDetail({Key key, this.HUD, this.column, this.row, this.attack}) : super(key: key);
 
   _ArmySelectDetailState createState() => new _ArmySelectDetailState();
 }
@@ -22,6 +22,7 @@ class ArmySelectDetail extends StatefulWidget {
 class _ArmySelectDetailState extends State<ArmySelectDetail> {
   bool hideDetailPage = true;
   String chosenArmy = "shaman";
+  int lastClickTime;
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +53,17 @@ class _ArmySelectDetailState extends State<ArmySelectDetail> {
                                   size: SystemIconSize.armyCampIconSize,
                                   armyIconImageUrl: "resource/images/rangeAttackIcon.png",
                                   callback: () {
-                                    setState(() {
-                                      if(this.widget.attack){
-                                        baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, ArmyType.RANGE_ATTACK);
-                                      }else{
-                                        baseFightLineUpProvider.changeProtectLineUp(this.widget.column, this.widget.row, ArmyType.RANGE_ATTACK);
-                                      }
-                                      Navigator.pop(context);
-                                    });
+                                    if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
+                                      setState(() {
+                                        if (this.widget.attack) {
+                                          baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, ArmyType.RANGE_ATTACK);
+                                        } else {
+                                          baseFightLineUpProvider.changeProtectLineUp(this.widget.column, this.widget.row, ArmyType.RANGE_ATTACK);
+                                        }
+                                        Navigator.pop(context);
+                                      });
+                                      this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
+                                    }
                                   },
                                 ),
                                 ArmyIconButton(
@@ -67,14 +71,17 @@ class _ArmySelectDetailState extends State<ArmySelectDetail> {
                                   size: SystemIconSize.armyCampIconSize,
                                   armyIconImageUrl: "resource/images/fighterIcon.png",
                                   callback: () {
-                                    setState(() {
-                                      if(this.widget.attack){
-                                        baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, ArmyType.FIGHTER);
-                                      }else{
-                                        baseFightLineUpProvider.changeProtectLineUp(this.widget.column, this.widget.row, ArmyType.FIGHTER);
-                                      }
-                                      Navigator.pop(context);
-                                    });
+                                    if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
+                                      setState(() {
+                                        if (this.widget.attack) {
+                                          baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, ArmyType.FIGHTER);
+                                        } else {
+                                          baseFightLineUpProvider.changeProtectLineUp(this.widget.column, this.widget.row, ArmyType.FIGHTER);
+                                        }
+                                        Navigator.pop(context);
+                                      });
+                                      this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
+                                    }
                                   },
                                 ),
                                 ArmyIconButton(
@@ -82,14 +89,17 @@ class _ArmySelectDetailState extends State<ArmySelectDetail> {
                                   size: SystemIconSize.armyCampIconSize,
                                   armyIconImageUrl: "resource/images/riderIcon.png",
                                   callback: () {
-                                    setState(() {
-                                      if(this.widget.attack){
-                                        baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, ArmyType.RIDER);
-                                      }else{
-                                        baseFightLineUpProvider.changeProtectLineUp(this.widget.column, this.widget.row, ArmyType.RIDER);
-                                      }
-                                      Navigator.pop(context);
-                                    });
+                                    if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
+                                      setState(() {
+                                        if (this.widget.attack) {
+                                          baseFightLineUpProvider.changeAttackLineUp(this.widget.column, this.widget.row, ArmyType.RIDER);
+                                        } else {
+                                          baseFightLineUpProvider.changeProtectLineUp(this.widget.column, this.widget.row, ArmyType.RIDER);
+                                        }
+                                        Navigator.pop(context);
+                                      });
+                                      this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
+                                    }
                                   },
                                 ),
                               ],

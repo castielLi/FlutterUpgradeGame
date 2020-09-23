@@ -42,7 +42,7 @@ class BaseFightLineupProvider with ChangeNotifier {
   }
 
   ///进攻结果
-  attackReslut(AttackModel model){
+  attackReslut(AttackModel model) {
     this.supplies = model.supplies;
     notifyListeners();
   }
@@ -70,7 +70,7 @@ class BaseFightLineupProvider with ChangeNotifier {
         }
         this.protect.add(row);
       }
-    }else{
+    } else {
       this.protect = [
         [0, 0, 0],
         [0, 0, 0],
@@ -111,7 +111,7 @@ class BaseFightLineupProvider with ChangeNotifier {
     }
   }
 
-  clearData(){
+  clearData() {
     this.protect = [];
     this.attack = [];
     this.protectHeroCount = 0;

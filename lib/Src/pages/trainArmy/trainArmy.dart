@@ -231,7 +231,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
                             width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
                             callback: () {
-                              // print(baseFightLineUpInfo.attackHeroCount);
+                              print(baseFightLineUpInfo.attackHeroCount);
                               if (baseFightLineUpInfo.attackHeroCount < 5) {
                                 CommonUtils.showWarningMessage(msg: "您当前的进攻阵容英雄不足5个,请继续排兵布阵");
                                 return;
@@ -273,7 +273,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
 //                                                  }
                                                 }
                                                 baseFightLineUpInfo.attackReslut(model);
-                                                baseUserInfo.attactResult(model.stoneamount,model.woodamount);
+                                                baseUserInfo.attactResult(model.stoneamount, model.woodamount);
                                                 Navigator.of(context).pop();
                                                 var lineup = List<List<int>>();
                                                 var list = convert.jsonDecode(model.lineup);
@@ -295,7 +295,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                                     winwood: model.winwood,
                                                   );
                                                 }));
-                                              }else{
+                                              } else {
                                                 Navigator.of(context).pop();
                                               }
                                             });
