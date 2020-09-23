@@ -174,7 +174,7 @@ class _FightPageState extends State<FightPage> {
                 children: [
                   new Container(
                     margin: EdgeInsets.only(top: ScreenUtil().setHeight(SystemIconSize.mainPageResourceBarIconSize + SystemScreenSize.mainPageSignalBarHeight)),
-                    height: ScreenUtil().setHeight(SystemIconSize.mainPageFunctionBarIconSize * 2),
+                    height: ScreenUtil().setHeight(SystemIconSize.mainPageFunctionBarIconSize * 2 + 50),
                     width: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize * 5),
                     child: new GridView.count(
                       shrinkWrap: true,
