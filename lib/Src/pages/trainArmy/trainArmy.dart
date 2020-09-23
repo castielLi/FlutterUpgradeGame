@@ -1,4 +1,5 @@
 import 'dart:convert' as convert;
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,6 +41,7 @@ class TrainArmyDetail extends StatefulWidget {
 class _TrainArmyDetailState extends State<TrainArmyDetail> {
   ProgressHUD _progressHUD;
   int lastClickTime;
+  bool _loading = false;
 
   @override
   void initState() {
@@ -52,6 +54,60 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
       text: '',
       loading: false,
     );
+  }
+
+  void showOrDismissProgressHUD() {
+    setState(() {
+      if (_loading) {
+        _progressHUD.state.dismiss();
+      } else {
+        _progressHUD.state.show();
+      }
+
+      _loading = !_loading;
+    });
+  }
+
+  void attack(BaseFightLineupProvider baseFightLineUpInfo,BaseUserInfoProvider baseUserInfo){
+    this.showOrDismissProgressHUD();
+    ArmyService.attack(baseFightLineUpInfo.attack, (AttackModel model) {
+      this.showOrDismissProgressHUD();
+      if (model != null) {
+        ///匹配获胜可能会显示广告
+        if (model.displayad) {
+//                                                  int timeSecend = DateTime.now().second;
+//                                                  if(timeSecend % 2 == 0){
+//                                                    AdDialog().showAd(3, 2,"6031610694170610");
+//                                                  }else{
+//                                                    AdDialog().showAd(4, 1,"945445227");
+//                                                  }
+        }
+        baseFightLineUpInfo.attackReslut(model);
+        baseUserInfo.attactResult(model.stoneamount, model.woodamount);
+        var lineup = List<List<int>>();
+        var list = convert.jsonDecode(model.lineup);
+        for (int i = 0; i < list.length; i++) {
+          var row = List<int>();
+          for (int j = 0; j < list[i].length; j++) {
+            row.add(list[i][j]);
+          }
+          lineup.add(row);
+        }
+        baseFightLineUpInfo.trainArmyContentName = 'reWatch';
+        Navigator.push(context, PopWindow(pageBuilder: (context) {
+          return TrainArmyDetail(
+            // contentName: 'reWatch',
+            content: lineup,
+            isFightWin: model.win,
+            winstone: model.winstone,
+            winsupplies: model.winsupplies,
+            winwood: model.winwood,
+          );
+        }));
+      } else {
+        Navigator.of(context).pop();
+      }
+    });
   }
 
   @override
@@ -259,46 +315,8 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                         new FlatButton(
                                           child: new Text('确认'),
                                           onPressed: () {
-                                            this.widget.HUD();
-                                            ArmyService.attack(baseFightLineUpInfo.attack, (AttackModel model) {
-                                              this.widget.HUD();
-                                              if (model != null) {
-                                                ///匹配获胜可能会显示广告
-                                                if (model.displayad) {
-//                                                  int timeSecend = DateTime.now().second;
-//                                                  if(timeSecend % 2 == 0){
-//                                                    AdDialog().showAd(3, 2,"6031610694170610");
-//                                                  }else{
-//                                                    AdDialog().showAd(4, 1,"945445227");
-//                                                  }
-                                                }
-                                                baseFightLineUpInfo.attackReslut(model);
-                                                baseUserInfo.attactResult(model.stoneamount, model.woodamount);
-                                                Navigator.of(context).pop();
-                                                var lineup = List<List<int>>();
-                                                var list = convert.jsonDecode(model.lineup);
-                                                for (int i = 0; i < list.length; i++) {
-                                                  var row = List<int>();
-                                                  for (int j = 0; j < list[i].length; j++) {
-                                                    row.add(list[i][j]);
-                                                  }
-                                                  lineup.add(row);
-                                                }
-                                                baseFightLineUpInfo.trainArmyContentName = 'reWatch';
-                                                Navigator.push(context, PopWindow(pageBuilder: (context) {
-                                                  return TrainArmyDetail(
-                                                    // contentName: 'reWatch',
-                                                    content: lineup,
-                                                    isFightWin: model.win,
-                                                    winstone: model.winstone,
-                                                    winsupplies: model.winsupplies,
-                                                    winwood: model.winwood,
-                                                  );
-                                                }));
-                                              } else {
-                                                Navigator.of(context).pop();
-                                              }
-                                            });
+                                            Navigator.of(context).pop();
+                                            this.attack(baseFightLineUpInfo,baseUserInfo);
                                           },
                                         ),
                                       ],
@@ -373,9 +391,9 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                 CommonUtils.showWarningMessage(msg: "最多只能排列5名士兵,请重新排兵布阵");
                                 return;
                               }
-                              this.widget.HUD();
+                              this.showOrDismissProgressHUD();
                               ArmyService.setProtectLineup(baseFightLineUpInfo.protect, (bool success) {
-                                this.widget.HUD();
+                                this.showOrDismissProgressHUD();
                                 if (success) {
                                   CommonUtils.showSuccessMessage(msg: "设置防守阵容成功");
                                 }

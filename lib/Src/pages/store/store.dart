@@ -67,6 +67,11 @@ class _StoreDetailState extends State<StoreDetail> {
                   return new ProductItem(
                     volumeAmount: storeList == null ? "" : storeList[index].amount.toString(),
                     callback: () {
+                      if(storeList[index].price > baseUserInfo.tcoinamount){
+                        CommonUtils.showErrorMessage(msg: "您当前的金币数量不足");
+                        return;
+                      }
+
                       this.buySupplies(storeList[index].productid, baseUserInfo);
                     },
                     cashAmount: storeList == null ? "" : storeList[index].price.toString(),
