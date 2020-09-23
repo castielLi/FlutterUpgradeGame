@@ -43,10 +43,12 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
   ProgressHUD _progressHUD;
   int lastClickTime;
   bool _loading = false;
+  int times = 0;
 
   @override
   void initState() {
     super.initState();
+    AdDialog().setCallback(this.adFinishedCallback, this.adFailedCallback,this.adOperateFailedCallback, false);
     _progressHUD = new ProgressHUD(
       backgroundColor: Colors.transparent,
       color: Colors.white,
@@ -69,20 +71,46 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
     });
   }
 
+  void adOperateFailedCallback(int type){
+    if(this.times == 2){
+      this.times = 0;
+      CommonUtils.showErrorMessage(msg: "广告观看失败,请稍后再试");
+      return;
+    }
+    ///尝试次数加1
+    this.times += 1;
+    switch(type){
+      case 3:
+        AdDialog().showAd(4, 1,"945445227");
+        break;
+      case 4:
+        AdDialog().showAd(3, 2,"6031610694170610");
+        break;
+    }
+  }
+
+  void adFailedCallback() {
+    CommonUtils.showErrorMessage(msg: "广告展示失败了,那就不看了!");
+  }
+
+  void adFinishedCallback() {
+    CommonUtils.showSuccessMessage(msg: "谢谢您对部落格的支持");
+  }
+
   void attack(BaseFightLineupProvider baseFightLineUpInfo,BaseUserInfoProvider baseUserInfo){
     this.showOrDismissProgressHUD();
     ArmyService.attack(baseFightLineUpInfo.attack, (AttackModel model) {
-      this.showOrDismissProgressHUD();
       if (model != null) {
+        this.showOrDismissProgressHUD();
         ///匹配获胜可能会显示广告
-        if (model.displayad) {
-//          CommonUtils.showSuccessMessage(msg: "您战斗胜利了,看条广告休息下吧");
-//          int timeSecend = DateTime.now().second;
-//          if(timeSecend % 2 == 0){
-//            AdDialog().showAd(3, 2,"6031610694170610");
-//          }else{
-//            AdDialog().showAd(4, 1,"945445227");
-//          }
+        if (model.displayad && model.win) {
+          CommonUtils.showSuccessMessage(msg: "您战斗胜利了,看条广告休息下吧");
+          int timeSecend = DateTime.now().second;
+          if(timeSecend % 2 == 0){
+            AdDialog().showAd(3, 2,"6031610694170610");
+          }else{
+            AdDialog().showAd(4, 1,"945445227");
+          }
         }
         baseFightLineUpInfo.attackReslut(model);
         baseUserInfo.attactResult(model.stoneamount, model.woodamount);
@@ -106,8 +134,6 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
             winwood: model.winwood,
           );
         }));
-      } else {
-        Navigator.of(context).pop();
       }
     });
   }
