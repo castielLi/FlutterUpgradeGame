@@ -10,6 +10,7 @@ import 'package:upgradegame/Src/pages/fight/service/fightService.dart';
 import 'package:upgradegame/Src/pages/main/common/buildingButton.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
+import 'package:upgradegame/Src/pages/main/service/mainService.dart';
 import 'package:upgradegame/Src/pages/trainArmy/trainArmy.dart';
 import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
@@ -270,6 +271,11 @@ class _FightPageState extends State<FightPage> {
                           imageUrl: "resource/images/refresh.png",
                           callback: () {
                             this.initFightInfo();
+                            this.showOrDismissProgressHUD();
+                            MainService.getBaseInfo((userInfoModel) {
+                              this.showOrDismissProgressHUD();
+                              Provide.value<BaseUserInfoProvider>(context).initBaseUserInfo(userInfoModel);
+                            });
                           },
                         ),
                       ],
