@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
@@ -5,6 +7,7 @@ import 'package:progress_hud/progress_hud.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/model/globalSystemStatuesControl.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
 import 'package:upgradegame/Src/pages/fight/service/fightService.dart';
 import 'package:upgradegame/Src/pages/main/common/buildingButton.dart';
@@ -28,7 +31,7 @@ class _FightPageState extends State<FightPage> {
   // double perFiveSecondProfit = 0.00;
   // Timer adShareTimer;
   // Timer productTCoin10;
-  // Timer productTCoin60;
+   Timer timer180;
   // Timer deviceIdTimer;
   // StreamSubscription stream;
   // StreamSubscription notification;
@@ -37,6 +40,7 @@ class _FightPageState extends State<FightPage> {
   ProgressHUD _progressHUD;
   bool _loading = false;
   int lastClickTime;
+  StreamSubscription systemStatus;
 
   @override
   void initState() {
@@ -53,7 +57,42 @@ class _FightPageState extends State<FightPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.initFightInfo();
     });
+
+    systemStatus = GlobalSystemStatuesControl.instance.eventBus.on<SystemStatus>().listen((status) {
+      if (status.active) {
+        this.startTimerProcess();
+      } else {
+        this.killAllTimer();
+      }
+    });
+    this.startTimerProcess();
   }
+
+  void startTimerProcess() {
+    this.timer180 = Timer.periodic(Duration(seconds: 30), (timer) {
+      FightService.getFightInfo((model) {
+        if (model != null) {
+          Provide.value<BaseFightLineupProvider>(context).initSupplies(model);
+          Provide.value<BaseFightLineupProvider>(context).initLiuneupProvider(model);
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    if (this.timer180 != null) {
+      this.timer180.cancel();
+    }
+  }
+
+   void killAllTimer() {
+     if (this.timer180 != null) {
+       this.timer180.cancel();
+     }
+   }
 
   void initFightInfo() {
     this.showOrDismissProgressHUD();
