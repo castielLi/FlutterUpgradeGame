@@ -161,6 +161,9 @@ class _RecycleDetailState extends State<RecycleDetail> {
                         ).then((val) {
                           print(val);
                         });
+                      }else{
+                        CommonUtils.showErrorMessage(msg: "您当前的金币余额不足");
+                        return;
                       }
                     }
 
