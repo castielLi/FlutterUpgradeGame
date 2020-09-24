@@ -19,7 +19,7 @@ class _ArmyCampDetailItemState extends State<ArmyCampDetailItem> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Container(
-          height: ScreenUtil().setHeight(600),
+          height: ScreenUtil().setHeight(650),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
