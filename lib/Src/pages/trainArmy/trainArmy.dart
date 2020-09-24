@@ -470,6 +470,10 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+                            Text(
+                              "对方阵容",
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                            ),
                             Container(
                               width: ScreenUtil().setWidth(900),
                               height: ScreenUtil().setHeight(SystemIconSize.trainArmyIconSize * 5), //大于等于5个高度
@@ -482,7 +486,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             ),
                             Image(
                               image: AssetImage('resource/images/' + (this.widget.isFightWin ? 'win' : 'lose').toString() + '.png'),
-                              height: ScreenUtil().setHeight(250),
+                              height: ScreenUtil().setHeight(230),
                               width: ScreenUtil().setWidth(650),
                             ),
                             Row(
