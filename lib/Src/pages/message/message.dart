@@ -135,11 +135,10 @@ class _MessageDetailState extends State<MessageDetail> {
                       tDate: item.time,
                       displayname: item.displayname,
                       lineup: item.lineup,
-                      // win: item.win,
-
-                      ///TODO 假数据
-                      win: index % 4 < 2,
-                      isattack: index % 2 == 1,
+                       win: item.win,
+                      isattack: item.isattack,
+                      winstone: item.winstone,
+                      winwood: item.winwood,
                     );
                   }),
             ),

@@ -2,6 +2,7 @@ import 'dart:convert' as convert;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:upgradegame/Src/pages/fight/fightAdTimer.dart';
 import 'package:upgradegame/Src/pages/fight/model/fightInfoModel.dart';
 import 'package:upgradegame/Src/pages/trainArmy/model/attackModel.dart';
 
@@ -17,6 +18,7 @@ class BaseFightLineupProvider with ChangeNotifier {
   int supplies;
   int limitsuppliesrecycle;
   String coinprice;
+  bool needWatchAd;
 
   String get Coinprice => coinprice;
 
@@ -35,6 +37,15 @@ class BaseFightLineupProvider with ChangeNotifier {
   exchangeSupplies(int suppliesamount) {
     this.supplies = suppliesamount;
     notifyListeners();
+  }
+
+  setNeedWatchAd(bool needWatchAd){
+    this.needWatchAd = needWatchAd;
+    FightAdTimer.UpdateAdTime(needWatchAd?1:0);
+  }
+
+  initNeedwatchAd(bool needWatchAd){
+    this.needWatchAd = needWatchAd;
   }
 
   ///购买物资

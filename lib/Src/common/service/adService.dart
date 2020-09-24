@@ -15,7 +15,7 @@ import 'package:convert/convert.dart';
 
 class AdService {
   static Future<ResultData> watchAd(int type, callback) async {
-    int dateTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    int dateTime = DateTime.now().millisecondsSinceEpoch ~/ 1000 - 8* 3600;
     String sign = generateMd5(dateTime.toString()+Global.getKey());
 
     WatchAd ad = new WatchAd(type: type, datetime: dateTime,sign:sign);

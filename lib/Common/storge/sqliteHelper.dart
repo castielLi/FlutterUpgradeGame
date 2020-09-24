@@ -33,7 +33,10 @@ class SqliteHelper{
     String path =join(databasesPath + "/" + displayName, 'buluoge.db');
     database = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
-          await db.execute("CREATE TABLE IF NOT EXISTS Timer(farm text, stone text, wood text)");
+           var batch = db.batch();
+           db.execute("CREATE TABLE IF NOT EXISTS Timer(farm text, stone text, wood text)");
+           db.execute("CREATE TABLE IF NOT EXISTS FightTimer(needWatched int)");
+           batch.commit();
         });
   }
 

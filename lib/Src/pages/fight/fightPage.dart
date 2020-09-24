@@ -14,6 +14,7 @@ import 'package:upgradegame/Src/pages/main/common/buildingButton.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/main/service/mainService.dart';
+import 'package:upgradegame/Src/pages/fight/fightAdTimer.dart';
 import 'package:upgradegame/Src/pages/trainArmy/trainArmy.dart';
 import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
@@ -54,8 +55,10 @@ class _FightPageState extends State<FightPage> {
       loading: false,
     );
 
+    FightAdTimer();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.initFightInfo();
+      this.initWatchAdTimer();
     });
 
     systemStatus = GlobalSystemStatuesControl.instance.eventBus.on<SystemStatus>().listen((status) {
@@ -67,6 +70,12 @@ class _FightPageState extends State<FightPage> {
     });
     this.startTimerProcess();
   }
+
+   void initWatchAdTimer() async{
+     List<dynamic> list = await FightAdTimer.GetNeedWatch();
+     bool needWatchAd = list[0]['needWatched'];
+     Provide.value<BaseFightLineupProvider>(context).initNeedwatchAd(needWatchAd);
+   }
 
   void startTimerProcess() {
     this.timer180 = Timer.periodic(Duration(seconds: 30), (timer) {
