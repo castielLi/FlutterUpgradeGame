@@ -18,7 +18,9 @@ class MessageItem extends StatefulWidget {
 
   String lineup;
 
-  MessageItem({Key key, this.tDate, this.displayname, this.lineup}) : super(key: key);
+  bool win;
+
+  MessageItem({Key key, this.tDate, this.displayname, this.lineup,this.win}) : super(key: key);
 
   @override
   _MessageItem createState() => _MessageItem();
@@ -78,8 +80,8 @@ class _MessageItem extends State<MessageItem> {
                       return TrainArmyDetail(
                         contentName: 'reWatch',
                         content: lineup,
-                        isFightWin: false,
-                        winsupplies: -10,
+                        isFightWin: this.widget.win,
+                        winsupplies: this.widget.win?8:-10,
                       );
                     }));
                   },

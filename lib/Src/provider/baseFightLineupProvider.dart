@@ -54,6 +54,8 @@ class BaseFightLineupProvider with ChangeNotifier {
     supplies = model.supplies;
     limitsuppliesrecycle = model.limitsuppliesrecycle;
     coinprice = model.coinprice;
+    this.woodproportion = model.wood;
+    this.stoneproportion = model.stone;
     notifyListeners();
   }
 
@@ -89,8 +91,6 @@ class BaseFightLineupProvider with ChangeNotifier {
       [0, 0, 0]
     ];
     this.attackHeroCount = 0;
-    this.woodproportion = model.wood;
-    this.stoneproportion = model.stone;
     notifyListeners();
   }
 

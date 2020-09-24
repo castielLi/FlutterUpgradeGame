@@ -77,8 +77,9 @@ class HttpManager {
     }
     try {
 
+      var _downloadDio = new Dio();
       /// 发起下载请求
-      Response response = await _dio.get(url,
+      Response response = await _downloadDio.get(url,
           onReceiveProgress: (int count,int total){
             double radio = count/total;
             progressCallback(radio);

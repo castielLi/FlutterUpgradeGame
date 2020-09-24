@@ -132,6 +132,7 @@ class _MessageDetailState extends State<MessageDetail> {
                       tDate: item.time,
                       displayname: item.displayname,
                       lineup: item.lineup,
+                      win: item.win,
                     );
                   }),
             ),

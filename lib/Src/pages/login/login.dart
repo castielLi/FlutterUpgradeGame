@@ -56,13 +56,13 @@ class _LoginPageState extends State<LoginPage> {
     // print(version);
     // print(buildNumber);
 
-//    setState(() {
-//      // CommonUtils.showSuccessMessage(msg: '检测到新版本，将自动更新应用');
-//      this.hasNewVersion = version != appVersion;
-//    });
+    setState(() {
+      // CommonUtils.showSuccessMessage(msg: '检测到新版本，将自动更新应用');
+      this.hasNewVersion = "1.1.2" != appVersion;
+    });
 
-//    if (this.hasNewVersion) {
-    if(false){
+    if (this.hasNewVersion) {
+//    if(false){
       Directory storageDir = await getExternalStorageDirectory();
       String storagePath = storageDir.path;
       File _apkFile = await BaseService.downloadNewApk(storagePath, "https://imtt.dd.qq.com/16891/apk/7C4D51A8EDF4290DED6C52F5102FDBF3.apk?fsname=com.wodebuluoge.mm_1.1.0_1.apk&csr=1bbd", (progress) {
@@ -419,13 +419,13 @@ class _LoginPageState extends State<LoginPage> {
                             child: Column(
                               children: [
                                 LinearProgressIndicator(
-                                  backgroundColor: Colors.grey[200],
-                                  valueColor: AlwaysStoppedAnimation(Colors.blue),
+                                  backgroundColor: Colors.black,
+                                  valueColor: AlwaysStoppedAnimation(Colors.white),
                                   value: this.progressIndicator,
                                 ),
                                 Text(
                                     this.progressIndicator >= 1 ?"正在处理安装文件,请稍等":'正在更新应用:' + (this.progressIndicator * 100).floor().toString() + "%",
-                                  style: TextStyle(color: Colors.blue),
+                                  style: TextStyle(color: Colors.white),
                                 ),
                               ],
                             ),
