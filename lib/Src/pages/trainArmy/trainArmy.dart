@@ -252,6 +252,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                 ),
               ),
               Container(
+                // color:Colors.red,
                 height: ScreenUtil().setHeight(230),
                 width: ScreenUtil().setWidth(230),
                 margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(860), ScreenUtil().setWidth(100), ScreenUtil().setWidth(0), ScreenUtil().setWidth(0)),
@@ -260,13 +261,9 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                     width: ScreenUtil().setWidth(130),
                     imageUrl: "resource/images/cancelDialog.png",
                     callback: () {
-                      /// 防止重复点击
-                      if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
-                        Application.router.pop(context);
-                        this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
-                        baseFightLineUpInfo.trainArmyContentName = null;
-                        // this.widget.contentName = null;
-                      }
+                      Application.router.pop(context);
+                      baseFightLineUpInfo.trainArmyContentName = null;
+                      // this.widget.contentName = null;
                     }),
               ),
 
@@ -316,7 +313,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
                             width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
                             callback: () {
-                              print(baseFightLineUpInfo.attackHeroCount);
+                              // print(baseFightLineUpInfo.attackHeroCount);
                               if (baseFightLineUpInfo.attackHeroCount < 5) {
                                 CommonUtils.showWarningMessage(msg: "您当前的进攻阵容英雄不足5个,请继续排兵布阵");
                                 return;

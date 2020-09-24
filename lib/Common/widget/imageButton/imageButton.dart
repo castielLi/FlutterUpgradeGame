@@ -17,6 +17,8 @@ class ImageButton extends StatefulWidget {
 }
 
 class _ImageButtonState extends State<ImageButton> {
+  int lastClickTime;
+
   @override
   Widget build(BuildContext context) {
     if (this.widget.textSize == 0) {
@@ -41,7 +43,10 @@ class _ImageButtonState extends State<ImageButton> {
         ),
       ),
       onPressed: () {
-        this.widget.callback();
+        if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
+          this.widget.callback();
+        }
+        this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
       },
     );
   }
