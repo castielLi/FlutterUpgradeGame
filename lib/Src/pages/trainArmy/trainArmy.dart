@@ -28,12 +28,13 @@ class TrainArmyDetail extends StatefulWidget {
   int winsupplies;
   int winwood;
   int winstone;
+  bool isattack;
 
   List<List<int>> content;
 
   bool isFightWin;
 
-  TrainArmyDetail({Key key, this.HUD, this.content, this.contentName, this.isFightWin = false, this.winstone = 0, this.winwood = 0, this.winsupplies = 0}) : super(key: key);
+  TrainArmyDetail({Key key, this.HUD, this.content, this.contentName, this.isFightWin = false, this.isattack,this.winstone = 0, this.winwood = 0, this.winsupplies = 0}) : super(key: key);
 
   _TrainArmyDetailState createState() => new _TrainArmyDetailState();
 }

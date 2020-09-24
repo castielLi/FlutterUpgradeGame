@@ -20,7 +20,13 @@ class MessageItem extends StatefulWidget {
 
   bool win;
 
-  MessageItem({Key key, this.tDate, this.displayname, this.lineup,this.win}) : super(key: key);
+  bool isattack;
+
+  int winwood;
+
+  int winstone;
+
+  MessageItem({Key key, this.tDate, this.displayname, this.lineup,this.win,this.isattack,this.winwood,this.winstone}) : super(key: key);
 
   @override
   _MessageItem createState() => _MessageItem();
@@ -82,6 +88,8 @@ class _MessageItem extends State<MessageItem> {
                         content: lineup,
                         isFightWin: this.widget.win,
                         winsupplies: this.widget.win?8:-10,
+                        winwood: this.widget.winwood,
+                        winstone: this.widget.winstone,
                       );
                     }));
                   },

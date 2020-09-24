@@ -240,7 +240,7 @@ class _FightPageState extends State<FightPage> {
                         ),
                         new UserImageButton(
                           size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
-                          buttonName: "消息",
+                          buttonName: "记录",
                           textSize: SystemFontSize.operationTextFontSize,
                           imageUrl: "resource/images/message.png",
                           callback: () {
@@ -249,7 +249,7 @@ class _FightPageState extends State<FightPage> {
                                 height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
                                 width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
                                 childWidgetName: 'messageDetail',
-                                title: "消 息",
+                                title: "记 录",
                               );
                             }));
                           },
