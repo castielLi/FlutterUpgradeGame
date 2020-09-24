@@ -31,6 +31,7 @@ class Datalist {
   String time;
   String displayname;
   String lineup;
+  bool win;
 
   Datalist({this.time, this.displayname, this.lineup});
 
@@ -38,11 +39,16 @@ class Datalist {
     time = json['time'];
     displayname = json['displayname'];
     lineup = json['lineup'];
+    win = json['win'];
+    if(win == null){
+      win = true;
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['time'] = this.time;
+    data['win'] = this.win;
     data['displayname'] = this.displayname;
     data['lineup'] = this.lineup;
     return data;

@@ -73,7 +73,6 @@ class _FightPageState extends State<FightPage> {
       FightService.getFightInfo((model) {
         if (model != null) {
           Provide.value<BaseFightLineupProvider>(context).initSupplies(model);
-          Provide.value<BaseFightLineupProvider>(context).initLiuneupProvider(model);
         }
       });
     });
