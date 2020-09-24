@@ -80,15 +80,18 @@ class _MessageDetailState extends State<MessageDetail> {
                         '玩家',
                         style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
                       ),
+                      // Text(
+                      //   '分类',
+                      //   style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
+                      // ),
                       Text(
-                        '操作',
+                        '结果',
                         style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
                       ),
                     ],
                   ),
                 ),
           Container(
-            // color: Colors.yellow,
             height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
             child: EasyRefresh(
               refreshFooter: ClassicsFooter(
@@ -132,7 +135,11 @@ class _MessageDetailState extends State<MessageDetail> {
                       tDate: item.time,
                       displayname: item.displayname,
                       lineup: item.lineup,
-                      win: item.win,
+                      // win: item.win,
+
+                      ///TODO 假数据
+                      win: index % 4 < 2,
+                      isattack: index % 2 == 1,
                     );
                   }),
             ),

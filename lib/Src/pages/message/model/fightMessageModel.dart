@@ -43,7 +43,7 @@ class Datalist {
     displayname = json['displayname'];
     lineup = json['lineup'];
     win = json['win'];
-    if(win == null){
+    if (win == null) {
       win = true;
     }
     winwood = json['winwood'];
