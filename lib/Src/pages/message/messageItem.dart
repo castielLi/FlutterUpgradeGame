@@ -95,7 +95,6 @@ class _MessageItem extends State<MessageItem> {
                 winsupplies: this.widget.win ? 8 : -10,
                 winwood: null == this.widget.winwood ? 0 : this.widget.winwood,
                 winstone: null == this.widget.winstone ? 0 : this.widget.winstone,
-                // isReWatchAttack: this.widget.isattack,
                 isattack: this.widget.isattack,
               );
             }));

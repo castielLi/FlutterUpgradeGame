@@ -35,8 +35,6 @@ class TrainArmyDetail extends StatefulWidget {
 
   bool isFightWin;
 
-  // bool isReWatchAttack;
-
   TrainArmyDetail({
     Key key,
     this.HUD,
@@ -119,7 +117,6 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
     this.showOrDismissProgressHUD();
     ArmyService.attack(baseFightLineUpInfo.attack, (AttackModel model) {
       if (model != null) {
-
         this.fightTimer = Timer.periodic(Duration(seconds: 2), (timer) {
           this.showOrDismissProgressHUD();
 
@@ -148,15 +145,16 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
           baseFightLineUpInfo.trainArmyContentName = 'reWatch';
           Navigator.push(context, PopWindow(pageBuilder: (context) {
             return TrainArmyDetail(
-//            contentName: 'reWatch',
-            content: lineup,
-            isFightWin: model.win,
-            winstone: model.winstone,
-            isattack: true,
-            winsupplies: model.winsupplies,
-            winwood: model.winwood,
-          );
-        }));
+              content: lineup,
+              isFightWin: model.win,
+              winstone: model.winstone,
+              isattack: true,
+              winsupplies: model.winsupplies,
+              winwood: model.winwood,
+            );
+          }));
+          fightTimer.cancel();
+        });
       }
     });
   }
@@ -290,7 +288,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
               ),
 
               Container(
-                height: ScreenUtil().setHeight(1520),
+                height: ScreenUtil().setHeight(1535),
                 margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(0), ScreenUtil().setHeight(300), ScreenUtil().setWidth(0), ScreenUtil().setHeight(0)),
                 child: Stack(
                   children: [
@@ -335,8 +333,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
                             width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
                             callback: () {
-                              
-                              if(baseFightLineUpInfo.needWatchAd){
+                              if (baseFightLineUpInfo.needWatchAd) {
                                 CommonUtils.showWarningMessage(msg: "才胜利了一场,休息下吧");
                                 int timeSecend = DateTime.now().second;
                                 if (timeSecend % 2 == 0) {
@@ -397,11 +394,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                 height: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
                                 width: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
                                 buttonName: '进 攻',
-                                callback: () {
-                                  // setState(() {
-                                  //   baseFightLineUpInfo.trainArmyContentName = 'attack';
-                                  // });
-                                },
+                                callback: () {},
                               ),
                               ImageButton(
                                 imageUrl: "resource/images/upgradeButton.png",
@@ -483,11 +476,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                 height: ScreenUtil().setHeight(SystemButtonSize.mediumButtonHeight),
                                 width: ScreenUtil().setWidth(SystemButtonSize.mediumButtonWidth),
                                 buttonName: '防 守',
-                                callback: () {
-                                  // setState(() {
-                                  //   baseFightLineUpInfo.trainArmyContentName = 'defence';
-                                  // });
-                                },
+                                callback: () {},
                               ),
                             ],
                           ),
@@ -505,7 +494,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                           children: [
                             Text(
                               "对方阵容",
-                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                             ),
                             Container(
                               width: ScreenUtil().setWidth(900),
@@ -531,7 +520,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                 ),
                                 Offstage(
-                                  offstage: !(this.widget.isattack && this.widget.isFightWin),
+                                  offstage: !(this.widget.isFightWin && this.widget.isattack),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
