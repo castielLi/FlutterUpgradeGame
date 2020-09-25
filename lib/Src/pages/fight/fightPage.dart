@@ -9,12 +9,12 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/globalSystemStatuesControl.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
+import 'package:upgradegame/Src/pages/fight/fightAdTimer.dart';
 import 'package:upgradegame/Src/pages/fight/service/fightService.dart';
 import 'package:upgradegame/Src/pages/main/common/buildingButton.dart';
 import 'package:upgradegame/Src/pages/main/common/resourceWidget.dart';
 import 'package:upgradegame/Src/pages/main/common/userImageButton.dart';
 import 'package:upgradegame/Src/pages/main/service/mainService.dart';
-import 'package:upgradegame/Src/pages/fight/fightAdTimer.dart';
 import 'package:upgradegame/Src/pages/trainArmy/trainArmy.dart';
 import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
@@ -32,7 +32,8 @@ class _FightPageState extends State<FightPage> {
   // double perFiveSecondProfit = 0.00;
   // Timer adShareTimer;
   // Timer productTCoin10;
-   Timer timer180;
+  Timer timer180;
+
   // Timer deviceIdTimer;
   // StreamSubscription stream;
   // StreamSubscription notification;
@@ -71,11 +72,11 @@ class _FightPageState extends State<FightPage> {
     this.startTimerProcess();
   }
 
-   void initWatchAdTimer() async{
-     List<dynamic> list = await FightAdTimer.GetNeedWatch();
-     int needWatchAd = list[0]['needWatched'];
-     Provide.value<BaseFightLineupProvider>(context).initNeedwatchAd(needWatchAd==0?false:true);
-   }
+  void initWatchAdTimer() async {
+    List<dynamic> list = await FightAdTimer.GetNeedWatch();
+    int needWatchAd = list[0]['needWatched'];
+    Provide.value<BaseFightLineupProvider>(context).initNeedwatchAd(needWatchAd == 0 ? false : true);
+  }
 
   void startTimerProcess() {
     this.timer180 = Timer.periodic(Duration(seconds: 30), (timer) {
@@ -96,11 +97,11 @@ class _FightPageState extends State<FightPage> {
     }
   }
 
-   void killAllTimer() {
-     if (this.timer180 != null) {
-       this.timer180.cancel();
-     }
-   }
+  void killAllTimer() {
+    if (this.timer180 != null) {
+      this.timer180.cancel();
+    }
+  }
 
   void initFightInfo() {
     this.showOrDismissProgressHUD();

@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/MyEasyRefresh/myEasyRefresh.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
@@ -350,34 +350,15 @@ class _MarketDetailState extends State<MarketDetail> {
                                 textAlign: TextAlign.center,
                                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                               )
-                            : EasyRefresh(
-                                refreshFooter: ClassicsFooter(
-                                  bgColor: Colors.transparent,
-                                  loadText: "上滑加载",
-                                  loadReadyText: "松开加载",
-                                  loadingText: "正在加载",
-                                  loadedText: "加载完成",
-                                  noMoreText: "没有更多了",
-                                  loadHeight: 35,
-                                  key: new GlobalKey<RefreshFooterState>(),
-                                ),
-                                refreshHeader: ClassicsHeader(
-                                  bgColor: Colors.transparent,
-                                  refreshText: "下拉刷新",
-                                  refreshReadyText: "松开刷新",
-                                  refreshingText: "正在刷新",
-                                  refreshedText: "刷新完成",
-                                  refreshHeight: 35,
-                                  key: new GlobalKey<RefreshHeaderState>(),
-                                ),
+                            : MyEasyRefresh(
                                 // ignore: missing_return
-                                loadMore: () {
+                                loadMoreCallback: () {
                                   this.woodPage += 1;
                                   this.woodListOffset = this.woodController.offset;
                                   getWoodList();
                                 },
                                 // ignore: missing_return
-                                onRefresh: () {
+                                onRefreshCallback: () {
                                   this.woodPage = 0;
                                   getWoodList();
                                 },
@@ -466,34 +447,15 @@ class _MarketDetailState extends State<MarketDetail> {
                                 textAlign: TextAlign.center,
                                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                               )
-                            : EasyRefresh(
-                                refreshFooter: ClassicsFooter(
-                                  bgColor: Colors.transparent,
-                                  loadText: "上滑加载",
-                                  loadReadyText: "松开加载",
-                                  loadingText: "正在加载",
-                                  loadedText: "加载完成",
-                                  noMoreText: "没有更多了",
-                                  loadHeight: 35,
-                                  key: new GlobalKey<RefreshFooterState>(),
-                                ),
-                                refreshHeader: ClassicsHeader(
-                                  bgColor: Colors.transparent,
-                                  refreshText: "下拉刷新",
-                                  refreshReadyText: "松开刷新",
-                                  refreshingText: "正在刷新",
-                                  refreshedText: "刷新完成",
-                                  refreshHeight: 35,
-                                  key: new GlobalKey<RefreshHeaderState>(),
-                                ),
+                            : MyEasyRefresh(
                                 // ignore: missing_return
-                                loadMore: () {
+                                loadMoreCallback: () {
                                   this.stonePage += 1;
                                   this.stoneListOffset = this.stoneController.offset;
                                   getStoneTradeList();
                                 },
                                 // ignore: missing_return
-                                onRefresh: () {
+                                onRefreshCallback: () {
                                   setState(() {
                                     this.stonePage = 0;
                                     getStoneTradeList();

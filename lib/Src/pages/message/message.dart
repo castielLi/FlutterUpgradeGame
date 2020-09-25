@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/MyEasyRefresh/myEasyRefresh.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/message/messageItem.dart';
 import 'package:upgradegame/Src/pages/message/model/fightMessageModel.dart';
@@ -10,9 +10,8 @@ import 'package:upgradegame/Src/pages/message/service/fightMessageService.dart';
 class MessageDetail extends StatefulWidget {
   @override
   VoidCallback HUD;
-  VoidCallback viewCallback;
 
-  MessageDetail({Key key, this.HUD, this.viewCallback}) : super(key: key);
+  MessageDetail({Key key, this.HUD}) : super(key: key);
 
   _MessageDetailState createState() => new _MessageDetailState();
 }
@@ -62,10 +61,9 @@ class _MessageDetailState extends State<MessageDetail> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().setHeight(1000),
-      width: ScreenUtil().setWidth(850),
+      height: ScreenUtil().setHeight(1050),
       margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
-          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(250)),
+          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(0)),
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -86,10 +84,6 @@ class _MessageDetailState extends State<MessageDetail> {
                         '玩家',
                         style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
                       ),
-                      // Text(
-                      //   '分类',
-                      //   style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
-                      // ),
                       Text(
                         '结果',
                         style: CustomFontSize.defaultTextStyle(SystemFontSize.settingTextFontSize),
@@ -99,40 +93,17 @@ class _MessageDetailState extends State<MessageDetail> {
                 ),
           Container(
             height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
-            child: EasyRefresh(
-              refreshFooter: ClassicsFooter(
-                bgColor: Colors.transparent,
-                loadText: "上滑加载",
-                loadReadyText: "松开加载",
-                loadingText: "正在加载",
-                loadedText: "加载完成",
-                noMoreText: "没有更多了",
-                loadHeight: 35,
-                key: new GlobalKey<RefreshFooterState>(),
-              ),
-              refreshHeader: ClassicsHeader(
-                bgColor: Colors.transparent,
-                refreshText: "下拉刷新",
-                refreshReadyText: "松开刷新",
-                refreshingText: "正在刷新",
-                refreshedText: "刷新完成",
-                refreshHeight: 35,
-                key: new GlobalKey<RefreshHeaderState>(),
-              ),
+            child: MyEasyRefresh(
               // ignore: missing_return
-              loadMore: () {
-                // setState(() {
+              loadMoreCallback: () {
                 this.page++;
                 getFightMessageList();
                 this.listOffset = this.listController.offset;
-                // });
               },
               // ignore: missing_return
-              onRefresh: () {
-                // setState(() {
+              onRefreshCallback: () {
                 this.page = 0;
                 getFightMessageList();
-                // });
               },
               child: ListView.builder(
                   itemCount: this.messageDetail == null ? 0 : this.messageDetail.datalist.length,

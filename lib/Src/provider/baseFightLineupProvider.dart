@@ -39,12 +39,12 @@ class BaseFightLineupProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  setNeedWatchAd(bool needWatchAd){
+  setNeedWatchAd(bool needWatchAd) {
     this.needWatchAd = needWatchAd;
-    FightAdTimer.UpdateAdTime(needWatchAd?1:0);
+    FightAdTimer.UpdateAdTime(needWatchAd ? 1 : 0);
   }
 
-  initNeedwatchAd(bool needWatchAd){
+  initNeedwatchAd(bool needWatchAd) {
     this.needWatchAd = needWatchAd;
   }
 
