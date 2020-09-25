@@ -17,7 +17,6 @@ import 'package:upgradegame/Src/provider/baseFightLineupProvider.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
-import '../fight/fightAdTimer.dart';
 import 'model/attackModel.dart';
 
 class TrainArmyDetail extends StatefulWidget {
@@ -142,6 +141,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
             isattack: true,
             winsupplies: model.winsupplies,
             winwood: model.winwood,
+            isReWatchAttack: true,
           );
         }));
       }

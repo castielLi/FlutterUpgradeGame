@@ -21,6 +21,8 @@ class _MessageDetailState extends State<MessageDetail> {
   FightMessageModel messageDetail = new FightMessageModel(total: 0, page: 0, datalist: []);
   int page = 0;
   String noTxText = '';
+  double listOffset = 0;
+  ScrollController listController = new ScrollController();
 
   @override
   void initState() {
@@ -40,6 +42,7 @@ class _MessageDetailState extends State<MessageDetail> {
       this.messageDetail.page = model.page;
       if (model.page == 0) {
         this.messageDetail.datalist = [];
+        this.listOffset = 0;
       }
       if (model.datalist.length == 0) {
         this.noTxText = '目前没有记录';
@@ -49,6 +52,9 @@ class _MessageDetailState extends State<MessageDetail> {
       }
       setState(() {
         this.messageDetail.datalist += model.datalist;
+      });
+      WidgetsBinding.instance.addPostFrameCallback((mag) {
+        this.listController.jumpTo(this.listOffset);
       });
     });
   }
@@ -118,6 +124,7 @@ class _MessageDetailState extends State<MessageDetail> {
                 // setState(() {
                 this.page++;
                 getFightMessageList();
+                this.listOffset = this.listController.offset;
                 // });
               },
               // ignore: missing_return
@@ -129,13 +136,14 @@ class _MessageDetailState extends State<MessageDetail> {
               },
               child: ListView.builder(
                   itemCount: this.messageDetail == null ? 0 : this.messageDetail.datalist.length,
+                  controller: this.listController,
                   itemBuilder: (content, index) {
                     Datalist item = this.messageDetail.datalist[index];
                     return MessageItem(
                       tDate: item.time,
                       displayname: item.displayname,
                       lineup: item.lineup,
-                       win: item.win,
+                      win: item.win,
                       isattack: item.isattack,
                       winstone: item.winstone,
                       winwood: item.winwood,
