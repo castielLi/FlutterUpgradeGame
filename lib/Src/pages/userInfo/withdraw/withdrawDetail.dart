@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
+import 'package:upgradegame/Common/widget/MyEasyRefresh/myEasyRefresh.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/userInfo/event/userInfoEventBus.dart';
@@ -88,35 +88,16 @@ class _WithDrawDetailState extends State<WithDrawDetail> {
               ),
         Container(
           height: ScreenUtil().setHeight(SystemScreenSize.displayContentHeight),
-          child: EasyRefresh(
-            refreshFooter: ClassicsFooter(
-              bgColor: Colors.transparent,
-              loadText: "上滑加载",
-              loadReadyText: "松开加载",
-              loadingText: "正在加载",
-              loadedText: "加载完成",
-              noMoreText: "没有更多了",
-              loadHeight: 35,
-              key: new GlobalKey<RefreshFooterState>(),
-            ),
-            refreshHeader: ClassicsHeader(
-              bgColor: Colors.transparent,
-              refreshText: "下拉刷新",
-              refreshReadyText: "松开刷新",
-              refreshingText: "正在刷新",
-              refreshedText: "刷新完成",
-              refreshHeight: 35,
-              key: new GlobalKey<RefreshHeaderState>(),
-            ),
+          child: MyEasyRefresh(
             // ignore: missing_return
-            loadMore: () {
+            loadMoreCallback: () {
               setState(() {
                 this.page++;
                 getWithdrawDetail();
               });
             },
             // ignore: missing_return
-            onRefresh: () {
+            onRefreshCallback: () {
               setState(() {
                 this.page = 0;
                 getWithdrawDetail();
