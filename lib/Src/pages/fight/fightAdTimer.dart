@@ -33,9 +33,10 @@ class FightAdTimer{
     String sqlstring = "select * from FightTimer ";
     List<dynamic> list = await _instance.adTimerDatabase.selectFromDatabase(sqlstring);
     if(list.length  == 0){
-      _instance.adTimerDatabase.insertDatabase("insert into FightTimer (needWatched) values ('0')");
-      list.add(0);
-      return list;
+      _instance.adTimerDatabase.insertDatabase("insert into FightTimer (needWatched) values (0)");
+      var currentList = List<dynamic>();
+      currentList.add({"needWatched":0});
+      return currentList;
     }else{
       return list;
     }
