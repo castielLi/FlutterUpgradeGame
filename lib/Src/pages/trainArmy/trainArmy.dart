@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert' as convert;
 
 import 'package:flutter/material.dart';
@@ -56,6 +57,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
   int lastClickTime;
   bool _loading = false;
   int times = 0;
+  Timer fightTimer;
 
   @override
   void initState() {
@@ -104,46 +106,48 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
   }
 
   void adFailedCallback() {
-    CommonUtils.showErrorMessage(msg: "广告展示失败了,那就不看了!");
+    CommonUtils.showErrorMessage(msg: "广告展示失败了,那就不看了!继续征战吧!");
     Provide.value<BaseFightLineupProvider>(context).setNeedWatchAd(false);
   }
 
   void adFinishedCallback() {
-//    CommonUtils.showSuccessMessage(msg: "谢谢您对部落格的支持");
-//    Provide.value<BaseFightLineupProvider>(context).setNeedWatchAd(false);
+    CommonUtils.showSuccessMessage(msg: "谢谢您对部落格的支持,继续征战吧!");
+    Provide.value<BaseFightLineupProvider>(context).setNeedWatchAd(false);
   }
 
   void attack(BaseFightLineupProvider baseFightLineUpInfo, BaseUserInfoProvider baseUserInfo) {
     this.showOrDismissProgressHUD();
     ArmyService.attack(baseFightLineUpInfo.attack, (AttackModel model) {
       if (model != null) {
-        this.showOrDismissProgressHUD();
 
-        ///匹配获胜可能会显示广告
-        if (model.displayad && model.win) {
-          CommonUtils.showSuccessMessage(msg: "您战斗胜利了,看条广告休息下吧");
-          Provide.value<BaseFightLineupProvider>(context).setNeedWatchAd(true);
-          int timeSecend = DateTime.now().second;
-          if (timeSecend % 2 == 0) {
-            AdDialog().showAd(3, 2, "6031610694170610");
-          } else {
-            AdDialog().showAd(4, 1, "945445227");
+        this.fightTimer = Timer.periodic(Duration(seconds: 2), (timer) {
+          this.showOrDismissProgressHUD();
+
+          ///匹配获胜可能会显示广告
+          if (model.displayad && model.win) {
+            CommonUtils.showSuccessMessage(msg: "您战斗胜利了,看条广告休息下吧");
+            Provide.value<BaseFightLineupProvider>(context).setNeedWatchAd(true);
+            int timeSecend = DateTime.now().second;
+            if (timeSecend % 2 == 0) {
+              AdDialog().showAd(3, 2, "6031610694170610");
+            } else {
+              AdDialog().showAd(4, 1, "945445227");
+            }
           }
-        }
-        baseFightLineUpInfo.attackReslut(model);
-        baseUserInfo.attactResult(model.stoneamount, model.woodamount);
-        var lineup = List<List<int>>();
-        var list = convert.jsonDecode(model.lineup);
-        for (int i = 0; i < list.length; i++) {
-          var row = List<int>();
-          for (int j = 0; j < list[i].length; j++) {
-            row.add(list[i][j]);
+          baseFightLineUpInfo.attackReslut(model);
+          baseUserInfo.attactResult(model.stoneamount, model.woodamount);
+          var lineup = List<List<int>>();
+          var list = convert.jsonDecode(model.lineup);
+          for (int i = 0; i < list.length; i++) {
+            var row = List<int>();
+            for (int j = 0; j < list[i].length; j++) {
+              row.add(list[i][j]);
+            }
+            lineup.add(row);
           }
-          lineup.add(row);
-        }
-        baseFightLineUpInfo.trainArmyContentName = 'reWatch';
-        Navigator.push(context, PopWindow(pageBuilder: (context) {
-          return TrainArmyDetail(
+          baseFightLineUpInfo.trainArmyContentName = 'reWatch';
+          Navigator.push(context, PopWindow(pageBuilder: (context) {
+            return TrainArmyDetail(
 //            contentName: 'reWatch',
             content: lineup,
             isFightWin: model.win,
@@ -331,18 +335,17 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
                             width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
                             callback: () {
-                              // print(baseFightLineUpInfo.attackHeroCount);
-
-//                              if(baseFightLineUpInfo.needWatchAd){
-//                                CommonUtils.showWarningMessage(msg: "才胜利了一场,休息下吧");
-//                                int timeSecend = DateTime.now().second;
-//                                if (timeSecend % 2 == 0) {
-//                                  AdDialog().showAd(3, 2, "6031610694170610");
-//                                } else {
-//                                  AdDialog().showAd(4, 1, "945445227");
-//                                }
-//                                return;
-//                              }
+                              
+                              if(baseFightLineUpInfo.needWatchAd){
+                                CommonUtils.showWarningMessage(msg: "才胜利了一场,休息下吧");
+                                int timeSecend = DateTime.now().second;
+                                if (timeSecend % 2 == 0) {
+                                  AdDialog().showAd(3, 2, "6031610694170610");
+                                } else {
+                                  AdDialog().showAd(4, 1, "945445227");
+                                }
+                                return;
+                              }
 
                               if (baseFightLineUpInfo.attackHeroCount < 5) {
                                 CommonUtils.showWarningMessage(msg: "您当前的进攻阵容英雄不足5个,请继续排兵布阵");
