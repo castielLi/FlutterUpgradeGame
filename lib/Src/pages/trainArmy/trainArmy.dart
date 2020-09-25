@@ -33,10 +33,20 @@ class TrainArmyDetail extends StatefulWidget {
   List<List<int>> content;
 
   bool isFightWin;
-  bool isReWatchAttack;
 
-  TrainArmyDetail({Key key, this.HUD, this.content, this.contentName, this.isFightWin = false, this.isattack, this.winstone = 0, this.winwood = 0, this.winsupplies = 0, this.isReWatchAttack = false})
-      : super(key: key);
+  // bool isReWatchAttack;
+
+  TrainArmyDetail({
+    Key key,
+    this.HUD,
+    this.content,
+    this.contentName,
+    this.isFightWin = false,
+    this.isattack = false,
+    this.winstone = 0,
+    this.winwood = 0,
+    this.winsupplies = 0,
+  }) : super(key: key);
 
   _TrainArmyDetailState createState() => new _TrainArmyDetailState();
 }
@@ -141,7 +151,6 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
             isattack: true,
             winsupplies: model.winsupplies,
             winwood: model.winwood,
-            isReWatchAttack: true,
           );
         }));
       }
@@ -519,7 +528,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                                   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreLargerTextSize),
                                 ),
                                 Offstage(
-                                  offstage: !(this.widget.isFightWin && this.widget.isReWatchAttack),
+                                  offstage: !(this.widget.isattack && this.widget.isFightWin),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
