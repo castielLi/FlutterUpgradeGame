@@ -322,18 +322,17 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
                             width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
                             callback: () {
-                              // print(baseFightLineUpInfo.attackHeroCount);
-
-//                              if(baseFightLineUpInfo.needWatchAd){
-//                                CommonUtils.showWarningMessage(msg: "才胜利了一场,休息下吧");
-//                                int timeSecend = DateTime.now().second;
-//                                if (timeSecend % 2 == 0) {
-//                                  AdDialog().showAd(3, 2, "6031610694170610");
-//                                } else {
-//                                  AdDialog().showAd(4, 1, "945445227");
-//                                }
-//                                return;
-//                              }
+                              
+                              if(baseFightLineUpInfo.needWatchAd){
+                                CommonUtils.showWarningMessage(msg: "才胜利了一场,休息下吧");
+                                int timeSecend = DateTime.now().second;
+                                if (timeSecend % 2 == 0) {
+                                  AdDialog().showAd(3, 2, "6031610694170610");
+                                } else {
+                                  AdDialog().showAd(4, 1, "945445227");
+                                }
+                                return;
+                              }
 
                               if (baseFightLineUpInfo.attackHeroCount < 5) {
                                 CommonUtils.showWarningMessage(msg: "您当前的进攻阵容英雄不足5个,请继续排兵布阵");

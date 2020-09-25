@@ -73,8 +73,8 @@ class _FightPageState extends State<FightPage> {
 
    void initWatchAdTimer() async{
      List<dynamic> list = await FightAdTimer.GetNeedWatch();
-     bool needWatchAd = list[0]['needWatched'];
-     Provide.value<BaseFightLineupProvider>(context).initNeedwatchAd(needWatchAd);
+     int needWatchAd = list[0]['needWatched'];
+     Provide.value<BaseFightLineupProvider>(context).initNeedwatchAd(needWatchAd==0?false:true);
    }
 
   void startTimerProcess() {
