@@ -14,6 +14,7 @@ import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/common/model/globalSystemStatuesControl.dart';
 import 'package:upgradegame/Src/common/widget/adDialog/adTimer.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
+import 'package:upgradegame/Src/common/widget/detailDialog/redEnvelopeDialog.dart';
 import 'package:upgradegame/Src/pages/fight/fightPage.dart';
 import 'package:upgradegame/Src/pages/main/common/buildingButton.dart';
 import 'package:upgradegame/Src/pages/main/common/dividendPart.dart';
@@ -433,18 +434,12 @@ class _MainPageState extends State<MainPage> {
                                 textSize: SystemFontSize.operationTextFontSize,
                                 callback: () {
                                   Navigator.push(context, PopWindow(pageBuilder: (context) {
-                                    return DetailDialog(
+                                    return RedEnvelopeDialog(
                                       height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
                                       width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
-                                      childWidgetName: 'contributionDetail',
-                                      title: "贡献值",
                                     );
                                   }));
                                 },
-                              ),
-                              new UserImageButton(
-                                imageUrl: "",
-                                textSize: SystemFontSize.operationTextFontSize,
                               ),
                               new UserImageButton(
                                 size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),

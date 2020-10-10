@@ -1,17 +1,21 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:progress_hud/progress_hud.dart';
+import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
-import 'package:upgradegame/Src/pages/trainArmy/armySelect.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
 class RedEnvelopeDialog extends StatefulWidget {
   double height;
   double width;
-  String childWidgetName;
-  String title;
 
-  RedEnvelopeDialog({Key key, this.height, this.width, this.childWidgetName, this.title = "",}) : super(key: key);
+  RedEnvelopeDialog({
+    Key key,
+    this.height,
+    this.width,
+  }) : super(key: key);
 
   @override
   _RedEnvelopeDialogState createState() => new _RedEnvelopeDialogState();
@@ -21,6 +25,7 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
   ProgressHUD _progressHUD;
   bool _loading = false;
   int lastClickTime;
+  bool isRedEnvelopeClose = true;
 
   void initState() {
     super.initState();
@@ -42,35 +47,8 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
 
   @override
   Widget build(BuildContext context) {
-    void showOrDismissProgressHUD() {
-      setState(() {
-        if (_loading) {
-          _progressHUD.state.dismiss();
-        } else {
-          _progressHUD.state.show();
-        }
-
-        _loading = !_loading;
-      });
-    }
-
-
-    Widget currentWidget;
-    switch (this.widget.childWidgetName) {
-      case 'armySelectDetail':
-        {
-          // currentWidget = new ArmySelectDetail(
-          //   HUD: showOrDismissProgressHUD,
-          //   row: this.widget.row,
-          //   column: this.widget.column,
-          //   attack: this.widget.attack,
-          // );
-          break;
-        }
-    }
-
     return new Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Color.fromRGBO(1, 1, 1, 0.3),
       body: SingleChildScrollView(
         child: Container(
           width: ScreenUtil().setWidth(1080),
@@ -78,37 +56,80 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
           color: Colors.transparent,
           child: new Container(
               color: Colors.transparent,
-              margin: EdgeInsets.fromLTRB((ScreenUtil().setWidth(1080) - this.widget.width) / 2, (ScreenUtil().setHeight(1920) - this.widget.height) / 2,
-                  (ScreenUtil().setWidth(1080) - this.widget.width) / 2, (ScreenUtil().setHeight(1920) - this.widget.height) / 2),
               child: Stack(
                 children: <Widget>[
                   Center(
                     child: new Image(
-                      image: new AssetImage('resource/images/RedEnvelopeDialogBackground.png'),
+                      image: new AssetImage('resource/images/' + (this.isRedEnvelopeClose ? 'redEnvelopeClose' : 'redEnvelopeOpen') + '.png'),
                       fit: BoxFit.fill,
                       height: widget.height,
                       width: widget.width,
                     ),
                   ),
-                  Container(
-//                    color: Colors.red,
-                    height: ScreenUtil().setHeight(210),
-                    width: this.widget.width,
-                    padding: EdgeInsets.only(left: ScreenUtil().setWidth(820)),
-                    child: ImageButton(
-                        height: ScreenUtil().setHeight(150),
-                        width: ScreenUtil().setWidth(150),
-                        imageUrl: "resource/images/cancelDialog.png",
-                        callback: () {
-                          /// 防止重复点击
-                          if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
-//                            Provide.value<BaseDialogClickProvider>(context).setDialogHide();
-                            Application.router.pop(context);
-                            this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
-                          }
-                        }),
+                  Center(
+                    child: GestureDetector(
+                      child: Container(
+                        color: Colors.transparent,
+                        margin: EdgeInsets.only(top: ScreenUtil().setHeight(300)),
+                        height: ScreenUtil().setHeight(200),
+                        width: ScreenUtil().setWidth(200),
+                      ),
+                      onTap: () {
+                        if (this.isRedEnvelopeClose) {
+                          setState(() {
+                            this.isRedEnvelopeClose = false;
+                          });
+                        }
+                      },
+                    ),
                   ),
-                  currentWidget,
+                  Center(
+                    child: Container(
+                      height: ScreenUtil().setWidth(210),
+                      width: ScreenUtil().setWidth(210),
+                      margin: EdgeInsets.only(top: ScreenUtil().setWidth(1100)),
+                      child: ImageButton(
+                          height: ScreenUtil().setHeight(150),
+                          width: ScreenUtil().setWidth(150),
+                          imageUrl: "resource/images/cancelDialog.png",
+                          callback: () {
+                            if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
+                              Application.router.pop(context);
+                            }
+                            this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
+                          }),
+                    ),
+                  ),
+
+                  Center(
+                    child: Offstage(
+                      offstage: !this.isRedEnvelopeClose,
+                      child: Container(
+                        margin: EdgeInsets.only(top: ScreenUtil().setHeight(600)),
+                        child: Text(
+                          '花费120贡献值打开红包',
+                          style: TextStyle(
+                            fontSize: ScreenUtil().setSp(SystemFontSize.bigTextSize),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Offstage(
+                      offstage: this.isRedEnvelopeClose,
+                      child: Container(
+                        child: Text(
+                          '获得' + Random().nextInt(20).toString() + '元红包',
+                          style: TextStyle(
+                            fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // currentWidget,
                   _progressHUD,
                 ],
               )),
