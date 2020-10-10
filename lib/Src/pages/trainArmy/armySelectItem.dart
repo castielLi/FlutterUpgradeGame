@@ -63,6 +63,7 @@ class _ArmySelectItem extends State<ArmySelectItem> {
             ),
             onTap: () {
               if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
+                this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
                 if (this.widget.reWatch) {
                   return;
                 }
@@ -106,7 +107,6 @@ class _ArmySelectItem extends State<ArmySelectItem> {
                 }));
               }
 
-              this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
               // this.widget.contentName = null;
             });
       },

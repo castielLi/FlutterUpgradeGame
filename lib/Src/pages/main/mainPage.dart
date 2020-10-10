@@ -14,6 +14,7 @@ import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/common/model/globalSystemStatuesControl.dart';
 import 'package:upgradegame/Src/common/widget/adDialog/adTimer.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
+import 'package:upgradegame/Src/common/widget/detailDialog/redEnvelopeDialog.dart';
 import 'package:upgradegame/Src/pages/fight/fightPage.dart';
 import 'package:upgradegame/Src/pages/main/common/buildingButton.dart';
 import 'package:upgradegame/Src/pages/main/common/dividendPart.dart';
@@ -428,6 +429,20 @@ class _MainPageState extends State<MainPage> {
                               ),
                               new UserImageButton(
                                 size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
+                                buttonName: "抽奖",
+                                imageUrl: "resource/images/redEnvelopeIcon.png",
+                                textSize: SystemFontSize.operationTextFontSize,
+                                callback: () {
+                                  Navigator.push(context, PopWindow(pageBuilder: (context) {
+                                    return RedEnvelopeDialog(
+                                      height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
+                                      width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                    );
+                                  }));
+                                },
+                              ),
+                              new UserImageButton(
+                                size: ScreenUtil().setWidth(SystemIconSize.mainPageFunctionBarIconSize),
                                 buttonName: "刷新",
                                 textSize: SystemFontSize.operationTextFontSize,
                                 imageUrl: "resource/images/refresh.png",
@@ -703,8 +718,7 @@ class _MainPageState extends State<MainPage> {
                   fontSize: SystemFontSize.otherBuildingTextFontSize,
                   namePadding: 100,
                   callback: () {
-                    if(baseUserInfo.mainbuildlevel < 3 || baseUserInfo.woodlevel < 3 || baseUserInfo.stonelevel < 3
-                    || baseUserInfo.farmlevel < 3){
+                    if (baseUserInfo.mainbuildlevel < 3 || baseUserInfo.woodlevel < 3 || baseUserInfo.stonelevel < 3 || baseUserInfo.farmlevel < 3) {
                       CommonUtils.showWarningMessage(msg: "您当前的主城等级或者资源建筑未达到3级,还不能参与对战");
                       return;
                     }
