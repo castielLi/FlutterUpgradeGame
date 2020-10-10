@@ -333,7 +333,7 @@ class _TrainArmyDetailState extends State<TrainArmyDetail> {
                             height: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
                             width: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
                             callback: () {
-                              
+
                               if(baseFightLineUpInfo.needWatchAd!= null && baseFightLineUpInfo.needWatchAd){
                                 CommonUtils.showWarningMessage(msg: "才胜利了一场,休息下吧");
                                 int timeSecend = DateTime.now().second;
