@@ -104,55 +104,78 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                       remainDays: this.widget.remainDays,
                     ),
                   ),
-                  GestureDetector(
-                    child: Container(
-                      width: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
-                      height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: new AssetImage('resource/images/upgradeButton.png'),
-                          fit: BoxFit.fill,
+                  Column(
+                    children: [
+                      GestureDetector(
+                        child: Container(
+                          width: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+                          height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: new AssetImage('resource/images/upgradeButton.png'),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '购 买',
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                            ),
+                          ),
                         ),
+                        onTap: () {
+                          if (0 != this.widget.price && baseUserInfo.TCoinAmount >= this.widget.price) {
+                            showDialog<Null>(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) {
+                                return new AlertDialog(
+                                  title: new Text('您确认购买英雄么?'),
+                                  actions: <Widget>[
+                                    new FlatButton(
+                                      child: new Text('取消'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    new FlatButton(
+                                      child: new Text('确认'),
+                                      onPressed: () {
+                                        this.buyHero(this.widget.heroType);
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            ).then((val) {
+                              print(val);
+                            });
+                          } else {
+                            CommonUtils.showErrorMessage(msg: "您当前的金币不足以购买英雄");
+                          }
+                        },
                       ),
-                      child: Center(
-                        child: Text(
-                          '购 买',
-                          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                      GestureDetector(
+                        child: Container(
+                          width: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+                          height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: new AssetImage('resource/images/upgradeButton.png'),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '领 取',
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                            ),
+                          ),
                         ),
+                        onTap: () {},
                       ),
-                    ),
-                    onTap: () {
-                      if (0 != this.widget.price && baseUserInfo.TCoinAmount >= this.widget.price) {
-                        showDialog<Null>(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (BuildContext context) {
-                            return new AlertDialog(
-                              title: new Text('您确认购买英雄么?'),
-                              actions: <Widget>[
-                                new FlatButton(
-                                  child: new Text('取消'),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                new FlatButton(
-                                  child: new Text('确认'),
-                                  onPressed: () {
-                                    this.buyHero(this.widget.heroType);
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        ).then((val) {
-                          print(val);
-                        });
-                      } else {
-                        CommonUtils.showErrorMessage(msg: "您当前的金币不足以购买英雄");
-                      }
-                    },
+                    ],
                   ),
                 ],
               ),
