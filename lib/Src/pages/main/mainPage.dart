@@ -435,8 +435,8 @@ class _MainPageState extends State<MainPage> {
                                 callback: () {
                                   Navigator.push(context, PopWindow(pageBuilder: (context) {
                                     return RedEnvelopeDialog(
-                                      height: ScreenUtil().setHeight(SystemScreenSize.detailDialogHeight),
-                                      width: ScreenUtil().setWidth(SystemScreenSize.detailDialogWidth),
+                                      height: ScreenUtil().setHeight(1920),
+                                      width: ScreenUtil().setWidth(1080),
                                     );
                                   }));
                                 },
