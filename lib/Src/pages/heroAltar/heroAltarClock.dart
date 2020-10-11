@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 
 class HeroAltarClock extends StatefulWidget {
@@ -21,7 +20,7 @@ class _HeroAltarClockState extends State<HeroAltarClock> {
       clockDayList.add(
         Row(
           children: <Widget>[
-            Image(image: new AssetImage(this.widget.imageUrl), height: ScreenUtil().setHeight(this.widget.adIconHeight)),
+            Image(image: new AssetImage(this.widget.imageUrl), height: this.widget.adIconHeight),
             Text(
               this.widget.remainDays[i] > 30 ? "永久" : this.widget.remainDays[i].toString() + '天',
               style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
@@ -34,7 +33,7 @@ class _HeroAltarClockState extends State<HeroAltarClock> {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
-      crossAxisCount: 3,
+      crossAxisCount: 4,
       childAspectRatio: 2,
       children: clockDayList,
     );

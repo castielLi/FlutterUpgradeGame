@@ -92,17 +92,35 @@ class _HeroAltarItem extends State<HeroAltarItem> {
               ),
             ),
             Container(
+              width: ScreenUtil().setWidth(800),
+              child: HeroAltarClock(
+                imageUrl: 'resource/images/clock.png',
+                adIconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
+                remainDays: this.widget.remainDays,
+              ),
+            ),
+            Container(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Container(
-                    width: ScreenUtil().setWidth(600),
-                    child: HeroAltarClock(
-                      imageUrl: 'resource/images/clock.png',
-                      adIconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
-                      remainDays: this.widget.remainDays,
+                  GestureDetector(
+                    child: Container(
+                      width: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+                      height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: new AssetImage('resource/images/upgradeButton.png'),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          '领 取',
+                          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                        ),
+                      ),
                     ),
+                    onTap: () {},
                   ),
                   GestureDetector(
                     child: Container(
