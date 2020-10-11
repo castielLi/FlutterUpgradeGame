@@ -33,7 +33,7 @@ class _HeroAltarClockState extends State<HeroAltarClock> {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
-      crossAxisCount: 3,
+      crossAxisCount: 4,
       childAspectRatio: 2,
       children: clockDayList,
     );

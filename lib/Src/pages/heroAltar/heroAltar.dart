@@ -80,7 +80,7 @@ class _HeroAltarState extends State<HeroAltar> {
             }
           });
         }
-        // for(int i=0;i<9;i++){
+        // for(int i=0;i<4;i++){
         //   warriors.add(30);
         // }
         return new Container(
