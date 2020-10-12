@@ -123,10 +123,9 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                         ),
                       ),
                       onTap: () {
-                        if(baseUserInfo.ad.stone + baseUserInfo.ad.wood + baseUserInfo.ad.farmone
-                            + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree > -1){
-
-                        }else{
+                        if (baseUserInfo.ad.stone + baseUserInfo.ad.wood + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree > -1) {
+                          ///TODO 领取分红
+                        } else {
                           CommonUtils.showErrorMessage(msg: "您没有足够的广告条数哦,无法领取分红,快去观看广告吧");
                         }
                       },

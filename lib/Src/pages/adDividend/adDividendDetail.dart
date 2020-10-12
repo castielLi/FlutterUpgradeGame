@@ -40,12 +40,12 @@ class _AdDividendDetailState extends State<AdDividendDetail> {
   Widget build(BuildContext context) {
     return new Container(
       margin: EdgeInsets.fromLTRB(ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogTop),
-          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(SystemScreenSize.detailDialogBottom)),
+          ScreenUtil().setWidth(SystemScreenSize.detailDialogLeft), ScreenUtil().setHeight(300)),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           AdPool(heroImageUrl: 'resource/images/warrior.png', adDividend: warrior),
-//          AdPool(heroImageUrl: 'resource/images/shaman.png', adDividend: shaman),
+          // AdPool(heroImageUrl: 'resource/images/shaman.png', adDividend: shaman),
         ],
       ),
     );
