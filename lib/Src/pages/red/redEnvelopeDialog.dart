@@ -53,7 +53,6 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
 
   @override
   Widget build(BuildContext context) {
-
     void showOrDismissProgressHUD() {
       setState(() {
         if (_loading) {
@@ -66,113 +65,109 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
       });
     }
 
-
-
-    return new Container(child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
-      return Scaffold(
-        backgroundColor: Color.fromRGBO(1, 1, 1, 0.3),
-        body: SingleChildScrollView(
-          child: Container(
-            width: ScreenUtil().setWidth(1080),
-            height: ScreenUtil().setHeight(1920),
-            color: Colors.transparent,
-            child: new Container(
-                color: Colors.transparent,
-                child: Stack(
-                  children: <Widget>[
-                    Center(
-                      child: new Image(
-                        image: new AssetImage('resource/images/' + (this.isRedEnvelopeClose ? 'redEnvelopeClose' : 'redEnvelopeOpen') + '.png'),
-                        fit: BoxFit.fill,
-                        height: widget.height,
-                        width: widget.width,
-                      ),
-                    ),
-                    Center(
-                      child: GestureDetector(
-                        child: Container(
-                          color: Colors.transparent,
-                          margin: EdgeInsets.only(top: ScreenUtil().setHeight(300)),
-                          height: ScreenUtil().setHeight(200),
-                          width: ScreenUtil().setWidth(200),
+    return new Container(
+      child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
+        return Scaffold(
+          backgroundColor: Color.fromRGBO(1, 1, 1, 0.3),
+          body: SingleChildScrollView(
+            child: Container(
+              width: ScreenUtil().setWidth(1080),
+              height: ScreenUtil().setHeight(1920),
+              color: Colors.transparent,
+              child: new Container(
+                  color: Colors.transparent,
+                  child: Stack(
+                    children: <Widget>[
+                      Center(
+                        child: new Image(
+                          image: new AssetImage('resource/images/' + (this.isRedEnvelopeClose ? 'redEnvelopeClose' : 'redEnvelopeOpen') + '.png'),
+                          fit: BoxFit.fill,
+                          height: widget.height,
+                          width: widget.width,
                         ),
-                        onTap: () {
-
-                          if(baseUserInfo.ad.stone + baseUserInfo.ad.wood + baseUserInfo.ad.farmone
-                          + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree > -1){
-
-                            showOrDismissProgressHUD();
-                            RedService.recycleRed((RedModel model){
+                      ),
+                      Center(
+                        child: GestureDetector(
+                          child: Container(
+                            color: Colors.transparent,
+                            margin: EdgeInsets.only(top: ScreenUtil().setHeight(300)),
+                            height: ScreenUtil().setHeight(200),
+                            width: ScreenUtil().setWidth(200),
+                          ),
+                          onTap: () {
+                            if (baseUserInfo.ad.stone + baseUserInfo.ad.wood + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree > -1) {
                               showOrDismissProgressHUD();
-                              if(model != null){
-                                ///todo:黄河 后面的让红包金额显示出来 是model.cash
-                              }
-                              if (this.isRedEnvelopeClose) {
-                                setState(() {
-                                  this.isRedEnvelopeClose = false;
-                                });
-                              }
-                            });
-                          }else{
-                            CommonUtils.showErrorMessage(msg: "您没有足够的广告条数来打开红包哟");
-                          }
-                        },
+                              RedService.recycleRed((RedModel model) {
+                                showOrDismissProgressHUD();
+                                if (null != model) {
+                                  ///todo:黄河 后面的让红包金额显示出来 是model.cash
+                                }
+                                if (this.isRedEnvelopeClose) {
+                                  setState(() {
+                                    this.isRedEnvelopeClose = false;
+                                  });
+                                }
+                              });
+                            } else {
+                              CommonUtils.showErrorMessage(msg: "您没有足够的广告条数来打开红包哟");
+                            }
+                          },
+                        ),
                       ),
-                    ),
-                    Center(
-                      child: Container(
-                        height: ScreenUtil().setWidth(210),
-                        width: ScreenUtil().setWidth(210),
-                        margin: EdgeInsets.only(top: ScreenUtil().setWidth(1100)),
-                        child: ImageButton(
-                            height: ScreenUtil().setHeight(150),
-                            width: ScreenUtil().setWidth(150),
-                            imageUrl: "resource/images/cancelDialog.png",
-                            callback: () {
-                              if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
-                                Application.router.pop(context);
-                              }
-                              this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
-                            }),
-                      ),
-                    ),
-
-                    Center(
-                      child: Offstage(
-                        offstage: !this.isRedEnvelopeClose,
+                      Center(
                         child: Container(
-                          margin: EdgeInsets.only(top: ScreenUtil().setHeight(600)),
-                          child: Text(
-                            '需要消耗120贡献值才能打开红包哟',
-                            style: TextStyle(
-                              fontSize: ScreenUtil().setSp(SystemFontSize.bigTextSize),
+                          height: ScreenUtil().setWidth(210),
+                          width: ScreenUtil().setWidth(210),
+                          margin: EdgeInsets.only(top: ScreenUtil().setWidth(1100)),
+                          child: ImageButton(
+                              height: ScreenUtil().setHeight(150),
+                              width: ScreenUtil().setWidth(150),
+                              imageUrl: "resource/images/cancelDialog.png",
+                              callback: () {
+                                if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
+                                  Application.router.pop(context);
+                                }
+                                this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
+                              }),
+                        ),
+                      ),
+
+                      Center(
+                        child: Offstage(
+                          offstage: !this.isRedEnvelopeClose,
+                          child: Container(
+                            margin: EdgeInsets.only(top: ScreenUtil().setHeight(600)),
+                            child: Text(
+                              '需要消耗120贡献值才能打开红包哟',
+                              style: TextStyle(
+                                fontSize: ScreenUtil().setSp(SystemFontSize.bigTextSize),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Center(
-                      child: Offstage(
-                        offstage: this.isRedEnvelopeClose,
-                        child: Container(
-                          child: Text(
-                            '获得' + Random().nextInt(20).toString() + '元红包',
-                            style: TextStyle(
-                              fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize),
+                      Center(
+                        child: Offstage(
+                          offstage: this.isRedEnvelopeClose,
+                          child: Container(
+                            child: Text(
+                              '获得' + Random().nextInt(20).toString() + '元红包',
+                              style: TextStyle(
+                                fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
 
-                    // currentWidget,
-                    _progressHUD,
-                  ],
-                )),
+                      // currentWidget,
+                      _progressHUD,
+                    ],
+                  )),
+            ),
           ),
-        ),
-      );
-    }),
+        );
+      }),
     );
   }
 }
