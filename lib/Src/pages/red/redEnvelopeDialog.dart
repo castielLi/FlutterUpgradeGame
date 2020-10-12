@@ -11,6 +11,8 @@ import 'package:upgradegame/Src/pages/red/service/redService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
 
+import 'model/redModel.dart';
+
 class RedEnvelopeDialog extends StatefulWidget {
   double height;
   double width;
@@ -100,8 +102,11 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
                           + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree > -1){
 
                             showOrDismissProgressHUD();
-                            RedService.recycleRed((){
+                            RedService.recycleRed((RedModel model){
                               showOrDismissProgressHUD();
+                              if(model != null){
+                                ///todo:黄河 后面的让红包金额显示出来 是model.cash
+                              }
                               if (this.isRedEnvelopeClose) {
                                 setState(() {
                                   this.isRedEnvelopeClose = false;

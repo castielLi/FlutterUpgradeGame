@@ -117,12 +117,19 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                         ),
                         child: Center(
                           child: Text(
-                            '领 取',
+                            '分 红',
                             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                           ),
                         ),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        if(baseUserInfo.ad.stone + baseUserInfo.ad.wood + baseUserInfo.ad.farmone
+                            + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree > -1){
+
+                        }else{
+                          CommonUtils.showErrorMessage(msg: "您没有足够的广告条数哦,无法领取分红,快去观看广告吧");
+                        }
+                      },
                     ),
                   ),
                   GestureDetector(

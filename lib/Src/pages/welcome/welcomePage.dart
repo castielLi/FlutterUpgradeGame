@@ -57,12 +57,12 @@ class _WelcomePageState extends State<WelcomePage> {
     this.initBaseWidget();
 
     ///显示开屏广告
-//    int timeSecend = DateTime.now().second;
-//    if(timeSecend % 3 == 0){
+    int timeSecend = DateTime.now().second;
+    if(timeSecend % 3 == 0){
       AdDialog().showAd(1, 1,"POSIDtvy0gsf7zfm1");
-//    }else{
-//      AdDialog().showAd(3, 1,"");
-//    }
+    }else{
+      AdDialog().showAd(3, 1,"2071735641981403");
+    }
 //
     AdDialog().setCallback(this.adCallback, this.adFailedCallback,null, true);
 
