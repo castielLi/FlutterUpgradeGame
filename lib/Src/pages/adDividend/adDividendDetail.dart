@@ -45,7 +45,7 @@ class _AdDividendDetailState extends State<AdDividendDetail> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           AdPool(heroImageUrl: 'resource/images/warrior.png', adDividend: warrior),
-          AdPool(heroImageUrl: 'resource/images/shaman.png', adDividend: shaman),
+//          AdPool(heroImageUrl: 'resource/images/shaman.png', adDividend: shaman),
         ],
       ),
     );
