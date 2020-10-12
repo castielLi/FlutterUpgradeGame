@@ -101,26 +101,29 @@ class _HeroAltarItem extends State<HeroAltarItem> {
             ),
             Container(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  GestureDetector(
-                    child: Container(
-                      width: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
-                      height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: new AssetImage('resource/images/upgradeButton.png'),
-                          fit: BoxFit.fill,
+                  Offstage(
+                    offstage: null == this.widget.remainDays || 0 == this.widget.remainDays.length,
+                    child: GestureDetector(
+                      child: Container(
+                        width: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+                        height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: new AssetImage('resource/images/upgradeButton.png'),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            '领 取',
+                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                          ),
                         ),
                       ),
-                      child: Center(
-                        child: Text(
-                          '领 取',
-                          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                        ),
-                      ),
+                      onTap: () {},
                     ),
-                    onTap: () {},
                   ),
                   GestureDetector(
                     child: Container(
