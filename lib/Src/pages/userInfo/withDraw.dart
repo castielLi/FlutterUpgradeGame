@@ -24,6 +24,7 @@ class _WithdrawState extends State<Withdraw> {
   final accountController = TextEditingController(text: "");
   final amountController = TextEditingController(text: "");
   final passwordController = TextEditingController(text: "");
+  int lastClickTime;
 
   withdraw(String account, String password, String amount) {
     this.widget.HUD();
@@ -96,56 +97,59 @@ class _WithdrawState extends State<Withdraw> {
                 ImageTextButton(
                   buttonName: '确 定',
                   callback: () {
-                    String aliPayAccount = accountController.text;
-                    String password = passwordController.text;
-                    String amount = amountController.text;
-                    if (aliPayAccount == "" || password == "" || amount == "") {
-                      CommonUtils.showWarningMessage(msg: "输入不能为空");
-                      return;
-                    }
-                    if (!RegExp(r"^\d*$").hasMatch(amountController.text)) {
-                      CommonUtils.showWarningMessage(msg: "请输入正整数");
-                      return;
-                    }
-                    if (double.parse(amountController.text) > cashAmount) {
-                      CommonUtils.showWarningMessage(msg: '可提现金额不足，请重新输入');
-                      return;
-                    }
-                    if (!cashInfo.hasWithdraw) {
-                      if (double.parse(amountController.text) < withdrawLimitAmount) {
-                        CommonUtils.showWarningMessage(msg: "您的提现金额不足" + withdrawLimitAmount.toString() + "还需努力哟!");
-                      } else {
-                        showDialog<Null>(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (BuildContext context) {
-                            return new AlertDialog(
-                              title: new Text('您确认要发起提现操作么?'),
-                              actions: <Widget>[
-                                new FlatButton(
-                                  child: new Text('取消'),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                new FlatButton(
-                                  child: new Text('确认'),
-                                  onPressed: () {
-                                    this.withdraw(accountController.text, passwordController.text, amountController.text);
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        ).then((val) {
-                          print(val);
-                        });
+                    if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 5000)) {
+                      this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
+                      String aliPayAccount = accountController.text;
+                      String password = passwordController.text;
+                      String amount = amountController.text;
+                      if (aliPayAccount == "" || password == "" || amount == "") {
+                        CommonUtils.showWarningMessage(msg: "输入不能为空");
+                        return;
                       }
-                    } else {
-                      CommonUtils.showWarningMessage(msg: "你已经发起了提现操作,若要取消操作请在客服中心联系管理员");
+                      if (!RegExp(r"^\d*$").hasMatch(amountController.text)) {
+                        CommonUtils.showWarningMessage(msg: "请输入正整数");
+                        return;
+                      }
+                      if (double.parse(amountController.text) > cashAmount) {
+                        CommonUtils.showWarningMessage(msg: '可提现金额不足，请重新输入');
+                        return;
+                      }
+                      if (!cashInfo.hasWithdraw) {
+                        if (double.parse(amountController.text) < withdrawLimitAmount) {
+                          CommonUtils.showWarningMessage(msg: "您的提现金额不足" + withdrawLimitAmount.toString() + "还需努力哟!");
+                        } else {
+                          showDialog<Null>(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return new AlertDialog(
+                                title: new Text('您确认要发起提现操作么?'),
+                                actions: <Widget>[
+                                  new FlatButton(
+                                    child: new Text('取消'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  new FlatButton(
+                                    child: new Text('确认'),
+                                    onPressed: () {
+                                      this.withdraw(accountController.text, passwordController.text, amountController.text);
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          ).then((val) {
+                            print(val);
+                          });
+                        }
+                      } else {
+                        CommonUtils.showWarningMessage(msg: "你已经发起了提现操作,若要取消操作请在客服中心联系管理员");
+                      }
+                      FocusScope.of(context).requestFocus(FocusNode());
                     }
-                    FocusScope.of(context).requestFocus(FocusNode());
                   },
                 ),
               ],
