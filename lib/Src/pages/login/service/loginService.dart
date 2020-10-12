@@ -16,8 +16,8 @@ import 'package:upgradegame/Src/pages/login/requstModel/setUserInfoRequestModel.
 import 'package:upgradegame/Src/service/serviceUrl.dart';
 
 class LoginService {
-  static Future<ResultData> login(String wechat, callback) async {
-    Login requstModel = Login(code: wechat);
+  static Future<ResultData> login(String wechat,String deviceid, callback) async {
+    Login requstModel = Login(code: wechat,deviceid: deviceid);
     String params = convert.jsonEncode(requstModel);
 
     var response = await httpManager.request(ServiceUrl.login(), params, null, Options(method: "post"));
@@ -49,8 +49,8 @@ class LoginService {
     }
   }
 
-  static Future<ResultData> loginWithAccount(String account, String password, callback) async {
-    LoginWithAccountRequestModel requestModel = LoginWithAccountRequestModel(account: account, password: password);
+  static Future<ResultData> loginWithAccount(String account, String password, String deviceid,callback) async {
+    LoginWithAccountRequestModel requestModel = LoginWithAccountRequestModel(account: account, password: password,deviceid: deviceid);
     String params = convert.jsonEncode(requestModel);
 
     var response = await httpManager.request(ServiceUrl.loginwithaccount(), params, null, Options(method: "post"));

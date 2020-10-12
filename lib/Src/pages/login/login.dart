@@ -170,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
       this.showOrDismissProgressHUD();
       if (response.errCode.toString() == "0") {
         if (response is fluwx.WeChatAuthResponse) {
-          LoginService.login(response.code, (LoginReponseModel model) {
+          LoginService.login(response.code, _deviceData["androidId"],(LoginReponseModel model) {
             this.showOrDismissProgressHUD();
             if (model != null) {
               if (model.verified) {
@@ -518,7 +518,7 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
     this.showOrDismissProgressHUD();
-    LoginService.loginWithAccount(username, password, (LoginReponseModel model) {
+    LoginService.loginWithAccount(username, password, _deviceData["androidId"],(LoginReponseModel model) {
       this.showOrDismissProgressHUD();
       if (model != null) {
         ///初始化用户

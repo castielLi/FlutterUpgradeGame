@@ -138,7 +138,7 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
                         child: Container(
                           margin: EdgeInsets.only(top: ScreenUtil().setHeight(600)),
                           child: Text(
-                            '需要广告24条广告打开红包',
+                            '需要消耗120贡献值才能打开红包哟',
                             style: TextStyle(
                               fontSize: ScreenUtil().setSp(SystemFontSize.bigTextSize),
                             ),
