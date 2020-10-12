@@ -14,7 +14,7 @@ import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/common/model/globalSystemStatuesControl.dart';
 import 'package:upgradegame/Src/common/widget/adDialog/adTimer.dart';
 import 'package:upgradegame/Src/common/widget/detailDialog/detailDialog.dart';
-import 'package:upgradegame/Src/common/widget/detailDialog/redEnvelopeDialog.dart';
+import 'package:upgradegame/Src/pages/red/redEnvelopeDialog.dart';
 import 'package:upgradegame/Src/pages/fight/fightPage.dart';
 import 'package:upgradegame/Src/pages/main/common/buildingButton.dart';
 import 'package:upgradegame/Src/pages/main/common/dividendPart.dart';

@@ -77,6 +77,11 @@ class ServiceUrl {
     return "${host}api/v3/fight/exchangesupplies";
   }
 
+  ///兑换红包
+  static recycleRed(){
+    return "${host}api/v3/contribution/redenvelope";
+  }
+
 
   ///设置防守阵容
   static setProtectLine(){
