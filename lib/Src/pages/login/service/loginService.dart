@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert' as convert;
-
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/http/httpManager.dart';
@@ -14,10 +14,14 @@ import 'package:upgradegame/Src/pages/login/requstModel/login.dart';
 import 'package:upgradegame/Src/pages/login/requstModel/loginWithAccountRequestModel.dart';
 import 'package:upgradegame/Src/pages/login/requstModel/setUserInfoRequestModel.dart';
 import 'package:upgradegame/Src/service/serviceUrl.dart';
+import 'package:crypto/crypto.dart';
+import 'package:convert/convert.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 
 class LoginService {
   static Future<ResultData> login(String wechat,String deviceid, callback) async {
-    Login requstModel = Login(code: wechat,deviceid: deviceid);
+    String sign = generateMd5(deviceid + Global.getKey());
+    Login requstModel = Login(code: wechat,deviceid: deviceid,sign: sign);
     String params = convert.jsonEncode(requstModel);
 
     var response = await httpManager.request(ServiceUrl.login(), params, null, Options(method: "post"));
@@ -50,7 +54,8 @@ class LoginService {
   }
 
   static Future<ResultData> loginWithAccount(String account, String password, String deviceid,callback) async {
-    LoginWithAccountRequestModel requestModel = LoginWithAccountRequestModel(account: account, password: password,deviceid: deviceid);
+    String sign = generateMd5(deviceid + Global.getKey());
+    LoginWithAccountRequestModel requestModel = LoginWithAccountRequestModel(account: account, password: password,deviceid: deviceid,sign: sign);
     String params = convert.jsonEncode(requestModel);
 
     var response = await httpManager.request(ServiceUrl.loginwithaccount(), params, null, Options(method: "post"));
@@ -80,6 +85,13 @@ class LoginService {
       BaseUserInfoModel model = BaseUserInfoModel.fromJson(response.data);
       callback(model);
     }
+  }
+
+  static String generateMd5(String data) {
+    var content = new Utf8Encoder().convert(data);
+    var digest = md5.convert(content);
+    // 这里其实就是 digest.toString()
+    return hex.encode(digest.bytes);
   }
 
   ///清除所有信息
