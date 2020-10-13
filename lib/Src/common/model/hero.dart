@@ -2,8 +2,9 @@
 
 class Heroes {
   static const WARRIOR = 1;
-  static const HUNTER = 2;
-  static const SHAMAN = 3;
+  static const ONEYUAN = 2;
+  static const FIVEYUAN = 3;
+  static const FIFTEENYUAN = 4;
 
   int type;
   int days;

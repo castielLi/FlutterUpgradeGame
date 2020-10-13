@@ -10,6 +10,7 @@ import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
 import 'heroAltarItem.dart';
 import 'model/heroBaseInfoListModel.dart';
+import 'model/heroListModel.dart';
 
 class HeroAltar extends StatefulWidget {
   @override
@@ -23,6 +24,10 @@ class HeroAltar extends StatefulWidget {
 class _HeroAltarState extends State<HeroAltar> {
   int warriorPrice = 0;
   int shamanPrice = 0;
+  List<int> warriors = [];
+  List<int> oneyuan = [];
+  List<int> fiveyuan = [];
+  List<int> fifteenyuan = [];
   bool hidePermanentHero = true;
 
   @override
@@ -32,23 +37,47 @@ class _HeroAltarState extends State<HeroAltar> {
 
   void getHeroBaseInfoList() {
     this.widget.HUD();
-    HeroService.getHeroList((HeroBaseInfoListModel model) {
+    /// type1 限时30天  type2 永久1元  type3 永久5元 type3 永久15元
+    HeroService.getHeroList((HeroListModel model) {
       this.widget.HUD();
       if (model != null) {
-        //获取英雄价格
-        List<Datalist> heroes = model.datalist;
-        if (null != heroes) {
-          heroes.forEach((hero) {
+
+
+        if (null != model.hold && model.hold.length > 0) {
+          model.hold.forEach((hero) {
             switch (hero.type) {
               case Heroes.WARRIOR:
-                this.warriorPrice = hero.price;
+                warriors.add(hero.days);
                 break;
-              case Heroes.SHAMAN:
-                this.shamanPrice = hero.price;
+              case Heroes.ONEYUAN:
+                oneyuan.add(hero.days);
+                break;
+              case Heroes.FIVEYUAN:
+                fiveyuan.add(hero.days);
+                break;
+              case Heroes.FIFTEENYUAN:
+                fifteenyuan.add(hero.days);
                 break;
             }
           });
         }
+
+
+
+//        //获取英雄价格
+//        List<Datalist> heroes = model.datalist;
+//        if (null != heroes) {
+//          heroes.forEach((hero) {
+//            switch (hero.type) {
+//              case Heroes.WARRIOR:
+//                this.warriorPrice = hero.price;
+//                break;
+//              case Heroes.SHAMAN:
+//                this.shamanPrice = hero.price;
+//                break;
+//            }
+//          });
+//        }
       }
     });
   }
@@ -65,24 +94,7 @@ class _HeroAltarState extends State<HeroAltar> {
   Widget build(BuildContext context) {
     return new Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
-        List<Heroes> heroes = baseUserInfo.hero;
-        List<int> warriors = [];
-        List<int> shamans = [];
-        if (null != baseUserInfo) {
-          heroes.forEach((hero) {
-            switch (hero.type) {
-              case Heroes.WARRIOR:
-                warriors.add(hero.days);
-                break;
-              case Heroes.SHAMAN:
-                shamans.add(hero.days);
-                break;
-            }
-          });
-        }
-        // for(int i=0;i<4;i++){
-        //   warriors.add(30);
-        // }
+
         return new Container(
           margin: EdgeInsets.fromLTRB(
               ScreenUtil().setWidth(80), // 左
@@ -137,8 +149,8 @@ class _HeroAltarState extends State<HeroAltar> {
                       child: HeroAltarItem(
                         heroImageUrl: 'resource/images/shaman.png',
                         description: '萨满:保佑你的灵魂',
-                        remainDays: shamans,
-                        heroType: Heroes.SHAMAN,
+                        remainDays: [],
+                        heroType: Heroes.ONEYUAN,
                         HUD: this.widget.HUD,
                         price: this.shamanPrice,
                         period: '永久',
