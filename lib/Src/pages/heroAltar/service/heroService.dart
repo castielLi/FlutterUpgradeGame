@@ -6,6 +6,7 @@ import 'package:upgradegame/Common/http/httpManager.dart';
 import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/buyHeroModel.dart';
+import 'package:upgradegame/Src/pages/heroAltar/model/dividendHeroModel.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/heroBaseInfoListModel.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/heroListModel.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/requestModel/buyHeroRequestModel.dart';
@@ -35,7 +36,7 @@ class HeroService {
     var response = await httpManager.request(ServiceUrl.dividendHero(), params, null, Options(method: "post"));
     if (response.code == 200) {
       CommonUtils.showSuccessMessage(msg: "获取分红成功,请在现金账户中查看,有疑问请咨询管理");
-      BuyHeroModel model = BuyHeroModel.fromJson(response.data);
+      DividendHeroModel model = DividendHeroModel.fromJson(response.data);
       callback(model);
     } else {
       CommonUtils.showErrorMessage(msg: response.message);

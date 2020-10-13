@@ -126,6 +126,12 @@ class BaseUserInfoProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  ///领取永久分红英雄
+  dividendHero(int tcoinamount){
+    this.tcoinamount = tcoinamount;
+    notifyListeners();
+  }
+
   ///升级建筑
   upgradeBuilding(BaseResourceModel model) {
     this.tcoinamount = model.tcoinamount;
