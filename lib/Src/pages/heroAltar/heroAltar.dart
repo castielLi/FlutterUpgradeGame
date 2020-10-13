@@ -81,7 +81,7 @@ class _HeroAltarState extends State<HeroAltar> {
           });
         }
         // for(int i=0;i<4;i++){
-        //   warriors.add(30);
+        //   warriors.add(29+i);
         // }
         return new Container(
           margin: EdgeInsets.fromLTRB(
@@ -129,7 +129,7 @@ class _HeroAltarState extends State<HeroAltar> {
                         heroType: Heroes.WARRIOR,
                         HUD: this.widget.HUD,
                         price: this.warriorPrice,
-                        period: '30天（可叠加）',
+                        period: '30天(可叠加)',
                       ),
                     ),
                     Offstage(
