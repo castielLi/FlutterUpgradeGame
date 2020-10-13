@@ -10,9 +10,6 @@ import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'heroAltarClock.dart';
 
 class HeroAltarItem extends StatefulWidget {
-  // 描述
-  String description;
-
   // 剩余天数
   List<int> remainDays;
 
@@ -27,7 +24,7 @@ class HeroAltarItem extends StatefulWidget {
 
   VoidCallback HUD;
 
-  HeroAltarItem({Key key, this.description, this.period, this.remainDays, this.heroImageUrl, this.heroType, this.price, this.HUD}) : super(key: key);
+  HeroAltarItem({Key key, this.period, this.remainDays, this.heroImageUrl, this.heroType, this.price, this.HUD}) : super(key: key);
 
   @override
   _HeroAltarItem createState() => _HeroAltarItem();
@@ -77,10 +74,6 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        // Text(
-                        //   this.widget.description,
-                        //   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                        // ),
                         Text(
                           '价格:' + this.widget.price.toString() + '金币',
                           style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),

@@ -9,7 +9,6 @@ import 'package:upgradegame/Src/pages/heroAltar/service/heroService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
 import 'heroAltarItem.dart';
-import 'model/heroBaseInfoListModel.dart';
 import 'model/heroListModel.dart';
 
 class HeroAltar extends StatefulWidget {
@@ -37,12 +36,11 @@ class _HeroAltarState extends State<HeroAltar> {
 
   void getHeroBaseInfoList() {
     this.widget.HUD();
+
     /// type1 限时30天  type2 永久1元  type3 永久5元 type3 永久15元
     HeroService.getHeroList((HeroListModel model) {
       this.widget.HUD();
       if (model != null) {
-
-
         if (null != model.hold && model.hold.length > 0) {
           model.hold.forEach((hero) {
             switch (hero.type) {
@@ -61,23 +59,6 @@ class _HeroAltarState extends State<HeroAltar> {
             }
           });
         }
-
-
-
-//        //获取英雄价格
-//        List<Datalist> heroes = model.datalist;
-//        if (null != heroes) {
-//          heroes.forEach((hero) {
-//            switch (hero.type) {
-//              case Heroes.WARRIOR:
-//                this.warriorPrice = hero.price;
-//                break;
-//              case Heroes.SHAMAN:
-//                this.shamanPrice = hero.price;
-//                break;
-//            }
-//          });
-//        }
       }
     });
   }
@@ -146,7 +127,6 @@ class _HeroAltarState extends State<HeroAltar> {
                       offstage: this.hidePermanentHero,
                       child: HeroAltarItem(
                         heroImageUrl: 'resource/images/shaman.png',
-                        description: '萨满:保佑你的灵魂',
                         remainDays: [],
                         heroType: Heroes.ONEYUAN,
                         HUD: this.widget.HUD,
@@ -162,3 +142,5 @@ class _HeroAltarState extends State<HeroAltar> {
         );
       }),
     );
+  }
+}
