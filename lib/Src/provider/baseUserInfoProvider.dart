@@ -121,9 +121,8 @@ class BaseUserInfoProvider with ChangeNotifier {
   }
 
   ///购买英雄
-  buyHero(int tcoinamount, List<Heroes> hero) {
+  buyHero(int tcoinamount) {
     this.tcoinamount = tcoinamount;
-    this.hero = hero;
     notifyListeners();
   }
 

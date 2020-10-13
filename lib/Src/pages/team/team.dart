@@ -37,6 +37,8 @@ class _TeamDetailState extends State<TeamDetail> {
   String noMembersHintText = '';
   String fatherDisplayName = '';
   String fatherAvatar = '';
+  int availablefirst = 0;
+  int availablesecond = 0;
   int initFirstLength = 20;
   int initSecondLength = 20;
   bool showQRCode = false;
@@ -99,6 +101,8 @@ class _TeamDetailState extends State<TeamDetail> {
         second = InvitationListModel.fromJson(data).second;
         fatherAvatar = InvitationListModel.fromJson(data).avatar;
         fatherDisplayName = InvitationListModel.fromJson(data).displayname;
+        availablefirst = InvitationListModel.fromJson(data).availablefirst;
+        availablesecond  = InvitationListModel.fromJson(data).availablesecond;
         this.noMembersHintText = '还没有团队成员';
       });
     });
@@ -269,7 +273,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                '当前徒弟团队成员共有' + first.length.toString() + '名',
+                                                '当前徒弟团队成员共有' + first.length.toString() + '名,有效' + availablefirst.toString() + '名',
                                                 textAlign: TextAlign.center,
                                                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                                               ),
@@ -326,7 +330,7 @@ class _TeamDetailState extends State<TeamDetail> {
                                         : Column(
                                             children: [
                                               Text(
-                                                '当前徒孙团队成员共有' + second.length.toString() + '名',
+                                                '当前徒孙团队成员共有' + second.length.toString() + '名,有效' + availablesecond.toString() +'名',
                                                 textAlign: TextAlign.center,
                                                 style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                                               ),

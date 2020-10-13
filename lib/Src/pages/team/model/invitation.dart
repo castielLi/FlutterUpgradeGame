@@ -3,6 +3,8 @@ class InvitationListModel {
   List<InvitationModel> second;
   String displayname;
   String avatar;
+  int availablefirst;
+  int availablesecond;
 
   InvitationListModel({this.first, this.second});
 
@@ -22,6 +24,8 @@ class InvitationListModel {
 
     this.displayname =json['displayname'];
     this.avatar = json['avatar'];
+    this.availablefirst = json['availablefirst'];
+    this.availablesecond = json['availablesecond'];
   }
 
   Map<String, dynamic> toJson() {
@@ -34,6 +38,8 @@ class InvitationListModel {
     }
     data['displayname'] = displayname;
     data['avatar'] = avatar;
+    data['availablefirst'] = availablefirst;
+    data['availablesecond'] = availablesecond;
     return data;
   }
 }

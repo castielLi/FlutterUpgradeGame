@@ -36,7 +36,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
       if (model != null) {
         CommonUtils.showSuccessMessage(msg: '英雄购买成功');
         setState(() {
-          Provide.value<BaseUserInfoProvider>(context).buyHero(model.tcoinamount, model.datalist);
+          Provide.value<BaseUserInfoProvider>(context).buyHero(model.tcoinamount);
         });
       }
     });

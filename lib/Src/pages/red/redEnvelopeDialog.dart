@@ -106,14 +106,15 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
                                 showOrDismissProgressHUD();
                                 if (null != model) {
                                   setState(() {
-                                    this.cashAmount = (null == model.cash ? "0" : model.cash);
+                                    this.cashAmount = (null == model.cashamount ? "0" : model.cashamount);
                                   });
+                                  if (this.isRedEnvelopeClose) {
+                                    setState(() {
+                                      this.isRedEnvelopeClose = false;
+                                    });
+                                  }
                                 }
-                                if (this.isRedEnvelopeClose) {
-                                  setState(() {
-                                    this.isRedEnvelopeClose = false;
-                                  });
-                                }
+
                               });
                             } else {
                               CommonUtils.showErrorMessage(msg: "您没有足够的广告条数来打开红包哟");
@@ -143,7 +144,7 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
                         child: Offstage(
                           offstage: !this.isRedEnvelopeClose,
                           child: Container(
-                            margin: EdgeInsets.only(top: ScreenUtil().setHeight(1150)),
+                            margin: EdgeInsets.only(top: ScreenUtil().setHeight(1170)),
                             child: Column(
                               children: <Widget>[
                                 Text(

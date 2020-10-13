@@ -1,15 +1,15 @@
 class RedModel {
-  String cash;
+  String cashamount;
 
-  RedModel({this.cash});
+  RedModel({this.cashamount});
 
   RedModel.fromJson(Map<String, dynamic> json) {
-    cash = json['cash'];
+    cashamount = json['cashamount'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['cash'] = this.cash;
+    data['cashamount'] = this.cashamount;
     return data;
   }
 }
