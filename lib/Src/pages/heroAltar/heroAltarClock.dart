@@ -7,8 +7,10 @@ class HeroAltarClock extends StatefulWidget {
   double adIconHeight;
   List<int> remainDays;
   VoidCallback callback;
+  int consumeCoin;
+  bool isPermanent;
 
-  HeroAltarClock({Key key, this.remainDays, this.adIconHeight, this.imageUrl, this.callback}) : super(key: key);
+  HeroAltarClock({Key key, this.isPermanent = true, this.consumeCoin = 0, this.remainDays, this.adIconHeight, this.imageUrl, this.callback}) : super(key: key);
 
   @override
   _HeroAltarClockState createState() => _HeroAltarClockState();
@@ -31,6 +33,13 @@ class _HeroAltarClockState extends State<HeroAltarClock> {
                   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                 ),
               ],
+            ),
+            Offstage(
+              offstage: !this.widget.isPermanent,
+              child: Text(
+                "消耗" + this.widget.consumeCoin.toString() + '金币',
+                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+              ),
             ),
             GestureDetector(
               child: Container(
@@ -56,7 +65,7 @@ class _HeroAltarClockState extends State<HeroAltarClock> {
       );
     }
     content = Container(
-      height: ScreenUtil().setHeight(360),
+      height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight*clockDayList.length),
       child: SingleChildScrollView(
         child: Column(
           children: clockDayList,
