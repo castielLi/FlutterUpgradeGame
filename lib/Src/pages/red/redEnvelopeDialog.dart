@@ -137,14 +137,25 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
                         child: Offstage(
                           offstage: !this.isRedEnvelopeClose,
                           child: Container(
-                            margin: EdgeInsets.only(top: ScreenUtil().setHeight(600)),
-                            child: Text(
-                              '需要消耗120贡献值才能打开红包哟',
-                              style: TextStyle(
-                                fontSize: ScreenUtil().setSp(SystemFontSize.bigTextSize),
-                                color: Colors.white,
-                              ),
-                            ),
+                            margin: EdgeInsets.only(top: ScreenUtil().setHeight(1150)),
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  '需消耗非下级获得的120贡献值才能打开',
+                                  style: TextStyle(
+                                    fontSize: ScreenUtil().setSp(SystemFontSize.bigTextSize),
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  '每天只能打开一次',
+                                  style: TextStyle(
+                                    fontSize: ScreenUtil().setSp(SystemFontSize.bigTextSize),
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            )
                           ),
                         ),
                       ),
@@ -153,7 +164,7 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
                           offstage: this.isRedEnvelopeClose,
                           child: Container(
                             child: Text(
-                              '获得' + this.cashAmount.toString() + '元红包',
+                              '获得' + this.cashAmount.toString() + '元红包,已打入现金账户',
                               style: TextStyle(
                                 fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize),
                                 color: Colors.white,
