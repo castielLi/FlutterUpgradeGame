@@ -42,20 +42,26 @@ class HeroListModel {
 }
 
 class Hold {
+  String id;
   int type;
   int days;
+  bool collected;
 
-  Hold({this.type, this.days});
+  Hold({this.id, this.type, this.days, this.collected});
 
   Hold.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     type = json['type'];
     days = json['days'];
+    collected = json['collected'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
     data['type'] = this.type;
     data['days'] = this.days;
+    data['collected'] = this.collected;
     return data;
   }
 }

@@ -58,7 +58,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
               height: ScreenUtil().setHeight(SystemScreenSize.displayItemHeight),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: new AssetImage('resource/images/woodButton.png'),
+                  image: new AssetImage('resource/images/marketItemBackground.png'),
                   fit: BoxFit.fill,
                 ),
               ),

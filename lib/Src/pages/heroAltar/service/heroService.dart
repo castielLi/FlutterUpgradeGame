@@ -7,6 +7,7 @@ import 'package:upgradegame/Common/http/resultData.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/buyHeroModel.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/heroBaseInfoListModel.dart';
+import 'package:upgradegame/Src/pages/heroAltar/model/heroListModel.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/requestModel/buyHeroRequestModel.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/requestModel/dividendHeroRequestModel.dart';
 import 'package:upgradegame/Src/service/serviceUrl.dart';
@@ -45,7 +46,7 @@ class HeroService {
   static Future<ResultData> getHeroList(callback) async {
     var response = await httpManager.request(ServiceUrl.getHeroList(), {}, null, null);
     if (response.code == 200) {
-      HeroBaseInfoListModel model = HeroBaseInfoListModel.fromJson(response.data);
+      HeroListModel model = HeroListModel.fromJson(response.data);
       callback(model);
     } else {
       CommonUtils.showErrorMessage(msg: response.message);
