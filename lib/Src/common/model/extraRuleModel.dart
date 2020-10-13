@@ -13,7 +13,7 @@ class ExtraRuleModel {
   String downloadurl;
   int redenvelopecontribution;
   int redenvelopeadamount;
-  int holdheroadamount;
+  int heroadamount;
 
   ExtraRuleModel(
       {this.adview,
@@ -27,7 +27,7 @@ class ExtraRuleModel {
         this.farmthree,
         this.wood,
       this.appversion,
-      this.downloadurl,this.redenvelopeadamount,this.redenvelopecontribution,this.holdheroadamount});
+      this.downloadurl,this.redenvelopeadamount,this.redenvelopecontribution,this.heroadamount});
 
   ExtraRuleModel.fromJson(Map<String, dynamic> json) {
     adview = json['adview'];
@@ -44,7 +44,7 @@ class ExtraRuleModel {
     wood = json['wood'];
     redenvelopecontribution = json['redenvelopecontribution'];
     redenvelopeadamount = json['redenvelopeadamount'];
-    holdheroadamount = json['holdheroadamount'];
+    heroadamount = json['heroadamount'];
   }
 
   Map<String, dynamic> toJson() {
@@ -63,7 +63,7 @@ class ExtraRuleModel {
     data['wood'] = this.wood;
     data['redenvelopecontribution'] = this.redenvelopecontribution;
     data['redenvelopeadamount'] = this.redenvelopeadamount;
-    data['holdheroadamount'] = this.holdheroadamount;
+    data['heroadamount'] = this.heroadamount;
     return data;
   }
 }

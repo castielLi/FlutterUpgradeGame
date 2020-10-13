@@ -5,6 +5,7 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/imageButton/imageButton.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/pages/red/service/redService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/route/application.dart';
@@ -66,6 +67,11 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
 
     return new Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
+
+//        int redAdLimit = Global.extraRule.redenvelopeadamount;
+        int redAdLimit = -1;
+        int redContributionLimit = Global.extraRule.redenvelopecontribution;
+
         return Scaffold(
           backgroundColor: Color.fromRGBO(1, 1, 1, 0.3),
           body: SingleChildScrollView(
@@ -94,7 +100,7 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
                             width: ScreenUtil().setWidth(200),
                           ),
                           onTap: () {
-                            if (baseUserInfo.ad.stone + baseUserInfo.ad.wood + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree > -1) {
+                            if (baseUserInfo.ad.stone + baseUserInfo.ad.wood + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree > redAdLimit) {
                               showOrDismissProgressHUD();
                               RedService.recycleRed((RedModel model) {
                                 showOrDismissProgressHUD();
@@ -141,7 +147,7 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
                             child: Column(
                               children: <Widget>[
                                 Text(
-                                  '需消耗非下级获得的120贡献值才能打开',
+                                  '需消耗' + redContributionLimit.toString() + '贡献值(非邀请人赠送)才能打开',
                                   style: TextStyle(
                                     fontSize: ScreenUtil().setSp(SystemFontSize.bigTextSize),
                                     color: Colors.white,
