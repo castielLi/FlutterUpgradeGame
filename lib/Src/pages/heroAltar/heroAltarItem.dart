@@ -36,6 +36,8 @@ class HeroAltarItem extends StatefulWidget {
 }
 
 class _HeroAltarItem extends State<HeroAltarItem> {
+  String cashAmount = '';
+
   buyHero(int type) {
     this.widget.HUD();
     HeroService.buyHero(type, (BuyHeroModel model) {
@@ -53,6 +55,17 @@ class _HeroAltarItem extends State<HeroAltarItem> {
   Widget build(BuildContext context) {
     if (null == this.widget.hero) {
       this.widget.hero = new Permanent(price: 0, consumecoin: 0, amount: 0);
+    }
+    switch (this.widget.heroType) {
+      case Heroes.ONEYUAN:
+        this.cashAmount = '1元';
+        break;
+      case Heroes.FIVEYUAN:
+        this.cashAmount = '5元';
+        break;
+      case Heroes.FIFTEENYUAN:
+        this.cashAmount = '15元';
+        break;
     }
     return Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
@@ -92,9 +105,24 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                         ),
                         Offstage(
                           offstage: Heroes.WARRIOR == this.widget.heroType,
-                          child: Text(
-                            '数量:' + this.widget.hero.amount.toString(),
-                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                          child: Column(
+                            children: [
+                              Text(
+                                '数量:' + this.widget.hero.amount.toString(),
+                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Offstage(
+                          offstage: Heroes.WARRIOR == this.widget.heroType,
+                          child: Column(
+                            children: [
+                              Text(
+                                '分红:' + this.cashAmount,
+                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                              ),
+                            ],
                           ),
                         ),
                       ],

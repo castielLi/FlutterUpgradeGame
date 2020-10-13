@@ -65,7 +65,8 @@ class _HeroAltarClockState extends State<HeroAltarClock> {
       );
     }
     content = Container(
-      height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight*clockDayList.length),
+      //最高只能为360
+      height: ScreenUtil().setHeight(clockDayList.length * SystemButtonSize.smallButtonHeight > 360 ? 360 : clockDayList.length * SystemButtonSize.smallButtonHeight),
       child: SingleChildScrollView(
         child: Column(
           children: clockDayList,

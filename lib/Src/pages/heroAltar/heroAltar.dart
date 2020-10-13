@@ -27,6 +27,7 @@ class _HeroAltarState extends State<HeroAltar> {
   List<int> fiveyuan = [];
   List<int> fifteenyuan = [];
   bool hidePermanentHero = true;
+
   // Permanent hunter =new Permanent(price: 0,consumecoin: 0,amount: 0);
   // Permanent rangeAttack=new Permanent(price: 0,consumecoin: 0,amount: 0);
   // Permanent shaman=new Permanent(price: 0,consumecoin: 0,amount: 0);
@@ -51,10 +52,6 @@ class _HeroAltarState extends State<HeroAltar> {
             switch (hero.type) {
               case Heroes.WARRIOR:
                 warriors.add(hero.days);
-                // warriors.add(hero.days);
-                // warriors.add(hero.days);
-                // warriors.add(hero.days);
-                // warriors.add(hero.days);
                 break;
               case Heroes.ONEYUAN:
                 oneyuan.add(hero.days);
@@ -67,14 +64,21 @@ class _HeroAltarState extends State<HeroAltar> {
                 break;
             }
           });
-          // oneyuan.add(32);
-          // fiveyuan.add(33);
-          // fiveyuan.add(33);
 
           warriorPrice = model.limittime[0].price;
-          hunter = new Permanent(price: model.permanent[0].price,type: model.permanent[0].type,consumecoin: model.permanent[0].consumecoin,amount: model.permanent[0].amount);
-          rangeAttack = new Permanent(price: model.permanent[1].price,type: model.permanent[1].type,consumecoin: model.permanent[1].consumecoin,amount: model.permanent[1].amount);
-          shaman = new Permanent(price: model.permanent[2].price,type: model.permanent[2].type,consumecoin: model.permanent[2].consumecoin,amount: model.permanent[2].amount);
+          hunter = new Permanent(price: model.permanent[0].price, type: model.permanent[0].type, consumecoin: model.permanent[0].consumecoin, amount: model.permanent[0].amount);
+          rangeAttack = new Permanent(price: model.permanent[1].price, type: model.permanent[1].type, consumecoin: model.permanent[1].consumecoin, amount: model.permanent[1].amount);
+          shaman = new Permanent(price: model.permanent[2].price, type: model.permanent[2].type, consumecoin: model.permanent[2].consumecoin, amount: model.permanent[2].amount);
+
+          /// TODO 假数据
+          oneyuan.add(32);
+          fiveyuan.add(33);
+          fiveyuan.add(33);
+          warriors.add(29 - warriors.length);
+          warriors.add(29 - warriors.length);
+          warriors.add(29 - warriors.length);
+          warriors.add(29 - warriors.length);
+          warriors.add(29 - warriors.length);
         }
       }
     });
@@ -135,7 +139,7 @@ class _HeroAltarState extends State<HeroAltar> {
                         heroImageUrl: 'resource/images/warrior.png',
                         heroType: Heroes.WARRIOR,
                         HUD: this.widget.HUD,
-                        hero: new Permanent(price: this.warriorPrice,consumecoin: 0),
+                        hero: new Permanent(price: this.warriorPrice, consumecoin: 0),
                         // price: this.warriorPrice,
                         period: '30天(可叠加)',
                         remainDays: warriors,
