@@ -58,82 +58,43 @@ class _HeroAltarItem extends State<HeroAltarItem> {
               height: ScreenUtil().setHeight(SystemScreenSize.displayItemHeight),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: new AssetImage('resource/images/woodButton.png'),
+                  image: new AssetImage('resource/images/marketItemBackground.png'),
                   fit: BoxFit.fill,
                 ),
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Image(
                     image: new AssetImage(this.widget.heroImageUrl),
                     height: ScreenUtil().setHeight(SystemIconSize.mediumIconSize),
                     width: ScreenUtil().setWidth(SystemIconSize.mediumIconSize),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        this.widget.description,
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                      ),
-                      Text(
-                        '价格:' + this.widget.price.toString() + '金币',
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                      ),
-                      Text(
-                        '期限:' + this.widget.period,
-                        style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: ScreenUtil().setWidth(800),
-              child: HeroAltarClock(
-                imageUrl: 'resource/images/clock.png',
-                adIconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
-                remainDays: this.widget.remainDays,
-              ),
-            ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Offstage(
-                    offstage: null == this.widget.remainDays || 0 == this.widget.remainDays.length,
-                    child: GestureDetector(
-                      child: Container(
-                        width: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
-                        height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: new AssetImage('resource/images/upgradeButton.png'),
-                            fit: BoxFit.fill,
-                          ),
+                  Container(
+                    width: ScreenUtil().setWidth(380),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        // Text(
+                        //   this.widget.description,
+                        //   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                        // ),
+                        Text(
+                          '价格:' + this.widget.price.toString() + '金币',
+                          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                         ),
-                        child: Center(
-                          child: Text(
-                            '分 红',
-                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                          ),
+                        Text(
+                          '期限:' + this.widget.period,
+                          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                         ),
-                      ),
-                      onTap: () {
-                        if (baseUserInfo.ad.stone + baseUserInfo.ad.wood + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree > -1) {
-                          ///TODO 领取分红
-                        } else {
-                          CommonUtils.showErrorMessage(msg: "您没有足够的广告条数哦,无法领取分红,快去观看广告吧");
-                        }
-                      },
+                      ],
                     ),
                   ),
                   GestureDetector(
                     child: Container(
-                      width: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+                      width: ScreenUtil().setWidth(220),
                       height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -182,6 +143,21 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                     },
                   ),
                 ],
+              ),
+            ),
+            Container(
+              width: ScreenUtil().setWidth(800),
+              child: HeroAltarClock(
+                imageUrl: 'resource/images/clock.png',
+                adIconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
+                remainDays: this.widget.remainDays,
+                callback: () {
+                  if (baseUserInfo.ad.stone + baseUserInfo.ad.wood + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree > -1) {
+                    ///TODO 领取分红
+                  } else {
+                    CommonUtils.showErrorMessage(msg: "您没有足够的广告条数哦,无法领取分红,快去观看广告吧");
+                  }
+                },
               ),
             ),
           ],

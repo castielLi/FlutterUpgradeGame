@@ -18,6 +18,8 @@ class ImageTextButton extends StatefulWidget {
 }
 
 class _ImageTextButtonState extends State<ImageTextButton> {
+  int lastClickTime;
+
   @override
   Widget build(BuildContext context) {
     if (this.widget.textSize == 0) {
@@ -50,7 +52,10 @@ class _ImageTextButtonState extends State<ImageTextButton> {
               ),
       ),
       onTap: () {
-        this.widget.callback();
+        if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 1000)) {
+          this.widget.callback();
+        }
+        this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
       },
     );
   }

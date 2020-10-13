@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 import 'package:upgradegame/Common/app/config.dart';
 
 class HeroAltarClock extends StatefulWidget {
   String imageUrl;
   double adIconHeight;
   List<int> remainDays;
+  VoidCallback callback;
 
-  HeroAltarClock({Key key, this.remainDays, this.adIconHeight, this.imageUrl}) : super(key: key);
+  HeroAltarClock({Key key, this.remainDays, this.adIconHeight, this.imageUrl, this.callback}) : super(key: key);
 
   @override
   _HeroAltarClockState createState() => _HeroAltarClockState();
@@ -19,24 +21,55 @@ class _HeroAltarClockState extends State<HeroAltarClock> {
     for (int i = 0; i < this.widget.remainDays.length; i++) {
       clockDayList.add(
         Row(
-          children: <Widget>[
-            Image(image: new AssetImage(this.widget.imageUrl), height: this.widget.adIconHeight),
-            Text(
-              this.widget.remainDays[i] > 30 ? "永久" : this.widget.remainDays[i].toString() + '天',
-              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: <Widget>[
+                Image(image: new AssetImage(this.widget.imageUrl), height: this.widget.adIconHeight),
+                Text(
+                  this.widget.remainDays[i] > 31 ? "永久" : this.widget.remainDays[i].toString() + '天',
+                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                ),
+              ],
+            ),
+            GestureDetector(
+              child: Container(
+                width: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+                height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: new AssetImage('resource/images/upgradeButton.png'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    '分 红',
+                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                  ),
+                ),
+              ),
+              onTap: this.widget.callback,
             ),
           ],
         ),
       );
     }
-    content = GridView.count(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.zero,
-      crossAxisCount: 4,
-      childAspectRatio: 2,
-      children: clockDayList,
+    content = Container(
+      // margin: EdgeInsets.only(top: 0),
+      height: ScreenUtil().setHeight(360),
+      child: ListView(
+        children: clockDayList,
+      ),
     );
+    // content = GridView.count(
+    //   shrinkWrap: true,
+    //   physics: NeverScrollableScrollPhysics(),
+    //   padding: EdgeInsets.zero,
+    //   crossAxisCount: 4,
+    //   childAspectRatio: 2,
+    //   children: clockDayList,
+    // );
     return content;
   }
 

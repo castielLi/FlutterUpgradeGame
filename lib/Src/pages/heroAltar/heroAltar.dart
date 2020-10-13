@@ -94,7 +94,6 @@ class _HeroAltarState extends State<HeroAltar> {
   Widget build(BuildContext context) {
     return new Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
-
         return new Container(
           margin: EdgeInsets.fromLTRB(
               ScreenUtil().setWidth(80), // 左
@@ -141,7 +140,7 @@ class _HeroAltarState extends State<HeroAltar> {
                         heroType: Heroes.WARRIOR,
                         HUD: this.widget.HUD,
                         price: this.warriorPrice,
-                        period: '30天（可叠加）',
+                        period: '30天(可叠加)',
                       ),
                     ),
                     Offstage(
