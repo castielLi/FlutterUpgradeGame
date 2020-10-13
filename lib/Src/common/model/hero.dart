@@ -3,6 +3,7 @@ class Heroes {
   static const ONEYUAN = 2;
   static const FIVEYUAN = 3;
   static const FIFTEENYUAN = 4;
+  static const UNKNOW = 10;
 
   int type;
   int days;
