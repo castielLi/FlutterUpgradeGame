@@ -56,20 +56,11 @@ class _HeroAltarClockState extends State<HeroAltarClock> {
       );
     }
     content = Container(
-      // margin: EdgeInsets.only(top: 0),
       height: ScreenUtil().setHeight(360),
       child: ListView(
         children: clockDayList,
       ),
     );
-    // content = GridView.count(
-    //   shrinkWrap: true,
-    //   physics: NeverScrollableScrollPhysics(),
-    //   padding: EdgeInsets.zero,
-    //   crossAxisCount: 4,
-    //   childAspectRatio: 2,
-    //   children: clockDayList,
-    // );
     return content;
   }
 

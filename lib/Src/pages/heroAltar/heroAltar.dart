@@ -68,7 +68,7 @@ class _HeroAltarState extends State<HeroAltar> {
         List<Heroes> heroes = baseUserInfo.hero;
         List<int> warriors = [];
         List<int> shamans = [];
-        if (null != baseUserInfo) {
+        if (null != baseUserInfo.hero) {
           heroes.forEach((hero) {
             switch (hero.type) {
               case Heroes.WARRIOR:
@@ -80,8 +80,8 @@ class _HeroAltarState extends State<HeroAltar> {
             }
           });
         }
-        // for(int i=0;i<4;i++){
-        //   warriors.add(29+i);
+        // for (int i = 0; i < 5; i++) {
+        //   warriors.add(29 + i);
         // }
         return new Container(
           margin: EdgeInsets.fromLTRB(
@@ -124,7 +124,6 @@ class _HeroAltarState extends State<HeroAltar> {
                       offstage: !this.hidePermanentHero,
                       child: HeroAltarItem(
                         heroImageUrl: 'resource/images/warrior.png',
-                        description: '战士:守卫家园',
                         remainDays: warriors,
                         heroType: Heroes.WARRIOR,
                         HUD: this.widget.HUD,
@@ -136,7 +135,6 @@ class _HeroAltarState extends State<HeroAltar> {
                       offstage: this.hidePermanentHero,
                       child: HeroAltarItem(
                         heroImageUrl: 'resource/images/shaman.png',
-                        description: '萨满:保佑你的灵魂',
                         remainDays: shamans,
                         heroType: Heroes.SHAMAN,
                         HUD: this.widget.HUD,

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:progress_hud/progress_hud.dart';
@@ -32,6 +30,7 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
   bool _loading = false;
   int lastClickTime;
   bool isRedEnvelopeClose = true;
+  String cashAmount = "0";
 
   void initState() {
     super.initState();
@@ -72,7 +71,7 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
           body: SingleChildScrollView(
             child: Container(
               width: ScreenUtil().setWidth(1080),
-              height: ScreenUtil().setHeight(1920),
+              height: ScreenUtil().setWidth(1920),
               color: Colors.transparent,
               child: new Container(
                   color: Colors.transparent,
@@ -100,7 +99,9 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
                               RedService.recycleRed((RedModel model) {
                                 showOrDismissProgressHUD();
                                 if (null != model) {
-                                  ///todo:黄河 后面的让红包金额显示出来 是model.cash
+                                  setState(() {
+                                    this.cashAmount = (null == model.cash ? "0" : model.cash);
+                                  });
                                 }
                                 if (this.isRedEnvelopeClose) {
                                   setState(() {
@@ -141,6 +142,7 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
                               '需要消耗120贡献值才能打开红包哟',
                               style: TextStyle(
                                 fontSize: ScreenUtil().setSp(SystemFontSize.bigTextSize),
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -151,9 +153,10 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
                           offstage: this.isRedEnvelopeClose,
                           child: Container(
                             child: Text(
-                              '获得' + Random().nextInt(20).toString() + '元红包',
+                              '获得' + this.cashAmount.toString() + '元红包',
                               style: TextStyle(
                                 fontSize: ScreenUtil().setSp(SystemFontSize.moreMoreLargerTextSize),
+                                color: Colors.white,
                               ),
                             ),
                           ),
