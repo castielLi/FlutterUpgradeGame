@@ -57,8 +57,10 @@ class _HeroAltarClockState extends State<HeroAltarClock> {
     }
     content = Container(
       height: ScreenUtil().setHeight(360),
-      child: ListView(
-        children: clockDayList,
+      child: SingleChildScrollView(
+        child: Column(
+          children: clockDayList,
+        ),
       ),
     );
     return content;
