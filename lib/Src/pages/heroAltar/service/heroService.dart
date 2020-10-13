@@ -28,8 +28,8 @@ class HeroService {
     }
   }
 
-  static Future<ResultData> dividendHero(type, callback) async {
-    DividendHeroRequestModel requestModel = DividendHeroRequestModel(type: type);
+  static Future<ResultData> dividendHero(int type,String id, callback) async {
+    DividendHeroRequestModel requestModel = DividendHeroRequestModel(type: type,id: id);
     String params = convert.jsonEncode(requestModel);
 
     var response = await httpManager.request(ServiceUrl.dividendHero(), params, null, Options(method: "post"));
