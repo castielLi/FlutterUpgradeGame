@@ -10,12 +10,10 @@ import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'heroAltarClock.dart';
 
 class HeroAltarItem extends StatefulWidget {
-  // 剩余天数
-  List<int> remainDays;
-
   //英雄图片
   String heroImageUrl;
 
+  List<int> remainDays;
   int heroType;
 
   int price;
@@ -48,18 +46,18 @@ class _HeroAltarItem extends State<HeroAltarItem> {
   Widget build(BuildContext context) {
     return Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
-        return Column(
-          children: <Widget>[
-            Container(
-              width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
-              height: ScreenUtil().setHeight(SystemScreenSize.displayItemHeight),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: new AssetImage('resource/images/marketItemBackground.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-              child: Row(
+        return Container(
+          width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
+          height: ScreenUtil().setHeight(SystemScreenSize.displayItemHeight),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: new AssetImage('resource/images/marketItemBackground.png'),
+              fit: BoxFit.fill,
+            ),
+          ),
+          child: Column(
+            children: [
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -137,23 +135,23 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                   ),
                 ],
               ),
-            ),
-            Container(
-              width: ScreenUtil().setWidth(800),
-              child: HeroAltarClock(
-                imageUrl: 'resource/images/clock.png',
-                adIconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
-                remainDays: this.widget.remainDays,
-                callback: () {
-                  if (baseUserInfo.ad.stone + baseUserInfo.ad.wood + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree > -1) {
-                    ///TODO 领取分红
-                  } else {
-                    CommonUtils.showErrorMessage(msg: "您没有足够的广告条数哦,无法领取分红,快去观看广告吧");
-                  }
-                },
-              ),
-            ),
-          ],
+              // Container(
+              //   width: ScreenUtil().setWidth(800),
+              //   child: HeroAltarClock(
+              //     imageUrl: 'resource/images/clock.png',
+              //     adIconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
+              //     remainDays: this.widget.remainDays,
+              //     callback: () {
+              //       if (baseUserInfo.ad.stone + baseUserInfo.ad.wood + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree > -1) {
+              //         ///TODO 领取分红
+              //       } else {
+              //         CommonUtils.showErrorMessage(msg: "您没有足够的广告条数哦,无法领取分红,快去观看广告吧");
+              //       }
+              //     },
+              //   ),
+              // ),
+            ],
+          ),
         );
       }),
     );

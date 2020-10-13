@@ -4,10 +4,12 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
+import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/pages/heroAltar/service/heroService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
+import 'heroAltarClock.dart';
 import 'heroAltarItem.dart';
 import 'model/heroListModel.dart';
 
@@ -22,6 +24,8 @@ class HeroAltar extends StatefulWidget {
 
 class _HeroAltarState extends State<HeroAltar> {
   int warriorPrice = 0;
+  int hunterPrice = 0;
+  int rangeAttackPrice = 0;
   int shamanPrice = 0;
   List<int> warriors = [];
   List<int> oneyuan = [];
@@ -36,7 +40,6 @@ class _HeroAltarState extends State<HeroAltar> {
 
   void getHeroBaseInfoList() {
     this.widget.HUD();
-
     /// type1 限时30天  type2 永久1元  type3 永久5元 type3 永久15元
     HeroService.getHeroList((HeroListModel model) {
       this.widget.HUD();
@@ -58,6 +61,10 @@ class _HeroAltarState extends State<HeroAltar> {
                 break;
             }
           });
+          warriorPrice = model.limittime[0].price;
+          hunterPrice = model.permanent[0].price;
+          rangeAttackPrice = model.permanent[1].price;
+          shamanPrice = model.permanent[2].price;
         }
       }
     });
@@ -116,7 +123,6 @@ class _HeroAltarState extends State<HeroAltar> {
                       offstage: !this.hidePermanentHero,
                       child: HeroAltarItem(
                         heroImageUrl: 'resource/images/warrior.png',
-                        remainDays: warriors,
                         heroType: Heroes.WARRIOR,
                         HUD: this.widget.HUD,
                         price: this.warriorPrice,
@@ -125,13 +131,39 @@ class _HeroAltarState extends State<HeroAltar> {
                     ),
                     Offstage(
                       offstage: this.hidePermanentHero,
-                      child: HeroAltarItem(
-                        heroImageUrl: 'resource/images/shaman.png',
-                        remainDays: [],
-                        heroType: Heroes.ONEYUAN,
-                        HUD: this.widget.HUD,
-                        price: this.shamanPrice,
-                        period: '永久',
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            HeroAltarItem(
+                              heroImageUrl: 'resource/images/hunter.png',
+                              heroType: Heroes.ONEYUAN,
+                              HUD: this.widget.HUD,
+                              price: this.hunterPrice,
+                              period: '永久',
+                            ),
+                            HeroAltarItem(
+                              heroImageUrl: 'resource/images/rangeAttack.png',
+                              heroType: Heroes.FIVEYUAN,
+                              HUD: this.widget.HUD,
+                              price: this.rangeAttackPrice,
+                              period: '永久',
+                            ),
+                            HeroAltarItem(
+                              heroImageUrl: 'resource/images/shaman.png',
+                              heroType: Heroes.FIFTEENYUAN,
+                              HUD: this.widget.HUD,
+                              price: this.shamanPrice,
+                              period: '永久',
+                            ),
+                            HeroAltarItem(
+                              heroImageUrl: 'resource/images/witch.png',
+                              heroType: Heroes.FIFTEENYUAN,
+                              HUD: this.widget.HUD,
+                              price: this.shamanPrice,
+                              period: '永久',
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   ],
