@@ -24,7 +24,7 @@ class _WithdrawState extends State<Withdraw> {
   final accountController = TextEditingController(text: "");
   final amountController = TextEditingController(text: "");
   final passwordController = TextEditingController(text: "");
-  int lastClickTime;
+  // int lastClickTime;
 
   withdraw(String account, String password, String amount) {
     this.widget.HUD();
@@ -97,8 +97,8 @@ class _WithdrawState extends State<Withdraw> {
                 ImageTextButton(
                   buttonName: '确 定',
                   callback: () {
-                    if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 5000)) {
-                      this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
+                    // if (null == this.lastClickTime || (DateTime.now().millisecondsSinceEpoch - this.lastClickTime > 5000)) {
+                    //   this.lastClickTime = DateTime.now().millisecondsSinceEpoch;
                       String aliPayAccount = accountController.text;
                       String password = passwordController.text;
                       String amount = amountController.text;
@@ -149,7 +149,7 @@ class _WithdrawState extends State<Withdraw> {
                         CommonUtils.showWarningMessage(msg: "你已经发起了提现操作,若要取消操作请在客服中心联系管理员");
                       }
                       FocusScope.of(context).requestFocus(FocusNode());
-                    }
+                    // }
                   },
                 ),
               ],
