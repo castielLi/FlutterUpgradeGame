@@ -1,5 +1,3 @@
-
-
 class Heroes {
   static const WARRIOR = 1;
   static const ONEYUAN = 2;
