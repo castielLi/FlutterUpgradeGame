@@ -94,7 +94,7 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
                         child: GestureDetector(
                           child: Container(
                             color: Colors.transparent,
-                            margin: EdgeInsets.only(top: ScreenUtil().setHeight(300)),
+                            margin: EdgeInsets.only(top: ScreenUtil().setWidth(300)),
                             height: ScreenUtil().setHeight(200),
                             width: ScreenUtil().setWidth(200),
                           ),
@@ -142,7 +142,7 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
                         child: Offstage(
                           offstage: !this.isRedEnvelopeClose,
                           child: Container(
-                              margin: EdgeInsets.only(top: ScreenUtil().setHeight(1300)),
+                              margin: EdgeInsets.only(top: ScreenUtil().setWidth(1250)),
                               child: Column(
                                 children: <Widget>[
                                   Text(
