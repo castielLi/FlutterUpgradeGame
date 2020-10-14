@@ -13,7 +13,6 @@ import 'package:upgradegame/Src/provider/heroProvider.dart';
 import 'heroAltarItem.dart';
 import 'model/PermanentDisplayModel.dart';
 import 'model/heroListModel.dart';
-import 'model/holdHeroDisplayModel.dart';
 
 class HeroAltar extends StatefulWidget {
   @override
@@ -94,7 +93,6 @@ class _HeroAltarState extends State<HeroAltar> {
     });
   }
 
-
   @override
   void initState() {
     super.initState();
@@ -112,101 +110,102 @@ class _HeroAltarState extends State<HeroAltar> {
           ScreenUtil().setHeight(350), // 上
           ScreenUtil().setWidth(80), // 右
           ScreenUtil().setHeight(200)),
-      child:  ProvideMulti(
+      child: ProvideMulti(
         builder: (context, child, model) {
           BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
           HeroProvider heroInfo = model.get<HeroProvider>();
-        return new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ButtonsList(
-              buttonWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
-              buttonHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
-              buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
-              textSize: ScreenUtil().setSp(SystemButtonSize.largeButtonFontSize),
-              buttons: [
-                ImageTextButton(
-                  buttonName: '限 时',
-                  callback: () {
-                    setState(() {
-                      this.hidePermanentHero = true;
-                    });
-                  },
-                ),
-                ImageTextButton(
-                  buttonName: '永 久',
-                  callback: () {
-                    setState(() {
-                      this.hidePermanentHero = false;
-                    });
-                  },
-                ),
-              ],
-            ),
-            Container(
-              margin:EdgeInsets.only(top:ScreenUtil().setHeight(50)),
-              height: ScreenUtil().setHeight(700),
-              child: Stack(
-                children: [
-                  Offstage(
-                    offstage: !this.hidePermanentHero,
-                    child: HeroAltarItem(
-                      heroImageUrl: 'resource/images/warrior.png',
-                      heroType: Heroes.WARRIOR,
-                      HUD: this.widget.HUD,
-                      hero: new PermanentDisplayModel(price: heroInfo.warriorPrice.toString(), consumecoin: "0",type: Heroes.WARRIOR),
-                      period: '30天(可叠加)',
-                      remainDays: heroInfo.warriors,
-                    ),
+          return new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ButtonsList(
+                buttonWidth: ScreenUtil().setWidth(SystemButtonSize.largeButtonWidth),
+                buttonHeight: ScreenUtil().setHeight(SystemButtonSize.largeButtonHeight),
+                buttonBackgroundImageUrl: 'resource/images/teamSwitchBackground.png',
+                textSize: ScreenUtil().setSp(SystemButtonSize.largeButtonFontSize),
+                buttons: [
+                  ImageTextButton(
+                    buttonName: '限 时',
+                    callback: () {
+                      setState(() {
+                        this.hidePermanentHero = true;
+                      });
+                    },
                   ),
-                  Offstage(
-                    offstage: this.hidePermanentHero,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          HeroAltarItem(
-                            heroImageUrl: 'resource/images/hunter.png',
-                            heroType: Heroes.ONEYUAN,
-                            HUD: this.widget.HUD,
-                            period: '永久',
-                            hero: heroInfo.hunter,
-                            remainDays: heroInfo.oneyuan,
-                          ),
-                          HeroAltarItem(
-                            heroImageUrl: 'resource/images/rangeAttack.png',
-                            heroType: Heroes.FIVEYUAN,
-                            HUD: this.widget.HUD,
-                            hero: heroInfo.rangeAttack,
-                            period: '永久',
-                            remainDays: heroInfo.fiveyuan,
-                          ),
-                          HeroAltarItem(
-                            heroImageUrl: 'resource/images/shaman.png',
-                            heroType: Heroes.FIFTEENYUAN,
-                            HUD: this.widget.HUD,
-                            hero: heroInfo.shaman,
-                            period: '永久',
-                            remainDays: heroInfo.fifteenyuan,
-                          ),
-                          HeroAltarItem(
-                            heroImageUrl: 'resource/images/witch.png',
-                            heroType: Heroes.UNKNOW,
-                            HUD: this.widget.HUD,
-                            hero: heroInfo.witch,
-                            period: '永久',
-                            remainDays: [],
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
+                  ImageTextButton(
+                    buttonName: '永 久',
+                    callback: () {
+                      setState(() {
+                        this.hidePermanentHero = false;
+                      });
+                    },
+                  ),
                 ],
               ),
-            ),
-          ],
-        );
-      },
-        requestedValues: [BaseUserInfoProvider,HeroProvider],),
+              Container(
+                margin: EdgeInsets.only(top: ScreenUtil().setHeight(50)),
+                height: ScreenUtil().setHeight(700),
+                child: Stack(
+                  children: [
+                    Offstage(
+                      offstage: !this.hidePermanentHero,
+                      child: HeroAltarItem(
+                        heroImageUrl: 'resource/images/warrior.png',
+                        heroType: Heroes.WARRIOR,
+                        HUD: this.widget.HUD,
+                        hero: new PermanentDisplayModel(price: heroInfo.warriorPrice.toString(), consumecoin: "0", type: Heroes.WARRIOR),
+                        period: '30天(可叠加)',
+                        remainDays: heroInfo.warriors,
+                      ),
+                    ),
+                    Offstage(
+                      offstage: this.hidePermanentHero,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            HeroAltarItem(
+                              heroImageUrl: 'resource/images/hunter.png',
+                              heroType: Heroes.ONEYUAN,
+                              HUD: this.widget.HUD,
+                              period: '永久',
+                              hero: heroInfo.hunter,
+                              remainDays: heroInfo.oneyuan,
+                            ),
+                            HeroAltarItem(
+                              heroImageUrl: 'resource/images/rangeAttack.png',
+                              heroType: Heroes.FIVEYUAN,
+                              HUD: this.widget.HUD,
+                              hero: heroInfo.rangeAttack,
+                              period: '永久',
+                              remainDays: heroInfo.fiveyuan,
+                            ),
+                            HeroAltarItem(
+                              heroImageUrl: 'resource/images/shaman.png',
+                              heroType: Heroes.FIFTEENYUAN,
+                              HUD: this.widget.HUD,
+                              hero: heroInfo.shaman,
+                              period: '永久',
+                              remainDays: heroInfo.fifteenyuan,
+                            ),
+                            HeroAltarItem(
+                              heroImageUrl: 'resource/images/witch.png',
+                              heroType: Heroes.UNKNOW,
+                              HUD: this.widget.HUD,
+                              hero: heroInfo.witch,
+                              period: '永久',
+                              remainDays: [],
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
+        requestedValues: [BaseUserInfoProvider, HeroProvider],
+      ),
     );
   }
 }

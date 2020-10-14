@@ -136,57 +136,59 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                       ],
                     ),
                   ),
-                  Offstage(
-                    offstage: !(Heroes.WARRIOR != this.widget.heroType && this.widget.hero.buy == true),
-                    child: GestureDetector(
-                      child: Container(
-                        width: ScreenUtil().setWidth(220),
-                        height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: new AssetImage('resource/images/upgradeButton.png'),
-                            fit: BoxFit.fill,
+                  Container(
+                    width: ScreenUtil().setWidth(220),
+                    child: Offstage(
+                      offstage: !(Heroes.WARRIOR != this.widget.heroType && this.widget.hero.buy == true),
+                      child: GestureDetector(
+                        child: Container(
+                          height: ScreenUtil().setHeight(120),
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: new AssetImage('resource/images/upgradeButton.png'),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '购 买',
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                            ),
                           ),
                         ),
-                        child: Center(
-                          child: Text(
-                            '购 买',
-                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                          ),
-                        ),
+                        onTap: () {
+                          if (0 != int.parse(this.widget.hero.price) && baseUserInfo.TCoinAmount >= int.parse(this.widget.hero.price)) {
+                            showDialog<Null>(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) {
+                                return new AlertDialog(
+                                  title: new Text('您确认购买英雄么?'),
+                                  actions: <Widget>[
+                                    new FlatButton(
+                                      child: new Text('取消'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    new FlatButton(
+                                      child: new Text('确认'),
+                                      onPressed: () {
+                                        this.buyHero(this.widget.heroType);
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            ).then((val) {
+                              print(val);
+                            });
+                          } else {
+                            CommonUtils.showErrorMessage(msg: "您当前的金币不足以购买英雄");
+                          }
+                        },
                       ),
-                      onTap: () {
-                        if (0 != int.parse(this.widget.hero.price) && baseUserInfo.TCoinAmount >= int.parse(this.widget.hero.price)) {
-                          showDialog<Null>(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (BuildContext context) {
-                              return new AlertDialog(
-                                title: new Text('您确认购买英雄么?'),
-                                actions: <Widget>[
-                                  new FlatButton(
-                                    child: new Text('取消'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                  new FlatButton(
-                                    child: new Text('确认'),
-                                    onPressed: () {
-                                      this.buyHero(this.widget.heroType);
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          ).then((val) {
-                            print(val);
-                          });
-                        } else {
-                          CommonUtils.showErrorMessage(msg: "您当前的金币不足以购买英雄");
-                        }
-                      },
                     ),
                   ),
                 ],
@@ -220,52 +222,54 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                             style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                           ),
                         ),
-                        Offstage(
-                          offstage: this.widget.remainDays[index].collected,
-                          child: GestureDetector(
-                            child: Container(
-                              width: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
-                              height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: new AssetImage('resource/images/upgradeButton.png'),
-                                  fit: BoxFit.fill,
+                        Container(
+                          width: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+                          child: Offstage(
+                            offstage: this.widget.remainDays[index].collected,
+                            child: GestureDetector(
+                              child: Container(
+                                height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: new AssetImage('resource/images/upgradeButton.png'),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '分 红',
+                                    style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                                  ),
                                 ),
                               ),
-                              child: Center(
-                                child: Text(
-                                  '分 红',
-                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                                ),
-                              ),
+                              onTap: () {
+                                if (this.widget.heroType == Heroes.WARRIOR) {
+                                  if (baseUserInfo.ad.wood + baseUserInfo.ad.stone + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree >=
+                                      // Global.extraRule.heroadamount) {
+                                      ///TODO 测试数据
+                                      -1) {
+                                    this.dividendHero(this.widget.heroType, this.widget.remainDays[index].id);
+                                  } else {
+                                    CommonUtils.showErrorMessage(msg: "你当前的广告数量没有达到" + Global.extraRule.heroadamount.toString() + "条不能领取分红");
+                                    return;
+                                  }
+                                } else {
+                                  if (baseUserInfo.tcoinamount < consumeCoin) {
+                                    CommonUtils.showErrorMessage(msg: "您当前的金币不足,请有足够金币的时候再来吧");
+                                    return;
+                                  }
+                                  if (baseUserInfo.ad.wood + baseUserInfo.ad.stone + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree >=
+                                      // Global.extraRule.heroadamount) {
+                                      ///TODO 测试数据
+                                      -1) {
+                                    this.dividendHero(this.widget.heroType, this.widget.remainDays[index].id);
+                                  } else {
+                                    CommonUtils.showErrorMessage(msg: "你当前的广告数量没有达到" + Global.extraRule.heroadamount.toString() + "条不能领取分红");
+                                    return;
+                                  }
+                                }
+                              },
                             ),
-                            onTap: () {
-                              if (this.widget.heroType == Heroes.WARRIOR) {
-                                if (baseUserInfo.ad.wood + baseUserInfo.ad.stone + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree >=
-                                    // Global.extraRule.heroadamount) {
-                                    ///TODO 测试数据
-                                    -1) {
-                                  this.dividendHero(this.widget.heroType, this.widget.remainDays[index].id);
-                                } else {
-                                  CommonUtils.showErrorMessage(msg: "你当前的广告数量没有达到" + Global.extraRule.heroadamount.toString() + "条不能领取分红");
-                                  return;
-                                }
-                              } else {
-                                if (baseUserInfo.tcoinamount < consumeCoin) {
-                                  CommonUtils.showErrorMessage(msg: "您当前的金币不足,请有足够金币的时候再来吧");
-                                  return;
-                                }
-                                if (baseUserInfo.ad.wood + baseUserInfo.ad.stone + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree >=
-                                    // Global.extraRule.heroadamount) {
-                                    ///TODO 测试数据
-                                    -1) {
-                                  this.dividendHero(this.widget.heroType, this.widget.remainDays[index].id);
-                                } else {
-                                  CommonUtils.showErrorMessage(msg: "你当前的广告数量没有达到" + Global.extraRule.heroadamount.toString() + "条不能领取分红");
-                                  return;
-                                }
-                              }
-                            },
                           ),
                         ),
                       ],
