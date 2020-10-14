@@ -142,7 +142,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                       offstage: !(Heroes.WARRIOR != this.widget.heroType && this.widget.hero.buy == true),
                       child: GestureDetector(
                         child: Container(
-                          height: ScreenUtil().setHeight(120),
+                          height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: new AssetImage('resource/images/upgradeButton.png'),
@@ -242,35 +242,37 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                                   ),
                                 ),
                               ),
-                            ),
-                            onTap: () {
-                              if (this.widget.heroType == Heroes.WARRIOR) {
-                                if (baseUserInfo.ad.wood + baseUserInfo.ad.stone + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree >=
-                                     Global.extraRule.heroadamount) {
-                                  this.dividendHero(this.widget.heroType, this.widget.remainDays[index].id);
+                              onTap: () {
+                                if (this.widget.heroType == Heroes.WARRIOR) {
+                                  if (baseUserInfo.ad.wood + baseUserInfo.ad.stone + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree >= Global.extraRule.heroadamount) {
+                                    this.dividendHero(this.widget.heroType, this.widget.remainDays[index].id);
+                                  } else {
+                                    CommonUtils.showErrorMessage(msg: "你当前的广告数量没有达到" + Global.extraRule.heroadamount.toString() + "条不能领取分红");
+                                    return;
+                                  }
                                 } else {
                                   if (baseUserInfo.tcoinamount < consumeCoin) {
                                     CommonUtils.showErrorMessage(msg: "您当前的金币不足,请有足够金币的时候再来吧");
                                     return;
                                   }
-                                  if (baseUserInfo.ad.wood + baseUserInfo.ad.stone + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree >=
-                                      // Global.extraRule.heroadamount) {
-                                      ///TODO 测试数据
-                                      -1) {
+                                  if (baseUserInfo.ad.wood + baseUserInfo.ad.stone + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree >= Global.extraRule.heroadamount) {
                                     this.dividendHero(this.widget.heroType, this.widget.remainDays[index].id);
                                   } else {
                                     CommonUtils.showErrorMessage(msg: "你当前的广告数量没有达到" + Global.extraRule.heroadamount.toString() + "条不能领取分红");
                                     return;
                                   }
                                 }
-                              } else {
-                                if (baseUserInfo.tcoinamount < consumeCoin) {
-                                  CommonUtils.showErrorMessage(msg: "您当前的金币不足,请有足够金币的时候再来吧");
-                                  return;
-                                }
-                                if (baseUserInfo.ad.wood + baseUserInfo.ad.stone + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree >=
-                                     Global.extraRule.heroadamount) {
-                                  this.dividendHero(this.widget.heroType, this.widget.remainDays[index].id);
-                                } else {
-                                  CommonUtils.showErrorMessage(msg: "你当前的广告数量没有达到" + Global.extraRule.heroadamount.toString() + "条不能领取分红");
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
+            )),
+          ],
+        );
+      }),
+    );
+  }
 }
