@@ -154,7 +154,7 @@ class _HeroAltarState extends State<HeroAltar> {
                       heroImageUrl: 'resource/images/warrior.png',
                       heroType: Heroes.WARRIOR,
                       HUD: this.widget.HUD,
-                      hero: new PermanentDisplayModel(price: heroInfo.warriorPrice.toString(), consumecoin: "0"),
+                      hero: new PermanentDisplayModel(price: heroInfo.warriorPrice.toString(), consumecoin: "0",type: Heroes.WARRIOR),
                       period: '30天(可叠加)',
                       remainDays: heroInfo.warriors,
                     ),

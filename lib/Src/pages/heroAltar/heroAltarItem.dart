@@ -63,13 +63,12 @@ class _HeroAltarItem extends State<HeroAltarItem> {
 
   @override
   Widget build(BuildContext context) {
-    int clockCount = null == this.widget.remainDays ? 0 : this.widget.remainDays.length;
-    int consumeCoin = this.widget.hero.consumecoin != "????" ? int.parse(this.widget.hero.consumecoin) : 0;
-    String period = Heroes.WARRIOR == this.widget.hero.type ? '30天(可叠加)' : '永久';
     if (null == this.widget.hero) {
       this.widget.hero = new PermanentDisplayModel(price: '0', consumecoin: '0', amount: '0');
     }
-
+    int clockCount = null == this.widget.remainDays ? 0 : this.widget.remainDays.length;
+    int consumeCoin = this.widget.hero.consumecoin != "????" ? int.parse(this.widget.hero.consumecoin) : 0;
+    String period = Heroes.WARRIOR == this.widget.hero.type ? '30天(可叠加)' : '永久';
     switch (this.widget.heroType) {
       case Heroes.ONEYUAN:
         this.cashAmount = '固定1元';
@@ -116,37 +115,22 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                           '价格:' + this.widget.hero.price.toString() + '金币',
                           style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                         ),
+                        Text(
+                          '期限:' + period,
+                          style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                        ),
                         Offstage(
-                          offstage: Heroes.WARRIOR != this.widget.heroType,
-                          child: Column(
-                            children: [
-                              Text(
-                                '期限:' + this.widget.period,
-                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                              ),
-                            ],
+                          offstage: Heroes.WARRIOR == this.widget.heroType,
+                          child: Text(
+                            '数量:' + this.widget.hero.amount.toString(),
+                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                           ),
                         ),
                         Offstage(
                           offstage: Heroes.WARRIOR == this.widget.heroType,
-                          child: Column(
-                            children: [
-                              Text(
-                                '数量:' + this.widget.hero.amount.toString(),
-                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Offstage(
-                          offstage: Heroes.WARRIOR == this.widget.heroType,
-                          child: Column(
-                            children: [
-                              Text(
-                                '分红:' + this.cashAmount,
-                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                              ),
-                            ],
+                          child: Text(
+                            '分红:' + this.cashAmount,
+                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                           ),
                         ),
                       ],
@@ -210,7 +194,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
             ),
             Container(
                 child: Container(
-              //最高只现实3个
+              //最高只显示3个
               height: ScreenUtil().setHeight(clockCount * SystemButtonSize.smallButtonHeight > 360 ? 360 : clockCount * SystemButtonSize.smallButtonHeight),
               child: ListView.builder(
                   padding: EdgeInsets.only(top: 0),
