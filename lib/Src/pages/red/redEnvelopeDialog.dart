@@ -67,7 +67,6 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
 
     return new Container(
       child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
-
 //        int redAdLimit = Global.extraRule.redenvelopeadamount;
         int redAdLimit = -1;
         int redContributionLimit = Global.extraRule.redenvelopecontribution;
@@ -114,7 +113,6 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
                                     });
                                   }
                                 }
-
                               });
                             } else {
                               CommonUtils.showErrorMessage(msg: "您没有足够的广告条数来打开红包哟");
@@ -144,26 +142,25 @@ class _RedEnvelopeDialogState extends State<RedEnvelopeDialog> {
                         child: Offstage(
                           offstage: !this.isRedEnvelopeClose,
                           child: Container(
-                            margin: EdgeInsets.only(top: ScreenUtil().setHeight(1170)),
-                            child: Column(
-                              children: <Widget>[
-                                Text(
-                                  '需消耗' + redContributionLimit.toString() + '贡献值(非邀请人赠送)才能打开',
-                                  style: TextStyle(
-                                    fontSize: ScreenUtil().setSp(SystemFontSize.bigTextSize),
-                                    color: Colors.white,
+                              margin: EdgeInsets.only(top: ScreenUtil().setHeight(1300)),
+                              child: Column(
+                                children: <Widget>[
+                                  Text(
+                                    '需消耗' + redContributionLimit.toString() + '贡献值(非邀请人赠送)才能打开',
+                                    style: TextStyle(
+                                      fontSize: ScreenUtil().setSp(SystemFontSize.bigTextSize),
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '每天只能打开一次',
-                                  style: TextStyle(
-                                    fontSize: ScreenUtil().setSp(SystemFontSize.bigTextSize),
-                                    color: Colors.white,
+                                  Text(
+                                    '每天只能打开一次',
+                                    style: TextStyle(
+                                      fontSize: ScreenUtil().setSp(SystemFontSize.bigTextSize),
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            )
-                          ),
+                                ],
+                              )),
                         ),
                       ),
                       Center(
