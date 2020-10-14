@@ -242,17 +242,12 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                                   ),
                                 ),
                               ),
-                              onTap: () {
-                                if (this.widget.heroType == Heroes.WARRIOR) {
-                                  if (baseUserInfo.ad.wood + baseUserInfo.ad.stone + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree >=
-                                      // Global.extraRule.heroadamount) {
-                                      ///TODO 测试数据
-                                      -1) {
-                                    this.dividendHero(this.widget.heroType, this.widget.remainDays[index].id);
-                                  } else {
-                                    CommonUtils.showErrorMessage(msg: "你当前的广告数量没有达到" + Global.extraRule.heroadamount.toString() + "条不能领取分红");
-                                    return;
-                                  }
+                            ),
+                            onTap: () {
+                              if (this.widget.heroType == Heroes.WARRIOR) {
+                                if (baseUserInfo.ad.wood + baseUserInfo.ad.stone + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree >=
+                                     Global.extraRule.heroadamount) {
+                                  this.dividendHero(this.widget.heroType, this.widget.remainDays[index].id);
                                 } else {
                                   if (baseUserInfo.tcoinamount < consumeCoin) {
                                     CommonUtils.showErrorMessage(msg: "您当前的金币不足,请有足够金币的时候再来吧");
@@ -268,17 +263,14 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                                     return;
                                   }
                                 }
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
-            )),
-          ],
-        );
-      }),
-    );
-  }
+                              } else {
+                                if (baseUserInfo.tcoinamount < consumeCoin) {
+                                  CommonUtils.showErrorMessage(msg: "您当前的金币不足,请有足够金币的时候再来吧");
+                                  return;
+                                }
+                                if (baseUserInfo.ad.wood + baseUserInfo.ad.stone + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree >=
+                                     Global.extraRule.heroadamount) {
+                                  this.dividendHero(this.widget.heroType, this.widget.remainDays[index].id);
+                                } else {
+                                  CommonUtils.showErrorMessage(msg: "你当前的广告数量没有达到" + Global.extraRule.heroadamount.toString() + "条不能领取分红");
 }
