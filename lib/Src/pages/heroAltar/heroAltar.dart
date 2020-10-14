@@ -5,8 +5,10 @@ import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/buttonsList/buttonsList.dart';
 import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Src/common/model/hero.dart';
+import 'package:upgradegame/Src/pages/heroAltar/event/heroEventBus.dart';
 import 'package:upgradegame/Src/pages/heroAltar/service/heroService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
+import 'package:upgradegame/Src/provider/heroProvider.dart';
 
 import 'heroAltarItem.dart';
 import 'model/PermanentDisplayModel.dart';
@@ -23,16 +25,16 @@ class HeroAltar extends StatefulWidget {
 }
 
 class _HeroAltarState extends State<HeroAltar> {
-  int warriorPrice = 0;
-  List<HoldHeroDisplayModel> warriors = [];
-  List<HoldHeroDisplayModel> oneyuan = [];
-  List<HoldHeroDisplayModel> fiveyuan = [];
-  List<HoldHeroDisplayModel> fifteenyuan = [];
+//  int warriorPrice = 0;
+//  List<HoldHeroDisplayModel> warriors = [];
+//  List<HoldHeroDisplayModel> oneyuan = [];
+//  List<HoldHeroDisplayModel> fiveyuan = [];
+//  List<HoldHeroDisplayModel> fifteenyuan = [];
 
-  PermanentDisplayModel hunter;
-  PermanentDisplayModel rangeAttack;
-  PermanentDisplayModel shaman;
-  PermanentDisplayModel witch;
+//  PermanentDisplayModel hunter;
+//  PermanentDisplayModel rangeAttack;
+//  PermanentDisplayModel shaman;
+//  PermanentDisplayModel witch;
 
   bool hidePermanentHero = true;
 
@@ -47,53 +49,56 @@ class _HeroAltarState extends State<HeroAltar> {
     /// type1 限时30天  type2 永久1元  type3 永久5元 type3 永久15元
     HeroService.getHeroList((HeroListModel model) {
       this.widget.HUD();
-      if (model != null) {
-        if (null != model.hold && model.hold.length > 0) {
-          model.hold.forEach((hero) {
-            switch (hero.type) {
-              case Heroes.WARRIOR:
-                warriors.add(HoldHeroDisplayModel(days: hero.days, id: hero.id, collected: hero.collected));
-                break;
-              case Heroes.ONEYUAN:
-                oneyuan.add(HoldHeroDisplayModel(days: hero.days, id: hero.id, collected: hero.collected));
-                break;
-              case Heroes.FIVEYUAN:
-                fiveyuan.add(HoldHeroDisplayModel(days: hero.days, id: hero.id, collected: hero.collected));
-                break;
-              case Heroes.FIFTEENYUAN:
-                fifteenyuan.add(HoldHeroDisplayModel(days: hero.days, id: hero.id, collected: hero.collected));
-                break;
-            }
-          });
-
-          warriorPrice = model.limittime[0].price;
-          hunter = new PermanentDisplayModel(
-              price: model.permanent[0].price.toString(),
-              type: model.permanent[0].type,
-              consumecoin: model.permanent[0].consumecoin.toString(),
-              amount: model.permanent[0].amount.toString(),
-              buy: model.permanent[0].buy);
-          rangeAttack = new PermanentDisplayModel(
-              price: model.permanent[1].price.toString(),
-              type: model.permanent[1].type,
-              consumecoin: model.permanent[1].consumecoin.toString(),
-              amount: model.permanent[1].amount.toString(),
-              buy: model.permanent[1].buy);
-          shaman = new PermanentDisplayModel(
-              price: model.permanent[2].price.toString(),
-              type: model.permanent[2].type,
-              consumecoin: model.permanent[2].consumecoin.toString(),
-              amount: model.permanent[2].amount.toString(),
-              buy: model.permanent[2].buy);
-          witch = new PermanentDisplayModel(price: "????", type: Heroes.UNKNOW, consumecoin: "????", amount: "????", buy: false);
-        }
-      }
+      Provide.value<HeroProvider>(context).initHeroProvider(model);
+//      if (model != null) {
+//        if (null != model.hold && model.hold.length > 0) {
+//          model.hold.forEach((hero) {
+//            switch (hero.type) {
+//              case Heroes.WARRIOR:
+//                warriors.add(HoldHeroDisplayModel(days: hero.days, id: hero.id, collected: hero.collected));
+//                break;
+//              case Heroes.ONEYUAN:
+//                oneyuan.add(HoldHeroDisplayModel(days: hero.days, id: hero.id, collected: hero.collected));
+//                break;
+//              case Heroes.FIVEYUAN:
+//                fiveyuan.add(HoldHeroDisplayModel(days: hero.days, id: hero.id, collected: hero.collected));
+//                break;
+//              case Heroes.FIFTEENYUAN:
+//                fifteenyuan.add(HoldHeroDisplayModel(days: hero.days, id: hero.id, collected: hero.collected));
+//                break;
+//            }
+//          });
+//
+//          warriorPrice = model.limittime[0].price;
+//          hunter = new PermanentDisplayModel(
+//              price: model.permanent[0].price.toString(),
+//              type: model.permanent[0].type,
+//              consumecoin: model.permanent[0].consumecoin.toString(),
+//              amount: model.permanent[0].amount.toString(),
+//              buy: model.permanent[0].buy);
+//          rangeAttack = new PermanentDisplayModel(
+//              price: model.permanent[1].price.toString(),
+//              type: model.permanent[1].type,
+//              consumecoin: model.permanent[1].consumecoin.toString(),
+//              amount: model.permanent[1].amount.toString(),
+//              buy: model.permanent[1].buy);
+//          shaman = new PermanentDisplayModel(
+//              price: model.permanent[2].price.toString(),
+//              type: model.permanent[2].type,
+//              consumecoin: model.permanent[2].consumecoin.toString(),
+//              amount: model.permanent[2].amount.toString(),
+//              buy: model.permanent[2].buy);
+//          witch = new PermanentDisplayModel(price: "????", type: Heroes.UNKNOW, consumecoin: "????", amount: "????", buy: false);
+//        }
+//      }
     });
   }
+
 
   @override
   void initState() {
     super.initState();
+    HeroEventBus().on("getHeroBaseInfoList", this.getHeroBaseInfoList);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       this.getHeroBaseInfoList();
     });
@@ -107,7 +112,10 @@ class _HeroAltarState extends State<HeroAltar> {
           ScreenUtil().setHeight(350), // 上
           ScreenUtil().setWidth(80), // 右
           ScreenUtil().setHeight(200)),
-      child: Provide<BaseUserInfoProvider>(builder: (context, child, baseUserInfo) {
+      child:  ProvideMulti(
+        builder: (context, child, model) {
+          BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
+          HeroProvider heroInfo = model.get<HeroProvider>();
         return new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -146,9 +154,9 @@ class _HeroAltarState extends State<HeroAltar> {
                       heroImageUrl: 'resource/images/warrior.png',
                       heroType: Heroes.WARRIOR,
                       HUD: this.widget.HUD,
-                      hero: new PermanentDisplayModel(price: this.warriorPrice.toString(), consumecoin: "0"),
+                      hero: new PermanentDisplayModel(price: heroInfo.warriorPrice.toString(), consumecoin: "0"),
                       period: '30天(可叠加)',
-                      remainDays: warriors,
+                      remainDays: heroInfo.warriors,
                     ),
                   ),
                   Offstage(
@@ -161,30 +169,30 @@ class _HeroAltarState extends State<HeroAltar> {
                             heroType: Heroes.ONEYUAN,
                             HUD: this.widget.HUD,
                             period: '永久',
-                            hero: hunter,
-                            remainDays: oneyuan,
+                            hero: heroInfo.hunter,
+                            remainDays: heroInfo.oneyuan,
                           ),
                           HeroAltarItem(
                             heroImageUrl: 'resource/images/rangeAttack.png',
                             heroType: Heroes.FIVEYUAN,
                             HUD: this.widget.HUD,
-                            hero: rangeAttack,
+                            hero: heroInfo.rangeAttack,
                             period: '永久',
-                            remainDays: fiveyuan,
+                            remainDays: heroInfo.fiveyuan,
                           ),
                           HeroAltarItem(
                             heroImageUrl: 'resource/images/shaman.png',
                             heroType: Heroes.FIFTEENYUAN,
                             HUD: this.widget.HUD,
-                            hero: shaman,
+                            hero: heroInfo.shaman,
                             period: '永久',
-                            remainDays: fifteenyuan,
+                            remainDays: heroInfo.fifteenyuan,
                           ),
                           HeroAltarItem(
                             heroImageUrl: 'resource/images/witch.png',
                             heroType: Heroes.UNKNOW,
                             HUD: this.widget.HUD,
-                            hero: witch,
+                            hero: heroInfo.witch,
                             period: '永久',
                             remainDays: [],
                           ),
@@ -197,7 +205,8 @@ class _HeroAltarState extends State<HeroAltar> {
             ),
           ],
         );
-      }),
+      },
+        requestedValues: [BaseUserInfoProvider,HeroProvider],),
     );
   }
 }

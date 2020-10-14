@@ -4,6 +4,7 @@ import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
 import 'package:upgradegame/Src/common/model/hero.dart';
+import 'package:upgradegame/Src/pages/heroAltar/event/heroEventBus.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/PermanentDisplayModel.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/buyHeroModel.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/holdHeroDisplayModel.dart';
@@ -42,6 +43,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
       this.widget.HUD();
       if (model != null) {
         Provide.value<BaseUserInfoProvider>(context).dividendHero(model.tcoinamount);
+        HeroEventBus().emit("getHeroBaseInfoList");
       }
     });
   }
