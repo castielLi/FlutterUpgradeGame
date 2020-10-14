@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import 'package:upgradegame/Common/app/config.dart';
 import 'package:upgradegame/Common/widget/toast/toast.dart';
+import 'package:upgradegame/Src/common/model/globalDataModel.dart';
 import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/PermanentDisplayModel.dart';
 import 'package:upgradegame/Src/pages/heroAltar/model/buyHeroModel.dart';
@@ -10,7 +11,6 @@ import 'package:upgradegame/Src/pages/heroAltar/model/holdHeroDisplayModel.dart'
 import 'package:upgradegame/Src/pages/heroAltar/service/heroService.dart';
 import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 
-import 'heroAltarClock.dart';
 import 'model/dividendHeroModel.dart';
 
 class HeroAltarItem extends StatefulWidget {
@@ -61,9 +61,13 @@ class _HeroAltarItem extends State<HeroAltarItem> {
 
   @override
   Widget build(BuildContext context) {
+    int clockCount = null == this.widget.remainDays ? 0 : this.widget.remainDays.length;
+    int consumeCoin = this.widget.hero.consumecoin != "????" ? int.parse(this.widget.hero.consumecoin) : 0;
+    String period = Heroes.WARRIOR == this.widget.hero.type ? '30天(可叠加)' : '永久';
     if (null == this.widget.hero) {
       this.widget.hero = new PermanentDisplayModel(price: '0', consumecoin: '0', amount: '0');
     }
+
     switch (this.widget.heroType) {
       case Heroes.ONEYUAN:
         this.cashAmount = '固定1元';
@@ -110,10 +114,17 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                           '价格:' + this.widget.hero.price.toString() + '金币',
                           style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
                         ),
-                        // Text(
-                        //   '期限:' + this.widget.period,
-                        //   style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
-                        // ),
+                        Offstage(
+                          offstage: Heroes.WARRIOR != this.widget.heroType,
+                          child: Column(
+                            children: [
+                              Text(
+                                '期限:' + this.widget.period,
+                                style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                              ),
+                            ],
+                          ),
+                        ),
                         Offstage(
                           offstage: Heroes.WARRIOR == this.widget.heroType,
                           child: Column(
@@ -196,24 +207,85 @@ class _HeroAltarItem extends State<HeroAltarItem> {
               ),
             ),
             Container(
-              width: ScreenUtil().setWidth(800),
-              child: HeroAltarClock(
-                imageUrl: 'resource/images/clock.png',
-                adIconHeight: ScreenUtil().setHeight(SystemIconSize.smallIconSize),
-                remainDays: this.widget.remainDays,
-                type: this.widget.heroType,
-                consumeCoin: this.widget.hero.consumecoin != "????" ? int.parse(this.widget.hero.consumecoin) : 0,
-                isPermanent: Heroes.WARRIOR != this.widget.heroType,
-                callback: (int type, String id) {
-                  if (baseUserInfo.ad.stone + baseUserInfo.ad.wood + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree > -1) {
-                    ///TODO 领取分红
-                    this.dividendHero(type, id);
-                  } else {
-                    CommonUtils.showErrorMessage(msg: "您没有足够的广告条数哦,无法领取分红,快去观看广告吧");
-                  }
-                },
-              ),
-            ),
+                child: Container(
+              //最高只现实3个
+              height: ScreenUtil().setHeight(clockCount * SystemButtonSize.smallButtonHeight > 360 ? 360 : clockCount * SystemButtonSize.smallButtonHeight),
+              child: ListView.builder(
+                  padding: EdgeInsets.only(top: 0),
+                  itemCount: clockCount,
+                  itemExtent: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+                  itemBuilder: (BuildContext context, int index) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: <Widget>[
+                            Image(image: new AssetImage('resource/images/clock.png'), height: ScreenUtil().setHeight(SystemIconSize.smallIconSize)),
+                            Text(
+                              this.widget.remainDays[index].days > 31 ? "永久" : this.widget.remainDays[index].days.toString() + '天',
+                              style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                            ),
+                          ],
+                        ),
+                        Offstage(
+                          offstage: Heroes.WARRIOR == this.widget.heroType,
+                          child: Text(
+                            "消耗" + consumeCoin.toString() + '金币',
+                            style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                          ),
+                        ),
+                        Offstage(
+                          offstage: this.widget.remainDays[index].collected,
+                          child: GestureDetector(
+                            child: Container(
+                              width: ScreenUtil().setWidth(SystemButtonSize.smallButtonWidth),
+                              height: ScreenUtil().setHeight(SystemButtonSize.smallButtonHeight),
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: new AssetImage('resource/images/upgradeButton.png'),
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  '分 红',
+                                  style: CustomFontSize.defaultTextStyle(SystemFontSize.moreMoreLargerTextSize),
+                                ),
+                              ),
+                            ),
+                            onTap: () {
+                              if (this.widget.heroType == Heroes.WARRIOR) {
+                                if (baseUserInfo.ad.wood + baseUserInfo.ad.stone + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree >=
+                                    // Global.extraRule.heroadamount) {
+                                    ///TODO 测试数据
+                                    -1) {
+                                  this.dividendHero(this.widget.heroType, this.widget.remainDays[index].id);
+                                } else {
+                                  CommonUtils.showErrorMessage(msg: "你当前的广告数量没有达到" + Global.extraRule.heroadamount.toString() + "条不能领取分红");
+                                  return;
+                                }
+                              } else {
+                                if (baseUserInfo.tcoinamount < consumeCoin) {
+                                  CommonUtils.showErrorMessage(msg: "您当前的金币不足,请有足够金币的时候再来吧");
+                                  return;
+                                }
+                                if (baseUserInfo.ad.wood + baseUserInfo.ad.stone + baseUserInfo.ad.farmone + baseUserInfo.ad.farmtwo + baseUserInfo.ad.farmthree >=
+                                    // Global.extraRule.heroadamount) {
+                                    ///TODO 测试数据
+                                    -1) {
+                                  this.dividendHero(this.widget.heroType, this.widget.remainDays[index].id);
+                                } else {
+                                  CommonUtils.showErrorMessage(msg: "你当前的广告数量没有达到" + Global.extraRule.heroadamount.toString() + "条不能领取分红");
+                                  return;
+                                }
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
+            )),
           ],
         );
       }),
