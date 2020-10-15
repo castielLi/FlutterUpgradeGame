@@ -85,7 +85,9 @@ class _HeroAltarItem extends State<HeroAltarItem> {
           children: [
             Container(
               width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
+              //850
               height: ScreenUtil().setHeight(SystemScreenSize.displayItemHeight),
+              padding: EdgeInsets.fromLTRB(0, ScreenUtil().setHeight(25), ScreenUtil().setHeight(25), 0),
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: new AssetImage('resource/images/marketItemBackground.png'),
@@ -148,7 +150,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                     ),
                   ),
                   Container(
-                    width: ScreenUtil().setWidth(220),
+                    width: ScreenUtil().setWidth(180),
                     child: Offstage(
                       offstage: !(Heroes.WARRIOR != this.widget.hero.type && this.widget.hero.buy == true),
                       child: GestureDetector(
@@ -207,8 +209,9 @@ class _HeroAltarItem extends State<HeroAltarItem> {
             ),
             Container(
                 child: Container(
+              padding: EdgeInsets.only(right: ScreenUtil().setHeight(25)),
               //最高只显示3个
-              height: ScreenUtil().setHeight(clockCount * SystemButtonSize.smallButtonHeight > 360 ? 360 : clockCount * SystemButtonSize.smallButtonHeight),
+              height: ScreenUtil().setHeight(clockCount > 3 ? 360 : clockCount * SystemButtonSize.smallButtonHeight),
               child: ListView.builder(
                   padding: EdgeInsets.only(top: 0),
                   itemCount: clockCount,
@@ -234,7 +237,7 @@ class _HeroAltarItem extends State<HeroAltarItem> {
                           ),
                         ),
                         Container(
-                          width: ScreenUtil().setWidth(220),
+                          width: ScreenUtil().setWidth(180),
                           child: Offstage(
                             offstage: this.widget.remainDays[index].collected,
                             child: GestureDetector(
