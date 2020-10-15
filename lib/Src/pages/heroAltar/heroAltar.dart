@@ -7,7 +7,6 @@ import 'package:upgradegame/Common/widget/imageTextButton/imageTextButton.dart';
 import 'package:upgradegame/Src/common/model/hero.dart';
 import 'package:upgradegame/Src/pages/heroAltar/event/heroEventBus.dart';
 import 'package:upgradegame/Src/pages/heroAltar/service/heroService.dart';
-import 'package:upgradegame/Src/provider/baseUserInfoProvider.dart';
 import 'package:upgradegame/Src/provider/heroProvider.dart';
 
 import 'heroAltarItem.dart';
@@ -112,7 +111,6 @@ class _HeroAltarState extends State<HeroAltar> {
           ScreenUtil().setHeight(200)),
       child: ProvideMulti(
         builder: (context, child, model) {
-          BaseUserInfoProvider baseUserInfo = model.get<BaseUserInfoProvider>();
           HeroProvider heroInfo = model.get<HeroProvider>();
           return new Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -194,7 +192,7 @@ class _HeroAltarState extends State<HeroAltar> {
             ],
           );
         },
-        requestedValues: [BaseUserInfoProvider, HeroProvider],
+        requestedValues: [HeroProvider],
       ),
     );
   }

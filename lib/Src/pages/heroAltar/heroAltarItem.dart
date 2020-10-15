@@ -85,7 +85,6 @@ class _HeroAltarItem extends State<HeroAltarItem> {
           children: [
             Container(
               width: ScreenUtil().setWidth(SystemScreenSize.displayContentHeight),
-              //850
               height: ScreenUtil().setHeight(SystemScreenSize.displayItemHeight),
               padding: EdgeInsets.fromLTRB(0, ScreenUtil().setHeight(25), ScreenUtil().setHeight(25), 0),
               decoration: BoxDecoration(
